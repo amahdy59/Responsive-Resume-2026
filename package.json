@@ -4,8 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "node scripts/build-static.mjs",
-    "dev": "node scripts/build-static.mjs",
-    "preview": "node scripts/build-static.mjs"
+    "build": "node build.mjs",
+    "dev": "node build.mjs",
+    "preview": "node build.mjs"
   }
 }
