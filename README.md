@@ -25,6 +25,8 @@ Use Vercel for the public portfolio link.
 - Output directory: `dist`
 - Node version: default is fine
 
+If Vercel says `The Output Directory "dist" is empty`, the build command did not run or the wrong root folder was selected. Make sure the Vercel root directory is the folder that contains `package.json`, `astro.config.mjs`, and `src/`.
+
 ## Local Development
 
 ```bash
@@ -51,6 +53,7 @@ Upload these to GitHub:
 - `src/`
 - `package.json`
 - `astro.config.mjs`
+- `vercel.json`
 - `.gitignore`
 - `README.md`
 
