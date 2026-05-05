@@ -1,0 +1,13 @@
+node_modules/
+dist/
+.astro/
+.vercel/
+
+# Local QA screenshots generated while checking the design
+desktop-*.png
+mobile-*.png
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+.vscode/
