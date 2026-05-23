@@ -81,7 +81,7 @@
         <path d="m19.07 4.93-1.41 1.41" />
       </symbol>
       <symbol id="icon-moon" viewBox="0 0 24 24">
-        <path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5 7 7 0 1 0 20.5 14.5Z" />
+        <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
       </symbol>
       <symbol id="icon-mail" viewBox="0 0 24 24">
         <rect width="20" height="16" x="2" y="4" rx="2" />
@@ -145,17 +145,17 @@
       <section class="resume-card">
         <header class="hero">
           <div class="hero-pattern" aria-hidden="true">
-            <!-- Subtle Data Analytics Visualization Graphic -->
+            <!-- Upward-trending Skill Progress Line Chart Backdrop -->
             <svg class="hero-chart" viewBox="0 0 1000 120" preserveAspectRatio="none">
               <defs>
                 <linearGradient id="chart-glow" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="var(--blue)" stop-opacity="0.18" />
-                  <stop offset="100%" stop-color="var(--blue)" stop-opacity="0.0" />
+                  <stop offset="0%" stop-color="var(--chart-glow-color, var(--blue))" stop-opacity="var(--chart-glow-opacity, 0.18)" />
+                  <stop offset="100%" stop-color="var(--chart-glow-color, var(--blue))" stop-opacity="0.0" />
                 </linearGradient>
                 <linearGradient id="chart-line-grad" x1="0" y1="0" x2="1" y2="0">
-                  <stop offset="0%" stop-color="var(--green)" />
-                  <stop offset="50%" stop-color="var(--blue)" />
-                  <stop offset="100%" stop-color="var(--green)" />
+                  <stop offset="0%" stop-color="var(--chart-line-color-start, var(--green))" />
+                  <stop offset="50%" stop-color="var(--chart-line-color-mid, var(--blue))" />
+                  <stop offset="100%" stop-color="var(--chart-line-color-end, var(--green))" />
                 </linearGradient>
               </defs>
               <g class="chart-grid">
@@ -170,12 +170,15 @@
                 <line x1="750" y1="0" x2="750" y2="120" />
                 <line x1="900" y1="0" x2="900" y2="120" />
               </g>
-              <path d="M 0 120 L 0 80 Q 150 40 300 70 T 600 30 T 900 90 L 1000 70 L 1000 120 Z" fill="url(#chart-glow)" />
-              <path class="chart-line" d="M 0 80 Q 150 40 300 70 T 600 30 T 900 90 L 1000 70" />
+              <path d="M 0 120 L 0 110 L 150 95 L 300 80 L 450 65 L 600 48 L 750 32 L 900 20 L 1000 12 L 1000 120 Z" fill="url(#chart-glow)" />
+              <path class="chart-line" d="M 0 110 L 150 95 L 300 80 L 450 65 L 600 48 L 750 32 L 900 20 L 1000 12" />
               <g class="chart-nodes">
-                <circle class="pulse-node" cx="300" cy="70" r="3.5" />
-                <circle class="pulse-node" cx="600" cy="30" r="3.5" />
-                <circle class="pulse-node" cx="900" cy="90" r="3.5" />
+                <circle class="pulse-node" cx="150" cy="95" r="3.5" />
+                <circle class="pulse-node" cx="300" cy="80" r="3.5" />
+                <circle class="pulse-node" cx="450" cy="65" r="3.5" />
+                <circle class="pulse-node" cx="600" cy="48" r="3.5" />
+                <circle class="pulse-node" cx="750" cy="32" r="3.5" />
+                <circle class="pulse-node" cx="900" cy="20" r="3.5" />
               </g>
             </svg>
           </div>

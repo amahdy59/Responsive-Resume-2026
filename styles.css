@@ -35,6 +35,14 @@
   --date-text: #475569;
   --copy-bg: rgba(255, 255, 255, 0.24);
   --shadow: 0 25px 50px rgba(26, 35, 50, 0.18);
+  --chart-glow-color: #ffffff;
+  --chart-glow-opacity: 0.12;
+  --chart-line-color-start: rgba(255, 255, 255, 0.35);
+  --chart-line-color-mid: rgba(255, 255, 255, 0.85);
+  --chart-line-color-end: rgba(255, 255, 255, 0.35);
+  --chart-grid-color: rgba(255, 255, 255, 0.08);
+  --chart-node-color: #ffffff;
+  --chart-node-color-alt: #ffffff;
 }
 
 [data-theme="dark"] {
@@ -75,6 +83,14 @@
   --date-text: #9ca3af;
   --copy-bg: rgba(255, 255, 255, 0.13);
   --shadow: 0 25px 55px rgba(0, 0, 0, 0.45);
+  --chart-glow-color: var(--blue);
+  --chart-glow-opacity: 0.18;
+  --chart-line-color-start: var(--green);
+  --chart-line-color-mid: var(--blue);
+  --chart-line-color-end: var(--green);
+  --chart-grid-color: rgba(255, 255, 255, 0.05);
+  --chart-node-color: var(--blue);
+  --chart-node-color-alt: var(--green);
 }
 
 * {
@@ -195,7 +211,7 @@ button:focus-visible {
   justify-content: space-between;
   gap: 24px;
   min-height: 160px;
-  padding: 64px clamp(16px, 3vw, 24px) clamp(16px, 3vw, 24px);
+  padding: 48px clamp(16px, 3vw, 24px) clamp(16px, 3vw, 24px);
   background: var(--hero-gradient);
   transition: background 520ms ease;
 }
@@ -215,8 +231,9 @@ button:focus-visible {
 .controls-group {
   position: absolute;
   z-index: 2;
-  top: 20px;
-  inset-inline-end: 20px;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   gap: 10px;
 }
@@ -796,22 +813,20 @@ h1 {
 }
 
 .hero-chart .chart-grid line {
-  stroke: rgba(255, 255, 255, 0.05);
+  stroke: var(--chart-grid-color, rgba(255, 255, 255, 0.05));
   stroke-width: 0.75px;
 }
 
 .hero-chart .chart-line {
   fill: none;
   stroke: url(#chart-line-grad);
-  stroke-width: 2;
+  stroke-width: 3.2;
   stroke-linecap: round;
   stroke-linejoin: round;
-  stroke-dasharray: 6 3;
-  animation: dashConnection 40s linear infinite;
 }
 
 .hero-chart .chart-nodes circle {
-  fill: var(--blue);
+  fill: var(--chart-node-color, var(--blue));
   stroke: var(--surface);
   stroke-width: 1.5px;
   transform-origin: center;
@@ -821,20 +836,12 @@ h1 {
   animation: pulseNode 3s ease-in-out infinite alternate;
 }
 
-.hero-chart .chart-nodes circle:nth-child(2) {
-  fill: var(--green);
-  animation-delay: 0.8s;
-}
-
-.hero-chart .chart-nodes circle:nth-child(3) {
-  animation-delay: 1.6s;
-}
-
-@keyframes dashConnection {
-  to {
-    stroke-dashoffset: -20;
-  }
-}
+.hero-chart .chart-nodes circle:nth-child(1) { animation-delay: 0s; }
+.hero-chart .chart-nodes circle:nth-child(2) { animation-delay: 0.5s; fill: var(--chart-node-color-alt, var(--green)); }
+.hero-chart .chart-nodes circle:nth-child(3) { animation-delay: 1s; }
+.hero-chart .chart-nodes circle:nth-child(4) { animation-delay: 1.5s; fill: var(--chart-node-color-alt, var(--green)); }
+.hero-chart .chart-nodes circle:nth-child(5) { animation-delay: 2s; }
+.hero-chart .chart-nodes circle:nth-child(6) { animation-delay: 2.5s; fill: var(--chart-node-color-alt, var(--green)); }
 
 @keyframes pulseNode {
   0% {
@@ -844,7 +851,7 @@ h1 {
   100% {
     transform: scale(1.3);
     opacity: 0.8;
-    fill: var(--green);
+    fill: var(--chart-node-color-alt, var(--green));
   }
 }
 
@@ -903,6 +910,14 @@ h1 {
   --pill-bg: #000000;
   --date-bg: #000000;
   --date-text: #ffff00;
+  --chart-glow-color: #00ffff;
+  --chart-glow-opacity: 0.2;
+  --chart-line-color-start: #00ff00;
+  --chart-line-color-mid: #00ffff;
+  --chart-line-color-end: #00ff00;
+  --chart-grid-color: rgba(255, 255, 255, 0.2);
+  --chart-node-color: #00ffff;
+  --chart-node-color-alt: #00ff00;
 }
 
 [data-contrast="high"] .panel {
@@ -969,7 +984,7 @@ h1 {
 
   .hero {
     min-height: auto;
-    padding: 56px 14px 16px 14px;
+    padding: 48px 14px 16px 14px;
   }
 
   .identity {
