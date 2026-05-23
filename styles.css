@@ -241,10 +241,13 @@ button:focus-visible {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  position: relative;
+  z-index: 20;
 }
 
 .theme-toggle,
 .lang-toggle,
+.print-button,
 .contrast-toggle {
   display: inline-grid;
   place-items: center;
@@ -270,9 +273,11 @@ button:focus-visible {
 
 .theme-toggle:hover,
 .lang-toggle:hover,
+.print-button:hover,
 .contrast-toggle:hover,
 .theme-toggle:focus-visible,
 .lang-toggle:focus-visible,
+.print-button:focus-visible,
 .contrast-toggle:focus-visible {
   transform: scale(1.1);
   background: rgba(255, 255, 255, 0.35);
@@ -282,6 +287,7 @@ button:focus-visible {
 
 .theme-toggle span,
 .lang-toggle span,
+.print-button span,
 .contrast-toggle span {
   display: inline-grid;
   place-items: center;
@@ -385,6 +391,8 @@ h1 {
   background: var(--contact-bg);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 14px;
+  position: relative;
+  z-index: 1;
   transition:
     background-color 420ms ease,
     border-color 420ms ease;
@@ -989,6 +997,43 @@ h1 {
   }
 }
 
+@media (min-width: 881px) {
+  /* Desktop tooltips alignment to prevent truncation at resume borders */
+  html[lang="en"] .controls-group [data-tooltip]::before {
+    left: auto;
+    right: 0;
+    transform: scale(0.9);
+  }
+  html[lang="en"] .controls-group [data-tooltip]::after {
+    left: auto;
+    right: 9px;
+    transform: scale(0.9);
+  }
+  html[lang="en"] .controls-group [data-tooltip]:hover::before,
+  html[lang="en"] .controls-group [data-tooltip]:focus-visible::before,
+  html[lang="en"] .controls-group [data-tooltip]:hover::after,
+  html[lang="en"] .controls-group [data-tooltip]:focus-visible::after {
+    transform: scale(1);
+  }
+
+  html[lang="ar"] .controls-group [data-tooltip]::before {
+    left: 0;
+    right: auto;
+    transform: scale(0.9);
+  }
+  html[lang="ar"] .controls-group [data-tooltip]::after {
+    left: 9px;
+    right: auto;
+    transform: scale(0.9);
+  }
+  html[lang="ar"] .controls-group [data-tooltip]:hover::before,
+  html[lang="ar"] .controls-group [data-tooltip]:focus-visible::before,
+  html[lang="ar"] .controls-group [data-tooltip]:hover::after,
+  html[lang="ar"] .controls-group [data-tooltip]:focus-visible::after {
+    transform: scale(1);
+  }
+}
+
 @media (max-width: 880px) {
   .hero {
     align-items: flex-start;
@@ -1093,6 +1138,10 @@ h1 {
 
 /* Print Stylesheet */
 @media print {
+  @page {
+    size: auto;
+    margin: 15mm 12mm;
+  }
   body {
     background: #ffffff !important;
     color: #000000 !important;
@@ -1133,7 +1182,12 @@ h1 {
   .contact-list a {
     color: #000000 !important;
   }
+  .contact-list li {
+    padding: 0 !important;
+  }
+  .contact-icon,
   .copy-button,
+  .print-button,
   .theme-toggle,
   .lang-toggle,
   .contrast-toggle,

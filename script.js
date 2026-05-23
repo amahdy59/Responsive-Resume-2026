@@ -2,6 +2,7 @@ const root = document.documentElement;
 const themeToggle = document.querySelector(".theme-toggle");
 const langToggle = document.querySelector(".lang-toggle");
 const contrastToggle = document.querySelector(".contrast-toggle");
+const printButton = document.querySelector(".print-button");
 
 const savedTheme = localStorage.getItem("resume-theme");
 const savedLang = localStorage.getItem("resume-lang") || "en";
@@ -89,7 +90,8 @@ const translations = {
     tooltip_contrast: "تبديل التباين العالي",
     tooltip_lang: "تبديل اللغة",
     tooltip_theme_dark: "التبديل إلى الوضع الداكن",
-    tooltip_theme_light: "التبديل إلى الوضع الفاتح"
+    tooltip_theme_light: "التبديل إلى الوضع الفاتح",
+    tooltip_print: "طباعة / حفظ كـ PDF"
   },
   en: {
     skip_link: "Skip to main content",
@@ -164,7 +166,8 @@ const translations = {
     tooltip_contrast: "Toggle High Contrast",
     tooltip_lang: "Toggle Language",
     tooltip_theme_dark: "Switch to Dark Mode",
-    tooltip_theme_light: "Switch to Light Mode"
+    tooltip_theme_light: "Switch to Light Mode",
+    tooltip_print: "Print / Save as PDF"
   }
 };
 
@@ -201,6 +204,7 @@ function setLanguage(lang) {
   contrastToggle.setAttribute("data-tooltip", translations[lang].tooltip_contrast);
   langToggle.setAttribute("data-tooltip", translations[lang].tooltip_lang);
   themeToggle.setAttribute("data-tooltip", isDark ? translations[lang].tooltip_theme_light : translations[lang].tooltip_theme_dark);
+  printButton.setAttribute("data-tooltip", translations[lang].tooltip_print);
 
   // Translate all tagged nodes
   document.querySelectorAll("[data-translate]").forEach((node) => {
@@ -266,6 +270,10 @@ contrastToggle.addEventListener("click", () => {
 
 langToggle.addEventListener("click", () => {
   setLanguage(root.getAttribute("lang") === "ar" ? "en" : "ar");
+});
+
+printButton.addEventListener("click", () => {
+  window.print();
 });
 
 // Dynamic Button setups
