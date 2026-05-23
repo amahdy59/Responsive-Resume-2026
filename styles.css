@@ -532,66 +532,50 @@ h1 {
   font-size: 1rem;
 }
 
-.panel-blue {
+.panel-primary {
   border-color: var(--blue);
   background: var(--about-panel-bg);
 }
 
-.panel-blue h2 span {
+.panel-primary h2 span {
   background: var(--blue);
   color: #ffffff;
 }
 
-.panel-gold {
-  border-color: var(--gold);
-  background: var(--cert-panel-bg);
-}
-
-.panel-gold h2 span {
-  background: var(--gold);
-  color: #ffffff;
-}
-
-.panel-green {
+.panel-secondary {
   border-color: var(--green);
   background: var(--skills-panel-bg);
 }
 
-.sidebar .panel-green {
-  padding-block: 14px;
-}
-
-.sidebar .panel-green .skill-group + .skill-group {
-  margin-top: 10px;
-}
-
-.sidebar .panel-green .pills span {
-  padding-block: 4px;
-}
-
-.panel-green h2 span {
+.panel-secondary h2 span {
   background: var(--green);
   color: #ffffff;
 }
 
-.panel-copper {
-  position: relative;
-  overflow: hidden;
-  border-color: var(--project-accent);
-  background: var(--project-panel-bg);
+.sidebar .panel-secondary {
+  padding-block: 14px;
 }
 
-.timeline-panel.panel-blue {
+.sidebar .panel-secondary .skill-group + .skill-group {
+  margin-top: 10px;
+}
+
+.sidebar .panel-secondary .pills span {
+  padding-block: 4px;
+}
+
+.panel-primary.featured {
+  position: relative;
+  overflow: hidden;
+  background: var(--about-panel-bg);
+}
+
+.timeline-panel.panel-primary {
   background: var(--employment-panel-bg);
 }
 
-.timeline-panel.panel-green {
+.timeline-panel.panel-secondary {
   background: var(--education-panel-bg);
-}
-
-.panel-copper h2 span {
-  background: var(--project-accent);
-  color: #ffffff;
 }
 
 .compact-list {
@@ -688,8 +672,8 @@ h1 {
   line-height: 1.35;
 }
 
-.panel-copper h4 a {
-  color: var(--project-accent);
+.panel-primary.featured h4 a {
+  color: var(--blue);
 }
 
 .contact-list li:hover .external-icon,

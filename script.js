@@ -23,18 +23,9 @@ function setTheme(theme) {
 async function copyText(value) {
   if (navigator.clipboard && window.isSecureContext) {
     await navigator.clipboard.writeText(value);
-    return;
+  } else {
+    throw new Error("Clipboard API not available");
   }
-
-  const field = document.createElement("textarea");
-  field.value = value;
-  field.setAttribute("readonly", "");
-  field.style.position = "fixed";
-  field.style.opacity = "0";
-  document.body.appendChild(field);
-  field.select();
-  document.execCommand("copy");
-  field.remove();
 }
 
 function showToast(message) {
