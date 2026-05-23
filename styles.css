@@ -808,57 +808,52 @@ h1 {
   transform: translateY(0);
 }
 
-/* Hero Data Visualization SVG Graphics */
-.hero-chart {
+/* Accessible Tooltips styled via CSS attribute injection */
+[data-tooltip] {
+  position: relative;
+}
+
+[data-tooltip]::before {
+  content: attr(data-tooltip);
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0.45;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) scale(0.9);
+  padding: 5px 10px;
+  background: var(--text);
+  color: var(--surface);
+  font-size: 0.72rem;
+  font-weight: 500;
+  border-radius: 6px;
+  white-space: nowrap;
+  opacity: 0;
   pointer-events: none;
+  z-index: 10;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.16);
+  transition: opacity 150ms ease, transform 150ms ease;
 }
 
-.hero-chart .chart-grid line {
-  stroke: var(--chart-grid-color, rgba(255, 255, 255, 0.05));
-  stroke-width: 0.75px;
+[data-tooltip]::after {
+  content: "";
+  position: absolute;
+  bottom: calc(100% + 3px);
+  left: 50%;
+  transform: translateX(-50%) scale(0.9);
+  border-width: 5px;
+  border-style: solid;
+  border-color: var(--text) transparent transparent transparent;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 10;
+  transition: opacity 150ms ease, transform 150ms ease;
 }
 
-.hero-chart .chart-line {
-  fill: none;
-  stroke: url(#chart-line-grad);
-  stroke-width: 3.2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.hero-chart .chart-nodes circle {
-  fill: var(--chart-node-color, var(--blue));
-  stroke: var(--surface);
-  stroke-width: 1.5px;
-  transform-origin: center;
-}
-
-.hero-chart .chart-nodes circle.pulse-node {
-  animation: pulseNode 3s ease-in-out infinite alternate;
-}
-
-.hero-chart .chart-nodes circle:nth-child(1) { animation-delay: 0s; }
-.hero-chart .chart-nodes circle:nth-child(2) { animation-delay: 0.5s; fill: var(--chart-node-color-alt, var(--green)); }
-.hero-chart .chart-nodes circle:nth-child(3) { animation-delay: 1s; }
-.hero-chart .chart-nodes circle:nth-child(4) { animation-delay: 1.5s; fill: var(--chart-node-color-alt, var(--green)); }
-.hero-chart .chart-nodes circle:nth-child(5) { animation-delay: 2s; }
-.hero-chart .chart-nodes circle:nth-child(6) { animation-delay: 2.5s; fill: var(--chart-node-color-alt, var(--green)); }
-
-@keyframes pulseNode {
-  0% {
-    transform: scale(0.9);
-    opacity: 0.4;
-  }
-  100% {
-    transform: scale(1.3);
-    opacity: 0.8;
-    fill: var(--chart-node-color-alt, var(--green));
-  }
+[data-tooltip]:hover::before,
+[data-tooltip]:focus-visible::before,
+[data-tooltip]:hover::after,
+[data-tooltip]:focus-visible::after {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
 }
 
 /* Skip link for keyboard accessibility */
@@ -924,6 +919,10 @@ h1 {
   --chart-grid-color: rgba(255, 255, 255, 0.2);
   --chart-node-color: #00ffff;
   --chart-node-color-alt: #00ff00;
+}
+
+[data-contrast="high"] .theme-toggle {
+  display: none !important;
 }
 
 [data-contrast="high"] .panel {

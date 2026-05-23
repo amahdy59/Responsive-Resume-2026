@@ -85,7 +85,11 @@ const translations = {
     edu2_date: "سبتمبر 2009 - يونيو 2013",
     edu2_school: "جامعة المنوفية",
     toast_copied: "تم النسخ",
-    toast_failed: "فشل النسخ"
+    toast_failed: "فشل النسخ",
+    tooltip_contrast: "تبديل التباين العالي",
+    tooltip_lang: "تبديل اللغة",
+    tooltip_theme_dark: "التبديل إلى الوضع الداكن",
+    tooltip_theme_light: "التبديل إلى الوضع الفاتح"
   },
   en: {
     skip_link: "Skip to main content",
@@ -156,7 +160,11 @@ const translations = {
     edu2_date: "Sep 2009 - Jun 2013",
     edu2_school: "Minufiya University",
     toast_copied: "Copied",
-    toast_failed: "Copy failed"
+    toast_failed: "Copy failed",
+    tooltip_contrast: "Toggle High Contrast",
+    tooltip_lang: "Toggle Language",
+    tooltip_theme_dark: "Switch to Dark Mode",
+    tooltip_theme_light: "Switch to Light Mode"
   }
 };
 
@@ -168,6 +176,10 @@ function setTheme(theme) {
   themeToggle.querySelector("span").innerHTML = isDark
     ? '<svg aria-hidden="true"><use href="#icon-sun"></use></svg>'
     : '<svg aria-hidden="true"><use href="#icon-moon"></use></svg>';
+
+  // Update theme toggle tooltip based on current language
+  const currentLang = root.getAttribute("lang") || "en";
+  themeToggle.setAttribute("data-tooltip", isDark ? translations[currentLang].tooltip_theme_light : translations[currentLang].tooltip_theme_dark);
 }
 
 function setContrast(contrast) {
@@ -183,6 +195,12 @@ function setLanguage(lang) {
   root.setAttribute("dir", lang === "ar" ? "rtl" : "ltr");
   localStorage.setItem("resume-lang", lang);
   langToggle.setAttribute("aria-label", lang === "ar" ? "Switch to English" : "Switch to Arabic");
+
+  // Update tooltips for controls
+  const isDark = root.dataset.theme === "dark";
+  contrastToggle.setAttribute("data-tooltip", translations[lang].tooltip_contrast);
+  langToggle.setAttribute("data-tooltip", translations[lang].tooltip_lang);
+  themeToggle.setAttribute("data-tooltip", isDark ? translations[lang].tooltip_theme_light : translations[lang].tooltip_theme_dark);
 
   // Translate all tagged nodes
   document.querySelectorAll("[data-translate]").forEach((node) => {

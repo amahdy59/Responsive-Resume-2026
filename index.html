@@ -144,44 +144,6 @@
     <main class="resume-shell" id="main-content" aria-label="Ahmed Mahdy resume portfolio">
       <section class="resume-card">
         <header class="hero">
-          <div class="hero-pattern" aria-hidden="true">
-            <!-- Upward-trending Skill Progress Line Chart Backdrop -->
-            <svg class="hero-chart" viewBox="0 0 1000 120" preserveAspectRatio="none">
-              <defs>
-                <linearGradient id="chart-glow" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="var(--chart-glow-color, var(--blue))" stop-opacity="var(--chart-glow-opacity, 0.18)" />
-                  <stop offset="100%" stop-color="var(--chart-glow-color, var(--blue))" stop-opacity="0.0" />
-                </linearGradient>
-                <linearGradient id="chart-line-grad" x1="0" y1="0" x2="1" y2="0">
-                  <stop offset="0%" stop-color="var(--chart-line-color-start, var(--green))" />
-                  <stop offset="50%" stop-color="var(--chart-line-color-mid, var(--blue))" />
-                  <stop offset="100%" stop-color="var(--chart-line-color-end, var(--green))" />
-                </linearGradient>
-              </defs>
-              <g class="chart-grid">
-                <line x1="0" y1="20" x2="1000" y2="20" />
-                <line x1="0" y1="50" x2="1000" y2="50" />
-                <line x1="0" y1="80" x2="1000" y2="80" />
-                <line x1="0" y1="110" x2="1000" y2="110" />
-                <line x1="150" y1="0" x2="150" y2="120" />
-                <line x1="300" y1="0" x2="300" y2="120" />
-                <line x1="450" y1="0" x2="450" y2="120" />
-                <line x1="600" y1="0" x2="600" y2="120" />
-                <line x1="750" y1="0" x2="750" y2="120" />
-                <line x1="900" y1="0" x2="900" y2="120" />
-              </g>
-              <path d="M 0 120 L 0 110 L 150 95 L 300 80 L 450 65 L 600 48 L 750 32 L 900 20 L 1000 12 L 1000 120 Z" fill="url(#chart-glow)" />
-              <path class="chart-line" d="M 0 110 L 150 95 L 300 80 L 450 65 L 600 48 L 750 32 L 900 20 L 1000 12" />
-              <g class="chart-nodes">
-                <circle class="pulse-node" cx="150" cy="95" r="3.5" />
-                <circle class="pulse-node" cx="300" cy="80" r="3.5" />
-                <circle class="pulse-node" cx="450" cy="65" r="3.5" />
-                <circle class="pulse-node" cx="600" cy="48" r="3.5" />
-                <circle class="pulse-node" cx="750" cy="32" r="3.5" />
-                <circle class="pulse-node" cx="900" cy="20" r="3.5" />
-              </g>
-            </svg>
-          </div>
           <div class="identity">
             <img class="avatar" src="assets/ahmed-mahdy.png" alt="Ahmed Mahdy" />
             <div class="identity-copy">
@@ -196,13 +158,13 @@
           </div>
           <div class="hero-controls-wrapper">
             <div class="controls-group">
-              <button class="contrast-toggle" type="button" aria-label="Switch to high contrast mode">
+              <button class="contrast-toggle" type="button" data-tooltip="Toggle Contrast" aria-label="Switch to high contrast mode">
                 <span aria-hidden="true"><svg><use href="#icon-contrast"></use></svg></span>
               </button>
-              <button class="lang-toggle" type="button" aria-label="Switch to Arabic">
+              <button class="lang-toggle" type="button" data-tooltip="Switch Language" aria-label="Switch to Arabic">
                 <span aria-hidden="true"><svg><use href="#icon-globe"></use></svg></span>
               </button>
-              <button class="theme-toggle" type="button" aria-label="Switch to dark mode">
+              <button class="theme-toggle" type="button" data-tooltip="Switch Theme" aria-label="Switch to dark mode">
                 <span aria-hidden="true"><svg><use href="#icon-moon"></use></svg></span>
               </button>
             </div>
