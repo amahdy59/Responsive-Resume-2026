@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
@@ -41,6 +41,7 @@
     </script>
   </head>
   <body>
+    <a href="#main-content" class="skip-link" data-translate="skip_link">Skip to main content</a>
     <svg class="icon-sprite" aria-hidden="true" focusable="false">
       <symbol id="icon-user" viewBox="0 0 24 24">
         <path d="M20 21a8 8 0 0 0-16 0" />
@@ -126,22 +127,46 @@
       </symbol>
     </svg>
     <div class="ambient-particles" aria-hidden="true"></div>
-    <main class="resume-shell" aria-label="Ahmed Mahdy resume portfolio">
+    <main class="resume-shell" id="main-content" aria-label="Ahmed Mahdy resume portfolio">
       <section class="resume-card">
         <header class="hero">
-          <div class="hero-pattern" aria-hidden="true"></div>
-          <button class="theme-toggle" type="button" aria-label="Switch to dark mode">
-            <span aria-hidden="true"><svg><use href="#icon-moon"></use></svg></span>
-          </button>
+          <div class="hero-pattern" aria-hidden="true">
+            <!-- Constellation Data Network SVG Graphic -->
+            <svg class="constellation" viewBox="0 0 100 100" preserveAspectRatio="none">
+              <g class="connections">
+                <line x1="15" y1="20" x2="35" y2="45" />
+                <line x1="35" y1="45" x2="60" y2="25" />
+                <line x1="60" y1="25" x2="85" y2="55" />
+                <line x1="35" y1="45" x2="50" y2="75" />
+                <line x1="50" y1="75" x2="75" y2="80" />
+                <line x1="60" y1="25" x2="75" y2="80" />
+              </g>
+              <g class="nodes">
+                <circle class="pulse-node" cx="15" cy="20" r="1.5" />
+                <circle class="pulse-node" cx="35" cy="45" r="2" />
+                <circle class="pulse-node" cx="60" cy="25" r="1.5" />
+                <circle class="pulse-node" cx="85" cy="55" r="2.5" />
+                <circle class="pulse-node" cx="50" cy="75" r="1.8" />
+                <circle class="pulse-node" cx="75" cy="80" r="2" />
+              </g>
+            </svg>
+          </div>
+          <div class="controls-group">
+            <button class="contrast-toggle" type="button" aria-label="Switch to high contrast mode">HC</button>
+            <button class="lang-toggle" type="button" aria-label="Switch to Arabic">AR</button>
+            <button class="theme-toggle" type="button" aria-label="Switch to dark mode">
+              <span aria-hidden="true"><svg><use href="#icon-moon"></use></svg></span>
+            </button>
+          </div>
           <div class="identity">
             <img class="avatar" src="assets/ahmed-mahdy.png" alt="Ahmed Mahdy" />
             <div class="identity-copy">
-              <h1>Ahmed Mahdy</h1>
-              <p>UX Designer & Data Analyst</p>
+              <h1 data-translate="name">Ahmed Mahdy</h1>
+              <p data-translate="title">UX Designer & Data Analyst</p>
               <div class="tags" aria-label="Highlights">
-                <span>4+ years experience</span>
-                <span>UX Design</span>
-                <span>Data Analytics</span>
+                <span data-translate="exp_tag">4+ years experience</span>
+                <span data-translate="ux_tag">UX Design</span>
+                <span data-translate="data_tag">Data Analytics</span>
               </div>
             </div>
           </div>
@@ -172,9 +197,9 @@
 
         <div class="content-grid">
           <aside class="sidebar" aria-label="Profile details">
-            <section class="panel panel-primary">
-              <h2><span aria-hidden="true"><svg><use href="#icon-user"></use></svg></span>About Me</h2>
-              <p>
+            <section class="panel panel-secondary">
+              <h2><span aria-hidden="true"><svg><use href="#icon-user"></use></svg></span><span data-translate="sect_about">About Me</span></h2>
+              <p data-translate="about_text">
                 UX Designer & Data Analyst with 4+ years of experience turning user and
                 business needs into decision-ready dashboards and user-centered digital
                 experiences. Skilled in user research, information architecture, data
@@ -184,43 +209,43 @@
             </section>
 
             <section class="panel panel-secondary">
-              <h2><span aria-hidden="true"><svg><use href="#icon-award"></use></svg></span>Certifications</h2>
+              <h2><span aria-hidden="true"><svg><use href="#icon-award"></use></svg></span><span data-translate="sect_certs">Certifications</span></h2>
               <ul class="compact-list">
-                <li><a href="https://www.coursera.org/account/accomplishments/professional-cert/0OYUGNC1DRF5" target="_blank" rel="noreferrer">Google Data Analytics <svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg></a></li>
-                <li><a href="https://www.coursera.org/account/accomplishments/professional-cert/JQPVYZ6VYF52" target="_blank" rel="noreferrer">Tableau Business Intelligence Analyst <svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg></a></li>
-                <li><a href="https://www.coursera.org/account/accomplishments/specialization/5XR5AHBP79KW" target="_blank" rel="noreferrer">Excel Skills for Data Analytics and Visualization <svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg></a></li>
-                <li><a href="https://www.coursera.org/account/accomplishments/specialization/DCL8H4YT5UWG" target="_blank" rel="noreferrer">Excel Skills for Business <svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg></a></li>
-                <li><a href="https://www.coursera.org/account/accomplishments/professional-cert/49PCMPYYGLJV" target="_blank" rel="noreferrer">Google UX Design <svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg></a></li>
+                <li><a href="https://www.coursera.org/account/accomplishments/professional-cert/0OYUGNC1DRF5" target="_blank" rel="noreferrer"><span data-translate="cert1">Google Data Analytics</span> <svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg></a></li>
+                <li><a href="https://www.coursera.org/account/accomplishments/professional-cert/JQPVYZ6VYF52" target="_blank" rel="noreferrer"><span data-translate="cert2">Tableau Business Intelligence Analyst</span> <svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg></a></li>
+                <li><a href="https://www.coursera.org/account/accomplishments/specialization/5XR5AHBP79KW" target="_blank" rel="noreferrer"><span data-translate="cert3">Excel Skills for Data Analytics and Visualization</span> <svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg></a></li>
+                <li><a href="https://www.coursera.org/account/accomplishments/specialization/DCL8H4YT5UWG" target="_blank" rel="noreferrer"><span data-translate="cert4">Excel Skills for Business</span> <svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg></a></li>
+                <li><a href="https://www.coursera.org/account/accomplishments/professional-cert/49PCMPYYGLJV" target="_blank" rel="noreferrer"><span data-translate="cert5">Google UX Design</span> <svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg></a></li>
               </ul>
             </section>
 
             <section class="panel panel-secondary">
-              <h2><span aria-hidden="true"><svg><use href="#icon-spark"></use></svg></span>Skills</h2>
+              <h2><span aria-hidden="true"><svg><use href="#icon-spark"></use></svg></span><span data-translate="sect_skills">Skills</span></h2>
               <div class="skill-group">
-                <h3>Core UX & Design</h3>
+                <h3 data-translate="skills_ux_header">Core UX & Design</h3>
                 <div class="pills">
-                  <span>Interaction Design</span>
-                  <span>Information Architecture</span>
-                  <span>User Research</span>
-                  <span>Usability Testing</span>
-                  <span>Wireframing</span>
-                  <span>Prototyping</span>
-                  <span>Figma</span>
-                  <span>Design Systems</span>
-                  <span>Accessibility</span>
+                  <span data-translate="skill_ux1">Interaction Design</span>
+                  <span data-translate="skill_ux2">Information Architecture</span>
+                  <span data-translate="skill_ux3">User Research</span>
+                  <span data-translate="skill_ux4">Usability Testing</span>
+                  <span data-translate="skill_ux5">Wireframing</span>
+                  <span data-translate="skill_ux6">Prototyping</span>
+                  <span data-translate="skill_ux7">Figma</span>
+                  <span data-translate="skill_ux8">Design Systems</span>
+                  <span data-translate="skill_ux9">Accessibility</span>
                 </div>
               </div>
               <div class="skill-group">
-                <h3>Data Analysis & Visualization</h3>
+                <h3 data-translate="skills_data_header">Data Analysis & Visualization</h3>
                 <div class="pills">
-                  <span>Microsoft Excel (Advanced)</span>
-                  <span>Power BI</span>
-                  <span>Tableau</span>
-                  <span>Python</span>
-                  <span>SQL</span>
-                  <span>Dashboard Design</span>
-                  <span>Data Storytelling</span>
-                  <span>KPI Analysis</span>
+                  <span data-translate="skill_data1">Microsoft Excel (Advanced)</span>
+                  <span data-translate="skill_data2">Power BI</span>
+                  <span data-translate="skill_data3">Tableau</span>
+                  <span data-translate="skill_data4">Python</span>
+                  <span data-translate="skill_data5">SQL</span>
+                  <span data-translate="skill_data6">Dashboard Design</span>
+                  <span data-translate="skill_data7">Data Storytelling</span>
+                  <span data-translate="skill_data8">KPI Analysis</span>
                 </div>
               </div>
             </section>
@@ -228,39 +253,39 @@
 
           <section class="main-column" aria-label="Main resume content">
             <section class="panel panel-primary featured">
-              <h2><span aria-hidden="true"><svg><use href="#icon-folder"></use></svg></span>Projects</h2>
+              <h2><span aria-hidden="true"><svg><use href="#icon-folder"></use></svg></span><span data-translate="sect_projects">Projects</span></h2>
               <div class="project-group">
-                <h3>Data Analysis & Visualization Projects</h3>
+                <h3 data-translate="proj_data_header">Data Analysis & Visualization Projects</h3>
                 <article>
-                  <h4><a href="https://mavenshowcase.com/project/24967" target="_blank" rel="noreferrer">A Data-Driven LEGO Explorer <svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg></a></h4>
-                  <p>
+                  <h4><a href="https://mavenshowcase.com/project/24967" target="_blank" rel="noreferrer"><span data-translate="proj_data1_title">A Data-Driven LEGO Explorer</span> <svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg></a></h4>
+                  <p data-translate="proj_data1_desc">
                     An interactive Tableau visualization experience that helps users explore LEGO sets by theme, age, price, and set count.
                   </p>
                 </article>
                 <article>
-                  <h4><a href="https://mavenshowcase.com/project/26891" target="_blank" rel="noreferrer">Sales Performance Dashboard <svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg></a></h4>
-                  <p>
+                  <h4><a href="https://mavenshowcase.com/project/26891" target="_blank" rel="noreferrer"><span data-translate="proj_data2_title">Sales Performance Dashboard</span> <svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg></a></h4>
+                  <p data-translate="proj_data2_desc">
                     CRM sales dashboard built in Google Sheets for tracking quarterly team performance through chart-based visualization.
                   </p>
                 </article>
               </div>
               <div class="project-group">
-                <h3>UX Projects</h3>
+                <h3 data-translate="proj_ux_header">UX Projects</h3>
                 <article>
-                  <h4><a href="https://hr-tool-v2-gamma.vercel.app/" target="_blank" rel="noreferrer">Human Resources V2 <svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg></a></h4>
-                  <p>
+                  <h4><a href="https://hr-tool-v2-gamma.vercel.app/" target="_blank" rel="noreferrer"><span data-translate="proj_ux1_title">Human Resources V2</span> <svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg></a></h4>
+                  <p data-translate="proj_ux1_desc">
                     A responsive, privacy-safe HR self-service application built with React, TypeScript, and Tailwind CSS. Streamlines leave requests, attendance, and role management.
                   </p>
                 </article>
                 <article>
-                  <h4><a href="https://dribbble.com/shots/27402016-Cairo-International-Airport-Command-Hub" target="_blank" rel="noreferrer">Cairo International Airport - Command Hub <svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg></a></h4>
-                  <p>
+                  <h4><a href="https://dribbble.com/shots/27402016-Cairo-International-Airport-Command-Hub" target="_blank" rel="noreferrer"><span data-translate="proj_ux2_title">Cairo International Airport - Command Hub</span> <svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg></a></h4>
+                  <p data-translate="proj_ux2_desc">
                     A smart airport monitoring platform exploring interactive dashboards, facility tracking, and Digital Twin operations for airport command teams.
                   </p>
                 </article>
                 <article>
-                  <h4><a href="https://oculus-paste-25250067.figma.site/" target="_blank" rel="noreferrer">People Tool (Figma Redesign) <svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg></a></h4>
-                  <p>
+                  <h4><a href="https://oculus-paste-25250067.figma.site/" target="_blank" rel="noreferrer"><span data-translate="proj_ux3_title">People Tool (Figma Redesign)</span> <svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg></a></h4>
+                  <p data-translate="proj_ux3_desc">
                     Redesigned an internal HR tool in Figma, delivering a clearer platform for vacation, sick leave, and mission requests.
                   </p>
                 </article>
@@ -268,33 +293,31 @@
             </section>
 
             <section class="panel panel-primary timeline-panel">
-              <h2><span aria-hidden="true"><svg><use href="#icon-briefcase"></use></svg></span>Employment</h2>
+              <h2><span aria-hidden="true"><svg><use href="#icon-briefcase"></use></svg></span><span data-translate="sect_jobs">Employment</span></h2>
               <div class="timeline">
                 <article>
                   <div class="timeline-dot" aria-hidden="true"><svg><use href="#icon-briefcase"></use></svg></div>
                   <div class="timeline-card">
-                    <h3>User Experience Designer</h3>
-                    <time class="date" datetime="2023-01">Jan 2023 - Present</time>
-                    <p class="company">Advansys IS</p>
+                    <h3 data-translate="job1_title">User Experience Designer</h3>
+                    <time class="date" datetime="2023-01" data-translate="job1_date">Jan 2023 - Present</time>
+                    <p class="company" data-translate="job1_company">Advansys IS</p>
                     <ul>
-                      <li>Analyzed complex user requirements to deliver intuitive and accessible interface designs.</li>
-                      <li>Designed interactive wireframes and high-fidelity prototypes in Figma to accelerate development handoffs.</li>
-                      <li>Created and maintained a component-based Figma design system, reducing design-to-development turnaround by 25%.</li>
-                      <li>Fostered cross-functional collaboration with product and engineering teams to ensure design fidelity.</li>
+                      <li data-translate="job1_b1">Conducted user research and usability testing to translate complex requirements into intuitive, accessible wireframes and prototypes in Figma.</li>
+                      <li data-translate="job1_b2">Developed and maintained a component-driven design system, accelerating cross-functional design-to-development handoffs by 25%.</li>
+                      <li data-translate="job1_b3">Collaborated with product managers and engineers to ensure implementation aligned with design fidelity and WCAG accessibility standards.</li>
                     </ul>
                   </div>
                 </article>
                 <article>
                   <div class="timeline-dot" aria-hidden="true"><svg><use href="#icon-briefcase"></use></svg></div>
                   <div class="timeline-card">
-                    <h3>Instructional Designer</h3>
-                    <time class="date" datetime="2018-07">Jul 2018 - Jan 2023</time>
-                    <p class="company">Schneider Electric</p>
+                    <h3 data-translate="job2_title">Instructional Designer</h3>
+                    <time class="date" datetime="2018-07" data-translate="job2_date">Jul 2018 - Jan 2023</time>
+                    <p class="company" data-translate="job2_company">Schneider Electric</p>
                     <ul>
-                      <li>Designed engaging, interactive e-learning activities that significantly enhanced learner retention and course completions.</li>
-                      <li>Conducted usability tests and user research on learning paths, increasing overall training engagement by 30%.</li>
-                      <li>Collaborated with subject matter experts to translate complex technical content into accessible online delivery formats.</li>
-                      <li>Improved the visual design of instructional materials to align with modern usability and visual standards.</li>
+                      <li data-translate="job2_b1">Designed interactive e-learning modules and media assets, increasing course completion rates by 30% and boosting user engagement.</li>
+                      <li data-translate="job2_b2">Conducted user research on learning paths and user journeys, redesigning course interfaces to align with modern usability standards.</li>
+                      <li data-translate="job2_b3">Collaborated with subject matter experts to translate technical content into accessible, user-centered digital training solutions.</li>
                     </ul>
                   </div>
                 </article>
@@ -302,22 +325,22 @@
             </section>
 
             <section class="panel panel-secondary timeline-panel">
-              <h2><span aria-hidden="true"><svg><use href="#icon-education"></use></svg></span>Education</h2>
+              <h2><span aria-hidden="true"><svg><use href="#icon-education"></use></svg></span><span data-translate="sect_edu">Education</span></h2>
               <div class="timeline education">
                 <article>
                   <div class="timeline-dot" aria-hidden="true"><svg><use href="#icon-education"></use></svg></div>
                   <div class="timeline-card">
-                    <h3>Diploma of Education/Instructional Technology</h3>
-                    <time class="date" datetime="2016-09">Sep 2016 - Jun 2017</time>
-                    <p class="company">Information Technology Institute (ITI)</p>
+                    <h3 data-translate="edu1_title">Diploma of Education/Instructional Technology</h3>
+                    <time class="date" datetime="2016-09" data-translate="edu1_date">Sep 2016 - Jun 2017</time>
+                    <p class="company" data-translate="edu1_school">Information Technology Institute (ITI)</p>
                   </div>
                 </article>
                 <article>
                   <div class="timeline-dot" aria-hidden="true"><svg><use href="#icon-education"></use></svg></div>
                   <div class="timeline-card">
-                    <h3>Bachelor's degree, Radio and Television</h3>
-                    <time class="date" datetime="2009-09">Sep 2009 - Jun 2013</time>
-                    <p class="company">Minufiya University</p>
+                    <h3 data-translate="edu2_title">Bachelor's degree, Radio and Television</h3>
+                    <time class="date" datetime="2009-09" data-translate="edu2_date">Sep 2009 - Jun 2013</time>
+                    <p class="company" data-translate="edu2_school">Minufiya University</p>
                   </div>
                 </article>
               </div>
