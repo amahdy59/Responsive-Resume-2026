@@ -295,6 +295,7 @@ button:focus-visible {
 
 .theme-toggle svg,
 .lang-toggle svg,
+.print-button svg,
 .contrast-toggle svg,
 .contact-icon svg,
 .timeline-dot svg {
@@ -1139,8 +1140,9 @@ h1 {
   }
   body {
     background: #ffffff !important;
-    color: #000000 !important;
-    font-size: 11pt !important;
+    color: #2d3748 !important;
+    font-size: 10pt !important;
+    line-height: 1.45 !important;
   }
   .resume-shell {
     padding: 0 !important;
@@ -1150,35 +1152,65 @@ h1 {
     border: none !important;
     box-shadow: none !important;
     background: #ffffff !important;
+    padding: 0 !important;
   }
   .hero {
-    background: #ffffff !important;
-    color: #000000 !important;
-    border-bottom: 2px solid #000000 !important;
-    padding: 10px 0 !important;
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    width: 100% !important;
+    background: none !important;
+    border-bottom: none !important;
+    padding: 0 0 20px 0 !important;
     min-height: auto !important;
   }
+  .identity {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 16px !important;
+  }
+  .avatar {
+    width: 72px !important;
+    height: 72px !important;
+    border-radius: 50% !important;
+  }
   h1 {
-    color: #000000 !important;
-    font-size: 24pt !important;
+    color: #1a202c !important;
+    font-size: 20pt !important;
+    margin: 0 0 4px 0 !important;
+    font-weight: 700 !important;
   }
   .identity-copy p {
-    color: #333333 !important;
+    color: #4a5568 !important;
+    font-size: 11pt !important;
+    margin: 0 !important;
   }
   .tags {
     display: none !important;
   }
+  .hero-controls-wrapper {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+  }
   .contact-list {
+    display: grid !important;
+    gap: 6px !important;
     background: none !important;
     border: none !important;
-    color: #000000 !important;
+    padding: 0 !important;
+  }
+  .contact-list li {
+    display: flex !important;
+    align-items: center !important;
     padding: 0 !important;
   }
   .contact-list a {
-    color: #000000 !important;
-  }
-  .contact-list li {
-    padding: 0 !important;
+    color: #2d3748 !important;
+    text-decoration: underline !important;
+    font-size: 9pt !important;
   }
   .contact-icon,
   .copy-button,
@@ -1193,8 +1225,9 @@ h1 {
     display: none !important;
   }
   .content-grid {
-    grid-template-columns: 1fr !important;
-    gap: 15px !important;
+    display: grid !important;
+    grid-template-columns: 220px 1fr !important;
+    gap: 24px !important;
     padding: 0 !important;
   }
   .panel {
@@ -1202,19 +1235,43 @@ h1 {
     border: none !important;
     box-shadow: none !important;
     padding: 0 !important;
-    margin-bottom: 15px !important;
+    margin-bottom: 20px !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
   }
   .panel h2 {
-    border-bottom: 1px solid #000000 !important;
-    padding-bottom: 4px !important;
-    margin-bottom: 8px !important;
-    font-size: 13pt !important;
-    color: #000000 !important;
+    border-bottom: none !important;
+    padding-bottom: 0 !important;
+    margin-bottom: 10px !important;
+    font-size: 12pt !important;
+    color: #1a202c !important;
+    font-weight: 700 !important;
   }
   .panel h2 .panel-icon-box {
     display: none !important;
   }
-  .compact-list li,
+  .compact-list {
+    list-style: disc !important;
+    padding-inline-start: 18px !important;
+    margin: 6px 0 !important;
+  }
+  .compact-list li {
+    display: list-item !important;
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    padding: 0 !important;
+    margin-bottom: 6px !important;
+  }
+  .compact-list a {
+    display: inline !important;
+    min-height: auto !important;
+    padding: 0 !important;
+    text-decoration: underline !important;
+    color: #2d3748 !important;
+    font-weight: 500 !important;
+  }
   .featured article,
   .timeline-card {
     background: none !important;
@@ -1222,19 +1279,23 @@ h1 {
     box-shadow: none !important;
     backdrop-filter: none !important;
     padding: 0 !important;
-    margin-bottom: 8px !important;
+    margin-bottom: 12px !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
   }
-  .compact-list a,
   .featured h4 a {
     text-decoration: underline !important;
-    color: #000000 !important;
+    color: #1a202c !important;
+    font-weight: 600 !important;
   }
   .timeline::before {
     display: none !important;
   }
   .timeline article {
     grid-template-columns: 1fr !important;
-    margin-bottom: 10px !important;
+    margin-bottom: 12px !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
   }
   .timeline-dot {
     display: none !important;
@@ -1246,16 +1307,24 @@ h1 {
     background: none !important;
     border: none !important;
     padding: 0 !important;
-    color: #555555 !important;
-    font-size: 9pt !important;
+    color: #718096 !important;
+    font-size: 8.5pt !important;
   }
   .company {
-    color: #000000 !important;
-    font-weight: bold !important;
+    color: #4a5568 !important;
+    font-weight: 600 !important;
+    margin-top: 2px !important;
   }
   .skill-group h3,
   .project-group h3 {
-    margin-top: 5px !important;
+    margin-top: 8px !important;
+    font-size: 10pt !important;
+    color: #1a202c !important;
+  }
+  .project-group,
+  article {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
   }
   .pills {
     display: block !important;
@@ -1264,9 +1333,9 @@ h1 {
     display: inline-block !important;
     border: none !important;
     background: none !important;
-    color: #000000 !important;
+    color: #2d3748 !important;
     padding: 0 !important;
-    margin-right: 10px !important;
+    margin-right: 8px !important;
   }
   .pills span::after {
     content: "," !important;
