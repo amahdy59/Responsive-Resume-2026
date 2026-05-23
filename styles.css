@@ -1161,21 +1161,57 @@ h1 {
   /* ── Page geometry ── */
   @page {
     size: auto;
-    /* Use @page margin areas: top for our fixed header, bottom for page numbers.
-       Overriding with empty strings suppresses Chrome's native date/time/URL. */
-    margin: 18mm 12mm 14mm 12mm;
+    /* Use @page margins: top 22mm leaves a 4mm gap between the running header border (at 18mm) and the content starting at 22mm. */
+    margin: 22mm 12mm 14mm 12mm;
 
-    @top-left   { content: ""; }
-    @top-center { content: ""; }
-    @top-right  { content: ""; }
-    @bottom-left  { content: ""; }
+    @top-left {
+      /* Date injected dynamically by JS */
+      font-family: 'Inter', 'Cairo', system-ui, -apple-system, sans-serif;
+      font-size: 8pt;
+      color: #718096;
+      border-bottom: 0.5pt solid #e2e8f0;
+      padding-bottom: 3mm;
+      vertical-align: bottom;
+    }
+    @top-center {
+      content: "";
+      border-bottom: 0.5pt solid #e2e8f0;
+      padding-bottom: 3mm;
+    }
+    @top-right {
+      /* Title injected dynamically by JS (holds 'Name | Title' translated) */
+      font-family: 'Inter', 'Cairo', system-ui, -apple-system, sans-serif;
+      font-size: 8pt;
+      color: #718096;
+      font-weight: 500;
+      border-bottom: 0.5pt solid #e2e8f0;
+      padding-bottom: 3mm;
+      vertical-align: bottom;
+    }
+    @bottom-left { content: ""; }
     @bottom-center {
       content: "Page " counter(page) " of " counter(pages);
-      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      font-family: 'Inter', 'Cairo', system-ui, -apple-system, sans-serif;
       font-size: 8pt;
       color: #718096;
     }
     @bottom-right { content: ""; }
+  }
+
+  /* Suppress top running header on page 1 */
+  @page :first {
+    @top-left {
+      content: normal !important;
+      border-bottom: none !important;
+    }
+    @top-center {
+      content: normal !important;
+      border-bottom: none !important;
+    }
+    @top-right {
+      content: normal !important;
+      border-bottom: none !important;
+    }
   }
 
   /* ── Base ── */
@@ -1190,33 +1226,6 @@ h1 {
   }
   [dir="rtl"] body {
     font-family: 'Cairo', sans-serif !important;
-  }
-
-  /* ── Custom print header (repeats every page via position:fixed) ── */
-  .print-page-header {
-    display: flex !important;
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    height: 12mm !important;
-    padding: 3mm 12mm !important;
-    justify-content: space-between !important;
-    align-items: center !important;
-    font-size: 8pt !important;
-    color: #718096 !important;
-    font-family: 'Inter', system-ui, sans-serif !important;
-    border-bottom: 0.5pt solid #e2e8f0 !important;
-    background: #ffffff !important;
-    z-index: 9999 !important;
-  }
-  .print-header-title {
-    font-weight: 500 !important;
-  }
-
-  /* ── Custom print footer (hidden – @page @bottom-center handles numbering) ── */
-  .print-page-footer {
-    display: none !important;
   }
 
   /* ── Shell ── */
@@ -1339,7 +1348,7 @@ h1 {
     gap: 28px !important;
     padding: 0 !important;
     /* Nudge content grid down a few px so section headings aren't clipped */
-    padding-top: 4px !important;
+    padding-top: 10px !important;
   }
 
   /* Convert nested grids to block flow to prevent cross-page column overlap */
@@ -1369,6 +1378,8 @@ h1 {
     font-weight: 700 !important;
     text-transform: uppercase !important;
     letter-spacing: 0.75px !important;
+    line-height: 1.4 !important;
+    padding-top: 2px !important;
   }
   .panel h2 .panel-icon-box {
     display: none !important;
@@ -1488,7 +1499,7 @@ h1 {
     line-height: 1.4 !important;
   }
   .timeline-card h3 {
-    font-size: 10pt !important;
+    font-size: 10.5pt !important;
     font-weight: 600 !important;
     color: #1a202c !important;
     margin-top: 0 !important;
