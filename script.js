@@ -63,8 +63,7 @@ const translations = {
     proj_ux1_desc: "تطبيق خدمة ذاتية للموارد البشرية مستجيب وآمن للخصوصية، تم بناؤه باستخدام React و TypeScript و Tailwind CSS. يسهل طلبات الإجازات والحضور وإدارة الأدوار.",
     proj_ux2_title: "مركز التحكم بمطار القاهرة الدولي",
     proj_ux2_desc: "منصة ذكية لمراقبة المطارات تستكشف لوحات المعلومات التفاعلية وتتبع المرافق وعمليات التوأم الرقمي لفرق إدارة المطار.",
-    proj_ux3_title: "أداة الموظفين (إعادة تصميم فيجما)",
-    proj_ux3_desc: "إعادة تصميم أداة موارد بشرية داخلية في Figma، مما يوفر منصة أكثر وضوحاً لطلبات الإجازات والمرضيات والمهمات.",
+
     sect_jobs: "الخبرات المهنية",
     job1_title: "مصمم تجربة المستخدم",
     job1_date: "يناير 2023 - الحالي",
@@ -139,8 +138,7 @@ const translations = {
     proj_ux1_desc: "A responsive, privacy-safe HR self-service application built with React, TypeScript, and Tailwind CSS. Streamlines leave requests, attendance, and role management.",
     proj_ux2_title: "Cairo International Airport - Command Hub",
     proj_ux2_desc: "A smart airport monitoring platform exploring interactive dashboards, facility tracking, and Digital Twin operations for airport command teams.",
-    proj_ux3_title: "People Tool (Figma Redesign)",
-    proj_ux3_desc: "Redesigned an internal HR tool in Figma, delivering a clearer platform for vacation, sick leave, and mission requests.",
+
     sect_jobs: "Employment",
     job1_title: "User Experience Designer",
     job1_date: "Jan 2023 - Present",
