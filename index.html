@@ -125,6 +125,15 @@
         <path d="m10 14 11-11" />
         <path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5" />
       </symbol>
+      <symbol id="icon-globe" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="10" />
+        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+        <path d="M2 12h20" />
+      </symbol>
+      <symbol id="icon-contrast" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="10" />
+        <path d="M12 2a10 10 0 0 1 0 20v-20z" fill="currentColor" />
+      </symbol>
     </svg>
     <div class="ambient-particles" aria-hidden="true"></div>
     <main class="resume-shell" id="main-content" aria-label="Ahmed Mahdy resume portfolio">
@@ -152,8 +161,12 @@
             </svg>
           </div>
           <div class="controls-group">
-            <button class="contrast-toggle" type="button" aria-label="Switch to high contrast mode">HC</button>
-            <button class="lang-toggle" type="button" aria-label="Switch to Arabic">AR</button>
+            <button class="contrast-toggle" type="button" aria-label="Switch to high contrast mode">
+              <span aria-hidden="true"><svg><use href="#icon-contrast"></use></svg></span>
+            </button>
+            <button class="lang-toggle" type="button" aria-label="Switch to Arabic">
+              <span aria-hidden="true"><svg><use href="#icon-globe"></use></svg></span>
+            </button>
             <button class="theme-toggle" type="button" aria-label="Switch to dark mode">
               <span aria-hidden="true"><svg><use href="#icon-moon"></use></svg></span>
             </button>
@@ -180,14 +193,14 @@
             </li>
             <li>
               <span class="contact-icon" aria-hidden="true"><svg><use href="#icon-linkedin"></use></svg></span>
-              <a href="https://www.linkedin.com/in/creativemahdy" target="_blank" rel="noreferrer">linkedin.com/in/creativemahdy <svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg></a>
+              <a href="https://www.linkedin.com/in/creativemahdy" target="_blank" rel="noreferrer">linkedin.com/in/creativemahdy</a>
               <button class="copy-button" type="button" data-copy="https://www.linkedin.com/in/creativemahdy" aria-label="Copy LinkedIn profile link">
                 <span aria-hidden="true"></span>
               </button>
             </li>
             <li>
               <span class="contact-icon" aria-hidden="true"><svg><use href="#icon-dribbble"></use></svg></span>
-              <a href="https://dribbble.com/amahdy59" target="_blank" rel="noreferrer">dribbble.com/amahdy59 <svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg></a>
+              <a href="https://dribbble.com/amahdy59" target="_blank" rel="noreferrer">dribbble.com/amahdy59</a>
               <button class="copy-button" type="button" data-copy="https://dribbble.com/amahdy59" aria-label="Copy Dribbble profile link">
                 <span aria-hidden="true"></span>
               </button>
@@ -198,7 +211,7 @@
         <div class="content-grid">
           <aside class="sidebar" aria-label="Profile details">
             <section class="panel panel-secondary">
-              <h2><span aria-hidden="true"><svg><use href="#icon-user"></use></svg></span><span data-translate="sect_about">About Me</span></h2>
+              <h2><span class="panel-icon-box" aria-hidden="true"><svg><use href="#icon-user"></use></svg></span><span data-translate="sect_about">About Me</span></h2>
               <p data-translate="about_text">
                 UX Designer & Data Analyst with 4+ years of experience turning user and
                 business needs into decision-ready dashboards and user-centered digital
@@ -209,7 +222,7 @@
             </section>
 
             <section class="panel panel-secondary">
-              <h2><span aria-hidden="true"><svg><use href="#icon-award"></use></svg></span><span data-translate="sect_certs">Certifications</span></h2>
+              <h2><span class="panel-icon-box" aria-hidden="true"><svg><use href="#icon-award"></use></svg></span><span data-translate="sect_certs">Certifications</span></h2>
               <ul class="compact-list">
                 <li><a href="https://www.coursera.org/account/accomplishments/professional-cert/0OYUGNC1DRF5" target="_blank" rel="noreferrer"><span data-translate="cert1">Google Data Analytics</span> <svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg></a></li>
                 <li><a href="https://www.coursera.org/account/accomplishments/professional-cert/JQPVYZ6VYF52" target="_blank" rel="noreferrer"><span data-translate="cert2">Tableau Business Intelligence Analyst</span> <svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg></a></li>
@@ -220,7 +233,7 @@
             </section>
 
             <section class="panel panel-secondary">
-              <h2><span aria-hidden="true"><svg><use href="#icon-spark"></use></svg></span><span data-translate="sect_skills">Skills</span></h2>
+              <h2><span class="panel-icon-box" aria-hidden="true"><svg><use href="#icon-spark"></use></svg></span><span data-translate="sect_skills">Skills</span></h2>
               <div class="skill-group">
                 <h3 data-translate="skills_ux_header">Core UX & Design</h3>
                 <div class="pills">
@@ -253,7 +266,7 @@
 
           <section class="main-column" aria-label="Main resume content">
             <section class="panel panel-primary featured">
-              <h2><span aria-hidden="true"><svg><use href="#icon-folder"></use></svg></span><span data-translate="sect_projects">Projects</span></h2>
+              <h2><span class="panel-icon-box" aria-hidden="true"><svg><use href="#icon-folder"></use></svg></span><span data-translate="sect_projects">Projects</span></h2>
               <div class="project-group">
                 <h3 data-translate="proj_data_header">Data Analysis & Visualization Projects</h3>
                 <article>
@@ -293,7 +306,7 @@
             </section>
 
             <section class="panel panel-primary timeline-panel">
-              <h2><span aria-hidden="true"><svg><use href="#icon-briefcase"></use></svg></span><span data-translate="sect_jobs">Employment</span></h2>
+              <h2><span class="panel-icon-box" aria-hidden="true"><svg><use href="#icon-briefcase"></use></svg></span><span data-translate="sect_jobs">Employment</span></h2>
               <div class="timeline">
                 <article>
                   <div class="timeline-dot" aria-hidden="true"><svg><use href="#icon-briefcase"></use></svg></div>
@@ -302,9 +315,9 @@
                     <time class="date" datetime="2023-01" data-translate="job1_date">Jan 2023 - Present</time>
                     <p class="company" data-translate="job1_company">Advansys IS</p>
                     <ul>
-                      <li data-translate="job1_b1">Conducted user research and usability testing to translate complex requirements into intuitive, accessible wireframes and prototypes in Figma.</li>
-                      <li data-translate="job1_b2">Developed and maintained a component-driven design system, accelerating cross-functional design-to-development handoffs by 25%.</li>
-                      <li data-translate="job1_b3">Collaborated with product managers and engineers to ensure implementation aligned with design fidelity and WCAG accessibility standards.</li>
+                      <li data-translate="job1_b1">Conducted user research and usability testing to design intuitive wireframes in Figma.</li>
+                      <li data-translate="job1_b2">Created a component-driven design system, speeding up developer handoffs by 25%.</li>
+                      <li data-translate="job1_b3">Collaborated with engineering teams to ensure WCAG AA compliance and design fidelity.</li>
                     </ul>
                   </div>
                 </article>
@@ -315,9 +328,9 @@
                     <time class="date" datetime="2018-07" data-translate="job2_date">Jul 2018 - Jan 2023</time>
                     <p class="company" data-translate="job2_company">Schneider Electric</p>
                     <ul>
-                      <li data-translate="job2_b1">Designed interactive e-learning modules and media assets, increasing course completion rates by 30% and boosting user engagement.</li>
-                      <li data-translate="job2_b2">Conducted user research on learning paths and user journeys, redesigning course interfaces to align with modern usability standards.</li>
-                      <li data-translate="job2_b3">Collaborated with subject matter experts to translate technical content into accessible, user-centered digital training solutions.</li>
+                      <li data-translate="job2_b1">Built interactive e-learning modules, boosting training completion rates by 30%.</li>
+                      <li data-translate="job2_b2">Researched learning paths and redesigned platform interfaces for better usability.</li>
+                      <li data-translate="job2_b3">Collaborated with SMEs to translate technical systems into accessible learning modules.</li>
                     </ul>
                   </div>
                 </article>
@@ -325,7 +338,7 @@
             </section>
 
             <section class="panel panel-secondary timeline-panel">
-              <h2><span aria-hidden="true"><svg><use href="#icon-education"></use></svg></span><span data-translate="sect_edu">Education</span></h2>
+              <h2><span class="panel-icon-box" aria-hidden="true"><svg><use href="#icon-education"></use></svg></span><span data-translate="sect_edu">Education</span></h2>
               <div class="timeline education">
                 <article>
                   <div class="timeline-dot" aria-hidden="true"><svg><use href="#icon-education"></use></svg></div>

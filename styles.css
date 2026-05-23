@@ -251,12 +251,16 @@ button:focus-visible {
   transform: translateY(-1px);
 }
 
-.theme-toggle span {
+.theme-toggle span,
+.lang-toggle span,
+.contrast-toggle span {
   display: inline-grid;
   place-items: center;
 }
 
 .theme-toggle svg,
+.lang-toggle svg,
+.contrast-toggle svg,
 .contact-icon svg,
 .timeline-dot svg {
   width: 16px;
@@ -266,6 +270,10 @@ button:focus-visible {
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-width: 2;
+}
+
+.contrast-toggle svg path {
+  fill: currentColor;
 }
 
 .identity,
@@ -437,7 +445,7 @@ h1 {
 }
 
 .contact-icon,
-.panel h2 span {
+.panel-icon-box {
   display: inline-grid;
   place-items: center;
   flex: 0 0 auto;
@@ -515,7 +523,7 @@ h1 {
   background: var(--panel-primary-bg);
 }
 
-.panel-primary h2 span {
+.panel-primary h2 .panel-icon-box {
   background: var(--blue);
   color: #ffffff;
 }
@@ -525,7 +533,7 @@ h1 {
   background: var(--panel-secondary-bg);
 }
 
-.panel-secondary h2 span {
+.panel-secondary h2 .panel-icon-box {
   background: var(--green);
   color: #ffffff;
 }
@@ -1091,7 +1099,7 @@ h1 {
     font-size: 13pt !important;
     color: #000000 !important;
   }
-  .panel h2 span {
+  .panel h2 .panel-icon-box {
     display: none !important;
   }
   .compact-list li,

@@ -68,15 +68,15 @@ const translations = {
     job1_title: "مصمم تجربة المستخدم",
     job1_date: "يناير 2023 - الحالي",
     job1_company: "أدفانسيس للحلول البرمجية",
-    job1_b1: "إجراء أبحاث المستخدمين واختبارات سهولة الاستخدام لترجمة المتطلبات المعقدة إلى مخططات هيكلية ونماذج تفاعلية سهلة الوصول في Figma.",
-    job1_b2: "تطوير وصيانة نظام تصميم معتمد على المكونات (Component-driven) مما سرع عمليات تسليم التصميم للمطورين بنسبة 25%.",
-    job1_b3: "التعاون مع مديري المنتجات والمهندسين لضمان توافق التنفيذ البرمجي مع دقة التصاميم ومعايير سهولة الوصول WCAG.",
+    job1_b1: "إجراء أبحاث المستخدمين واختبارات سهولة الاستخدام لتصميم مخططات تفاعلية في Figma.",
+    job1_b2: "بناء نظام تصميم معتمد على المكونات، مما سرع تسليم التصاميم للمطورين بنسبة 25%.",
+    job1_b3: "التعاون مع فرق الهندسة لضمان مطابقة معايير سهولة الوصول WCAG AA ودقة التصميم.",
     job2_title: "مصمم تعليمي",
     job2_date: "يوليو 2018 - يناير 2023",
     job2_company: "شنايدر إلكتريك",
-    job2_b1: "تصميم أنشطة تعليمية إلكترونية ومواد تفاعلية وجذابة زادت معدلات إكمال الدورات التدريبية بنسبة 30% وعززت تفاعل المتدربين.",
-    job2_b2: "إجراء أبحاث المستخدمين على مسارات التعلم ورحلات المستخدم، وإعادة تصميم واجهات الدورات لتتوافق مع معايير سهولة الاستخدام الحديثة.",
-    job2_b3: "التعاون مع خبراء موضوع العمل لترجمة المحتوى التقني المعقد إلى صيغ وحلول تقديم رقمية سهلة الوصول ومتمحورة حول المستخدم.",
+    job2_b1: "تطوير وحدات تعليمية تفاعلية، مما زاد معدلات إكمال التدريب بنسبة 30%.",
+    job2_b2: "دراسة مسارات التعلم وإعادة تصميم واجهات المنصات لتحسين سهولة الاستخدام.",
+    job2_b3: "التعاون مع الخبراء لتبسيط الأنظمة التقنية إلى محتوى تعليمي سهل الوصول.",
     sect_edu: "التعليم",
     edu1_title: "دبلوم في تقنيات التعليم وتكنولوجيا المعلومات",
     edu1_date: "سبتمبر 2016 - يونيو 2017",
@@ -139,15 +139,15 @@ const translations = {
     job1_title: "User Experience Designer",
     job1_date: "Jan 2023 - Present",
     job1_company: "Advansys IS",
-    job1_b1: "Conducted user research and usability testing to translate complex requirements into intuitive, accessible wireframes and prototypes in Figma.",
-    job1_b2: "Developed and maintained a component-driven design system, accelerating cross-functional design-to-development handoffs by 25%.",
-    job1_b3: "Collaborated with product managers and engineers to ensure implementation aligned with design fidelity and WCAG accessibility standards.",
+    job1_b1: "Conducted user research and usability testing to design intuitive wireframes in Figma.",
+    job1_b2: "Created a component-driven design system, speeding up developer handoffs by 25%.",
+    job1_b3: "Collaborated with engineering teams to ensure WCAG AA compliance and design fidelity.",
     job2_title: "Instructional Designer",
     job2_date: "Jul 2018 - Jan 2023",
     job2_company: "Schneider Electric",
-    job2_b1: "Designed interactive e-learning modules and media assets, increasing course completion rates by 30% and boosting user engagement.",
-    job2_b2: "Conducted user research on learning paths and user journeys, redesigning course interfaces to align with modern usability standards.",
-    job2_b3: "Collaborated with subject matter experts to translate technical content into accessible, user-centered digital training solutions.",
+    job2_b1: "Built interactive e-learning modules, boosting training completion rates by 30%.",
+    job2_b2: "Researched learning paths and redesigned platform interfaces for better usability.",
+    job2_b3: "Collaborated with SMEs to translate technical systems into accessible learning modules.",
     sect_edu: "Education",
     edu1_title: "Diploma of Education/Instructional Technology",
     edu1_date: "Sep 2016 - Jun 2017",
@@ -175,7 +175,6 @@ function setContrast(contrast) {
   localStorage.setItem("resume-contrast", contrast);
   const isHigh = contrast === "high";
   contrastToggle.setAttribute("aria-label", isHigh ? "Switch to normal contrast" : "Switch to high contrast");
-  contrastToggle.textContent = isHigh ? "NC" : "HC";
   contrastToggle.classList.toggle("active", isHigh);
 }
 
@@ -183,7 +182,6 @@ function setLanguage(lang) {
   root.setAttribute("lang", lang);
   root.setAttribute("dir", lang === "ar" ? "rtl" : "ltr");
   localStorage.setItem("resume-lang", lang);
-  langToggle.textContent = lang === "ar" ? "EN" : "AR";
   langToggle.setAttribute("aria-label", lang === "ar" ? "Switch to English" : "Switch to Arabic");
 
   // Translate all tagged nodes
