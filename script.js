@@ -228,7 +228,7 @@ function makeCopyButton(value, label) {
   button.type = "button";
   button.dataset.copy = value;
   button.setAttribute("aria-label", label);
-  button.innerHTML = '<span aria-hidden="true"></span>';
+  button.innerHTML = '<span aria-hidden="true"><svg><use href="#icon-copy"></use></svg></span>';
   return button;
 }
 
@@ -268,6 +268,16 @@ document.querySelectorAll("[data-copy]").forEach((button) => {
     try {
       await copyText(button.dataset.copy);
       showToast(translations[currentLang].toast_copied);
+      
+      const useTag = button.querySelector("use");
+      if (useTag) {
+        useTag.setAttribute("href", "#icon-check");
+        button.classList.add("copied");
+        setTimeout(() => {
+          useTag.setAttribute("href", "#icon-copy");
+          button.classList.remove("copied");
+        }, 1500);
+      }
     } catch {
       showToast(translations[currentLang].toast_failed);
     }

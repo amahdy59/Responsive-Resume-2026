@@ -134,29 +134,50 @@
         <circle cx="12" cy="12" r="10" />
         <path d="M12 2a10 10 0 0 1 0 20v-20z" fill="currentColor" />
       </symbol>
+      <symbol id="icon-copy" viewBox="0 0 16 16">
+        <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z" />
+        <path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z" />
+      </symbol>
+      <symbol id="icon-check" viewBox="0 0 16 16">
+        <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z" />
+      </symbol>
     </svg>
     <div class="ambient-particles" aria-hidden="true"></div>
     <main class="resume-shell" id="main-content" aria-label="Ahmed Mahdy resume portfolio">
       <section class="resume-card">
         <header class="hero">
           <div class="hero-pattern" aria-hidden="true">
-            <!-- Constellation Data Network SVG Graphic -->
-            <svg class="constellation" viewBox="0 0 100 100" preserveAspectRatio="none">
-              <g class="connections">
-                <line x1="15" y1="20" x2="35" y2="45" />
-                <line x1="35" y1="45" x2="60" y2="25" />
-                <line x1="60" y1="25" x2="85" y2="55" />
-                <line x1="35" y1="45" x2="50" y2="75" />
-                <line x1="50" y1="75" x2="75" y2="80" />
-                <line x1="60" y1="25" x2="75" y2="80" />
+            <!-- Subtle Data Analytics Visualization Graphic -->
+            <svg class="hero-chart" viewBox="0 0 1000 120" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="chart-glow" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="var(--blue)" stop-opacity="0.18" />
+                  <stop offset="100%" stop-color="var(--blue)" stop-opacity="0.0" />
+                </linearGradient>
+                <linearGradient id="chart-line-grad" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stop-color="var(--green)" />
+                  <stop offset="50%" stop-color="var(--blue)" />
+                  <stop offset="100%" stop-color="var(--green)" />
+                </linearGradient>
+              </defs>
+              <g class="chart-grid">
+                <line x1="0" y1="20" x2="1000" y2="20" />
+                <line x1="0" y1="50" x2="1000" y2="50" />
+                <line x1="0" y1="80" x2="1000" y2="80" />
+                <line x1="0" y1="110" x2="1000" y2="110" />
+                <line x1="150" y1="0" x2="150" y2="120" />
+                <line x1="300" y1="0" x2="300" y2="120" />
+                <line x1="450" y1="0" x2="450" y2="120" />
+                <line x1="600" y1="0" x2="600" y2="120" />
+                <line x1="750" y1="0" x2="750" y2="120" />
+                <line x1="900" y1="0" x2="900" y2="120" />
               </g>
-              <g class="nodes">
-                <circle class="pulse-node" cx="15" cy="20" r="1.5" />
-                <circle class="pulse-node" cx="35" cy="45" r="2" />
-                <circle class="pulse-node" cx="60" cy="25" r="1.5" />
-                <circle class="pulse-node" cx="85" cy="55" r="2.5" />
-                <circle class="pulse-node" cx="50" cy="75" r="1.8" />
-                <circle class="pulse-node" cx="75" cy="80" r="2" />
+              <path d="M 0 120 L 0 80 Q 150 40 300 70 T 600 30 T 900 90 L 1000 70 L 1000 120 Z" fill="url(#chart-glow)" />
+              <path class="chart-line" d="M 0 80 Q 150 40 300 70 T 600 30 T 900 90 L 1000 70" />
+              <g class="chart-nodes">
+                <circle class="pulse-node" cx="300" cy="70" r="3.5" />
+                <circle class="pulse-node" cx="600" cy="30" r="3.5" />
+                <circle class="pulse-node" cx="900" cy="90" r="3.5" />
               </g>
             </svg>
           </div>
@@ -188,21 +209,21 @@
               <span class="contact-icon" aria-hidden="true"><svg><use href="#icon-mail"></use></svg></span>
               <a href="mailto:amahdy59@gmail.com">amahdy59@gmail.com</a>
               <button class="copy-button" type="button" data-copy="amahdy59@gmail.com" aria-label="Copy email address">
-                <span aria-hidden="true"></span>
+                <span aria-hidden="true"><svg><use href="#icon-copy"></use></svg></span>
               </button>
             </li>
             <li>
               <span class="contact-icon" aria-hidden="true"><svg><use href="#icon-linkedin"></use></svg></span>
               <a href="https://www.linkedin.com/in/creativemahdy" target="_blank" rel="noreferrer">linkedin.com/in/creativemahdy</a>
               <button class="copy-button" type="button" data-copy="https://www.linkedin.com/in/creativemahdy" aria-label="Copy LinkedIn profile link">
-                <span aria-hidden="true"></span>
+                <span aria-hidden="true"><svg><use href="#icon-copy"></use></svg></span>
               </button>
             </li>
             <li>
               <span class="contact-icon" aria-hidden="true"><svg><use href="#icon-dribbble"></use></svg></span>
               <a href="https://dribbble.com/amahdy59" target="_blank" rel="noreferrer">dribbble.com/amahdy59</a>
               <button class="copy-button" type="button" data-copy="https://dribbble.com/amahdy59" aria-label="Copy Dribbble profile link">
-                <span aria-hidden="true"></span>
+                <span aria-hidden="true"><svg><use href="#icon-copy"></use></svg></span>
               </button>
             </li>
           </ul>
