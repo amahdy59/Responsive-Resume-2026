@@ -192,7 +192,7 @@ button:focus-visible {
 }
 
 .resume-card {
-  overflow: hidden;
+  position: relative;
   min-height: calc(100vh - clamp(28px, 6vw, 80px));
   background: var(--surface);
   border: 1px solid var(--line);
@@ -213,6 +213,7 @@ button:focus-visible {
   min-height: 160px;
   padding: clamp(20px, 3.5vw, 28px) clamp(16px, 3vw, 24px);
   background: var(--hero-gradient);
+  border-radius: 15px 15px 0 0;
   transition: background 520ms ease;
 }
 
@@ -225,6 +226,7 @@ button:focus-visible {
     radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.15) 0%, transparent 40%),
     radial-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px);
   background-size: 100% 100%, 100% 100%, 20px 20px;
+  border-radius: 15px 15px 0 0;
   pointer-events: none;
 }
 
@@ -674,7 +676,7 @@ h1 {
   border-radius: 8px;
   color: var(--green);
   font-size: 0.9rem;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .project-group + .project-group {
@@ -849,7 +851,7 @@ h1 {
 [data-tooltip]::before {
   content: attr(data-tooltip);
   position: absolute;
-  bottom: calc(100% + 8px);
+  bottom: calc(100% + 6px);
   left: 50%;
   transform: translateX(-50%) scale(0.9);
   padding: 5px 10px;
@@ -869,7 +871,7 @@ h1 {
 [data-tooltip]::after {
   content: "";
   position: absolute;
-  bottom: calc(100% + 3px);
+  bottom: calc(100% + 1px);
   left: 50%;
   transform: translateX(-50%) scale(0.9);
   border-width: 5px;
@@ -993,44 +995,60 @@ h1 {
   }
 }
 
-@media (min-width: 881px) {
-  /* Desktop tooltips alignment to prevent truncation at resume borders */
+@media screen and (min-width: 881px) {
+  /* Position controls tooltips to the side of the buttons column on desktop to avoid top/bottom border truncation */
   html[lang="en"] .controls-group [data-tooltip]::before {
-    left: auto;
-    right: 0;
-    transform: scale(0.9);
+    bottom: 50% !important;
+    left: auto !important;
+    right: calc(100% + 8px) !important;
+    transform: translateY(50%) scale(0.9) !important;
   }
   html[lang="en"] .controls-group [data-tooltip]::after {
-    left: auto;
-    right: 9px;
-    transform: scale(0.9);
+    bottom: 50% !important;
+    left: auto !important;
+    right: calc(100% + 2px) !important;
+    transform: translateY(50%) scale(0.9) !important;
+    border-color: transparent transparent transparent var(--text) !important;
+    border-width: 5px 0 5px 5px !important;
   }
   html[lang="en"] .controls-group [data-tooltip]:hover::before,
-  html[lang="en"] .controls-group [data-tooltip]:focus-visible::before,
+  html[lang="en"] .controls-group [data-tooltip]:focus-visible::before {
+    transform: translateY(50%) scale(1) !important;
+    opacity: 1 !important;
+  }
   html[lang="en"] .controls-group [data-tooltip]:hover::after,
   html[lang="en"] .controls-group [data-tooltip]:focus-visible::after {
-    transform: scale(1);
+    transform: translateY(50%) scale(1) !important;
+    opacity: 1 !important;
   }
 
   html[lang="ar"] .controls-group [data-tooltip]::before {
-    left: 0;
-    right: auto;
-    transform: scale(0.9);
+    bottom: 50% !important;
+    right: auto !important;
+    left: calc(100% + 8px) !important;
+    transform: translateY(50%) scale(0.9) !important;
   }
   html[lang="ar"] .controls-group [data-tooltip]::after {
-    left: 9px;
-    right: auto;
-    transform: scale(0.9);
+    bottom: 50% !important;
+    right: auto !important;
+    left: calc(100% + 2px) !important;
+    transform: translateY(50%) scale(0.9) !important;
+    border-color: transparent var(--text) transparent transparent !important;
+    border-width: 5px 5px 5px 0 !important;
   }
   html[lang="ar"] .controls-group [data-tooltip]:hover::before,
-  html[lang="ar"] .controls-group [data-tooltip]:focus-visible::before,
+  html[lang="ar"] .controls-group [data-tooltip]:focus-visible::before {
+    transform: translateY(50%) scale(1) !important;
+    opacity: 1 !important;
+  }
   html[lang="ar"] .controls-group [data-tooltip]:hover::after,
   html[lang="ar"] .controls-group [data-tooltip]:focus-visible::after {
-    transform: scale(1);
+    transform: translateY(50%) scale(1) !important;
+    opacity: 1 !important;
   }
 }
 
-@media (max-width: 880px) {
+@media screen and (max-width: 880px) {
   .hero {
     align-items: flex-start;
     flex-direction: column;
@@ -1058,7 +1076,7 @@ h1 {
   }
 }
 
-@media (max-width: 560px) {
+@media screen and (max-width: 560px) {
   .resume-shell {
     padding: 0;
   }
@@ -1136,13 +1154,18 @@ h1 {
 @media print {
   @page {
     size: auto;
-    margin: 15mm 12mm;
+    margin: 0;
   }
   body {
     background: #ffffff !important;
     color: #2d3748 !important;
-    font-size: 10pt !important;
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif !important;
+    font-size: 9.5pt !important;
     line-height: 1.45 !important;
+    padding: 15mm 12mm !important;
+  }
+  [dir="rtl"] body {
+    font-family: 'Cairo', sans-serif !important;
   }
   .resume-shell {
     padding: 0 !important;
@@ -1163,18 +1186,20 @@ h1 {
     background: none !important;
     border-bottom: none !important;
     padding: 0 0 20px 0 !important;
+    margin-bottom: 24px !important;
     min-height: auto !important;
   }
   .identity {
     display: flex !important;
     flex-direction: row !important;
     align-items: center !important;
-    gap: 16px !important;
+    gap: 20px !important;
   }
   .avatar {
-    width: 72px !important;
-    height: 72px !important;
+    width: 80px !important;
+    height: 80px !important;
     border-radius: 50% !important;
+    object-fit: cover !important;
   }
   h1 {
     color: #1a202c !important;
@@ -1188,7 +1213,20 @@ h1 {
     margin: 0 !important;
   }
   .tags {
-    display: none !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 6px !important;
+    margin-top: 8px !important;
+  }
+  .tags span {
+    display: inline-block !important;
+    padding: 2px 6px !important;
+    background: #f1f5f9 !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 6px !important;
+    color: #475569 !important;
+    font-size: 8pt !important;
+    font-weight: 500 !important;
   }
   .hero-controls-wrapper {
     display: flex !important;
@@ -1196,7 +1234,8 @@ h1 {
     align-items: center !important;
   }
   .contact-list {
-    display: grid !important;
+    display: flex !important;
+    flex-direction: column !important;
     gap: 6px !important;
     background: none !important;
     border: none !important;
@@ -1212,7 +1251,21 @@ h1 {
     text-decoration: underline !important;
     font-size: 9pt !important;
   }
-  .contact-icon,
+  .contact-icon {
+    display: inline-grid !important;
+    place-items: center !important;
+    width: 14px !important;
+    height: 14px !important;
+    background: none !important;
+    border: none !important;
+    color: #4a5568 !important;
+    margin-inline-end: 6px !important;
+    margin-inline-start: 0 !important;
+  }
+  .contact-icon svg {
+    width: 14px !important;
+    height: 14px !important;
+  }
   .copy-button,
   .print-button,
   .theme-toggle,
@@ -1226,8 +1279,8 @@ h1 {
   }
   .content-grid {
     display: grid !important;
-    grid-template-columns: 220px 1fr !important;
-    gap: 24px !important;
+    grid-template-columns: 240px 1fr !important;
+    gap: 32px !important;
     padding: 0 !important;
   }
   .panel {
@@ -1235,25 +1288,42 @@ h1 {
     border: none !important;
     box-shadow: none !important;
     padding: 0 !important;
-    margin-bottom: 20px !important;
+    margin-bottom: 24px !important;
     break-inside: avoid !important;
     page-break-inside: avoid !important;
   }
   .panel h2 {
     border-bottom: none !important;
     padding-bottom: 0 !important;
-    margin-bottom: 10px !important;
-    font-size: 12pt !important;
+    margin-top: 0 !important;
+    margin-bottom: 14px !important;
+    font-size: 13pt !important;
     color: #1a202c !important;
     font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.75px !important;
   }
   .panel h2 .panel-icon-box {
     display: none !important;
   }
+  .project-group h3,
+  .skill-group h3 {
+    margin-top: 18px !important;
+    margin-bottom: 8px !important;
+    font-size: 10.5pt !important;
+    color: #2d3748 !important;
+    font-weight: 600 !important;
+    text-transform: none !important;
+    letter-spacing: normal !important;
+  }
+  .project-group:first-of-type h3,
+  .skill-group:first-of-type h3 {
+    margin-top: 0 !important;
+  }
   .compact-list {
     list-style: disc !important;
     padding-inline-start: 18px !important;
-    margin: 6px 0 !important;
+    margin: 8px 0 !important;
   }
   .compact-list li {
     display: list-item !important;
@@ -1262,7 +1332,7 @@ h1 {
     box-shadow: none !important;
     backdrop-filter: none !important;
     padding: 0 !important;
-    margin-bottom: 6px !important;
+    margin-bottom: 8px !important;
   }
   .compact-list a {
     display: inline !important;
@@ -1283,17 +1353,31 @@ h1 {
     break-inside: avoid !important;
     page-break-inside: avoid !important;
   }
+  .featured h4,
+  .timeline-card h3 {
+    font-size: 10pt !important;
+    font-weight: 600 !important;
+    color: #1a202c !important;
+    margin-top: 10px !important;
+    margin-bottom: 4px !important;
+  }
   .featured h4 a {
     text-decoration: underline !important;
     color: #1a202c !important;
     font-weight: 600 !important;
+  }
+  .featured p {
+    margin-top: 2px !important;
+    margin-bottom: 12px !important;
+    color: #4a5568 !important;
+    font-size: 9.5pt !important;
   }
   .timeline::before {
     display: none !important;
   }
   .timeline article {
     grid-template-columns: 1fr !important;
-    margin-bottom: 12px !important;
+    margin-bottom: 14px !important;
     break-inside: avoid !important;
     page-break-inside: avoid !important;
   }
@@ -1302,6 +1386,17 @@ h1 {
   }
   .timeline-card {
     padding: 0 !important;
+  }
+  .timeline-card ul {
+    margin: 6px 0 0 0 !important;
+    padding-inline-start: 16px !important;
+    list-style-type: disc !important;
+  }
+  .timeline-card li {
+    margin-bottom: 5px !important;
+    color: #4a5568 !important;
+    font-size: 9pt !important;
+    line-height: 1.4 !important;
   }
   .date {
     background: none !important;
@@ -1315,27 +1410,25 @@ h1 {
     font-weight: 600 !important;
     margin-top: 2px !important;
   }
-  .skill-group h3,
-  .project-group h3 {
-    margin-top: 8px !important;
-    font-size: 10pt !important;
-    color: #1a202c !important;
-  }
   .project-group,
   article {
     break-inside: avoid !important;
     page-break-inside: avoid !important;
   }
   .pills {
-    display: block !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 4px 6px !important;
   }
   .pills span {
-    display: inline-block !important;
+    display: inline !important;
     border: none !important;
     background: none !important;
     color: #2d3748 !important;
     padding: 0 !important;
-    margin-right: 8px !important;
+    margin: 0 !important;
+    font-weight: 500 !important;
+    font-size: 9.5pt !important;
   }
   .pills span::after {
     content: "," !important;
