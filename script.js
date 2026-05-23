@@ -309,3 +309,17 @@ document.querySelectorAll("[data-copy]").forEach((button) => {
     }
   });
 });
+
+// ── Print: populate header date (date only, no time) ──────────────────────────
+window.addEventListener("beforeprint", () => {
+  const dateEl = document.querySelector(".print-header-date");
+  if (dateEl) {
+    const now = new Date();
+    dateEl.textContent = now.toLocaleDateString("en-US", {
+      month: "numeric",
+      day: "numeric",
+      year: "2-digit",
+    });
+  }
+});
+

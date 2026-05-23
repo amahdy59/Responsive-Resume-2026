@@ -1150,12 +1150,35 @@ h1 {
   }
 }
 
+/* Print-only header and footer: hidden on screen */
+.print-page-header,
+.print-page-footer {
+  display: none;
+}
+
 /* Print Stylesheet */
 @media print {
+  /* ── Page geometry ── */
   @page {
     size: auto;
-    margin: 15mm 12mm;
+    /* Use @page margin areas: top for our fixed header, bottom for page numbers.
+       Overriding with empty strings suppresses Chrome's native date/time/URL. */
+    margin: 18mm 12mm 14mm 12mm;
+
+    @top-left   { content: ""; }
+    @top-center { content: ""; }
+    @top-right  { content: ""; }
+    @bottom-left  { content: ""; }
+    @bottom-center {
+      content: "Page " counter(page) " of " counter(pages);
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      font-size: 8pt;
+      color: #718096;
+    }
+    @bottom-right { content: ""; }
   }
+
+  /* ── Base ── */
   body {
     background: #ffffff !important;
     color: #2d3748 !important;
@@ -1168,6 +1191,35 @@ h1 {
   [dir="rtl"] body {
     font-family: 'Cairo', sans-serif !important;
   }
+
+  /* ── Custom print header (repeats every page via position:fixed) ── */
+  .print-page-header {
+    display: flex !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    height: 12mm !important;
+    padding: 3mm 12mm !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    font-size: 8pt !important;
+    color: #718096 !important;
+    font-family: 'Inter', system-ui, sans-serif !important;
+    border-bottom: 0.5pt solid #e2e8f0 !important;
+    background: #ffffff !important;
+    z-index: 9999 !important;
+  }
+  .print-header-title {
+    font-weight: 500 !important;
+  }
+
+  /* ── Custom print footer (hidden – @page @bottom-center handles numbering) ── */
+  .print-page-footer {
+    display: none !important;
+  }
+
+  /* ── Shell ── */
   .resume-shell {
     padding: 0 !important;
     width: 100% !important;
@@ -1178,23 +1230,25 @@ h1 {
     background: #ffffff !important;
     padding: 0 !important;
   }
+
+  /* ── Hero / Header ── */
   .hero {
     display: flex !important;
     flex-direction: row !important;
     justify-content: space-between !important;
-    align-items: center !important;
+    align-items: flex-start !important;
     width: 100% !important;
     background: none !important;
     border-bottom: none !important;
-    padding: 0 0 16px 0 !important;
-    margin-bottom: 16px !important;
+    padding: 0 0 14px 0 !important;
+    margin-bottom: 14px !important;
     min-height: auto !important;
   }
   .identity {
     display: flex !important;
     flex-direction: row !important;
     align-items: center !important;
-    gap: 20px !important;
+    gap: 14px !important;
   }
   .avatar {
     display: none !important;
@@ -1229,12 +1283,12 @@ h1 {
   .hero-controls-wrapper {
     display: flex !important;
     flex-direction: row !important;
-    align-items: center !important;
+    align-items: flex-start !important;
   }
   .contact-list {
     display: flex !important;
     flex-direction: column !important;
-    gap: 6px !important;
+    gap: 5px !important;
     background: none !important;
     border: none !important;
     padding: 0 !important;
@@ -1264,6 +1318,8 @@ h1 {
     width: 14px !important;
     height: 14px !important;
   }
+
+  /* ── Hide web-only controls ── */
   .copy-button,
   .print-button,
   .theme-toggle,
@@ -1275,18 +1331,31 @@ h1 {
   .skip-link {
     display: none !important;
   }
+
+  /* ── Two-column content grid ── */
   .content-grid {
     display: grid !important;
-    grid-template-columns: 240px 1fr !important;
-    gap: 32px !important;
+    grid-template-columns: 228px 1fr !important;
+    gap: 28px !important;
     padding: 0 !important;
+    /* Nudge content grid down a few px so section headings aren't clipped */
+    padding-top: 4px !important;
   }
+
+  /* Convert nested grids to block flow to prevent cross-page column overlap */
+  .sidebar,
+  .main-column {
+    display: block !important;
+  }
+
+  /* ── Panels ── */
   .panel {
     background: #ffffff !important;
     border: none !important;
     box-shadow: none !important;
     padding: 0 !important;
-    margin-bottom: 20px !important;
+    margin-bottom: 18px !important;
+    /* Allow panels to split across pages so content fills each page efficiently */
     break-inside: auto !important;
     page-break-inside: auto !important;
   }
@@ -1294,7 +1363,7 @@ h1 {
     border-bottom: none !important;
     padding-bottom: 0 !important;
     margin-top: 0 !important;
-    margin-bottom: 12px !important;
+    margin-bottom: 10px !important;
     font-size: 13pt !important;
     color: #1a202c !important;
     font-weight: 700 !important;
@@ -1304,10 +1373,18 @@ h1 {
   .panel h2 .panel-icon-box {
     display: none !important;
   }
+
+  /* ── Skills panel: always starts on page 2 ── */
+  .skills-panel {
+    break-before: page !important;
+    page-break-before: always !important;
+  }
+
+  /* ── Sub-section group headers ── */
   .project-group h3,
   .skill-group h3 {
-    margin-top: 14px !important;
-    margin-bottom: 6px !important;
+    margin-top: 12px !important;
+    margin-bottom: 5px !important;
     font-size: 10.5pt !important;
     color: #2d3748 !important;
     font-weight: 600 !important;
@@ -1318,10 +1395,12 @@ h1 {
   .skill-group:first-of-type h3 {
     margin-top: 0 !important;
   }
+
+  /* ── Certifications list ── */
   .compact-list {
     list-style: disc !important;
     padding-inline-start: 18px !important;
-    margin: 8px 0 !important;
+    margin: 6px 0 0 0 !important;
   }
   .compact-list li {
     display: list-item !important;
@@ -1331,6 +1410,9 @@ h1 {
     backdrop-filter: none !important;
     padding: 0 !important;
     margin-bottom: 5px !important;
+    /* Each cert item stays intact */
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
   }
   .compact-list a {
     display: inline !important;
@@ -1340,17 +1422,20 @@ h1 {
     color: #2d3748 !important;
     font-weight: 500 !important;
   }
-  .featured article,
-  .timeline-card {
+
+  /* ── Project articles ── */
+  .featured article {
     background: none !important;
     border: none !important;
     box-shadow: none !important;
     backdrop-filter: none !important;
     padding: 0 !important;
     margin-bottom: 8px !important;
+    /* Keep each project intact */
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
   }
-  .featured h4,
-  .timeline-card h3 {
+  .featured h4 {
     font-size: 10pt !important;
     font-weight: 600 !important;
     color: #1a202c !important;
@@ -1363,22 +1448,32 @@ h1 {
     font-weight: 600 !important;
   }
   .featured p {
-    margin-top: 2px !important;
-    margin-bottom: 8px !important;
+    margin-top: 1px !important;
+    margin-bottom: 6px !important;
     color: #4a5568 !important;
     font-size: 9.5pt !important;
   }
+
+  /* ── Timeline (Employment & Education) ── */
   .timeline::before {
     display: none !important;
   }
   .timeline article {
-    grid-template-columns: 1fr !important;
+    display: block !important;
+    grid-template-columns: unset !important;
     margin-bottom: 10px !important;
+    /* Keep each job/edu entry intact across the page break */
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
   }
   .timeline-dot {
     display: none !important;
   }
   .timeline-card {
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
     padding: 0 !important;
   }
   .timeline-card ul {
@@ -1392,34 +1487,40 @@ h1 {
     font-size: 9pt !important;
     line-height: 1.4 !important;
   }
+  .timeline-card h3 {
+    font-size: 10pt !important;
+    font-weight: 600 !important;
+    color: #1a202c !important;
+    margin-top: 0 !important;
+    margin-bottom: 2px !important;
+  }
   .date {
     background: none !important;
     border: none !important;
     padding: 0 !important;
     color: #718096 !important;
     font-size: 8.5pt !important;
+    display: block !important;
+    margin-bottom: 1px !important;
   }
   .company {
-    color: #4a5568 !important;
+    color: #2d6e9e !important;
     font-weight: 600 !important;
-    margin-top: 2px !important;
+    font-size: 10pt !important;
+    margin-top: 1px !important;
+    margin-bottom: 4px !important;
+    display: block !important;
   }
-  .project-group,
-  article {
-    break-inside: avoid !important;
-    page-break-inside: avoid !important;
-  }
-  .timeline article,
-  .featured article,
-  .skill-group,
-  .compact-list li {
+
+  /* ── Skills pills ── */
+  .skill-group {
     break-inside: avoid !important;
     page-break-inside: avoid !important;
   }
   .pills {
     display: flex !important;
     flex-wrap: wrap !important;
-    gap: 4px 6px !important;
+    gap: 3px 5px !important;
   }
   .pills span {
     display: inline !important;
@@ -1436,5 +1537,18 @@ h1 {
   }
   .pills span:last-child::after {
     content: "" !important;
+  }
+
+  /* ── Page-2 content breathing room ──
+     When employment panel continues on page 2, add extra top margin
+     to create visible breathing room between the fixed header and content. */
+  .timeline-panel {
+    break-inside: auto !important;
+    page-break-inside: auto !important;
+  }
+  /* Education section: always keeps its heading attached to its first entry */
+  .timeline-panel .panel h2 {
+    break-after: avoid !important;
+    page-break-after: avoid !important;
   }
 }

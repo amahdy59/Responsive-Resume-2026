@@ -43,6 +43,11 @@
   </head>
   <body>
     <a href="#main-content" class="skip-link" data-translate="skip_link">Skip to main content</a>
+    <!-- Print-only header: repeats on every printed page via position:fixed -->
+    <div class="print-page-header" aria-hidden="true">
+      <span class="print-header-date"></span>
+      <span class="print-header-title">Ahmed Mahdy | UX Designer &amp; Data Analyst</span>
+    </div>
     <svg class="icon-sprite" aria-hidden="true" focusable="false">
       <symbol id="icon-user" viewBox="0 0 24 24">
         <path d="M20 21a8 8 0 0 0-16 0" />
@@ -227,7 +232,7 @@
               </ul>
             </section>
 
-            <section class="panel panel-secondary">
+            <section class="panel panel-secondary skills-panel">
               <h2><span class="panel-icon-box" aria-hidden="true"><svg><use href="#icon-spark"></use></svg></span><span data-translate="sect_skills">Skills</span></h2>
               <div class="skill-group">
                 <h3 data-translate="skills_ux_header">Core UX & Design</h3>
@@ -357,6 +362,10 @@
         </div>
       </section>
     </main>
+    <!-- Print-only footer: repeats on every printed page via position:fixed -->
+    <div class="print-page-footer" aria-hidden="true">
+      <span>Page <span class="print-footer-current">1</span> of <span class="print-footer-total">1</span></span>
+    </div>
     <script src="script.js"></script>
   </body>
 </html>
