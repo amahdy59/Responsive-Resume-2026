@@ -384,6 +384,8 @@ h1 {
 .copy-button {
   position: absolute;
   inset-inline-end: 6px;
+  top: 50%;
+  transform: translateY(-50%);
   display: inline-grid;
   place-items: center;
   flex: 0 0 auto;
@@ -396,16 +398,18 @@ h1 {
   border-radius: 9px;
   cursor: pointer;
   opacity: 0;
-  transform: translateX(4px);
+  transition:
+    opacity 150ms ease,
+    background-color 150ms ease,
+    border-color 150ms ease,
+    color 150ms ease;
 }
 
 .compact-list .copy-button,
 .featured .copy-button {
-  top: 50%;
   color: var(--text);
   background: color-mix(in srgb, var(--surface) 70%, transparent);
   border-color: var(--line);
-  transform: translate(4px, -50%);
 }
 
 .copy-button span {
@@ -419,7 +423,7 @@ h1 {
   fill: currentColor;
   transition:
     transform 150ms ease,
-    color 200ms ease;
+    color 150ms ease;
 }
 
 .copy-button:active svg {
@@ -440,14 +444,6 @@ h1 {
 .featured article:hover .copy-button,
 .featured article:focus-within .copy-button {
   opacity: 1;
-  transform: translateX(0);
-}
-
-.compact-list li:hover .copy-button,
-.compact-list li:focus-within .copy-button,
-.featured article:hover .copy-button,
-.featured article:focus-within .copy-button {
-  transform: translate(0, -50%);
 }
 
 .contact-icon,
@@ -581,18 +577,20 @@ h1 {
 .compact-list li {
   position: relative;
   background: var(--cert-card);
-  padding: 0 42px 0 0;
+  padding-inline-end: 42px;
   color: var(--text);
   font-size: 0.95rem;
   font-weight: 500;
   cursor: pointer;
+  transition:
+    border-color 150ms ease,
+    background-color 150ms ease;
 }
 
 .compact-list li:hover,
 .compact-list li:focus-within {
   border-color: color-mix(in srgb, var(--green) 52%, var(--line));
-  box-shadow: 0 10px 24px color-mix(in srgb, var(--green) 13%, transparent);
-  transform: translateY(-1px);
+  background-color: color-mix(in srgb, var(--green) 4%, var(--cert-card));
 }
 
 .compact-list a {
@@ -630,18 +628,17 @@ h1 {
 .featured article {
   position: relative;
   background: var(--project-bg);
-  padding: 12px 46px 12px 12px;
+  padding: 12px;
+  padding-inline-end: 46px;
   cursor: pointer;
   transition:
-    transform 180ms ease,
-    border-color 260ms ease,
-    background-color 320ms ease;
+    border-color 150ms ease,
+    background-color 150ms ease;
 }
 
 .featured article:hover {
-  transform: translateY(-1px);
   border-color: color-mix(in srgb, var(--project-accent) 45%, var(--line));
-  box-shadow: 0 12px 26px color-mix(in srgb, var(--project-accent) 13%, transparent);
+  background-color: color-mix(in srgb, var(--project-accent) 4%, var(--project-bg));
 }
 
 .featured article + article {
@@ -877,33 +874,6 @@ h1 {
   font-family: Cairo, system-ui, -apple-system, sans-serif;
 }
 
-[dir="rtl"] .copy-button {
-  transform: translateX(-4px);
-}
-
-[dir="rtl"] .compact-list .copy-button,
-[dir="rtl"] .featured .copy-button {
-  transform: translate(-4px, -50%);
-}
-
-[dir="rtl"] .copy-button:hover,
-[dir="rtl"] .copy-button:focus-visible,
-[dir="rtl"] .contact-list li:hover .copy-button,
-[dir="rtl"] .contact-list li:focus-within .copy-button,
-[dir="rtl"] .compact-list li:hover .copy-button,
-[dir="rtl"] .compact-list li:focus-within .copy-button,
-[dir="rtl"] .featured article:hover .copy-button,
-[dir="rtl"] .featured article:focus-within .copy-button {
-  transform: translateX(0);
-}
-
-[dir="rtl"] .compact-list li:hover .copy-button,
-[dir="rtl"] .compact-list li:focus-within .copy-button,
-[dir="rtl"] .featured article:hover .copy-button,
-[dir="rtl"] .featured article:focus-within .copy-button {
-  transform: translate(0, -50%);
-}
-
 [dir="rtl"] .external-icon {
   transform: translateY(0.08em) scaleX(-1);
 }
@@ -1033,6 +1003,19 @@ h1 {
   .timeline-dot {
     width: 24px;
     height: 24px;
+  }
+
+  .featured article {
+    padding: 10px;
+    padding-inline-end: 36px;
+  }
+
+  .compact-list a {
+    padding: 8px 10px;
+  }
+
+  .compact-list li {
+    padding-inline-end: 36px;
   }
 }
 
