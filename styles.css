@@ -211,7 +211,7 @@ button:focus-visible {
   justify-content: space-between;
   gap: 24px;
   min-height: 160px;
-  padding: 48px clamp(16px, 3vw, 24px) clamp(16px, 3vw, 24px);
+  padding: clamp(20px, 3.5vw, 28px) clamp(16px, 3vw, 24px);
   background: var(--hero-gradient);
   transition: background 520ms ease;
 }
@@ -228,14 +228,18 @@ button:focus-visible {
   pointer-events: none;
 }
 
-.controls-group {
-  position: absolute;
-  z-index: 2;
-  top: 16px;
-  left: 50%;
-  transform: translateX(-50%);
+.hero-controls-wrapper {
   display: flex;
-  gap: 10px;
+  align-items: center;
+  gap: 16px;
+  position: relative;
+  z-index: 2;
+}
+
+.controls-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .theme-toggle,
@@ -250,7 +254,7 @@ button:focus-visible {
   background: color-mix(in srgb, var(--surface) 90%, transparent);
   border: 1px solid var(--line);
   border-radius: 999px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.14);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
   cursor: pointer;
   font-family: inherit;
   font-weight: 700;
@@ -259,13 +263,15 @@ button:focus-visible {
     transform 180ms ease,
     background-color 320ms ease,
     border-color 320ms ease,
+    box-shadow 180ms ease,
     color 320ms ease;
 }
 
 .theme-toggle:hover,
 .lang-toggle:hover,
 .contrast-toggle:hover {
-  transform: translateY(-1px);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.22);
 }
 
 .theme-toggle span,
@@ -367,7 +373,7 @@ h1 {
   gap: 8px;
   width: min(100%, 380px);
   margin: 0;
-  padding: 14px;
+  padding: 8px;
   list-style: none;
   background: var(--contact-bg);
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -381,11 +387,11 @@ h1 {
   position: relative;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   min-width: 0;
-  padding-block: 4px;
-  padding-inline: 8px 44px;
-  border-radius: 10px;
+  padding-block: 2px;
+  padding-inline: 6px 36px;
+  border-radius: 8px;
 }
 
 .contact-list a {
@@ -400,19 +406,19 @@ h1 {
 
 .copy-button {
   position: absolute;
-  inset-inline-end: 6px;
+  inset-inline-end: 5px;
   top: 50%;
   transform: translateY(-50%);
   display: inline-grid;
   place-items: center;
   flex: 0 0 auto;
-  width: 30px;
-  height: 30px;
+  width: 26px;
+  height: 26px;
   padding: 0;
   color: #ffffff;
   background: var(--copy-bg);
   border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 9px;
+  border-radius: 7px;
   cursor: pointer;
   opacity: 0;
   transition:
@@ -961,6 +967,18 @@ h1 {
     flex-direction: column;
   }
 
+  .hero-controls-wrapper {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    gap: 12px;
+  }
+
+  .controls-group {
+    flex-direction: row;
+    justify-content: center;
+  }
+
   .contact-list {
     width: 100%;
     max-width: none;
@@ -984,7 +1002,7 @@ h1 {
 
   .hero {
     min-height: auto;
-    padding: 48px 14px 16px 14px;
+    padding: 16px 14px;
   }
 
   .identity {
