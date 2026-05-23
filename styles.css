@@ -1154,7 +1154,7 @@ h1 {
 @media print {
   @page {
     size: auto;
-    margin: 0;
+    margin: 15mm 12mm;
   }
   body {
     background: #ffffff !important;
@@ -1162,7 +1162,8 @@ h1 {
     font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif !important;
     font-size: 9.5pt !important;
     line-height: 1.45 !important;
-    padding: 15mm 12mm !important;
+    padding: 0 !important;
+    margin: 0 !important;
   }
   [dir="rtl"] body {
     font-family: 'Cairo', sans-serif !important;
@@ -1185,8 +1186,8 @@ h1 {
     width: 100% !important;
     background: none !important;
     border-bottom: none !important;
-    padding: 0 0 20px 0 !important;
-    margin-bottom: 24px !important;
+    padding: 0 0 16px 0 !important;
+    margin-bottom: 16px !important;
     min-height: auto !important;
   }
   .identity {
@@ -1196,15 +1197,12 @@ h1 {
     gap: 20px !important;
   }
   .avatar {
-    width: 80px !important;
-    height: 80px !important;
-    border-radius: 50% !important;
-    object-fit: cover !important;
+    display: none !important;
   }
   h1 {
     color: #1a202c !important;
     font-size: 20pt !important;
-    margin: 0 0 4px 0 !important;
+    margin: 0 0 2px 0 !important;
     font-weight: 700 !important;
   }
   .identity-copy p {
@@ -1288,15 +1286,15 @@ h1 {
     border: none !important;
     box-shadow: none !important;
     padding: 0 !important;
-    margin-bottom: 24px !important;
-    break-inside: avoid !important;
-    page-break-inside: avoid !important;
+    margin-bottom: 20px !important;
+    break-inside: auto !important;
+    page-break-inside: auto !important;
   }
   .panel h2 {
     border-bottom: none !important;
     padding-bottom: 0 !important;
     margin-top: 0 !important;
-    margin-bottom: 14px !important;
+    margin-bottom: 12px !important;
     font-size: 13pt !important;
     color: #1a202c !important;
     font-weight: 700 !important;
@@ -1308,8 +1306,8 @@ h1 {
   }
   .project-group h3,
   .skill-group h3 {
-    margin-top: 18px !important;
-    margin-bottom: 8px !important;
+    margin-top: 14px !important;
+    margin-bottom: 6px !important;
     font-size: 10.5pt !important;
     color: #2d3748 !important;
     font-weight: 600 !important;
@@ -1332,7 +1330,7 @@ h1 {
     box-shadow: none !important;
     backdrop-filter: none !important;
     padding: 0 !important;
-    margin-bottom: 8px !important;
+    margin-bottom: 5px !important;
   }
   .compact-list a {
     display: inline !important;
@@ -1349,17 +1347,15 @@ h1 {
     box-shadow: none !important;
     backdrop-filter: none !important;
     padding: 0 !important;
-    margin-bottom: 12px !important;
-    break-inside: avoid !important;
-    page-break-inside: avoid !important;
+    margin-bottom: 8px !important;
   }
   .featured h4,
   .timeline-card h3 {
     font-size: 10pt !important;
     font-weight: 600 !important;
     color: #1a202c !important;
-    margin-top: 10px !important;
-    margin-bottom: 4px !important;
+    margin-top: 6px !important;
+    margin-bottom: 2px !important;
   }
   .featured h4 a {
     text-decoration: underline !important;
@@ -1368,7 +1364,7 @@ h1 {
   }
   .featured p {
     margin-top: 2px !important;
-    margin-bottom: 12px !important;
+    margin-bottom: 8px !important;
     color: #4a5568 !important;
     font-size: 9.5pt !important;
   }
@@ -1377,9 +1373,7 @@ h1 {
   }
   .timeline article {
     grid-template-columns: 1fr !important;
-    margin-bottom: 14px !important;
-    break-inside: avoid !important;
-    page-break-inside: avoid !important;
+    margin-bottom: 10px !important;
   }
   .timeline-dot {
     display: none !important;
@@ -1388,12 +1382,12 @@ h1 {
     padding: 0 !important;
   }
   .timeline-card ul {
-    margin: 6px 0 0 0 !important;
+    margin: 4px 0 0 0 !important;
     padding-inline-start: 16px !important;
     list-style-type: disc !important;
   }
   .timeline-card li {
-    margin-bottom: 5px !important;
+    margin-bottom: 3px !important;
     color: #4a5568 !important;
     font-size: 9pt !important;
     line-height: 1.4 !important;
@@ -1412,6 +1406,13 @@ h1 {
   }
   .project-group,
   article {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+  .timeline article,
+  .featured article,
+  .skill-group,
+  .compact-list li {
     break-inside: avoid !important;
     page-break-inside: avoid !important;
   }
