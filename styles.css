@@ -6,9 +6,8 @@
   --line: rgba(26, 35, 50, 0.15);
   --soft-line: rgba(26, 35, 50, 0.1);
   --text: #1a2332;
-  --muted: #5a6578;
+  --muted: #475569; /* Darkened from #5a6578 to ensure >4.5:1 contrast against panel backgrounds */
   --blue: #0076a8;
-  --gold: #f59e0b;
   --green: #2d7a4e;
   --project-accent: #2d7a4e;
   --focus: #0ea5e9;
@@ -20,35 +19,20 @@
   --hero-gradient: linear-gradient(90deg, #0076a8 0%, #2d7a4e 50%, #0076a8 100%);
   --contact-bg: rgba(255, 255, 255, 0.1);
   --tag-bg: rgba(255, 255, 255, 0.2);
-  --list-bg: linear-gradient(172deg, #fef3c7 0%, #fde68a 100%);
-  --project-bg: linear-gradient(170deg, #e8f4ed 0%, #f0fdf4 100%);
-  --project-panel-bg:
-    linear-gradient(135deg, color-mix(in srgb, var(--project-accent) 15%, transparent), transparent 54%),
+  --project-bg: rgba(232, 244, 237, 0.45);
+  --panel-primary-bg:
+    linear-gradient(135deg, rgba(0, 118, 168, 0.06), rgba(250, 249, 247, 0.88) 50%, rgba(250, 249, 247, 0.96) 100%),
     var(--panel);
-  --employment-bg: linear-gradient(170deg, #e0f2fe 0%, #f0f9ff 100%);
-  --education-bg: linear-gradient(170deg, #e8f4ed 0%, #f0fdf4 100%);
-  --about-panel-bg:
-    linear-gradient(135deg, rgba(0, 118, 168, 0.08), rgba(250, 249, 247, 0.82) 56%),
-    var(--panel);
-  --cert-panel-bg:
-    linear-gradient(135deg, rgba(245, 158, 11, 0.12), rgba(250, 249, 247, 0.85) 56%),
-    var(--panel);
-  --skills-panel-bg:
-    linear-gradient(135deg, rgba(45, 122, 78, 0.1), rgba(250, 249, 247, 0.85) 56%),
-    var(--panel);
-  --employment-panel-bg:
-    linear-gradient(135deg, rgba(0, 118, 168, 0.16) 0%, rgba(224, 242, 254, 0.7) 42%, rgba(250, 249, 247, 0.88) 100%),
+  --panel-secondary-bg:
+    linear-gradient(135deg, rgba(45, 122, 78, 0.06), rgba(250, 249, 247, 0.88) 50%, rgba(250, 249, 247, 0.96) 100%),
     var(--panel);
   --employment-card-bg: transparent;
-  --education-panel-bg:
-    linear-gradient(135deg, rgba(45, 122, 78, 0.1), rgba(250, 249, 247, 0.85) 56%),
-    var(--panel);
   --inner-card: rgba(255, 255, 255, 0.55);
   --translucent-card: rgba(255, 255, 255, 0.58);
-  --cert-card: rgba(255, 251, 235, 0.68);
+  --cert-card: rgba(232, 244, 237, 0.55);
   --pill-bg: #e8f4ed;
   --date-bg: rgba(255, 255, 255, 0.72);
-  --date-text: #5a6578;
+  --date-text: #475569;
   --copy-bg: rgba(255, 255, 255, 0.24);
   --shadow: 0 25px 50px rgba(26, 35, 50, 0.18);
 }
@@ -63,9 +47,8 @@
   --text: #edf2f8;
   --muted: #a9b4c4;
   --blue: #7c8fff;
-  --gold: #fbbf24;
   --green: #34d399;
-  --project-accent: #fbbf24;
+  --project-accent: #34d399;
   --focus: #a5b4fc;
   --hero-title: #ffffff;
   --hero-subtitle: #dbeafe;
@@ -76,30 +59,17 @@
   --hero-gradient: linear-gradient(90deg, #5b6fe8 0%, #7c8fff 50%, #5b6fe8 100%);
   --contact-bg: rgba(2, 6, 23, 0.32);
   --tag-bg: rgba(255, 255, 255, 0.2);
-  --list-bg: rgba(251, 191, 36, 0.11);
-  --project-bg: rgba(33, 38, 45, 0.24);
-  --project-panel-bg: linear-gradient(135deg, rgba(139, 73, 34, 0.28), rgba(13, 17, 23, 0.92) 54%);
-  --employment-bg: rgba(124, 143, 255, 0.09);
-  --education-bg: rgba(52, 211, 153, 0.08);
-  --about-panel-bg:
-    linear-gradient(135deg, rgba(124, 143, 255, 0.12), rgba(13, 17, 23, 0.94) 56%),
+  --project-bg: rgba(52, 211, 153, 0.08);
+  --panel-primary-bg:
+    linear-gradient(135deg, rgba(124, 143, 255, 0.12), rgba(13, 17, 23, 0.94) 50%, rgba(13, 17, 23, 0.98) 100%),
     var(--panel);
-  --cert-panel-bg:
-    linear-gradient(135deg, rgba(251, 191, 36, 0.14), rgba(13, 17, 23, 0.94) 56%),
-    var(--panel);
-  --skills-panel-bg:
-    linear-gradient(135deg, rgba(52, 211, 153, 0.13), rgba(13, 17, 23, 0.94) 56%),
-    var(--panel);
-  --employment-panel-bg:
-    linear-gradient(135deg, rgba(124, 143, 255, 0.24) 0%, rgba(30, 41, 59, 0.66) 46%, rgba(13, 17, 23, 0.96) 100%),
+  --panel-secondary-bg:
+    linear-gradient(135deg, rgba(52, 211, 153, 0.12), rgba(13, 17, 23, 0.94) 50%, rgba(13, 17, 23, 0.98) 100%),
     var(--panel);
   --employment-card-bg: transparent;
-  --education-panel-bg:
-    linear-gradient(135deg, rgba(52, 211, 153, 0.14), rgba(13, 17, 23, 0.94) 56%),
-    var(--panel);
   --inner-card: rgba(15, 23, 42, 0.55);
   --translucent-card: rgba(15, 23, 42, 0.5);
-  --cert-card: rgba(33, 38, 45, 0.32);
+  --cert-card: rgba(52, 211, 153, 0.06);
   --pill-bg: rgba(52, 211, 153, 0.18);
   --date-bg: rgba(33, 38, 45, 0.5);
   --date-text: #9ca3af;
@@ -223,9 +193,9 @@ button:focus-visible {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 28px;
-  min-height: 220px;
-  padding: clamp(24px, 4vw, 34px);
+  gap: 24px;
+  min-height: 160px;
+  padding: clamp(16px, 3vw, 24px);
   background: var(--hero-gradient);
   transition: background 520ms ease;
 }
@@ -233,18 +203,13 @@ button:focus-visible {
 .hero-pattern {
   position: absolute;
   inset: 0;
-  opacity: 0.22;
-  background:
-    radial-gradient(circle at 18% 72%, transparent 0 46px, rgba(255, 255, 255, 0.34) 48px 52px, transparent 54px),
-    radial-gradient(circle at 82% 22%, rgba(255, 255, 255, 0.18), transparent 16rem),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.12), transparent 34%, rgba(255, 255, 255, 0.1));
-  background-position: 0 0, 0 0, 0 0;
+  opacity: 0.25;
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.25) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.15) 0%, transparent 40%),
+    radial-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 20px 20px;
   pointer-events: none;
-}
-
-.hero-pattern::before,
-.hero-pattern::after {
-  content: none;
 }
 
 .theme-toggle {
@@ -534,7 +499,7 @@ h1 {
 
 .panel-primary {
   border-color: var(--blue);
-  background: var(--about-panel-bg);
+  background: var(--panel-primary-bg);
 }
 
 .panel-primary h2 span {
@@ -544,7 +509,7 @@ h1 {
 
 .panel-secondary {
   border-color: var(--green);
-  background: var(--skills-panel-bg);
+  background: var(--panel-secondary-bg);
 }
 
 .panel-secondary h2 span {
@@ -567,15 +532,6 @@ h1 {
 .panel-primary.featured {
   position: relative;
   overflow: hidden;
-  background: var(--about-panel-bg);
-}
-
-.timeline-panel.panel-primary {
-  background: var(--employment-panel-bg);
-}
-
-.timeline-panel.panel-secondary {
-  background: var(--education-panel-bg);
 }
 
 .compact-list {
@@ -607,8 +563,8 @@ h1 {
 
 .compact-list li:hover,
 .compact-list li:focus-within {
-  border-color: color-mix(in srgb, var(--gold) 52%, var(--line));
-  box-shadow: 0 10px 24px color-mix(in srgb, var(--gold) 13%, transparent);
+  border-color: color-mix(in srgb, var(--green) 52%, var(--line));
+  box-shadow: 0 10px 24px color-mix(in srgb, var(--green) 13%, transparent);
   transform: translateY(-1px);
 }
 
@@ -842,7 +798,7 @@ h1 {
 
   .hero {
     min-height: auto;
-    padding: 22px 18px;
+    padding: 16px 14px;
   }
 
   .identity {
