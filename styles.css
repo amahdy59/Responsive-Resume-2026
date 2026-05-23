@@ -230,6 +230,7 @@ button:focus-visible {
 
 .hero-controls-wrapper {
   display: flex;
+  flex-direction: row-reverse;
   align-items: center;
   gap: 16px;
   position: relative;
@@ -247,13 +248,13 @@ button:focus-visible {
 .contrast-toggle {
   display: inline-grid;
   place-items: center;
-  width: 40px;
-  height: 40px;
+  width: 28px;
+  height: 28px;
   padding: 0;
-  color: var(--text);
-  background: color-mix(in srgb, var(--surface) 90%, transparent);
-  border: 1px solid var(--line);
-  border-radius: 999px;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
   cursor: pointer;
   font-family: inherit;
@@ -269,9 +270,14 @@ button:focus-visible {
 
 .theme-toggle:hover,
 .lang-toggle:hover,
-.contrast-toggle:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.22);
+.contrast-toggle:hover,
+.theme-toggle:focus-visible,
+.lang-toggle:focus-visible,
+.contrast-toggle:focus-visible {
+  transform: scale(1.1);
+  background: rgba(255, 255, 255, 0.35);
+  border-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18);
 }
 
 .theme-toggle span,
@@ -369,6 +375,7 @@ h1 {
 }
 
 .contact-list {
+  direction: ltr !important;
   display: grid;
   gap: 8px;
   width: min(100%, 380px);
@@ -467,6 +474,21 @@ h1 {
 .featured article:hover .copy-button,
 .featured article:focus-within .copy-button {
   opacity: 1;
+}
+
+.copy-button:hover,
+.copy-button:focus-visible {
+  transform: translateY(-50%) scale(1.12);
+  background: rgba(255, 255, 255, 0.35);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.compact-list .copy-button:hover,
+.featured .copy-button:hover,
+.compact-list .copy-button:focus-visible,
+.featured .copy-button:focus-visible {
+  background: color-mix(in srgb, var(--surface) 90%, transparent);
+  border-color: var(--blue);
 }
 
 .contact-icon,

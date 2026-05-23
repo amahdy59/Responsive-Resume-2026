@@ -68,3 +68,67 @@ npm install
 # Run static assets packager (compiles build into dist/ folder)
 npm run build
 ```
+
+---
+
+## How to Update This Resume (No AI Needed)
+
+You can easily maintain and update your resume by directly editing the files. Follow this quick guide to make content updates without using AI:
+
+### 1. Updating Text Content (Bilingual Support)
+All user-facing text strings are mapped inside the `translations` object inside [script.js](file:///c:/Users/AhmedMahdy/OneDrive%20-%20Advansys%20IS/Documents/Antigravity/Responsive%20Resume/script.js).
+- Open `script.js` and locate `const translations = { ar: { ... }, en: { ... } };`.
+- To edit any text (e.g., job bullet points, titles, education details), update **both** the English (`en`) and Arabic (`ar`) key-value pairs.
+- For example, to change your job title:
+  ```javascript
+  // Inside script.js:
+  ar: {
+    title: "مطور واجهات ومصمم تجربة مستخدم", // Arabic update
+  },
+  en: {
+    title: "Front-end Developer & UX Designer", // English update
+  }
+  ```
+
+### 2. Updating Contact Links (Email, LinkedIn, Dribbble)
+Contact links are defined in [index.html](file:///c:/Users/AhmedMahdy/OneDrive%20-%20Advansys%20IS/Documents/Antigravity/Responsive%20Resume/index.html) in the `<ul class="contact-list">` section.
+If you need to change your email or profile URLs:
+- Edit the `href` attribute on the `<a>` tag:
+  ```html
+  <a href="mailto:new-email@gmail.com">new-email@gmail.com</a>
+  ```
+- Update the `data-copy` attribute on the neighboring copy button so the click-to-copy feature copies the correct value:
+  ```html
+  <button class="copy-button" type="button" data-copy="new-email@gmail.com" ...>
+  ```
+
+### 3. Adding or Editing a Job or Project
+Jobs and projects are structured as semantic HTML blocks inside [index.html](file:///c:/Users/AhmedMahdy/OneDrive%20-%20Advansys%20IS/Documents/Antigravity/Responsive%20Resume/index.html).
+- **Step A:** Duplicate an existing article block in the HTML:
+  ```html
+  <!-- Project Example -->
+  <article>
+    <h4><a href="https://yourlink.com" target="_blank" rel="noreferrer"><span data-translate="proj_new_title">New Project Name</span></a></h4>
+    <p data-translate="proj_new_desc">Short description of your project.</p>
+  </article>
+  ```
+- **Step B:** Add your new translation keys (`proj_new_title` and `proj_new_desc`) to the `translations` object inside `script.js` in both the `ar` and `en` blocks:
+  ```javascript
+  // Inside script.js ar:
+  proj_new_title: "مشروعي الجديد",
+  proj_new_desc: "وصف مشروعي الجديد بالتفصيل.",
+
+  // Inside script.js en:
+  proj_new_title: "My New Project",
+  proj_new_desc: "Detailed description of my new project.",
+  ```
+
+### 4. Compiling Your Changes
+After editing the files:
+- Run the build command in your terminal:
+  ```bash
+  npm run build
+  ```
+- This compiles `index.html`, `styles.css`, `script.js`, and copies your `assets` into the `dist/` directory.
+- The contents of the `dist/` folder represent the final production-ready site. Upload the files inside `dist/` to Vercel, Netlify, or your host to deploy the changes.
+
