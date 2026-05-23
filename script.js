@@ -308,38 +308,4 @@ document.querySelectorAll("[data-copy]").forEach((button) => {
   });
 });
 
-// ── Print: populate dynamic styles for paged media header ───────────────────
-window.addEventListener("beforeprint", () => {
-  const now = new Date();
-  const dateStr = now.toLocaleDateString("en-US", {
-    month: "numeric",
-    day: "numeric",
-    year: "2-digit",
-  });
-  
-  const currentLang = document.documentElement.getAttribute("lang") || "en";
-  const nameStr = translations[currentLang].name;
-  const titleStr = translations[currentLang].title;
-  const headerTitle = `${nameStr} | ${titleStr}`;
-  
-  let dynamicStyle = document.getElementById("print-dynamic-style");
-  if (!dynamicStyle) {
-    dynamicStyle = document.createElement("style");
-    dynamicStyle.id = "print-dynamic-style";
-    document.head.appendChild(dynamicStyle);
-  }
-  
-  dynamicStyle.textContent = `
-    @media print {
-      @page {
-        @top-left {
-          content: "${dateStr}" !important;
-        }
-        @top-right {
-          content: "${headerTitle}" !important;
-        }
-      }
-    }
-  `;
-});
 
