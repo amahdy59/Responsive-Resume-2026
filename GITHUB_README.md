@@ -1,6 +1,6 @@
-# Ahmed Mahdy — UX Designer & Data Analyst
+# Ahmed Mahdy — UX Designer & Data Visualizer
 
-**UX Designer & Data Analyst** with 8+ years of experience turning user and business needs into decision-ready dashboards and user-centered digital experiences. Skilled in user research, information architecture, data storytelling, and accessible interface design.
+**UX Designer & Data Visualizer** with 8+ years of experience turning user and business needs into decision-ready dashboards and user-centered digital experiences. Skilled in user research, information architecture, data storytelling, and accessible interface design.
 
 📧 [amahdy59@gmail.com](mailto:amahdy59@gmail.com) · 💼 [linkedin.com/in/creativemahdy](https://www.linkedin.com/in/creativemahdy) · 🎨 [dribbble.com/creativemahdy](https://dribbble.com/creativemahdy)
 
@@ -8,7 +8,7 @@
 
 ## Projects
 
-### Data Analysis & Visualization
+### Data Visualization
 
 | Project | Description |
 |---|---|
@@ -28,7 +28,7 @@
 
 **UX & Design** — Interaction Design · Information Architecture · User Research · Usability Testing · Wireframing · Prototyping · Figma · Design Systems · Accessibility (WCAG)
 
-**Data & Analytics** — Microsoft Excel (Advanced) · Power BI · Tableau · Python · SQL · Dashboard Design · Data Storytelling · KPI Analysis
+**Data & Visualization** — Microsoft Excel (Advanced) · Power BI · Tableau · Python · SQL · Dashboard Design · Data Storytelling · KPI Analysis
 
 ---
 

@@ -1,6 +1,6 @@
 # Ahmed Mahdy — Portfolio Resume (Production-Grade V2)
 
-A highly optimized, production-grade responsive portfolio resume website for **Ahmed Mahdy**, a **UX Designer & Data Analyst** based in Cairo, Egypt. 
+A highly optimized, production-grade responsive portfolio resume website for **Ahmed Mahdy**, a **UX Designer & Data Visualizer** based in Cairo, Egypt. 
 
 The application is structured to deliver an outstanding experience for both human recruiters and automated systems (ATS), featuring responsive design, multilingual support, advanced accessibility, and high performance.
 
