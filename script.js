@@ -90,7 +90,10 @@ const translations = {
     tooltip_lang: "تبديل اللغة",
     tooltip_theme_dark: "التبديل إلى الوضع الداكن",
     tooltip_theme_light: "التبديل إلى الوضع الفاتح",
-    tooltip_print: "طباعة / حفظ كـ PDF"
+    tooltip_print: "طباعة / حفظ كـ PDF",
+    tooltip_copy_email: "نسخ البريد الإلكتروني",
+    tooltip_copy_linkedin: "نسخ رابط الملف الشخصي لينكد إن",
+    tooltip_copy_dribbble: "نسخ رابط الملف الشخصي دريبل"
   },
   en: {
     skip_link: "Skip to main content",
@@ -165,7 +168,10 @@ const translations = {
     tooltip_lang: "Toggle Language",
     tooltip_theme_dark: "Switch to Dark Mode",
     tooltip_theme_light: "Switch to Light Mode",
-    tooltip_print: "Print / Save as PDF"
+    tooltip_print: "Print / Save as PDF",
+    tooltip_copy_email: "Copy email address",
+    tooltip_copy_linkedin: "Copy LinkedIn profile link",
+    tooltip_copy_dribbble: "Copy Dribbble profile link"
   }
 };
 
@@ -212,6 +218,28 @@ function setLanguage(lang) {
     }
   });
 
+  // Update tooltips and aria-labels for dynamic copy buttons
+  document.querySelectorAll(".compact-list a, .featured h4 a").forEach((link) => {
+    const container = link.closest("li, article");
+    const copyButton = container.querySelector(".copy-button");
+    if (copyButton) {
+      const cleanText = link.textContent.trim();
+      const label = lang === "ar" ? `نسخ رابط ${cleanText}` : `Copy ${cleanText} link`;
+      copyButton.setAttribute("aria-label", label);
+      copyButton.setAttribute("data-tooltip", label);
+    }
+  });
+
+  // Update tooltips for static copy buttons
+  document.querySelectorAll(".contact-list .copy-button").forEach((button) => {
+    const key = button.dataset.tooltipKey;
+    if (key && translations[lang] && translations[lang][key]) {
+      const label = translations[lang][key];
+      button.setAttribute("aria-label", label);
+      button.setAttribute("data-tooltip", label);
+    }
+  });
+
   // Re-run standard labels on external links that depend on text content
   document.querySelectorAll('a[target="_blank"]').forEach((link) => {
     const label = link.textContent.replace(" (opens external site)", "").replace(" (يفتح في موقع خارجي)", "").trim();
@@ -248,9 +276,21 @@ function makeCopyButton(value, label) {
   button.type = "button";
   button.dataset.copy = value;
   button.setAttribute("aria-label", label);
+  button.setAttribute("data-tooltip", label);
   button.innerHTML = '<span aria-hidden="true"><svg><use href="#icon-copy"></use></svg></span>';
   return button;
 }
+
+// Dynamic Button setups
+document.querySelectorAll(".compact-list a, .featured h4 a").forEach((link) => {
+  const copyButton = makeCopyButton(link.href, `Copy ${link.textContent.trim()} link`);
+  const container = link.closest("li, article");
+  container.appendChild(copyButton);
+  container.addEventListener("click", (event) => {
+    if (event.target.closest("button") || event.target.closest("a")) return;
+    link.click();
+  });
+});
 
 // Initial Setups
 setTheme(savedTheme || (prefersDark ? "dark" : "light"));
@@ -272,17 +312,6 @@ langToggle.addEventListener("click", () => {
 
 printButton.addEventListener("click", () => {
   window.print();
-});
-
-// Dynamic Button setups
-document.querySelectorAll(".compact-list a, .featured h4 a").forEach((link) => {
-  const copyButton = makeCopyButton(link.href, `Copy ${link.textContent.trim()} link`);
-  const container = link.closest("li, article");
-  container.appendChild(copyButton);
-  container.addEventListener("click", (event) => {
-    if (event.target.closest("button") || event.target.closest("a")) return;
-    link.click();
-  });
 });
 
 document.querySelectorAll("[data-copy]").forEach((button) => {
