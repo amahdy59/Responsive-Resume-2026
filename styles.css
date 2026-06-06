@@ -782,16 +782,14 @@ h1 {
 .timeline-card {
   background: var(--employment-card-bg);
   padding: 12px;
-  border-color: color-mix(in srgb, var(--blue) 36%, var(--line));
+  border: none;
   transition:
-    background-color 420ms ease,
-    border-color 420ms ease;
+    background-color 420ms ease;
   backdrop-filter: blur(14px) saturate(1.15);
 }
 
 .education .timeline-card {
   background: transparent;
-  border-color: rgba(52, 211, 153, 0.32);
 }
 
 .date {
