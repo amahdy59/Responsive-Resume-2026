@@ -407,8 +407,7 @@ h1 {
   align-items: center;
   gap: 8px;
   min-width: 0;
-  padding-block: 2px;
-  padding-inline: 6px 36px;
+  padding: 2px 36px 2px 6px;
   border-radius: 8px;
 }
 
@@ -625,7 +624,7 @@ h1 {
 
 .panel-primary.featured {
   position: relative;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .compact-list {
@@ -648,7 +647,7 @@ h1 {
 .compact-list li {
   position: relative;
   background: var(--cert-card);
-  padding-inline-end: 42px;
+  padding: 0 42px 0 0;
   color: var(--text);
   font-size: 0.95rem;
   font-weight: 500;
@@ -656,6 +655,10 @@ h1 {
   transition:
     border-color 150ms ease,
     background-color 150ms ease;
+}
+
+[dir="rtl"] .compact-list li {
+  padding: 0 0 0 42px;
 }
 
 .compact-list li:hover,
@@ -699,12 +702,15 @@ h1 {
 .featured article {
   position: relative;
   background: var(--project-bg);
-  padding: 12px;
-  padding-inline-end: 46px;
+  padding: 12px 46px 12px 12px;
   cursor: pointer;
   transition:
     border-color 150ms ease,
     background-color 150ms ease;
+}
+
+[dir="rtl"] .featured article {
+  padding: 12px 12px 12px 46px;
 }
 
 .featured article:hover {
@@ -1099,10 +1105,15 @@ h1 {
     padding: 0;
   }
 
+  .resume-card,
+  .hero,
+  .hero-pattern {
+    border-radius: 0 !important;
+  }
+
   .resume-card {
     min-height: 100vh;
     border-width: 0;
-    border-radius: 0;
   }
 
   .hero {
@@ -1132,6 +1143,17 @@ h1 {
     width: 92px;
   }
 
+  .contact-list {
+    width: 100% !important;
+    max-width: none !important;
+  }
+
+  .contact-list a {
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+
   .content-grid {
     gap: 14px;
     padding: 14px;
@@ -1141,23 +1163,27 @@ h1 {
     padding: 15px;
   }
 
-  .timeline article {
-    grid-template-columns: 24px minmax(0, 1fr);
-    gap: 10px;
-  }
-
+  /* ── Remove vertical timeline lines and dots on mobile ── */
   .timeline::before {
-    inset-inline-start: 11px;
+    display: none !important;
   }
 
   .timeline-dot {
-    width: 24px;
-    height: 24px;
+    display: none !important;
   }
 
+  .timeline article {
+    grid-template-columns: 1fr !important;
+    gap: 0 !important;
+  }
+
+  /* ── Mobile card padding with physical overrides ── */
   .featured article {
-    padding: 10px;
-    padding-inline-end: 36px;
+    padding: 10px 36px 10px 10px !important;
+  }
+
+  [dir="rtl"] .featured article {
+    padding: 10px 10px 10px 36px !important;
   }
 
   .compact-list a {
@@ -1165,7 +1191,11 @@ h1 {
   }
 
   .compact-list li {
-    padding-inline-end: 36px;
+    padding: 0 36px 0 0 !important;
+  }
+
+  [dir="rtl"] .compact-list li {
+    padding: 0 0 0 36px !important;
   }
 }
 
