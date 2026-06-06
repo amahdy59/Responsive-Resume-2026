@@ -425,7 +425,7 @@ h1 {
 
 .copy-button {
   position: absolute;
-  inset-inline-end: 5px;
+  right: 5px;
   top: 50%;
   transform: translateY(-50%);
   display: inline-grid;
@@ -448,14 +448,25 @@ h1 {
     color 150ms ease;
 }
 
+[dir="rtl"] .copy-button {
+  right: auto;
+  left: 5px;
+}
+
 .compact-list .copy-button,
 .featured .copy-button {
   color: var(--text);
   background: color-mix(in srgb, var(--surface) 70%, transparent);
   border-color: var(--line);
   top: 12px;
-  inset-inline-end: 12px;
+  right: 12px;
   transform: none;
+}
+
+[dir="rtl"] .compact-list .copy-button,
+[dir="rtl"] .featured .copy-button {
+  right: auto;
+  left: 12px;
 }
 
 .copy-button span {
@@ -826,7 +837,7 @@ h1 {
 
 .copy-toast {
   position: fixed;
-  inset-inline-end: 20px;
+  right: 20px;
   bottom: 20px;
   z-index: 20;
   padding: 10px 14px;
@@ -840,6 +851,11 @@ h1 {
   transition:
     opacity 180ms ease,
     transform 180ms ease;
+}
+
+[dir="rtl"] .copy-toast {
+  right: auto;
+  left: 20px;
 }
 
 .copy-toast.is-visible {
