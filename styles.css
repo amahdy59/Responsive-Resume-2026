@@ -1161,16 +1161,38 @@ h1 {
   /* ── Page geometry ── */
   @page {
     size: auto;
-    /* Clean 15mm margins on all sides. Suppress Chrome's native date/URL header by
-       setting @top-* to empty. Page numbers live in @bottom-center only. */
-    margin: 15mm 12mm 14mm 12mm;
+    /* Clean margins: 18mm top margin leaves space for the 20px running header,
+       which is placed at the bottom of the margin box (around 16.5mm) with zero overlap. */
+    margin: 18mm 12mm 14mm 12mm;
 
-    @top-left   { content: ""; }
-    @top-center { content: ""; }
-    @top-right  { content: ""; }
-    @bottom-left  { content: ""; }
+    @top-left {
+      /* Date content injected dynamically by JS */
+      font-family: 'Inter', 'Cairo', system-ui, -apple-system, sans-serif;
+      font-size: 8pt;
+      color: #718096;
+      border-bottom: 0.5pt solid #cbd5e0;
+      padding-bottom: 4px;
+      vertical-align: bottom;
+    }
+    @top-center {
+      content: "";
+      border-bottom: 0.5pt solid #cbd5e0;
+      padding-bottom: 4px;
+      vertical-align: bottom;
+    }
+    @top-right {
+      /* Name | Title injected dynamically by JS */
+      font-family: 'Inter', 'Cairo', system-ui, -apple-system, sans-serif;
+      font-size: 8pt;
+      color: #718096;
+      font-weight: 500;
+      border-bottom: 0.5pt solid #cbd5e0;
+      padding-bottom: 4px;
+      vertical-align: bottom;
+    }
+    @bottom-left { content: ""; }
     @bottom-center {
-      content: "Page " counter(page) " of " counter(pages);
+      /* Translated page numbers injected dynamically by JS */
       font-family: 'Inter', 'Cairo', system-ui, -apple-system, sans-serif;
       font-size: 8pt;
       color: #718096;
@@ -1213,7 +1235,7 @@ h1 {
     width: 100% !important;
     background: none !important;
     border-bottom: 0.5pt solid #cbd5e0 !important;
-    padding: 0 0 12px 0 !important;
+    padding: 8px 0 12px 0 !important;
     margin-bottom: 14px !important;
     min-height: auto !important;
   }
@@ -1352,6 +1374,7 @@ h1 {
   .skills-panel {
     break-before: page !important;
     page-break-before: always !important;
+    margin-top: 10px !important;
   }
 
   /* ── Sub-section group headers ── */

@@ -308,4 +308,53 @@ document.querySelectorAll("[data-copy]").forEach((button) => {
   });
 });
 
+// ── Print: populate dynamic content for page media header and footer ──────────
+window.addEventListener("beforeprint", () => {
+  const nameEl = document.querySelector('h1[data-translate="name"]') || document.querySelector('h1');
+  const titleEl = document.querySelector('p[data-translate="title"]') || document.querySelector('.identity-copy p');
+  
+  const nameStr = nameEl ? nameEl.textContent.trim() : "Ahmed Mahdy";
+  const titleStr = titleEl ? titleEl.textContent.trim() : "UX Designer & Data Analyst";
+  
+  const now = new Date();
+  const dateStr = now.toLocaleDateString("en-US", {
+    month: "numeric",
+    day: "numeric",
+    year: "2-digit",
+  });
+  
+  const currentLang = document.documentElement.getAttribute("lang") || "en";
+  const isRtl = document.documentElement.getAttribute("dir") === "rtl" || currentLang === "ar";
+  
+  const pageText = currentLang === "ar" ? "صفحة" : "Page";
+  const ofText = currentLang === "ar" ? "من" : "of";
+  
+  let dynamicStyle = document.getElementById("print-dynamic-style");
+  if (!dynamicStyle) {
+    dynamicStyle = document.createElement("style");
+    dynamicStyle.id = "print-dynamic-style";
+    document.head.appendChild(dynamicStyle);
+  }
+  
+  // Mirror header in RTL mode
+  const leftContent = isRtl ? `"${nameStr} | ${titleStr}"` : `"${dateStr}"`;
+  const rightContent = isRtl ? `"${dateStr}"` : `"${nameStr} | ${titleStr}"`;
+  
+  dynamicStyle.textContent = `
+    @media print {
+      @page {
+        @top-left {
+          content: ${leftContent} !important;
+        }
+        @top-right {
+          content: ${rightContent} !important;
+        }
+        @bottom-center {
+          content: "${pageText} " counter(page) " ${ofText} " counter(pages) !important;
+        }
+      }
+    }
+  `;
+});
+
 
