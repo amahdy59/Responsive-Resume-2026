@@ -20,12 +20,12 @@ const translations = {
   ar: {
     skip_link: "تجاوز إلى المحتوى الرئيسي",
     name: "أحمد مهدي",
-    title: "مصمم تجربة المستخدم ومحلل بيانات",
+    title: "مصمم تجربة المستخدم ومصور بيانات",
     exp_tag: "خبرة +8 سنوات",
     ux_tag: "تصميم تجربة المستخدم",
-    data_tag: "تحليل البيانات",
+    data_tag: "تصوير البيانات",
     sect_about: "نبذة عني",
-    about_text: "مصمم تجربة مستخدم ومحلل بيانات بخبرة تزيد عن 8 سنوات في تحويل احتياجات المستخدمين والأعمال إلى لوحات معلومات تفاعلية وتجارب رقمية متمحورة حول المستخدم. ماهر في أبحاث المستخدم، بنية المعلومات، سرد البيانات، وتصميم الواجهات سهلة الوصول باستخدام Excel و Power BI و Tableau و SQL و Python.",
+    about_text: "مصمم تجربة مستخدم ومصور بيانات بخبرة تزيد عن 8 سنوات في تحويل احتياجات المستخدمين والأعمال إلى لوحات معلومات تفاعلية وتجارب رقمية متمحورة حول المستخدم. ماهر في أبحاث المستخدم، بنية المعلومات، سرد البيانات، وتصميم الواجهات سهلة الوصول باستخدام Excel و Power BI و Tableau و SQL و Python.",
     sect_certs: "الشهادات المهنية",
     cert1: "تحليل البيانات من جوجل (Google Data Analytics)",
     cert2: "تحليل ذكاء الأعمال Tableau (Tableau Business Intelligence Analyst)",
@@ -100,12 +100,12 @@ const translations = {
   en: {
     skip_link: "Skip to main content",
     name: "Ahmed Mahdy",
-    title: "UX Designer & Data Analyst",
+    title: "UX Designer & Data Visualizer",
     exp_tag: "8+ years experience",
     ux_tag: "UX Design",
-    data_tag: "Data Analytics",
+    data_tag: "Data Visualization",
     sect_about: "About Me",
-    about_text: "UX Designer & Data Analyst with 8+ years of experience turning user and business needs into decision-ready dashboards and user-centered digital experiences. Skilled in user research, information architecture, data storytelling, visualization, and accessible interface design with Excel, Power BI, Tableau, SQL, and Python.",
+    about_text: "UX Designer & Data Visualizer with 8+ years of experience turning user and business needs into decision-ready dashboards and user-centered digital experiences. Skilled in user research, information architecture, data storytelling, visualization, and accessible interface design with Excel, Power BI, Tableau, SQL, and Python.",
     sect_certs: "Certifications",
     cert1: "Google Data Analytics",
     cert2: "Tableau Business Intelligence Analyst",
@@ -332,6 +332,55 @@ document.querySelectorAll("[data-copy]").forEach((button) => {
       showToast(translations[currentLang].toast_failed);
     }
   });
+});
+
+// ── Print: populate dynamic content for page media header and footer ──────────
+window.addEventListener("beforeprint", () => {
+  const nameEl = document.querySelector('h1[data-translate="name"]') || document.querySelector('h1');
+  const titleEl = document.querySelector('p[data-translate="title"]') || document.querySelector('.identity-copy p');
+  
+  const nameStr = nameEl ? nameEl.textContent.trim() : "Ahmed Mahdy";
+  const titleStr = titleEl ? titleEl.textContent.trim() : "UX Designer & Data Visualizer";
+  
+  const now = new Date();
+  const dateStr = now.toLocaleDateString("en-US", {
+    month: "numeric",
+    day: "numeric",
+    year: "2-digit",
+  });
+  
+  const currentLang = document.documentElement.getAttribute("lang") || "en";
+  const isRtl = document.documentElement.getAttribute("dir") === "rtl" || currentLang === "ar";
+  
+  const pageText = currentLang === "ar" ? "صفحة" : "Page";
+  const ofText = currentLang === "ar" ? "من" : "of";
+  
+  let dynamicStyle = document.getElementById("print-dynamic-style");
+  if (!dynamicStyle) {
+    dynamicStyle = document.createElement("style");
+    dynamicStyle.id = "print-dynamic-style";
+    document.head.appendChild(dynamicStyle);
+  }
+  
+  // Mirror header in RTL mode
+  const leftContent = isRtl ? `"${nameStr} | ${titleStr}"` : `"${dateStr}"`;
+  const rightContent = isRtl ? `"${dateStr}"` : `"${nameStr} | ${titleStr}"`;
+  
+  dynamicStyle.textContent = `
+    @media print {
+      @page {
+        @top-left {
+          content: ${leftContent} !important;
+        }
+        @top-right {
+          content: ${rightContent} !important;
+        }
+        @bottom-center {
+          content: "${pageText} " counter(page) " ${ofText} " counter(pages) !important;
+        }
+      }
+    }
+  `;
 });
 
 
