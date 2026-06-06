@@ -1074,25 +1074,35 @@ h1 {
 
 @media screen and (max-width: 880px) {
   .hero {
-    align-items: flex-start;
-    flex-direction: column;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 16px;
   }
 
   .hero-controls-wrapper {
     flex-direction: column;
-    align-items: stretch;
-    width: 100%;
-    gap: 12px;
+    align-items: flex-end;
+    width: auto;
+    gap: 8px;
+  }
+
+  [dir="rtl"] .hero-controls-wrapper {
+    align-items: flex-start;
   }
 
   .controls-group {
     flex-direction: row;
-    justify-content: center;
+    justify-content: flex-end;
+  }
+
+  [dir="rtl"] .controls-group {
+    justify-content: flex-start;
   }
 
   .contact-list {
-    width: 100%;
-    max-width: none;
+    width: 320px;
+    max-width: 100%;
   }
 
   .content-grid {
@@ -1119,6 +1129,20 @@ h1 {
   .hero {
     min-height: auto;
     padding: 16px 14px;
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+
+  .hero-controls-wrapper {
+    flex-direction: column !important;
+    align-items: center !important;
+    width: 100% !important;
+    gap: 12px !important;
+  }
+
+  .controls-group {
+    flex-direction: row !important;
+    justify-content: center !important;
   }
 
   .identity {
