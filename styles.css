@@ -453,6 +453,9 @@ h1 {
   color: var(--text);
   background: color-mix(in srgb, var(--surface) 70%, transparent);
   border-color: var(--line);
+  top: 12px;
+  inset-inline-end: 12px;
+  transform: none;
 }
 
 .copy-button span {
@@ -500,6 +503,7 @@ h1 {
 .featured .copy-button:hover,
 .compact-list .copy-button:focus-visible,
 .featured .copy-button:focus-visible {
+  transform: scale(1.12);
   background: color-mix(in srgb, var(--surface) 90%, transparent);
   border-color: var(--blue);
 }
