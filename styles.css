@@ -424,8 +424,8 @@ h1 {
 }
 
 .copy-button {
-  position: absolute;
-  right: 5px;
+  position: absolute !important;
+  right: 8px;
   top: 50%;
   transform: translateY(-50%);
   display: inline-grid;
@@ -448,25 +448,17 @@ h1 {
     color 150ms ease;
 }
 
-[dir="rtl"] .copy-button {
-  right: auto;
-  left: 5px;
-}
-
 .compact-list .copy-button,
 .featured .copy-button {
   color: var(--text);
   background: color-mix(in srgb, var(--surface) 70%, transparent);
   border-color: var(--line);
-  top: 12px;
-  right: 12px;
-  transform: none;
 }
 
 [dir="rtl"] .compact-list .copy-button,
 [dir="rtl"] .featured .copy-button {
-  right: auto;
-  left: 12px;
+  right: auto !important;
+  left: 8px !important;
 }
 
 .copy-button span {
@@ -514,9 +506,15 @@ h1 {
 .featured .copy-button:hover,
 .compact-list .copy-button:focus-visible,
 .featured .copy-button:focus-visible {
-  transform: scale(1.12);
   background: color-mix(in srgb, var(--surface) 90%, transparent);
   border-color: var(--blue);
+}
+
+.compact-list li:hover,
+.compact-list li:focus-within,
+.featured article:hover,
+.featured article:focus-within {
+  z-index: 10;
 }
 
 .contact-icon,
@@ -883,7 +881,7 @@ h1 {
   white-space: nowrap;
   opacity: 0;
   pointer-events: none;
-  z-index: 10;
+  z-index: 100;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.16);
   transition: opacity 150ms ease, transform 150ms ease;
 }
@@ -899,7 +897,7 @@ h1 {
   border-color: var(--text) transparent transparent transparent;
   opacity: 0;
   pointer-events: none;
-  z-index: 10;
+  z-index: 100;
   transition: opacity 150ms ease, transform 150ms ease;
 }
 
@@ -1113,9 +1111,21 @@ h1 {
   }
 
   .identity {
-    align-items: flex-start;
+    align-items: center;
     flex-direction: column;
     gap: 14px;
+    text-align: center;
+    width: 100%;
+  }
+
+  .identity-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .tags {
+    justify-content: center;
   }
 
   .avatar {
