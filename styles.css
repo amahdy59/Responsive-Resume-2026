@@ -8,29 +8,29 @@
   --text: #1a2332;
   --muted: #475569; /* Darkened from #5a6578 to ensure >4.5:1 contrast against panel backgrounds */
   --blue: #0076a8;
-  --green: #2d7a4e;
-  --project-accent: #2d7a4e;
+  --accent: #0076a8; /* Unified single accent — replaces old --green */
+  --project-accent: #0076a8;
   --focus: #0ea5e9;
   --hero-title: #ffffff;
   --hero-subtitle: #dbeafe;
   --page-background:
     radial-gradient(circle at 12% 8%, rgba(0, 118, 168, 0.12), transparent 34rem),
     linear-gradient(125deg, #faf9f7, #d8d4ce);
-  --hero-gradient: linear-gradient(90deg, #0076a8 0%, #2d7a4e 50%, #0076a8 100%);
+  --hero-gradient: linear-gradient(90deg, #005f88 0%, #0076a8 50%, #005f88 100%);
   --contact-bg: rgba(255, 255, 255, 0.1);
   --tag-bg: rgba(255, 255, 255, 0.2);
-  --project-bg: rgba(232, 244, 237, 0.45);
+  --project-bg: rgba(219, 234, 254, 0.45);
   --panel-primary-bg:
     linear-gradient(135deg, rgba(0, 118, 168, 0.06), rgba(250, 249, 247, 0.88) 50%, rgba(250, 249, 247, 0.96) 100%),
     var(--panel);
   --panel-secondary-bg:
-    linear-gradient(135deg, rgba(45, 122, 78, 0.06), rgba(250, 249, 247, 0.88) 50%, rgba(250, 249, 247, 0.96) 100%),
+    linear-gradient(135deg, rgba(0, 118, 168, 0.04), rgba(250, 249, 247, 0.88) 50%, rgba(250, 249, 247, 0.96) 100%),
     var(--panel);
   --employment-card-bg: transparent;
   --inner-card: rgba(255, 255, 255, 0.55);
   --translucent-card: rgba(255, 255, 255, 0.58);
-  --cert-card: rgba(232, 244, 237, 0.55);
-  --pill-bg: #e8f4ed;
+  --cert-card: rgba(219, 234, 254, 0.55);
+  --pill-bg: #dbeafe;
   --date-bg: rgba(255, 255, 255, 0.72);
   --date-text: #475569;
   --copy-bg: rgba(255, 255, 255, 0.24);
@@ -50,47 +50,47 @@
   --page: #0a0e12;
   --surface: #20262f;
   --panel: #0d1117;
-  --line: rgba(124, 143, 255, 0.2);
+  --line: rgba(96, 165, 250, 0.18);
   --soft-line: rgba(226, 232, 240, 0.08);
   --text: #edf2f8;
   --muted: #a9b4c4;
-  --blue: #7c8fff;
-  --green: #34d399;
-  --project-accent: #34d399;
+  --blue: #60a5fa;
+  --accent: #60a5fa; /* Unified single accent */
+  --project-accent: #60a5fa;
   --focus: #a5b4fc;
   --hero-title: #ffffff;
   --hero-subtitle: #dbeafe;
   --page-background:
-    radial-gradient(circle at 18% 8%, rgba(124, 143, 255, 0.13), transparent 32rem),
-    radial-gradient(circle at 82% 12%, rgba(52, 211, 153, 0.06), transparent 30rem),
+    radial-gradient(circle at 18% 8%, rgba(96, 165, 250, 0.13), transparent 32rem),
+    radial-gradient(circle at 82% 12%, rgba(96, 165, 250, 0.06), transparent 30rem),
     linear-gradient(125deg, #0a0e12, #0d1117 52%, #0f1419);
-  --hero-gradient: linear-gradient(90deg, #5b6fe8 0%, #7c8fff 50%, #5b6fe8 100%);
+  --hero-gradient: linear-gradient(90deg, #3b82f6 0%, #60a5fa 50%, #3b82f6 100%);
   --contact-bg: rgba(2, 6, 23, 0.32);
   --tag-bg: rgba(255, 255, 255, 0.2);
-  --project-bg: rgba(52, 211, 153, 0.08);
+  --project-bg: rgba(96, 165, 250, 0.08);
   --panel-primary-bg:
-    linear-gradient(135deg, rgba(124, 143, 255, 0.12), rgba(13, 17, 23, 0.94) 50%, rgba(13, 17, 23, 0.98) 100%),
+    linear-gradient(135deg, rgba(96, 165, 250, 0.12), rgba(13, 17, 23, 0.94) 50%, rgba(13, 17, 23, 0.98) 100%),
     var(--panel);
   --panel-secondary-bg:
-    linear-gradient(135deg, rgba(52, 211, 153, 0.12), rgba(13, 17, 23, 0.94) 50%, rgba(13, 17, 23, 0.98) 100%),
+    linear-gradient(135deg, rgba(96, 165, 250, 0.08), rgba(13, 17, 23, 0.94) 50%, rgba(13, 17, 23, 0.98) 100%),
     var(--panel);
   --employment-card-bg: transparent;
   --inner-card: rgba(15, 23, 42, 0.55);
   --translucent-card: rgba(15, 23, 42, 0.5);
-  --cert-card: rgba(52, 211, 153, 0.06);
-  --pill-bg: rgba(52, 211, 153, 0.18);
+  --cert-card: rgba(96, 165, 250, 0.06);
+  --pill-bg: rgba(96, 165, 250, 0.18);
   --date-bg: rgba(33, 38, 45, 0.5);
   --date-text: #9ca3af;
   --copy-bg: rgba(255, 255, 255, 0.13);
   --shadow: 0 25px 55px rgba(0, 0, 0, 0.45);
   --chart-glow-color: var(--blue);
   --chart-glow-opacity: 0.18;
-  --chart-line-color-start: var(--green);
+  --chart-line-color-start: color-mix(in srgb, var(--blue) 60%, transparent);
   --chart-line-color-mid: var(--blue);
-  --chart-line-color-end: var(--green);
+  --chart-line-color-end: color-mix(in srgb, var(--blue) 60%, transparent);
   --chart-grid-color: rgba(255, 255, 255, 0.05);
   --chart-node-color: var(--blue);
-  --chart-node-color-alt: var(--green);
+  --chart-node-color-alt: color-mix(in srgb, var(--blue) 70%, #ffffff);
 }
 
 * {
@@ -138,7 +138,7 @@ body::selection {
   opacity: 0.38;
   background-image:
     radial-gradient(circle, color-mix(in srgb, var(--blue) 48%, transparent) 1px, transparent 1.6px),
-    radial-gradient(circle, color-mix(in srgb, var(--green) 34%, transparent) 1px, transparent 1.6px);
+    radial-gradient(circle, color-mix(in srgb, var(--blue) 28%, transparent) 1px, transparent 1.6px);
   background-position: 0 0, 28px 24px;
   background-size: 56px 56px, 72px 72px;
   animation: driftParticles 24s linear infinite;
@@ -479,8 +479,8 @@ h1 {
 }
 
 .copy-button.copied {
-  color: var(--green) !important;
-  border-color: var(--green) !important;
+  color: var(--blue) !important;
+  border-color: var(--blue) !important;
 }
 
 .copy-button:hover,
@@ -601,12 +601,12 @@ h1 {
 }
 
 .panel-secondary {
-  border-color: var(--green);
+  border-color: color-mix(in srgb, var(--blue) 60%, var(--line));
   background: var(--panel-secondary-bg);
 }
 
 .panel-secondary h2 .panel-icon-box {
-  background: var(--green);
+  background: var(--blue);
   color: #ffffff;
 }
 
@@ -636,8 +636,7 @@ h1 {
 }
 
 .compact-list li,
-.featured article,
-.timeline-card {
+.featured article {
   background: var(--translucent-card);
   border: 1px solid var(--line);
   border-radius: 10px;
@@ -663,8 +662,8 @@ h1 {
 
 .compact-list li:hover,
 .compact-list li:focus-within {
-  border-color: color-mix(in srgb, var(--green) 52%, var(--line));
-  background-color: color-mix(in srgb, var(--green) 4%, var(--cert-card));
+  border-color: color-mix(in srgb, var(--blue) 42%, var(--line));
+  background-color: color-mix(in srgb, var(--blue) 4%, var(--cert-card));
 }
 
 .compact-list a {
@@ -688,9 +687,9 @@ h1 {
 .pills span {
   padding: 5px 10px;
   background: var(--pill-bg);
-  border: 1px solid rgba(52, 211, 153, 0.22);
+  border: 1px solid color-mix(in srgb, var(--blue) 22%, transparent);
   border-radius: 8px;
-  color: var(--green);
+  color: var(--blue);
   font-size: 0.9rem;
   font-weight: 500;
 }
@@ -767,8 +766,8 @@ h1 {
 }
 
 .timeline.education::before {
-  background: var(--green);
-  box-shadow: 0 0 0 1px color-mix(in srgb, var(--green) 18%, transparent);
+  background: var(--blue);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--blue) 18%, transparent);
 }
 
 .timeline article {
@@ -795,7 +794,7 @@ h1 {
 }
 
 .education .timeline-dot {
-  background: var(--green);
+  background: var(--blue);
 }
 
 .timeline-card {
@@ -829,7 +828,7 @@ h1 {
 }
 
 .education .company {
-  color: var(--green);
+  color: var(--blue);
 }
 
 .timeline-card ul {
@@ -953,8 +952,8 @@ h1 {
   --text: #ffffff;
   --muted: #ffff00;
   --blue: #00ffff;
-  --green: #00ff00;
-  --project-accent: #00ff00;
+  --accent: #00ffff;
+  --project-accent: #00ffff;
   --focus: #ffff00;
   --page-background: #000000;
   --hero-gradient: #000000;
@@ -970,12 +969,12 @@ h1 {
   --date-text: #ffff00;
   --chart-glow-color: #00ffff;
   --chart-glow-opacity: 0.2;
-  --chart-line-color-start: #00ff00;
+  --chart-line-color-start: #00ffff;
   --chart-line-color-mid: #00ffff;
-  --chart-line-color-end: #00ff00;
+  --chart-line-color-end: #00ffff;
   --chart-grid-color: rgba(255, 255, 255, 0.2);
   --chart-node-color: #00ffff;
-  --chart-node-color-alt: #00ff00;
+  --chart-node-color-alt: #00ffff;
 }
 
 [data-contrast="high"] .theme-toggle {
@@ -987,15 +986,14 @@ h1 {
 }
 
 [data-contrast="high"] .compact-list li,
-[data-contrast="high"] .featured article,
-[data-contrast="high"] .timeline-card {
+[data-contrast="high"] .featured article {
   border: 2px solid #ffffff;
   backdrop-filter: none;
 }
 
 [data-contrast="high"] .pills span {
-  border: 1px solid #00ff00;
-  color: #00ff00;
+  border: 1px solid #00ffff;
+  color: #00ffff;
 }
 
 [data-contrast="high"] .timeline::before {
@@ -1551,6 +1549,7 @@ h1 {
   .timeline-card {
     background: none !important;
     border: none !important;
+    border-inline-start: none !important;
     box-shadow: none !important;
     backdrop-filter: none !important;
     padding: 0 !important;
@@ -1629,5 +1628,12 @@ h1 {
   .timeline-panel .panel h2 {
     break-after: avoid !important;
     page-break-after: avoid !important;
+  }
+
+  /* ── Education panel: starts on page 2 in Arabic PDF ──
+     Ensures education doesn't overlap with the skills sidebar on page 2. */
+  .timeline-panel:has(.education) {
+    break-before: page !important;
+    page-break-before: always !important;
   }
 }
