@@ -795,17 +795,13 @@ h1 {
   width: 28px;
   height: 28px;
   margin-top: 5px;
-  background: var(--blue);
-  border: 2px solid var(--panel);
+  background: var(--panel);
+  border: 2px solid var(--blue);
   border-radius: 50%;
   box-shadow: 0 10px 18px rgba(0, 0, 0, 0.22);
-  color: var(--panel);
+  color: var(--blue);
   display: inline-grid;
   place-items: center;
-}
-
-.education .timeline-dot {
-  background: var(--blue);
 }
 
 .timeline-card {
