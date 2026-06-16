@@ -796,10 +796,10 @@ h1 {
   height: 28px;
   margin-top: 5px;
   background: var(--blue);
-  border: 2px solid #ffffff;
+  border: 2px solid var(--panel);
   border-radius: 50%;
   box-shadow: 0 10px 18px rgba(0, 0, 0, 0.22);
-  color: #ffffff;
+  color: var(--panel);
   display: inline-grid;
   place-items: center;
 }
