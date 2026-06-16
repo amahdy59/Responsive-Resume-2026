@@ -777,15 +777,15 @@ h1 {
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: 28px minmax(0, 1fr);
+  grid-template-columns: 36px minmax(0, 1fr);
   gap: 12px;
 }
 
 .timeline-dot {
   position: relative;
   z-index: 1;
-  width: 28px;
-  height: 28px;
+  width: 36px;
+  height: 36px;
   margin-top: 5px;
   background: var(--panel);
   border: 2px solid var(--blue);
