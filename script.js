@@ -255,29 +255,49 @@ async function copyText(value) {
     }
   }
 
-  // Fallback method for non-secure contexts (e.g. file:// protocol) or unsupported browsers
+  // Fallback method for non-secure contexts (e.g. HTTP) or unsupported browsers
   const textarea = document.createElement("textarea");
   textarea.value = value;
-  // Position offscreen and keep fixed to avoid scrolling
-  textarea.style.position = "fixed";
-  textarea.style.top = "0";
-  textarea.style.left = "0";
-  textarea.style.opacity = "0";
-  textarea.style.pointerEvents = "none";
+  textarea.setAttribute("readonly", ""); // Prevent keyboard popup on mobile
+  
+  // Style to position off-screen instead of using zero-opacity or display:none
+  textarea.style.position = "absolute";
+  textarea.style.left = "-9999px";
+  // Keep vertical position close to top of viewport to prevent page jumping/scrolling
+  textarea.style.top = (window.pageYOffset || document.documentElement.scrollTop) + "px";
   
   document.body.appendChild(textarea);
-  textarea.focus();
-  textarea.select();
   
+  // Save current active element and selection
+  const activeElement = document.activeElement;
+  const selection = window.getSelection();
+  const originalRange = selection.rangeCount > 0 ? selection.getRangeAt(0) : null;
+  
+  textarea.select();
+  textarea.setSelectionRange(0, 99999); // Force selection on mobile/iOS
+  
+  let successful = false;
   try {
-    const successful = document.execCommand("copy");
-    if (!successful) {
-      throw new Error("copy command unsuccessful");
-    }
+    successful = document.execCommand("copy");
   } catch (err) {
-    throw new Error("Clipboard fallback failed: " + err.message);
+    console.error("Clipboard fallback error:", err);
   } finally {
     document.body.removeChild(textarea);
+    
+    // Restore original focus and selection
+    if (activeElement && typeof activeElement.focus === "function") {
+      activeElement.focus();
+    }
+    if (originalRange) {
+      selection.removeAllRanges();
+      selection.addRange(originalRange);
+    } else {
+      selection.removeAllRanges();
+    }
+  }
+
+  if (!successful) {
+    throw new Error("copy command unsuccessful");
   }
 }
 
