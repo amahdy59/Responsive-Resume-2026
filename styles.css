@@ -847,6 +847,10 @@ h1 {
   padding-inline-start: 18px;
 }
 
+.timeline-card ul li::marker {
+  color: var(--blue);
+}
+
 .copy-toast {
   position: fixed;
   right: 20px;
