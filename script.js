@@ -261,10 +261,9 @@ async function copyText(value) {
   textarea.setAttribute("readonly", ""); // Prevent keyboard popup on mobile
   
   // Style to position off-screen instead of using zero-opacity or display:none
-  textarea.style.position = "absolute";
+  textarea.style.position = "fixed";
   textarea.style.left = "-9999px";
-  // Keep vertical position close to top of viewport to prevent page jumping/scrolling
-  textarea.style.top = (window.pageYOffset || document.documentElement.scrollTop) + "px";
+  textarea.style.top = "0";
   
   document.body.appendChild(textarea);
   
@@ -273,6 +272,7 @@ async function copyText(value) {
   const selection = window.getSelection();
   const originalRange = selection.rangeCount > 0 ? selection.getRangeAt(0) : null;
   
+  textarea.focus({ preventScroll: true });
   textarea.select();
   textarea.setSelectionRange(0, 99999); // Force selection on mobile/iOS
   
