@@ -247,9 +247,37 @@ function setLanguage(lang) {
 
 async function copyText(value) {
   if (navigator.clipboard && window.isSecureContext) {
-    await navigator.clipboard.writeText(value);
-  } else {
-    throw new Error("Clipboard API not available");
+    try {
+      await navigator.clipboard.writeText(value);
+      return;
+    } catch (err) {
+      // Fall through to legacy method if API fails
+    }
+  }
+
+  // Fallback method for non-secure contexts (e.g. file:// protocol) or unsupported browsers
+  const textarea = document.createElement("textarea");
+  textarea.value = value;
+  // Position offscreen and keep fixed to avoid scrolling
+  textarea.style.position = "fixed";
+  textarea.style.top = "0";
+  textarea.style.left = "0";
+  textarea.style.opacity = "0";
+  textarea.style.pointerEvents = "none";
+  
+  document.body.appendChild(textarea);
+  textarea.focus();
+  textarea.select();
+  
+  try {
+    const successful = document.execCommand("copy");
+    if (!successful) {
+      throw new Error("copy command unsuccessful");
+    }
+  } catch (err) {
+    throw new Error("Clipboard fallback failed: " + err.message);
+  } finally {
+    document.body.removeChild(textarea);
   }
 }
 
@@ -280,7 +308,8 @@ function makeCopyButton(value, label, key) {
 document.querySelectorAll(".compact-list a, .featured h4 a").forEach((link) => {
   const isCert = link.closest(".compact-list") !== null;
   const key = isCert ? "tooltip_copy_cert" : "tooltip_copy_project";
-  const copyButton = makeCopyButton(link.href, "", key);
+  const defaultLabel = isCert ? translations.en.tooltip_copy_cert : translations.en.tooltip_copy_project;
+  const copyButton = makeCopyButton(link.href, defaultLabel, key);
   const container = link.closest("li, article");
   container.appendChild(copyButton);
   container.addEventListener("click", (event) => {
@@ -382,5 +411,21 @@ window.addEventListener("beforeprint", () => {
     }
   `;
 });
+
+// AAA 1.4.13: Dismiss tooltips with Escape key
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    // Blur any focused tooltip-triggering element
+    const focused = document.activeElement;
+    if (focused && focused.hasAttribute("data-tooltip")) {
+      focused.blur();
+    }
+  }
+});
+
+// AAA 3.1.2: Mark English-content elements with lang="en" in Arabic mode
+// Contact list always shows English URLs
+const contactList = document.querySelector(".contact-list");
+if (contactList) contactList.setAttribute("lang", "en");
 
 
