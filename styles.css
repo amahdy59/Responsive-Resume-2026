@@ -765,15 +765,7 @@ h1 {
 }
 
 .timeline::before {
-  position: absolute;
-  inset-block: 16px 18px;
-  inset-inline-start: 13px;
-  inset-inline-end: auto;
-  z-index: 0;
-  width: 2px;
-  background: var(--blue);
-  border-radius: 999px;
-  content: "";
+  display: none;
 }
 
 .timeline.education::before {
@@ -809,16 +801,10 @@ h1 {
   padding: 0;
   padding-inline-start: 12px;
   border: none;
-  border-inline-start: 3px solid color-mix(in srgb, var(--blue) 60%, var(--line)); /* AAA 1.4.11: ≥3:1 non-text contrast */
   border-radius: 0;
   transition:
     border-color 420ms ease;
   backdrop-filter: none;
-}
-
-.education .timeline-card {
-  background: transparent;
-  border-inline-start-color: color-mix(in srgb, var(--blue) 50%, var(--line));
 }
 
 .date {
@@ -899,7 +885,7 @@ h1 {
   white-space: nowrap;
   opacity: 0;
   pointer-events: none;
-  z-index: 100;
+  z-index: 9999;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.16);
   transition: opacity 150ms ease, transform 150ms ease;
 }
@@ -915,7 +901,7 @@ h1 {
   border-color: var(--text) transparent transparent transparent;
   opacity: 0;
   pointer-events: none;
-  z-index: 100;
+  z-index: 9999;
   transition: opacity 150ms ease, transform 150ms ease;
 }
 
