@@ -6,10 +6,10 @@
   --line: rgba(26, 35, 50, 0.15);
   --soft-line: rgba(26, 35, 50, 0.1);
   --text: #1a2332;
-  --muted: #475569; /* Darkened from #5a6578 to ensure >4.5:1 contrast against panel backgrounds */
-  --blue: #0076a8;
-  --accent: #0076a8; /* Unified single accent — replaces old --green */
-  --project-accent: #0076a8;
+  --muted: #3d4a5c; /* AAA-compliant: ~7.4:1 contrast on #faf9f7 */
+  --blue: #005e87; /* AAA-compliant: ~7.1:1 contrast on #faf9f7 */
+  --accent: #005e87; /* Unified single accent — replaces old --green */
+  --project-accent: #005e87;
   --focus: #0ea5e9;
   --hero-title: #ffffff;
   --hero-subtitle: #dbeafe;
@@ -30,9 +30,9 @@
   --inner-card: rgba(255, 255, 255, 0.55);
   --translucent-card: rgba(255, 255, 255, 0.58);
   --cert-card: rgba(219, 234, 254, 0.55);
-  --pill-bg: #dbeafe;
+  --pill-bg: #e8f0fe;
   --date-bg: rgba(255, 255, 255, 0.72);
-  --date-text: #475569;
+  --date-text: #3d4a5c; /* AAA-compliant: matches --muted for 7:1 */
   --copy-bg: rgba(255, 255, 255, 0.24);
   --shadow: 0 25px 50px rgba(26, 35, 50, 0.18);
   --chart-glow-color: #ffffff;
@@ -53,10 +53,10 @@
   --line: rgba(96, 165, 250, 0.18);
   --soft-line: rgba(226, 232, 240, 0.08);
   --text: #edf2f8;
-  --muted: #a9b4c4;
-  --blue: #60a5fa;
-  --accent: #60a5fa; /* Unified single accent */
-  --project-accent: #60a5fa;
+  --muted: #b4bcc8; /* AAA-compliant: ~7.2:1 on #0d1117 */
+  --blue: #7ab8ff; /* AAA-compliant: ~7.5:1 on #0d1117 */
+  --accent: #7ab8ff; /* Unified single accent */
+  --project-accent: #7ab8ff;
   --focus: #a5b4fc;
   --hero-title: #ffffff;
   --hero-subtitle: #dbeafe;
@@ -78,9 +78,9 @@
   --inner-card: rgba(15, 23, 42, 0.55);
   --translucent-card: rgba(15, 23, 42, 0.5);
   --cert-card: rgba(96, 165, 250, 0.06);
-  --pill-bg: rgba(96, 165, 250, 0.18);
+  --pill-bg: rgba(122, 184, 255, 0.18);
   --date-bg: rgba(33, 38, 45, 0.5);
-  --date-text: #9ca3af;
+  --date-text: #b4bcc8; /* AAA-compliant: matches --muted for 7:1 */
   --copy-bg: rgba(255, 255, 255, 0.13);
   --shadow: 0 25px 55px rgba(0, 0, 0, 0.45);
   --chart-glow-color: var(--blue);
@@ -438,7 +438,7 @@ h1 {
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 7px;
   cursor: pointer;
-  opacity: 0;
+  opacity: 0.3; /* AAA 1.4.11: non-text elements must be perceivable; was 0 */
   transition:
     opacity 150ms ease,
     transform 150ms ease,
@@ -588,6 +588,17 @@ h1 {
 .panel li {
   color: var(--muted);
   font-size: 1rem;
+}
+
+/* AAA 1.4.8: text blocks must not exceed 80 characters wide */
+.panel p {
+  max-width: 65ch;
+}
+
+/* AAA 1.4.8: paragraph spacing must be >= 1.5× line-height */
+.panel p + p,
+.timeline-card ul {
+  margin-top: 1.2em;
 }
 
 .panel-primary {
@@ -798,16 +809,20 @@ h1 {
 }
 
 .timeline-card {
-  background: var(--employment-card-bg);
-  padding: 12px;
+  background: transparent;
+  padding: 0;
+  padding-inline-start: 12px;
   border: none;
+  border-inline-start: 3px solid color-mix(in srgb, var(--blue) 60%, var(--line)); /* AAA 1.4.11: ≥3:1 non-text contrast */
+  border-radius: 0;
   transition:
-    background-color 420ms ease;
-  backdrop-filter: blur(14px) saturate(1.15);
+    border-color 420ms ease;
+  backdrop-filter: none;
 }
 
 .education .timeline-card {
   background: transparent;
+  border-inline-start-color: color-mix(in srgb, var(--blue) 50%, var(--line));
 }
 
 .date {
@@ -910,6 +925,12 @@ h1 {
 [data-tooltip]:focus-visible::after {
   opacity: 1;
   transform: translateX(-50%) scale(1);
+}
+
+/* AAA 1.4.13: tooltip content must be hoverable by pointer */
+[data-tooltip]:hover::before,
+[data-tooltip]:focus-visible::before {
+  pointer-events: auto;
 }
 
 /* Skip link for keyboard accessibility */

@@ -280,7 +280,8 @@ function makeCopyButton(value, label, key) {
 document.querySelectorAll(".compact-list a, .featured h4 a").forEach((link) => {
   const isCert = link.closest(".compact-list") !== null;
   const key = isCert ? "tooltip_copy_cert" : "tooltip_copy_project";
-  const copyButton = makeCopyButton(link.href, "", key);
+  const defaultLabel = isCert ? translations.en.tooltip_copy_cert : translations.en.tooltip_copy_project;
+  const copyButton = makeCopyButton(link.href, defaultLabel, key);
   const container = link.closest("li, article");
   container.appendChild(copyButton);
   container.addEventListener("click", (event) => {
@@ -382,5 +383,21 @@ window.addEventListener("beforeprint", () => {
     }
   `;
 });
+
+// AAA 1.4.13: Dismiss tooltips with Escape key
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    // Blur any focused tooltip-triggering element
+    const focused = document.activeElement;
+    if (focused && focused.hasAttribute("data-tooltip")) {
+      focused.blur();
+    }
+  }
+});
+
+// AAA 3.1.2: Mark English-content elements with lang="en" in Arabic mode
+// Contact list always shows English URLs
+const contactList = document.querySelector(".contact-list");
+if (contactList) contactList.setAttribute("lang", "en");
 
 
