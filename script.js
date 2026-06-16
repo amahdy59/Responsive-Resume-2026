@@ -247,9 +247,37 @@ function setLanguage(lang) {
 
 async function copyText(value) {
   if (navigator.clipboard && window.isSecureContext) {
-    await navigator.clipboard.writeText(value);
-  } else {
-    throw new Error("Clipboard API not available");
+    try {
+      await navigator.clipboard.writeText(value);
+      return;
+    } catch (err) {
+      // Fall through to legacy method if API fails
+    }
+  }
+
+  // Fallback method for non-secure contexts (e.g. file:// protocol) or unsupported browsers
+  const textarea = document.createElement("textarea");
+  textarea.value = value;
+  // Position offscreen and keep fixed to avoid scrolling
+  textarea.style.position = "fixed";
+  textarea.style.top = "0";
+  textarea.style.left = "0";
+  textarea.style.opacity = "0";
+  textarea.style.pointerEvents = "none";
+  
+  document.body.appendChild(textarea);
+  textarea.focus();
+  textarea.select();
+  
+  try {
+    const successful = document.execCommand("copy");
+    if (!successful) {
+      throw new Error("copy command unsuccessful");
+    }
+  } catch (err) {
+    throw new Error("Clipboard fallback failed: " + err.message);
+  } finally {
+    document.body.removeChild(textarea);
   }
 }
 
