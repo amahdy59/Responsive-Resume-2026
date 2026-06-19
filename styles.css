@@ -823,7 +823,6 @@ h1 {
 .li-roles-list {
   margin-top: 8px;
   margin-inline-start: 17px;
-  border-inline-start: 2px solid var(--line);
   padding-inline-start: 23px;
   padding-bottom: 8px;
   display: flex;
@@ -835,6 +834,20 @@ h1 {
   position: relative;
 }
 
+.li-role-item::before {
+  content: "";
+  position: absolute;
+  top: 11px; /* Center of the dot */
+  bottom: -25px; /* Extend down to the next dot */
+  inset-inline-start: -25px; /* Centered on the dot */
+  width: 2px;
+  background: var(--line);
+}
+
+.li-role-item:last-child::before {
+  display: none;
+}
+
 .li-role-dot {
   position: absolute;
   top: 5px;
@@ -844,6 +857,7 @@ h1 {
   background: var(--muted);
   border-radius: 50%;
   border: 2px solid var(--panel);
+  z-index: 1;
 }
 
 [dir="rtl"] .li-role-dot {
@@ -1592,10 +1606,13 @@ h1 {
   .timeline::before {
     display: none !important;
   }
-  .li-roles-list {
+   .li-roles-list {
     border: none !important;
     margin: 0 !important;
     padding: 0 !important;
+  }
+  .li-role-item::before {
+    display: none !important;
   }
   .li-experience-group {
     display: block !important;
