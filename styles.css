@@ -1334,15 +1334,11 @@ h1 {
       font-family: 'Inter', 'Cairo', system-ui, -apple-system, sans-serif;
       font-size: 8pt;
       color: #718096;
-      border-bottom: 0.5pt solid #cbd5e0;
-      padding-bottom: 4px;
       vertical-align: top;
       margin-top: 6mm;
     }
     @top-center {
       content: "";
-      border-bottom: 0.5pt solid #cbd5e0;
-      padding-bottom: 4px;
       vertical-align: top;
       margin-top: 6mm;
     }
@@ -1352,8 +1348,6 @@ h1 {
       font-size: 8pt;
       color: #718096;
       font-weight: 500;
-      border-bottom: 0.5pt solid #cbd5e0;
-      padding-bottom: 4px;
       vertical-align: top;
       margin-top: 6mm;
     }
@@ -1625,6 +1619,9 @@ h1 {
   }
 
   /* ── Timeline (Employment & Education) ── */
+  .timeline {
+    gap: 8px !important;
+  }
   .timeline::before {
     display: none !important;
   }
@@ -1638,7 +1635,7 @@ h1 {
   }
   .li-experience-group {
     display: block !important;
-    margin-bottom: 8px !important;
+    margin-bottom: 0 !important;
     break-inside: avoid !important;
     page-break-inside: avoid !important;
   }
