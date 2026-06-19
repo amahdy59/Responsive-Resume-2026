@@ -837,8 +837,8 @@ h1 {
 
 .li-role-dot {
   position: absolute;
-  top: 6px;
-  left: -29px; /* -23 (padding) - 6 (half dot width) */
+  top: 5px;
+  inset-inline-start: -30px; /* -(23px padding + 1px half-border + 6px half-dot) */
   width: 12px;
   height: 12px;
   background: var(--muted);
@@ -848,7 +848,7 @@ h1 {
 
 [dir="rtl"] .li-role-dot {
   left: auto;
-  right: -29px;
+  right: -30px;
 }
 
 .li-role-details h4 {
