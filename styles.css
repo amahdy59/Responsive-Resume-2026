@@ -1089,6 +1089,37 @@ h1 {
   background: #000000;
 }
 
+@media (forced-colors: active) {
+  :root {
+    --page: Canvas;
+    --surface: Canvas;
+    --panel: Canvas;
+    --line: ButtonBorder;
+    --soft-line: ButtonBorder;
+    --text: CanvasText;
+    --muted: HighlightText;
+    --blue: LinkText;
+    --accent: Highlight;
+    --focus: Highlight;
+    --page-background: Canvas;
+    --hero-title: CanvasText;
+    --hero-subtitle: HighlightText;
+    --project-bg: Canvas;
+    --cert-card: Canvas;
+    --pill-bg: Canvas;
+    --date-bg: Canvas;
+    --date-text: LinkText;
+  }
+  .theme-toggle {
+    display: none !important;
+  }
+  .panel,
+  .compact-list li,
+  .featured article {
+    border: 1.5px solid ButtonBorder !important;
+  }
+}
+
 @keyframes driftParticles {
   from {
     background-position: 0 0, 28px 24px;
