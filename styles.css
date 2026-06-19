@@ -838,14 +838,10 @@ h1 {
   content: "";
   position: absolute;
   top: 11px; /* Center of the dot */
-  bottom: -25px; /* Extend down to the next dot */
+  bottom: 0; /* Align with the bottom of the text/content */
   inset-inline-start: -25px; /* Centered on the dot */
   width: 2px;
   background: var(--line);
-}
-
-.li-role-item:last-child::before {
-  display: none;
 }
 
 .li-role-dot {
@@ -874,10 +870,14 @@ h1 {
 }
 
 .li-date {
-  font-size: 0.9rem;
-  color: var(--muted);
-  margin: 2px 0 0 0;
-  display: block;
+  display: inline-block;
+  margin-top: 5px;
+  padding: 2px 8px;
+  color: var(--date-text);
+  background: var(--date-bg);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 0.75rem;
 }
 
 .li-location {
