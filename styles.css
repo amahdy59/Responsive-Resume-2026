@@ -312,6 +312,14 @@ button:focus-visible {
   stroke-width: 2;
 }
 
+.theme-toggle svg {
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.theme-toggle:hover svg {
+  transform: rotate(45deg);
+}
+
 .contrast-toggle svg path {
   fill: currentColor;
 }
@@ -717,8 +725,10 @@ h1 {
   padding: 12px 46px 12px 12px;
   cursor: pointer;
   transition:
-    border-color 150ms ease,
-    background-color 150ms ease;
+    border-color 200ms cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 200ms cubic-bezier(0.4, 0, 0.2, 1),
+    transform 200ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 [dir="rtl"] .featured article {
@@ -728,6 +738,8 @@ h1 {
 .featured article:hover {
   border-color: color-mix(in srgb, var(--project-accent) 45%, var(--line));
   background-color: color-mix(in srgb, var(--project-accent) 4%, var(--project-bg));
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
 }
 
 .featured article + article {
@@ -1518,6 +1530,8 @@ h1 {
     letter-spacing: 0.75px !important;
     line-height: 1.4 !important;
     padding-top: 2px !important;
+    break-after: avoid !important;
+    page-break-after: avoid !important;
   }
   .panel h2 .panel-icon-box {
     display: none !important;
