@@ -1296,9 +1296,9 @@ h1 {
   /* ── Page geometry ── */
   @page {
     size: auto;
-    /* Clean margins: 18mm top margin leaves space for the 20px running header,
-       which is placed at the bottom of the margin box (around 16.5mm) with zero overlap. */
-    margin: 18mm 12mm 14mm 12mm;
+    /* Clean margins: 22mm top margin leaves space for the 20px running header,
+       plus ~12px of extra white space before the main text content. */
+    margin: 22mm 12mm 14mm 12mm;
 
     @top-left {
       /* Date content injected dynamically by JS */
@@ -1453,18 +1453,27 @@ h1 {
     display: none !important;
   }
 
-  /* ── Single-column content block for ATS ── */
+  /* ── Semantic ordering for ATS & PDF readability ── */
   .content-grid {
-    display: block !important;
+    display: flex !important;
+    flex-direction: column !important;
     padding: 0 !important;
     padding-top: 6px !important;
   }
 
-  /* Convert nested grids to block flow to prevent cross-page column overlap */
+  /* Hoist the panels into the flex container so we can reorder them globally */
   .sidebar,
   .main-column {
-    display: block !important;
+    display: contents !important;
   }
+
+  /* Enforce semantic block order for print: Projects before Skills */
+  .sidebar section:nth-child(1) { order: 1 !important; } /* About Me */
+  .sidebar section:nth-child(2) { order: 2 !important; } /* Certifications */
+  .main-column section:nth-child(1) { order: 3 !important; } /* Projects */
+  .sidebar section:nth-child(3) { order: 4 !important; } /* Skills */
+  .main-column section:nth-child(2) { order: 5 !important; } /* Employment */
+  .main-column section:nth-child(3) { order: 6 !important; } /* Education */
 
   /* ── Panels ── */
   .panel {
