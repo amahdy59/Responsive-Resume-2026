@@ -758,82 +758,130 @@ h1 {
   font-size: 0.94rem;
 }
 
+/* ── LinkedIn-Style Timeline ── */
 .timeline {
-  position: relative;
-  display: grid;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.li-experience-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.li-company-header {
+  display: flex;
+  align-items: flex-start;
   gap: 12px;
 }
 
-.timeline::before {
-  display: none;
-}
-
-.timeline.education::before {
-  background: var(--blue);
-  box-shadow: 0 0 0 1px color-mix(in srgb, var(--blue) 18%, transparent);
-}
-
-.timeline article {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  grid-template-columns: 36px minmax(0, 1fr);
-  gap: 12px;
-}
-
-.timeline-dot {
-  position: relative;
-  z-index: 1;
-  width: 36px;
-  height: 36px;
-  margin-top: 5px;
-  background: var(--panel);
-  border: 2px solid var(--blue);
-  border-radius: 50%;
-  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.22);
-  color: var(--blue);
-  display: inline-grid;
-  place-items: center;
-}
-
-.timeline-card {
-  background: transparent;
-  padding: 0;
-  padding-inline-start: 12px;
-  border: none;
-  border-radius: 0;
-  transition:
-    border-color 420ms ease;
-  backdrop-filter: none;
-}
-
-.date {
-  display: inline-block;
-  margin-top: 5px;
-  padding: 2px 8px;
-  color: var(--date-text);
-  background: var(--date-bg);
+.li-company-logo {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
   border: 1px solid var(--line);
-  border-radius: 999px;
-  font-size: 0.75rem;
+  border-radius: 4px;
+  overflow: hidden;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.company {
-  margin-top: 7px;
-  color: var(--blue);
+.li-company-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.li-company-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 48px;
+}
+
+.li-company-name {
+  font-size: 1.05rem;
   font-weight: 600;
+  color: var(--text);
+  margin: 0;
+  line-height: 1.3;
 }
 
-.education .company {
-  color: var(--blue);
+.li-company-duration {
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin: 0;
+  line-height: 1.3;
 }
 
-.timeline-card ul {
-  margin: 7px 0 0;
+.li-roles-list {
+  margin-top: 8px;
+  margin-inline-start: 23px;
+  border-inline-start: 2px solid var(--line);
+  padding-inline-start: 23px;
+  padding-bottom: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.li-role-item {
+  position: relative;
+}
+
+.li-role-dot {
+  position: absolute;
+  top: 6px;
+  left: -29px; /* -23 (padding) - 6 (half dot width) */
+  width: 12px;
+  height: 12px;
+  background: var(--muted);
+  border-radius: 50%;
+  border: 2px solid var(--panel);
+}
+
+[dir="rtl"] .li-role-dot {
+  left: auto;
+  right: -29px;
+}
+
+.li-role-details h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0;
+  line-height: 1.35;
+}
+
+.li-date {
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin: 2px 0 0 0;
+  display: block;
+}
+
+.li-location {
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin: 2px 0 6px 0;
+  display: block;
+}
+
+.li-role-details ul {
+  margin: 8px 0 0 0;
   padding-inline-start: 18px;
 }
 
-.timeline-card ul li::marker {
+.li-role-details li {
+  font-size: 0.95rem;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.li-role-details li::marker {
   color: var(--blue);
 }
 
@@ -1529,44 +1577,40 @@ h1 {
   .timeline::before {
     display: none !important;
   }
-  .timeline article {
+  .li-roles-list {
+    border: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .li-experience-group {
     display: block !important;
-    grid-template-columns: unset !important;
     margin-bottom: 10px !important;
-    /* Keep each job/edu entry intact across the page break */
     break-inside: avoid !important;
     page-break-inside: avoid !important;
   }
-  .timeline-dot {
+  .li-company-logo, .li-role-dot {
     display: none !important;
   }
-  .timeline-card {
-    background: none !important;
-    border: none !important;
-    border-inline-start: none !important;
-    box-shadow: none !important;
-    backdrop-filter: none !important;
-    padding: 0 !important;
+  .li-company-info {
+    min-height: auto !important;
   }
-  .timeline-card ul {
-    margin: 4px 0 0 0 !important;
-    padding-inline-start: 16px !important;
-    list-style-type: disc !important;
+  .li-company-name {
+    color: #2d6e9e !important;
+    font-size: 10pt !important;
+    margin-top: 1px !important;
+    margin-bottom: 4px !important;
   }
-  .timeline-card li {
-    margin-bottom: 3px !important;
-    color: #4a5568 !important;
-    font-size: 9pt !important;
-    line-height: 1.4 !important;
+  .li-company-duration {
+    display: none !important;
   }
-  .timeline-card h3 {
+  .li-role-details h4 {
     font-size: 10.5pt !important;
     font-weight: 600 !important;
     color: #1a202c !important;
     margin-top: 0 !important;
     margin-bottom: 2px !important;
   }
-  .date {
+  .li-date {
     background: none !important;
     border: none !important;
     padding: 0 !important;
@@ -1575,13 +1619,19 @@ h1 {
     display: block !important;
     margin-bottom: 1px !important;
   }
-  .company {
-    color: #2d6e9e !important;
-    font-weight: 600 !important;
-    font-size: 10pt !important;
-    margin-top: 1px !important;
-    margin-bottom: 4px !important;
-    display: block !important;
+  .li-location {
+    display: none !important;
+  }
+  .li-role-details ul {
+    margin: 4px 0 0 0 !important;
+    padding-inline-start: 16px !important;
+    list-style-type: disc !important;
+  }
+  .li-role-details li {
+    margin-bottom: 3px !important;
+    color: #4a5568 !important;
+    font-size: 9pt !important;
+    line-height: 1.4 !important;
   }
 
   /* ── Skills pills ── */
