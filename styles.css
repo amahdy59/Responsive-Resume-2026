@@ -1403,7 +1403,7 @@ h1 {
     background: none !important;
     border-bottom: 0.5pt solid #cbd5e0 !important;
     padding: 8px 0 12px 0 !important;
-    margin-bottom: 14px !important;
+    margin-bottom: 12px !important;
     min-height: auto !important;
   }
   .identity {
@@ -1467,9 +1467,17 @@ h1 {
   }
   .contact-icon {
     display: inline-grid !important;
+    place-items: center !important;
+    width: 14px !important;
+    height: 14px !important;
+    color: #4a5568 !important;
+    margin-inline-end: 6px !important;
+    margin-inline-start: 0 !important;
   }
   .contact-icon svg {
     display: block !important;
+    width: 14px !important;
+    height: 14px !important;
   }
 
   /* ── Hide web-only controls ── */
@@ -1630,7 +1638,7 @@ h1 {
   }
   .li-experience-group {
     display: block !important;
-    margin-bottom: 10px !important;
+    margin-bottom: 8px !important;
     break-inside: avoid !important;
     page-break-inside: avoid !important;
   }
