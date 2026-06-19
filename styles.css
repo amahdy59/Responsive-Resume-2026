@@ -43,6 +43,7 @@
   --chart-grid-color: rgba(255, 255, 255, 0.08);
   --chart-node-color: #ffffff;
   --chart-node-color-alt: #ffffff;
+  --logo-bg: #ffffff;
 }
 
 [data-theme="dark"] {
@@ -50,6 +51,7 @@
   --page: #0a0e12;
   --surface: #20262f;
   --panel: #0d1117;
+  --logo-bg: #20262f;
   --line: rgba(96, 165, 250, 0.18);
   --soft-line: rgba(226, 232, 240, 0.08);
   --text: #edf2f8;
@@ -777,13 +779,13 @@ h1 {
 }
 
 .li-company-logo {
-  width: 48px;
-  height: 48px;
+  width: 34px;
+  height: 34px;
   flex-shrink: 0;
   border: 1px solid var(--line);
   border-radius: 4px;
   overflow: hidden;
-  background: #ffffff;
+  background: var(--logo-bg, #ffffff);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -799,7 +801,7 @@ h1 {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-height: 48px;
+  min-height: 34px;
 }
 
 .li-company-name {
