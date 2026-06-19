@@ -1307,13 +1307,15 @@ h1 {
       color: #718096;
       border-bottom: 0.5pt solid #cbd5e0;
       padding-bottom: 4px;
-      vertical-align: bottom;
+      vertical-align: top;
+      margin-top: 6mm;
     }
     @top-center {
       content: "";
       border-bottom: 0.5pt solid #cbd5e0;
       padding-bottom: 4px;
-      vertical-align: bottom;
+      vertical-align: top;
+      margin-top: 6mm;
     }
     @top-right {
       /* Name | Title injected dynamically by JS */
@@ -1323,7 +1325,8 @@ h1 {
       font-weight: 500;
       border-bottom: 0.5pt solid #cbd5e0;
       padding-bottom: 4px;
-      vertical-align: bottom;
+      vertical-align: top;
+      margin-top: 6mm;
     }
     @bottom-left { content: ""; }
     @bottom-center {
@@ -1434,10 +1437,10 @@ h1 {
     font-size: 9pt !important;
   }
   .contact-icon {
-    display: none !important;
+    display: inline-grid !important;
   }
   .contact-icon svg {
-    display: none !important;
+    display: block !important;
   }
 
   /* ── Hide web-only controls ── */
@@ -1481,7 +1484,7 @@ h1 {
     border: none !important;
     box-shadow: none !important;
     padding: 0 !important;
-    margin-bottom: 18px !important;
+    margin-bottom: 12px !important;
     /* Allow panels to split across pages so content fills each page efficiently */
     break-inside: auto !important;
     page-break-inside: auto !important;
