@@ -51,7 +51,7 @@
   --page: #0a0e12;
   --surface: #20262f;
   --panel: #0d1117;
-  --logo-bg: #20262f;
+  --logo-bg: #ffffff;
   --line: rgba(96, 165, 250, 0.18);
   --soft-line: rgba(226, 232, 240, 0.08);
   --text: #edf2f8;
@@ -783,12 +783,13 @@ h1 {
   height: 34px;
   flex-shrink: 0;
   border: 1px solid var(--line);
-  border-radius: 4px;
+  border-radius: 6px;
   overflow: hidden;
   background: var(--logo-bg, #ffffff);
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 2px;
 }
 
 .li-company-logo img {
@@ -821,7 +822,7 @@ h1 {
 
 .li-roles-list {
   margin-top: 8px;
-  margin-inline-start: 23px;
+  margin-inline-start: 17px;
   border-inline-start: 2px solid var(--line);
   padding-inline-start: 23px;
   padding-bottom: 8px;
