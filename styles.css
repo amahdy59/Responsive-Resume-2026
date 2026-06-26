@@ -51,19 +51,19 @@
 [data-theme="dark"] {
   color-scheme: dark;
   --page: #0a0e12;
-  --surface: #20262f;
-  --panel: #0d1117;
+  --surface: #121820; /* Darker card surface to improve contrast */
+  --panel: #0b0f15; /* Darker panel background */
   --logo-bg: #ffffff;
   --line: rgba(96, 165, 250, 0.18);
   --soft-line: rgba(226, 232, 240, 0.08);
-  --text: #edf2f8;
-  --muted: #b4bcc8; /* AAA-compliant: ~7.2:1 on #0d1117 */
-  --blue: #7ab8ff; /* AAA-compliant: ~7.5:1 on #0d1117 */
-  --accent: #7ab8ff; /* Unified single accent */
-  --project-accent: #7ab8ff;
-  --link-aaa: #7ab8ff; /* Same as --blue in dark mode — already AAA */
-  --focus: #60a5fa; /* AAA focus ring in dark mode: ~7.1:1 on #0d1117 */
-  --text-secondary: #c8d3e0; /* Secondary text in dark mode: ~7.8:1 on #0d1117 */
+  --text: #f8fafc; /* Crisp white-gray (meets AAA contrast ratio > 10:1) */
+  --muted: #cbd5e1; /* Lighter gray to guarantee AAA contrast (> 8:1) */
+  --blue: #8ec3ff; /* Lighter cyan-blue to guarantee AAA contrast (> 7.5:1) */
+  --accent: #8ec3ff; 
+  --project-accent: #8ec3ff;
+  --link-aaa: #8ec3ff;
+  --focus: #60a5fa; 
+  --text-secondary: #e2e8f0; /* Crisp secondary body text (> 9:1) */
   --hero-title: #ffffff;
   --hero-subtitle: #ffffff;
   --page-background:
