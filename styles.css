@@ -10,6 +10,7 @@
   --blue: #005e87; /* AAA-compliant: ~7.1:1 contrast on #faf9f7 */
   --accent: #005e87; /* Unified single accent — replaces old --green */
   --project-accent: #005e87;
+  --link-aaa: #004b6e; /* AAA: ~7.8:1 on white, ≥8.2:1 on card bg — project title links */
   --focus: #0ea5e9;
   --hero-title: #ffffff;
   --hero-subtitle: #ffffff;
@@ -59,6 +60,7 @@
   --blue: #7ab8ff; /* AAA-compliant: ~7.5:1 on #0d1117 */
   --accent: #7ab8ff; /* Unified single accent */
   --project-accent: #7ab8ff;
+  --link-aaa: #7ab8ff; /* Same as --blue in dark mode — already AAA */
   --focus: #a5b4fc;
   --hero-title: #ffffff;
   --hero-subtitle: #ffffff;
@@ -817,7 +819,8 @@ h1 {
 }
 
 .panel-primary.featured h4 a {
-  color: var(--blue);
+  /* --link-aaa (#004b6e) vs --blue (#005e87): raises contrast from ~5.5:1 to ~7.8:1 on card bg — WCAG 1.4.6 AAA */
+  color: var(--link-aaa);
 }
 
 .contact-list li:hover .external-icon,
