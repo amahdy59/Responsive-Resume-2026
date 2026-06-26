@@ -1187,6 +1187,15 @@ h1 {
   text-decoration: underline !important;
 }
 
+[data-contrast="high"] .panel h2 {
+  color: #ffffff !important;
+}
+
+[data-contrast="high"] .panel h2 .panel-icon-box {
+  background: #ffff00 !important;
+  color: #000000 !important;
+}
+
 @media (forced-colors: active) {
   :root {
     --page: Canvas;
