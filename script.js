@@ -8,13 +8,9 @@ const savedTheme = localStorage.getItem("resume-theme");
 const savedLang = localStorage.getItem("resume-lang") || "en";
 const savedContrast = localStorage.getItem("resume-contrast") || "normal";
 const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-const toast = document.createElement("div");
+// Live region defined in HTML (WCAG 4.1.3): must exist on page load, not injected by JS
+const toast = document.querySelector(".copy-toast");
 let toastTimer;
-
-toast.className = "copy-toast";
-toast.setAttribute("role", "status");
-toast.setAttribute("aria-live", "polite");
-document.body.appendChild(toast);
 
 const translations = {
   ar: {
@@ -72,7 +68,7 @@ const translations = {
     job1_company: "أدفانسيس للحلول البرمجية",
     job1_b1: "قيادة تصميم تجربة وواجهة المستخدم (UX/UI) لمنصات (SaaS) المؤسسية و(B2B) المعقدة، وتقديم حلول تتمحور حول المستخدم.",
     job1_b2: "تأسيس أنظمة تصميم قابلة للتوسع باستخدام Figma و Adobe Creative Suite والمنهجيات الحديثة.",
-    job1_b3: "الاستفادة من أدوات التصميم المدعومة بالذكاء الاصطناعي لتسريع النماذج الأولية وتلخيص أبحاث تجربة المستخدم.",
+    job1_b3: "استخدام أدوات الذكاء الاصطناعي لتسريع النماذج الأولية وتلخيص نتائج أبحاث تجربة المستخدم.",
     job2_title: "مصمم تعليمي",
     job2_date: "يوليو 2018 - يناير 2023 · 4 سنوات و7 أشهر",
     job2_company: "شنايدر إلكتريك",
@@ -98,7 +94,12 @@ const translations = {
     tooltip_copy_dribbble: "نسخ رابط دريبل",
     tooltip_copy_project: "نسخ رابط المشروع",
     tooltip_copy_cert: "نسخ رابط الشهادة",
-    opens_new_tab: " يفتح في تبويب جديد"
+    opens_new_tab: " يفتح في تبويب جديد",
+    toast_copy_email: "تم نسخ عنوان البريد الإلكتروني",
+    toast_copy_linkedin: "تم نسخ رابط لينكد إن",
+    toast_copy_dribbble: "تم نسخ رابط دريبل",
+    toast_copy_project: "تم نسخ رابط المشروع",
+    toast_copy_cert: "تم نسخ رابط الشهادة"
   },
   en: {
     skip_link: "Skip to main content",
@@ -181,7 +182,12 @@ const translations = {
     tooltip_copy_dribbble: "Copy Dribbble link",
     tooltip_copy_project: "Copy project link",
     tooltip_copy_cert: "Copy certification link",
-    opens_new_tab: " opens in new tab"
+    opens_new_tab: " opens in new tab",
+    toast_copy_email: "Email address copied to clipboard",
+    toast_copy_linkedin: "LinkedIn link copied to clipboard",
+    toast_copy_dribbble: "Dribbble link copied to clipboard",
+    toast_copy_project: "Project link copied to clipboard",
+    toast_copy_cert: "Certification link copied to clipboard"
   }
 };
 
@@ -388,8 +394,16 @@ document.querySelectorAll("[data-copy]").forEach((button) => {
     const currentLang = root.getAttribute("lang") || "en";
     try {
       await copyText(button.dataset.copy);
-      showToast(translations[currentLang].toast_copied);
-      
+
+      // Use item-specific message if available (e.g. "Email address copied to clipboard")
+      const toastKey = button.dataset.tooltipKey
+        ? button.dataset.tooltipKey.replace("tooltip_copy_", "toast_copy_")
+        : null;
+      const toastMessage =
+        (toastKey && translations[currentLang][toastKey]) ||
+        translations[currentLang].toast_copied;
+      showToast(toastMessage);
+
       const useTag = button.querySelector("use");
       if (useTag) {
         useTag.setAttribute("href", "#icon-check");

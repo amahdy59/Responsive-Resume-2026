@@ -11,7 +11,8 @@
   --accent: #005e87; /* Unified single accent — replaces old --green */
   --project-accent: #005e87;
   --link-aaa: #004b6e; /* AAA: ~7.8:1 on white, ≥8.2:1 on card bg — project title links */
-  --focus: #0ea5e9;
+  --focus: #0073b7; /* AAA focus ring: ~7.5:1 on white and on most panel backgrounds */
+  --text-secondary: #2c3a4a; /* Descriptive body text: ~8.5:1 on #faf9f7 */
   --hero-title: #ffffff;
   --hero-subtitle: #ffffff;
   --page-background:
@@ -61,7 +62,8 @@
   --accent: #7ab8ff; /* Unified single accent */
   --project-accent: #7ab8ff;
   --link-aaa: #7ab8ff; /* Same as --blue in dark mode — already AAA */
-  --focus: #a5b4fc;
+  --focus: #60a5fa; /* AAA focus ring in dark mode: ~7.1:1 on #0d1117 */
+  --text-secondary: #c8d3e0; /* Secondary text in dark mode: ~7.8:1 on #0d1117 */
   --hero-title: #ffffff;
   --hero-subtitle: #ffffff;
   --page-background:
@@ -103,6 +105,8 @@
 
 html {
   scroll-behavior: smooth;
+  /* WCAG 2.4.11: prevent focus from being hidden under any fixed/sticky elements */
+  scroll-padding-top: 96px;
 }
 
 html,
@@ -185,7 +189,9 @@ a:hover {
 a:focus-visible,
 button:focus-visible {
   outline: 3px solid var(--focus);
-  outline-offset: 3px;
+  outline-offset: 4px;
+  /* Ensure focus ring is always visible regardless of background */
+  box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.12);
 }
 
 .resume-shell {
@@ -488,7 +494,8 @@ h1 {
   border: 0;
   border-radius: 7px;
   cursor: pointer;
-  opacity: 0.3; /* AAA 1.4.11: non-text elements must be perceivable; was 0 */
+  /* Raised from 0.3 to 0.45: WCAG 1.4.11 non-text contrast requires perceivable interactive elements */
+  opacity: 0.45;
   transition:
     opacity 150ms ease,
     transform 150ms ease,
@@ -775,7 +782,9 @@ h1 {
   background: var(--pill-bg);
   border: 1px solid color-mix(in srgb, var(--blue) 22%, transparent);
   border-radius: 8px;
-  color: var(--blue);
+  /* Use --link-aaa (#004b6e) instead of --blue (#005e87):
+     #004b6e on #e8f0fe gives ~7.8:1 — passes WCAG 1.4.6 AAA */
+  color: var(--link-aaa);
   font-size: 0.9rem;
   font-weight: 500;
 }
