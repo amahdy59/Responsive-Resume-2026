@@ -12,7 +12,7 @@
   --project-accent: #005e87;
   --focus: #0ea5e9;
   --hero-title: #ffffff;
-  --hero-subtitle: #dbeafe;
+  --hero-subtitle: #ffffff;
   --page-background:
     radial-gradient(circle at 12% 8%, rgba(0, 118, 168, 0.12), transparent 34rem),
     linear-gradient(125deg, #faf9f7, #d8d4ce);
@@ -61,7 +61,7 @@
   --project-accent: #7ab8ff;
   --focus: #a5b4fc;
   --hero-title: #ffffff;
-  --hero-subtitle: #dbeafe;
+  --hero-subtitle: #ffffff;
   --page-background:
     radial-gradient(circle at 18% 8%, rgba(96, 165, 250, 0.13), transparent 32rem),
     radial-gradient(circle at 82% 12%, rgba(96, 165, 250, 0.06), transparent 30rem),
@@ -253,16 +253,18 @@ button:focus-visible {
 .lang-toggle,
 .print-button,
 .contrast-toggle {
+  --control-visual-size: 28px;
   display: inline-grid;
   place-items: center;
-  width: 28px;
-  height: 28px;
+  width: 44px;
+  height: 44px;
+  margin-block: -8px;
   padding: 0;
   color: #ffffff;
-  background: rgba(255, 255, 255, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: transparent;
+  border: 0;
   border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+  box-shadow: none;
   cursor: pointer;
   font-family: inherit;
   font-weight: 700;
@@ -284,9 +286,9 @@ button:focus-visible {
 .print-button:focus-visible,
 .contrast-toggle:focus-visible {
   transform: scale(1.1);
-  background: rgba(255, 255, 255, 0.35);
-  border-color: rgba(255, 255, 255, 0.5);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18);
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
 }
 
 .theme-toggle span,
@@ -295,6 +297,29 @@ button:focus-visible {
 .contrast-toggle span {
   display: inline-grid;
   place-items: center;
+  width: var(--control-visual-size);
+  height: var(--control-visual-size);
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+  transition:
+    background-color 320ms ease,
+    border-color 320ms ease,
+    box-shadow 180ms ease;
+}
+
+.theme-toggle:hover span,
+.lang-toggle:hover span,
+.print-button:hover span,
+.contrast-toggle:hover span,
+.theme-toggle:focus-visible span,
+.lang-toggle:focus-visible span,
+.print-button:focus-visible span,
+.contrast-toggle:focus-visible span {
+  background: rgba(255, 255, 255, 0.35);
+  border-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18);
 }
 
 .theme-toggle svg,
@@ -432,7 +457,20 @@ h1 {
   text-align: left;
 }
 
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .copy-button {
+  --copy-visual-size: 26px;
   position: absolute !important;
   right: 8px;
   top: 50%;
@@ -440,12 +478,12 @@ h1 {
   display: inline-grid;
   place-items: center;
   flex: 0 0 auto;
-  width: 26px;
-  height: 26px;
+  width: 44px;
+  height: 44px;
   padding: 0;
   color: #ffffff;
-  background: var(--copy-bg);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: transparent;
+  border: 0;
   border-radius: 7px;
   cursor: pointer;
   opacity: 0.3; /* AAA 1.4.11: non-text elements must be perceivable; was 0 */
@@ -460,6 +498,12 @@ h1 {
 .compact-list .copy-button,
 .featured .copy-button {
   color: var(--text);
+  background: transparent;
+  border-color: transparent;
+}
+
+.compact-list .copy-button span,
+.featured .copy-button span {
   background: color-mix(in srgb, var(--surface) 70%, transparent);
   border-color: var(--line);
 }
@@ -473,6 +517,14 @@ h1 {
 .copy-button span {
   display: inline-grid;
   place-items: center;
+  width: var(--copy-visual-size);
+  height: var(--copy-visual-size);
+  background: var(--copy-bg);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 7px;
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease;
 }
 
 .copy-button svg {
@@ -507,6 +559,10 @@ h1 {
 .copy-button:hover,
 .copy-button:focus-visible {
   transform: translateY(-50%) scale(1.12);
+}
+
+.copy-button:hover span,
+.copy-button:focus-visible span {
   background: rgba(255, 255, 255, 0.35);
   border-color: rgba(255, 255, 255, 0.5);
 }
@@ -515,6 +571,13 @@ h1 {
 .featured .copy-button:hover,
 .compact-list .copy-button:focus-visible,
 .featured .copy-button:focus-visible {
+  background: transparent;
+}
+
+.compact-list .copy-button:hover span,
+.featured .copy-button:hover span,
+.compact-list .copy-button:focus-visible span,
+.featured .copy-button:focus-visible span {
   background: color-mix(in srgb, var(--surface) 90%, transparent);
   border-color: var(--blue);
 }

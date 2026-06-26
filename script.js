@@ -97,7 +97,8 @@ const translations = {
     tooltip_copy_linkedin: "نسخ رابط لينكد إن",
     tooltip_copy_dribbble: "نسخ رابط دريبل",
     tooltip_copy_project: "نسخ رابط المشروع",
-    tooltip_copy_cert: "نسخ رابط الشهادة"
+    tooltip_copy_cert: "نسخ رابط الشهادة",
+    opens_new_tab: " يفتح في تبويب جديد"
   },
   en: {
     skip_link: "Skip to main content",
@@ -179,9 +180,22 @@ const translations = {
     tooltip_copy_linkedin: "Copy LinkedIn link",
     tooltip_copy_dribbble: "Copy Dribbble link",
     tooltip_copy_project: "Copy project link",
-    tooltip_copy_cert: "Copy certification link"
+    tooltip_copy_cert: "Copy certification link",
+    opens_new_tab: " opens in new tab"
   }
 };
+
+function ensureExternalLinkNotes() {
+  document.querySelectorAll('a[target="_blank"]').forEach((link) => {
+    link.rel = "noopener noreferrer";
+    if (!link.querySelector(".sr-only[data-translate='opens_new_tab']")) {
+      const note = document.createElement("span");
+      note.className = "sr-only";
+      note.dataset.translate = "opens_new_tab";
+      link.appendChild(note);
+    }
+  });
+}
 
 function setTheme(theme) {
   root.dataset.theme = theme;
@@ -236,16 +250,19 @@ function setLanguage(lang) {
     }
   });
 
+  ensureExternalLinkNotes();
+
   // Re-run standard labels on external links that depend on text content
   document.querySelectorAll('a[target="_blank"]').forEach((link) => {
-    const label = link.textContent.replace(" (opens external site)", "").replace(" (يفتح في موقع خارجي)", "").trim();
-    if (lang === "ar") {
-      link.setAttribute("aria-label", `${label} (يفتح في موقع خارجي)`);
-      link.setAttribute("title", "يفتح في موقع خارجي");
-    } else {
-      link.setAttribute("aria-label", `${label} (opens external site)`);
-      link.setAttribute("title", "Opens external site");
-    }
+    const note = link.querySelector(".sr-only[data-translate='opens_new_tab']");
+    const label = Array.from(link.childNodes)
+      .filter((node) => node !== note)
+      .map((node) => node.textContent)
+      .join("")
+      .trim();
+    const newTabText = translations[lang].opens_new_tab.trim();
+    link.setAttribute("aria-label", `${label} (${newTabText})`);
+    link.setAttribute("title", newTabText);
   });
 }
 
@@ -343,6 +360,7 @@ document.querySelectorAll(".compact-list a, .featured h4 a").forEach((link) => {
 });
 
 // Initial Setups
+ensureExternalLinkNotes();
 setTheme(savedTheme || (prefersDark ? "dark" : "light"));
 setContrast(savedContrast);
 setLanguage(savedLang);
