@@ -1086,10 +1086,22 @@ h1 {
   transition: top 200ms ease;
 }
 
+[data-contrast="high"] .skip-link {
+  background: #000000;
+  color: #ffff00;
+  border: 2px solid #ffff00;
+  border-top: none;
+}
+
 .skip-link:focus-visible {
   top: 0;
   outline: none;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+[data-contrast="high"] .skip-link:focus-visible {
+  outline: 2px solid #ffff00;
+  outline-offset: 2px;
 }
 
 /* Bilingual and RTL support */
@@ -1162,6 +1174,17 @@ h1 {
 [data-contrast="high"] .timeline-dot {
   border: 2px solid #ffffff;
   background: #000000;
+}
+
+[data-contrast="high"] .compact-list a,
+[data-contrast="high"] .featured h4 a {
+  color: #00ffff !important;
+}
+
+[data-contrast="high"] .compact-list a:hover,
+[data-contrast="high"] .featured h4 a:hover {
+  color: #ffff00 !important;
+  text-decoration: underline !important;
 }
 
 @media (forced-colors: active) {
