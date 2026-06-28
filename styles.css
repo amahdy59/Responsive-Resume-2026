@@ -50,53 +50,53 @@
 
 [data-theme="dark"] {
   color-scheme: dark;
-  --page: #0a0e12;
-  --surface: #121820; /* Darker card surface to improve contrast */
-  --panel: #0b0f15; /* Darker panel background */
+  --page: #0d1117;
+  --surface: #161b22; /* GitHub's card/box canvas */
+  --panel: #161b22; /* GitHub's overlay canvas */
   --logo-bg: #ffffff;
-  --line: rgba(96, 165, 250, 0.18);
-  --soft-line: rgba(226, 232, 240, 0.08);
-  --text: #f8fafc; /* Crisp white-gray (meets AAA contrast ratio > 10:1) */
-  --muted: #cbd5e1; /* Lighter gray to guarantee AAA contrast (> 8:1) */
-  --blue: #8ec3ff; /* Lighter cyan-blue to guarantee AAA contrast (> 7.5:1) */
-  --accent: #8ec3ff; 
-  --project-accent: #8ec3ff;
-  --link-aaa: #8ec3ff;
-  --focus: #60a5fa; 
-  --text-secondary: #e2e8f0; /* Crisp secondary body text (> 9:1) */
+  --line: #30363d; /* GitHub's border default */
+  --soft-line: #21262d; /* GitHub's border muted */
+  --text: #f0f6fc; /* GitHub's fg default (meets AAA contrast ratio > 14:1) */
+  --muted: #cbd5e1; /* AAA secondary text (meets AAA contrast ratio > 9:1) */
+  --blue: #79c0ff; /* Lighter GitHub blue accent to guarantee AAA contrast (> 8.5:1) */
+  --accent: #79c0ff; 
+  --project-accent: #79c0ff;
+  --link-aaa: #79c0ff;
+  --focus: #388bfd; /* GitHub's focus ring blue */
+  --text-secondary: #e2e8f0; /* Crisp secondary body text (> 12:1) */
   --hero-title: #ffffff;
-  --hero-subtitle: #ffffff;
+  --hero-subtitle: #79c0ff;
   --page-background:
-    radial-gradient(circle at 18% 8%, rgba(96, 165, 250, 0.13), transparent 32rem),
-    radial-gradient(circle at 82% 12%, rgba(96, 165, 250, 0.06), transparent 30rem),
-    linear-gradient(125deg, #0a0e12, #0d1117 52%, #0f1419);
-  --hero-gradient: linear-gradient(90deg, #3b82f6 0%, #60a5fa 50%, #3b82f6 100%);
-  --contact-bg: rgba(2, 6, 23, 0.32);
-  --tag-bg: rgba(255, 255, 255, 0.2);
-  --project-bg: rgba(96, 165, 250, 0.08);
+    radial-gradient(circle at 18% 8%, rgba(56, 139, 253, 0.1), transparent 40rem),
+    radial-gradient(circle at 82% 12%, rgba(56, 139, 253, 0.05), transparent 35rem),
+    linear-gradient(125deg, #0d1117 0%, #161b22 100%);
+  --hero-gradient: linear-gradient(90deg, #1f242c 0%, #161b22 50%, #1f242c 100%);
+  --contact-bg: rgba(48, 54, 61, 0.4);
+  --tag-bg: rgba(48, 54, 61, 0.6);
+  --project-bg: rgba(56, 139, 253, 0.08);
   --panel-primary-bg:
-    linear-gradient(135deg, rgba(96, 165, 250, 0.12), rgba(13, 17, 23, 0.94) 50%, rgba(13, 17, 23, 0.98) 100%),
+    linear-gradient(135deg, rgba(56, 139, 253, 0.06), #161b22 100%),
     var(--panel);
   --panel-secondary-bg:
-    linear-gradient(135deg, rgba(96, 165, 250, 0.08), rgba(13, 17, 23, 0.94) 50%, rgba(13, 17, 23, 0.98) 100%),
+    linear-gradient(135deg, rgba(48, 54, 61, 0.06), #161b22 100%),
     var(--panel);
   --employment-card-bg: transparent;
-  --inner-card: rgba(15, 23, 42, 0.55);
-  --translucent-card: rgba(15, 23, 42, 0.5);
-  --cert-card: rgba(96, 165, 250, 0.06);
-  --pill-bg: rgba(122, 184, 255, 0.18);
-  --date-bg: rgba(33, 38, 45, 0.5);
-  --date-text: #b4bcc8; /* AAA-compliant: matches --muted for 7:1 */
-  --copy-bg: rgba(255, 255, 255, 0.13);
-  --shadow: 0 25px 55px rgba(0, 0, 0, 0.45);
-  --chart-glow-color: var(--blue);
-  --chart-glow-opacity: 0.18;
-  --chart-line-color-start: color-mix(in srgb, var(--blue) 60%, transparent);
-  --chart-line-color-mid: var(--blue);
-  --chart-line-color-end: color-mix(in srgb, var(--blue) 60%, transparent);
-  --chart-grid-color: rgba(255, 255, 255, 0.05);
-  --chart-node-color: var(--blue);
-  --chart-node-color-alt: color-mix(in srgb, var(--blue) 70%, #ffffff);
+  --inner-card: #0d1117;
+  --translucent-card: rgba(22, 27, 34, 0.85);
+  --cert-card: rgba(56, 139, 253, 0.05);
+  --pill-bg: rgba(56, 139, 253, 0.15);
+  --date-bg: rgba(48, 54, 61, 0.3);
+  --date-text: #cbd5e1; /* Matches --muted for > 9:1 AAA contrast */
+  --copy-bg: rgba(240, 246, 252, 0.1);
+  --shadow: 0 25px 50px rgba(0, 0, 0, 0.55);
+  --chart-glow-color: #58a6ff;
+  --chart-glow-opacity: 0.15;
+  --chart-line-color-start: rgba(56, 139, 253, 0.4);
+  --chart-line-color-mid: #79c0ff;
+  --chart-line-color-end: rgba(56, 139, 253, 0.4);
+  --chart-grid-color: rgba(240, 246, 252, 0.05);
+  --chart-node-color: #58a6ff;
+  --chart-node-color-alt: #79c0ff;
 }
 
 * {
@@ -1078,7 +1078,7 @@ h1 {
   left: 50%;
   transform: translateX(-50%);
   background: var(--blue);
-  color: #ffffff;
+  color: var(--page);
   padding: 10px 20px;
   border-radius: 0 0 8px 8px;
   z-index: 9999;
@@ -1121,15 +1121,15 @@ h1 {
   --line: #ffffff;
   --soft-line: #ffffff;
   --text: #ffffff;
-  --muted: #ffff00;
+  --muted: #86efac; /* Softer mint green instead of harsh yellow */
   --blue: #00ffff;
   --accent: #00ffff;
   --project-accent: #00ffff;
-  --focus: #ffff00;
+  --focus: #86efac; /* Softer focus ring green */
   --page-background: #000000;
   --hero-gradient: #000000;
   --hero-title: #ffffff;
-  --hero-subtitle: #ffff00;
+  --hero-subtitle: #86efac;
   --project-bg: #000000;
   --cert-card: #000000;
   --panel-primary-bg: #000000;
@@ -1137,7 +1137,7 @@ h1 {
   --translucent-card: #000000;
   --pill-bg: #000000;
   --date-bg: #000000;
-  --date-text: #ffff00;
+  --date-text: #86efac;
   --chart-glow-color: #00ffff;
   --chart-glow-opacity: 0.2;
   --chart-line-color-start: #00ffff;
@@ -1183,7 +1183,7 @@ h1 {
 
 [data-contrast="high"] .compact-list a:hover,
 [data-contrast="high"] .featured h4 a:hover {
-  color: #ffff00 !important;
+  color: #86efac !important;
   text-decoration: underline !important;
 }
 
@@ -1192,8 +1192,68 @@ h1 {
 }
 
 [data-contrast="high"] .panel h2 .panel-icon-box {
-  background: #ffff00 !important;
+  background: #86efac !important;
   color: #000000 !important;
+}
+
+/* Enhanced tactile button borders and visibility in High Contrast Mode */
+[data-contrast="high"] .lang-toggle,
+[data-contrast="high"] .contrast-toggle,
+[data-contrast="high"] .print-button {
+  border: 2px solid #ffffff !important;
+  background: #000000 !important;
+  color: #ffffff !important;
+  border-radius: 6px !important;
+}
+
+[data-contrast="high"] .copy-button {
+  border: 2px solid #ffffff !important;
+  background: #000000 !important;
+  color: #ffffff !important;
+  border-radius: 6px !important;
+  opacity: 0.25 !important; /* Softer default visibility to prevent visual clutter */
+}
+
+/* Keep copy buttons interactive on hover/focus */
+[data-contrast="high"] .copy-button:hover,
+[data-contrast="high"] .copy-button:focus-visible,
+[data-contrast="high"] .contact-list li:hover .copy-button,
+[data-contrast="high"] .contact-list li:focus-within .copy-button,
+[data-contrast="high"] .compact-list li:hover .copy-button,
+[data-contrast="high"] .compact-list li:focus-within .copy-button,
+[data-contrast="high"] .featured article:hover .copy-button,
+[data-contrast="high"] .featured article:focus-within .copy-button {
+  opacity: 1 !important;
+}
+
+[data-contrast="high"] .copy-button span {
+  background: #000000 !important;
+  border: 1px solid #ffffff !important;
+}
+
+[data-contrast="high"] .copy-button:hover,
+[data-contrast="high"] .copy-button:focus-visible,
+[data-contrast="high"] .lang-toggle:hover,
+[data-contrast="high"] .lang-toggle:focus-visible,
+[data-contrast="high"] .contrast-toggle:hover,
+[data-contrast="high"] .contrast-toggle:focus-visible,
+[data-contrast="high"] .print-button:hover,
+[data-contrast="high"] .print-button:focus-visible {
+  border-color: #00ffff !important;
+  color: #00ffff !important;
+}
+
+[data-contrast="high"] .copy-button:hover span,
+[data-contrast="high"] .copy-button:focus-visible span {
+  border-color: #00ffff !important;
+}
+
+/* Explicit high-visibility keyboard focus rings */
+[data-contrast="high"] a:focus-visible,
+[data-contrast="high"] button:focus-visible {
+  outline: 3px solid #86efac !important;
+  outline-offset: 4px !important;
+  box-shadow: none !important;
 }
 
 @media (forced-colors: active) {
