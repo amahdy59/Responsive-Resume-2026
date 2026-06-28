@@ -1121,15 +1121,15 @@ h1 {
   --line: #ffffff;
   --soft-line: #ffffff;
   --text: #ffffff;
-  --muted: #ffff00;
+  --muted: #86efac; /* Softer mint green instead of harsh yellow */
   --blue: #00ffff;
   --accent: #00ffff;
   --project-accent: #00ffff;
-  --focus: #ffff00;
+  --focus: #86efac; /* Softer focus ring green */
   --page-background: #000000;
   --hero-gradient: #000000;
   --hero-title: #ffffff;
-  --hero-subtitle: #ffff00;
+  --hero-subtitle: #86efac;
   --project-bg: #000000;
   --cert-card: #000000;
   --panel-primary-bg: #000000;
@@ -1137,7 +1137,7 @@ h1 {
   --translucent-card: #000000;
   --pill-bg: #000000;
   --date-bg: #000000;
-  --date-text: #ffff00;
+  --date-text: #86efac;
   --chart-glow-color: #00ffff;
   --chart-glow-opacity: 0.2;
   --chart-line-color-start: #00ffff;
@@ -1183,7 +1183,7 @@ h1 {
 
 [data-contrast="high"] .compact-list a:hover,
 [data-contrast="high"] .featured h4 a:hover {
-  color: #ffff00 !important;
+  color: #86efac !important;
   text-decoration: underline !important;
 }
 
@@ -1192,20 +1192,38 @@ h1 {
 }
 
 [data-contrast="high"] .panel h2 .panel-icon-box {
-  background: #ffff00 !important;
+  background: #86efac !important;
   color: #000000 !important;
 }
 
 /* Enhanced tactile button borders and visibility in High Contrast Mode */
-[data-contrast="high"] .copy-button,
 [data-contrast="high"] .lang-toggle,
 [data-contrast="high"] .contrast-toggle,
 [data-contrast="high"] .print-button {
-  opacity: 1 !important;
   border: 2px solid #ffffff !important;
   background: #000000 !important;
   color: #ffffff !important;
   border-radius: 6px !important;
+}
+
+[data-contrast="high"] .copy-button {
+  border: 2px solid #ffffff !important;
+  background: #000000 !important;
+  color: #ffffff !important;
+  border-radius: 6px !important;
+  opacity: 0.25 !important; /* Softer default visibility to prevent visual clutter */
+}
+
+/* Keep copy buttons interactive on hover/focus */
+[data-contrast="high"] .copy-button:hover,
+[data-contrast="high"] .copy-button:focus-visible,
+[data-contrast="high"] .contact-list li:hover .copy-button,
+[data-contrast="high"] .contact-list li:focus-within .copy-button,
+[data-contrast="high"] .compact-list li:hover .copy-button,
+[data-contrast="high"] .compact-list li:focus-within .copy-button,
+[data-contrast="high"] .featured article:hover .copy-button,
+[data-contrast="high"] .featured article:focus-within .copy-button {
+  opacity: 1 !important;
 }
 
 [data-contrast="high"] .copy-button span {
@@ -1233,7 +1251,7 @@ h1 {
 /* Explicit high-visibility keyboard focus rings */
 [data-contrast="high"] a:focus-visible,
 [data-contrast="high"] button:focus-visible {
-  outline: 3px solid #ffff00 !important;
+  outline: 3px solid #86efac !important;
   outline-offset: 4px !important;
   box-shadow: none !important;
 }
