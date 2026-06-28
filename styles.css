@@ -1196,6 +1196,48 @@ h1 {
   color: #000000 !important;
 }
 
+/* Enhanced tactile button borders and visibility in High Contrast Mode */
+[data-contrast="high"] .copy-button,
+[data-contrast="high"] .lang-toggle,
+[data-contrast="high"] .contrast-toggle,
+[data-contrast="high"] .print-button {
+  opacity: 1 !important;
+  border: 2px solid #ffffff !important;
+  background: #000000 !important;
+  color: #ffffff !important;
+  border-radius: 6px !important;
+}
+
+[data-contrast="high"] .copy-button span {
+  background: #000000 !important;
+  border: 1px solid #ffffff !important;
+}
+
+[data-contrast="high"] .copy-button:hover,
+[data-contrast="high"] .copy-button:focus-visible,
+[data-contrast="high"] .lang-toggle:hover,
+[data-contrast="high"] .lang-toggle:focus-visible,
+[data-contrast="high"] .contrast-toggle:hover,
+[data-contrast="high"] .contrast-toggle:focus-visible,
+[data-contrast="high"] .print-button:hover,
+[data-contrast="high"] .print-button:focus-visible {
+  border-color: #00ffff !important;
+  color: #00ffff !important;
+}
+
+[data-contrast="high"] .copy-button:hover span,
+[data-contrast="high"] .copy-button:focus-visible span {
+  border-color: #00ffff !important;
+}
+
+/* Explicit high-visibility keyboard focus rings */
+[data-contrast="high"] a:focus-visible,
+[data-contrast="high"] button:focus-visible {
+  outline: 3px solid #ffff00 !important;
+  outline-offset: 4px !important;
+  box-shadow: none !important;
+}
+
 @media (forced-colors: active) {
   :root {
     --page: Canvas;
