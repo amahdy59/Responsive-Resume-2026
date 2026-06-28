@@ -1078,7 +1078,7 @@ h1 {
   left: 50%;
   transform: translateX(-50%);
   background: var(--blue);
-  color: #ffffff;
+  color: var(--page);
   padding: 10px 20px;
   border-radius: 0 0 8px 8px;
   z-index: 9999;
