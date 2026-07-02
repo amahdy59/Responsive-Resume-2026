@@ -1444,14 +1444,6 @@ h1 {
   [dir="rtl"] .identity-copy {
     max-width: calc(100% - 116px);
   }
-
-  [dir="rtl"] .controls-group {
-    grid-column: 1;
-  }
-
-  [dir="rtl"] .contact-list {
-    grid-column: 2;
-  }
 }
 
 @media screen and (max-width: 880px) {
