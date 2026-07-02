@@ -1374,6 +1374,7 @@ h1 {
     align-items: stretch;
     gap: 18px;
     padding: 20px;
+    position: relative;
   }
 
   .identity {
@@ -1381,11 +1382,17 @@ h1 {
   }
 
   .avatar {
-    display: none;
+    display: block;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 96px;
+    height: 96px;
+    border-width: 3px;
   }
 
   .identity-copy {
-    max-width: 100%;
+    max-width: calc(100% - 136px);
   }
 
   .identity-copy > p {
@@ -1399,9 +1406,10 @@ h1 {
   .hero-controls-wrapper {
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
-    align-items: start;
+    align-items: end;
     gap: 14px 16px;
     width: 100%;
+    padding-top: 88px;
   }
 
   .controls-group {
@@ -1409,7 +1417,7 @@ h1 {
     grid-row: 1;
     flex-direction: row;
     justify-content: flex-end;
-    align-self: start;
+    align-self: end;
   }
 
   .contact-list {
@@ -1417,6 +1425,15 @@ h1 {
     grid-row: 2;
     width: 100%;
     max-width: none;
+  }
+
+  [dir="rtl"] .avatar {
+    right: auto;
+    left: 20px;
+  }
+
+  [dir="rtl"] .identity-copy {
+    max-width: calc(100% - 136px);
   }
 }
 
