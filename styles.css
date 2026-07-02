@@ -120,15 +120,31 @@ body {
   position: relative;
   margin: 0;
   min-width: 320px;
+  overflow-x: hidden;
   background: var(--page-background);
   color: var(--text);
   font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   line-height: 1.6;
 }
 
-body *,
-body *::before,
-body *::after {
+:where(
+  .resume-card,
+  .panel,
+  .contact-list,
+  .compact-list li,
+  .featured article,
+  .tags span,
+  .pills span,
+  .copy-button,
+  .theme-toggle,
+  .lang-toggle,
+  .print-button,
+  .contrast-toggle,
+  .panel-icon-box,
+  .contact-icon,
+  .li-company-logo,
+  .li-role-dot
+) {
   transition-property: background-color, background, border-color, box-shadow, color, opacity, transform;
   transition-duration: 260ms;
   transition-timing-function: ease;
@@ -372,7 +388,8 @@ button:focus-visible {
 
 .avatar {
   width: clamp(86px, 12vw, 128px);
-  aspect-ratio: 1;
+  height: clamp(86px, 12vw, 128px);
+  flex: 0 0 auto;
   object-fit: cover;
   border: 4px solid rgba(255, 255, 255, 0.36);
   border-radius: 50%;
@@ -450,7 +467,7 @@ h1 {
   align-items: center;
   gap: 8px;
   min-width: 0;
-  padding: 2px 36px 2px 6px;
+  padding: 4px 36px 4px 6px;
   border-radius: 8px;
 }
 
@@ -462,6 +479,7 @@ h1 {
   overflow-wrap: anywhere;
   font-size: 0.9rem;
   font-weight: 500;
+  line-height: 1.45;
   text-align: left;
 }
 
@@ -494,7 +512,7 @@ h1 {
   border: 0;
   border-radius: 7px;
   cursor: pointer;
-  /* Raised from 0.3 to 0.45: WCAG 1.4.11 non-text contrast requires perceivable interactive elements */
+  /* Keep copy buttons perceivable without adding too much visual noise. */
   opacity: 0.45;
   transition:
     opacity 150ms ease,
@@ -1350,39 +1368,59 @@ h1 {
   }
 }
 
-@media screen and (max-width: 880px) {
+@media screen and (min-width: 561px) and (max-width: 960px) {
   .hero {
-    align-items: center;
-    flex-direction: row;
-    justify-content: space-between;
-    gap: 16px;
-  }
-
-  .hero-controls-wrapper {
     flex-direction: column;
-    align-items: flex-end;
-    width: auto;
-    gap: 8px;
+    align-items: stretch;
+    gap: 18px;
+    padding: 20px;
   }
 
-  [dir="rtl"] .hero-controls-wrapper {
-    align-items: flex-start;
+  .identity {
+    display: block;
   }
 
-  .controls-group {
-    flex-direction: row;
-    justify-content: flex-end;
+  .avatar {
+    display: none;
   }
 
-  [dir="rtl"] .controls-group {
-    justify-content: flex-start;
-  }
-
-  .contact-list {
-    width: 320px;
+  .identity-copy {
     max-width: 100%;
   }
 
+  .identity-copy > p {
+    max-width: 24ch;
+  }
+
+  .tags {
+    max-width: 100%;
+  }
+
+  .hero-controls-wrapper {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: start;
+    gap: 14px 16px;
+    width: 100%;
+  }
+
+  .controls-group {
+    grid-column: 2;
+    grid-row: 1;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-self: start;
+  }
+
+  .contact-list {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    width: 100%;
+    max-width: none;
+  }
+}
+
+@media screen and (max-width: 880px) {
   .content-grid {
     grid-template-columns: 1fr;
   }
@@ -1443,6 +1481,7 @@ h1 {
 
   .avatar {
     width: 92px;
+    height: 92px;
   }
 
   .contact-list {
@@ -1450,15 +1489,31 @@ h1 {
     max-width: none !important;
   }
 
+  .contact-list li {
+    align-items: flex-start;
+    padding: 6px 38px 6px 8px;
+  }
+
   .contact-list a {
-    white-space: nowrap !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+    word-break: break-word;
   }
 
   .content-grid {
+    display: flex;
+    flex-direction: column;
     gap: 14px;
     padding: 14px;
+  }
+
+  .main-column {
+    order: 1;
+  }
+
+  .sidebar {
+    order: 2;
   }
 
   .panel {
@@ -1498,6 +1553,10 @@ h1 {
 
   [dir="rtl"] .compact-list li {
     padding: 0 0 0 36px !important;
+  }
+
+  .copy-button {
+    opacity: 0.85;
   }
 }
 
