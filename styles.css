@@ -1369,71 +1369,78 @@ h1 {
 }
 
 @media screen and (min-width: 561px) and (max-width: 960px) {
+  /* ── Tablet Hero: compact two-row layout, no wasted space ── */
   .hero {
     flex-direction: column;
     align-items: stretch;
-    gap: 18px;
-    padding: 20px;
+    gap: 14px;
+    padding: 20px 20px 18px;
     position: relative;
+    min-height: auto;
   }
 
+  /* Row 1: avatar + text side-by-side, controls pinned top-right */
   .identity {
-    display: block;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 16px;
+    padding-inline-end: 148px;
   }
 
   .avatar {
-    display: block;
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    width: 96px;
-    height: 96px;
+    flex: 0 0 auto;
+    position: static;
+    width: 80px;
+    height: 80px;
     border-width: 3px;
   }
 
   .identity-copy {
-    max-width: calc(100% - 136px);
+    flex: 1 1 auto;
+    min-width: 0;
+    max-width: none;
   }
 
   .identity-copy > p {
-    max-width: 24ch;
+    max-width: none;
   }
 
   .tags {
     max-width: 100%;
   }
 
-  .hero-controls-wrapper {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    align-items: end;
-    gap: 14px 16px;
-    width: 100%;
-    padding-top: 88px;
+  /* Controls: absolute top-right, horizontal row */
+  .controls-group {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    flex-direction: row;
+    gap: 4px;
+    z-index: 20;
   }
 
-  .controls-group {
-    grid-column: 2;
-    grid-row: 1;
-    flex-direction: row;
-    justify-content: flex-end;
-    align-self: end;
+  /* Row 2: contact list, full width */
+  .hero-controls-wrapper {
+    display: block;
+    width: 100%;
+    padding-top: 0;
   }
 
   .contact-list {
-    grid-column: 1 / -1;
-    grid-row: 2;
     width: 100%;
     max-width: none;
   }
 
-  [dir="rtl"] .avatar {
-    right: auto;
-    left: 20px;
+  /* RTL mirroring */
+  [dir="rtl"] .identity {
+    padding-inline-end: 148px;
+    padding-inline-start: 0;
   }
 
-  [dir="rtl"] .identity-copy {
-    max-width: calc(100% - 136px);
+  [dir="rtl"] .controls-group {
+    right: auto;
+    left: 16px;
   }
 }
 
@@ -1474,6 +1481,7 @@ h1 {
   }
 
   .controls-group {
+    position: static !important;
     flex-direction: row !important;
     justify-content: center !important;
   }
@@ -1484,6 +1492,7 @@ h1 {
     gap: 14px;
     text-align: center;
     width: 100%;
+    padding-inline-end: 0 !important;
   }
 
   .identity-copy {
