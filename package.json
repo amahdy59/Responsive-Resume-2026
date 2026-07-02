@@ -5,7 +5,12 @@
   "type": "module",
   "scripts": {
     "build": "node build.mjs",
-    "dev": "node build.mjs",
-    "preview": "node build.mjs"
+    "check": "node scripts/validate.mjs",
+    "dev": "node scripts/serve.mjs --root . --port 4173",
+    "preview": "npm run build && node scripts/serve.mjs --root dist --port 4174",
+    "test": "node scripts/validate.mjs"
+  },
+  "engines": {
+    "node": ">=20"
   }
 }

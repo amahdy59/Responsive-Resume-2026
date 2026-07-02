@@ -35,14 +35,11 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Build static files
-        run: node build.mjs
+      - name: Validate source files
+        run: npm test
 
-      - name: Copy CNAME to dist
-        run: |
-          if [ -f CNAME ]; then
-            cp CNAME dist/
-          fi
+      - name: Build static files
+        run: npm run build
 
       - name: Setup Pages
         uses: actions/configure-pages@v5

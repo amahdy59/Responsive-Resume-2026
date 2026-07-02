@@ -114,15 +114,31 @@ body {
   position: relative;
   margin: 0;
   min-width: 320px;
+  overflow-x: hidden;
   background: var(--page-background);
   color: var(--text);
   font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   line-height: 1.6;
 }
 
-body *,
-body *::before,
-body *::after {
+:where(
+  .resume-card,
+  .panel,
+  .contact-list,
+  .compact-list li,
+  .featured article,
+  .tags span,
+  .pills span,
+  .copy-button,
+  .theme-toggle,
+  .lang-toggle,
+  .print-button,
+  .contrast-toggle,
+  .panel-icon-box,
+  .contact-icon,
+  .li-company-logo,
+  .li-role-dot
+) {
   transition-property: background-color, background, border-color, box-shadow, color, opacity, transform;
   transition-duration: 260ms;
   transition-timing-function: ease;
@@ -417,7 +433,7 @@ h1 {
   align-items: center;
   gap: 8px;
   min-width: 0;
-  padding: 2px 36px 2px 6px;
+  padding: 4px 36px 4px 6px;
   border-radius: 8px;
 }
 
@@ -429,6 +445,7 @@ h1 {
   overflow-wrap: anywhere;
   font-size: 0.9rem;
   font-weight: 500;
+  line-height: 1.45;
   text-align: left;
 }
 
@@ -448,7 +465,7 @@ h1 {
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 7px;
   cursor: pointer;
-  opacity: 0.3; /* AAA 1.4.11: non-text elements must be perceivable; was 0 */
+  opacity: 0.45;
   transition:
     opacity 150ms ease,
     transform 150ms ease,
@@ -1283,15 +1300,31 @@ h1 {
     max-width: none !important;
   }
 
+  .contact-list li {
+    align-items: flex-start;
+    padding: 6px 38px 6px 8px;
+  }
+
   .contact-list a {
-    white-space: nowrap !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+    word-break: break-word;
   }
 
   .content-grid {
+    display: flex;
+    flex-direction: column;
     gap: 14px;
     padding: 14px;
+  }
+
+  .main-column {
+    order: 1;
+  }
+
+  .sidebar {
+    order: 2;
   }
 
   .panel {
@@ -1331,6 +1364,10 @@ h1 {
 
   [dir="rtl"] .compact-list li {
     padding: 0 0 0 36px !important;
+  }
+
+  .copy-button {
+    opacity: 0.85;
   }
 }
 

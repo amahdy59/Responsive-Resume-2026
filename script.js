@@ -1,49 +1,131 @@
 const root = document.documentElement;
-const themeToggle = document.querySelector(".theme-toggle");
-const langToggle = document.querySelector(".lang-toggle");
-const contrastToggle = document.querySelector(".contrast-toggle");
-const printButton = document.querySelector(".print-button");
+const storageKeys = {
+  theme: "resume-theme",
+  lang: "resume-lang",
+  contrast: "resume-contrast",
+};
 
-const savedTheme = localStorage.getItem("resume-theme");
-const savedLang = localStorage.getItem("resume-lang") || "en";
-const savedContrast = localStorage.getItem("resume-contrast") || "normal";
 const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-const toast = document.createElement("div");
+const savedTheme = localStorage.getItem(storageKeys.theme);
+const savedLang = localStorage.getItem(storageKeys.lang) || "en";
+const savedContrast = localStorage.getItem(storageKeys.contrast) || "normal";
+
+const controls = {
+  themeToggle: document.querySelector(".theme-toggle"),
+  langToggle: document.querySelector(".lang-toggle"),
+  contrastToggle: document.querySelector(".contrast-toggle"),
+  printButton: document.querySelector(".print-button"),
+};
+
+const metaNodes = {
+  description: document.getElementById("meta-description"),
+  themeColor: document.querySelector('meta[name="theme-color"]'),
+  ogTitle: document.getElementById("og-title"),
+  ogDescription: document.getElementById("og-description"),
+  twitterTitle: document.getElementById("twitter-title"),
+  twitterDescription: document.getElementById("twitter-description"),
+  personSchema: document.getElementById("person-schema"),
+};
+
+const themeIconUse = controls.themeToggle?.querySelector("use");
+const copyToast = document.createElement("div");
 let toastTimer;
 
-toast.className = "copy-toast";
-toast.setAttribute("role", "status");
-toast.setAttribute("aria-live", "polite");
-document.body.appendChild(toast);
+copyToast.className = "copy-toast";
+copyToast.setAttribute("role", "status");
+copyToast.setAttribute("aria-live", "polite");
+document.body.appendChild(copyToast);
+
+const siteMeta = {
+  url: "https://creativemahdy.space/",
+  image: "https://creativemahdy.space/assets/ahmed-mahdy.png",
+  email: "mailto:amahdy59@gmail.com",
+  sameAs: [
+    "https://www.linkedin.com/in/creativemahdy",
+    "https://dribbble.com/creativemahdy",
+  ],
+  knowsAbout: [
+    "UX Design",
+    "Data Visualization",
+    "Data Analytics",
+    "Power BI",
+    "Tableau",
+    "Microsoft Excel",
+    "SQL",
+    "Python",
+  ],
+};
 
 const translations = {
   ar: {
-    skip_link: "تجاوز إلى المحتوى الرئيسي",
-    name: "أحمد مهدي",
-    title: "مصمم تجربة المستخدم ومصور بيانات",
-    exp_tag: "خبرة +8 سنوات",
-    ux_tag: "تصميم تجربة المستخدم",
-    data_tag: "تصوير البيانات",
-    sect_about: "نبذة عني",
-    about_text: "مصمم تجربة مستخدم ومصور بيانات بخبرة تزيد عن 8 سنوات في تحويل احتياجات المستخدمين والأعمال إلى لوحات معلومات تفاعلية وتجارب رقمية متمحورة حول المستخدم. ماهر في أبحاث المستخدم، بنية المعلومات، سرد البيانات، وتصميم الواجهات سهلة الوصول باستخدام Excel و Power BI و Tableau و SQL و Python.",
-    sect_certs: "الشهادات المهنية",
+    about_text:
+      "مصمم تجربة مستخدم ومصور بيانات بخبرة تزيد عن 8 سنوات في تحويل احتياجات المستخدمين والأعمال إلى لوحات معلومات تفاعلية وتجارب رقمية متمحورة حول المستخدم. ماهر في أبحاث المستخدم، وبنية المعلومات، وسرد البيانات، وتصميم الواجهات سهلة الوصول باستخدام Excel وPower BI وTableau وSQL وPython.",
+    aria_print_resume: "طباعة السيرة الذاتية أو حفظها كملف PDF",
+    aria_switch_to_arabic: "التبديل إلى العربية",
+    aria_switch_to_dark: "التبديل إلى الوضع الداكن",
+    aria_switch_to_english: "التبديل إلى الإنجليزية",
+    aria_switch_to_high_contrast: "التبديل إلى التباين العالي",
+    aria_switch_to_light: "التبديل إلى الوضع الفاتح",
+    aria_switch_to_normal_contrast: "التبديل إلى التباين العادي",
     cert1: "تحليل البيانات من جوجل (Google Data Analytics)",
     cert2: "تحليل ذكاء الأعمال Tableau (Tableau Business Intelligence Analyst)",
     cert3: "مهارات Excel لتحليل البيانات والتصوير المرئي",
     cert4: "مهارات Excel للأعمال",
     cert5: "تصميم تجربة المستخدم من جوجل (Google UX Design)",
+    contact_links_label: "روابط التواصل",
+    data_tag: "تصوير البيانات",
+    display_settings_label: "إعدادات العرض",
+    edu1_date: "سبتمبر 2016 - يونيو 2017",
+    edu1_school: "معهد تكنولوجيا المعلومات (ITI)",
+    edu1_title: "دبلوم في تقنيات التعليم وتكنولوجيا المعلومات",
+    edu2_date: "سبتمبر 2009 - يونيو 2013",
+    edu2_school: "جامعة المنوفية",
+    edu2_title: "بكالوريوس في الإذاعة والتلفزيون",
+    exp_tag: "خبرة +8 سنوات",
+    external_site_hint: "يفتح في موقع خارجي",
+    highlights_label: "أبرز النقاط",
+    job1_b1: "قيادة تصميم تجربة وواجهة المستخدم (UX/UI) لمنصات (SaaS) المؤسسية و(B2B) المعقدة، وتقديم حلول تتمحور حول المستخدم.",
+    job1_b2: "تأسيس أنظمة تصميم قابلة للتوسع باستخدام Figma وAdobe Creative Suite والمنهجيات الحديثة.",
+    job1_b3: "الاستفادة من أدوات التصميم المدعومة بالذكاء الاصطناعي لتسريع النماذج الأولية وتلخيص أبحاث تجربة المستخدم.",
+    job1_company: "أدفانسيز للحلول البرمجية",
+    job1_date: "يناير 2023 - الحالي · 3 سنوات و6 أشهر",
+    job1_title: "مصمم تجربة المستخدم",
+    job2_b1: "إعادة تصميم منصات وواجهات التعلم المؤسسية، مما زاد من تفاعل المستخدمين ومعدلات إكمال التدريب بنسبة 30%.",
+    job2_b2: "تحويل المتطلبات التقنية المعقدة إلى تجارب تعلم إلكترونية B2B سهلة الوصول وبديهية.",
+    job2_company: "شنايدر إلكتريك",
+    job2_date: "يوليو 2018 - يناير 2023 · 4 سنوات و7 أشهر",
+    job2_location: "محافظة القاهرة، مصر",
+    job2_title: "مصمم تعليمي",
+    main_resume_label: "محتوى السيرة الذاتية الرئيسي",
+    meta_description:
+      "السيرة الذاتية لأحمد مهدي، مصمم تجربة مستخدم ومصور بيانات، مع خبرة في التصميم، ولوحات المعلومات، وتجارب المنتجات الرقمية.",
+    meta_title: "أحمد مهدي | مصمم تجربة المستخدم ومصور بيانات",
+    name: "أحمد مهدي",
+    profile_details_label: "تفاصيل الملف الشخصي",
+    proj_data1_desc:
+      "تجربة تفاعلية لتصور البيانات باستخدام Tableau تساعد المستخدمين على استكشاف مجموعات LEGO حسب الموضوع، والعمر، والسعر، وعدد القطع.",
+    proj_data1_title: "مستكشف ليجو المعتمد على البيانات",
+    proj_data2_desc:
+      "لوحة معلومات لمبيعات علاقات العملاء (CRM) تم بناؤها في Google Sheets لتتبع أداء الفريق الربع سنوي عبر التصور المعتمد على الرسوم البيانية.",
+    proj_data2_title: "لوحة معلومات أداء المبيعات",
+    proj_data_header: "مشاريع تحليل وتصوير البيانات",
+    proj_ux1_desc:
+      "تطبيق الموارد البشرية (SaaS) مستجيب يركز على الخصوصية ويحسن طلبات الإجازات وإدارة الأدوار من خلال واجهات حديثة وسهلة الاستخدام.",
+    proj_ux1_title: "أداة الموارد البشرية",
+    proj_ux2_desc:
+      "لوحة تحكم تشغيلية عالية الدقة تركز على تصور البيانات في الوقت الفعلي والتسلسل الهرمي الواضح للمعلومات والأداء المتجاوب.",
+    proj_ux2_title: "مركز التحكم بمطار القاهرة الدولي",
+    proj_ux3_desc:
+      "تجربة تجارة إلكترونية بديهية وسهلة الوصول، مصممة بتخطيطات متجاوبة وتنقل سلس لزيادة تفاعل المستخدمين والتحويلات.",
+    proj_ux3_title: "تطبيق حاج عرفة",
+    proj_ux_header: "مشاريع تجربة المستخدم",
+    resume_label: "موقع السيرة الذاتية لأحمد مهدي",
+    sect_about: "نبذة عني",
+    sect_certs: "الشهادات المهنية",
+    sect_edu: "التعليم",
+    sect_jobs: "الخبرات المهنية",
+    sect_projects: "المشاريع",
     sect_skills: "المهارات",
-    skills_ux_header: "تصميم تجربة المستخدم",
-    skills_data_header: "تحليل وتصوير البيانات",
-    skill_ux1: "تصميم التفاعل",
-    skill_ux2: "بنية المعلومات",
-    skill_ux3: "أبحاث المستخدمين",
-    skill_ux4: "اختبار سهولة الاستخدام",
-    skill_ux5: "التخطيط الهيكلي (Wireframing)",
-    skill_ux6: "بناء النماذج الأولية",
-    skill_ux7: "فيجما (Figma)",
-    skill_ux8: "أنظمة التصميم",
-    skill_ux9: "سهولة الوصول (a11y)",
     skill_data1: "مايكروسوفت إكسل (متقدم)",
     skill_data2: "باور بي آي (Power BI)",
     skill_data3: "تابلو (Tableau)",
@@ -52,80 +134,105 @@ const translations = {
     skill_data6: "تصميم لوحات المعلومات",
     skill_data7: "سرد البيانات قصصياً",
     skill_data8: "تحليل مؤشرات الأداء (KPI)",
-    sect_projects: "المشاريع",
-    proj_data_header: "مشاريع تحليل وتصوير البيانات",
-    proj_data1_title: "مستكشف ليجو المعتمد على البيانات",
-    proj_data1_desc: "تجربة تفاعلية لتصور البيانات باستخدام Tableau تساعد المستخدمين على استكشاف مجموعات LEGO حسب الموضوع، العمر، السعر، وعدد القطع.",
-    proj_data2_title: "لوحة معلومات أداء المبيعات",
-    proj_data2_desc: "لوحة معلومات لمبيعات علاقات العملاء (CRM) تم بناؤها في Google Sheets لتتبع أداء الفريق الربع سنوي عبر التصور المعتمد على الرسوم البيانية.",
-    proj_ux_header: "مشاريع تجربة المستخدم",
-    proj_ux3_title: "تطبيق حاج عرفة",
-    proj_ux3_desc: "تجربة تجارة إلكترونية بديهية وسهلة الوصول، مصممة بتخطيطات متجاوبة وتنقل سلس لزيادة تفاعل المستخدمين والتحويلات.",
-    proj_ux2_title: "مركز التحكم بمطار القاهرة الدولي",
-    proj_ux2_desc: "لوحة تحكم تشغيلية عالية الدقة تركز على تصور البيانات في الوقت الفعلي والتسلسل الهرمي الواضح للمعلومات والأداء المتجاوب.",
-    proj_ux1_title: "أداة الموارد البشرية",
-    proj_ux1_desc: "تطبيق الموارد البشرية (SaaS) مستجيب يركز على الخصوصية ويحسن طلبات الإجازات وإدارة الأدوار من خلال واجهات حديثة وسهلة الاستخدام.",
-
-    sect_jobs: "الخبرات المهنية",
-    job1_title: "مصمم تجربة المستخدم",
-    job1_date: "يناير 2023 - الحالي · 3 سنوات و6 أشهر",
-    job1_company: "أدفانسيس للحلول البرمجية",
-    job1_b1: "قيادة تصميم تجربة وواجهة المستخدم (UX/UI) لمنصات (SaaS) المؤسسية و(B2B) المعقدة، وتقديم حلول تتمحور حول المستخدم.",
-    job1_b2: "تأسيس أنظمة تصميم قابلة للتوسع باستخدام Figma و Adobe Creative Suite والمنهجيات الحديثة.",
-    job1_b3: "الاستفادة من أدوات التصميم المدعومة بالذكاء الاصطناعي لتسريع النماذج الأولية وتلخيص أبحاث تجربة المستخدم.",
-    job2_title: "مصمم تعليمي",
-    job2_date: "يوليو 2018 - يناير 2023 · 4 سنوات و7 أشهر",
-    job2_company: "شنايدر إلكتريك",
-    job2_location: "محافظة القاهرة، مصر",
-    job2_b1: "إعادة تصميم منصات وواجهات التعلم المؤسسية، مما زاد من تفاعل المستخدمين ومعدلات إكمال التدريب بنسبة 30%.",
-    job2_b2: "تحويل المتمتطلبات التقنية المعقدة إلى تجارب تعلم إلكترونية B2B سهلة الوصول وبديهية.",
-    sect_edu: "التعليم",
-    edu1_title: "دبلوم في تقنيات التعليم وتكنولوجيا المعلومات",
-    edu1_date: "سبتمبر 2016 - يونيو 2017",
-    edu1_school: "معهد تكنولوجيا المعلومات (ITI)",
-    edu2_title: "بكالوريوس في الإذاعة والتلفزيون",
-    edu2_date: "سبتمبر 2009 - يونيو 2013",
-    edu2_school: "جامعة المنوفية",
+    skill_ux1: "تصميم التفاعل",
+    skill_ux10: "تصميم المؤسسات ومنتجات SaaS",
+    skill_ux11: "حزمة Adobe الإبداعية",
+    skill_ux12: "أدوات التصميم بالذكاء الاصطناعي",
+    skill_ux2: "بنية المعلومات",
+    skill_ux3: "أبحاث المستخدمين",
+    skill_ux4: "اختبار سهولة الاستخدام",
+    skill_ux5: "التخطيط الهيكلي (Wireframing)",
+    skill_ux6: "بناء النماذج الأولية",
+    skill_ux7: "فيجما (Figma)",
+    skill_ux8: "أنظمة التصميم",
+    skill_ux9: "سهولة الوصول (a11y)",
+    skills_data_header: "تحليل وتصوير البيانات",
+    skills_ux_header: "تصميم تجربة المستخدم",
+    skip_link: "تجاوز إلى المحتوى الرئيسي",
+    title: "مصمم تجربة المستخدم ومصور بيانات",
     toast_copied: "تم النسخ",
     toast_failed: "فشل النسخ",
     tooltip_contrast: "تبديل التباين العالي",
-    tooltip_lang: "تبديل اللغة",
-    tooltip_theme_dark: "التبديل إلى الوضع الداكن",
-    tooltip_theme_light: "التبديل إلى الوضع الفاتح",
-    tooltip_print: "طباعة / حفظ كـ PDF",
+    tooltip_copy_cert: "نسخ رابط الشهادة",
+    tooltip_copy_dribbble: "نسخ رابط دريبل",
     tooltip_copy_email: "نسخ البريد الإلكتروني",
     tooltip_copy_linkedin: "نسخ رابط لينكد إن",
-    tooltip_copy_dribbble: "نسخ رابط دريبل",
     tooltip_copy_project: "نسخ رابط المشروع",
-    tooltip_copy_cert: "نسخ رابط الشهادة"
+    tooltip_lang: "تبديل اللغة",
+    tooltip_print: "طباعة / حفظ كـ PDF",
+    tooltip_theme_dark: "التبديل إلى الوضع الداكن",
+    tooltip_theme_light: "التبديل إلى الوضع الفاتح",
+    ux_tag: "تصميم تجربة المستخدم",
   },
   en: {
-    skip_link: "Skip to main content",
-    name: "Ahmed Mahdy",
-    title: "UX Designer & Data Visualizer",
-    exp_tag: "8+ years experience",
-    ux_tag: "UX Design",
-    data_tag: "Data Visualization",
-    sect_about: "About Me",
-    about_text: "UX Designer & Data Visualizer with 8+ years of experience turning user and business needs into decision-ready dashboards and user-centered digital experiences. Skilled in user research, information architecture, data storytelling, visualization, and accessible interface design with Excel, Power BI, Tableau, SQL, and Python.",
-    sect_certs: "Certifications",
+    about_text:
+      "UX Designer & Data Visualizer with 8+ years of experience turning user and business needs into decision-ready dashboards and user-centered digital experiences. Skilled in user research, information architecture, data storytelling, visualization, and accessible interface design with Excel, Power BI, Tableau, SQL, and Python.",
+    aria_print_resume: "Print the resume or save it as PDF",
+    aria_switch_to_arabic: "Switch to Arabic",
+    aria_switch_to_dark: "Switch to dark mode",
+    aria_switch_to_english: "Switch to English",
+    aria_switch_to_high_contrast: "Switch to high contrast",
+    aria_switch_to_light: "Switch to light mode",
+    aria_switch_to_normal_contrast: "Switch to normal contrast",
     cert1: "Google Data Analytics",
     cert2: "Tableau Business Intelligence Analyst",
     cert3: "Excel Skills for Data Analytics and Visualization",
     cert4: "Excel Skills for Business",
     cert5: "Google UX Design",
+    contact_links_label: "Contact links",
+    data_tag: "Data Visualization",
+    display_settings_label: "Display settings",
+    edu1_date: "Sep 2016 - Jun 2017",
+    edu1_school: "Information Technology Institute (ITI)",
+    edu1_title: "Diploma of Education/Instructional Technology",
+    edu2_date: "Sep 2009 - Jun 2013",
+    edu2_school: "Minufiya University",
+    edu2_title: "Bachelor's degree, Radio and Television",
+    exp_tag: "8+ years experience",
+    external_site_hint: "opens external site",
+    highlights_label: "Highlights",
+    job1_b1: "Led UX/UI design for complex B2B and enterprise SaaS platforms, driving user-centric solutions.",
+    job1_b2: "Established scalable design systems utilizing Figma, Adobe Creative Suite, and modern methodologies.",
+    job1_b3: "Leveraged AI-powered design tools to accelerate rapid prototyping and UX research synthesis.",
+    job1_company: "Advansys IS",
+    job1_date: "Jan 2023 - Present · 3 yrs 6 mos",
+    job1_title: "User Experience Designer",
+    job2_b1: "Redesigned enterprise learning platforms and interfaces, increasing user engagement and training completion rates by 30%.",
+    job2_b2: "Translated complex technical requirements into accessible, intuitive B2B e-learning experiences.",
+    job2_company: "Schneider Electric",
+    job2_date: "Jul 2018 - Jan 2023 · 4 yrs 7 mos",
+    job2_location: "Cairo Governorate, Egypt",
+    job2_title: "Instructional Designer",
+    main_resume_label: "Main resume content",
+    meta_description:
+      "Ahmed Mahdy portfolio resume featuring UX design, data visualization, dashboards, and accessible digital product work.",
+    meta_title: "Ahmed Mahdy | UX Designer & Data Visualizer",
+    name: "Ahmed Mahdy",
+    profile_details_label: "Profile details",
+    proj_data1_desc:
+      "An interactive Tableau visualization experience that helps users explore LEGO sets by theme, age, price, and set count.",
+    proj_data1_title: "A Data-Driven LEGO Explorer",
+    proj_data2_desc:
+      "CRM sales dashboard built in Google Sheets for tracking quarterly team performance through chart-based visualization.",
+    proj_data2_title: "Sales Performance Dashboard",
+    proj_data_header: "Data Analysis & Visualization Projects",
+    proj_ux1_desc:
+      "A responsive, privacy-centric HR SaaS application optimizing leave requests and role management through modern, user-friendly interfaces.",
+    proj_ux1_title: "Human Resources Tool",
+    proj_ux2_desc:
+      "A high-fidelity operational command dashboard focusing on real-time data visualization, clear information hierarchy, and responsive performance.",
+    proj_ux2_title: "Cairo International Airport - Command Hub",
+    proj_ux3_desc:
+      "An intuitive, accessible e-commerce experience designed with responsive layouts and seamless navigation to maximize user conversion and engagement.",
+    proj_ux3_title: "Haj Arafa App",
+    proj_ux_header: "UX Projects",
+    resume_label: "Ahmed Mahdy resume portfolio",
+    sect_about: "About Me",
+    sect_certs: "Certifications",
+    sect_edu: "Education",
+    sect_jobs: "Employment",
+    sect_projects: "Projects",
     sect_skills: "Skills",
-    skills_ux_header: "Core UX & Design",
-    skills_data_header: "Data Analysis & Visualization",
-    skill_ux1: "Interaction Design",
-    skill_ux2: "Information Architecture",
-    skill_ux3: "User Research",
-    skill_ux4: "Usability Testing",
-    skill_ux5: "Wireframing",
-    skill_ux6: "Prototyping",
-    skill_ux7: "Figma",
-    skill_ux8: "Design Systems",
-    skill_ux9: "Accessibility",
     skill_data1: "Microsoft Excel (Advanced)",
     skill_data2: "Power BI",
     skill_data3: "Tableau",
@@ -134,291 +241,380 @@ const translations = {
     skill_data6: "Dashboard Design",
     skill_data7: "Data Storytelling",
     skill_data8: "KPI Analysis",
-    sect_projects: "Projects",
-    proj_data_header: "Data Analysis & Visualization Projects",
-    proj_data1_title: "A Data-Driven LEGO Explorer",
-    proj_data1_desc: "An interactive Tableau visualization experience that helps users explore LEGO sets by theme, age, price, and set count.",
-    proj_data2_title: "Sales Performance Dashboard",
-    proj_data2_desc: "CRM sales dashboard built in Google Sheets for tracking quarterly team performance through chart-based visualization.",
-    proj_ux_header: "UX Projects",
-    proj_ux3_title: "Haj Arafa App",
-    proj_ux3_desc: "An intuitive, accessible e-commerce experience designed with responsive layouts and seamless navigation to maximize user conversion and engagement.",
-    proj_ux2_title: "Cairo International Airport - Command Hub",
-    proj_ux2_desc: "A high-fidelity operational command dashboard focusing on real-time data visualization, clear information hierarchy, and responsive performance.",
-    proj_ux1_title: "Human Resources Tool",
-    proj_ux1_desc: "A responsive, privacy-centric HR SaaS application optimizing leave requests and role management through modern, user-friendly interfaces.",
-
-    sect_jobs: "Employment",
-    job1_title: "User Experience Designer",
-    job1_date: "Jan 2023 - Present · 3 yrs 6 mos",
-    job1_company: "Advansys IS",
-    job1_b1: "Led UX/UI design for complex B2B and enterprise SaaS platforms, driving user-centric solutions.",
-    job1_b2: "Established scalable design systems utilizing Figma, Adobe Creative Suite, and modern methodologies.",
-    job1_b3: "Leveraged AI-powered design tools to accelerate rapid prototyping and UX research synthesis.",
-    job2_title: "Instructional Designer",
-    job2_date: "Jul 2018 - Jan 2023 · 4 yrs 7 mos",
-    job2_company: "Schneider Electric",
-    job2_location: "Cairo Governorate, Egypt",
-    job2_b1: "Redesigned enterprise learning platforms and interfaces, increasing user engagement and training completion rates by 30%.",
-    job2_b2: "Translated complex technical requirements into accessible, intuitive B2B e-learning experiences.",
-    sect_edu: "Education",
-    edu1_title: "Diploma of Education/Instructional Technology",
-    edu1_date: "Sep 2016 - Jun 2017",
-    edu1_school: "Information Technology Institute (ITI)",
-    edu2_title: "Bachelor's degree, Radio and Television",
-    edu2_date: "Sep 2009 - Jun 2013",
-    edu2_school: "Minufiya University",
+    skill_ux1: "Interaction Design",
+    skill_ux10: "Enterprise & SaaS Design",
+    skill_ux11: "Adobe Creative Suite",
+    skill_ux12: "AI Design Tools",
+    skill_ux2: "Information Architecture",
+    skill_ux3: "User Research",
+    skill_ux4: "Usability Testing",
+    skill_ux5: "Wireframing",
+    skill_ux6: "Prototyping",
+    skill_ux7: "Figma",
+    skill_ux8: "Design Systems",
+    skill_ux9: "Accessibility",
+    skills_data_header: "Data Analysis & Visualization",
+    skills_ux_header: "Core UX & Design",
+    skip_link: "Skip to main content",
+    title: "UX Designer & Data Visualizer",
     toast_copied: "Copied",
     toast_failed: "Copy failed",
-    tooltip_contrast: "Toggle High Contrast",
-    tooltip_lang: "Toggle Language",
-    tooltip_theme_dark: "Switch to Dark Mode",
-    tooltip_theme_light: "Switch to Light Mode",
-    tooltip_print: "Print / Save as PDF",
+    tooltip_contrast: "Toggle high contrast",
+    tooltip_copy_cert: "Copy certification link",
+    tooltip_copy_dribbble: "Copy Dribbble link",
     tooltip_copy_email: "Copy email",
     tooltip_copy_linkedin: "Copy LinkedIn link",
-    tooltip_copy_dribbble: "Copy Dribbble link",
     tooltip_copy_project: "Copy project link",
-    tooltip_copy_cert: "Copy certification link"
-  }
+    tooltip_lang: "Toggle language",
+    tooltip_print: "Print / Save as PDF",
+    tooltip_theme_dark: "Switch to dark mode",
+    tooltip_theme_light: "Switch to light mode",
+    ux_tag: "UX Design",
+  },
 };
+
+function getCurrentLanguage() {
+  return root.getAttribute("lang") || "en";
+}
+
+function getTranslation(lang, key, fallback = "") {
+  return translations[lang]?.[key] ?? fallback;
+}
+
+function setUseIcon(button, iconId) {
+  const useNode = button?.querySelector("use");
+  if (useNode) {
+    useNode.setAttribute("href", iconId);
+  }
+}
+
+function updateThemeColor() {
+  if (!metaNodes.themeColor) {
+    return;
+  }
+
+  const isHighContrast = root.dataset.contrast === "high";
+  const isDark = root.dataset.theme === "dark";
+
+  metaNodes.themeColor.setAttribute(
+    "content",
+    isHighContrast ? "#000000" : isDark ? "#3b82f6" : "#005f88",
+  );
+}
+
+function updateMetadata(lang) {
+  const title = getTranslation(lang, "meta_title", document.title);
+  const description = getTranslation(
+    lang,
+    "meta_description",
+    metaNodes.description?.getAttribute("content") || "",
+  );
+
+  document.title = title;
+  metaNodes.description?.setAttribute("content", description);
+  metaNodes.ogTitle?.setAttribute("content", title);
+  metaNodes.ogDescription?.setAttribute("content", description);
+  metaNodes.twitterTitle?.setAttribute("content", title);
+  metaNodes.twitterDescription?.setAttribute("content", description);
+
+  if (metaNodes.personSchema) {
+    metaNodes.personSchema.textContent = JSON.stringify(
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        name: "Ahmed Mahdy",
+        jobTitle: getTranslation(lang, "title", "UX Designer & Data Visualizer"),
+        email: siteMeta.email,
+        url: siteMeta.url,
+        image: siteMeta.image,
+        sameAs: siteMeta.sameAs,
+        knowsAbout: siteMeta.knowsAbout,
+      },
+      null,
+      2,
+    );
+  }
+}
+
+function updateTranslatedText(lang) {
+  document.querySelectorAll("[data-translate]").forEach((node) => {
+    const key = node.dataset.translate;
+    const value = getTranslation(lang, key);
+
+    if (value) {
+      node.textContent = value;
+    }
+  });
+}
+
+function updateTranslatedAttributes(lang) {
+  document.querySelectorAll("[data-translate-attr]").forEach((node) => {
+    const attrName = node.dataset.translateAttr;
+    const key = node.dataset.translateAttrKey;
+    const value = getTranslation(lang, key);
+
+    if (attrName && key && value) {
+      node.setAttribute(attrName, value);
+    }
+  });
+}
+
+function updateExternalLinks(lang) {
+  const hint = getTranslation(lang, "external_site_hint");
+
+  document.querySelectorAll('a[target="_blank"]').forEach((link) => {
+    const label = link.textContent.trim();
+    link.setAttribute("aria-label", `${label} (${hint})`);
+    link.setAttribute("title", hint);
+  });
+}
+
+function updateCopyButtons(lang) {
+  document.querySelectorAll("[data-copy]").forEach((button) => {
+    const key = button.dataset.tooltipKey;
+    const label = getTranslation(lang, key, button.getAttribute("aria-label") || "");
+
+    if (label) {
+      button.setAttribute("aria-label", label);
+      button.setAttribute("data-tooltip", label);
+    }
+  });
+}
+
+function updateLanguageButton(lang) {
+  const nextLanguageLabel =
+    lang === "ar"
+      ? getTranslation(lang, "aria_switch_to_english")
+      : getTranslation(lang, "aria_switch_to_arabic");
+
+  controls.langToggle?.setAttribute("aria-label", nextLanguageLabel);
+  controls.langToggle?.setAttribute("data-tooltip", getTranslation(lang, "tooltip_lang"));
+}
+
+function updateThemeButton(lang) {
+  const isDark = root.dataset.theme === "dark";
+  const ariaLabel = isDark
+    ? getTranslation(lang, "aria_switch_to_light")
+    : getTranslation(lang, "aria_switch_to_dark");
+  const tooltip = isDark
+    ? getTranslation(lang, "tooltip_theme_light")
+    : getTranslation(lang, "tooltip_theme_dark");
+
+  controls.themeToggle?.setAttribute("aria-label", ariaLabel);
+  controls.themeToggle?.setAttribute("aria-pressed", String(isDark));
+  controls.themeToggle?.setAttribute("data-tooltip", tooltip);
+  setUseIcon(controls.themeToggle, isDark ? "#icon-sun" : "#icon-moon");
+}
+
+function updateContrastButton(lang) {
+  const isHigh = root.dataset.contrast === "high";
+  const ariaLabel = isHigh
+    ? getTranslation(lang, "aria_switch_to_normal_contrast")
+    : getTranslation(lang, "aria_switch_to_high_contrast");
+
+  controls.contrastToggle?.setAttribute("aria-label", ariaLabel);
+  controls.contrastToggle?.setAttribute("aria-pressed", String(isHigh));
+  controls.contrastToggle?.setAttribute("data-tooltip", getTranslation(lang, "tooltip_contrast"));
+  controls.contrastToggle?.classList.toggle("active", isHigh);
+}
+
+function updatePrintButton(lang) {
+  controls.printButton?.setAttribute("aria-label", getTranslation(lang, "aria_print_resume"));
+  controls.printButton?.setAttribute("data-tooltip", getTranslation(lang, "tooltip_print"));
+}
+
+function refreshUi(lang) {
+  updateTranslatedText(lang);
+  updateTranslatedAttributes(lang);
+  updateMetadata(lang);
+  updateExternalLinks(lang);
+  updateCopyButtons(lang);
+  updateLanguageButton(lang);
+  updateThemeButton(lang);
+  updateContrastButton(lang);
+  updatePrintButton(lang);
+}
 
 function setTheme(theme) {
   root.dataset.theme = theme;
-  localStorage.setItem("resume-theme", theme);
-  const isDark = theme === "dark";
-  themeToggle.setAttribute("aria-label", isDark ? "Switch to light mode" : "Switch to dark mode");
-  themeToggle.querySelector("span").innerHTML = isDark
-    ? '<svg aria-hidden="true"><use href="#icon-sun"></use></svg>'
-    : '<svg aria-hidden="true"><use href="#icon-moon"></use></svg>';
-
-  // Update theme toggle tooltip based on current language
-  const currentLang = root.getAttribute("lang") || "en";
-  themeToggle.setAttribute("data-tooltip", isDark ? translations[currentLang].tooltip_theme_light : translations[currentLang].tooltip_theme_dark);
+  localStorage.setItem(storageKeys.theme, theme);
+  updateThemeColor();
+  updateThemeButton(getCurrentLanguage());
 }
 
 function setContrast(contrast) {
   root.dataset.contrast = contrast;
-  localStorage.setItem("resume-contrast", contrast);
-  const isHigh = contrast === "high";
-  contrastToggle.setAttribute("aria-label", isHigh ? "Switch to normal contrast" : "Switch to high contrast");
-  contrastToggle.classList.toggle("active", isHigh);
+  localStorage.setItem(storageKeys.contrast, contrast);
+  updateThemeColor();
+  updateContrastButton(getCurrentLanguage());
 }
 
 function setLanguage(lang) {
   root.setAttribute("lang", lang);
   root.setAttribute("dir", lang === "ar" ? "rtl" : "ltr");
-  localStorage.setItem("resume-lang", lang);
-  langToggle.setAttribute("aria-label", lang === "ar" ? "Switch to English" : "Switch to Arabic");
-
-  // Update tooltips for controls
-  const isDark = root.dataset.theme === "dark";
-  contrastToggle.setAttribute("data-tooltip", translations[lang].tooltip_contrast);
-  langToggle.setAttribute("data-tooltip", translations[lang].tooltip_lang);
-  themeToggle.setAttribute("data-tooltip", isDark ? translations[lang].tooltip_theme_light : translations[lang].tooltip_theme_dark);
-  printButton.setAttribute("data-tooltip", translations[lang].tooltip_print);
-
-  // Translate all tagged nodes
-  document.querySelectorAll("[data-translate]").forEach((node) => {
-    const key = node.dataset.translate;
-    if (translations[lang] && translations[lang][key]) {
-      node.textContent = translations[lang][key];
-    }
-  });
-
-  // Update tooltips and aria-labels for copy buttons
-  document.querySelectorAll("[data-copy]").forEach((button) => {
-    const key = button.dataset.tooltipKey;
-    if (key && translations[lang] && translations[lang][key]) {
-      const label = translations[lang][key];
-      button.setAttribute("aria-label", label);
-      button.setAttribute("data-tooltip", label);
-    }
-  });
-
-  // Re-run standard labels on external links that depend on text content
-  document.querySelectorAll('a[target="_blank"]').forEach((link) => {
-    const label = link.textContent.replace(" (opens external site)", "").replace(" (يفتح في موقع خارجي)", "").trim();
-    if (lang === "ar") {
-      link.setAttribute("aria-label", `${label} (يفتح في موقع خارجي)`);
-      link.setAttribute("title", "يفتح في موقع خارجي");
-    } else {
-      link.setAttribute("aria-label", `${label} (opens external site)`);
-      link.setAttribute("title", "Opens external site");
-    }
-  });
+  localStorage.setItem(storageKeys.lang, lang);
+  refreshUi(lang);
 }
 
 async function copyText(value) {
   if (navigator.clipboard && window.isSecureContext) {
-    try {
-      await navigator.clipboard.writeText(value);
-      return;
-    } catch (err) {
-      // Fall through to legacy method if API fails
-    }
+    await navigator.clipboard.writeText(value);
+    return;
   }
 
-  // Fallback method for non-secure contexts (e.g. HTTP) or unsupported browsers
   const textarea = document.createElement("textarea");
+  const selection = window.getSelection();
+  const activeElement = document.activeElement;
+  const originalRange = selection && selection.rangeCount > 0
+    ? selection.getRangeAt(0)
+    : null;
+
   textarea.value = value;
-  textarea.setAttribute("readonly", ""); // Prevent keyboard popup on mobile
-  
-  // Style to position off-screen instead of using zero-opacity or display:none
+  textarea.setAttribute("readonly", "");
   textarea.style.position = "fixed";
   textarea.style.left = "-9999px";
   textarea.style.top = "0";
-  
+
   document.body.appendChild(textarea);
-  
-  // Save current active element and selection
-  const activeElement = document.activeElement;
-  const selection = window.getSelection();
-  const originalRange = selection.rangeCount > 0 ? selection.getRangeAt(0) : null;
-  
   textarea.focus({ preventScroll: true });
   textarea.select();
-  textarea.setSelectionRange(0, 99999); // Force selection on mobile/iOS
-  
-  let successful = false;
+  textarea.setSelectionRange(0, textarea.value.length);
+
+  let copied = false;
+
   try {
-    successful = document.execCommand("copy");
-  } catch (err) {
-    console.error("Clipboard fallback error:", err);
+    copied = document.execCommand("copy");
   } finally {
     document.body.removeChild(textarea);
-    
-    // Restore original focus and selection
-    if (activeElement && typeof activeElement.focus === "function") {
+
+    if (activeElement instanceof HTMLElement) {
       activeElement.focus();
     }
-    if (originalRange) {
+
+    if (selection) {
       selection.removeAllRanges();
-      selection.addRange(originalRange);
-    } else {
-      selection.removeAllRanges();
+      if (originalRange) {
+        selection.addRange(originalRange);
+      }
     }
   }
 
-  if (!successful) {
+  if (!copied) {
     throw new Error("copy command unsuccessful");
   }
 }
 
 function showToast(message) {
   window.clearTimeout(toastTimer);
-  toast.textContent = message;
-  toast.classList.add("is-visible");
+  copyToast.textContent = message;
+  copyToast.classList.add("is-visible");
   toastTimer = window.setTimeout(() => {
-    toast.classList.remove("is-visible");
+    copyToast.classList.remove("is-visible");
   }, 1800);
 }
 
-function makeCopyButton(value, label, key) {
+function createCopyButton(value, label, key) {
   const button = document.createElement("button");
+  const iconWrapper = document.createElement("span");
+  const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  const use = document.createElementNS("http://www.w3.org/2000/svg", "use");
+
   button.className = "copy-button";
   button.type = "button";
   button.dataset.copy = value;
-  if (key) {
-    button.dataset.tooltipKey = key;
-  }
+  button.dataset.tooltipKey = key;
   button.setAttribute("aria-label", label);
   button.setAttribute("data-tooltip", label);
-  button.innerHTML = '<span aria-hidden="true"><svg><use href="#icon-copy"></use></svg></span>';
+
+  iconWrapper.setAttribute("aria-hidden", "true");
+  use.setAttribute("href", "#icon-copy");
+  svg.appendChild(use);
+  iconWrapper.appendChild(svg);
+  button.appendChild(iconWrapper);
+
   return button;
 }
 
-// Dynamic Button setups
-document.querySelectorAll(".compact-list a, .featured h4 a").forEach((link) => {
-  const isCert = link.closest(".compact-list") !== null;
-  const key = isCert ? "tooltip_copy_cert" : "tooltip_copy_project";
-  const defaultLabel = isCert ? translations.en.tooltip_copy_cert : translations.en.tooltip_copy_project;
-  const copyButton = makeCopyButton(link.href, defaultLabel, key);
-  const container = link.closest("li, article");
-  container.appendChild(copyButton);
-  container.addEventListener("click", (event) => {
-    if (event.target.closest("button") || event.target.closest("a")) return;
-    link.click();
+function enhanceLinkedCards() {
+  document.querySelectorAll(".compact-list a, .featured h4 a").forEach((link) => {
+    const container = link.closest("li, article");
+
+    if (!container || container.querySelector(".copy-button")) {
+      return;
+    }
+
+    const isCertification = link.closest(".compact-list") !== null;
+    const tooltipKey = isCertification ? "tooltip_copy_cert" : "tooltip_copy_project";
+    const label = getTranslation("en", tooltipKey);
+    const copyButton = createCopyButton(link.href, label, tooltipKey);
+
+    container.appendChild(copyButton);
+    container.addEventListener("click", (event) => {
+      if (event.target.closest("a, button")) {
+        return;
+      }
+
+      link.click();
+    });
   });
-});
+}
 
-// Initial Setups
-setTheme(savedTheme || (prefersDark ? "dark" : "light"));
-setContrast(savedContrast);
-setLanguage(savedLang);
+function bindCopyButtons() {
+  document.querySelectorAll("[data-copy]").forEach((button) => {
+    if (button.dataset.copyBound === "true") {
+      return;
+    }
 
-// Event Listeners
-themeToggle.addEventListener("click", () => {
-  setTheme(root.dataset.theme === "dark" ? "light" : "dark");
-});
+    button.dataset.copyBound = "true";
+    button.addEventListener("click", async (event) => {
+      event.stopPropagation();
 
-contrastToggle.addEventListener("click", () => {
-  setContrast(root.dataset.contrast === "high" ? "normal" : "high");
-});
+      const lang = getCurrentLanguage();
 
-langToggle.addEventListener("click", () => {
-  setLanguage(root.getAttribute("lang") === "ar" ? "en" : "ar");
-});
+      try {
+        await copyText(button.dataset.copy);
+        showToast(getTranslation(lang, "toast_copied"));
 
-printButton.addEventListener("click", () => {
-  window.print();
-});
-
-document.querySelectorAll("[data-copy]").forEach((button) => {
-  button.addEventListener("click", async (event) => {
-    event.stopPropagation();
-    const currentLang = root.getAttribute("lang") || "en";
-    try {
-      await copyText(button.dataset.copy);
-      showToast(translations[currentLang].toast_copied);
-      
-      const useTag = button.querySelector("use");
-      if (useTag) {
-        useTag.setAttribute("href", "#icon-check");
+        setUseIcon(button, "#icon-check");
         button.classList.add("copied");
-        setTimeout(() => {
-          useTag.setAttribute("href", "#icon-copy");
+
+        window.setTimeout(() => {
+          setUseIcon(button, "#icon-copy");
           button.classList.remove("copied");
         }, 1500);
+      } catch {
+        showToast(getTranslation(lang, "toast_failed"));
       }
-    } catch {
-      showToast(translations[currentLang].toast_failed);
-    }
+    });
   });
-});
+}
 
-// ── Print: populate dynamic content for page media header and footer ──────────
-window.addEventListener("beforeprint", () => {
-  const nameEl = document.querySelector('h1[data-translate="name"]') || document.querySelector('h1');
-  const titleEl = document.querySelector('p[data-translate="title"]') || document.querySelector('.identity-copy p');
-  
-  const nameStr = nameEl ? nameEl.textContent.trim() : "Ahmed Mahdy";
-  const titleStr = titleEl ? titleEl.textContent.trim() : "UX Designer & Data Visualizer";
-  
-  const now = new Date();
-  const dateStr = now.toLocaleDateString("en-US", {
-    month: "numeric",
+function updatePrintStyles() {
+  const lang = getCurrentLanguage();
+  const isRtl = root.getAttribute("dir") === "rtl";
+  const nameText =
+    document.querySelector('h1[data-translate="name"]')?.textContent?.trim() || "Ahmed Mahdy";
+  const titleText =
+    document.querySelector('p[data-translate="title"]')?.textContent?.trim() ||
+    "UX Designer & Data Visualizer";
+  const dateText = new Date().toLocaleDateString(lang === "ar" ? "ar-EG" : "en-US", {
+    year: "numeric",
+    month: "short",
     day: "numeric",
-    year: "2-digit",
   });
-  
-  const currentLang = document.documentElement.getAttribute("lang") || "en";
-  const isRtl = document.documentElement.getAttribute("dir") === "rtl" || currentLang === "ar";
-  
-  const pageText = currentLang === "ar" ? "صفحة" : "Page";
-  const ofText = currentLang === "ar" ? "من" : "of";
-  
+  const pageText = lang === "ar" ? "صفحة" : "Page";
+  const ofText = lang === "ar" ? "من" : "of";
+  const leftContent = isRtl ? `"${nameText} | ${titleText}"` : `"${dateText}"`;
+  const rightContent = isRtl ? `"${dateText}"` : `"${nameText} | ${titleText}"`;
+
   let dynamicStyle = document.getElementById("print-dynamic-style");
+
   if (!dynamicStyle) {
     dynamicStyle = document.createElement("style");
     dynamicStyle.id = "print-dynamic-style";
     document.head.appendChild(dynamicStyle);
   }
-  
-  // Mirror header in RTL mode
-  const leftContent = isRtl ? `"${nameStr} | ${titleStr}"` : `"${dateStr}"`;
-  const rightContent = isRtl ? `"${dateStr}"` : `"${nameStr} | ${titleStr}"`;
-  
+
   dynamicStyle.textContent = `
     @media print {
       @page {
@@ -434,22 +630,49 @@ window.addEventListener("beforeprint", () => {
       }
     }
   `;
+}
+
+function initialize() {
+  const contactList = document.querySelector(".contact-list");
+
+  if (contactList) {
+    contactList.setAttribute("lang", "en");
+  }
+
+  enhanceLinkedCards();
+  bindCopyButtons();
+
+  setTheme(savedTheme || (prefersDark ? "dark" : "light"));
+  setContrast(savedContrast);
+  setLanguage(savedLang);
+}
+
+controls.themeToggle?.addEventListener("click", () => {
+  setTheme(root.dataset.theme === "dark" ? "light" : "dark");
 });
 
-// AAA 1.4.13: Dismiss tooltips with Escape key
+controls.contrastToggle?.addEventListener("click", () => {
+  setContrast(root.dataset.contrast === "high" ? "normal" : "high");
+});
+
+controls.langToggle?.addEventListener("click", () => {
+  setLanguage(getCurrentLanguage() === "ar" ? "en" : "ar");
+});
+
+controls.printButton?.addEventListener("click", () => {
+  window.print();
+});
+
+window.addEventListener("beforeprint", updatePrintStyles);
+
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape") {
-    // Blur any focused tooltip-triggering element
     const focused = document.activeElement;
-    if (focused && focused.hasAttribute("data-tooltip")) {
+
+    if (focused instanceof HTMLElement && focused.hasAttribute("data-tooltip")) {
       focused.blur();
     }
   }
 });
 
-// AAA 3.1.2: Mark English-content elements with lang="en" in Arabic mode
-// Contact list always shows English URLs
-const contactList = document.querySelector(".contact-list");
-if (contactList) contactList.setAttribute("lang", "en");
-
-
+initialize();

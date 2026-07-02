@@ -1,23 +1,28 @@
 <!doctype html>
-<html lang="en" data-theme="light">
+<html lang="en" dir="ltr" data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
+      id="meta-description"
       name="description"
       content="Ahmed Mahdy, UX Designer and Data Visualizer portfolio resume."
     />
+    <meta name="theme-color" content="#005f88" />
+    <link rel="canonical" href="https://creativemahdy.space/" />
     <title>Ahmed Mahdy | UX Designer & Data Visualizer</title>
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Ahmed Mahdy | UX Designer & Data Visualizer" />
-    <meta property="og:description" content="Ahmed Mahdy, UX Designer and Data Visualizer portfolio resume." />
-    <meta property="og:image" content="ahmed-mahdy.png" />
+    <meta id="og-title" property="og:title" content="Ahmed Mahdy | UX Designer & Data Visualizer" />
+    <meta id="og-description" property="og:description" content="Ahmed Mahdy, UX Designer and Data Visualizer portfolio resume." />
+    <meta property="og:url" content="https://creativemahdy.space/" />
+    <meta property="og:site_name" content="Ahmed Mahdy Portfolio Resume" />
+    <meta property="og:image" content="https://creativemahdy.space/assets/ahmed-mahdy.png" />
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:title" content="Ahmed Mahdy | UX Designer & Data Visualizer" />
-    <meta property="twitter:description" content="Ahmed Mahdy, UX Designer and Data Visualizer portfolio resume." />
-    <meta property="twitter:image" content="ahmed-mahdy.png" />
+    <meta id="twitter-title" property="twitter:title" content="Ahmed Mahdy | UX Designer & Data Visualizer" />
+    <meta id="twitter-description" property="twitter:description" content="Ahmed Mahdy, UX Designer and Data Visualizer portfolio resume." />
+    <meta property="twitter:image" content="https://creativemahdy.space/assets/ahmed-mahdy.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -26,14 +31,15 @@
     />
     <link rel="stylesheet" href="styles.css" />
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
-    <script type="application/ld+json">
+    <script id="person-schema" type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "Person",
         "name": "Ahmed Mahdy",
         "jobTitle": "UX Designer & Data Visualizer",
         "email": "mailto:amahdy59@gmail.com",
-        "url": "https://www.linkedin.com/in/creativemahdy",
+        "url": "https://creativemahdy.space/",
+        "image": "https://creativemahdy.space/assets/ahmed-mahdy.png",
         "sameAs": [
           "https://www.linkedin.com/in/creativemahdy",
           "https://dribbble.com/creativemahdy"
@@ -158,22 +164,49 @@
       </symbol>
     </svg>
     <div class="ambient-particles" aria-hidden="true"></div>
-    <main class="resume-shell" id="main-content" aria-label="Ahmed Mahdy resume portfolio">
+    <main
+      class="resume-shell"
+      id="main-content"
+      aria-label="Ahmed Mahdy resume portfolio"
+      data-translate-attr="aria-label"
+      data-translate-attr-key="resume_label"
+    >
       <section class="resume-card">
         <header class="hero">
           <div class="identity">
-            <img class="avatar" src="assets/ahmed-mahdy.webp" alt="Ahmed Mahdy" />
+            <img
+              class="avatar"
+              src="assets/ahmed-mahdy.webp"
+              alt="Ahmed Mahdy"
+              width="128"
+              height="128"
+              loading="eager"
+              decoding="async"
+              fetchpriority="high"
+            />
             <div class="identity-copy">
               <h1 data-translate="name">Ahmed Mahdy</h1>
               <p data-translate="title">UX Designer & Data Visualizer</p>
-              <div class="tags" aria-label="Highlights">
+              <div
+                class="tags"
+                aria-label="Highlights"
+                data-translate-attr="aria-label"
+                data-translate-attr-key="highlights_label"
+              >
+                <span data-translate="exp_tag">8+ years experience</span>
                 <span data-translate="ux_tag">UX Design</span>
                 <span data-translate="data_tag">Data Visualization</span>
               </div>
             </div>
           </div>
           <div class="hero-controls-wrapper">
-            <div class="controls-group" role="toolbar" aria-label="Display settings">
+            <div
+              class="controls-group"
+              role="toolbar"
+              aria-label="Display settings"
+              data-translate-attr="aria-label"
+              data-translate-attr-key="display_settings_label"
+            >
               <button class="lang-toggle" type="button" data-tooltip="Switch Language" aria-label="Switch to Arabic">
                 <span aria-hidden="true"><svg><use href="#icon-globe"></use></svg></span>
               </button>
@@ -187,7 +220,12 @@
                 <span aria-hidden="true"><svg><use href="#icon-print"></use></svg></span>
               </button>
             </div>
-            <ul class="contact-list" aria-label="Contact links">
+            <ul
+              class="contact-list"
+              aria-label="Contact links"
+              data-translate-attr="aria-label"
+              data-translate-attr-key="contact_links_label"
+            >
               <li>
                 <span class="contact-icon" aria-hidden="true"><svg><use href="#icon-mail"></use></svg></span>
                 <a href="mailto:amahdy59@gmail.com">amahdy59@gmail.com</a>
@@ -197,14 +235,14 @@
               </li>
               <li>
                 <span class="contact-icon" aria-hidden="true"><svg><use href="#icon-linkedin"></use></svg></span>
-                <a href="https://www.linkedin.com/in/creativemahdy" target="_blank" rel="noreferrer">linkedin.com/in/creativemahdy</a>
+                <a href="https://www.linkedin.com/in/creativemahdy" target="_blank" rel="noopener noreferrer">linkedin.com/in/creativemahdy</a>
                 <button class="copy-button" type="button" data-copy="https://www.linkedin.com/in/creativemahdy" aria-label="Copy LinkedIn profile link" data-tooltip="Copy LinkedIn profile link" data-tooltip-key="tooltip_copy_linkedin">
                   <span aria-hidden="true"><svg><use href="#icon-copy"></use></svg></span>
                 </button>
               </li>
               <li>
                 <span class="contact-icon" aria-hidden="true"><svg><use href="#icon-dribbble"></use></svg></span>
-                <a href="https://dribbble.com/creativemahdy" target="_blank" rel="noreferrer">dribbble.com/creativemahdy</a>
+                <a href="https://dribbble.com/creativemahdy" target="_blank" rel="noopener noreferrer">dribbble.com/creativemahdy</a>
                 <button class="copy-button" type="button" data-copy="https://dribbble.com/creativemahdy" aria-label="Copy Dribbble profile link" data-tooltip="Copy Dribbble profile link" data-tooltip-key="tooltip_copy_dribbble">
                   <span aria-hidden="true"><svg><use href="#icon-copy"></use></svg></span>
                 </button>
@@ -214,8 +252,13 @@
         </header>
 
         <div class="content-grid">
-          <aside class="sidebar" aria-label="Profile details">
-            <section class="panel panel-secondary">
+          <aside
+            class="sidebar"
+            aria-label="Profile details"
+            data-translate-attr="aria-label"
+            data-translate-attr-key="profile_details_label"
+          >
+            <section class="panel panel-secondary about-panel">
               <h2><span class="panel-icon-box" aria-hidden="true"><svg><use href="#icon-user"></use></svg></span><span data-translate="sect_about">About Me</span></h2>
               <p data-translate="about_text">
                 UX Designer & Data Visualizer with 8+ years of experience turning user and
@@ -226,14 +269,14 @@
               </p>
             </section>
 
-            <section class="panel panel-secondary">
+            <section class="panel panel-secondary certifications-panel">
               <h2><span class="panel-icon-box" aria-hidden="true"><svg><use href="#icon-award"></use></svg></span><span data-translate="sect_certs">Certifications</span></h2>
               <ul class="compact-list">
-                <li><a href="https://www.coursera.org/account/accomplishments/professional-cert/0OYUGNC1DRF5" target="_blank" rel="noreferrer"><span data-translate="cert1">Google Data Analytics</span></a></li>
-                <li><a href="https://www.coursera.org/account/accomplishments/professional-cert/JQPVYZ6VYF52" target="_blank" rel="noreferrer"><span data-translate="cert2">Tableau Business Intelligence Analyst</span></a></li>
-                <li><a href="https://www.coursera.org/account/accomplishments/specialization/5XR5AHBP79KW" target="_blank" rel="noreferrer"><span data-translate="cert3">Excel Skills for Data Analytics and Visualization</span></a></li>
-                <li><a href="https://www.coursera.org/account/accomplishments/specialization/DCL8H4YT5UWG" target="_blank" rel="noreferrer"><span data-translate="cert4">Excel Skills for Business</span></a></li>
-                <li><a href="https://www.coursera.org/account/accomplishments/professional-cert/49PCMPYYGLJV" target="_blank" rel="noreferrer"><span data-translate="cert5">Google UX Design</span></a></li>
+                <li><a href="https://www.coursera.org/account/accomplishments/professional-cert/0OYUGNC1DRF5" target="_blank" rel="noopener noreferrer"><span data-translate="cert1">Google Data Analytics</span></a></li>
+                <li><a href="https://www.coursera.org/account/accomplishments/professional-cert/JQPVYZ6VYF52" target="_blank" rel="noopener noreferrer"><span data-translate="cert2">Tableau Business Intelligence Analyst</span></a></li>
+                <li><a href="https://www.coursera.org/account/accomplishments/specialization/5XR5AHBP79KW" target="_blank" rel="noopener noreferrer"><span data-translate="cert3">Excel Skills for Data Analytics and Visualization</span></a></li>
+                <li><a href="https://www.coursera.org/account/accomplishments/specialization/DCL8H4YT5UWG" target="_blank" rel="noopener noreferrer"><span data-translate="cert4">Excel Skills for Business</span></a></li>
+                <li><a href="https://www.coursera.org/account/accomplishments/professional-cert/49PCMPYYGLJV" target="_blank" rel="noopener noreferrer"><span data-translate="cert5">Google UX Design</span></a></li>
               </ul>
             </section>
 
@@ -272,25 +315,30 @@
             </section>
           </aside>
 
-          <section class="main-column" aria-label="Main resume content">
-            <section class="panel panel-primary featured">
+          <section
+            class="main-column"
+            aria-label="Main resume content"
+            data-translate-attr="aria-label"
+            data-translate-attr-key="main_resume_label"
+          >
+            <section class="panel panel-primary featured projects-panel">
               <h2><span class="panel-icon-box" aria-hidden="true"><svg><use href="#icon-folder"></use></svg></span><span data-translate="sect_projects">Projects</span></h2>
               <div class="project-group">
                 <h3 data-translate="proj_ux_header">UX Projects</h3>
                 <article>
-                  <h4><a href="https://amahdy59.github.io/Hajarafaapp/" target="_blank" rel="noreferrer"><span data-translate="proj_ux3_title">Haj Arafa App</span></a></h4>
+                  <h4><a href="https://amahdy59.github.io/Hajarafaapp/" target="_blank" rel="noopener noreferrer"><span data-translate="proj_ux3_title">Haj Arafa App</span></a></h4>
                   <p data-translate="proj_ux3_desc">
                     An intuitive, accessible e-commerce experience designed with responsive layouts and seamless navigation to maximize user conversion and engagement.
                   </p>
                 </article>
                 <article>
-                  <h4><a href="https://amahdy59.github.io/Cairo-International-Airpot-CIA-Dashboard/" target="_blank" rel="noreferrer"><span data-translate="proj_ux2_title">Cairo International Airport - Command Hub</span></a></h4>
+                  <h4><a href="https://amahdy59.github.io/Cairo-International-Airpot-CIA-Dashboard/" target="_blank" rel="noopener noreferrer"><span data-translate="proj_ux2_title">Cairo International Airport - Command Hub</span></a></h4>
                   <p data-translate="proj_ux2_desc">
                     A high-fidelity operational command dashboard focusing on real-time data visualization, clear information hierarchy, and responsive performance.
                   </p>
                 </article>
                 <article>
-                  <h4><a href="https://amahdy59.github.io/hr-tool-v2/" target="_blank" rel="noreferrer"><span data-translate="proj_ux1_title">Human Resources Tool</span></a></h4>
+                  <h4><a href="https://amahdy59.github.io/hr-tool-v2/" target="_blank" rel="noopener noreferrer"><span data-translate="proj_ux1_title">Human Resources Tool</span></a></h4>
                   <p data-translate="proj_ux1_desc">
                     A responsive, privacy-centric HR SaaS application optimizing leave requests and role management through modern, user-friendly interfaces.
                   </p>
@@ -299,13 +347,13 @@
               <div class="project-group">
                 <h3 data-translate="proj_data_header">Data Analysis & Visualization Projects</h3>
                 <article>
-                  <h4><a href="https://mavenshowcase.com/project/24967" target="_blank" rel="noreferrer"><span data-translate="proj_data1_title">A Data-Driven LEGO Explorer</span></a></h4>
+                  <h4><a href="https://mavenshowcase.com/project/24967" target="_blank" rel="noopener noreferrer"><span data-translate="proj_data1_title">A Data-Driven LEGO Explorer</span></a></h4>
                   <p data-translate="proj_data1_desc">
                     An interactive Tableau visualization experience that helps users explore LEGO sets by theme, age, price, and set count.
                   </p>
                 </article>
                 <article>
-                  <h4><a href="https://mavenshowcase.com/project/26891" target="_blank" rel="noreferrer"><span data-translate="proj_data2_title">Sales Performance Dashboard</span></a></h4>
+                  <h4><a href="https://mavenshowcase.com/project/26891" target="_blank" rel="noopener noreferrer"><span data-translate="proj_data2_title">Sales Performance Dashboard</span></a></h4>
                   <p data-translate="proj_data2_desc">
                     CRM sales dashboard built in Google Sheets for tracking quarterly team performance through chart-based visualization.
                   </p>
@@ -313,7 +361,7 @@
               </div>
             </section>
 
-            <section class="panel panel-primary timeline-panel">
+            <section class="panel panel-primary timeline-panel employment-panel">
               <h2><span class="panel-icon-box" aria-hidden="true"><svg><use href="#icon-briefcase"></use></svg></span><span data-translate="sect_jobs">Employment</span></h2>
               <div class="timeline">
                 <div class="li-experience-group">
@@ -364,7 +412,7 @@
               </div>
             </section>
 
-            <section class="panel panel-secondary timeline-panel">
+            <section class="panel panel-secondary timeline-panel education-panel">
               <h2><span class="panel-icon-box" aria-hidden="true"><svg><use href="#icon-education"></use></svg></span><span data-translate="sect_edu">Education</span></h2>
               <div class="timeline education">
                 <div class="li-experience-group">
