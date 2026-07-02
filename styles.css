@@ -1369,37 +1369,35 @@ h1 {
 }
 
 @media screen and (min-width: 561px) and (max-width: 960px) {
-  /* ── Tablet Hero: compact two-row layout, no wasted space ── */
+  /* ── Tablet Hero: avatar top-right, identity left, contact+controls grid ── */
   .hero {
     flex-direction: column;
     align-items: stretch;
     gap: 14px;
-    padding: 20px 20px 18px;
+    padding: 20px;
     position: relative;
     min-height: auto;
   }
 
-  /* Row 1: avatar + text side-by-side, controls pinned top-right */
+  /* Identity: name/subtitle/tags flush left, leaves room for avatar */
   .identity {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 16px;
-    padding-inline-end: 148px;
+    display: block;
   }
 
+  /* Avatar: absolute top-right corner */
   .avatar {
-    flex: 0 0 auto;
-    position: static;
-    width: 80px;
-    height: 80px;
+    display: block;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 88px;
+    height: 88px;
     border-width: 3px;
   }
 
+  /* Text column leaves space for the avatar */
   .identity-copy {
-    flex: 1 1 auto;
-    min-width: 0;
-    max-width: none;
+    max-width: calc(100% - 116px);
   }
 
   .identity-copy > p {
@@ -1410,37 +1408,49 @@ h1 {
     max-width: 100%;
   }
 
-  /* Controls: absolute top-right, horizontal row */
-  .controls-group {
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    flex-direction: row;
-    gap: 4px;
-    z-index: 20;
-  }
-
-  /* Row 2: contact list, full width */
+  /* Row 2: two-column grid — contact list (wide) | controls (stacked vertically) */
   .hero-controls-wrapper {
-    display: block;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 0 12px;
     width: 100%;
     padding-top: 0;
   }
 
+  /* Controls column: stacked vertically, aligned center-right */
+  .controls-group {
+    grid-column: 2;
+    grid-row: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
+  }
+
+  /* Contact list: takes remaining width */
   .contact-list {
+    grid-column: 1;
+    grid-row: 1;
     width: 100%;
     max-width: none;
   }
 
   /* RTL mirroring */
-  [dir="rtl"] .identity {
-    padding-inline-end: 148px;
-    padding-inline-start: 0;
+  [dir="rtl"] .avatar {
+    right: auto;
+    left: 20px;
+  }
+
+  [dir="rtl"] .identity-copy {
+    max-width: calc(100% - 116px);
   }
 
   [dir="rtl"] .controls-group {
-    right: auto;
-    left: 16px;
+    grid-column: 1;
+  }
+
+  [dir="rtl"] .contact-list {
+    grid-column: 2;
   }
 }
 
