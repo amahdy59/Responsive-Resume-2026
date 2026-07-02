@@ -29,7 +29,7 @@ const metaNodes = {
 
 const themeIconUse = controls.themeToggle?.querySelector("use");
 const copyToast = document.querySelector(".copy-toast") || document.createElement("div");
-let toastTimer;
+let toastTimer = 0;
 
 copyToast.setAttribute("role", "status");
 copyToast.setAttribute("aria-live", "polite");
@@ -123,6 +123,7 @@ const translations = {
       "تجربة تجارة إلكترونية بديهية وسهلة الوصول، مصممة بتخطيطات متجاوبة وتنقل سلس لزيادة تفاعل المستخدمين والتحويلات.",
     proj_ux3_title: "تطبيق حاج عرفة",
     proj_ux_header: "مشاريع تجربة المستخدم",
+    resume_card_label: "نظرة عامة على السيرة الذاتية",
     resume_label: "موقع السيرة الذاتية لأحمد مهدي",
     sect_about: "نبذة عني",
     sect_certs: "الشهادات المهنية",
@@ -152,6 +153,7 @@ const translations = {
     skill_ux9: "سهولة الوصول (a11y)",
     skills_data_header: "تحليل وتصوير البيانات",
     skills_ux_header: "تصميم تجربة المستخدم",
+    opens_new_tab: " يفتح في تبويب جديد",
     skip_link: "تجاوز إلى المحتوى الرئيسي",
     title: "مصمم تجربة المستخدم ومصور بيانات",
     toast_copied: "تم النسخ",
@@ -231,6 +233,7 @@ const translations = {
       "An intuitive, accessible e-commerce experience designed with responsive layouts and seamless navigation to maximize user conversion and engagement.",
     proj_ux3_title: "Haj Arafa App",
     proj_ux_header: "UX Projects",
+    resume_card_label: "Resume overview",
     resume_label: "Ahmed Mahdy resume portfolio",
     sect_about: "About Me",
     sect_certs: "Certifications",
@@ -283,14 +286,30 @@ const translations = {
   },
 };
 
+/**
+ * Returns the current active language from the root element's lang attribute.
+ * @returns {'en'|'ar'} The current language code.
+ */
 function getCurrentLanguage() {
   return root.getAttribute("lang") || "en";
 }
 
+/**
+ * Retrieves a translated string for the given language and key.
+ * @param {'en'|'ar'} lang - Language code.
+ * @param {string} key - Translation key.
+ * @param {string} [fallback=''] - Fallback string if key not found.
+ * @returns {string} Translated string or fallback.
+ */
 function getTranslation(lang, key, fallback = "") {
   return translations[lang]?.[key] ?? fallback;
 }
 
+/**
+ * Updates the href of an SVG <use> element inside a button.
+ * @param {HTMLElement|null} button - The button element.
+ * @param {string} iconId - The SVG symbol ID (e.g. '#icon-moon').
+ */
 function setUseIcon(button, iconId) {
   const useNode = button?.querySelector("use");
   if (useNode) {
@@ -298,6 +317,9 @@ function setUseIcon(button, iconId) {
   }
 }
 
+/**
+ * Updates the <meta name="theme-color"> to reflect the current theme and contrast state.
+ */
 function updateThemeColor() {
   if (!metaNodes.themeColor) {
     return;
@@ -312,6 +334,11 @@ function updateThemeColor() {
   );
 }
 
+/**
+ * Updates all SEO meta tags, Open Graph, Twitter card, and JSON-LD schema
+ * to reflect the current language.
+ * @param {'en'|'ar'} lang - Language code.
+ */
 function updateMetadata(lang) {
   const title = getTranslation(lang, "meta_title", document.title);
   const description = getTranslation(
@@ -346,6 +373,10 @@ function updateMetadata(lang) {
   }
 }
 
+/**
+ * Replaces text content for all elements with [data-translate] attributes.
+ * @param {'en'|'ar'} lang - Language code.
+ */
 function updateTranslatedText(lang) {
   document.querySelectorAll("[data-translate]").forEach((node) => {
     const key = node.dataset.translate;
@@ -357,6 +388,10 @@ function updateTranslatedText(lang) {
   });
 }
 
+/**
+ * Updates HTML attributes (e.g. aria-label) for elements with [data-translate-attr].
+ * @param {'en'|'ar'} lang - Language code.
+ */
 function updateTranslatedAttributes(lang) {
   document.querySelectorAll("[data-translate-attr]").forEach((node) => {
     const attrName = node.dataset.translateAttr;
@@ -369,6 +404,12 @@ function updateTranslatedAttributes(lang) {
   });
 }
 
+/**
+ * Injects a visually-hidden screen-reader note into every target="_blank" link
+ * so assistive technology announces it opens in a new tab.
+ * Idempotent — safe to call multiple times.
+ * @param {'en'|'ar'} lang - Language code for the note text.
+ */
 function ensureExternalLinkNotes(lang) {
   const noteText = getTranslation(
     lang,
@@ -392,6 +433,12 @@ function ensureExternalLinkNotes(lang) {
   });
 }
 
+/**
+ * Refreshes aria-label and title attributes on all external links to include
+ * the translated "opens external site" hint and "opens in new tab" note.
+ * Also calls ensureExternalLinkNotes to guarantee the SR-only span is present.
+ * @param {'en'|'ar'} lang - Language code.
+ */
 function updateExternalLinks(lang) {
   const hint = getTranslation(lang, "external_site_hint");
   const newTabText = getTranslation(
@@ -416,6 +463,11 @@ function updateExternalLinks(lang) {
   });
 }
 
+/**
+ * Updates aria-label and data-tooltip on all copy buttons to match
+ * the current language.
+ * @param {'en'|'ar'} lang - Language code.
+ */
 function updateCopyButtons(lang) {
   document.querySelectorAll("[data-copy]").forEach((button) => {
     const key = button.dataset.tooltipKey;
@@ -428,6 +480,11 @@ function updateCopyButtons(lang) {
   });
 }
 
+/**
+ * Updates the language toggle button aria-label and tooltip to indicate
+ * which language it will switch to.
+ * @param {'en'|'ar'} lang - The currently active language.
+ */
 function updateLanguageButton(lang) {
   const nextLanguageLabel =
     lang === "ar"
@@ -438,6 +495,11 @@ function updateLanguageButton(lang) {
   controls.langToggle?.setAttribute("data-tooltip", getTranslation(lang, "tooltip_lang"));
 }
 
+/**
+ * Updates the theme toggle button icon, aria-label, aria-pressed, and tooltip
+ * to reflect the current theme state.
+ * @param {'en'|'ar'} lang - Language code for translated labels.
+ */
 function updateThemeButton(lang) {
   const isDark = root.dataset.theme === "dark";
   const ariaLabel = isDark
@@ -453,6 +515,11 @@ function updateThemeButton(lang) {
   setUseIcon(controls.themeToggle, isDark ? "#icon-sun" : "#icon-moon");
 }
 
+/**
+ * Updates the contrast toggle button aria-label, aria-pressed, tooltip,
+ * and active class to reflect the current contrast state.
+ * @param {'en'|'ar'} lang - Language code for translated labels.
+ */
 function updateContrastButton(lang) {
   const isHigh = root.dataset.contrast === "high";
   const ariaLabel = isHigh
@@ -465,13 +532,21 @@ function updateContrastButton(lang) {
   controls.contrastToggle?.classList.toggle("active", isHigh);
 }
 
+/**
+ * Updates the print button aria-label and tooltip for the current language.
+ * @param {'en'|'ar'} lang - Language code.
+ */
 function updatePrintButton(lang) {
   controls.printButton?.setAttribute("aria-label", getTranslation(lang, "aria_print_resume"));
   controls.printButton?.setAttribute("data-tooltip", getTranslation(lang, "tooltip_print"));
 }
 
+/**
+ * Orchestrates a full UI refresh for a language switch or initial load.
+ * Runs all translation, metadata, link, button, and aria-label update functions.
+ * @param {'en'|'ar'} lang - Language code to apply.
+ */
 function refreshUi(lang) {
-  ensureExternalLinkNotes(lang);
   updateTranslatedText(lang);
   updateTranslatedAttributes(lang);
   updateMetadata(lang);
@@ -483,6 +558,10 @@ function refreshUi(lang) {
   updatePrintButton(lang);
 }
 
+/**
+ * Applies a theme, persists it to localStorage, and refreshes the UI.
+ * @param {'light'|'dark'} theme - Theme name to apply.
+ */
 function setTheme(theme) {
   root.dataset.theme = theme;
   localStorage.setItem(storageKeys.theme, theme);
@@ -490,6 +569,10 @@ function setTheme(theme) {
   updateThemeButton(getCurrentLanguage());
 }
 
+/**
+ * Applies a contrast mode, persists it to localStorage, and refreshes the UI.
+ * @param {'normal'|'high'} contrast - Contrast level to apply.
+ */
 function setContrast(contrast) {
   root.dataset.contrast = contrast;
   localStorage.setItem(storageKeys.contrast, contrast);
@@ -497,6 +580,11 @@ function setContrast(contrast) {
   updateContrastButton(getCurrentLanguage());
 }
 
+/**
+ * Switches the active language: updates the html element's lang/dir attributes,
+ * persists the choice to localStorage, and runs a full UI refresh.
+ * @param {'en'|'ar'} lang - Language code to activate.
+ */
 function setLanguage(lang) {
   root.setAttribute("lang", lang);
   root.setAttribute("dir", lang === "ar" ? "rtl" : "ltr");
@@ -504,6 +592,14 @@ function setLanguage(lang) {
   refreshUi(lang);
 }
 
+/**
+ * Copies a string to the clipboard using the Clipboard API when available,
+ * with a textarea execCommand fallback for non-secure contexts.
+ * Restores focus and selection state after the fallback path.
+ * @param {string} value - The text to copy.
+ * @returns {Promise<void>}
+ * @throws {Error} If the fallback copy command fails.
+ */
 async function copyText(value) {
   if (navigator.clipboard && window.isSecureContext) {
     await navigator.clipboard.writeText(value);
@@ -552,15 +648,27 @@ async function copyText(value) {
   }
 }
 
+/**
+ * Displays a live-region toast notification for the given message.
+ * Auto-dismisses after 5 seconds. Resets the timer if called while visible.
+ * @param {string} message - The message text to display.
+ */
 function showToast(message) {
   window.clearTimeout(toastTimer);
   copyToast.textContent = message;
   copyToast.classList.add("is-visible");
   toastTimer = window.setTimeout(() => {
     copyToast.classList.remove("is-visible");
-  }, 1800);
+  }, 5000);
 }
 
+/**
+ * Creates a fully accessible copy button element with icon, aria-label, and tooltip.
+ * @param {string} value - The text value to copy on click.
+ * @param {string} label - The initial aria-label / tooltip string.
+ * @param {string} key - The translation key used to update the label on language switch.
+ * @returns {HTMLButtonElement} The constructed button element.
+ */
 function createCopyButton(value, label, key) {
   const button = document.createElement("button");
   const iconWrapper = document.createElement("span");
@@ -583,6 +691,11 @@ function createCopyButton(value, label, key) {
   return button;
 }
 
+/**
+ * Dynamically injects copy buttons into certification and project cards,
+ * and makes the entire card clickable (excluding the link and button themselves).
+ * Safe to call multiple times — skips cards that already have a copy button.
+ */
 function enhanceLinkedCards() {
   document.querySelectorAll(".compact-list a, .featured h4 a").forEach((link) => {
     const container = link.closest("li, article");
@@ -593,7 +706,7 @@ function enhanceLinkedCards() {
 
     const isCertification = link.closest(".compact-list") !== null;
     const tooltipKey = isCertification ? "tooltip_copy_cert" : "tooltip_copy_project";
-    const label = getTranslation("en", tooltipKey);
+    const label = getTranslation(getCurrentLanguage(), tooltipKey);
     const copyButton = createCopyButton(link.href, label, tooltipKey);
 
     container.appendChild(copyButton);
@@ -607,6 +720,11 @@ function enhanceLinkedCards() {
   });
 }
 
+/**
+ * Attaches click event listeners to all [data-copy] buttons.
+ * Uses a data-copy-bound guard to prevent duplicate bindings.
+ * Shows a contextual toast and temporarily swaps the icon on success.
+ */
 function bindCopyButtons() {
   document.querySelectorAll("[data-copy]").forEach((button) => {
     if (button.dataset.copyBound === "true") {
@@ -646,6 +764,11 @@ function bindCopyButtons() {
   });
 }
 
+/**
+ * Dynamically generates and injects a <style> block that populates @page
+ * running headers and footers with the current name, title, date, and
+ * page counter — localised for the active language and text direction.
+ */
 function updatePrintStyles() {
   const lang = getCurrentLanguage();
   const isRtl = root.getAttribute("dir") === "rtl";
@@ -689,6 +812,11 @@ function updatePrintStyles() {
   `;
 }
 
+/**
+ * Entry point. Locks the contact list to LTR, enhances cards with copy buttons,
+ * binds all copy button listeners, then applies the saved (or system-preferred)
+ * theme, contrast, and language to boot the UI.
+ */
 function initialize() {
   const contactList = document.querySelector(".contact-list");
 

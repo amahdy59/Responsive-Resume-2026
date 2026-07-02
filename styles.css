@@ -1468,7 +1468,7 @@ h1 {
   .resume-card,
   .hero,
   .hero-pattern {
-    border-radius: 0 !important;
+    border-radius: 0;
   }
 
   .resume-card {
@@ -1479,21 +1479,21 @@ h1 {
   .hero {
     min-height: auto;
     padding: 16px 14px;
-    flex-direction: column !important;
-    align-items: center !important;
+    flex-direction: column;
+    align-items: center;
   }
 
   .hero-controls-wrapper {
-    flex-direction: column !important;
-    align-items: center !important;
-    width: 100% !important;
-    gap: 12px !important;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 12px;
   }
 
   .controls-group {
-    position: static !important;
-    flex-direction: row !important;
-    justify-content: center !important;
+    position: static;
+    flex-direction: row;
+    justify-content: center;
   }
 
   .identity {
@@ -1502,7 +1502,7 @@ h1 {
     gap: 14px;
     text-align: center;
     width: 100%;
-    padding-inline-end: 0 !important;
+    padding-inline-end: 0;
   }
 
   .identity-copy {
@@ -1521,8 +1521,8 @@ h1 {
   }
 
   .contact-list {
-    width: 100% !important;
-    max-width: none !important;
+    width: 100%;
+    max-width: none;
   }
 
   .contact-list li {
@@ -1531,9 +1531,9 @@ h1 {
   }
 
   .contact-list a {
-    white-space: normal !important;
-    overflow: visible !important;
-    text-overflow: clip !important;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
     word-break: break-word;
   }
 
