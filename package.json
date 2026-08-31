@@ -8,7 +8,11 @@
     "check": "node scripts/validate.mjs",
     "dev": "node scripts/serve.mjs --root . --port 4173",
     "preview": "npm run build && node scripts/serve.mjs --root dist --port 4174",
-    "test": "node scripts/validate.mjs"
+    "test": "npm run check && npm run build && npm run test:browser",
+    "test:browser": "node scripts/responsive-smoke.mjs"
+  },
+  "devDependencies": {
+    "playwright": "1.62.1"
   },
   "engines": {
     "node": ">=20"

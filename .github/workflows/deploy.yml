@@ -35,11 +35,14 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Validate source files
-        run: npm test
+      - name: Install dependencies
+        run: npm ci
 
-      - name: Build static files
-        run: npm run build
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Validate, build, and run browser smoke tests
+        run: npm test
 
       - name: Setup Pages
         uses: actions/configure-pages@v5

@@ -1315,8 +1315,8 @@ h1 {
   }
 }
 
-@media screen and (min-width: 881px) {
-  /* Position controls tooltips to the side of the buttons column on desktop to avoid top/bottom border truncation */
+@media screen and (min-width: 561px) {
+  /* Keep tooltips beside the vertical controls column on tablet and desktop. */
   html[lang="en"] .controls-group [data-tooltip]::before {
     bottom: 50% !important;
     left: auto !important;

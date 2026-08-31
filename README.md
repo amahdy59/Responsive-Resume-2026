@@ -33,8 +33,9 @@ Live site: [creativemahdy.space](https://creativemahdy.space/)
 
 ```bash
 npm run check    # validate translations, docs, and external-link hygiene
-npm run test     # alias for the validation step
+npm run test     # validate, build, and run responsive browser smoke tests
 npm run build    # create dist/
+npm run test:browser # test the existing dist/ in Chromium
 npm run dev      # serve the repo root locally on http://127.0.0.1:4173
 npm run preview  # build and serve dist/ on http://127.0.0.1:4174
 ```
