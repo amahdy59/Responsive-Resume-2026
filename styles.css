@@ -89,6 +89,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: clip;
   /* WCAG 2.4.11: prevent focus from being hidden under any fixed/sticky elements */
   scroll-padding-top: 96px;
 }
@@ -671,7 +672,7 @@ h1 {
   background: color-mix(in srgb, var(--surface) 94%, transparent);
   border-bottom: 1px solid var(--line);
   backdrop-filter: blur(12px);
-  contain: paint;
+  contain: inline-size paint;
   scrollbar-width: none;
 }
 

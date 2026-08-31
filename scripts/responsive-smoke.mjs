@@ -106,6 +106,7 @@ try {
         innerWidth: window.innerWidth,
         language: document.documentElement.lang,
         overflowingElements: [...document.querySelectorAll("body *")]
+          .filter((element) => !element.closest(".section-nav"))
           .map((element) => {
             const rect = element.getBoundingClientRect();
             return {
@@ -142,6 +143,7 @@ try {
       state.scrollWidth <= state.clientWidth,
       `Horizontal overflow at ${scenario.width}px in ${scenario.language}: ${state.scrollWidth}px scroll / ${state.clientWidth}px client / ${state.innerWidth}px viewport; ${JSON.stringify(state.overflowingElements)}`,
     );
+    assert.deepEqual(state.overflowingElements, []);
     assert.deepEqual(runtimeErrors, []);
     assert.equal(new Set(state.buttonNames).size, state.buttonNames.length);
     assert.equal(state.skipTargetTabIndex, -1);
