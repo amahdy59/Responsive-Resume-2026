@@ -568,9 +568,11 @@ function updatePrintButton(lang) {
  * @param {'en'|'ar'} lang - Language code to apply.
  */
 function refreshUi(lang) {
-  updateTranslatedText(lang);
-  updateTranslatedAttributes(lang);
-  updateMetadata(lang);
+  if (document.body.dataset.localized !== "false") {
+    updateTranslatedText(lang);
+    updateTranslatedAttributes(lang);
+    updateMetadata(lang);
+  }
   updateExternalLinks(lang);
   updateCopyButtons(lang);
   updateLanguageButton(lang);

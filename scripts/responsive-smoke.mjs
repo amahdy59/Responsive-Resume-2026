@@ -278,6 +278,7 @@ try {
       paginationLinks: document.querySelectorAll(".case-study-pagination a").length,
       resumeHref: document.querySelector('.case-study-nav a')?.getAttribute("href"),
       scrollWidth: document.documentElement.scrollWidth,
+      title: document.title,
     }));
 
     assert.equal(state.language, "en");
@@ -288,6 +289,7 @@ try {
     assert.equal(state.paginationLinks, 2);
     assert.equal(state.resumeHref, "index.html#projects");
     assert.ok(state.canonical?.endsWith(file));
+    assert.notEqual(state.title, "Ahmed Mahdy | UX Designer & Data Visualizer");
     assert.deepEqual(runtimeErrors, []);
 
     for (const selector of [".theme-toggle", ".contrast-toggle"]) {
