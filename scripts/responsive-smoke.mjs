@@ -88,6 +88,9 @@ try {
         : null;
 
       return {
+        ambientAnimationName: getComputedStyle(
+          document.querySelector(".ambient-particles"),
+        ).animationName,
         brokenImages: [...document.images].filter(
           (image) => !image.complete || image.naturalWidth === 0,
         ).length,
@@ -134,6 +137,10 @@ try {
       assert.deepEqual(state.visualSectionOrder, state.domSectionOrder);
     }
 
+    if (scenario.width <= 560) {
+      assert.equal(state.ambientAnimationName, "none");
+    }
+
     const accessibility = await new AxeBuilder({ page }).analyze();
     assert.deepEqual(
       accessibility.violations.map(({ id, impact }) => ({ id, impact })),
@@ -141,6 +148,10 @@ try {
     );
 
     if (scenario.language === "en" && scenario.width === 320) {
+      const firstProject = page.locator(".featured article").first();
+      await firstProject.locator("a").first().focus();
+      assert.notEqual(await firstProject.evaluate((article) => getComputedStyle(article).transform), "none");
+
       for (const selector of [".theme-toggle", ".contrast-toggle"]) {
         const toggle = page.locator(selector);
         const before = {

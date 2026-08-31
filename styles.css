@@ -37,14 +37,6 @@
   --date-text: #3d4a5c; /* AAA-compliant: matches --muted for 7:1 */
   --copy-bg: rgba(255, 255, 255, 0.24);
   --shadow: 0 25px 50px rgba(26, 35, 50, 0.18);
-  --chart-glow-color: #ffffff;
-  --chart-glow-opacity: 0.12;
-  --chart-line-color-start: rgba(255, 255, 255, 0.35);
-  --chart-line-color-mid: rgba(255, 255, 255, 0.85);
-  --chart-line-color-end: rgba(255, 255, 255, 0.35);
-  --chart-grid-color: rgba(255, 255, 255, 0.08);
-  --chart-node-color: #ffffff;
-  --chart-node-color-alt: #ffffff;
   --logo-bg: #ffffff;
 }
 
@@ -89,14 +81,6 @@
   --date-text: #cbd5e1; /* Matches --muted for > 9:1 AAA contrast */
   --copy-bg: rgba(240, 246, 252, 0.1);
   --shadow: 0 25px 50px rgba(0, 0, 0, 0.55);
-  --chart-glow-color: #58a6ff;
-  --chart-glow-opacity: 0.15;
-  --chart-line-color-start: rgba(56, 139, 253, 0.4);
-  --chart-line-color-mid: #79c0ff;
-  --chart-line-color-end: rgba(56, 139, 253, 0.4);
-  --chart-grid-color: rgba(240, 246, 252, 0.05);
-  --chart-node-color: #58a6ff;
-  --chart-node-color-alt: #79c0ff;
 }
 
 * {
@@ -134,15 +118,7 @@ body {
   .featured article,
   .tags span,
   .pills span,
-  .copy-button,
-  .theme-toggle,
-  .lang-toggle,
-  .print-button,
-  .contrast-toggle,
-  .panel-icon-box,
-  .contact-icon,
-  .li-company-logo,
-  .li-role-dot
+  .copy-button
 ) {
   transition-property: background-color, background, border-color, box-shadow, color, opacity, transform;
   transition-duration: 260ms;
@@ -350,8 +326,7 @@ button:focus-visible {
 .lang-toggle svg,
 .print-button svg,
 .contrast-toggle svg,
-.contact-icon svg,
-.timeline-dot svg {
+.contact-icon svg {
   width: 16px;
   height: 16px;
   fill: none;
@@ -827,7 +802,8 @@ h1 {
   padding: 12px 12px 12px 46px;
 }
 
-.featured article:hover {
+.featured article:hover,
+.featured article:focus-within {
   border-color: color-mix(in srgb, var(--project-accent) 45%, var(--line));
   background-color: color-mix(in srgb, var(--project-accent) 4%, var(--project-bg));
   transform: translateY(-2px);
@@ -1156,14 +1132,6 @@ h1 {
   --pill-bg: #000000;
   --date-bg: #000000;
   --date-text: #86efac;
-  --chart-glow-color: #00ffff;
-  --chart-glow-opacity: 0.2;
-  --chart-line-color-start: #00ffff;
-  --chart-line-color-mid: #00ffff;
-  --chart-line-color-end: #00ffff;
-  --chart-grid-color: rgba(255, 255, 255, 0.2);
-  --chart-node-color: #00ffff;
-  --chart-node-color-alt: #00ffff;
 }
 
 [data-contrast="high"] .theme-toggle {
@@ -1183,15 +1151,6 @@ h1 {
 [data-contrast="high"] .pills span {
   border: 1px solid #00ffff;
   color: #00ffff;
-}
-
-[data-contrast="high"] .timeline::before {
-  background: #ffffff;
-}
-
-[data-contrast="high"] .timeline-dot {
-  border: 2px solid #ffffff;
-  background: #000000;
 }
 
 [data-contrast="high"] .compact-list a,
@@ -1488,6 +1447,10 @@ h1 {
     justify-content: center;
   }
 
+  .ambient-particles {
+    animation: none;
+  }
+
   .identity {
     align-items: center;
     flex-direction: column;
@@ -1548,15 +1511,6 @@ h1 {
     padding: 15px;
   }
 
-  /* ── Remove vertical timeline lines and dots on mobile ── */
-  .timeline::before {
-    display: none !important;
-  }
-
-  .timeline-dot {
-    display: none !important;
-  }
-
   .timeline article {
     grid-template-columns: 1fr !important;
     gap: 0 !important;
@@ -1597,12 +1551,6 @@ h1 {
     animation-iteration-count: 1 !important;
     transition-duration: 1ms !important;
   }
-}
-
-/* Print-only header and footer: hidden on screen */
-.print-page-header,
-.print-page-footer {
-  display: none;
 }
 
 /* Print Stylesheet */
@@ -1906,9 +1854,6 @@ h1 {
   /* ── Timeline (Employment & Education) ── */
   .timeline {
     gap: 8px !important;
-  }
-  .timeline::before {
-    display: none !important;
   }
    .li-roles-list {
     border: none !important;

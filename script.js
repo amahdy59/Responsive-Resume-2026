@@ -27,7 +27,6 @@ const metaNodes = {
   personSchema: document.getElementById("person-schema"),
 };
 
-const themeIconUse = controls.themeToggle?.querySelector("use");
 const copyToast = document.querySelector(".copy-toast") || document.createElement("div");
 let toastTimer = 0;
 
