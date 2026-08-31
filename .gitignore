@@ -6,6 +6,7 @@ dist/
 # Local QA screenshots generated while checking the design
 desktop-*.png
 mobile-*.png
+assets/screenshots/
 
 # OS/editor noise
 .DS_Store

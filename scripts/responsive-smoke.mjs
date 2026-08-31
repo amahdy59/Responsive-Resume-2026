@@ -242,6 +242,72 @@ try {
     await context.close();
     console.log(`Passed ${scenario.language} at ${scenario.width}x${scenario.height}`);
   }
+
+  const caseStudyFiles = [
+    "project-haj-arafa.html",
+    "project-cairo-airport.html",
+    "project-hr-tool.html",
+    "project-lego-explorer.html",
+    "project-sales-dashboard.html",
+  ];
+
+  for (const file of caseStudyFiles) {
+    const context = await browser.newContext({ viewport: { width: 375, height: 812 } });
+    await context.route(/https:\/\/fonts\.googleapis\.com\//, (route) =>
+      route.fulfill({ body: "", contentType: "text/css", status: 200 }),
+    );
+    const page = await context.newPage();
+    const runtimeErrors = [];
+    page.on("console", (message) => {
+      if (message.type() === "error") runtimeErrors.push(message.text());
+    });
+    page.on("pageerror", (error) => runtimeErrors.push(error.message));
+
+    await page.goto(baseUrl);
+    await page.evaluate(() => localStorage.setItem("resume-lang", "ar"));
+    const response = await page.goto(`${baseUrl}/${file}`, { waitUntil: "networkidle" });
+    assert.equal(response?.status(), 200);
+
+    const state = await page.evaluate(() => ({
+      brokenImages: [...document.images].filter((image) => !image.complete || image.naturalWidth === 0).length,
+      canonical: document.querySelector('link[rel="canonical"]')?.href,
+      clientWidth: document.documentElement.clientWidth,
+      direction: document.documentElement.dir,
+      heading: document.querySelector("h1")?.textContent?.trim(),
+      language: document.documentElement.lang,
+      paginationLinks: document.querySelectorAll(".case-study-pagination a").length,
+      resumeHref: document.querySelector('.case-study-nav a')?.getAttribute("href"),
+      scrollWidth: document.documentElement.scrollWidth,
+    }));
+
+    assert.equal(state.language, "en");
+    assert.equal(state.direction, "ltr");
+    assert.ok(state.heading);
+    assert.equal(state.brokenImages, 0);
+    assert.equal(state.scrollWidth, state.clientWidth);
+    assert.equal(state.paginationLinks, 2);
+    assert.equal(state.resumeHref, "index.html#projects");
+    assert.ok(state.canonical?.endsWith(file));
+    assert.deepEqual(runtimeErrors, []);
+
+    for (const selector of [".theme-toggle", ".contrast-toggle"]) {
+      await page.locator(selector).click();
+      const accessibility = await new AxeBuilder({ page }).analyze();
+      assert.deepEqual(
+        accessibility.violations.map(({ id, impact }) => ({ id, impact })),
+        [],
+      );
+    }
+
+    await page.emulateMedia({ media: "print" });
+    assert.equal(
+      await page.locator(".case-study-section").first().evaluate((section) => getComputedStyle(section).opacity),
+      "1",
+    );
+
+    await context.close();
+    console.log(`Passed case study ${file}`);
+  }
 } finally {
   await browser?.close();
   server.kill();

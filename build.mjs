@@ -6,6 +6,13 @@ import { fileURLToPath } from "node:url";
 const root = dirname(fileURLToPath(import.meta.url));
 const dist = join(root, "dist");
 const requiredPaths = ["index.html", "styles.css", "script.js", "assets"];
+const caseStudyFiles = [
+  "project-haj-arafa.html",
+  "project-cairo-airport.html",
+  "project-hr-tool.html",
+  "project-lego-explorer.html",
+  "project-sales-dashboard.html",
+];
 const optionalFiles = ["CNAME"];
 
 async function copyDirectory(source, destination) {
@@ -13,6 +20,8 @@ async function copyDirectory(source, destination) {
   const entries = await readdir(source, { withFileTypes: true });
 
   for (const entry of entries) {
+    if (entry.name === "screenshots") continue;
+
     const sourcePath = join(source, entry.name);
     const destinationPath = join(destination, entry.name);
 
@@ -37,6 +46,13 @@ await copyFile(join(root, "index.html"), join(dist, "index.html"));
 await copyFile(join(root, "styles.css"), join(dist, "styles.css"));
 await copyFile(join(root, "script.js"), join(dist, "script.js"));
 await copyDirectory(join(root, "assets"), join(dist, "assets"));
+
+for (const fileName of caseStudyFiles) {
+  if (!existsSync(join(root, fileName))) {
+    throw new Error(`Missing case-study page: ${fileName}`);
+  }
+  await copyFile(join(root, fileName), join(dist, fileName));
+}
 
 for (const fileName of optionalFiles) {
   const sourcePath = join(root, fileName);

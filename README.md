@@ -18,11 +18,16 @@ Live site: [creativemahdy.space](https://creativemahdy.space/)
 .
 ├── .github/workflows/deploy.yml
 ├── assets/
+│   ├── case-cairo-airport.jpg
+│   ├── case-haj-arafa.jpg
+│   └── case-hr-tool.jpg
 ├── scripts/
 │   ├── serve.mjs
+│   ├── responsive-smoke.mjs
 │   └── validate.mjs
 ├── build.mjs
 ├── index.html
+├── project-*.html
 ├── script.js
 ├── styles.css
 ├── CNAME
@@ -36,7 +41,7 @@ npm run check    # validate translations, docs, and external-link hygiene
 npm run test     # validate, build, and run responsive browser smoke tests
 npm run build    # create dist/
 npm run test:browser # test the existing dist/ in Chromium
-npm run dev      # serve the repo root locally on http://127.0.0.1:4173
+npm run dev      # build and serve dist/ locally on http://127.0.0.1:4173
 npm run preview  # build and serve dist/ on http://127.0.0.1:4174
 ```
 
@@ -46,6 +51,8 @@ npm run preview  # build and serve dist/ on http://127.0.0.1:4174
 - If you add a new `data-translate` or `data-translate-attr-key` entry in `index.html`, run `npm run check` before committing.
 - External links opened with `target="_blank"` should keep `rel="noopener noreferrer"`.
 - Social preview metadata points to `assets/ahmed-mahdy.png`, so that file should remain available in production builds.
+- Case-study pages use unique metadata, canonical URLs, previous/next navigation, and project-sized local images where verified captures exist.
+- `assets/screenshots/` is intentionally excluded from Git and deployment; keep only optimized, referenced portfolio images in `assets/`.
 
 ## Deployment
 

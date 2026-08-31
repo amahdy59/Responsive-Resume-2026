@@ -3,6 +3,20 @@ import { resolve } from "node:path";
 
 const root = process.cwd();
 const html = readFileSync(resolve(root, "index.html"), "utf8");
+const caseStudyFiles = [
+  "project-haj-arafa.html",
+  "project-cairo-airport.html",
+  "project-hr-tool.html",
+  "project-lego-explorer.html",
+  "project-sales-dashboard.html",
+];
+const htmlDocuments = [
+  { file: "index.html", source: html },
+  ...caseStudyFiles.map((file) => ({
+    file,
+    source: readFileSync(resolve(root, file), "utf8"),
+  })),
+];
 const script = readFileSync(resolve(root, "script.js"), "utf8");
 const readme = readFileSync(resolve(root, "README.md"), "utf8");
 
@@ -49,11 +63,29 @@ if (readme.includes("file:///")) {
   errors.push("README.md still contains local file:/// links.");
 }
 
-for (const match of html.matchAll(blankLinkPattern)) {
-  const relValue = match[1];
+for (const { file, source } of htmlDocuments) {
+  for (const match of source.matchAll(blankLinkPattern)) {
+    const relValue = match[1];
 
-  if (!relValue.includes("noopener") || !relValue.includes("noreferrer")) {
-    errors.push(`External link is missing rel="noopener noreferrer": ${match[0]}`);
+    if (!relValue.includes("noopener") || !relValue.includes("noreferrer")) {
+      errors.push(`${file} has an external link without rel="noopener noreferrer": ${match[0]}`);
+    }
+  }
+
+  const ids = [...source.matchAll(/\bid="([^"]+)"/g)].map((match) => match[1]);
+  const duplicateIds = ids.filter((id, index) => ids.indexOf(id) !== index);
+  if (duplicateIds.length > 0) {
+    errors.push(`${file} has duplicate IDs: ${[...new Set(duplicateIds)].join(", ")}`);
+  }
+
+  if (source.includes("placehold.co")) {
+    errors.push(`${file} still uses a placeholder image.`);
+  }
+
+  for (const match of source.matchAll(/\b(?:href|src)="((?:project-[^"]+\.html)|(?:assets\/[^"]+))"/g)) {
+    if (!existsSync(resolve(root, match[1]))) {
+      errors.push(`${file} references missing local resource: ${match[1]}`);
+    }
   }
 }
 

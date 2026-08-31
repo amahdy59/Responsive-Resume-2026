@@ -122,6 +122,7 @@ const translations = {
       "تجربة تجارة إلكترونية بديهية وسهلة الوصول، مصممة بتخطيطات متجاوبة وتنقل سلس لزيادة تفاعل المستخدمين والتحويلات.",
     proj_ux3_title: "تطبيق حاج عرفة",
     proj_ux_header: "مشاريع تجربة المستخدم",
+    read_case_study: "قراءة دراسة الحالة",
     resume_card_label: "نظرة عامة على السيرة الذاتية",
     resume_label: "موقع السيرة الذاتية لأحمد مهدي",
     section_nav_label: "أقسام السيرة الذاتية",
@@ -233,6 +234,7 @@ const translations = {
       "An intuitive, accessible e-commerce experience designed with responsive layouts and seamless navigation to maximize user conversion and engagement.",
     proj_ux3_title: "Haj Arafa App",
     proj_ux_header: "UX Projects",
+    read_case_study: "Read Case Study",
     resume_card_label: "Resume overview",
     resume_label: "Ahmed Mahdy resume portfolio",
     section_nav_label: "Resume sections",
@@ -604,10 +606,10 @@ function setContrast(contrast) {
  * persists the choice to localStorage, and runs a full UI refresh.
  * @param {'en'|'ar'} lang - Language code to activate.
  */
-function setLanguage(lang) {
+function setLanguage(lang, persist = true) {
   root.setAttribute("lang", lang);
   root.setAttribute("dir", lang === "ar" ? "rtl" : "ltr");
-  localStorage.setItem(storageKeys.lang, lang);
+  if (persist) localStorage.setItem(storageKeys.lang, lang);
   refreshUi(lang);
 }
 
@@ -842,7 +844,8 @@ function initialize() {
 
   setTheme(savedTheme || (prefersDark ? "dark" : "light"));
   setContrast(savedContrast);
-  setLanguage(savedLang);
+  const pageLanguage = document.body.dataset.localized === "false" ? "en" : savedLang;
+  setLanguage(pageLanguage, document.body.dataset.localized !== "false");
 }
 
 controls.themeToggle?.addEventListener("click", () => {
@@ -874,3 +877,28 @@ document.addEventListener("keydown", (event) => {
 });
 
 initialize();
+
+/* Reveal content once as it enters the viewport. */
+function initScrollReveal() {
+  const revealElements = document.querySelectorAll('.panel, .li-experience-group, .featured article, .case-study-section');
+
+  if (!("IntersectionObserver" in window) || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    revealElements.forEach((element) => element.classList.add("reveal", "active"));
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add("active");
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: 0.08, rootMargin: "0px 0px -32px" });
+
+  revealElements.forEach((element) => {
+    element.classList.add("reveal");
+    observer.observe(element);
+  });
+}
+
+initScrollReveal();
