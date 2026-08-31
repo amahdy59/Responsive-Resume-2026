@@ -661,13 +661,17 @@ h1 {
   top: 0;
   z-index: 30;
   display: flex;
+  width: 100%;
+  max-width: 100%;
   justify-content: center;
   gap: 6px;
   padding: 8px 16px;
   overflow-x: auto;
+  overflow-y: hidden;
   background: color-mix(in srgb, var(--surface) 94%, transparent);
   border-bottom: 1px solid var(--line);
   backdrop-filter: blur(12px);
+  contain: paint;
   scrollbar-width: none;
 }
 
