@@ -122,7 +122,13 @@ try {
         contactTexts: [...document.querySelectorAll(".contact-list a")].map((link) =>
           link.childNodes[0]?.textContent.trim(),
         ),
-        resumeActionText: document.querySelector(".resume-action")?.textContent?.trim(),
+        entityLinks: [...document.querySelectorAll(".li-entity-link")].map((link) => link.href),
+        externalIconCount: document.querySelectorAll('a[target="_blank"] .external-icon').length,
+        externalLinkCount: document.querySelectorAll('a[target="_blank"]').length,
+        printButtonInToolbar: Boolean(
+          document.querySelector(".controls-group > .print-button"),
+        ),
+        resumeActionCount: document.querySelectorAll(".resume-action").length,
         sectionLinks: [...document.querySelectorAll(".section-nav a")].map((link) => ({
           targetExists: Boolean(document.querySelector(new URL(link.href).hash)),
           text: link.textContent.trim(),
@@ -150,14 +156,19 @@ try {
     assert.equal(state.sectionLinks.length, 6);
     assert.ok(state.sectionLinks.every(({ targetExists, text }) => targetExists && text));
     assert.equal(state.sectionNavPosition, "sticky");
-    assert.equal(
-      state.resumeActionText,
-      scenario.language === "ar" ? "طباعة / حفظ PDF" : "Print / Save PDF",
-    );
+    assert.equal(state.printButtonInToolbar, true);
+    assert.equal(state.resumeActionCount, 0);
+    assert.equal(state.externalIconCount, state.externalLinkCount);
+    assert.deepEqual(state.entityLinks, [
+      "https://advansys-is.com/",
+      "https://www.se.com/eg/en/",
+      "https://iti.gov.eg/iti/home",
+      "https://www.menofia.edu.eg/",
+    ]);
     assert.deepEqual(
       state.contactTexts.slice(1),
       scenario.language === "ar"
-        ? ["الملف الشخصي على لينكد إن", "معرض الأعمال على دريبل"]
+        ? ["لينكد إن", "معرض دريبل"]
         : ["LinkedIn profile", "Dribbble portfolio"],
     );
 
@@ -180,13 +191,26 @@ try {
         window.print = () => {
           window.__printCalled = true;
         };
-        document.querySelector(".resume-action").click();
+        document.querySelector(".print-button").click();
       });
       assert.equal(await page.evaluate(() => window.__printCalled), true);
+
+      await page.locator('.section-nav a[href="#projects"]').click();
+      assert.equal(
+        await page.locator("#projects").evaluate((panel) => getComputedStyle(panel).animationName),
+        "targetPanel",
+      );
 
       const firstProject = page.locator(".featured article").first();
       await firstProject.locator("a").first().focus();
       assert.notEqual(await firstProject.evaluate((article) => getComputedStyle(article).transform), "none");
+
+      const firstEntity = page.locator(".li-entity-link").first();
+      await firstEntity.hover();
+      assert.notEqual(
+        await firstEntity.locator(".li-company-logo").evaluate((logo) => getComputedStyle(logo).transform),
+        "none",
+      );
 
       for (const selector of [".theme-toggle", ".contrast-toggle"]) {
         const toggle = page.locator(selector);

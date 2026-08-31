@@ -14,7 +14,7 @@ const controls = {
   themeToggle: document.querySelector(".theme-toggle"),
   langToggle: document.querySelector(".lang-toggle"),
   contrastToggle: document.querySelector(".contrast-toggle"),
-  printButton: document.querySelector(".resume-action"),
+  printButton: document.querySelector(".print-button"),
 };
 
 const metaNodes = {
@@ -73,8 +73,8 @@ const translations = {
     cert3: "مهارات Excel لتحليل البيانات والتصوير المرئي",
     cert4: "مهارات Excel للأعمال",
     cert5: "تصميم تجربة المستخدم من جوجل (Google UX Design)",
-    contact_dribbble: "معرض الأعمال على دريبل",
-    contact_linkedin: "الملف الشخصي على لينكد إن",
+    contact_dribbble: "معرض دريبل",
+    contact_linkedin: "لينكد إن",
     contact_links_label: "روابط التواصل",
     data_tag: "تصوير البيانات",
     display_settings_label: "إعدادات العرض",
@@ -104,7 +104,6 @@ const translations = {
       "السيرة الذاتية لأحمد مهدي، مصمم تجربة مستخدم ومصور بيانات، مع خبرة في التصميم، ولوحات المعلومات، وتجارب المنتجات الرقمية.",
     meta_title: "أحمد مهدي | مصمم تجربة المستخدم ومصور بيانات",
     name: "أحمد مهدي",
-    print_cta: "طباعة / حفظ PDF",
     profile_details_label: "تفاصيل الملف الشخصي",
     proj_data1_desc:
       "تجربة تفاعلية لتصور البيانات باستخدام Tableau تساعد المستخدمين على استكشاف مجموعات LEGO حسب الموضوع، والعمر، والسعر، وعدد القطع.",
@@ -166,6 +165,7 @@ const translations = {
     tooltip_copy_linkedin: "نسخ رابط لينكد إن",
     tooltip_copy_project: "نسخ رابط المشروع",
     tooltip_lang: "تبديل اللغة",
+    tooltip_print: "طباعة / حفظ كـ PDF",
     tooltip_theme_dark: "التبديل إلى الوضع الداكن",
     tooltip_theme_light: "التبديل إلى الوضع الفاتح",
     ux_tag: "تصميم تجربة المستخدم",
@@ -215,7 +215,6 @@ const translations = {
     meta_title: "Ahmed Mahdy | UX Designer & Data Visualizer",
     name: "Ahmed Mahdy",
     opens_new_tab: " opens in new tab",
-    print_cta: "Print / Save PDF",
     profile_details_label: "Profile details",
     proj_data1_desc:
       "An interactive Tableau visualization experience that helps users explore LEGO sets by theme, age, price, and set count.",
@@ -281,6 +280,7 @@ const translations = {
     tooltip_copy_linkedin: "Copy LinkedIn link",
     tooltip_copy_project: "Copy project link",
     tooltip_lang: "Toggle language",
+    tooltip_print: "Print / Save as PDF",
     tooltip_theme_dark: "Switch to dark mode",
     tooltip_theme_light: "Switch to light mode",
     ux_tag: "UX Design",
@@ -416,8 +416,8 @@ function getLinkText(link) {
 }
 
 /**
- * Injects a visually-hidden screen-reader note into every target="_blank" link
- * so assistive technology announces it opens in a new tab.
+ * Adds an external-link cue and a visually-hidden new-tab note to every
+ * target="_blank" link.
  * Idempotent — safe to call multiple times.
  * @param {'en'|'ar'} lang - Language code for the note text.
  */
@@ -438,6 +438,17 @@ function ensureExternalLinkNotes(lang) {
       note.className = "sr-only";
       note.dataset.translate = "opens_new_tab";
       link.appendChild(note);
+    }
+
+    if (!link.querySelector(".external-icon")) {
+      const icon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      const use = document.createElementNS("http://www.w3.org/2000/svg", "use");
+
+      icon.classList.add("external-icon");
+      icon.setAttribute("aria-hidden", "true");
+      use.setAttribute("href", "#icon-external");
+      icon.appendChild(use);
+      link.insertBefore(icon, note);
     }
 
     note.textContent = noteText;
@@ -546,6 +557,7 @@ function updateContrastButton(lang) {
  */
 function updatePrintButton(lang) {
   controls.printButton?.setAttribute("aria-label", getTranslation(lang, "aria_print_resume"));
+  controls.printButton?.setAttribute("data-tooltip", getTranslation(lang, "tooltip_print"));
 }
 
 /**
