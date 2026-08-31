@@ -292,6 +292,7 @@ try {
 
     for (const selector of [".theme-toggle", ".contrast-toggle"]) {
       await page.locator(selector).click();
+      await page.waitForTimeout(250);
       const accessibility = await new AxeBuilder({ page }).analyze();
       assert.deepEqual(
         accessibility.violations.map(({ id, impact }) => ({ id, impact })),
