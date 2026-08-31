@@ -1,13 +1,28 @@
 import assert from "node:assert/strict";
 import { spawn } from "node:child_process";
+import AxeBuilder from "@axe-core/playwright";
 import { chromium } from "playwright";
 
-const baseUrl = "http://127.0.0.1:4174";
 const server = spawn(
   process.execPath,
-  ["scripts/serve.mjs", "--root", "dist", "--port", "4174"],
-  { stdio: "ignore" },
+  ["scripts/serve.mjs", "--root", "dist", "--port", "0"],
+  { stdio: ["ignore", "pipe", "inherit"] },
 );
+
+const baseUrl = await new Promise((resolve, reject) => {
+  let output = "";
+
+  server.stdout.setEncoding("utf8");
+  server.stdout.on("data", (chunk) => {
+    output += chunk;
+    const match = output.match(/http:\/\/127\.0\.0\.1:\d+/);
+    if (match) resolve(match[0]);
+  });
+  server.once("error", reject);
+  server.once("exit", (code) => {
+    reject(new Error(`Preview server exited before starting (code ${code})`));
+  });
+});
 
 async function waitForServer() {
   for (let attempt = 0; attempt < 30; attempt += 1) {
@@ -23,6 +38,8 @@ async function waitForServer() {
 }
 
 const scenarios = [
+  { language: "en", width: 320, height: 700 },
+  { language: "ar", width: 320, height: 700 },
   { language: "en", width: 375, height: 812 },
   { language: "ar", width: 375, height: 812 },
   { language: "en", width: 768, height: 1024 },
@@ -54,18 +71,52 @@ try {
       await page.getByLabel("Switch to Arabic", { exact: true }).click();
     }
 
+    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+    await page.waitForTimeout(200);
+    await page.evaluate(() => window.scrollTo(0, 0));
     await page.evaluate(() => document.fonts.ready);
 
-    const state = await page.evaluate(() => ({
-      brokenImages: [...document.images].filter(
-        (image) => !image.complete || image.naturalWidth === 0,
-      ).length,
-      clientWidth: document.documentElement.clientWidth,
-      direction: document.documentElement.dir,
-      heading: document.querySelector("h1")?.textContent?.trim(),
-      language: document.documentElement.lang,
-      scrollWidth: document.documentElement.scrollWidth,
-    }));
+    const state = await page.evaluate(() => {
+      const panels = [...document.querySelectorAll(".content-grid .panel")];
+      const panelName = (panel) => panel.querySelector("h2")?.textContent?.trim();
+      const buttonNames = [...document.querySelectorAll("button")].map((button) =>
+        button.getAttribute("aria-label"),
+      );
+      const skipLink = document.querySelector(".skip-link");
+      const skipTarget = skipLink
+        ? document.querySelector(new URL(skipLink.href).hash)
+        : null;
+
+      return {
+        brokenImages: [...document.images].filter(
+          (image) => !image.complete || image.naturalWidth === 0,
+        ).length,
+        buttonNames,
+        clientWidth: document.documentElement.clientWidth,
+        direction: document.documentElement.dir,
+        domSectionOrder: panels.map(panelName),
+        heading: document.querySelector("h1")?.textContent?.trim(),
+        innerWidth: window.innerWidth,
+        language: document.documentElement.lang,
+        overflowingElements: [...document.querySelectorAll("body *")]
+          .map((element) => {
+            const rect = element.getBoundingClientRect();
+            return {
+              className: element.className,
+              left: Math.round(rect.left),
+              right: Math.round(rect.right),
+              tagName: element.tagName,
+            };
+          })
+          .filter(({ left, right }) => left < 0 || right > window.innerWidth)
+          .slice(0, 8),
+        scrollWidth: document.documentElement.scrollWidth,
+        skipTargetTabIndex: skipTarget?.tabIndex,
+        visualSectionOrder: panels
+          .toSorted((a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top)
+          .map(panelName),
+      };
+    });
 
     assert.equal(state.language, scenario.language);
     assert.equal(state.direction, scenario.language === "ar" ? "rtl" : "ltr");
@@ -73,9 +124,39 @@ try {
     assert.equal(state.brokenImages, 0);
     assert.ok(
       state.scrollWidth <= state.clientWidth,
-      `Horizontal overflow at ${scenario.width}px in ${scenario.language}`,
+      `Horizontal overflow at ${scenario.width}px in ${scenario.language}: ${state.scrollWidth}px scroll / ${state.clientWidth}px client / ${state.innerWidth}px viewport; ${JSON.stringify(state.overflowingElements)}`,
     );
     assert.deepEqual(runtimeErrors, []);
+    assert.equal(new Set(state.buttonNames).size, state.buttonNames.length);
+    assert.equal(state.skipTargetTabIndex, -1);
+
+    if (scenario.width <= 375) {
+      assert.deepEqual(state.visualSectionOrder, state.domSectionOrder);
+    }
+
+    const accessibility = await new AxeBuilder({ page }).analyze();
+    assert.deepEqual(
+      accessibility.violations.map(({ id, impact }) => ({ id, impact })),
+      [],
+    );
+
+    if (scenario.language === "en" && scenario.width === 320) {
+      for (const selector of [".theme-toggle", ".contrast-toggle"]) {
+        const toggle = page.locator(selector);
+        const before = {
+          label: await toggle.getAttribute("aria-label"),
+          pressed: await toggle.getAttribute("aria-pressed"),
+        };
+        await toggle.click();
+        const after = {
+          label: await toggle.getAttribute("aria-label"),
+          pressed: await toggle.getAttribute("aria-pressed"),
+        };
+        assert.equal(after.label, before.label);
+        assert.notEqual(after.pressed, before.pressed);
+        await toggle.click();
+      }
+    }
 
     if (scenario.width === 768) {
       await page.locator(".lang-toggle").focus();

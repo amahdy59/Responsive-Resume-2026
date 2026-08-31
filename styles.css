@@ -119,7 +119,6 @@ body {
 body {
   position: relative;
   margin: 0;
-  min-width: 320px;
   overflow-x: hidden;
   background: var(--page-background);
   color: var(--text);
@@ -212,7 +211,8 @@ button:focus-visible {
 
 .resume-shell {
   position: relative;
-  width: min(100%, 1180px);
+  width: auto;
+  max-width: 1180px;
   margin: 0 auto;
   padding: clamp(14px, 3vw, 40px);
 }
@@ -1537,11 +1537,11 @@ h1 {
   }
 
   .main-column {
-    order: 1;
+    order: 2;
   }
 
   .sidebar {
-    order: 2;
+    order: 1;
   }
 
   .panel {

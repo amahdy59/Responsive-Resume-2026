@@ -62,5 +62,7 @@ const server = createServer(async (request, response) => {
 });
 
 server.listen(port, () => {
-  console.log(`Serving ${join(root)} at http://127.0.0.1:${port}`);
+  const address = server.address();
+  const activePort = typeof address === "object" && address ? address.port : port;
+  console.log(`Serving ${join(root)} at http://127.0.0.1:${activePort}`);
 });

@@ -64,6 +64,8 @@ const translations = {
   ar: {
     about_text:
       "مصمم تجربة مستخدم ومصور بيانات بخبرة تزيد عن 8 سنوات في تحويل احتياجات المستخدمين والأعمال إلى لوحات معلومات تفاعلية وتجارب رقمية متمحورة حول المستخدم. ماهر في أبحاث المستخدم، وبنية المعلومات، وسرد البيانات، وتصميم الواجهات سهلة الوصول باستخدام Excel وPower BI وTableau وSQL وPython.",
+    aria_dark_mode: "الوضع الداكن",
+    aria_high_contrast_mode: "وضع التباين العالي",
     aria_print_resume: "طباعة السيرة الذاتية أو حفظها كملف PDF",
     aria_switch_to_arabic: "التبديل إلى العربية",
     aria_switch_to_dark: "التبديل إلى الوضع الداكن",
@@ -154,7 +156,7 @@ const translations = {
     skills_data_header: "تحليل وتصوير البيانات",
     skills_ux_header: "تصميم تجربة المستخدم",
     opens_new_tab: " يفتح في تبويب جديد",
-    skip_link: "تجاوز إلى المحتوى الرئيسي",
+    skip_link: "تجاوز إلى محتوى السيرة الذاتية",
     title: "مصمم تجربة المستخدم ومصور بيانات",
     toast_copied: "تم النسخ",
     toast_failed: "فشل النسخ",
@@ -173,6 +175,8 @@ const translations = {
   en: {
     about_text:
       "UX Designer & Data Visualizer with 8+ years of experience turning user and business needs into decision-ready dashboards and user-centered digital experiences. Skilled in user research, information architecture, data storytelling, visualization, and accessible interface design with Excel, Power BI, Tableau, SQL, and Python.",
+    aria_dark_mode: "Dark mode",
+    aria_high_contrast_mode: "High contrast mode",
     aria_print_resume: "Print the resume or save it as PDF",
     aria_switch_to_arabic: "Switch to Arabic",
     aria_switch_to_dark: "Switch to dark mode",
@@ -263,7 +267,7 @@ const translations = {
     skill_ux9: "Accessibility",
     skills_data_header: "Data Analysis & Visualization",
     skills_ux_header: "Core UX & Design",
-    skip_link: "Skip to main content",
+    skip_link: "Skip to resume content",
     title: "UX Designer & Data Visualizer",
     toast_copied: "Copied",
     toast_copy_cert: "Certification link copied to clipboard",
@@ -404,6 +408,16 @@ function updateTranslatedAttributes(lang) {
   });
 }
 
+function getLinkText(link) {
+  const note = link.querySelector(".sr-only[data-translate='opens_new_tab']");
+
+  return Array.from(link.childNodes)
+    .filter((node) => node !== note)
+    .map((node) => node.textContent)
+    .join("")
+    .trim();
+}
+
 /**
  * Injects a visually-hidden screen-reader note into every target="_blank" link
  * so assistive technology announces it opens in a new tab.
@@ -451,11 +465,7 @@ function updateExternalLinks(lang) {
 
   document.querySelectorAll('a[target="_blank"]').forEach((link) => {
     const note = link.querySelector(".sr-only[data-translate='opens_new_tab']");
-    const label = Array.from(link.childNodes)
-      .filter((node) => node !== note)
-      .map((node) => node.textContent)
-      .join("")
-      .trim();
+    const label = getLinkText(link);
     const context = [hint, newTabText].filter(Boolean).join(", ");
 
     link.setAttribute("aria-label", context ? `${label} (${context})` : label);
@@ -471,11 +481,15 @@ function updateExternalLinks(lang) {
 function updateCopyButtons(lang) {
   document.querySelectorAll("[data-copy]").forEach((button) => {
     const key = button.dataset.tooltipKey;
-    const label = getTranslation(lang, key, button.getAttribute("aria-label") || "");
+    const genericLabel = getTranslation(lang, key, button.getAttribute("aria-label") || "");
+    const link = button.closest("li, article")?.querySelector("a");
+    const includesSubject = key === "tooltip_copy_cert" || key === "tooltip_copy_project";
+    const subject = includesSubject && link ? getLinkText(link) : "";
+    const label = subject ? `${genericLabel}: ${subject}` : genericLabel;
 
     if (label) {
       button.setAttribute("aria-label", label);
-      button.setAttribute("data-tooltip", label);
+      button.setAttribute("data-tooltip", genericLabel);
     }
   });
 }
@@ -502,14 +516,11 @@ function updateLanguageButton(lang) {
  */
 function updateThemeButton(lang) {
   const isDark = root.dataset.theme === "dark";
-  const ariaLabel = isDark
-    ? getTranslation(lang, "aria_switch_to_light")
-    : getTranslation(lang, "aria_switch_to_dark");
   const tooltip = isDark
     ? getTranslation(lang, "tooltip_theme_light")
     : getTranslation(lang, "tooltip_theme_dark");
 
-  controls.themeToggle?.setAttribute("aria-label", ariaLabel);
+  controls.themeToggle?.setAttribute("aria-label", getTranslation(lang, "aria_dark_mode"));
   controls.themeToggle?.setAttribute("aria-pressed", String(isDark));
   controls.themeToggle?.setAttribute("data-tooltip", tooltip);
   setUseIcon(controls.themeToggle, isDark ? "#icon-sun" : "#icon-moon");
@@ -522,11 +533,11 @@ function updateThemeButton(lang) {
  */
 function updateContrastButton(lang) {
   const isHigh = root.dataset.contrast === "high";
-  const ariaLabel = isHigh
-    ? getTranslation(lang, "aria_switch_to_normal_contrast")
-    : getTranslation(lang, "aria_switch_to_high_contrast");
 
-  controls.contrastToggle?.setAttribute("aria-label", ariaLabel);
+  controls.contrastToggle?.setAttribute(
+    "aria-label",
+    getTranslation(lang, "aria_high_contrast_mode"),
+  );
   controls.contrastToggle?.setAttribute("aria-pressed", String(isHigh));
   controls.contrastToggle?.setAttribute("data-tooltip", getTranslation(lang, "tooltip_contrast"));
   controls.contrastToggle?.classList.toggle("active", isHigh);
