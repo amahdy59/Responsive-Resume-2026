@@ -211,6 +211,10 @@
                 <span role="listitem" data-translate="ux_tag">UX Design</span>
                 <span role="listitem" data-translate="data_tag">Data Visualization</span>
               </div>
+              <button class="resume-action" type="button" aria-label="Print or save resume as PDF">
+                <span aria-hidden="true"><svg><use href="#icon-print"></use></svg></span>
+                <span data-translate="print_cta">Print / Save PDF</span>
+              </button>
             </div>
           </div>
           <div class="hero-controls-wrapper">
@@ -230,9 +234,6 @@
               <button class="contrast-toggle" type="button" data-tooltip="Toggle Contrast" aria-label="High contrast mode">
                 <span aria-hidden="true"><svg><use href="#icon-contrast"></use></svg></span>
               </button>
-              <button class="print-button" type="button" data-tooltip="Print / Save as PDF" aria-label="Print or save resume as PDF">
-                <span aria-hidden="true"><svg><use href="#icon-print"></use></svg></span>
-              </button>
             </div>
             <ul
               class="contact-list"
@@ -242,21 +243,21 @@
             >
               <li>
                 <span class="contact-icon" aria-hidden="true"><svg><use href="#icon-mail"></use></svg></span>
-                <a href="mailto:amahdy59@gmail.com">amahdy59@gmail.com</a>
+                <a href="mailto:amahdy59@gmail.com" lang="en" dir="ltr">amahdy59@gmail.com</a>
                 <button class="copy-button" type="button" data-copy="amahdy59@gmail.com" aria-label="Copy email address" data-tooltip="Copy email address" data-tooltip-key="tooltip_copy_email">
                   <span aria-hidden="true"><svg><use href="#icon-copy"></use></svg></span>
                 </button>
               </li>
               <li>
                 <span class="contact-icon" aria-hidden="true"><svg><use href="#icon-linkedin"></use></svg></span>
-                <a href="https://www.linkedin.com/in/creativemahdy" target="_blank" rel="noopener noreferrer">linkedin.com/in/creativemahdy</a>
+                <a href="https://www.linkedin.com/in/creativemahdy" target="_blank" rel="noopener noreferrer" dir="auto" data-translate="contact_linkedin">LinkedIn profile</a>
                 <button class="copy-button" type="button" data-copy="https://www.linkedin.com/in/creativemahdy" aria-label="Copy LinkedIn profile link" data-tooltip="Copy LinkedIn profile link" data-tooltip-key="tooltip_copy_linkedin">
                   <span aria-hidden="true"><svg><use href="#icon-copy"></use></svg></span>
                 </button>
               </li>
               <li>
                 <span class="contact-icon" aria-hidden="true"><svg><use href="#icon-dribbble"></use></svg></span>
-                <a href="https://dribbble.com/creativemahdy" target="_blank" rel="noopener noreferrer">dribbble.com/creativemahdy</a>
+                <a href="https://dribbble.com/creativemahdy" target="_blank" rel="noopener noreferrer" dir="auto" data-translate="contact_dribbble">Dribbble portfolio</a>
                 <button class="copy-button" type="button" data-copy="https://dribbble.com/creativemahdy" aria-label="Copy Dribbble profile link" data-tooltip="Copy Dribbble profile link" data-tooltip-key="tooltip_copy_dribbble">
                   <span aria-hidden="true"><svg><use href="#icon-copy"></use></svg></span>
                 </button>
@@ -265,6 +266,20 @@
           </div>
         </header>
 
+        <nav
+          class="section-nav"
+          aria-label="Resume sections"
+          data-translate-attr="aria-label"
+          data-translate-attr-key="section_nav_label"
+        >
+          <a href="#about" data-translate="sect_about">About Me</a>
+          <a href="#certifications" data-translate="sect_certs">Certifications</a>
+          <a href="#skills" data-translate="sect_skills">Skills</a>
+          <a href="#projects" data-translate="sect_projects">Projects</a>
+          <a href="#employment" data-translate="sect_jobs">Employment</a>
+          <a href="#education" data-translate="sect_edu">Education</a>
+        </nav>
+
         <div class="content-grid" id="resume-content" tabindex="-1">
           <aside
             class="sidebar"
@@ -272,7 +287,7 @@
             data-translate-attr="aria-label"
             data-translate-attr-key="profile_details_label"
           >
-            <section class="panel panel-secondary about-panel">
+            <section class="panel panel-secondary about-panel" id="about">
               <h2><span class="panel-icon-box" aria-hidden="true"><svg><use href="#icon-user"></use></svg></span><span data-translate="sect_about">About Me</span></h2>
               <p data-translate="about_text">
                 UX Designer & Data Visualizer with 8+ years of experience turning user and
@@ -283,7 +298,7 @@
               </p>
             </section>
 
-            <section class="panel panel-secondary certifications-panel">
+            <section class="panel panel-secondary certifications-panel" id="certifications">
               <h2><span class="panel-icon-box" aria-hidden="true"><svg><use href="#icon-award"></use></svg></span><span data-translate="sect_certs">Certifications</span></h2>
               <ul class="compact-list">
                 <li><a href="https://www.coursera.org/account/accomplishments/professional-cert/0OYUGNC1DRF5" target="_blank" rel="noopener noreferrer"><span data-translate="cert1">Google Data Analytics</span></a></li>
@@ -294,7 +309,7 @@
               </ul>
             </section>
 
-            <section class="panel panel-secondary skills-panel">
+            <section class="panel panel-secondary skills-panel" id="skills">
               <h2><span class="panel-icon-box" aria-hidden="true"><svg><use href="#icon-spark"></use></svg></span><span data-translate="sect_skills">Skills</span></h2>
               <div class="skill-group">
                 <h3 data-translate="skills_ux_header">Core UX & Design</h3>
@@ -335,7 +350,7 @@
             data-translate-attr="aria-label"
             data-translate-attr-key="main_resume_label"
           >
-            <section class="panel panel-primary featured projects-panel">
+            <section class="panel panel-primary featured projects-panel" id="projects">
               <h2><span class="panel-icon-box" aria-hidden="true"><svg><use href="#icon-folder"></use></svg></span><span data-translate="sect_projects">Projects</span></h2>
               <div class="project-group">
                 <h3 data-translate="proj_ux_header">UX Projects</h3>
@@ -375,7 +390,7 @@
               </div>
             </section>
 
-            <section class="panel panel-primary timeline-panel employment-panel">
+            <section class="panel panel-primary timeline-panel employment-panel" id="employment">
               <h2><span class="panel-icon-box" aria-hidden="true"><svg><use href="#icon-briefcase"></use></svg></span><span data-translate="sect_jobs">Employment</span></h2>
               <div class="timeline">
                 <div class="li-experience-group">
@@ -426,7 +441,7 @@
               </div>
             </section>
 
-            <section class="panel panel-secondary timeline-panel education-panel">
+            <section class="panel panel-secondary timeline-panel education-panel" id="education">
               <h2><span class="panel-icon-box" aria-hidden="true"><svg><use href="#icon-education"></use></svg></span><span data-translate="sect_edu">Education</span></h2>
               <div class="timeline education">
                 <div class="li-experience-group">

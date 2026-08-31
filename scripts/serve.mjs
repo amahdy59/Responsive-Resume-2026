@@ -24,8 +24,9 @@ const mimeTypes = {
 };
 
 function getSafePath(urlPath) {
-  const cleanPath = normalize(decodeURIComponent(urlPath.split("?")[0]));
-  const requestedPath = cleanPath === "/" ? "index.html" : cleanPath.replace(/^[/\\]+/, "");
+  const decodedPath = decodeURIComponent(urlPath.split("?")[0]);
+  const cleanPath = normalize(decodedPath);
+  const requestedPath = decodedPath === "/" ? "index.html" : cleanPath.replace(/^[/\\]+/, "");
   const resolvedPath = resolve(root, requestedPath);
 
   if (!resolvedPath.startsWith(root)) {

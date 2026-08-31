@@ -50,12 +50,16 @@ let browser;
 
 try {
   await waitForServer();
+  assert.equal((await fetch(`${baseUrl}/?smoke=1`)).status, 200);
   browser = await chromium.launch({ headless: true });
 
   for (const scenario of scenarios) {
     const context = await browser.newContext({
       viewport: { width: scenario.width, height: scenario.height },
     });
+    await context.route(/https:\/\/fonts\.googleapis\.com\//, (route) =>
+      route.fulfill({ body: "", contentType: "text/css", status: 200 }),
+    );
     const page = await context.newPage();
     const runtimeErrors = [];
 
@@ -114,6 +118,15 @@ try {
           .filter(({ left, right }) => left < 0 || right > window.innerWidth)
           .slice(0, 8),
         scrollWidth: document.documentElement.scrollWidth,
+        contactTexts: [...document.querySelectorAll(".contact-list a")].map((link) =>
+          link.childNodes[0]?.textContent.trim(),
+        ),
+        resumeActionText: document.querySelector(".resume-action")?.textContent?.trim(),
+        sectionLinks: [...document.querySelectorAll(".section-nav a")].map((link) => ({
+          targetExists: Boolean(document.querySelector(new URL(link.href).hash)),
+          text: link.textContent.trim(),
+        })),
+        sectionNavPosition: getComputedStyle(document.querySelector(".section-nav")).position,
         skipTargetTabIndex: skipTarget?.tabIndex,
         visualSectionOrder: panels
           .toSorted((a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top)
@@ -132,6 +145,19 @@ try {
     assert.deepEqual(runtimeErrors, []);
     assert.equal(new Set(state.buttonNames).size, state.buttonNames.length);
     assert.equal(state.skipTargetTabIndex, -1);
+    assert.equal(state.sectionLinks.length, 6);
+    assert.ok(state.sectionLinks.every(({ targetExists, text }) => targetExists && text));
+    assert.equal(state.sectionNavPosition, "sticky");
+    assert.equal(
+      state.resumeActionText,
+      scenario.language === "ar" ? "طباعة / حفظ PDF" : "Print / Save PDF",
+    );
+    assert.deepEqual(
+      state.contactTexts.slice(1),
+      scenario.language === "ar"
+        ? ["الملف الشخصي على لينكد إن", "معرض الأعمال على دريبل"]
+        : ["LinkedIn profile", "Dribbble portfolio"],
+    );
 
     if (scenario.width <= 375) {
       assert.deepEqual(state.visualSectionOrder, state.domSectionOrder);
@@ -148,6 +174,14 @@ try {
     );
 
     if (scenario.language === "en" && scenario.width === 320) {
+      await page.evaluate(() => {
+        window.print = () => {
+          window.__printCalled = true;
+        };
+        document.querySelector(".resume-action").click();
+      });
+      assert.equal(await page.evaluate(() => window.__printCalled), true);
+
       const firstProject = page.locator(".featured article").first();
       await firstProject.locator("a").first().focus();
       assert.notEqual(await firstProject.evaluate((article) => getComputedStyle(article).transform), "none");

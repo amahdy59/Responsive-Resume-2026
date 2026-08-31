@@ -14,7 +14,7 @@ const controls = {
   themeToggle: document.querySelector(".theme-toggle"),
   langToggle: document.querySelector(".lang-toggle"),
   contrastToggle: document.querySelector(".contrast-toggle"),
-  printButton: document.querySelector(".print-button"),
+  printButton: document.querySelector(".resume-action"),
 };
 
 const metaNodes = {
@@ -67,16 +67,14 @@ const translations = {
     aria_high_contrast_mode: "وضع التباين العالي",
     aria_print_resume: "طباعة السيرة الذاتية أو حفظها كملف PDF",
     aria_switch_to_arabic: "التبديل إلى العربية",
-    aria_switch_to_dark: "التبديل إلى الوضع الداكن",
     aria_switch_to_english: "التبديل إلى الإنجليزية",
-    aria_switch_to_high_contrast: "التبديل إلى التباين العالي",
-    aria_switch_to_light: "التبديل إلى الوضع الفاتح",
-    aria_switch_to_normal_contrast: "التبديل إلى التباين العادي",
     cert1: "تحليل البيانات من جوجل (Google Data Analytics)",
     cert2: "تحليل ذكاء الأعمال Tableau (Tableau Business Intelligence Analyst)",
     cert3: "مهارات Excel لتحليل البيانات والتصوير المرئي",
     cert4: "مهارات Excel للأعمال",
     cert5: "تصميم تجربة المستخدم من جوجل (Google UX Design)",
+    contact_dribbble: "معرض الأعمال على دريبل",
+    contact_linkedin: "الملف الشخصي على لينكد إن",
     contact_links_label: "روابط التواصل",
     data_tag: "تصوير البيانات",
     display_settings_label: "إعدادات العرض",
@@ -106,6 +104,7 @@ const translations = {
       "السيرة الذاتية لأحمد مهدي، مصمم تجربة مستخدم ومصور بيانات، مع خبرة في التصميم، ولوحات المعلومات، وتجارب المنتجات الرقمية.",
     meta_title: "أحمد مهدي | مصمم تجربة المستخدم ومصور بيانات",
     name: "أحمد مهدي",
+    print_cta: "طباعة / حفظ PDF",
     profile_details_label: "تفاصيل الملف الشخصي",
     proj_data1_desc:
       "تجربة تفاعلية لتصور البيانات باستخدام Tableau تساعد المستخدمين على استكشاف مجموعات LEGO حسب الموضوع، والعمر، والسعر، وعدد القطع.",
@@ -126,6 +125,7 @@ const translations = {
     proj_ux_header: "مشاريع تجربة المستخدم",
     resume_card_label: "نظرة عامة على السيرة الذاتية",
     resume_label: "موقع السيرة الذاتية لأحمد مهدي",
+    section_nav_label: "أقسام السيرة الذاتية",
     sect_about: "نبذة عني",
     sect_certs: "الشهادات المهنية",
     sect_edu: "التعليم",
@@ -166,7 +166,6 @@ const translations = {
     tooltip_copy_linkedin: "نسخ رابط لينكد إن",
     tooltip_copy_project: "نسخ رابط المشروع",
     tooltip_lang: "تبديل اللغة",
-    tooltip_print: "طباعة / حفظ كـ PDF",
     tooltip_theme_dark: "التبديل إلى الوضع الداكن",
     tooltip_theme_light: "التبديل إلى الوضع الفاتح",
     ux_tag: "تصميم تجربة المستخدم",
@@ -178,16 +177,14 @@ const translations = {
     aria_high_contrast_mode: "High contrast mode",
     aria_print_resume: "Print the resume or save it as PDF",
     aria_switch_to_arabic: "Switch to Arabic",
-    aria_switch_to_dark: "Switch to dark mode",
     aria_switch_to_english: "Switch to English",
-    aria_switch_to_high_contrast: "Switch to high contrast",
-    aria_switch_to_light: "Switch to light mode",
-    aria_switch_to_normal_contrast: "Switch to normal contrast",
     cert1: "Google Data Analytics",
     cert2: "Tableau Business Intelligence Analyst",
     cert3: "Excel Skills for Data Analytics and Visualization",
     cert4: "Excel Skills for Business",
     cert5: "Google UX Design",
+    contact_dribbble: "Dribbble portfolio",
+    contact_linkedin: "LinkedIn profile",
     contact_links_label: "Contact links",
     data_tag: "Data Visualization",
     display_settings_label: "Display settings",
@@ -218,6 +215,7 @@ const translations = {
     meta_title: "Ahmed Mahdy | UX Designer & Data Visualizer",
     name: "Ahmed Mahdy",
     opens_new_tab: " opens in new tab",
+    print_cta: "Print / Save PDF",
     profile_details_label: "Profile details",
     proj_data1_desc:
       "An interactive Tableau visualization experience that helps users explore LEGO sets by theme, age, price, and set count.",
@@ -238,6 +236,7 @@ const translations = {
     proj_ux_header: "UX Projects",
     resume_card_label: "Resume overview",
     resume_label: "Ahmed Mahdy resume portfolio",
+    section_nav_label: "Resume sections",
     sect_about: "About Me",
     sect_certs: "Certifications",
     sect_edu: "Education",
@@ -282,7 +281,6 @@ const translations = {
     tooltip_copy_linkedin: "Copy LinkedIn link",
     tooltip_copy_project: "Copy project link",
     tooltip_lang: "Toggle language",
-    tooltip_print: "Print / Save as PDF",
     tooltip_theme_dark: "Switch to dark mode",
     tooltip_theme_light: "Switch to light mode",
     ux_tag: "UX Design",
@@ -543,12 +541,11 @@ function updateContrastButton(lang) {
 }
 
 /**
- * Updates the print button aria-label and tooltip for the current language.
+ * Updates the print button accessible name for the current language.
  * @param {'en'|'ar'} lang - Language code.
  */
 function updatePrintButton(lang) {
   controls.printButton?.setAttribute("aria-label", getTranslation(lang, "aria_print_resume"));
-  controls.printButton?.setAttribute("data-tooltip", getTranslation(lang, "tooltip_print"));
 }
 
 /**
@@ -823,17 +820,11 @@ function updatePrintStyles() {
 }
 
 /**
- * Entry point. Locks the contact list to LTR, enhances cards with copy buttons,
- * binds all copy button listeners, then applies the saved (or system-preferred)
- * theme, contrast, and language to boot the UI.
+ * Entry point. Enhances cards with copy buttons, binds all copy button
+ * listeners, then applies the saved (or system-preferred) theme, contrast,
+ * and language to boot the UI.
  */
 function initialize() {
-  const contactList = document.querySelector(".contact-list");
-
-  if (contactList) {
-    contactList.setAttribute("lang", "en");
-  }
-
   enhanceLinkedCards();
   bindCopyButtons();
 

@@ -251,7 +251,6 @@ button:focus-visible {
 
 .theme-toggle,
 .lang-toggle,
-.print-button,
 .contrast-toggle {
   --control-visual-size: 28px;
   display: inline-grid;
@@ -279,11 +278,9 @@ button:focus-visible {
 
 .theme-toggle:hover,
 .lang-toggle:hover,
-.print-button:hover,
 .contrast-toggle:hover,
 .theme-toggle:focus-visible,
 .lang-toggle:focus-visible,
-.print-button:focus-visible,
 .contrast-toggle:focus-visible {
   transform: scale(1.1);
   background: transparent;
@@ -293,7 +290,6 @@ button:focus-visible {
 
 .theme-toggle span,
 .lang-toggle span,
-.print-button span,
 .contrast-toggle span {
   display: inline-grid;
   place-items: center;
@@ -311,11 +307,9 @@ button:focus-visible {
 
 .theme-toggle:hover span,
 .lang-toggle:hover span,
-.print-button:hover span,
 .contrast-toggle:hover span,
 .theme-toggle:focus-visible span,
 .lang-toggle:focus-visible span,
-.print-button:focus-visible span,
 .contrast-toggle:focus-visible span {
   background: rgba(255, 255, 255, 0.35);
   border-color: rgba(255, 255, 255, 0.5);
@@ -324,7 +318,6 @@ button:focus-visible {
 
 .theme-toggle svg,
 .lang-toggle svg,
-.print-button svg,
 .contrast-toggle svg,
 .contact-icon svg {
   width: 16px;
@@ -418,8 +411,47 @@ h1 {
   font-weight: 500;
 }
 
+.resume-action {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: 8px;
+  min-height: 44px;
+  margin-top: 14px;
+  padding: 8px 13px;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  border-radius: 10px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.86rem;
+  font-weight: 700;
+  transition: background-color 180ms ease, transform 180ms ease;
+}
+
+.resume-action:hover,
+.resume-action:focus-visible {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
+}
+
+.resume-action > span:first-child {
+  display: inline-grid;
+  place-items: center;
+}
+
+.resume-action svg {
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+}
+
 .contact-list {
-  direction: ltr !important;
   display: grid;
   gap: 8px;
   width: min(100%, 380px);
@@ -442,7 +474,8 @@ h1 {
   align-items: center;
   gap: 8px;
   min-width: 0;
-  padding: 4px 36px 4px 6px;
+  padding: 4px 6px;
+  padding-inline-end: 54px;
   border-radius: 8px;
 }
 
@@ -455,7 +488,12 @@ h1 {
   font-size: 0.9rem;
   font-weight: 500;
   line-height: 1.45;
-  text-align: left;
+  text-align: start;
+}
+
+[dir="rtl"] .contact-list .copy-button {
+  right: auto !important;
+  left: 8px !important;
 }
 
 .sr-only {
@@ -618,6 +656,43 @@ h1 {
   background: rgba(255, 255, 255, 0.2);
 }
 
+.section-nav {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 16px;
+  overflow-x: auto;
+  background: color-mix(in srgb, var(--surface) 94%, transparent);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(12px);
+  scrollbar-width: none;
+}
+
+.section-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.section-nav a {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  min-height: 44px;
+  padding: 6px 10px;
+  color: var(--muted);
+  border-radius: 9px;
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
+.section-nav a:hover,
+.section-nav a:focus-visible {
+  color: var(--link-aaa);
+  background: var(--pill-bg);
+}
+
 .content-grid {
   display: grid;
   grid-template-columns: minmax(260px, 0.8fr) minmax(0, 1.7fr);
@@ -637,6 +712,7 @@ h1 {
 }
 
 .panel {
+  scroll-margin-top: 76px;
   padding: 18px;
   background: var(--panel);
   border: 1px solid var(--line);
@@ -1176,7 +1252,7 @@ h1 {
 /* Enhanced tactile button borders and visibility in High Contrast Mode */
 [data-contrast="high"] .lang-toggle,
 [data-contrast="high"] .contrast-toggle,
-[data-contrast="high"] .print-button {
+[data-contrast="high"] .resume-action {
   border: 2px solid #ffffff !important;
   background: #000000 !important;
   color: #ffffff !important;
@@ -1214,8 +1290,8 @@ h1 {
 [data-contrast="high"] .lang-toggle:focus-visible,
 [data-contrast="high"] .contrast-toggle:hover,
 [data-contrast="high"] .contrast-toggle:focus-visible,
-[data-contrast="high"] .print-button:hover,
-[data-contrast="high"] .print-button:focus-visible {
+[data-contrast="high"] .resume-action:hover,
+[data-contrast="high"] .resume-action:focus-visible {
   border-color: #00ffff !important;
   color: #00ffff !important;
 }
@@ -1466,6 +1542,15 @@ h1 {
     align-items: center;
   }
 
+  .resume-action {
+    align-self: center;
+  }
+
+  .section-nav {
+    justify-content: flex-start;
+    padding-inline: 10px;
+  }
+
   .tags {
     justify-content: center;
   }
@@ -1482,7 +1567,8 @@ h1 {
 
   .contact-list li {
     align-items: flex-start;
-    padding: 6px 38px 6px 8px;
+    padding: 6px 8px;
+    padding-inline-end: 54px;
   }
 
   .contact-list a {
@@ -1709,13 +1795,14 @@ h1 {
 
   /* ── Hide web-only controls ── */
   .copy-button,
-  .print-button,
+  .resume-action,
   .theme-toggle,
   .lang-toggle,
   .contrast-toggle,
   .controls-group,
   .ambient-particles,
   .hero-pattern,
+  .section-nav,
   .skip-link {
     display: none !important;
   }
