@@ -17,12 +17,12 @@
     <meta id="og-description" property="og:description" content="Real-time interactive operational dashboard monitoring flight arrivals, departures, and terminal status." />
     <meta property="og:url" content="https://creativemahdy.space/project-cairo-airport.html" />
     <meta property="og:site_name" content="Ahmed Mahdy Portfolio Resume" />
-    <meta property="og:image" content="https://creativemahdy.space/assets/og-card.png" />
+    <meta property="og:image" content="https://creativemahdy.space/assets/og-cairo-airport.png" />
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta id="twitter-title" property="twitter:title" content="Cairo International Airport - Command Hub | Ahmed Mahdy Portfolio" />
     <meta id="twitter-description" property="twitter:description" content="Real-time interactive operational dashboard monitoring flight arrivals, departures, and terminal status." />
-    <meta property="twitter:image" content="https://creativemahdy.space/assets/og-card.png" />
+    <meta property="twitter:image" content="https://creativemahdy.space/assets/og-cairo-airport.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -172,10 +172,29 @@
               </div>
             </div>
             <div class="case-cta-wrapper">
+              <button class="btn btn-secondary case-preview-toggle" type="button" data-toggle-embed aria-expanded="false">
+                <span>Interactive Preview</span>
+              </button>
               <a href="https://amahdy59.github.io/CAI-Airport/" class="btn btn-primary case-live-cta" target="_blank" rel="noopener noreferrer">
                 <span>View Live Project</span>
                 <svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg>
               </a>
+            </div>
+          </div>
+
+          <div class="live-embed-wrapper" id="live-embed-viewer">
+            <div class="live-embed-bar">
+              <div class="live-embed-controls">
+                <button class="device-btn is-active" type="button" data-set-device="desktop">Desktop</button>
+                <button class="device-btn" type="button" data-set-device="mobile">Mobile (390px)</button>
+              </div>
+              <a href="https://amahdy59.github.io/CAI-Airport/" class="device-btn" target="_blank" rel="noopener noreferrer">
+                <span>Open in New Tab</span>
+                <svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg>
+              </a>
+            </div>
+            <div class="live-embed-frame-container" data-device="desktop">
+              <iframe class="live-embed-iframe" src="about:blank" data-src="https://amahdy59.github.io/CAI-Airport/" title="Live interactive preview of Cairo International Airport Command Hub" loading="lazy"></iframe>
             </div>
           </div>
         </header>

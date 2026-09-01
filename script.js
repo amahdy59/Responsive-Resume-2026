@@ -1109,4 +1109,169 @@ function initScrollReveal() {
   });
 }
 
+/* ── Interactive Image Lightbox Modal ── */
+function initImageLightbox() {
+  let lightbox = null;
+  let lightboxImg = null;
+  let lightboxCaption = null;
+  let closeBtn = null;
+  let lastActiveElement = null;
+
+  function ensureLightbox() {
+    if (lightbox) return;
+    lightbox = document.createElement("div");
+    lightbox.id = "image-lightbox";
+    lightbox.className = "image-lightbox";
+    lightbox.setAttribute("role", "dialog");
+    lightbox.setAttribute("aria-modal", "true");
+    lightbox.setAttribute("aria-label", "Image preview");
+    lightbox.innerHTML = `
+      <div class="lightbox-content">
+        <button class="lightbox-close-btn" type="button" aria-label="Close image preview">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 6L6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="lightbox-img-wrapper">
+          <img class="lightbox-img" alt="" />
+        </div>
+        <p class="lightbox-caption"></p>
+      </div>
+    `;
+    document.body.appendChild(lightbox);
+    lightboxImg = lightbox.querySelector(".lightbox-img");
+    lightboxCaption = lightbox.querySelector(".lightbox-caption");
+    closeBtn = lightbox.querySelector(".lightbox-close-btn");
+
+    closeBtn.addEventListener("click", closeLightbox);
+    lightbox.addEventListener("click", (e) => {
+      if (e.target === lightbox || e.target.classList.contains("lightbox-img-wrapper")) {
+        closeLightbox();
+      }
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && lightbox && lightbox.classList.contains("is-open")) {
+        closeLightbox();
+      }
+    });
+  }
+
+  function openLightbox(imgSrc, altText, captionText) {
+    ensureLightbox();
+    lastActiveElement = document.activeElement;
+    lightboxImg.src = imgSrc;
+    lightboxImg.alt = altText || "";
+    lightboxCaption.textContent = captionText || altText || "";
+    lightbox.classList.add("is-open");
+    closeBtn.focus();
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeLightbox() {
+    if (!lightbox || !lightbox.classList.contains("is-open")) return;
+    lightbox.classList.remove("is-open");
+    if (lightboxImg) lightboxImg.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E";
+    document.body.style.overflow = "";
+    if (lastActiveElement && typeof lastActiveElement.focus === "function") {
+      lastActiveElement.focus();
+    }
+  }
+
+  // Attach to case study images
+  const targetImages = document.querySelectorAll(".case-study-image, .case-showcase-wrapper img");
+  targetImages.forEach((img) => {
+    img.setAttribute("tabindex", "0");
+    img.setAttribute("role", "button");
+    img.setAttribute("aria-label", `Zoom into ${img.alt || "image preview"}`);
+
+    const handleOpen = () => {
+      const caption = img.closest("figure")?.querySelector("figcaption")?.textContent || img.alt;
+      openLightbox(img.src, img.alt, caption);
+    };
+
+    img.addEventListener("click", handleOpen);
+    img.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        handleOpen();
+      }
+    });
+  });
+}
+
+/* ── Interactive In-Page Live Embed Viewer ── */
+function initLiveEmbedViewer() {
+  const toggleButtons = document.querySelectorAll("[data-toggle-embed]");
+  toggleButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const container = document.getElementById("live-embed-viewer");
+      if (!container) return;
+
+      const isOpen = container.classList.toggle("is-open");
+      btn.setAttribute("aria-expanded", String(isOpen));
+      btn.querySelector("span").textContent = isOpen ? "Hide Interactive Preview" : "Interactive Preview";
+
+      if (isOpen) {
+        const iframe = container.querySelector(".live-embed-iframe");
+        if (iframe && iframe.getAttribute("src") === "about:blank" && iframe.dataset.src) {
+          iframe.src = iframe.dataset.src;
+        }
+        container.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }
+    });
+  });
+
+  const deviceButtons = document.querySelectorAll("[data-set-device]");
+  deviceButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const frameContainer = document.querySelector(".live-embed-frame-container");
+      if (!frameContainer) return;
+
+      deviceButtons.forEach((b) => b.classList.remove("is-active"));
+      btn.classList.add("is-active");
+
+      const device = btn.dataset.setDevice;
+      frameContainer.dataset.device = device;
+    });
+  });
+}
+
+/* ── Skill Badge to Project Cross-Filtering ── */
+function initSkillProjectLinks() {
+  const skillPills = document.querySelectorAll(".pills span[data-skill-filter]");
+  const projectPanel = document.getElementById("projects");
+  if (!skillPills.length || !projectPanel) return;
+
+  skillPills.forEach((pill) => {
+    const handleSkillClick = () => {
+      const filterCategory = pill.dataset.skillFilter;
+      const filterBtn = document.querySelector(`.project-filter-pill[data-filter="${filterCategory}"]`);
+      if (filterBtn) {
+        filterBtn.click();
+      }
+
+      projectPanel.scrollIntoView({ behavior: "smooth", block: "start" });
+
+      // Pulse all matching category articles
+      const articles = document.querySelectorAll(`.featured article[data-category="${filterCategory}"]`);
+      articles.forEach((art) => {
+        art.classList.remove("skill-highlighted");
+        void art.offsetWidth; // Trigger reflow
+        art.classList.add("skill-highlighted");
+        setTimeout(() => art.classList.remove("skill-highlighted"), 3000);
+      });
+    };
+
+    pill.addEventListener("click", handleSkillClick);
+    pill.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        handleSkillClick();
+      }
+    });
+  });
+}
+
 initScrollReveal();
+initImageLightbox();
+initLiveEmbedViewer();
+initSkillProjectLinks();
