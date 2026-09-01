@@ -368,9 +368,43 @@
           >
             <section class="panel panel-primary featured projects-panel" id="projects">
               <h2><span class="panel-icon-box" aria-hidden="true"><svg><use href="#icon-folder"></use></svg></span><span data-translate="sect_projects">Projects</span></h2>
-              <div class="project-group">
+
+              <!-- Project filter pills -->
+              <div
+                class="project-filter-bar"
+                role="group"
+                aria-label="Filter projects by category"
+                data-translate-attr="aria-label"
+                data-translate-attr-key="filter_projects_label"
+              >
+                <button
+                  class="project-filter-pill is-active"
+                  type="button"
+                  data-filter="all"
+                  aria-pressed="true"
+                  data-translate="filter_all"
+                >All <span class="filter-count" aria-hidden="true">5</span></button>
+                <button
+                  class="project-filter-pill"
+                  type="button"
+                  data-filter="ux"
+                  aria-pressed="false"
+                  data-translate="filter_ux"
+                >UX Design <span class="filter-count" aria-hidden="true">3</span></button>
+                <button
+                  class="project-filter-pill"
+                  type="button"
+                  data-filter="data"
+                  aria-pressed="false"
+                  data-translate="filter_data"
+                >Data Visualization <span class="filter-count" aria-hidden="true">2</span></button>
+              </div>
+              <!-- Live region announces filter results to screen readers -->
+              <p class="sr-only" role="status" aria-live="polite" aria-atomic="true" id="filter-results-announcement"></p>
+
+              <div class="project-group" data-group-category="ux">
                 <h3 data-translate="proj_ux_header">UX Projects</h3>
-                <article>
+                <article data-category="ux">
                   <img class="project-thumbnail" src="assets/case-haj-arafa.webp" alt="" width="1440" height="890" loading="lazy" decoding="async" />
                   <h4><span data-translate="proj_ux3_title">Haj Arafa App</span></h4>
                   <p data-translate="proj_ux3_desc">
@@ -383,7 +417,7 @@
                     </a>
                   </div>
                 </article>
-                <article>
+                <article data-category="ux">
                   <img class="project-thumbnail" src="assets/case-cairo-airport.webp" alt="" width="1440" height="1586" loading="lazy" decoding="async" />
                   <h4><span data-translate="proj_ux2_title">Cairo International Airport - Command Hub</span></h4>
                   <p data-translate="proj_ux2_desc">
@@ -396,7 +430,7 @@
                     </a>
                   </div>
                 </article>
-                <article>
+                <article data-category="ux">
                   <img class="project-thumbnail" src="assets/case-hr-tool.webp" alt="" width="1440" height="890" loading="lazy" decoding="async" />
                   <h4><span data-translate="proj_ux1_title">Human Resources Tool</span></h4>
                   <p data-translate="proj_ux1_desc">
@@ -411,9 +445,9 @@
                 </article>
               </div>
 
-              <div class="project-group">
-                <h3 data-translate="proj_data_header">Data Analysis & Visualization Projects</h3>
-                <article>
+              <div class="project-group" data-group-category="data">
+                <h3 data-translate="proj_data_header">Data Analysis &amp; Visualization Projects</h3>
+                <article data-category="data">
                   <img class="project-thumbnail" src="assets/case-lego-explorer.webp" alt="" width="1440" height="890" loading="lazy" decoding="async" />
                   <h4><span data-translate="proj_data1_title">A Data-Driven LEGO Explorer</span></h4>
                   <p data-translate="proj_data1_desc">
@@ -426,7 +460,7 @@
                     </a>
                   </div>
                 </article>
-                <article>
+                <article data-category="data">
                   <img class="project-thumbnail" src="assets/case-sales-dashboard.webp" alt="" width="1440" height="890" loading="lazy" decoding="async" />
                   <h4><span data-translate="proj_data2_title">Sales Performance Dashboard</span></h4>
                   <p data-translate="proj_data2_desc">

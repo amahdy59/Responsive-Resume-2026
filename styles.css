@@ -907,6 +907,124 @@ h1 {
   margin-top: 14px;
 }
 
+/* ── Project Filter Pills ── */
+.project-filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-block: 16px 4px;
+}
+
+.project-filter-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border: 1.5px solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1;
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    color 160ms ease,
+    background 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    transform 120ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.project-filter-pill:hover {
+  border-color: color-mix(in srgb, var(--blue) 55%, transparent);
+  color: var(--text);
+  background: color-mix(in srgb, var(--blue) 7%, transparent);
+}
+
+.project-filter-pill:active {
+  transform: scale(0.97);
+}
+
+.project-filter-pill:focus-visible {
+  outline: 2.5px solid var(--blue);
+  outline-offset: 2px;
+  border-color: var(--blue);
+}
+
+.project-filter-pill.is-active {
+  background: var(--blue);
+  border-color: var(--blue);
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 2px 8px color-mix(in srgb, var(--blue) 35%, transparent);
+}
+
+.project-filter-pill.is-active:hover {
+  background: color-mix(in srgb, var(--blue) 88%, #000);
+  border-color: color-mix(in srgb, var(--blue) 88%, #000);
+}
+
+/* Count badge inside pill */
+.filter-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: color-mix(in srgb, currentColor 15%, transparent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1;
+  transition: background 160ms ease;
+}
+
+.project-filter-pill.is-active .filter-count {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* Article entry animation on filter */
+@keyframes project-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.projects-panel article[data-category]:not([hidden]) {
+  animation: project-fade-in 220ms cubic-bezier(0.2, 0, 0.1, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .projects-panel article[data-category]:not([hidden]) {
+    animation: none;
+  }
+  .project-filter-pill {
+    transition: none;
+  }
+}
+
+/* High-contrast mode */
+@media (forced-colors: active) {
+  .project-filter-pill {
+    border: 2px solid ButtonText;
+    forced-color-adjust: auto;
+  }
+  .project-filter-pill.is-active {
+    background: Highlight;
+    color: HighlightText;
+    border-color: Highlight;
+  }
+}
+
 .featured article {
   position: relative;
   background: var(--project-bg);
