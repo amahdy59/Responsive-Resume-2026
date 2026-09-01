@@ -107,9 +107,7 @@
         <path d="m6.34 17.66-1.41 1.41" />
         <path d="m19.07 4.93-1.41 1.41" />
       </symbol>
-      <symbol id="icon-moon" viewBox="0 0 24 24">
-        <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
-      </symbol>
+      <symbol id="icon-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1 -9 -9Z" /></symbol>
       <symbol id="icon-mail" viewBox="0 0 24 24">
         <rect width="20" height="16" x="2" y="4" rx="2" />
         <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
@@ -171,6 +169,8 @@
       <symbol id="icon-check" viewBox="0 0 16 16">
         <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z" />
       </symbol>
+      <symbol id="icon-volume" viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="icon-pause" viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16" fill="currentColor"/><rect x="14" y="4" width="4" height="16" fill="currentColor"/></symbol>
     </svg>
     <div class="ambient-particles" aria-hidden="true"></div>
     <main
@@ -292,7 +292,13 @@
             data-translate-attr-key="profile_details_label"
           >
             <section class="panel panel-secondary about-panel" id="about">
-              <h2><span class="panel-icon-box" aria-hidden="true"><svg><use href="#icon-user"></use></svg></span><span data-translate="sect_about">About Me</span></h2>
+              <div class="panel-heading-row">
+                <h2><span class="panel-icon-box" aria-hidden="true"><svg><use href="#icon-user"></use></svg></span><span data-translate="sect_about">About Me</span></h2>
+                <button class="audio-play-btn" type="button" data-audio-id="resume-about" aria-label="Listen to About Me" title="Listen to narration">
+                  <svg class="audio-icon" aria-hidden="true"><use href="#icon-volume"></use></svg>
+                  <span class="audio-btn-text">Listen</span>
+                </button>
+              </div>
               <p data-translate="about_text">
                 UX Designer & Data Visualizer with 8+ years of experience turning user and
                 business needs into decision-ready dashboards and user-centered digital
@@ -303,7 +309,13 @@
             </section>
 
             <section class="panel panel-secondary certifications-panel" id="certifications">
-              <h2><span class="panel-icon-box" aria-hidden="true"><svg><use href="#icon-award"></use></svg></span><span data-translate="sect_certs">Certifications</span></h2>
+              <div class="panel-heading-row">
+                <h2><span class="panel-icon-box" aria-hidden="true"><svg><use href="#icon-award"></use></svg></span><span data-translate="sect_certs">Certifications</span></h2>
+                <button class="audio-play-btn" type="button" data-audio-id="resume-certifications" aria-label="Listen to Certifications" title="Listen to narration">
+                  <svg class="audio-icon" aria-hidden="true"><use href="#icon-volume"></use></svg>
+                  <span class="audio-btn-text">Listen</span>
+                </button>
+              </div>
               <ul class="compact-list">
                 <li><a href="https://www.coursera.org/account/accomplishments/professional-cert/0OYUGNC1DRF5" target="_blank" rel="noopener noreferrer"><span data-translate="cert1">Google Data Analytics</span></a></li>
                 <li><a href="https://www.coursera.org/account/accomplishments/professional-cert/JQPVYZ6VYF52" target="_blank" rel="noopener noreferrer"><span data-translate="cert2">Tableau Business Intelligence Analyst</span></a></li>
@@ -431,7 +443,13 @@
             </section>
 
             <section class="panel panel-primary timeline-panel employment-panel" id="employment">
-              <h2><span class="panel-icon-box" aria-hidden="true"><svg><use href="#icon-briefcase"></use></svg></span><span data-translate="sect_jobs">Employment</span></h2>
+              <div class="panel-heading-row">
+                <h2><span class="panel-icon-box" aria-hidden="true"><svg><use href="#icon-briefcase"></use></svg></span><span data-translate="sect_jobs">Employment</span></h2>
+                <button class="audio-play-btn" type="button" data-audio-id="resume-employment" aria-label="Listen to Employment history" title="Listen to narration">
+                  <svg class="audio-icon" aria-hidden="true"><use href="#icon-volume"></use></svg>
+                  <span class="audio-btn-text">Listen</span>
+                </button>
+              </div>
               <div class="timeline">
                 <div class="li-experience-group">
                   <div class="li-company-header">

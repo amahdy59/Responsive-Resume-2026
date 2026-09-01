@@ -6,7 +6,7 @@
     <meta
       id="meta-description"
       name="description"
-      content="Sales reporting and data visualization case study built around a Google Sheets CRM workflow."
+      content="CRM sales performance dashboard visualizing revenue, conversion rates, and quota attainment."
     />
     <meta name="theme-color" content="#005f88" />
     <link rel="canonical" href="https://creativemahdy.space/project-sales-dashboard.html" />
@@ -14,15 +14,15 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta id="og-title" property="og:title" content="Sales Performance Dashboard | Ahmed Mahdy Portfolio" />
-    <meta id="og-description" property="og:description" content="Sales reporting and data visualization case study built around a Google Sheets CRM workflow." />
+    <meta id="og-description" property="og:description" content="CRM sales performance dashboard visualizing revenue, conversion rates, and quota attainment." />
     <meta property="og:url" content="https://creativemahdy.space/project-sales-dashboard.html" />
     <meta property="og:site_name" content="Ahmed Mahdy Portfolio Resume" />
-    <meta property="og:image" content="https://creativemahdy.space/assets/ahmed-mahdy.png" />
+    <meta property="og:image" content="https://creativemahdy.space/assets/og-card.png" />
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta id="twitter-title" property="twitter:title" content="Sales Performance Dashboard | Ahmed Mahdy Portfolio" />
-    <meta id="twitter-description" property="twitter:description" content="Sales reporting and data visualization case study built around a Google Sheets CRM workflow." />
-    <meta property="twitter:image" content="https://creativemahdy.space/assets/ahmed-mahdy.png" />
+    <meta id="twitter-description" property="twitter:description" content="CRM sales performance dashboard visualizing revenue, conversion rates, and quota attainment." />
+    <meta property="twitter:image" content="https://creativemahdy.space/assets/og-card.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -55,7 +55,7 @@
     "@type": "CreativeWork",
     "name": "Sales Performance Dashboard",
     "headline": "Sales Performance Dashboard",
-    "description": "CRM sales dashboard built in Google Sheets for tracking quarterly team performance through chart-based visualization.",
+    "description": "CRM sales performance dashboard visualizing revenue, conversion rates, and quota attainment.",
     "url": "https://creativemahdy.space/project-sales-dashboard.html",
     "author": {
       "@type": "Person",
@@ -82,7 +82,7 @@
       {
         "@type": "ListItem",
         "position": 3,
-        "name": "Sales Dashboard",
+        "name": "Sales Performance Dashboard",
         "item": "https://creativemahdy.space/project-sales-dashboard.html"
       }
     ]
@@ -93,124 +93,182 @@
   <body data-page="case-study" data-localized="false">
     <a href="#case-study-content" class="skip-link">Skip to content</a>
     <svg class="icon-sprite" aria-hidden="true" focusable="false">
-      <symbol id="icon-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" /></symbol>
+      <symbol id="icon-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1 -9 -9Z" /></symbol>
       <symbol id="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" /><path d="M12 2v2" /><path d="M12 20v2" /><path d="m4.93 4.93 1.41 1.41" /><path d="m17.66 17.66 1.41 1.41" /><path d="M2 12h2" /><path d="M20 12h2" /><path d="m6.34 17.66-1.41 1.41" /><path d="m19.07 4.93-1.41 1.41" /></symbol>
       <symbol id="icon-contrast" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" /><path d="M12 3a9 9 0 0 1 0 18Z" /></symbol>
       <symbol id="icon-external" viewBox="0 0 24 24"><path d="M15 3h6v6" /><path d="m10 14 11-11" /><path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5" /></symbol>
       <symbol id="icon-arrow-left" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></symbol>
+      <symbol id="icon-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></symbol>
+      <symbol id="icon-volume" viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="icon-pause" viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16" fill="currentColor"/><rect x="14" y="4" width="4" height="16" fill="currentColor"/></symbol>
     </svg>
     <div class="ambient-particles" aria-hidden="true"></div>
     <main class="resume-shell case-study-shell" id="case-study-content">
-      <nav class="case-study-nav reveal active" aria-label="Case study header navigation">
-        <a href="index.html#projects" class="back-link">
-          <svg aria-hidden="true"><use href="#icon-arrow-left"></use></svg>
-          Back to Projects
-        </a>
-        <div class="case-study-controls">
-          <button class="theme-toggle" type="button" data-tooltip="Switch Theme" aria-label="Dark mode"><span aria-hidden="true"><svg><use href="#icon-moon"></use></svg></span></button>
-          <button class="contrast-toggle" type="button" data-tooltip="Toggle Contrast" aria-label="High contrast mode"><span aria-hidden="true"><svg><use href="#icon-contrast"></use></svg></span></button>
-        </div>
-      </nav>
-      <nav class="case-study-breadcrumbs" aria-label="Breadcrumb trail">
-        <ol class="breadcrumbs">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="index.html#projects">Projects</a></li>
-          <li aria-current="page">Sales Dashboard</li>
-        </ol>
-      </nav>
-
-            <article class="case-study-card panel reveal active">
-        <header class="case-study-hero">
-          <span class="case-category-badge">Business Intelligence • Spreadsheet CRM</span>
-          <h1>Sales Performance Dashboard</h1>
-          <p class="case-study-subtitle">CRM sales dashboard built in Google Sheets for tracking quarterly team performance through chart-based visualization.</p>
-
-          <div class="case-meta-grid">
-            <div class="case-meta-item">
-              <span class="case-meta-label">Role</span>
-              <span class="case-meta-value">Data Visualizer & BI Designer</span>
-            </div>
-            <div class="case-meta-item">
-              <span class="case-meta-label">Timeline</span>
-              <span class="case-meta-value">1 Month</span>
-            </div>
-            <div class="case-meta-item">
-              <span class="case-meta-label">Platform</span>
-              <span class="case-meta-value">Google Sheets & Analytics</span>
-            </div>
-            <div class="case-meta-item">
-              <span class="case-meta-label">Status</span>
-              <span class="case-meta-value">Published Live</span>
-            </div>
+      <header class="case-study-header-bar reveal active">
+        <nav class="case-study-nav" aria-label="Case study header navigation">
+          <a href="index.html#projects" class="case-nav-back-pill">
+            <svg aria-hidden="true"><use href="#icon-arrow-left"></use></svg>
+            <span>Back to Projects</span>
+          </a>
+          <div class="case-study-controls">
+            <button class="theme-toggle" type="button" data-tooltip="Switch Theme" aria-label="Dark mode"><span aria-hidden="true"><svg><use href="#icon-moon"></use></svg></span></button>
+            <button class="contrast-toggle" type="button" data-tooltip="Toggle Contrast" aria-label="High contrast mode"><span aria-hidden="true"><svg><use href="#icon-contrast"></use></svg></span></button>
           </div>
+        </nav>
+        <nav class="case-study-breadcrumbs" aria-label="Breadcrumb trail">
+          <ol class="breadcrumbs">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#projects">Projects</a></li>
+            <li aria-current="page">Sales Performance Dashboard</li>
+          </ol>
+        </nav>
+      </header>
 
-          <div class="case-study-actions">
-            <a href="https://mavenshowcase.com/project/26891" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
-              View Live Project <svg class="external-icon" viewBox="0 0 24 24"><use href="#icon-external"></use></svg>
-            </a>
+      <article class="case-study-card panel reveal active">
+        <!-- 1. Hero Showcase Mockup at top of card -->
+        <figure class="case-showcase-wrapper">
+          <div class="mockup-header" aria-hidden="true">
+            <div class="mockup-dots">
+              <span class="mockup-dot red"></span>
+              <span class="mockup-dot yellow"></span>
+              <span class="mockup-dot green"></span>
+            </div>
+            <div class="mockup-url">sheets.google.com/sales-dashboard-crm</div>
+            <div class="mockup-badge"><span class="live-dot"></span> Live Prototype</div>
+          </div>
+          <img src="assets/case-sales-dashboard.webp" width="1440" height="890" alt="Sales Performance Dashboard interface preview" class="case-study-image" decoding="async" fetchpriority="high" />
+          <figcaption>CRM sales performance dashboard visualizing revenue, conversion rates, and quota attainment.</figcaption>
+        </figure>
+
+        <!-- 2. Hero Headline, Meta & Live Action Button -->
+        <header class="case-study-hero">
+          <div class="case-hero-top-row">
+            <span class="case-category-badge">Business Intelligence • Performance Analytics</span>
+            <button class="audio-play-btn" type="button" data-audio-id="sales-dashboard-intro" aria-label="Listen to Sales Performance Dashboard overview" title="Listen to narration">
+              <svg class="audio-icon" aria-hidden="true"><use href="#icon-volume"></use></svg>
+              <span class="audio-btn-text">Listen</span>
+            </button>
+          </div>
+          <h1>Sales Performance Dashboard</h1>
+          <p class="case-study-subtitle">CRM sales performance dashboard visualizing revenue, conversion rates, and quota attainment.</p>
+
+          <div class="case-hero-meta-and-cta">
+            <div class="case-meta-chips">
+              <div class="case-chip">
+                <span class="chip-label">Role</span>
+                <strong class="chip-val">Data Analyst & Dashboard Designer</strong>
+              </div>
+              <div class="case-chip">
+                <span class="chip-label">Timeline</span>
+                <strong class="chip-val">1 Month</strong>
+              </div>
+              <div class="case-chip">
+                <span class="chip-label">Platform</span>
+                <strong class="chip-val">Google Sheets / BI Dashboard</strong>
+              </div>
+              <div class="case-chip">
+                <span class="chip-label">Status</span>
+                <strong class="chip-val status-live">Published Live</strong>
+              </div>
+            </div>
+            <div class="case-cta-wrapper">
+              <a href="https://mavenshowcase.com/project/26891" class="btn btn-primary case-live-cta" target="_blank" rel="noopener noreferrer">
+                <span>View Sales Showcase</span>
+                <svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg>
+              </a>
+            </div>
           </div>
         </header>
 
-        <figure class="case-study-figure">
-          <div class="mockup-header" aria-hidden="true">
-            <span class="mockup-dot red"></span>
-            <span class="mockup-dot yellow"></span>
-            <span class="mockup-dot green"></span>
-            <span class="mockup-url">docs.google.com/spreadsheets/sales-q4</span>
-          </div>
-          <img src="assets/case-sales-dashboard.webp" width="1440" height="890" alt="Sales Performance Dashboard overview" class="case-study-image" decoding="async" fetchpriority="high" />
-          <figcaption>Quarterly sales intelligence dashboard featuring dynamic quota tracking and lead conversion pipeline.</figcaption>
-        </figure>
-
+        <!-- 3. Numbered Content Story Sections with Audio -->
         <div class="case-study-content">
-          <section class="case-study-section">
-            <h2><span class="section-num">01</span> Context &amp; Challenge</h2>
-            <p>Sales directors were spending hours manually aggregating rep performance across scattered spreadsheets without real-time visibility into quota attainment or pipeline velocity.</p>
+          <section class="case-study-section" id="section-01">
+            <div class="section-title-row">
+              <h2><span class="section-num">01</span> Context & Challenge</h2>
+              <button class="audio-play-btn" type="button" data-audio-id="sales-dashboard-01" aria-label="Listen to Context & Challenge" title="Listen to narration">
+                <svg class="audio-icon" aria-hidden="true"><use href="#icon-volume"></use></svg>
+                <span class="audio-btn-text">Listen</span>
+              </button>
+            </div>
+            <p>Sales management lacked real-time visibility into quarterly pipeline health, regional rep quotas, and product-tier conversion funnels.</p>
           </section>
-
-          <section class="case-study-section">
-            <h2><span class="section-num">02</span> Approach &amp; Key Decisions</h2>
-            <p>Built an automated, formulas-driven Google Sheets CRM dashboard with visual KPI summary cards, progress bars, and lead source conversion funnels.</p>
+          <section class="case-study-section" id="section-02">
+            <div class="section-title-row">
+              <h2><span class="section-num">02</span> Approach & Key Decisions</h2>
+              <button class="audio-play-btn" type="button" data-audio-id="sales-dashboard-02" aria-label="Listen to Approach & Key Decisions" title="Listen to narration">
+                <svg class="audio-icon" aria-hidden="true"><use href="#icon-volume"></use></svg>
+                <span class="audio-btn-text">Listen</span>
+              </button>
+            </div>
+            <p>Engineered an automated Google Sheets analytics engine with dynamic KPI summaries, trend sparklines, and automated rep ranking calculations.</p>
             <div class="case-callout">
-              <strong>Key Design Decision</strong>
-              Designed conditional formatting logic and automated status indicators that immediately flag stalled pipeline opportunities requiring sales management intervention.
+              <strong>Analytical UI Decision</strong>
+              <p>Combined modular KPI scorecards with dynamic date range selectors to eliminate manual monthly report compiling.</p>
             </div>
           </section>
-
-          <section class="case-study-section">
-            <h2><span class="section-num">03</span> Tools &amp; Technologies</h2>
+          <section class="case-study-section" id="section-03">
+            <div class="section-title-row">
+              <h2><span class="section-num">03</span> Tools & Technologies</h2>
+              <button class="audio-play-btn" type="button" data-audio-id="sales-dashboard-03" aria-label="Listen to Tools & Technologies" title="Listen to narration">
+                <svg class="audio-icon" aria-hidden="true"><use href="#icon-volume"></use></svg>
+                <span class="audio-btn-text">Listen</span>
+              </button>
+            </div>
             <div class="pills">
               <span class="skill-btn">Google Sheets</span>
-              <span class="skill-btn">Data Visualization</span>
-              <span class="skill-btn">Sales Analytics</span>
-              <span class="skill-btn">Dashboard Architecture</span>
-              <span class="skill-btn">KPI Tracking</span>
+              <span class="skill-btn">Data Modeling</span>
+              <span class="skill-btn">KPI Dashboards</span>
+              <span class="skill-btn">Formulas & Macros</span>
+              <span class="skill-btn">Revenue Analytics</span>
             </div>
           </section>
-
-          <section class="case-study-section">
-            <h2><span class="section-num">04</span> Outcome &amp; Impact</h2>
-            <p>Empowered team leadership to conduct weekly pipeline reviews in half the time with instant visibility into individual and team quota progress.</p>
+          <section class="case-study-section" id="section-04">
+            <div class="section-title-row">
+              <h2><span class="section-num">04</span> Outcome & Impact</h2>
+              <button class="audio-play-btn" type="button" data-audio-id="sales-dashboard-04" aria-label="Listen to Outcome & Impact" title="Listen to narration">
+                <svg class="audio-icon" aria-hidden="true"><use href="#icon-volume"></use></svg>
+                <span class="audio-btn-text">Listen</span>
+              </button>
+            </div>
+            <p>Empowered leadership to identify conversion bottlenecks and reallocate sales focus to high-margin revenue streams.</p>
           </section>
-
-          <section class="case-study-section">
-            <h2><span class="section-num">05</span> Evidence &amp; Next Validation</h2>
-            <p>Working spreadsheet template and visual dashboard are available on Maven Showcase.</p>
+          <section class="case-study-section" id="section-05">
+            <div class="section-title-row">
+              <h2><span class="section-num">05</span> Evidence & Next Validation</h2>
+              <button class="audio-play-btn" type="button" data-audio-id="sales-dashboard-05" aria-label="Listen to Evidence & Next Validation" title="Listen to narration">
+                <svg class="audio-icon" aria-hidden="true"><use href="#icon-volume"></use></svg>
+                <span class="audio-btn-text">Listen</span>
+              </button>
+            </div>
+            <p>Live interactive model published on Maven Showcase with full performance calculation schemas.</p>
           </section>
         </div>
 
-        <nav class="case-study-pagination" aria-label="Case study pagination">
-          <a class="back-link" href="project-lego-explorer.html">
-            <span class="pagination-sub">← Previous Case Study</span>
-            <span class="pagination-title">LEGO Explorer</span>
+        <!-- 4. Directional Bottom Pagination -->
+        <footer class="case-study-pagination" aria-label="Case study pagination">
+          <a href="project-lego-explorer.html" class="pagination-card pagination-prev">
+            <div class="pagination-arrow-box" aria-hidden="true">
+              <svg><use href="#icon-arrow-left"></use></svg>
+            </div>
+            <div class="pagination-info">
+              <span class="pagination-sub">Previous Project</span>
+              <span class="pagination-title">A Data-Driven LEGO Explorer</span>
+            </div>
           </a>
-          <a class="back-link" href="project-haj-arafa.html">
-            <span class="pagination-sub">Next Case Study →</span>
-            <span class="pagination-title">Haj Arafa App</span>
+          <a href="project-haj-arafa.html" class="pagination-card pagination-next">
+            <div class="pagination-info">
+              <span class="pagination-sub">Next Project</span>
+              <span class="pagination-title">Haj Arafa App</span>
+            </div>
+            <div class="pagination-arrow-box" aria-hidden="true">
+              <svg><use href="#icon-arrow-right"></use></svg>
+            </div>
           </a>
-        </nav>
+        </footer>
       </article>
     </main>
-<script src="script.js"></script>
+
+    <script src="script.js" defer></script>
+    <script src="audio-player.js" defer></script>
   </body>
 </html>

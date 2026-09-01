@@ -6,23 +6,23 @@
     <meta
       id="meta-description"
       name="description"
-      content="Tableau data visualization case study for exploring LEGO themes, prices, ages, and set counts."
+      content="Interactive Tableau dashboard exploring 18,000+ LEGO sets across historical themes and complexity tiers."
     />
     <meta name="theme-color" content="#005f88" />
     <link rel="canonical" href="https://creativemahdy.space/project-lego-explorer.html" />
-    <title>Data-Driven LEGO Explorer | Ahmed Mahdy Portfolio</title>
+    <title>A Data-Driven LEGO Explorer | Ahmed Mahdy Portfolio</title>
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta id="og-title" property="og:title" content="Data-Driven LEGO Explorer | Ahmed Mahdy Portfolio" />
-    <meta id="og-description" property="og:description" content="Tableau data visualization case study for exploring LEGO themes, prices, ages, and set counts." />
+    <meta id="og-title" property="og:title" content="A Data-Driven LEGO Explorer | Ahmed Mahdy Portfolio" />
+    <meta id="og-description" property="og:description" content="Interactive Tableau dashboard exploring 18,000+ LEGO sets across historical themes and complexity tiers." />
     <meta property="og:url" content="https://creativemahdy.space/project-lego-explorer.html" />
     <meta property="og:site_name" content="Ahmed Mahdy Portfolio Resume" />
-    <meta property="og:image" content="https://creativemahdy.space/assets/ahmed-mahdy.png" />
+    <meta property="og:image" content="https://creativemahdy.space/assets/og-card.png" />
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
-    <meta id="twitter-title" property="twitter:title" content="Data-Driven LEGO Explorer | Ahmed Mahdy Portfolio" />
-    <meta id="twitter-description" property="twitter:description" content="Tableau data visualization case study for exploring LEGO themes, prices, ages, and set counts." />
-    <meta property="twitter:image" content="https://creativemahdy.space/assets/ahmed-mahdy.png" />
+    <meta id="twitter-title" property="twitter:title" content="A Data-Driven LEGO Explorer | Ahmed Mahdy Portfolio" />
+    <meta id="twitter-description" property="twitter:description" content="Interactive Tableau dashboard exploring 18,000+ LEGO sets across historical themes and complexity tiers." />
+    <meta property="twitter:image" content="https://creativemahdy.space/assets/og-card.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -55,7 +55,7 @@
     "@type": "CreativeWork",
     "name": "A Data-Driven LEGO Explorer",
     "headline": "A Data-Driven LEGO Explorer",
-    "description": "An interactive Tableau visualization experience that helps users explore LEGO sets by theme, age, price, and set count.",
+    "description": "Interactive Tableau dashboard exploring 18,000+ LEGO sets across historical themes and complexity tiers.",
     "url": "https://creativemahdy.space/project-lego-explorer.html",
     "author": {
       "@type": "Person",
@@ -82,7 +82,7 @@
       {
         "@type": "ListItem",
         "position": 3,
-        "name": "LEGO Explorer",
+        "name": "A Data-Driven LEGO Explorer",
         "item": "https://creativemahdy.space/project-lego-explorer.html"
       }
     ]
@@ -93,124 +93,182 @@
   <body data-page="case-study" data-localized="false">
     <a href="#case-study-content" class="skip-link">Skip to content</a>
     <svg class="icon-sprite" aria-hidden="true" focusable="false">
-      <symbol id="icon-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" /></symbol>
+      <symbol id="icon-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1 -9 -9Z" /></symbol>
       <symbol id="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" /><path d="M12 2v2" /><path d="M12 20v2" /><path d="m4.93 4.93 1.41 1.41" /><path d="m17.66 17.66 1.41 1.41" /><path d="M2 12h2" /><path d="M20 12h2" /><path d="m6.34 17.66-1.41 1.41" /><path d="m19.07 4.93-1.41 1.41" /></symbol>
       <symbol id="icon-contrast" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" /><path d="M12 3a9 9 0 0 1 0 18Z" /></symbol>
       <symbol id="icon-external" viewBox="0 0 24 24"><path d="M15 3h6v6" /><path d="m10 14 11-11" /><path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5" /></symbol>
       <symbol id="icon-arrow-left" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></symbol>
+      <symbol id="icon-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></symbol>
+      <symbol id="icon-volume" viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="icon-pause" viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16" fill="currentColor"/><rect x="14" y="4" width="4" height="16" fill="currentColor"/></symbol>
     </svg>
     <div class="ambient-particles" aria-hidden="true"></div>
     <main class="resume-shell case-study-shell" id="case-study-content">
-      <nav class="case-study-nav reveal active" aria-label="Case study header navigation">
-        <a href="index.html#projects" class="back-link">
-          <svg aria-hidden="true"><use href="#icon-arrow-left"></use></svg>
-          Back to Projects
-        </a>
-        <div class="case-study-controls">
-          <button class="theme-toggle" type="button" data-tooltip="Switch Theme" aria-label="Dark mode"><span aria-hidden="true"><svg><use href="#icon-moon"></use></svg></span></button>
-          <button class="contrast-toggle" type="button" data-tooltip="Toggle Contrast" aria-label="High contrast mode"><span aria-hidden="true"><svg><use href="#icon-contrast"></use></svg></span></button>
-        </div>
-      </nav>
-      <nav class="case-study-breadcrumbs" aria-label="Breadcrumb trail">
-        <ol class="breadcrumbs">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="index.html#projects">Projects</a></li>
-          <li aria-current="page">LEGO Explorer</li>
-        </ol>
-      </nav>
-
-            <article class="case-study-card panel reveal active">
-        <header class="case-study-hero">
-          <span class="case-category-badge">Data Visualization • Tableau Analytics</span>
-          <h1>A Data-Driven LEGO Explorer</h1>
-          <p class="case-study-subtitle">An interactive Tableau visualization experience that helps users explore LEGO sets by theme, age, price, and set count.</p>
-
-          <div class="case-meta-grid">
-            <div class="case-meta-item">
-              <span class="case-meta-label">Role</span>
-              <span class="case-meta-value">Data Analyst & Visualizer</span>
-            </div>
-            <div class="case-meta-item">
-              <span class="case-meta-label">Timeline</span>
-              <span class="case-meta-value">2 Months</span>
-            </div>
-            <div class="case-meta-item">
-              <span class="case-meta-label">Platform</span>
-              <span class="case-meta-value">Tableau Public Visualization</span>
-            </div>
-            <div class="case-meta-item">
-              <span class="case-meta-label">Status</span>
-              <span class="case-meta-value">Published Live</span>
-            </div>
+      <header class="case-study-header-bar reveal active">
+        <nav class="case-study-nav" aria-label="Case study header navigation">
+          <a href="index.html#projects" class="case-nav-back-pill">
+            <svg aria-hidden="true"><use href="#icon-arrow-left"></use></svg>
+            <span>Back to Projects</span>
+          </a>
+          <div class="case-study-controls">
+            <button class="theme-toggle" type="button" data-tooltip="Switch Theme" aria-label="Dark mode"><span aria-hidden="true"><svg><use href="#icon-moon"></use></svg></span></button>
+            <button class="contrast-toggle" type="button" data-tooltip="Toggle Contrast" aria-label="High contrast mode"><span aria-hidden="true"><svg><use href="#icon-contrast"></use></svg></span></button>
           </div>
+        </nav>
+        <nav class="case-study-breadcrumbs" aria-label="Breadcrumb trail">
+          <ol class="breadcrumbs">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#projects">Projects</a></li>
+            <li aria-current="page">A Data-Driven LEGO Explorer</li>
+          </ol>
+        </nav>
+      </header>
 
-          <div class="case-study-actions">
-            <a href="https://mavenshowcase.com/project/24967" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
-              View Live Project <svg class="external-icon" viewBox="0 0 24 24"><use href="#icon-external"></use></svg>
-            </a>
-          </div>
-        </header>
-
-        <figure class="case-study-figure">
+      <article class="case-study-card panel reveal active">
+        <!-- 1. Hero Showcase Mockup at top of card -->
+        <figure class="case-showcase-wrapper">
           <div class="mockup-header" aria-hidden="true">
-            <span class="mockup-dot red"></span>
-            <span class="mockup-dot yellow"></span>
-            <span class="mockup-dot green"></span>
-            <span class="mockup-url">public.tableau.com/views/lego-explorer</span>
+            <div class="mockup-dots">
+              <span class="mockup-dot red"></span>
+              <span class="mockup-dot yellow"></span>
+              <span class="mockup-dot green"></span>
+            </div>
+            <div class="mockup-url">public.tableau.com/views/lego-explorer</div>
+            <div class="mockup-badge"><span class="live-dot"></span> Live Prototype</div>
           </div>
-          <img src="assets/case-lego-explorer.webp" width="1440" height="890" alt="LEGO Explorer data visualization dashboard overview" class="case-study-image" decoding="async" fetchpriority="high" />
+          <img src="assets/case-lego-explorer.webp" width="1440" height="890" alt="A Data-Driven LEGO Explorer interface preview" class="case-study-image" decoding="async" fetchpriority="high" />
           <figcaption>Interactive Tableau dashboard exploring 18,000+ LEGO sets across historical themes and complexity tiers.</figcaption>
         </figure>
 
-        <div class="case-study-content">
-          <section class="case-study-section">
-            <h2><span class="section-num">01</span> Context &amp; Challenge</h2>
-            <p>A massive 50-year dataset of over 18,000 LEGO sets presented overwhelming tabular data that prevented casual collectors and analysts from discovering pricing trends and theme growth.</p>
-          </section>
+        <!-- 2. Hero Headline, Meta & Live Action Button -->
+        <header class="case-study-hero">
+          <div class="case-hero-top-row">
+            <span class="case-category-badge">Data Visualization • Tableau Analytics</span>
+            <button class="audio-play-btn" type="button" data-audio-id="lego-explorer-intro" aria-label="Listen to A Data-Driven LEGO Explorer overview" title="Listen to narration">
+              <svg class="audio-icon" aria-hidden="true"><use href="#icon-volume"></use></svg>
+              <span class="audio-btn-text">Listen</span>
+            </button>
+          </div>
+          <h1>A Data-Driven LEGO Explorer</h1>
+          <p class="case-study-subtitle">Interactive Tableau dashboard exploring 18,000+ LEGO sets across historical themes and complexity tiers.</p>
 
-          <section class="case-study-section">
-            <h2><span class="section-num">02</span> Approach &amp; Key Decisions</h2>
-            <p>Cleaned and structured the dataset, then designed an interactive dual-axis visual analytics dashboard in Tableau allowing dynamic filtering by release decade, piece count, and target demographic.</p>
+          <div class="case-hero-meta-and-cta">
+            <div class="case-meta-chips">
+              <div class="case-chip">
+                <span class="chip-label">Role</span>
+                <strong class="chip-val">Data Analyst & Visualizer</strong>
+              </div>
+              <div class="case-chip">
+                <span class="chip-label">Timeline</span>
+                <strong class="chip-val">2 Months</strong>
+              </div>
+              <div class="case-chip">
+                <span class="chip-label">Platform</span>
+                <strong class="chip-val">Tableau Public Visualization</strong>
+              </div>
+              <div class="case-chip">
+                <span class="chip-label">Status</span>
+                <strong class="chip-val status-live">Published Live</strong>
+              </div>
+            </div>
+            <div class="case-cta-wrapper">
+              <a href="https://mavenshowcase.com/project/24967" class="btn btn-primary case-live-cta" target="_blank" rel="noopener noreferrer">
+                <span>View Tableau Showcase</span>
+                <svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg>
+              </a>
+            </div>
+          </div>
+        </header>
+
+        <!-- 3. Numbered Content Story Sections with Audio -->
+        <div class="case-study-content">
+          <section class="case-study-section" id="section-01">
+            <div class="section-title-row">
+              <h2><span class="section-num">01</span> Context & Challenge</h2>
+              <button class="audio-play-btn" type="button" data-audio-id="lego-explorer-01" aria-label="Listen to Context & Challenge" title="Listen to narration">
+                <svg class="audio-icon" aria-hidden="true"><use href="#icon-volume"></use></svg>
+                <span class="audio-btn-text">Listen</span>
+              </button>
+            </div>
+            <p>A massive 50-year dataset of over 18,000 LEGO sets presented overwhelming tabular data that obscured critical trends in theme longevity, piece counts, and price inflation.</p>
+          </section>
+          <section class="case-study-section" id="section-02">
+            <div class="section-title-row">
+              <h2><span class="section-num">02</span> Approach & Key Decisions</h2>
+              <button class="audio-play-btn" type="button" data-audio-id="lego-explorer-02" aria-label="Listen to Approach & Key Decisions" title="Listen to narration">
+                <svg class="audio-icon" aria-hidden="true"><use href="#icon-volume"></use></svg>
+                <span class="audio-btn-text">Listen</span>
+              </button>
+            </div>
+            <p>Structured a dynamic Tableau visual narrative with cross-filtering, historical price normalization, and interactive age-bracket distribution charts.</p>
             <div class="case-callout">
-              <strong>Key Design Decision</strong>
-              Engineered responsive cross-filtering across bar charts and scatter plots, allowing users to select any individual theme and instantly view median price per piece curves.
+              <strong>Data Storytelling Decision</strong>
+              <p>Designed intuitive visual hierarchy with high-contrast color encoding to allow non-technical collectors to instantly uncover pricing and rarity trends.</p>
             </div>
           </section>
-
-          <section class="case-study-section">
-            <h2><span class="section-num">03</span> Tools &amp; Technologies</h2>
+          <section class="case-study-section" id="section-03">
+            <div class="section-title-row">
+              <h2><span class="section-num">03</span> Tools & Technologies</h2>
+              <button class="audio-play-btn" type="button" data-audio-id="lego-explorer-03" aria-label="Listen to Tools & Technologies" title="Listen to narration">
+                <svg class="audio-icon" aria-hidden="true"><use href="#icon-volume"></use></svg>
+                <span class="audio-btn-text">Listen</span>
+              </button>
+            </div>
             <div class="pills">
               <span class="skill-btn">Tableau</span>
-              <span class="skill-btn">Data Analysis</span>
+              <span class="skill-btn">Data Storytelling</span>
+              <span class="skill-btn">Statistical Analysis</span>
               <span class="skill-btn">Information Design</span>
-              <span class="skill-btn">Data Modeling</span>
-              <span class="skill-btn">Interactive Dashboards</span>
+              <span class="skill-btn">Excel ETL</span>
             </div>
           </section>
-
-          <section class="case-study-section">
-            <h2><span class="section-num">04</span> Outcome &amp; Impact</h2>
-            <p>Transformed raw historical sales and catalog records into an engaging, decision-ready data storytelling tool.</p>
+          <section class="case-study-section" id="section-04">
+            <div class="section-title-row">
+              <h2><span class="section-num">04</span> Outcome & Impact</h2>
+              <button class="audio-play-btn" type="button" data-audio-id="lego-explorer-04" aria-label="Listen to Outcome & Impact" title="Listen to narration">
+                <svg class="audio-icon" aria-hidden="true"><use href="#icon-volume"></use></svg>
+                <span class="audio-btn-text">Listen</span>
+              </button>
+            </div>
+            <p>Delivered an engaging public visualization showcased on Maven Analytics, enabling users to explore decades of toy manufacturing history effortlessly.</p>
           </section>
-
-          <section class="case-study-section">
-            <h2><span class="section-num">05</span> Evidence &amp; Next Validation</h2>
-            <p>Interactive Tableau project is live on Maven Showcase for exploration and download.</p>
+          <section class="case-study-section" id="section-05">
+            <div class="section-title-row">
+              <h2><span class="section-num">05</span> Evidence & Next Validation</h2>
+              <button class="audio-play-btn" type="button" data-audio-id="lego-explorer-05" aria-label="Listen to Evidence & Next Validation" title="Listen to narration">
+                <svg class="audio-icon" aria-hidden="true"><use href="#icon-volume"></use></svg>
+                <span class="audio-btn-text">Listen</span>
+              </button>
+            </div>
+            <p>Showcase project published live on Maven Analytics with interactive public workbook downloads.</p>
           </section>
         </div>
 
-        <nav class="case-study-pagination" aria-label="Case study pagination">
-          <a class="back-link" href="project-hr-tool.html">
-            <span class="pagination-sub">← Previous Case Study</span>
-            <span class="pagination-title">HR Tool</span>
+        <!-- 4. Directional Bottom Pagination -->
+        <footer class="case-study-pagination" aria-label="Case study pagination">
+          <a href="project-hr-tool.html" class="pagination-card pagination-prev">
+            <div class="pagination-arrow-box" aria-hidden="true">
+              <svg><use href="#icon-arrow-left"></use></svg>
+            </div>
+            <div class="pagination-info">
+              <span class="pagination-sub">Previous Project</span>
+              <span class="pagination-title">Human Resources Tool</span>
+            </div>
           </a>
-          <a class="back-link" href="project-sales-dashboard.html">
-            <span class="pagination-sub">Next Case Study →</span>
-            <span class="pagination-title">Sales Dashboard</span>
+          <a href="project-sales-dashboard.html" class="pagination-card pagination-next">
+            <div class="pagination-info">
+              <span class="pagination-sub">Next Project</span>
+              <span class="pagination-title">Sales Performance Dashboard</span>
+            </div>
+            <div class="pagination-arrow-box" aria-hidden="true">
+              <svg><use href="#icon-arrow-right"></use></svg>
+            </div>
           </a>
-        </nav>
+        </footer>
       </article>
     </main>
-<script src="script.js"></script>
+
+    <script src="script.js" defer></script>
+    <script src="audio-player.js" defer></script>
   </body>
 </html>

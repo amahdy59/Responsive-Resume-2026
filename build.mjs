@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url";
 
 const root = dirname(fileURLToPath(import.meta.url));
 const dist = join(root, "dist");
-const requiredPaths = ["index.html", "styles.css", "script.js", "assets"];
+const requiredPaths = ["index.html", "styles.css", "script.js", "audio-player.js", "assets"];
 const caseStudyFiles = [
   "project-haj-arafa.html",
   "project-cairo-airport.html",
@@ -45,6 +45,7 @@ await mkdir(dist, { recursive: true });
 await copyFile(join(root, "index.html"), join(dist, "index.html"));
 await copyFile(join(root, "styles.css"), join(dist, "styles.css"));
 await copyFile(join(root, "script.js"), join(dist, "script.js"));
+await copyFile(join(root, "audio-player.js"), join(dist, "audio-player.js"));
 await copyDirectory(join(root, "assets"), join(dist, "assets"));
 
 for (const fileName of caseStudyFiles) {
