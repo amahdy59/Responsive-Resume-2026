@@ -142,7 +142,7 @@ if (errors.length > 0) {
   process.exit(1);
 }
 
-console.log("Validation passed.");
+console.log("Validation passed: all assets, translation dictionaries, and case study links verified.");
 
 if (warnings.length > 0) {
   console.log("\nWarnings:");
