@@ -104,6 +104,12 @@ if (htmlDocuments.some(({ source }) => /assets\/case-[^"]+\.jpg/.test(source))) 
 for (const assetPath of [
   resolve(root, "assets", "ahmed-mahdy.webp"),
   resolve(root, "assets", "ahmed-mahdy.png"),
+  resolve(root, "assets", "og-card.png"),
+  resolve(root, "assets", "case-cairo-airport.webp"),
+  resolve(root, "assets", "case-haj-arafa.webp"),
+  resolve(root, "assets", "case-hr-tool.webp"),
+  resolve(root, "assets", "case-lego-explorer.webp"),
+  resolve(root, "assets", "case-sales-dashboard.webp"),
   resolve(root, "assets", "favicon.svg"),
 ]) {
   if (!existsSync(assetPath)) {

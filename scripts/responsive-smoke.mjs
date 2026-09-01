@@ -166,7 +166,7 @@ try {
     assert.equal(state.sectionNavPosition, "sticky");
     assert.equal(state.toolbarRole, "group");
     assert.equal(state.footerExists, true);
-    assert.equal(state.projectThumbnailCount, 3);
+    assert.equal(state.projectThumbnailCount, 5);
     assert.equal(state.resumeActionCount, 0);
     assert.equal(state.externalIconCount, state.externalLinkCount);
     assert.deepEqual(state.entityLinks, [

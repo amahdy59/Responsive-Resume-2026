@@ -2629,3 +2629,51 @@ h1 {
     transition: none !important;
   }
 }
+
+
+/* Print-only portfolio verification banner */
+.print-qr-card {
+  display: none;
+}
+
+@media print {
+  .print-qr-card {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+    padding: 10px 16px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--surface);
+    break-inside: avoid;
+  }
+
+  .print-qr-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .print-qr-title {
+    font-size: 10pt;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .print-qr-url {
+    font-size: 9pt;
+    color: var(--blue);
+    font-weight: 600;
+  }
+
+  .print-qr-badge {
+    font-size: 8.5pt;
+    font-weight: 700;
+    color: var(--text);
+    padding: 4px 10px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: #ffffff;
+  }
+}
