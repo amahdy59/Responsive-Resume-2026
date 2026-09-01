@@ -918,8 +918,9 @@ h1 {
 .project-filter-pill {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 7px 14px;
+  gap: 8px;
+  min-height: 44px;
+  padding: 8px 16px;
   border: 1.5px solid var(--line);
   border-radius: 999px;
   background: transparent;
@@ -929,6 +930,7 @@ h1 {
   line-height: 1;
   cursor: pointer;
   white-space: nowrap;
+  box-sizing: border-box;
   transition:
     color 160ms ease,
     background 160ms ease,
@@ -972,9 +974,9 @@ h1 {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 20px;
-  height: 20px;
-  padding: 0 5px;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
   border-radius: 999px;
   background: color-mix(in srgb, currentColor 15%, transparent);
   font-size: 0.75rem;
@@ -1028,15 +1030,14 @@ h1 {
 .featured article {
   position: relative;
   background: var(--project-bg);
-  padding: 16px;
-  border: 1px solid var(--line);
+  border: 1px solid var(--project-border);
   border-radius: 12px;
-  cursor: pointer;
+  padding: 16px 18px;
+  box-shadow: 0 4px 16px var(--project-shadow);
   transition:
-    border-color 200ms cubic-bezier(0.4, 0, 0.2, 1),
-    background-color 200ms cubic-bezier(0.4, 0, 0.2, 1),
-    transform 200ms cubic-bezier(0.4, 0, 0.2, 1),
-    box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1);
+    transform 220ms ease,
+    box-shadow 220ms ease,
+    border-color 220ms ease;
 }
 
 .project-thumbnail {
@@ -1133,15 +1134,18 @@ h1 {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  width: 32px;
-  height: 32px;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
   padding: 0;
   background: color-mix(in srgb, var(--project-accent) 10%, transparent);
   border: 1px solid color-mix(in srgb, var(--project-accent) 25%, transparent);
-  border-radius: 8px;
+  border-radius: 10px;
   color: var(--project-accent);
   cursor: pointer;
   font: inherit;
+  box-sizing: border-box;
   transition:
     background-color 160ms ease,
     border-color 160ms ease,
@@ -2936,17 +2940,19 @@ h1 {
 .audio-play-btn {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  min-height: 36px;
-  padding: 4px 12px;
+  gap: 8px;
+  min-height: 44px;
+  min-width: 44px;
+  padding: 8px 16px;
   background: color-mix(in srgb, var(--blue) 8%, transparent);
   border: 1px solid color-mix(in srgb, var(--blue) 25%, transparent);
-  border-radius: 8px;
+  border-radius: 10px;
   color: var(--link-aaa);
   font-family: inherit;
-  font-size: 0.82rem;
+  font-size: 0.84rem;
   font-weight: 700;
   cursor: pointer;
+  box-sizing: border-box;
   transition: all 180ms ease;
 }
 
