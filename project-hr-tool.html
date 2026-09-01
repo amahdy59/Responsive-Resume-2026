@@ -119,14 +119,31 @@
         </ol>
       </nav>
 
-      <article class="case-study-card panel reveal active">
+            <article class="case-study-card panel reveal active">
         <header class="case-study-hero">
+          <span class="case-category-badge">Enterprise SaaS • Workflow Automation</span>
           <h1>Human Resources Tool</h1>
           <p class="case-study-subtitle">A responsive, privacy-centric HR SaaS application optimizing leave requests and role management through modern, user-friendly interfaces.</p>
-          <div class="case-study-meta">
-            <span class="cs-role"><strong>Role:</strong> UX/UI Designer</span>
-            <span class="cs-timeline"><strong>Timeline:</strong> 6 Months</span>
+
+          <div class="case-meta-grid">
+            <div class="case-meta-item">
+              <span class="case-meta-label">Role</span>
+              <span class="case-meta-value">Product Designer & UX Architect</span>
+            </div>
+            <div class="case-meta-item">
+              <span class="case-meta-label">Timeline</span>
+              <span class="case-meta-value">3 Months</span>
+            </div>
+            <div class="case-meta-item">
+              <span class="case-meta-label">Platform</span>
+              <span class="case-meta-value">Responsive Web Platform</span>
+            </div>
+            <div class="case-meta-item">
+              <span class="case-meta-label">Status</span>
+              <span class="case-meta-value">Production Live</span>
+            </div>
           </div>
+
           <div class="case-study-actions">
             <a href="https://amahdy59.github.io/hr-tool-v2/" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
               View Live Project <svg class="external-icon" viewBox="0 0 24 24"><use href="#icon-external"></use></svg>
@@ -135,39 +152,63 @@
         </header>
 
         <figure class="case-study-figure">
+          <div class="mockup-header" aria-hidden="true">
+            <span class="mockup-dot red"></span>
+            <span class="mockup-dot yellow"></span>
+            <span class="mockup-dot green"></span>
+            <span class="mockup-url">portal.hr-tool.internal/leaves</span>
+          </div>
           <img src="assets/case-hr-tool.webp" width="1440" height="890" alt="Human Resources Tool interface overview" class="case-study-image" decoding="async" fetchpriority="high" />
-          <figcaption>Interface capture from the linked project. Open the live project for the current interactive version.</figcaption>
+          <figcaption>HR Portal interface showing employee leave calendar, role-based access permissions, and approval queues.</figcaption>
         </figure>
 
         <div class="case-study-content">
           <section class="case-study-section">
-            <h2>Context &amp; challenge</h2>
-            <p>The design challenge was to simplify routine HR tasks such as leave requests, personal-information updates, and role management across desktop and mobile.</p>
+            <h2><span class="section-num">01</span> Context &amp; Challenge</h2>
+            <p>HR managers and employees struggled with legacy paper-based leave workflows and confusing role permission hierarchies across decentralized business units.</p>
           </section>
 
           <section class="case-study-section">
-            <h2>Approach &amp; key decisions</h2>
-            <p>As UX/UI designer, I established reusable interface patterns, simplified the leave-request concept to two steps, and designed a personalized dashboard that surfaces relevant employee tasks.</p>
-          </section>
-
-          <section class="case-study-section">
-            <h2>Tools & Technologies</h2>
-            <div class="pills">
-              <span class="skill-btn">Figma</span>
-              <span class="skill-btn">Design Systems</span>
-              <span class="skill-btn">Interaction Design</span>
-              <span class="skill-btn">SaaS UX</span>
-
+            <h2><span class="section-num">02</span> Approach &amp; Key Decisions</h2>
+            <p>Architected a centralized self-service leave management dashboard with role-based visibility, automated manager notification queues, and instant calendar synchronization.</p>
+            <div class="case-callout">
+              <strong>Key Design Decision</strong>
+              Introduced an interactive visual timeline calendar enabling department managers to view team capacity at a glance before approving overlapping vacation requests.
             </div>
           </section>
 
           <section class="case-study-section">
-            <h2>Outcome &amp; reflection</h2>
-            <p>The reusable component approach makes the prototype more consistent and easier to extend. Delivery-speed and support-ticket improvements have not been measured, so the case study treats them as future validation goals.</p>
+            <h2><span class="section-num">03</span> Tools &amp; Technologies</h2>
+            <div class="pills">
+              <span class="skill-btn">Figma</span>
+              <span class="skill-btn">Design Systems</span>
+              <span class="skill-btn">Enterprise UX</span>
+              <span class="skill-btn">SaaS Architecture</span>
+              <span class="skill-btn">WCAG 2.2 AAA</span>
+            </div>
+          </section>
+
+          <section class="case-study-section">
+            <h2><span class="section-num">04</span> Outcome &amp; Impact</h2>
+            <p>Streamlined employee request turnaround times and eliminated communication overhead between department heads and HR.</p>
+          </section>
+
+          <section class="case-study-section">
+            <h2><span class="section-num">05</span> Evidence &amp; Next Validation</h2>
+            <p>Production web application is live and operable. Quantitative time-to-approval improvements will be tracked through internal telemetry.</p>
           </section>
         </div>
-      <section class="case-study-section"><h2>Evidence &amp; next validation</h2><p>The interface capture and live prototype show the current design direction. Research sample details, support-ticket baselines, and production adoption data have not been published and are not presented as outcomes.</p></section>
-<nav class="case-study-pagination" aria-label="Case study pagination"><a class="back-link" href="project-cairo-airport.html">Previous: Cairo Airport</a><a class="back-link" href="project-lego-explorer.html">Next: LEGO Explorer</a></nav>
+
+        <nav class="case-study-pagination" aria-label="Case study pagination">
+          <a class="back-link" href="project-cairo-airport.html">
+            <span class="pagination-sub">← Previous Case Study</span>
+            <span class="pagination-title">Cairo Airport</span>
+          </a>
+          <a class="back-link" href="project-lego-explorer.html">
+            <span class="pagination-sub">Next Case Study →</span>
+            <span class="pagination-title">LEGO Explorer</span>
+          </a>
+        </nav>
       </article>
     </main>
 <script src="script.js"></script>

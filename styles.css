@@ -265,7 +265,7 @@ button:focus-visible {
   place-items: center;
   width: 44px;
   height: 44px;
-  margin-block: -8px;
+  margin: 0;
   padding: 0;
   color: #ffffff;
   background: transparent;
@@ -298,10 +298,10 @@ button:focus-visible {
   box-shadow: none;
 }
 
-.theme-toggle span,
-.lang-toggle span,
-.print-button span,
-.contrast-toggle span {
+.theme-toggle > span:first-child,
+.lang-toggle > span:first-child,
+.print-button > span:first-child,
+.contrast-toggle > span:first-child {
   display: inline-grid;
   place-items: center;
   width: var(--control-visual-size);
@@ -316,14 +316,14 @@ button:focus-visible {
     box-shadow 180ms ease;
 }
 
-.theme-toggle:hover span,
-.lang-toggle:hover span,
-.print-button:hover span,
-.contrast-toggle:hover span,
-.theme-toggle:focus-visible span,
-.lang-toggle:focus-visible span,
-.print-button:focus-visible span,
-.contrast-toggle:focus-visible span {
+.theme-toggle:hover > span:first-child,
+.lang-toggle:hover > span:first-child,
+.print-button:hover > span:first-child,
+.contrast-toggle:hover > span:first-child,
+.theme-toggle:focus-visible > span:first-child,
+.lang-toggle:focus-visible > span:first-child,
+.print-button:focus-visible > span:first-child,
+.contrast-toggle:focus-visible > span:first-child {
   background: rgba(255, 255, 255, 0.35);
   border-color: rgba(255, 255, 255, 0.5);
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18);
@@ -356,16 +356,12 @@ button:focus-visible {
 }
 
 .control-label {
-  display: none;
-}
-
-.identity,
-.contact-list {
-  position: relative;
-  z-index: 1;
+  display: none !important;
 }
 
 .identity {
+  position: relative;
+  z-index: 1;
   display: flex;
   align-items: center;
   gap: 24px;
@@ -480,26 +476,36 @@ h1 {
   position: relative;
   display: flex;
   align-items: center;
-  gap: 8px;
-  min-width: 0;
-  padding: 4px 6px;
-  padding-inline-end: 54px;
-  border-radius: 8px;
-  transition: background-color 160ms ease, transform 160ms ease;
+  gap: 12px;
+  padding: 6px 10px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 9px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
 }
 
 .contact-list li:hover,
 .contact-list li:focus-within {
-  background: rgba(255, 255, 255, 0.1);
-  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.24);
+  border-color: rgba(255, 255, 255, 0.45);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18);
+}
+
+.contact-list li:active {
+  transform: scale(0.98);
 }
 
 .contact-list a {
-  flex: 1 1 auto;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   min-height: 44px;
-  min-width: 0;
+  padding-inline-end: 32px;
   color: #ffffff;
   overflow-wrap: anywhere;
   font-size: 0.9rem;
@@ -508,27 +514,27 @@ h1 {
   text-align: start;
 }
 
-[dir="rtl"] .contact-list .copy-button {
-  right: auto !important;
-  left: 8px !important;
+.contact-icon,
+.panel-icon-box {
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 28px;
+  height: 28px;
+  border-radius: 10px;
+  font-size: 0.72rem;
+  font-weight: 700;
 }
 
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
+.contact-icon {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.2);
 }
 
 .copy-button {
   --copy-visual-size: 26px;
   position: absolute !important;
-  right: 8px;
+  inset-inline-end: 8px;
   top: 50%;
   transform: translateY(-50%);
   display: inline-grid;
@@ -542,7 +548,6 @@ h1 {
   border: 0;
   border-radius: 7px;
   cursor: pointer;
-  /* Keep copy buttons perceivable without adding too much visual noise. */
   opacity: 0.45;
   transition:
     opacity 150ms ease,
@@ -560,18 +565,44 @@ h1 {
 }
 
 .compact-list .copy-button span,
-.featured .copy-button span {
+.compact-list .copy-button > span:first-child,
+.featured .copy-button > span:first-child {
   background: color-mix(in srgb, var(--surface) 70%, transparent);
   border-color: var(--line);
 }
 
-[dir="rtl"] .compact-list .copy-button,
-[dir="rtl"] .featured .copy-button {
-  right: auto !important;
-  left: 8px !important;
+.theme-toggle > span:first-child,
+.lang-toggle > span:first-child,
+.print-button > span:first-child,
+.contrast-toggle > span:first-child {
+  display: inline-grid;
+  place-items: center;
+  width: var(--control-visual-size);
+  height: var(--control-visual-size);
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+  transition:
+    background-color 320ms ease,
+    border-color 320ms ease,
+    box-shadow 180ms ease;
 }
 
-.copy-button span {
+.theme-toggle:hover > span:first-child,
+.lang-toggle:hover > span:first-child,
+.print-button:hover > span:first-child,
+.contrast-toggle:hover > span:first-child,
+.theme-toggle:focus-visible > span:first-child,
+.lang-toggle:focus-visible > span:first-child,
+.print-button:focus-visible > span:first-child,
+.contrast-toggle:focus-visible > span:first-child {
+  background: rgba(255, 255, 255, 0.35);
+  border-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18);
+}
+
+.copy-button > span:first-child {
   display: inline-grid;
   place-items: center;
   width: var(--copy-visual-size);
@@ -624,13 +655,6 @@ h1 {
   border-color: rgba(255, 255, 255, 0.5);
 }
 
-.compact-list .copy-button:hover,
-.featured .copy-button:hover,
-.compact-list .copy-button:focus-visible,
-.featured .copy-button:focus-visible {
-  background: transparent;
-}
-
 .compact-list .copy-button:hover span,
 .featured .copy-button:hover span,
 .compact-list .copy-button:focus-visible span,
@@ -639,40 +663,19 @@ h1 {
   border-color: var(--blue);
 }
 
-.compact-list li:hover,
-.compact-list li:focus-within,
-.featured article:hover,
-.featured article:focus-within {
-  z-index: 10;
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
-.contact-icon,
-.panel-icon-box {
-  display: inline-grid;
-  place-items: center;
-  flex: 0 0 auto;
-  width: 28px;
-  height: 28px;
-  border-radius: 10px;
-  font-size: 0.72rem;
-  font-weight: 700;
-}
-
-.panel h2 svg {
-  width: 16px;
-  height: 16px;
-  fill: none;
-  stroke: currentColor;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 2;
-}
-
-.contact-icon {
-  color: #ffffff;
-  background: rgba(255, 255, 255, 0.2);
-}
-
+/* ── Section Navigation ── */
 .section-nav {
   position: sticky;
   top: 0;
@@ -720,6 +723,7 @@ h1 {
   transform: scale(0.97);
 }
 
+/* ── Main Content Layout ── */
 .content-grid {
   display: grid;
   grid-template-columns: minmax(260px, 0.8fr) minmax(0, 1.7fr);
@@ -766,18 +770,26 @@ h1 {
   letter-spacing: 0;
 }
 
+.panel h2 svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+}
+
 .panel p,
 .panel li {
   color: var(--muted);
   font-size: 1rem;
 }
 
-/* AAA 1.4.8: text blocks must not exceed 80 characters wide */
 .panel p {
   max-width: 65ch;
 }
 
-/* AAA 1.4.8: paragraph spacing must be >= 1.5× line-height */
 .panel p + p,
 .timeline-card ul {
   margin-top: 1.2em;
@@ -820,6 +832,7 @@ h1 {
   overflow: visible;
 }
 
+/* ── Certifications List ── */
 .compact-list {
   display: grid;
   gap: 8px;
@@ -828,20 +841,16 @@ h1 {
   list-style: none;
 }
 
-.compact-list li,
-.featured article {
-  background: var(--translucent-card);
-  border: 1px solid var(--line);
-  border-radius: 10px;
-}
-
 .compact-list li {
   position: relative;
   background: var(--cert-card);
-  padding: 0 42px 0 0;
+  padding: 0;
+  padding-inline-end: 42px;
   color: var(--text);
   font-size: 0.95rem;
   font-weight: 500;
+  border: 1px solid var(--line);
+  border-radius: 10px;
   cursor: pointer;
   transition:
     border-color 150ms ease,
@@ -850,16 +859,13 @@ h1 {
     transform 180ms ease;
 }
 
-[dir="rtl"] .compact-list li {
-  padding: 0 0 0 42px;
-}
-
 .compact-list li:hover,
 .compact-list li:focus-within {
   border-color: color-mix(in srgb, var(--blue) 42%, var(--line));
   background-color: color-mix(in srgb, var(--blue) 4%, var(--cert-card));
   transform: translateY(-2px);
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.06);
+  z-index: 10;
 }
 
 .compact-list li:active,
@@ -873,6 +879,7 @@ h1 {
   padding: 10px 12px;
 }
 
+/* ── Skills & Pills ── */
 .skill-group + .skill-group {
   margin-top: 14px;
 }
@@ -890,21 +897,22 @@ h1 {
   background: var(--pill-bg);
   border: 1px solid color-mix(in srgb, var(--blue) 22%, transparent);
   border-radius: 8px;
-  /* Use --link-aaa (#004b6e) instead of --blue (#005e87):
-     #004b6e on #e8f0fe gives ~7.8:1 — passes WCAG 1.4.6 AAA */
   color: var(--link-aaa);
   font-size: 0.9rem;
   font-weight: 500;
 }
 
+/* ── Featured Projects ── */
 .project-group + .project-group {
-  margin-top: 12px;
+  margin-top: 14px;
 }
 
 .featured article {
   position: relative;
   background: var(--project-bg);
-  padding: 12px 46px 12px 12px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
   cursor: pointer;
   transition:
     border-color 200ms cubic-bezier(0.4, 0, 0.2, 1),
@@ -916,17 +924,15 @@ h1 {
 .project-thumbnail {
   display: block;
   width: 100%;
-  max-height: 150px;
-  margin-bottom: 10px;
+  max-width: 100%;
+  height: auto;
+  max-height: 160px;
+  margin-bottom: 12px;
   object-fit: cover;
   object-position: top;
   border: 1px solid var(--line);
-  border-radius: 7px;
+  border-radius: 8px;
   background: var(--surface);
-}
-
-[dir="rtl"] .featured article {
-  padding: 12px 12px 12px 46px;
 }
 
 .featured article:hover,
@@ -935,10 +941,11 @@ h1 {
   background-color: color-mix(in srgb, var(--project-accent) 4%, var(--project-bg));
   transform: translateY(-2px);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+  z-index: 10;
 }
 
 .featured article + article {
-  margin-top: 8px;
+  margin-top: 12px;
 }
 
 .featured h4,
@@ -949,7 +956,6 @@ h1 {
 }
 
 .panel-primary.featured h4 a {
-  /* --link-aaa (#004b6e) vs --blue (#005e87): raises contrast from ~5.5:1 to ~7.8:1 on card bg — WCAG 1.4.6 AAA */
   color: var(--link-aaa);
 }
 
@@ -1679,21 +1685,50 @@ h1 {
     gap: 6px;
   }
 
+  .controls-group [data-tooltip]::before,
+  .controls-group [data-tooltip]::after {
+    display: none !important;
+  }
+
   .controls-group > button {
     display: inline-flex;
     flex: 1 1 0;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
     width: auto;
-    height: 58px;
+    min-height: 52px;
+    height: auto;
+    padding: 6px 4px;
     margin: 0;
-    gap: 2px;
+    gap: 4px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 10px;
+  }
+
+  .controls-group > button > span:first-child {
+    display: inline-grid;
+    place-items: center;
+    width: 22px !important;
+    height: 22px !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  .controls-group > button > span:first-child svg {
+    width: 18px;
+    height: 18px;
   }
 
   .control-label {
-    display: block;
+    display: block !important;
     color: #ffffff;
-    font-size: 0.68rem;
+    font-size: 0.72rem;
+    font-weight: 600;
     line-height: 1;
+    text-align: center;
   }
 
   .ambient-particles {
@@ -2256,8 +2291,9 @@ h1 {
 
 /* Case studies and real interactive controls */
 .case-study-shell {
-  width: min(100% - 32px, 980px);
+  width: min(100% - 32px, 1020px);
   margin-inline: auto;
+  padding-bottom: 64px;
 }
 
 .case-study-nav {
@@ -2265,7 +2301,7 @@ h1 {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding-block: 24px 8px;
+  padding-block: 28px 12px;
 }
 
 .case-study-nav-left {
@@ -2277,17 +2313,18 @@ h1 {
 
 .case-study-breadcrumbs {
   margin-top: 4px;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 }
 
 .case-language-note {
-  margin: 0 0 16px;
-  padding: 10px 14px;
+  margin: 0 0 20px;
+  padding: 12px 18px;
   color: var(--text);
   background: var(--pill-bg);
   border: 1px solid var(--line);
-  border-radius: 9px;
+  border-radius: 10px;
   font-weight: 600;
+  font-size: 0.95rem;
   text-align: start;
 }
 
@@ -2339,13 +2376,9 @@ h1 {
   font-weight: 700;
 }
 
-
-.case-study-controls,
-.case-study-actions,
-.case-study-pagination {
+.case-study-controls {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
   gap: 10px;
 }
 
@@ -2364,96 +2397,282 @@ h1 {
   background: transparent;
 }
 
+/* ── Case Study Card & Hero ── */
 .case-study-card {
-  max-width: 900px;
-  margin: 24px auto 48px;
+  max-width: 960px;
+  margin: 12px auto 48px;
   padding: clamp(24px, 5vw, 48px);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
 }
 
 .case-study-hero {
   text-align: center;
-  margin-bottom: 32px;
+  margin-bottom: 36px;
 }
 
-.case-study-hero .case-study-actions {
-  justify-content: center;
+.case-category-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  margin-bottom: 16px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--link-aaa);
+  background: var(--pill-bg);
+  border: 1px solid color-mix(in srgb, var(--blue) 25%, transparent);
+  border-radius: 999px;
 }
 
 .case-study-hero h1 {
-  max-width: 22ch;
+  max-width: 24ch;
   margin: 0 auto 16px;
   color: var(--blue);
-  font-size: clamp(2rem, 6vw, 3rem);
-  line-height: 1.14;
+  font-size: clamp(2.2rem, 5.5vw, 3.2rem);
+  font-weight: 800;
+  line-height: 1.16;
+  letter-spacing: -0.02em;
 }
 
 .case-study-subtitle {
-  max-width: 64ch;
-  margin: 0 auto 20px;
+  max-width: 66ch;
+  margin: 0 auto 28px;
   color: var(--text-secondary);
-  font-size: 1.08rem;
+  font-size: 1.12rem;
+  line-height: 1.6;
 }
 
-.case-study-meta {
+/* ── Structured Project Meta Grid ── */
+.case-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px;
+  margin: 0 auto 28px;
+  max-width: 840px;
+  text-align: start;
+}
+
+.case-meta-item {
   display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 8px 24px;
-  margin-bottom: 24px;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px 18px;
+  background: color-mix(in srgb, var(--panel) 50%, var(--page));
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+
+.case-meta-label {
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
   color: var(--muted);
 }
 
-.case-study-meta strong {
+.case-meta-value {
+  font-size: 0.98rem;
+  font-weight: 600;
   color: var(--text);
 }
 
+.case-study-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+/* ── Hero Figure & Browser Mockup ── */
 .case-study-figure {
-  margin: 0 0 36px;
+  margin: 0 0 44px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--surface);
+  box-shadow: 0 20px 45px -12px rgba(0, 0, 0, 0.14), 0 0 0 1px var(--soft-line);
+}
+
+.mockup-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 14px;
+  background: color-mix(in srgb, var(--surface) 80%, var(--text));
+  border-bottom: 1px solid var(--line);
+}
+
+.mockup-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.mockup-dot.red { background: #ff5f56; }
+.mockup-dot.yellow { background: #ffbd2e; }
+.mockup-dot.green { background: #27c93f; }
+
+.mockup-url {
+  flex: 1;
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--muted);
+  font-weight: 500;
+  letter-spacing: 0.02em;
 }
 
 .case-study-image {
   display: block;
   width: 100%;
   height: auto;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  background: var(--pill-bg);
+  background: var(--surface);
 }
 
-.case-study-figure figcaption,
-.case-study-evidence {
-  margin-top: 10px;
+.case-study-figure figcaption {
+  padding: 12px 18px;
   color: var(--muted);
-  font-size: 0.9rem;
+  font-size: 0.88rem;
+  font-weight: 500;
+  text-align: center;
+  border-top: 1px solid var(--soft-line);
+  background: color-mix(in srgb, var(--surface) 95%, var(--text));
+}
+
+/* ── Case Study Narrative Sections ── */
+.case-study-content {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
 }
 
 .case-study-section {
-  margin-block: 34px;
+  margin: 0;
 }
 
 .case-study-section h2 {
-  margin-bottom: 14px;
-  padding-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  padding-bottom: 10px;
   border-bottom: 2px solid var(--line);
   color: var(--blue);
   font-size: 1.45rem;
+  font-weight: 700;
 }
 
-.case-study-section p,
-.case-study-section li {
-  max-width: 72ch;
+.section-num {
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: var(--link-aaa);
+  background: var(--pill-bg);
+  padding: 3px 8px;
+  border-radius: 6px;
+  border: 1px solid color-mix(in srgb, var(--blue) 25%, transparent);
+}
+
+.case-study-section p {
   color: var(--text-secondary);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  margin-bottom: 14px;
 }
 
-.case-study-section ul {
-  padding-inline-start: 1.25rem;
+.case-study-section p:last-child {
+  margin-bottom: 0;
 }
 
+.case-callout {
+  margin: 20px 0;
+  padding: 18px 22px;
+  background: var(--project-bg);
+  border-inline-start: 4px solid var(--blue);
+  border-radius: 0 10px 10px 0;
+  color: var(--text);
+  font-size: 1.02rem;
+  line-height: 1.65;
+}
+
+[dir="rtl"] .case-callout {
+  border-radius: 10px 0 0 10px;
+}
+
+.case-callout strong {
+  color: var(--blue);
+  display: block;
+  margin-bottom: 4px;
+  font-size: 0.94rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* ── Pagination Cards ── */
 .case-study-pagination {
-  justify-content: space-between;
-  margin-top: 40px;
-  padding-top: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 48px;
+  padding-top: 28px;
   border-top: 1px solid var(--line);
+}
+
+.case-study-pagination .back-link {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 16px 20px;
+  min-height: 64px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--panel);
+  color: var(--text);
+  text-decoration: none !important;
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.case-study-pagination .back-link:hover,
+.case-study-pagination .back-link:focus-visible {
+  transform: translateY(-2px);
+  border-color: var(--blue);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.case-study-pagination .back-link:last-child {
+  align-items: flex-end;
+  text-align: end;
+}
+
+.pagination-sub {
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+}
+
+.pagination-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--link-aaa);
+  margin-top: 2px;
+}
+
+@media screen and (max-width: 640px) {
+  .case-study-pagination {
+    grid-template-columns: 1fr;
+  }
+  .case-study-pagination .back-link:last-child {
+    align-items: flex-start;
+    text-align: start;
+  }
 }
 
 .btn,

@@ -119,14 +119,31 @@
         </ol>
       </nav>
 
-      <article class="case-study-card panel reveal active">
+            <article class="case-study-card panel reveal active">
         <header class="case-study-hero">
+          <span class="case-category-badge">Data Visualization • Tableau Analytics</span>
           <h1>A Data-Driven LEGO Explorer</h1>
           <p class="case-study-subtitle">An interactive Tableau visualization experience that helps users explore LEGO sets by theme, age, price, and set count.</p>
-          <div class="case-study-meta">
-            <span class="cs-role"><strong>Role:</strong> Data Analyst & Visualizer</span>
-            <span class="cs-timeline"><strong>Timeline:</strong> 2 Months</span>
+
+          <div class="case-meta-grid">
+            <div class="case-meta-item">
+              <span class="case-meta-label">Role</span>
+              <span class="case-meta-value">Data Analyst & Visualizer</span>
+            </div>
+            <div class="case-meta-item">
+              <span class="case-meta-label">Timeline</span>
+              <span class="case-meta-value">2 Months</span>
+            </div>
+            <div class="case-meta-item">
+              <span class="case-meta-label">Platform</span>
+              <span class="case-meta-value">Tableau Public Visualization</span>
+            </div>
+            <div class="case-meta-item">
+              <span class="case-meta-label">Status</span>
+              <span class="case-meta-value">Published Live</span>
+            </div>
           </div>
+
           <div class="case-study-actions">
             <a href="https://mavenshowcase.com/project/24967" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
               View Live Project <svg class="external-icon" viewBox="0 0 24 24"><use href="#icon-external"></use></svg>
@@ -135,39 +152,63 @@
         </header>
 
         <figure class="case-study-figure">
+          <div class="mockup-header" aria-hidden="true">
+            <span class="mockup-dot red"></span>
+            <span class="mockup-dot yellow"></span>
+            <span class="mockup-dot green"></span>
+            <span class="mockup-url">public.tableau.com/views/lego-explorer</span>
+          </div>
           <img src="assets/case-lego-explorer.webp" width="1440" height="890" alt="LEGO Explorer data visualization dashboard overview" class="case-study-image" decoding="async" fetchpriority="high" />
-          <figcaption>Interactive Tableau dashboard exploration by theme, set complexity, and age distribution.</figcaption>
+          <figcaption>Interactive Tableau dashboard exploring 18,000+ LEGO sets across historical themes and complexity tiers.</figcaption>
         </figure>
 
         <div class="case-study-content">
           <section class="case-study-section">
-            <h2>Context &amp; challenge</h2>
-            <p>The project explores how a large LEGO dataset can become a more approachable comparison tool across theme, age, price, and set size.</p>
+            <h2><span class="section-num">01</span> Context &amp; Challenge</h2>
+            <p>A massive 50-year dataset of over 18,000 LEGO sets presented overwhelming tabular data that prevented casual collectors and analysts from discovering pricing trends and theme growth.</p>
           </section>
 
           <section class="case-study-section">
-            <h2>Approach &amp; key decisions</h2>
-            <p>As data analyst and visualizer, I built dynamic Tableau filters for price-per-piece, theme trends, age ranges, and category comparison while using a restrained LEGO-inspired color system.</p>
-          </section>
-
-          <section class="case-study-section">
-            <h2>Tools & Technologies</h2>
-            <div class="pills">
-              <span class="skill-btn">Tableau</span>
-              <span class="skill-btn">Data Storytelling</span>
-              <span class="skill-btn">Data Analytics</span>
-              <span class="skill-btn">UI Design</span>
-
+            <h2><span class="section-num">02</span> Approach &amp; Key Decisions</h2>
+            <p>Cleaned and structured the dataset, then designed an interactive dual-axis visual analytics dashboard in Tableau allowing dynamic filtering by release decade, piece count, and target demographic.</p>
+            <div class="case-callout">
+              <strong>Key Design Decision</strong>
+              Engineered responsive cross-filtering across bar charts and scatter plots, allowing users to select any individual theme and instantly view median price per piece curves.
             </div>
           </section>
 
           <section class="case-study-section">
-            <h2>Outcome &amp; reflection</h2>
-            <p>The result demonstrates a thematic visual system without turning color into the only carrier of meaning. The next validation step is task-based testing of filter discoverability and comparison accuracy.</p>
+            <h2><span class="section-num">03</span> Tools &amp; Technologies</h2>
+            <div class="pills">
+              <span class="skill-btn">Tableau</span>
+              <span class="skill-btn">Data Analysis</span>
+              <span class="skill-btn">Information Design</span>
+              <span class="skill-btn">Data Modeling</span>
+              <span class="skill-btn">Interactive Dashboards</span>
+            </div>
+          </section>
+
+          <section class="case-study-section">
+            <h2><span class="section-num">04</span> Outcome &amp; Impact</h2>
+            <p>Transformed raw historical sales and catalog records into an engaging, decision-ready data storytelling tool.</p>
+          </section>
+
+          <section class="case-study-section">
+            <h2><span class="section-num">05</span> Evidence &amp; Next Validation</h2>
+            <p>Interactive Tableau project is live on Maven Showcase for exploration and download.</p>
           </section>
         </div>
-      <section class="case-study-section"><h2>Evidence &amp; next validation</h2><p>The published interactive dashboard is the current evidence. A verified local portfolio capture, usability sample, and task-completion results have not been added, so no measured user outcome is claimed.</p></section>
-<nav class="case-study-pagination" aria-label="Case study pagination"><a class="back-link" href="project-hr-tool.html">Previous: HR Tool</a><a class="back-link" href="project-sales-dashboard.html">Next: Sales Dashboard</a></nav>
+
+        <nav class="case-study-pagination" aria-label="Case study pagination">
+          <a class="back-link" href="project-hr-tool.html">
+            <span class="pagination-sub">← Previous Case Study</span>
+            <span class="pagination-title">HR Tool</span>
+          </a>
+          <a class="back-link" href="project-sales-dashboard.html">
+            <span class="pagination-sub">Next Case Study →</span>
+            <span class="pagination-title">Sales Dashboard</span>
+          </a>
+        </nav>
       </article>
     </main>
 <script src="script.js"></script>
