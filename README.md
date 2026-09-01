@@ -18,9 +18,9 @@ Live site: [creativemahdy.space](https://creativemahdy.space/)
 .
 ├── .github/workflows/deploy.yml
 ├── assets/
-│   ├── case-cairo-airport.jpg
-│   ├── case-haj-arafa.jpg
-│   └── case-hr-tool.jpg
+│   ├── case-cairo-airport.webp
+│   ├── case-haj-arafa.webp
+│   └── case-hr-tool.webp
 ├── scripts/
 │   ├── serve.mjs
 │   ├── responsive-smoke.mjs
@@ -52,6 +52,7 @@ npm run preview  # build and serve dist/ on http://127.0.0.1:4174
 - External links opened with `target="_blank"` should keep `rel="noopener noreferrer"`.
 - Social preview metadata points to `assets/ahmed-mahdy.png`, so that file should remain available in production builds.
 - Case-study pages use unique metadata, canonical URLs, previous/next navigation, and project-sized local images where verified captures exist.
+- Case-study outcomes must distinguish verified evidence from future validation; do not publish unsupported performance claims.
 - `assets/screenshots/` is intentionally excluded from Git and deployment; keep only optimized, referenced portfolio images in `assets/`.
 
 ## Deployment

@@ -355,6 +355,10 @@ button:focus-visible {
   fill: currentColor;
 }
 
+.control-label {
+  display: none;
+}
+
 .identity,
 .contact-list {
   position: relative;
@@ -415,6 +419,36 @@ h1 {
   margin-top: 12px;
 }
 
+.hero-print-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  margin-top: 14px;
+  padding: 9px 14px;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  border-radius: 9px;
+  font: inherit;
+  font-size: 0.86rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.hero-print-action:hover,
+.hero-print-action:focus-visible {
+  background: rgba(255, 255, 255, 0.26);
+}
+
+.hero-print-action svg {
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+}
+
 .tags span {
   padding: 3px 9px;
   background: var(--tag-bg);
@@ -462,7 +496,9 @@ h1 {
 
 .contact-list a {
   flex: 1 1 auto;
-  display: block;
+  display: flex;
+  align-items: center;
+  min-height: 44px;
   min-width: 0;
   color: #ffffff;
   overflow-wrap: anywhere;
@@ -797,7 +833,6 @@ h1 {
   background: var(--translucent-card);
   border: 1px solid var(--line);
   border-radius: 10px;
-  backdrop-filter: blur(10px);
 }
 
 .compact-list li {
@@ -876,6 +911,18 @@ h1 {
     background-color 200ms cubic-bezier(0.4, 0, 0.2, 1),
     transform 200ms cubic-bezier(0.4, 0, 0.2, 1),
     box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.project-thumbnail {
+  display: block;
+  width: 100%;
+  max-height: 150px;
+  margin-bottom: 10px;
+  object-fit: cover;
+  object-position: top;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--surface);
 }
 
 [dir="rtl"] .featured article {
@@ -1131,6 +1178,48 @@ h1 {
 .copy-toast.is-visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+.resume-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin: 0 20px 20px;
+  padding: 22px;
+  color: var(--text);
+  background: var(--panel-secondary-bg);
+  border: 1px solid var(--line);
+  border-inline-start: 4px solid var(--blue);
+  border-radius: 12px;
+}
+
+.resume-footer h2 {
+  color: var(--text);
+  font-size: 1.25rem;
+}
+
+.resume-footer p {
+  max-width: 58ch;
+  margin-top: 5px;
+  color: var(--muted);
+}
+
+.footer-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.back-to-top {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 8px;
+  color: var(--link-aaa);
+  font-weight: 700;
 }
 
 /* Accessible Tooltips styled via CSS attribute injection */
@@ -1586,6 +1675,25 @@ h1 {
     position: static;
     flex-direction: row;
     justify-content: center;
+    width: 100%;
+    gap: 6px;
+  }
+
+  .controls-group > button {
+    display: inline-flex;
+    flex: 1 1 0;
+    flex-direction: column;
+    width: auto;
+    height: 58px;
+    margin: 0;
+    gap: 2px;
+  }
+
+  .control-label {
+    display: block;
+    color: #ffffff;
+    font-size: 0.68rem;
+    line-height: 1;
   }
 
   .ambient-particles {
@@ -1608,8 +1716,26 @@ h1 {
   }
 
   .section-nav {
-    justify-content: flex-start;
-    padding-inline: 10px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2px;
+    padding: 6px 8px;
+    overflow: visible;
+  }
+
+  .section-nav a {
+    justify-content: center;
+    padding-inline: 4px;
+    text-align: center;
+    line-height: 1.25;
+  }
+
+  html {
+    scroll-padding-top: 112px;
+  }
+
+  .panel {
+    scroll-margin-top: 112px;
   }
 
   .tags {
@@ -1644,6 +1770,22 @@ h1 {
     flex-direction: column;
     gap: 14px;
     padding: 14px;
+  }
+
+  .resume-footer {
+    align-items: stretch;
+    flex-direction: column;
+    margin: 0 14px 14px;
+    padding: 18px;
+  }
+
+  .footer-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .footer-actions > * {
+    width: 100%;
   }
 
   .main-column {
@@ -1865,6 +2007,8 @@ h1 {
   .ambient-particles,
   .hero-pattern,
   .section-nav,
+  .resume-footer,
+  .hero-print-action,
   .skip-link {
     display: none !important;
   }
@@ -2124,6 +2268,78 @@ h1 {
   padding-block: 24px 8px;
 }
 
+.case-study-nav-left {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.case-study-breadcrumbs {
+  margin-top: 4px;
+  margin-bottom: 16px;
+}
+
+.case-language-note {
+  margin: 0 0 16px;
+  padding: 10px 14px;
+  color: var(--text);
+  background: var(--pill-bg);
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  font-weight: 600;
+  text-align: start;
+}
+
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.breadcrumbs li {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.breadcrumbs li + li::before {
+  content: "/";
+  color: var(--line);
+  font-weight: 400;
+}
+
+[dir="rtl"] .breadcrumbs li + li::before {
+  content: "\\";
+}
+
+.breadcrumbs a {
+  color: var(--link-aaa);
+  transition: color 160ms ease;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.breadcrumbs a:hover,
+.breadcrumbs a:focus-visible {
+  color: var(--blue);
+  text-decoration: underline;
+}
+
+.breadcrumbs [aria-current="page"] {
+  color: var(--text);
+  font-weight: 700;
+}
+
+
 .case-study-controls,
 .case-study-actions,
 .case-study-pagination {
@@ -2157,6 +2373,10 @@ h1 {
 .case-study-hero {
   text-align: center;
   margin-bottom: 32px;
+}
+
+.case-study-hero .case-study-actions {
+  justify-content: center;
 }
 
 .case-study-hero h1 {
@@ -2243,20 +2463,45 @@ h1 {
   justify-content: center;
   gap: 8px;
   min-height: 44px;
+  min-width: 44px;
+  padding: 10px 18px;
   border-radius: 8px;
+  font-family: inherit;
+  font-size: 0.92rem;
   font-weight: 700;
+  line-height: 1.2;
   text-decoration: none !important;
-  transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease, transform 160ms ease;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease,
+    transform 160ms ease,
+    box-shadow 160ms ease;
 }
 
-.btn {
-  padding: 10px 18px;
-  border: 2px solid transparent;
+.btn-icon {
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  flex: 0 0 44px;
 }
 
 .btn-primary {
-  background: var(--button-bg);
-  color: var(--button-text);
+  background: var(--blue);
+  border: 2px solid var(--blue);
+  color: #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+}
+
+.btn-primary:hover,
+.btn-primary:focus-visible {
+  background: var(--link-aaa);
+  border-color: var(--link-aaa);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
 }
 
 .btn-secondary,
@@ -2266,14 +2511,21 @@ h1 {
   color: var(--blue);
 }
 
-.back-link {
-  padding: 8px 12px;
+.btn-secondary:hover,
+.btn-secondary:focus-visible,
+.back-link:hover,
+.back-link:focus-visible {
+  background: color-mix(in srgb, var(--blue) 12%, transparent);
+  border-color: var(--blue);
+  color: var(--blue);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
 }
 
-.btn:hover,
-.back-link:hover {
-  transform: translateY(-2px);
-  text-decoration: none !important;
+.btn-secondary:active,
+.btn-primary:active,
+.back-link:active {
+  transform: scale(0.98);
 }
 
 .btn svg,
@@ -2283,6 +2535,36 @@ h1 {
   fill: none;
   stroke: currentColor;
   stroke-width: 2;
+}
+
+[dir="rtl"] .back-link svg {
+  transform: scaleX(-1);
+}
+
+[data-theme="dark"] .btn-primary {
+  background: var(--blue);
+  border-color: var(--blue);
+  color: #0b1528;
+}
+
+[data-theme="dark"] .btn-primary:hover,
+[data-theme="dark"] .btn-primary:focus-visible {
+  background: #60a5fa;
+  border-color: #60a5fa;
+  color: #0b1528;
+}
+
+[data-theme="dark"] .btn-secondary,
+[data-theme="dark"] .back-link {
+  border-color: var(--blue);
+  color: var(--blue);
+}
+
+[data-theme="dark"] .btn-secondary:hover,
+[data-theme="dark"] .btn-secondary:focus-visible,
+[data-theme="dark"] .back-link:hover,
+[data-theme="dark"] .back-link:focus-visible {
+  background: color-mix(in srgb, var(--blue) 20%, transparent);
 }
 
 .reveal {
@@ -2317,6 +2599,10 @@ h1 {
 
   .case-study-nav {
     padding-top: 12px;
+  }
+
+  .case-study-breadcrumbs {
+    display: none;
   }
 
   .case-study-card {

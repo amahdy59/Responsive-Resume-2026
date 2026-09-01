@@ -40,29 +40,54 @@
     <link rel="stylesheet" href="styles.css" />
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
     <script id="person-schema" type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Ahmed Mahdy",
+    "jobTitle": "UX Designer & Data Visualizer",
+    "email": "mailto:amahdy59@gmail.com",
+    "url": "https://creativemahdy.space/",
+    "image": "https://creativemahdy.space/assets/ahmed-mahdy.png"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    "name": "Cairo International Airport - Command Hub",
+    "headline": "Cairo International Airport - Command Hub",
+    "description": "Operational dashboard UX and data visualization case study focused on hierarchy and progressive disclosure.",
+    "url": "https://creativemahdy.space/project-cairo-airport.html",
+    "author": {
+      "@type": "Person",
+      "name": "Ahmed Mahdy",
+      "url": "https://creativemahdy.space/"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
       {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Ahmed Mahdy",
-        "jobTitle": "UX Designer & Data Visualizer",
-        "email": "mailto:amahdy59@gmail.com",
-        "url": "https://creativemahdy.space/",
-        "image": "https://creativemahdy.space/assets/ahmed-mahdy.png",
-        "sameAs": [
-          "https://www.linkedin.com/in/creativemahdy",
-          "https://dribbble.com/creativemahdy"
-        ],
-        "knowsAbout": [
-          "UX Design",
-          "Data Visualization",
-          "Data Analytics",
-          "Power BI",
-          "Tableau",
-          "Microsoft Excel",
-          "SQL",
-          "Python"
-        ]
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://creativemahdy.space/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Projects",
+        "item": "https://creativemahdy.space/#projects"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Cairo International Airport",
+        "item": "https://creativemahdy.space/project-cairo-airport.html"
       }
+    ]
+  }
+]
     </script>
   </head>
   <body data-page="case-study" data-localized="false">
@@ -76,12 +101,22 @@
     </svg>
     <div class="ambient-particles" aria-hidden="true"></div>
     <main class="resume-shell case-study-shell" id="case-study-content">
-      <nav class="case-study-nav reveal active">
+      <nav class="case-study-nav reveal active" aria-label="Case study header navigation">
         <a href="index.html#projects" class="back-link">
           <svg aria-hidden="true"><use href="#icon-arrow-left"></use></svg>
-          Back to Resume
+          Back to Projects
         </a>
-        <div class="case-study-controls"><button class="theme-toggle" type="button" data-tooltip="Switch Theme" aria-label="Dark mode"><span aria-hidden="true"><svg><use href="#icon-moon"></use></svg></span></button><button class="contrast-toggle" type="button" data-tooltip="Toggle Contrast" aria-label="High contrast mode"><span aria-hidden="true"><svg><use href="#icon-contrast"></use></svg></span></button></div>
+        <div class="case-study-controls">
+          <button class="theme-toggle" type="button" data-tooltip="Switch Theme" aria-label="Dark mode"><span aria-hidden="true"><svg><use href="#icon-moon"></use></svg></span></button>
+          <button class="contrast-toggle" type="button" data-tooltip="Toggle Contrast" aria-label="High contrast mode"><span aria-hidden="true"><svg><use href="#icon-contrast"></use></svg></span></button>
+        </div>
+      </nav>
+      <nav class="case-study-breadcrumbs" aria-label="Breadcrumb trail">
+        <ol class="breadcrumbs">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html#projects">Projects</a></li>
+          <li aria-current="page">Cairo International Airport</li>
+        </ol>
       </nav>
 
       <article class="case-study-card panel reveal active">
@@ -99,17 +134,20 @@
           </div>
         </header>
 
-        <figure class="case-study-figure"><img src="assets/case-cairo-airport.jpg" width="1440" height="1586" alt="Cairo International Airport Command Hub interface overview" class="case-study-image" decoding="async" fetchpriority="high"><figcaption>Interface capture from the linked project. Open the live project for the current interactive version.</figcaption></figure>
+        <figure class="case-study-figure">
+          <img src="assets/case-cairo-airport.webp" width="1440" height="1586" alt="Cairo International Airport Command Hub interface overview" class="case-study-image" decoding="async" fetchpriority="high" />
+          <figcaption>Interface capture from the linked project. Open the live project for the current interactive version.</figcaption>
+        </figure>
 
         <div class="case-study-content">
           <section class="case-study-section">
             <h2>Context &amp; challenge</h2>
-            <p>Airport operations managers were overwhelmed by fragmented data sources. They needed a centralized, real-time command hub to monitor flight statuses, terminal crowd density, and maintenance alerts without cognitive overload.</p>
+            <p>The concept addresses a high-density operational environment where flight status, terminal activity, and maintenance information need a clear shared hierarchy.</p>
           </section>
 
           <section class="case-study-section">
             <h2>Approach &amp; key decisions</h2>
-            <p>I architected a modular dashboard that prioritizes critical alerts and high-level KPIs while allowing users to drill down into specific terminals. I utilized a high-contrast dark mode UI to reduce eye strain for operators working long shifts in control rooms.</p>
+            <p>As UX/UI designer and data visualizer, I organized the dashboard around critical alerts, high-level KPIs, and progressive drill-down into terminal detail. The dark interface supports sustained viewing, but reduced eye strain has not been clinically or operationally measured.</p>
           </section>
 
           <section class="case-study-section">
@@ -125,11 +163,11 @@
 
           <section class="case-study-section">
             <h2>Outcome &amp; reflection</h2>
-            <p>Balancing information density with readability was a major hurdle. I learned to heavily rely on progressive disclosure—showing only the absolute most critical data by default, and allowing users to expand panels for deeper context when needed.</p>
+            <p>The implementation demonstrates how progressive disclosure can balance dense operational data with scanning. The next step is scenario-based testing with representative operations users under realistic time pressure.</p>
           </section>
         </div>
-      <section class="case-study-section"><h2>Evidence &amp; limitations</h2><p>This page documents the current design rationale and available implementation. It does not claim a measured business outcome unless a verified metric is shown. Use the live-project link to inspect the working experience.</p></section>
-<nav class="case-study-pagination" aria-label="Case study navigation"><a class="back-link" href="project-haj-arafa.html">Previous: Haj Arafa</a><a class="back-link" href="project-hr-tool.html">Next: HR Tool</a></nav>
+      <section class="case-study-section"><h2>Evidence &amp; next validation</h2><p>The interface capture and working dashboard are available for review. Operational user interviews, task timings, and production performance metrics have not been published and are not claimed here.</p></section>
+<nav class="case-study-pagination" aria-label="Case study pagination"><a class="back-link" href="project-haj-arafa.html">Previous: Haj Arafa</a><a class="back-link" href="project-hr-tool.html">Next: HR Tool</a></nav>
       </article>
     </main>
 <script src="script.js"></script>

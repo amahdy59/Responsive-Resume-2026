@@ -14,7 +14,6 @@ const controls = {
   themeToggle: document.querySelector(".theme-toggle"),
   langToggle: document.querySelector(".lang-toggle"),
   contrastToggle: document.querySelector(".contrast-toggle"),
-  printButton: document.querySelector(".print-button"),
 };
 
 const metaNodes = {
@@ -65,7 +64,6 @@ const translations = {
       "مصمم تجربة مستخدم ومصور بيانات بخبرة تزيد عن 8 سنوات في تحويل احتياجات المستخدمين والأعمال إلى لوحات معلومات تفاعلية وتجارب رقمية متمحورة حول المستخدم. ماهر في أبحاث المستخدم، وبنية المعلومات، وسرد البيانات، وتصميم الواجهات سهلة الوصول باستخدام Excel وPower BI وTableau وSQL وPython.",
     aria_dark_mode: "الوضع الداكن",
     aria_high_contrast_mode: "وضع التباين العالي",
-    aria_print_resume: "طباعة السيرة الذاتية أو حفظها كملف PDF",
     aria_switch_to_arabic: "التبديل إلى العربية",
     aria_switch_to_english: "التبديل إلى الإنجليزية",
     cert1: "تحليل البيانات من جوجل (Google Data Analytics)",
@@ -73,6 +71,10 @@ const translations = {
     cert3: "مهارات Excel لتحليل البيانات والتصوير المرئي",
     cert4: "مهارات Excel للأعمال",
     cert5: "تصميم تجربة المستخدم من جوجل (Google UX Design)",
+    back_to_top: "العودة إلى الأعلى",
+    control_contrast: "التباين",
+    control_language: "اللغة",
+    control_theme: "المظهر",
     contact_dribbble: "معرض دريبل",
     contact_linkedin: "لينكد إن",
     contact_links_label: "روابط التواصل",
@@ -85,6 +87,9 @@ const translations = {
     edu2_school: "جامعة المنوفية",
     edu2_title: "بكالوريوس في الإذاعة والتلفزيون",
     exp_tag: "خبرة +8 سنوات",
+    footer_cta: "لنعمل معاً",
+    footer_email: "راسل أحمد",
+    footer_text: "هل تبحث عن خبرة في تجربة المستخدم، أو المنتجات سهلة الوصول، أو تجارب البيانات الداعمة للقرار؟",
     external_site_hint: "يفتح في موقع خارجي",
     highlights_label: "أبرز النقاط",
     job1_b1: "قيادة تصميم تجربة وواجهة المستخدم (UX/UI) لمنصات (SaaS) المؤسسية و(B2B) المعقدة، وتقديم حلول تتمحور حول المستخدم.",
@@ -104,6 +109,7 @@ const translations = {
       "السيرة الذاتية لأحمد مهدي، مصمم تجربة مستخدم ومصور بيانات، مع خبرة في التصميم، ولوحات المعلومات، وتجارب المنتجات الرقمية.",
     meta_title: "أحمد مهدي | مصمم تجربة المستخدم ومصور بيانات",
     name: "أحمد مهدي",
+    opens_new_tab: " يفتح في تبويب جديد",
     profile_details_label: "تفاصيل الملف الشخصي",
     proj_data1_desc:
       "تجربة تفاعلية لتصور البيانات باستخدام Tableau تساعد المستخدمين على استكشاف مجموعات LEGO حسب الموضوع، والعمر، والسعر، وعدد القطع.",
@@ -122,7 +128,8 @@ const translations = {
       "تجربة تجارة إلكترونية بديهية وسهلة الوصول، مصممة بتخطيطات متجاوبة وتنقل سلس لزيادة تفاعل المستخدمين والتحويلات.",
     proj_ux3_title: "تطبيق حاج عرفة",
     proj_ux_header: "مشاريع تجربة المستخدم",
-    read_case_study: "قراءة دراسة الحالة",
+    print_resume_action: "طباعة / حفظ PDF",
+    read_case_study: "قراءة دراسة الحالة بالإنجليزية",
     resume_card_label: "نظرة عامة على السيرة الذاتية",
     resume_label: "موقع السيرة الذاتية لأحمد مهدي",
     section_nav_label: "أقسام السيرة الذاتية",
@@ -154,7 +161,6 @@ const translations = {
     skill_ux9: "سهولة الوصول (a11y)",
     skills_data_header: "تحليل وتصوير البيانات",
     skills_ux_header: "تصميم تجربة المستخدم",
-    opens_new_tab: " يفتح في تبويب جديد",
     skip_link: "تجاوز إلى محتوى السيرة الذاتية",
     title: "مصمم تجربة المستخدم ومصور بيانات",
     toast_copied: "تم النسخ",
@@ -166,17 +172,17 @@ const translations = {
     tooltip_copy_linkedin: "نسخ رابط لينكد إن",
     tooltip_copy_project: "نسخ رابط المشروع",
     tooltip_lang: "تبديل اللغة",
-    tooltip_print: "طباعة / حفظ كـ PDF",
     tooltip_theme_dark: "التبديل إلى الوضع الداكن",
     tooltip_theme_light: "التبديل إلى الوضع الفاتح",
+    tooltip_visit_live_site: "زيارة الموقع المباشر",
     ux_tag: "تصميم تجربة المستخدم",
+    visit_live_project: "زيارة موقع المشروع المباشر",
   },
   en: {
     about_text:
       "UX Designer & Data Visualizer with 8+ years of experience turning user and business needs into decision-ready dashboards and user-centered digital experiences. Skilled in user research, information architecture, data storytelling, visualization, and accessible interface design with Excel, Power BI, Tableau, SQL, and Python.",
     aria_dark_mode: "Dark mode",
     aria_high_contrast_mode: "High contrast mode",
-    aria_print_resume: "Print the resume or save it as PDF",
     aria_switch_to_arabic: "Switch to Arabic",
     aria_switch_to_english: "Switch to English",
     cert1: "Google Data Analytics",
@@ -184,6 +190,10 @@ const translations = {
     cert3: "Excel Skills for Data Analytics and Visualization",
     cert4: "Excel Skills for Business",
     cert5: "Google UX Design",
+    back_to_top: "Back to top",
+    control_contrast: "Contrast",
+    control_language: "Language",
+    control_theme: "Theme",
     contact_dribbble: "Dribbble portfolio",
     contact_linkedin: "LinkedIn profile",
     contact_links_label: "Contact links",
@@ -196,6 +206,9 @@ const translations = {
     edu2_school: "Minufiya University",
     edu2_title: "Bachelor's degree, Radio and Television",
     exp_tag: "8+ years experience",
+    footer_cta: "Let’s work together",
+    footer_email: "Email Ahmed",
+    footer_text: "Interested in UX, accessible products, or decision-ready data experiences?",
     external_site_hint: "opens external site",
     highlights_label: "Highlights",
     job1_b1: "Led UX/UI design for complex B2B and enterprise SaaS platforms, driving user-centric solutions.",
@@ -234,6 +247,7 @@ const translations = {
       "An intuitive, accessible e-commerce experience designed with responsive layouts and seamless navigation to maximize user conversion and engagement.",
     proj_ux3_title: "Haj Arafa App",
     proj_ux_header: "UX Projects",
+    print_resume_action: "Print / Save PDF",
     read_case_study: "Read Case Study",
     resume_card_label: "Resume overview",
     resume_label: "Ahmed Mahdy resume portfolio",
@@ -282,10 +296,11 @@ const translations = {
     tooltip_copy_linkedin: "Copy LinkedIn link",
     tooltip_copy_project: "Copy project link",
     tooltip_lang: "Toggle language",
-    tooltip_print: "Print / Save as PDF",
     tooltip_theme_dark: "Switch to dark mode",
     tooltip_theme_light: "Switch to light mode",
+    tooltip_visit_live_site: "Visit Live Site",
     ux_tag: "UX Design",
+    visit_live_project: "Visit live project",
   },
 };
 
@@ -411,7 +426,7 @@ function getLinkText(link) {
   const note = link.querySelector(".sr-only[data-translate='opens_new_tab']");
 
   return Array.from(link.childNodes)
-    .filter((node) => node !== note)
+    .filter((node) => node !== note && !(node instanceof SVGElement))
     .map((node) => node.textContent)
     .join("")
     .trim();
@@ -474,12 +489,22 @@ function updateExternalLinks(lang) {
   ensureExternalLinkNotes(lang);
 
   document.querySelectorAll('a[target="_blank"]').forEach((link) => {
-    const note = link.querySelector(".sr-only[data-translate='opens_new_tab']");
-    const label = getLinkText(link);
+    let label = getLinkText(link);
+    if (!label) {
+      const article = link.closest("article");
+      const projectTitle = article?.querySelector("h4")?.textContent?.trim();
+      const fallbackKey = link.dataset.tooltipKey;
+      const baseLabel = fallbackKey ? getTranslation(lang, fallbackKey, "Visit live site") : "Visit live site";
+      label = projectTitle ? `${baseLabel}: ${projectTitle}` : baseLabel;
+    }
     const context = [hint, newTabText].filter(Boolean).join(", ");
 
     link.setAttribute("aria-label", context ? `${label} (${context})` : label);
     link.setAttribute("title", context || label);
+
+    if (link.dataset.tooltipKey) {
+      link.setAttribute("data-tooltip", getTranslation(lang, link.dataset.tooltipKey, link.getAttribute("data-tooltip") || ""));
+    }
   });
 }
 
@@ -554,15 +579,6 @@ function updateContrastButton(lang) {
 }
 
 /**
- * Updates the print button accessible name for the current language.
- * @param {'en'|'ar'} lang - Language code.
- */
-function updatePrintButton(lang) {
-  controls.printButton?.setAttribute("aria-label", getTranslation(lang, "aria_print_resume"));
-  controls.printButton?.setAttribute("data-tooltip", getTranslation(lang, "tooltip_print"));
-}
-
-/**
  * Orchestrates a full UI refresh for a language switch or initial load.
  * Runs all translation, metadata, link, button, and aria-label update functions.
  * @param {'en'|'ar'} lang - Language code to apply.
@@ -578,7 +594,6 @@ function refreshUi(lang) {
   updateLanguageButton(lang);
   updateThemeButton(lang);
   updateContrastButton(lang);
-  updatePrintButton(lang);
 }
 
 /**
@@ -844,6 +859,15 @@ function initialize() {
   enhanceLinkedCards();
   bindCopyButtons();
 
+  if (document.body.dataset.localized === "false" && savedLang === "ar") {
+    const languageNote = document.createElement("p");
+    languageNote.className = "case-language-note";
+    languageNote.lang = "ar";
+    languageNote.dir = "rtl";
+    languageNote.textContent = "دراسة الحالة متاحة حالياً باللغة الإنجليزية.";
+    document.querySelector(".case-study-breadcrumbs")?.after(languageNote);
+  }
+
   setTheme(savedTheme || (prefersDark ? "dark" : "light"));
   setContrast(savedContrast);
   const pageLanguage = document.body.dataset.localized === "false" ? "en" : savedLang;
@@ -862,8 +886,8 @@ controls.langToggle?.addEventListener("click", () => {
   setLanguage(getCurrentLanguage() === "ar" ? "en" : "ar");
 });
 
-controls.printButton?.addEventListener("click", () => {
-  window.print();
+document.querySelectorAll("[data-print-resume]").forEach((button) => {
+  button.addEventListener("click", () => window.print());
 });
 
 window.addEventListener("beforeprint", updatePrintStyles);
@@ -871,7 +895,6 @@ window.addEventListener("beforeprint", updatePrintStyles);
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape") {
     const focused = document.activeElement;
-
     if (focused instanceof HTMLElement && focused.hasAttribute("data-tooltip")) {
       focused.blur();
     }

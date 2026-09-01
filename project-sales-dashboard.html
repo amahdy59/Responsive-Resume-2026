@@ -40,29 +40,54 @@
     <link rel="stylesheet" href="styles.css" />
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
     <script id="person-schema" type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Ahmed Mahdy",
+    "jobTitle": "UX Designer & Data Visualizer",
+    "email": "mailto:amahdy59@gmail.com",
+    "url": "https://creativemahdy.space/",
+    "image": "https://creativemahdy.space/assets/ahmed-mahdy.png"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    "name": "Sales Performance Dashboard",
+    "headline": "Sales Performance Dashboard",
+    "description": "CRM sales dashboard built in Google Sheets for tracking quarterly team performance through chart-based visualization.",
+    "url": "https://creativemahdy.space/project-sales-dashboard.html",
+    "author": {
+      "@type": "Person",
+      "name": "Ahmed Mahdy",
+      "url": "https://creativemahdy.space/"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
       {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Ahmed Mahdy",
-        "jobTitle": "UX Designer & Data Visualizer",
-        "email": "mailto:amahdy59@gmail.com",
-        "url": "https://creativemahdy.space/",
-        "image": "https://creativemahdy.space/assets/ahmed-mahdy.png",
-        "sameAs": [
-          "https://www.linkedin.com/in/creativemahdy",
-          "https://dribbble.com/creativemahdy"
-        ],
-        "knowsAbout": [
-          "UX Design",
-          "Data Visualization",
-          "Data Analytics",
-          "Power BI",
-          "Tableau",
-          "Microsoft Excel",
-          "SQL",
-          "Python"
-        ]
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://creativemahdy.space/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Projects",
+        "item": "https://creativemahdy.space/#projects"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Sales Dashboard",
+        "item": "https://creativemahdy.space/project-sales-dashboard.html"
       }
+    ]
+  }
+]
     </script>
   </head>
   <body data-page="case-study" data-localized="false">
@@ -76,12 +101,22 @@
     </svg>
     <div class="ambient-particles" aria-hidden="true"></div>
     <main class="resume-shell case-study-shell" id="case-study-content">
-      <nav class="case-study-nav reveal active">
+      <nav class="case-study-nav reveal active" aria-label="Case study header navigation">
         <a href="index.html#projects" class="back-link">
           <svg aria-hidden="true"><use href="#icon-arrow-left"></use></svg>
-          Back to Resume
+          Back to Projects
         </a>
-        <div class="case-study-controls"><button class="theme-toggle" type="button" data-tooltip="Switch Theme" aria-label="Dark mode"><span aria-hidden="true"><svg><use href="#icon-moon"></use></svg></span></button><button class="contrast-toggle" type="button" data-tooltip="Toggle Contrast" aria-label="High contrast mode"><span aria-hidden="true"><svg><use href="#icon-contrast"></use></svg></span></button></div>
+        <div class="case-study-controls">
+          <button class="theme-toggle" type="button" data-tooltip="Switch Theme" aria-label="Dark mode"><span aria-hidden="true"><svg><use href="#icon-moon"></use></svg></span></button>
+          <button class="contrast-toggle" type="button" data-tooltip="Toggle Contrast" aria-label="High contrast mode"><span aria-hidden="true"><svg><use href="#icon-contrast"></use></svg></span></button>
+        </div>
+      </nav>
+      <nav class="case-study-breadcrumbs" aria-label="Breadcrumb trail">
+        <ol class="breadcrumbs">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html#projects">Projects</a></li>
+          <li aria-current="page">Sales Dashboard</li>
+        </ol>
       </nav>
 
       <article class="case-study-card panel reveal active">
@@ -104,12 +139,12 @@
         <div class="case-study-content">
           <section class="case-study-section">
             <h2>Context &amp; challenge</h2>
-            <p>Sales managers lacked a clear, real-time view of individual and team performance metrics. Existing reports were static, hard to read, and required manual weekly updates.</p>
+            <p>The project addresses the challenge of comparing individual and team sales performance inside a familiar spreadsheet environment without requiring a separate BI platform.</p>
           </section>
 
           <section class="case-study-section">
             <h2>Approach &amp; key decisions</h2>
-            <p>I designed an automated, visually striking dashboard directly within Google Sheets. By utilizing advanced conditional formatting, pivot tables, and custom charts, I transformed raw CRM exports into a self-updating, highly readable performance tracker.</p>
+            <p>As data analyst, I organized CRM exports with pivot tables, conditional formatting, and focused charts so quarterly KPIs can be scanned and compared in Google Sheets.</p>
           </section>
 
           <section class="case-study-section">
@@ -125,11 +160,11 @@
 
           <section class="case-study-section">
             <h2>Outcome &amp; reflection</h2>
-            <p>Constraints breed creativity. Building a beautiful, functional dashboard within the limitations of a spreadsheet application taught me how to push the boundaries of conditional formatting and layout grids to mimic dedicated BI tools.</p>
+            <p>The implementation shows how a spreadsheet can support a compact decision view without imitating every feature of a dedicated BI tool. The next validation step is to measure refresh effort, error rate, and manager task time.</p>
           </section>
         </div>
-      <section class="case-study-section"><h2>Evidence &amp; limitations</h2><p>This page documents the current design rationale and available implementation. It does not claim a measured business outcome unless a verified metric is shown. Use the live-project link to inspect the working experience.</p></section>
-<nav class="case-study-pagination" aria-label="Case study navigation"><a class="back-link" href="project-lego-explorer.html">Previous: LEGO Explorer</a><a class="back-link" href="project-haj-arafa.html">Next: Haj Arafa</a></nav>
+      <section class="case-study-section"><h2>Evidence &amp; next validation</h2><p>The published dashboard is the current evidence. Source-data refresh timing, manager task testing, and production adoption metrics have not been published and are not claimed as outcomes.</p></section>
+<nav class="case-study-pagination" aria-label="Case study pagination"><a class="back-link" href="project-lego-explorer.html">Previous: LEGO Explorer</a><a class="back-link" href="project-haj-arafa.html">Next: Haj Arafa</a></nav>
       </article>
     </main>
 <script src="script.js"></script>

@@ -40,29 +40,54 @@
     <link rel="stylesheet" href="styles.css" />
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
     <script id="person-schema" type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Ahmed Mahdy",
+    "jobTitle": "UX Designer & Data Visualizer",
+    "email": "mailto:amahdy59@gmail.com",
+    "url": "https://creativemahdy.space/",
+    "image": "https://creativemahdy.space/assets/ahmed-mahdy.png"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    "name": "Haj Arafa App",
+    "headline": "Haj Arafa App",
+    "description": "Accessible responsive commerce UX case study covering mobile navigation and checkout decisions.",
+    "url": "https://creativemahdy.space/project-haj-arafa.html",
+    "author": {
+      "@type": "Person",
+      "name": "Ahmed Mahdy",
+      "url": "https://creativemahdy.space/"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
       {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Ahmed Mahdy",
-        "jobTitle": "UX Designer & Data Visualizer",
-        "email": "mailto:amahdy59@gmail.com",
-        "url": "https://creativemahdy.space/",
-        "image": "https://creativemahdy.space/assets/ahmed-mahdy.png",
-        "sameAs": [
-          "https://www.linkedin.com/in/creativemahdy",
-          "https://dribbble.com/creativemahdy"
-        ],
-        "knowsAbout": [
-          "UX Design",
-          "Data Visualization",
-          "Data Analytics",
-          "Power BI",
-          "Tableau",
-          "Microsoft Excel",
-          "SQL",
-          "Python"
-        ]
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://creativemahdy.space/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Projects",
+        "item": "https://creativemahdy.space/#projects"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Haj Arafa",
+        "item": "https://creativemahdy.space/project-haj-arafa.html"
       }
+    ]
+  }
+]
     </script>
   </head>
   <body data-page="case-study" data-localized="false">
@@ -76,12 +101,22 @@
     </svg>
     <div class="ambient-particles" aria-hidden="true"></div>
     <main class="resume-shell case-study-shell" id="case-study-content">
-      <nav class="case-study-nav reveal active">
+      <nav class="case-study-nav reveal active" aria-label="Case study header navigation">
         <a href="index.html#projects" class="back-link">
           <svg aria-hidden="true"><use href="#icon-arrow-left"></use></svg>
-          Back to Resume
+          Back to Projects
         </a>
-        <div class="case-study-controls"><button class="theme-toggle" type="button" data-tooltip="Switch Theme" aria-label="Dark mode"><span aria-hidden="true"><svg><use href="#icon-moon"></use></svg></span></button><button class="contrast-toggle" type="button" data-tooltip="Toggle Contrast" aria-label="High contrast mode"><span aria-hidden="true"><svg><use href="#icon-contrast"></use></svg></span></button></div>
+        <div class="case-study-controls">
+          <button class="theme-toggle" type="button" data-tooltip="Switch Theme" aria-label="Dark mode"><span aria-hidden="true"><svg><use href="#icon-moon"></use></svg></span></button>
+          <button class="contrast-toggle" type="button" data-tooltip="Toggle Contrast" aria-label="High contrast mode"><span aria-hidden="true"><svg><use href="#icon-contrast"></use></svg></span></button>
+        </div>
+      </nav>
+      <nav class="case-study-breadcrumbs" aria-label="Breadcrumb trail">
+        <ol class="breadcrumbs">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html#projects">Projects</a></li>
+          <li aria-current="page">Haj Arafa</li>
+        </ol>
       </nav>
 
       <article class="case-study-card panel reveal active">
@@ -99,17 +134,20 @@
           </div>
         </header>
 
-        <figure class="case-study-figure"><img src="assets/case-haj-arafa.jpg" width="1440" height="890" alt="Haj Arafa App interface overview" class="case-study-image" decoding="async" fetchpriority="high"><figcaption>Interface capture from the linked project. Open the live project for the current interactive version.</figcaption></figure>
+        <figure class="case-study-figure">
+          <img src="assets/case-haj-arafa.webp" width="1440" height="890" alt="Haj Arafa App interface overview" class="case-study-image" decoding="async" fetchpriority="high" />
+          <figcaption>Interface capture from the linked project. Open the live project for the current interactive version.</figcaption>
+        </figure>
 
         <div class="case-study-content">
           <section class="case-study-section">
             <h2>Context &amp; challenge</h2>
-            <p>The primary challenge was reducing cart abandonment rates and streamlining the shopping journey. Users frequently struggled with finding specific products and experienced friction during the multi-step checkout process on mobile devices.</p>
+            <p>The design challenge was to make product discovery and checkout easier on mobile without overwhelming shoppers with dense navigation or a long sequence of decisions.</p>
           </section>
 
           <section class="case-study-section">
             <h2>Approach &amp; key decisions</h2>
-            <p>I redesigned the core user flows, focusing on an intuitive search-first navigation model and a frictionless checkout experience. By introducing guest checkout and optimizing touch targets for mobile users, we significantly reduced the time to purchase.</p>
+            <p>As lead UX designer, I shaped a search-first navigation model, guest checkout, mobile-sized touch targets, and a step-by-step checkout flow. These decisions aim to shorten the path to purchase; conversion impact has not yet been verified with published analytics.</p>
           </section>
 
           <section class="case-study-section">
@@ -126,11 +164,11 @@
 
           <section class="case-study-section">
             <h2>Outcome &amp; reflection</h2>
-            <p>This project reinforced the importance of mobile-first design. Early usability testing revealed that our initial checkout flow was too dense for smaller screens, prompting a crucial pivot to a step-by-step accordion model that ultimately boosted conversion.</p>
+            <p>The available implementation demonstrates the mobile-first flow and accordion checkout direction. The next validation step is a documented usability study followed by funnel analytics; no conversion improvement is claimed on this page.</p>
           </section>
         </div>
-      <section class="case-study-section"><h2>Evidence &amp; limitations</h2><p>This page documents the current design rationale and available implementation. It does not claim a measured business outcome unless a verified metric is shown. Use the live-project link to inspect the working experience.</p></section>
-<nav class="case-study-pagination" aria-label="Case study navigation"><a class="back-link" href="project-sales-dashboard.html">Previous: Sales Dashboard</a><a class="back-link" href="project-cairo-airport.html">Next: Cairo Airport</a></nav>
+      <section class="case-study-section"><h2>Evidence &amp; next validation</h2><p>The interface capture and live implementation are the available evidence. Research participant counts, baseline funnel data, and post-launch conversion metrics have not been published, so they are not presented as outcomes.</p></section>
+<nav class="case-study-pagination" aria-label="Case study pagination"><a class="back-link" href="project-sales-dashboard.html">Previous: Sales Dashboard</a><a class="back-link" href="project-cairo-airport.html">Next: Cairo Airport</a></nav>
       </article>
     </main>
 <script src="script.js"></script>

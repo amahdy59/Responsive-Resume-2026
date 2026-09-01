@@ -82,11 +82,23 @@ for (const { file, source } of htmlDocuments) {
     errors.push(`${file} still uses a placeholder image.`);
   }
 
-  for (const match of source.matchAll(/\b(?:href|src)="((?:project-[^"]+\.html)|(?:assets\/[^"]+))"/g)) {
+  for (const match of source.matchAll(/\b(?:href|src|srcset)="((?:project-[^"]+\.html)|(?:assets\/[^"]+))"/g)) {
     if (!existsSync(resolve(root, match[1]))) {
       errors.push(`${file} references missing local resource: ${match[1]}`);
     }
   }
+}
+
+if (htmlDocuments.some(({ source }) => source.includes('rel="manifest"'))) {
+  errors.push("HTML still references a removed web app manifest.");
+}
+
+if (/serviceWorker\.register|event\.key\.toLowerCase\(\)/.test(script)) {
+  errors.push("Removed PWA registration or global character shortcuts were reintroduced.");
+}
+
+if (htmlDocuments.some(({ source }) => /assets\/case-[^"]+\.jpg/.test(source))) {
+  errors.push("A case study still references a superseded JPEG asset.");
 }
 
 for (const assetPath of [

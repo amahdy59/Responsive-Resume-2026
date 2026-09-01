@@ -23,8 +23,7 @@
     <meta id="twitter-title" property="twitter:title" content="Ahmed Mahdy | UX Designer & Data Visualizer" />
     <meta id="twitter-description" property="twitter:description" content="Ahmed Mahdy, UX Designer and Data Visualizer portfolio resume." />
     <meta property="twitter:image" content="https://creativemahdy.space/assets/ahmed-mahdy.png" />
-        <link rel="preload" as="image" href="assets/ahmed-mahdy.webp" />
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" />
+    <link rel="preload" as="image" href="assets/ahmed-mahdy.webp" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -213,27 +212,31 @@
                 <span role="listitem" data-translate="ux_tag">UX Design</span>
                 <span role="listitem" data-translate="data_tag">Data Visualization</span>
               </div>
+              <button class="hero-print-action" type="button" data-print-resume>
+                <svg aria-hidden="true"><use href="#icon-print"></use></svg>
+                <span data-translate="print_resume_action">Print / Save PDF</span>
+              </button>
             </div>
           </div>
           <div class="hero-controls-wrapper">
             <div
               class="controls-group"
-              role="toolbar"
+              role="group"
               aria-label="Display settings"
               data-translate-attr="aria-label"
               data-translate-attr-key="display_settings_label"
             >
               <button class="lang-toggle" type="button" data-tooltip="Switch Language" aria-label="Switch to Arabic">
                 <span aria-hidden="true"><svg><use href="#icon-globe"></use></svg></span>
+                <span class="control-label" data-translate="control_language">Language</span>
               </button>
               <button class="theme-toggle" type="button" data-tooltip="Switch Theme" aria-label="Dark mode">
                 <span aria-hidden="true"><svg><use href="#icon-moon"></use></svg></span>
+                <span class="control-label" data-translate="control_theme">Theme</span>
               </button>
               <button class="contrast-toggle" type="button" data-tooltip="Toggle Contrast" aria-label="High contrast mode">
                 <span aria-hidden="true"><svg><use href="#icon-contrast"></use></svg></span>
-              </button>
-              <button class="print-button" type="button" data-tooltip="Print / Save as PDF" aria-label="Print or save resume as PDF">
-                <span aria-hidden="true"><svg><use href="#icon-print"></use></svg></span>
+                <span class="control-label" data-translate="control_contrast">Contrast</span>
               </button>
             </div>
             <ul
@@ -273,11 +276,11 @@
           data-translate-attr="aria-label"
           data-translate-attr-key="section_nav_label"
         >
-          <a href="#about" data-translate="sect_about">About Me</a>
-          <a href="#certifications" data-translate="sect_certs">Certifications</a>
-          <a href="#skills" data-translate="sect_skills">Skills</a>
           <a href="#projects" data-translate="sect_projects">Projects</a>
           <a href="#employment" data-translate="sect_jobs">Employment</a>
+          <a href="#about" data-translate="sect_about">About Me</a>
+          <a href="#skills" data-translate="sect_skills">Skills</a>
+          <a href="#certifications" data-translate="sect_certs">Certifications</a>
           <a href="#education" data-translate="sect_edu">Education</a>
         </nav>
 
@@ -356,38 +359,41 @@
               <div class="project-group">
                 <h3 data-translate="proj_ux_header">UX Projects</h3>
                 <article>
+                  <img class="project-thumbnail" src="assets/case-haj-arafa.webp" alt="" width="1440" height="890" loading="lazy" decoding="async" />
                   <h4><span data-translate="proj_ux3_title">Haj Arafa App</span></h4>
                   <p data-translate="proj_ux3_desc">
                     An intuitive, accessible e-commerce experience designed with responsive layouts and seamless navigation to maximize user conversion and engagement.
                   </p>
                   <div class="project-actions">
                     <a href="project-haj-arafa.html" class="btn btn-primary" data-translate="read_case_study">Read Case Study</a>
-                    <a href="https://amahdy59.github.io/Hajarafaapp/" class="btn btn-secondary btn-icon" target="_blank" rel="noopener noreferrer" aria-label="Visit Live Site" data-tooltip="Visit Live Site">
-
+                    <a href="https://amahdy59.github.io/Hajarafaapp/" class="btn btn-secondary btn-icon" target="_blank" rel="noopener noreferrer" aria-label="Visit live site: Haj Arafa App" data-tooltip="Visit Live Site" data-tooltip-key="tooltip_visit_live_site">
+                      <svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg>
                     </a>
                   </div>
                 </article>
                 <article>
+                  <img class="project-thumbnail" src="assets/case-cairo-airport.webp" alt="" width="1440" height="1586" loading="lazy" decoding="async" />
                   <h4><span data-translate="proj_ux2_title">Cairo International Airport - Command Hub</span></h4>
                   <p data-translate="proj_ux2_desc">
                     A high-fidelity operational command dashboard focusing on real-time data visualization, clear information hierarchy, and responsive performance.
                   </p>
                   <div class="project-actions">
                     <a href="project-cairo-airport.html" class="btn btn-primary" data-translate="read_case_study">Read Case Study</a>
-                    <a href="https://amahdy59.github.io/Cairo-International-Airpot-CIA-Dashboard/" class="btn btn-secondary btn-icon" target="_blank" rel="noopener noreferrer" aria-label="Visit Live Site" data-tooltip="Visit Live Site">
-
+                    <a href="https://amahdy59.github.io/Cairo-International-Airpot-CIA-Dashboard/" class="btn btn-secondary btn-icon" target="_blank" rel="noopener noreferrer" aria-label="Visit live site: Cairo International Airport - Command Hub" data-tooltip="Visit Live Site" data-tooltip-key="tooltip_visit_live_site">
+                      <svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg>
                     </a>
                   </div>
                 </article>
                 <article>
+                  <img class="project-thumbnail" src="assets/case-hr-tool.webp" alt="" width="1440" height="890" loading="lazy" decoding="async" />
                   <h4><span data-translate="proj_ux1_title">Human Resources Tool</span></h4>
                   <p data-translate="proj_ux1_desc">
                     A responsive, privacy-centric HR SaaS application optimizing leave requests and role management through modern, user-friendly interfaces.
                   </p>
                   <div class="project-actions">
                     <a href="project-hr-tool.html" class="btn btn-primary" data-translate="read_case_study">Read Case Study</a>
-                    <a href="https://amahdy59.github.io/hr-tool-v2/" class="btn btn-secondary btn-icon" target="_blank" rel="noopener noreferrer" aria-label="Visit Live Site" data-tooltip="Visit Live Site">
-
+                    <a href="https://amahdy59.github.io/hr-tool-v2/" class="btn btn-secondary btn-icon" target="_blank" rel="noopener noreferrer" aria-label="Visit live site: Human Resources Tool" data-tooltip="Visit Live Site" data-tooltip-key="tooltip_visit_live_site">
+                      <svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg>
                     </a>
                   </div>
                 </article>
@@ -402,8 +408,8 @@
                   </p>
                   <div class="project-actions">
                     <a href="project-lego-explorer.html" class="btn btn-primary" data-translate="read_case_study">Read Case Study</a>
-                    <a href="https://mavenshowcase.com/project/24967" class="btn btn-secondary btn-icon" target="_blank" rel="noopener noreferrer" aria-label="Visit Live Site" data-tooltip="Visit Live Site">
-
+                    <a href="https://mavenshowcase.com/project/24967" class="btn btn-secondary btn-icon" target="_blank" rel="noopener noreferrer" aria-label="Visit live site: A Data-Driven LEGO Explorer" data-tooltip="Visit Live Site" data-tooltip-key="tooltip_visit_live_site">
+                      <svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg>
                     </a>
                   </div>
                 </article>
@@ -414,8 +420,8 @@
                   </p>
                   <div class="project-actions">
                     <a href="project-sales-dashboard.html" class="btn btn-primary" data-translate="read_case_study">Read Case Study</a>
-                    <a href="https://mavenshowcase.com/project/26891" class="btn btn-secondary btn-icon" target="_blank" rel="noopener noreferrer" aria-label="Visit Live Site" data-tooltip="Visit Live Site">
-
+                    <a href="https://mavenshowcase.com/project/26891" class="btn btn-secondary btn-icon" target="_blank" rel="noopener noreferrer" aria-label="Visit live site: Sales Performance Dashboard" data-tooltip="Visit Live Site" data-tooltip-key="tooltip_visit_live_site">
+                      <svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg>
                     </a>
                   </div>
                 </article>
@@ -523,6 +529,18 @@
             </section>
           </section>
         </div>
+        <footer class="resume-footer">
+          <div>
+            <h2 data-translate="footer_cta">Let’s work together</h2>
+            <p data-translate="footer_text">Interested in UX, accessible products, or decision-ready data experiences?</p>
+          </div>
+          <div class="footer-actions">
+            <a class="btn btn-primary" href="mailto:amahdy59@gmail.com" data-translate="footer_email">Email Ahmed</a>
+            <a class="btn btn-secondary" href="https://www.linkedin.com/in/creativemahdy" target="_blank" rel="noopener noreferrer" data-translate="contact_linkedin">LinkedIn profile</a>
+            <button class="btn btn-secondary" type="button" data-print-resume data-translate="print_resume_action">Print / Save PDF</button>
+            <a class="back-to-top" href="#main-content" data-translate="back_to_top">Back to top</a>
+          </div>
+        </footer>
       </section>
     </main>
 

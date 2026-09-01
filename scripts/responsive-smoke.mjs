@@ -83,9 +83,10 @@ try {
     const state = await page.evaluate(() => {
       const panels = [...document.querySelectorAll(".content-grid .panel")];
       const panelName = (panel) => panel.querySelector("h2")?.textContent?.trim();
-      const buttonNames = [...document.querySelectorAll("button")].map((button) =>
-        button.getAttribute("aria-label"),
-      );
+      const buttons = [...document.querySelectorAll("button")];
+      const buttonNames = buttons
+        .map((button) => button.getAttribute("aria-label"))
+        .filter(Boolean);
       const skipLink = document.querySelector(".skip-link");
       const skipTarget = skipLink
         ? document.querySelector(new URL(skipLink.href).hash)
@@ -99,6 +100,9 @@ try {
           (image) => !image.complete || image.naturalWidth === 0,
         ).length,
         buttonNames,
+        buttonsAreNamed: buttons.every((button) =>
+          Boolean(button.getAttribute("aria-label") || button.textContent.trim()),
+        ),
         clientWidth: document.documentElement.clientWidth,
         direction: document.documentElement.dir,
         domSectionOrder: panels.map(panelName),
@@ -125,16 +129,19 @@ try {
         entityLinks: [...document.querySelectorAll(".li-entity-link")].map((link) => link.href),
         externalIconCount: document.querySelectorAll('a[target="_blank"] .external-icon').length,
         externalLinkCount: document.querySelectorAll('a[target="_blank"]').length,
-        printButtonInToolbar: Boolean(
-          document.querySelector(".controls-group > .print-button"),
-        ),
         resumeActionCount: document.querySelectorAll(".resume-action").length,
         sectionLinks: [...document.querySelectorAll(".section-nav a")].map((link) => ({
           targetExists: Boolean(document.querySelector(new URL(link.href).hash)),
           text: link.textContent.trim(),
         })),
         sectionNavPosition: getComputedStyle(document.querySelector(".section-nav")).position,
+        sectionNavFits:
+          document.querySelector(".section-nav").scrollWidth <=
+          document.querySelector(".section-nav").clientWidth,
         skipTargetTabIndex: skipTarget?.tabIndex,
+        toolbarRole: document.querySelector(".controls-group")?.getAttribute("role"),
+        footerExists: Boolean(document.querySelector(".resume-footer")),
+        projectThumbnailCount: document.querySelectorAll('.project-thumbnail[src$=".webp"]').length,
         visualSectionOrder: panels
           .toSorted((a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top)
           .map(panelName),
@@ -151,12 +158,15 @@ try {
     );
     assert.deepEqual(state.overflowingElements, []);
     assert.deepEqual(runtimeErrors, []);
+    assert.equal(state.buttonsAreNamed, true);
     assert.equal(new Set(state.buttonNames).size, state.buttonNames.length);
     assert.equal(state.skipTargetTabIndex, -1);
     assert.equal(state.sectionLinks.length, 6);
     assert.ok(state.sectionLinks.every(({ targetExists, text }) => targetExists && text));
     assert.equal(state.sectionNavPosition, "sticky");
-    assert.equal(state.printButtonInToolbar, true);
+    assert.equal(state.toolbarRole, "group");
+    assert.equal(state.footerExists, true);
+    assert.equal(state.projectThumbnailCount, 3);
     assert.equal(state.resumeActionCount, 0);
     assert.equal(state.externalIconCount, state.externalLinkCount);
     assert.deepEqual(state.entityLinks, [
@@ -178,6 +188,7 @@ try {
 
     if (scenario.width <= 560) {
       assert.equal(state.ambientAnimationName, "none");
+      assert.equal(state.sectionNavFits, true);
     }
 
     const accessibility = await new AxeBuilder({ page }).analyze();
@@ -191,9 +202,16 @@ try {
         window.print = () => {
           window.__printCalled = true;
         };
-        document.querySelector(".print-button").click();
+        document.querySelector("[data-print-resume]").click();
       });
       assert.equal(await page.evaluate(() => window.__printCalled), true);
+
+      const themeBeforeShortcut = await page.locator("html").getAttribute("data-theme");
+      await page.locator("body").press("t");
+      assert.equal(
+        await page.locator("html").getAttribute("data-theme"),
+        themeBeforeShortcut,
+      );
 
       await page.locator('.section-nav a[href="#projects"]').click();
       assert.equal(
@@ -275,6 +293,7 @@ try {
       direction: document.documentElement.dir,
       heading: document.querySelector("h1")?.textContent?.trim(),
       language: document.documentElement.lang,
+      languageNotice: document.querySelector(".case-language-note")?.textContent.trim(),
       paginationLinks: document.querySelectorAll(".case-study-pagination a").length,
       resumeHref: document.querySelector('.case-study-nav a')?.getAttribute("href"),
       scrollWidth: document.documentElement.scrollWidth,
@@ -290,6 +309,7 @@ try {
     assert.equal(state.resumeHref, "index.html#projects");
     assert.ok(state.canonical?.endsWith(file));
     assert.notEqual(state.title, "Ahmed Mahdy | UX Designer & Data Visualizer");
+    assert.equal(state.languageNotice, "دراسة الحالة متاحة حالياً باللغة الإنجليزية.");
     assert.deepEqual(runtimeErrors, []);
 
     for (const selector of [".theme-toggle", ".contrast-toggle"]) {

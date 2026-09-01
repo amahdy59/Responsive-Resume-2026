@@ -40,29 +40,54 @@
     <link rel="stylesheet" href="styles.css" />
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
     <script id="person-schema" type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Ahmed Mahdy",
+    "jobTitle": "UX Designer & Data Visualizer",
+    "email": "mailto:amahdy59@gmail.com",
+    "url": "https://creativemahdy.space/",
+    "image": "https://creativemahdy.space/assets/ahmed-mahdy.png"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    "name": "A Data-Driven LEGO Explorer",
+    "headline": "A Data-Driven LEGO Explorer",
+    "description": "An interactive Tableau visualization experience that helps users explore LEGO sets by theme, age, price, and set count.",
+    "url": "https://creativemahdy.space/project-lego-explorer.html",
+    "author": {
+      "@type": "Person",
+      "name": "Ahmed Mahdy",
+      "url": "https://creativemahdy.space/"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
       {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Ahmed Mahdy",
-        "jobTitle": "UX Designer & Data Visualizer",
-        "email": "mailto:amahdy59@gmail.com",
-        "url": "https://creativemahdy.space/",
-        "image": "https://creativemahdy.space/assets/ahmed-mahdy.png",
-        "sameAs": [
-          "https://www.linkedin.com/in/creativemahdy",
-          "https://dribbble.com/creativemahdy"
-        ],
-        "knowsAbout": [
-          "UX Design",
-          "Data Visualization",
-          "Data Analytics",
-          "Power BI",
-          "Tableau",
-          "Microsoft Excel",
-          "SQL",
-          "Python"
-        ]
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://creativemahdy.space/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Projects",
+        "item": "https://creativemahdy.space/#projects"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "LEGO Explorer",
+        "item": "https://creativemahdy.space/project-lego-explorer.html"
       }
+    ]
+  }
+]
     </script>
   </head>
   <body data-page="case-study" data-localized="false">
@@ -76,12 +101,22 @@
     </svg>
     <div class="ambient-particles" aria-hidden="true"></div>
     <main class="resume-shell case-study-shell" id="case-study-content">
-      <nav class="case-study-nav reveal active">
+      <nav class="case-study-nav reveal active" aria-label="Case study header navigation">
         <a href="index.html#projects" class="back-link">
           <svg aria-hidden="true"><use href="#icon-arrow-left"></use></svg>
-          Back to Resume
+          Back to Projects
         </a>
-        <div class="case-study-controls"><button class="theme-toggle" type="button" data-tooltip="Switch Theme" aria-label="Dark mode"><span aria-hidden="true"><svg><use href="#icon-moon"></use></svg></span></button><button class="contrast-toggle" type="button" data-tooltip="Toggle Contrast" aria-label="High contrast mode"><span aria-hidden="true"><svg><use href="#icon-contrast"></use></svg></span></button></div>
+        <div class="case-study-controls">
+          <button class="theme-toggle" type="button" data-tooltip="Switch Theme" aria-label="Dark mode"><span aria-hidden="true"><svg><use href="#icon-moon"></use></svg></span></button>
+          <button class="contrast-toggle" type="button" data-tooltip="Toggle Contrast" aria-label="High contrast mode"><span aria-hidden="true"><svg><use href="#icon-contrast"></use></svg></span></button>
+        </div>
+      </nav>
+      <nav class="case-study-breadcrumbs" aria-label="Breadcrumb trail">
+        <ol class="breadcrumbs">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html#projects">Projects</a></li>
+          <li aria-current="page">LEGO Explorer</li>
+        </ol>
       </nav>
 
       <article class="case-study-card panel reveal active">
@@ -104,12 +139,12 @@
         <div class="case-study-content">
           <section class="case-study-section">
             <h2>Context &amp; challenge</h2>
-            <p>LEGO enthusiasts and buyers often struggle to compare sets across massive product catalogs. The goal was to take a large, raw dataset of LEGO sets and turn it into an engaging, explorable tool for users of all ages.</p>
+            <p>The project explores how a large LEGO dataset can become a more approachable comparison tool across theme, age, price, and set size.</p>
           </section>
 
           <section class="case-study-section">
             <h2>Approach &amp; key decisions</h2>
-            <p>I developed a highly interactive Tableau dashboard utilizing dynamic filtering. Users can visually explore distributions of price-per-piece, track theme popularity over time, and isolate specific categories using an intuitive, playful interface.</p>
+            <p>As data analyst and visualizer, I built dynamic Tableau filters for price-per-piece, theme trends, age ranges, and category comparison while using a restrained LEGO-inspired color system.</p>
           </section>
 
           <section class="case-study-section">
@@ -125,11 +160,11 @@
 
           <section class="case-study-section">
             <h2>Outcome &amp; reflection</h2>
-            <p>Data visualization isn't just about charts; it's about storytelling. I learned how to use color strategically—mapping specific Tableau color palettes to iconic LEGO colors to make the dashboard feel thematic and immersive rather than purely analytical.</p>
+            <p>The result demonstrates a thematic visual system without turning color into the only carrier of meaning. The next validation step is task-based testing of filter discoverability and comparison accuracy.</p>
           </section>
         </div>
-      <section class="case-study-section"><h2>Evidence &amp; limitations</h2><p>This page documents the current design rationale and available implementation. It does not claim a measured business outcome unless a verified metric is shown. Use the live-project link to inspect the working experience.</p></section>
-<nav class="case-study-pagination" aria-label="Case study navigation"><a class="back-link" href="project-hr-tool.html">Previous: HR Tool</a><a class="back-link" href="project-sales-dashboard.html">Next: Sales Dashboard</a></nav>
+      <section class="case-study-section"><h2>Evidence &amp; next validation</h2><p>The published interactive dashboard is the current evidence. A verified local portfolio capture, usability sample, and task-completion results have not been added, so no measured user outcome is claimed.</p></section>
+<nav class="case-study-pagination" aria-label="Case study pagination"><a class="back-link" href="project-hr-tool.html">Previous: HR Tool</a><a class="back-link" href="project-sales-dashboard.html">Next: Sales Dashboard</a></nav>
       </article>
     </main>
 <script src="script.js"></script>

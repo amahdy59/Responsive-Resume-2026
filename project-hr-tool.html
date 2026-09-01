@@ -40,29 +40,54 @@
     <link rel="stylesheet" href="styles.css" />
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
     <script id="person-schema" type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Ahmed Mahdy",
+    "jobTitle": "UX Designer & Data Visualizer",
+    "email": "mailto:amahdy59@gmail.com",
+    "url": "https://creativemahdy.space/",
+    "image": "https://creativemahdy.space/assets/ahmed-mahdy.png"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    "name": "Human Resources Tool",
+    "headline": "Human Resources Tool",
+    "description": "A responsive, privacy-centric HR SaaS application optimizing leave requests and role management through modern, user-friendly interfaces.",
+    "url": "https://creativemahdy.space/project-hr-tool.html",
+    "author": {
+      "@type": "Person",
+      "name": "Ahmed Mahdy",
+      "url": "https://creativemahdy.space/"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
       {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Ahmed Mahdy",
-        "jobTitle": "UX Designer & Data Visualizer",
-        "email": "mailto:amahdy59@gmail.com",
-        "url": "https://creativemahdy.space/",
-        "image": "https://creativemahdy.space/assets/ahmed-mahdy.png",
-        "sameAs": [
-          "https://www.linkedin.com/in/creativemahdy",
-          "https://dribbble.com/creativemahdy"
-        ],
-        "knowsAbout": [
-          "UX Design",
-          "Data Visualization",
-          "Data Analytics",
-          "Power BI",
-          "Tableau",
-          "Microsoft Excel",
-          "SQL",
-          "Python"
-        ]
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://creativemahdy.space/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Projects",
+        "item": "https://creativemahdy.space/#projects"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "HR Tool",
+        "item": "https://creativemahdy.space/project-hr-tool.html"
       }
+    ]
+  }
+]
     </script>
   </head>
   <body data-page="case-study" data-localized="false">
@@ -76,12 +101,22 @@
     </svg>
     <div class="ambient-particles" aria-hidden="true"></div>
     <main class="resume-shell case-study-shell" id="case-study-content">
-      <nav class="case-study-nav reveal active">
+      <nav class="case-study-nav reveal active" aria-label="Case study header navigation">
         <a href="index.html#projects" class="back-link">
           <svg aria-hidden="true"><use href="#icon-arrow-left"></use></svg>
-          Back to Resume
+          Back to Projects
         </a>
-        <div class="case-study-controls"><button class="theme-toggle" type="button" data-tooltip="Switch Theme" aria-label="Dark mode"><span aria-hidden="true"><svg><use href="#icon-moon"></use></svg></span></button><button class="contrast-toggle" type="button" data-tooltip="Toggle Contrast" aria-label="High contrast mode"><span aria-hidden="true"><svg><use href="#icon-contrast"></use></svg></span></button></div>
+        <div class="case-study-controls">
+          <button class="theme-toggle" type="button" data-tooltip="Switch Theme" aria-label="Dark mode"><span aria-hidden="true"><svg><use href="#icon-moon"></use></svg></span></button>
+          <button class="contrast-toggle" type="button" data-tooltip="Toggle Contrast" aria-label="High contrast mode"><span aria-hidden="true"><svg><use href="#icon-contrast"></use></svg></span></button>
+        </div>
+      </nav>
+      <nav class="case-study-breadcrumbs" aria-label="Breadcrumb trail">
+        <ol class="breadcrumbs">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html#projects">Projects</a></li>
+          <li aria-current="page">HR Tool</li>
+        </ol>
       </nav>
 
       <article class="case-study-card panel reveal active">
@@ -99,17 +134,20 @@
           </div>
         </header>
 
-        <figure class="case-study-figure"><img src="assets/case-hr-tool.jpg" width="1440" height="890" alt="Human Resources Tool interface overview" class="case-study-image" decoding="async" fetchpriority="high"><figcaption>Interface capture from the linked project. Open the live project for the current interactive version.</figcaption></figure>
+        <figure class="case-study-figure">
+          <img src="assets/case-hr-tool.webp" width="1440" height="890" alt="Human Resources Tool interface overview" class="case-study-image" decoding="async" fetchpriority="high" />
+          <figcaption>Interface capture from the linked project. Open the live project for the current interactive version.</figcaption>
+        </figure>
 
         <div class="case-study-content">
           <section class="case-study-section">
             <h2>Context &amp; challenge</h2>
-            <p>The legacy HR software was notoriously difficult to navigate, leading to a high volume of support tickets for simple tasks like requesting PTO or updating personal information. The interface was outdated and not optimized for mobile.</p>
+            <p>The design challenge was to simplify routine HR tasks such as leave requests, personal-information updates, and role management across desktop and mobile.</p>
           </section>
 
           <section class="case-study-section">
             <h2>Approach &amp; key decisions</h2>
-            <p>I spearheaded a complete redesign, establishing a scalable design system and standardizing components. I streamlined the leave request flow into a simple 2-step process and introduced a personalized employee dashboard to surface relevant tasks immediately.</p>
+            <p>As UX/UI designer, I established reusable interface patterns, simplified the leave-request concept to two steps, and designed a personalized dashboard that surfaces relevant employee tasks.</p>
           </section>
 
           <section class="case-study-section">
@@ -125,11 +163,11 @@
 
           <section class="case-study-section">
             <h2>Outcome &amp; reflection</h2>
-            <p>Creating a comprehensive design system from scratch pays massive dividends. While it slowed down the initial weeks of the project, it exponentially increased our velocity when rolling out new features later in the timeline.</p>
+            <p>The reusable component approach makes the prototype more consistent and easier to extend. Delivery-speed and support-ticket improvements have not been measured, so the case study treats them as future validation goals.</p>
           </section>
         </div>
-      <section class="case-study-section"><h2>Evidence &amp; limitations</h2><p>This page documents the current design rationale and available implementation. It does not claim a measured business outcome unless a verified metric is shown. Use the live-project link to inspect the working experience.</p></section>
-<nav class="case-study-pagination" aria-label="Case study navigation"><a class="back-link" href="project-cairo-airport.html">Previous: Cairo Airport</a><a class="back-link" href="project-lego-explorer.html">Next: LEGO Explorer</a></nav>
+      <section class="case-study-section"><h2>Evidence &amp; next validation</h2><p>The interface capture and live prototype show the current design direction. Research sample details, support-ticket baselines, and production adoption data have not been published and are not presented as outcomes.</p></section>
+<nav class="case-study-pagination" aria-label="Case study pagination"><a class="back-link" href="project-cairo-airport.html">Previous: Cairo Airport</a><a class="back-link" href="project-lego-explorer.html">Next: LEGO Explorer</a></nav>
       </article>
     </main>
 <script src="script.js"></script>
