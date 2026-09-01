@@ -212,10 +212,6 @@
                 <span role="listitem" data-translate="ux_tag">UX Design</span>
                 <span role="listitem" data-translate="data_tag">Data Visualization</span>
               </div>
-              <button class="hero-print-action" type="button" data-print-resume>
-                <svg aria-hidden="true"><use href="#icon-print"></use></svg>
-                <span data-translate="print_resume_action">Print / Save PDF</span>
-              </button>
             </div>
           </div>
           <div class="hero-controls-wrapper">
@@ -237,6 +233,10 @@
               <button class="contrast-toggle" type="button" data-tooltip="Toggle Contrast" aria-label="High contrast mode">
                 <span aria-hidden="true"><svg><use href="#icon-contrast"></use></svg></span>
                 <span class="control-label" data-translate="control_contrast">Contrast</span>
+              </button>
+              <button class="print-button" type="button" data-print-resume data-tooltip="Print / Save PDF" aria-label="Print or save as PDF" data-tooltip-key="print_resume_action">
+                <span aria-hidden="true"><svg><use href="#icon-print"></use></svg></span>
+                <span class="control-label" data-translate="print_resume_action">Print / Save PDF</span>
               </button>
             </div>
             <ul
@@ -405,42 +405,75 @@
               <div class="project-group" data-group-category="ux">
                 <h3 data-translate="proj_ux_header">UX Projects</h3>
                 <article data-category="ux">
-                  <img class="project-thumbnail" src="assets/case-haj-arafa.webp" alt="" width="1440" height="890" loading="lazy" decoding="async" />
-                  <h4><span data-translate="proj_ux3_title">Haj Arafa App</span></h4>
-                  <p data-translate="proj_ux3_desc">
-                    An intuitive, accessible e-commerce experience designed with responsive layouts and seamless navigation to maximize user conversion and engagement.
-                  </p>
-                  <div class="project-actions">
-                    <a href="project-haj-arafa.html" class="btn btn-primary" data-translate="read_case_study">Read Case Study</a>
-                    <a href="https://amahdy59.github.io/Hajarafaapp/" class="btn btn-secondary btn-icon" target="_blank" rel="noopener noreferrer" aria-label="Visit live site: Haj Arafa App" data-tooltip="Visit Live Site" data-tooltip-key="tooltip_visit_live_site">
-                      <svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg>
-                    </a>
+                  <div class="project-header">
+                    <h4><span data-translate="proj_ux3_title">Haj Arafa App</span></h4>
+                    <button class="project-toggle" type="button" aria-expanded="true" aria-label="Collapse Haj Arafa App" data-project-toggle>
+                      <svg class="project-toggle-icon" aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="4 6 8 10 12 6"/>
+                      </svg>
+                    </button>
+                  </div>
+                  <div class="project-body">
+                    <div class="project-body-inner">
+                      <img class="project-thumbnail" src="assets/case-haj-arafa.webp" alt="" width="1440" height="890" loading="lazy" decoding="async" />
+                      <p data-translate="proj_ux3_desc">
+                        An intuitive, accessible e-commerce experience designed with responsive layouts and seamless navigation to maximize user conversion and engagement.
+                      </p>
+                      <div class="project-actions">
+                        <a href="project-haj-arafa.html" class="btn btn-primary" data-translate="read_case_study">Read Case Study</a>
+                        <a href="https://amahdy59.github.io/Hajarafaapp/" class="btn btn-secondary btn-icon" target="_blank" rel="noopener noreferrer" aria-label="Visit live site: Haj Arafa App" data-tooltip="Visit Live Site" data-tooltip-key="tooltip_visit_live_site">
+                          <svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg>
+                        </a>
+                      </div>
+                    </div>
                   </div>
                 </article>
                 <article data-category="ux">
-                  <img class="project-thumbnail" src="assets/case-cairo-airport.webp" alt="" width="1440" height="1586" loading="lazy" decoding="async" />
-                  <h4><span data-translate="proj_ux2_title">Cairo International Airport - Command Hub</span></h4>
-                  <p data-translate="proj_ux2_desc">
-                    A high-fidelity operational command dashboard focusing on real-time data visualization, clear information hierarchy, and responsive performance.
-                  </p>
-                  <div class="project-actions">
-                    <a href="project-cairo-airport.html" class="btn btn-primary" data-translate="read_case_study">Read Case Study</a>
-                    <a href="https://amahdy59.github.io/Cairo-International-Airpot-CIA-Dashboard/" class="btn btn-secondary btn-icon" target="_blank" rel="noopener noreferrer" aria-label="Visit live site: Cairo International Airport - Command Hub" data-tooltip="Visit Live Site" data-tooltip-key="tooltip_visit_live_site">
-                      <svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg>
-                    </a>
+                  <div class="project-header">
+                    <h4><span data-translate="proj_ux2_title">Cairo International Airport - Command Hub</span></h4>
+                    <button class="project-toggle" type="button" aria-expanded="true" aria-label="Collapse Cairo International Airport - Command Hub" data-project-toggle>
+                      <svg class="project-toggle-icon" aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="4 6 8 10 12 6"/>
+                      </svg>
+                    </button>
+                  </div>
+                  <div class="project-body">
+                    <div class="project-body-inner">
+                      <img class="project-thumbnail" src="assets/case-cairo-airport.webp" alt="" width="1440" height="1586" loading="lazy" decoding="async" />
+                      <p data-translate="proj_ux2_desc">
+                        A high-fidelity operational command dashboard focusing on real-time data visualization, clear information hierarchy, and responsive performance.
+                      </p>
+                      <div class="project-actions">
+                        <a href="project-cairo-airport.html" class="btn btn-primary" data-translate="read_case_study">Read Case Study</a>
+                        <a href="https://amahdy59.github.io/Cairo-International-Airpot-CIA-Dashboard/" class="btn btn-secondary btn-icon" target="_blank" rel="noopener noreferrer" aria-label="Visit live site: Cairo International Airport - Command Hub" data-tooltip="Visit Live Site" data-tooltip-key="tooltip_visit_live_site">
+                          <svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg>
+                        </a>
+                      </div>
+                    </div>
                   </div>
                 </article>
                 <article data-category="ux">
-                  <img class="project-thumbnail" src="assets/case-hr-tool.webp" alt="" width="1440" height="890" loading="lazy" decoding="async" />
-                  <h4><span data-translate="proj_ux1_title">Human Resources Tool</span></h4>
-                  <p data-translate="proj_ux1_desc">
-                    A responsive, privacy-centric HR SaaS application optimizing leave requests and role management through modern, user-friendly interfaces.
-                  </p>
-                  <div class="project-actions">
-                    <a href="project-hr-tool.html" class="btn btn-primary" data-translate="read_case_study">Read Case Study</a>
-                    <a href="https://amahdy59.github.io/hr-tool-v2/" class="btn btn-secondary btn-icon" target="_blank" rel="noopener noreferrer" aria-label="Visit live site: Human Resources Tool" data-tooltip="Visit Live Site" data-tooltip-key="tooltip_visit_live_site">
-                      <svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg>
-                    </a>
+                  <div class="project-header">
+                    <h4><span data-translate="proj_ux1_title">Human Resources Tool</span></h4>
+                    <button class="project-toggle" type="button" aria-expanded="true" aria-label="Collapse Human Resources Tool" data-project-toggle>
+                      <svg class="project-toggle-icon" aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="4 6 8 10 12 6"/>
+                      </svg>
+                    </button>
+                  </div>
+                  <div class="project-body">
+                    <div class="project-body-inner">
+                      <img class="project-thumbnail" src="assets/case-hr-tool.webp" alt="" width="1440" height="890" loading="lazy" decoding="async" />
+                      <p data-translate="proj_ux1_desc">
+                        A responsive, privacy-centric HR SaaS application optimizing leave requests and role management through modern, user-friendly interfaces.
+                      </p>
+                      <div class="project-actions">
+                        <a href="project-hr-tool.html" class="btn btn-primary" data-translate="read_case_study">Read Case Study</a>
+                        <a href="https://amahdy59.github.io/hr-tool-v2/" class="btn btn-secondary btn-icon" target="_blank" rel="noopener noreferrer" aria-label="Visit live site: Human Resources Tool" data-tooltip="Visit Live Site" data-tooltip-key="tooltip_visit_live_site">
+                          <svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg>
+                        </a>
+                      </div>
+                    </div>
                   </div>
                 </article>
               </div>
@@ -448,29 +481,51 @@
               <div class="project-group" data-group-category="data">
                 <h3 data-translate="proj_data_header">Data Analysis &amp; Visualization Projects</h3>
                 <article data-category="data">
-                  <img class="project-thumbnail" src="assets/case-lego-explorer.webp" alt="" width="1440" height="890" loading="lazy" decoding="async" />
-                  <h4><span data-translate="proj_data1_title">A Data-Driven LEGO Explorer</span></h4>
-                  <p data-translate="proj_data1_desc">
-                    An interactive Tableau visualization experience that helps users explore LEGO sets by theme, age, price, and set count.
-                  </p>
-                  <div class="project-actions">
-                    <a href="project-lego-explorer.html" class="btn btn-primary" data-translate="read_case_study">Read Case Study</a>
-                    <a href="https://mavenshowcase.com/project/24967" class="btn btn-secondary btn-icon" target="_blank" rel="noopener noreferrer" aria-label="Visit live site: A Data-Driven LEGO Explorer" data-tooltip="Visit Live Site" data-tooltip-key="tooltip_visit_live_site">
-                      <svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg>
-                    </a>
+                  <div class="project-header">
+                    <h4><span data-translate="proj_data1_title">A Data-Driven LEGO Explorer</span></h4>
+                    <button class="project-toggle" type="button" aria-expanded="true" aria-label="Collapse A Data-Driven LEGO Explorer" data-project-toggle>
+                      <svg class="project-toggle-icon" aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="4 6 8 10 12 6"/>
+                      </svg>
+                    </button>
+                  </div>
+                  <div class="project-body">
+                    <div class="project-body-inner">
+                      <img class="project-thumbnail" src="assets/case-lego-explorer.webp" alt="" width="1440" height="890" loading="lazy" decoding="async" />
+                      <p data-translate="proj_data1_desc">
+                        An interactive Tableau visualization experience that helps users explore LEGO sets by theme, age, price, and set count.
+                      </p>
+                      <div class="project-actions">
+                        <a href="project-lego-explorer.html" class="btn btn-primary" data-translate="read_case_study">Read Case Study</a>
+                        <a href="https://mavenshowcase.com/project/24967" class="btn btn-secondary btn-icon" target="_blank" rel="noopener noreferrer" aria-label="Visit live site: A Data-Driven LEGO Explorer" data-tooltip="Visit Live Site" data-tooltip-key="tooltip_visit_live_site">
+                          <svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg>
+                        </a>
+                      </div>
+                    </div>
                   </div>
                 </article>
                 <article data-category="data">
-                  <img class="project-thumbnail" src="assets/case-sales-dashboard.webp" alt="" width="1440" height="890" loading="lazy" decoding="async" />
-                  <h4><span data-translate="proj_data2_title">Sales Performance Dashboard</span></h4>
-                  <p data-translate="proj_data2_desc">
-                    CRM sales dashboard built in Google Sheets for tracking quarterly team performance through chart-based visualization.
-                  </p>
-                  <div class="project-actions">
-                    <a href="project-sales-dashboard.html" class="btn btn-primary" data-translate="read_case_study">Read Case Study</a>
-                    <a href="https://mavenshowcase.com/project/26891" class="btn btn-secondary btn-icon" target="_blank" rel="noopener noreferrer" aria-label="Visit live site: Sales Performance Dashboard" data-tooltip="Visit Live Site" data-tooltip-key="tooltip_visit_live_site">
-                      <svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg>
-                    </a>
+                  <div class="project-header">
+                    <h4><span data-translate="proj_data2_title">Sales Performance Dashboard</span></h4>
+                    <button class="project-toggle" type="button" aria-expanded="true" aria-label="Collapse Sales Performance Dashboard" data-project-toggle>
+                      <svg class="project-toggle-icon" aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="4 6 8 10 12 6"/>
+                      </svg>
+                    </button>
+                  </div>
+                  <div class="project-body">
+                    <div class="project-body-inner">
+                      <img class="project-thumbnail" src="assets/case-sales-dashboard.webp" alt="" width="1440" height="890" loading="lazy" decoding="async" />
+                      <p data-translate="proj_data2_desc">
+                        CRM sales dashboard built in Google Sheets for tracking quarterly team performance through chart-based visualization.
+                      </p>
+                      <div class="project-actions">
+                        <a href="project-sales-dashboard.html" class="btn btn-primary" data-translate="read_case_study">Read Case Study</a>
+                        <a href="https://mavenshowcase.com/project/26891" class="btn btn-secondary btn-icon" target="_blank" rel="noopener noreferrer" aria-label="Visit live site: Sales Performance Dashboard" data-tooltip="Visit Live Site" data-tooltip-key="tooltip_visit_live_site">
+                          <svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg>
+                        </a>
+                      </div>
+                    </div>
                   </div>
                 </article>
               </div>

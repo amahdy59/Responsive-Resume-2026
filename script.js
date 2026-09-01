@@ -183,6 +183,8 @@ const translations = {
     filter_projects_label: "تصفية المشاريع حسب الفئة",
     filter_showing: "عرض",
     filter_projects: "مشاريع",
+    collapse_project: "طي",
+    expand_project: "توسيع",
   },
   en: {
     about_text:
@@ -313,6 +315,8 @@ const translations = {
     filter_projects_label: "Filter projects by category",
     filter_showing: "Showing",
     filter_projects: "projects",
+    collapse_project: "Collapse",
+    expand_project: "Expand",
   },
 };
 
@@ -980,10 +984,57 @@ function initProjectFilters() {
   });
 }
 
+/**
+ * Expandable & Collapsible Projects
+ * ─────────────────────────────────────────────────────────────────────
+ * Allows users to collapse/expand each project card:
+ *  - Click on .project-toggle button or .project-header
+ *  - Updates aria-expanded ("true" | "false")
+ *  - Updates aria-label ("Collapse [Title]" / "Expand [Title]")
+ *  - Animates smooth height collapse via CSS grid
+ *  - Keyboard accessible via the toggle button
+ */
+function initProjectCollapses() {
+  const articles = document.querySelectorAll(".projects-panel article[data-category]");
+  if (!articles.length) return;
+
+  articles.forEach((article) => {
+    const header = article.querySelector(".project-header");
+    const toggle = article.querySelector(".project-toggle");
+    const titleEl = article.querySelector("h4");
+    if (!header || !toggle) return;
+
+    function updateAriaLabel(isCollapsed) {
+      const lang = getCurrentLanguage();
+      const t = translations[lang] || translations.en;
+      const actionPrefix = isCollapsed ? (t.expand_project || "Expand") : (t.collapse_project || "Collapse");
+      const titleText = titleEl ? titleEl.textContent.trim() : "project";
+      toggle.setAttribute("aria-label", `${actionPrefix} ${titleText}`);
+    }
+
+    function toggleCollapse(event) {
+      // Prevent toggle if clicking on a link or button inside header other than the toggle
+      if (event.target.closest("a, .btn, .copy-button") && !event.target.closest(".project-toggle")) {
+        return;
+      }
+
+      const isCurrentlyCollapsed = article.classList.contains("is-collapsed");
+      const nextCollapsed = !isCurrentlyCollapsed;
+
+      article.classList.toggle("is-collapsed", nextCollapsed);
+      toggle.setAttribute("aria-expanded", nextCollapsed ? "false" : "true");
+      updateAriaLabel(nextCollapsed);
+    }
+
+    header.addEventListener("click", toggleCollapse);
+  });
+}
+
 function initialize() {
   enhanceLinkedCards();
   bindCopyButtons();
   initProjectFilters();
+  initProjectCollapses();
 
   if (document.body.dataset.localized === "false" && savedLang === "ar") {
     const languageNote = document.createElement("p");
