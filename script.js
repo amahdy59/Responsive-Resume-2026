@@ -127,6 +127,9 @@ const translations = {
     proj_ux3_desc:
       "تجربة تجارة إلكترونية بديهية وسهلة الوصول، مصممة بتخطيطات متجاوبة وتنقل سلس لزيادة تفاعل المستخدمين والتحويلات.",
     proj_ux3_title: "تطبيق حاج عرفة",
+    proj_ux4_desc:
+      "تطبيق ويب هادئ وسهل الوصول للأذكار اليومية ومواقيت الصلاة، مصمم لتعزيز الاستمرارية والتركيز الروحي.",
+    proj_ux4_title: "تطبيق الأذكار - الحصن اليومي",
     proj_ux_header: "مشاريع تجربة المستخدم",
     print_resume_action: "طباعة / حفظ PDF",
     read_case_study: "قراءة دراسة الحالة بالإنجليزية",
@@ -254,6 +257,9 @@ const translations = {
     proj_ux3_desc:
       "An intuitive, accessible e-commerce experience designed with responsive layouts and seamless navigation to maximize user conversion and engagement.",
     proj_ux3_title: "Haj Arafa App",
+    proj_ux4_desc:
+      "A serene, accessible Islamic daily remembrance and prayer times web application designed for spiritual consistency and focus.",
+    proj_ux4_title: "Azkar App – Daily Fortress",
     proj_ux_header: "UX Projects",
     print_resume_action: "Print / Save PDF",
     read_case_study: "Read Case Study",

@@ -10,8 +10,8 @@ const caseStudyFiles = [
   "project-haj-arafa.html",
   "project-cairo-airport.html",
   "project-hr-tool.html",
+  "project-azkar-app.html",
   "project-lego-explorer.html",
-  "project-sales-dashboard.html",
 ];
 const optionalFiles = ["CNAME"];
 
