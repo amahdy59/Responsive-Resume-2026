@@ -11,7 +11,8 @@ const port = 4190;
 const baseUrl = `http://127.0.0.1:${port}`;
 const baselineDir = resolve("tests", "visual-baselines");
 const evidenceDir = resolve("artifacts", "visual");
-const update = process.env.UPDATE_VISUALS === "1";
+const update =
+  process.env.UPDATE_VISUALS === "1" || process.argv.includes("--update");
 const server = spawn(
   process.execPath,
   ["scripts/serve.mjs", "--root", "dist", "--port", String(port)],

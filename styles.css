@@ -525,33 +525,25 @@ h1 {
 .hero-role-title {
   margin-top: 4px;
   color: var(--hero-subtitle);
-  font-size: clamp(1rem, 2.2vw, 1.25rem);
-  font-weight: 500;
-}
-
-.hero-value-prop {
-  margin-top: 8px;
-  max-width: 540px;
-  color: rgb(255 255 255 / 92%);
-  font-size: clamp(0.86rem, 1.8vw, 0.95rem);
-  line-height: 1.55;
-  font-weight: 400;
+  font-size: clamp(1.02rem, 2vw, 1.2rem);
+  font-weight: 600;
 }
 
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 10px;
-  margin-top: 14px;
+  gap: 8px;
+  margin-top: 12px;
 }
 
 .hero-cta-btn {
-  font-size: 0.88rem;
+  font-size: 0.84rem;
   font-weight: 600;
-  padding: 8px 16px;
-  min-height: 44px;
-  border-radius: 9px;
+  padding: 0 14px;
+  height: 38px;
+  min-height: 38px;
+  border-radius: 8px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -568,29 +560,29 @@ h1 {
   background: #fff;
   color: var(--blue);
   border: 1px solid #fff;
-  box-shadow: 0 4px 14px rgb(0 0 0 / 16%);
+  box-shadow: 0 2px 8px rgb(0 0 0 / 12%);
 }
 
 .hero-actions .btn-primary:hover,
 .hero-actions .btn-primary:focus-visible {
   background: #f0f7ff;
   color: var(--blue);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgb(0 0 0 / 22%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgb(0 0 0 / 16%);
 }
 
 .hero-actions .btn-secondary {
-  background: rgb(255 255 255 / 15%);
+  background: rgb(255 255 255 / 16%);
   color: #fff;
-  border: 1px solid rgb(255 255 255 / 35%);
+  border: 1px solid rgb(255 255 255 / 40%);
   backdrop-filter: blur(8px);
 }
 
 .hero-actions .btn-secondary:hover,
 .hero-actions .btn-secondary:focus-visible {
   background: rgb(255 255 255 / 26%);
-  border-color: rgb(255 255 255 / 60%);
-  transform: translateY(-2px);
+  border-color: rgb(255 255 255 / 65%);
+  transform: translateY(-1px);
 }
 
 .tags,
@@ -1325,48 +1317,31 @@ h1 {
   transition: color 180ms ease;
 }
 
-.project-card-chips {
+.project-byline {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 6px;
-  margin-top: 6px;
-}
-
-.project-chip {
-  display: inline-flex;
-  align-items: center;
-  padding: 2px 8px;
-  font-size: 0.72rem;
-  font-weight: 600;
-  border-radius: 6px;
+  margin-top: 4px;
+  font-size: 0.82rem;
+  color: var(--text-muted);
   line-height: 1.4;
-  letter-spacing: 0.01em;
   unicode-bidi: isolate;
 }
 
-.project-chip.chip-type {
-  background: color-mix(in srgb, var(--blue) 12%, transparent);
-  color: var(--blue);
-  border: 1px solid color-mix(in srgb, var(--blue) 25%, transparent);
+.byline-item {
+  font-weight: 500;
 }
 
-.project-chip.chip-role {
-  background: color-mix(in srgb, var(--tag-bg, #64748b) 12%, transparent);
-  color: var(--text-muted);
-  border: 1px solid var(--line);
+.byline-sep {
+  opacity: 0.45;
+  user-select: none;
+  font-size: 0.75rem;
 }
 
-.project-chip.chip-highlight {
-  background: color-mix(in srgb, #10b981 12%, transparent);
-  color: #059669;
-  border: 1px solid color-mix(in srgb, #10b981 25%, transparent);
-}
-
-[data-theme="dark"] .project-chip.chip-highlight {
-  color: #34d399;
-  background: color-mix(in srgb, #10b981 18%, transparent);
-  border-color: color-mix(in srgb, #10b981 35%, transparent);
+.byline-highlight {
+  color: var(--link-aaa);
+  font-weight: 600;
 }
 
 .featured article:hover .project-header h4 {
@@ -3263,37 +3238,47 @@ h1 {
 }
 
 .case-cta-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   flex: 0 0 auto;
 }
 
+.case-preview-toggle,
 .case-live-cta {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  height: 46px;
-  padding: 0 22px;
-  font-size: 0.95rem;
-  font-weight: 700;
+  gap: 6px;
+  height: 38px;
+  min-height: 38px;
+  padding: 0 16px;
+  font-size: 0.86rem;
+  font-weight: 600;
+  border-radius: 8px;
 }
 
 /* ── Audio Narration Trigger Button ── */
 .audio-play-btn {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  min-height: 44px;
-  min-width: 44px;
-  padding: 8px 16px;
+  gap: 6px;
+  height: 34px;
+  min-height: 34px;
+  padding: 0 12px;
   background: color-mix(in srgb, var(--blue) 8%, transparent);
   border: 1px solid color-mix(in srgb, var(--blue) 25%, transparent);
-  border-radius: 10px;
+  border-radius: 8px;
   color: var(--link-aaa);
   font-family: inherit;
-  font-size: 0.84rem;
-  font-weight: 700;
+  font-size: 0.8rem;
+  font-weight: 600;
   cursor: pointer;
   box-sizing: border-box;
-  transition: background-color var(--motion-normal) var(--ease-standard), border-color var(--motion-normal) var(--ease-standard), color var(--motion-normal) var(--ease-standard), transform var(--motion-normal) var(--ease-standard);
+  transition:
+    background-color var(--motion-normal) var(--ease-standard),
+    border-color var(--motion-normal) var(--ease-standard),
+    color var(--motion-normal) var(--ease-standard),
+    transform var(--motion-normal) var(--ease-standard);
 }
 
 .audio-play-btn:hover,
