@@ -57,213 +57,219 @@ try {
   });
 
   for (const scenario of scenarios) {
-    const context = await browser.newContext({
-      viewport: { width: scenario.width, height: scenario.height },
-    });
-    await context.route(/https:\/\/fonts\.googleapis\.com\//, (route) =>
-      route.fulfill({ body: "", contentType: "text/css", status: 200 }),
-    );
-    const page = await context.newPage();
-    const runtimeErrors = [];
-
-    page.on("console", (message) => {
-      if (message.type() === "error") runtimeErrors.push(message.text());
-    });
-    page.on("pageerror", (error) => runtimeErrors.push(error.message));
-
-    const response = await page.goto(baseUrl, { waitUntil: "networkidle" });
-    assert.equal(response?.status(), 200);
-
-    if (scenario.language === "ar") {
-      await page.getByLabel("Switch to Arabic", { exact: true }).click();
-    }
-
-    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
-    await page.waitForTimeout(200);
-    await page.evaluate(() => window.scrollTo(0, 0));
-    await page.evaluate(() => document.fonts.ready);
-
-    const state = await page.evaluate(() => {
-      const panels = [...document.querySelectorAll(".content-grid .panel")];
-      const panelName = (panel) => panel.querySelector("h2")?.textContent?.trim();
-      const buttons = [...document.querySelectorAll("button")];
-      const buttonNames = buttons
-        .map((button) => button.getAttribute("aria-label"))
-        .filter(Boolean);
-      const skipLink = document.querySelector(".skip-link");
-      const skipTarget = skipLink
-        ? document.querySelector(new URL(skipLink.href).hash)
-        : null;
-
-      return {
-        ambientAnimationName: getComputedStyle(
-          document.querySelector(".ambient-particles"),
-        ).animationName,
-        brokenImages: [...document.images].filter(
-          (image) => !image.complete || image.naturalWidth === 0,
-        ).length,
-        buttonNames,
-        buttonsAreNamed: buttons.every((button) =>
-          Boolean(button.getAttribute("aria-label") || button.textContent.trim()),
-        ),
-        clientWidth: document.documentElement.clientWidth,
-        direction: document.documentElement.dir,
-        domSectionOrder: panels.map(panelName),
-        heading: document.querySelector("h1")?.textContent?.trim(),
-        innerWidth: window.innerWidth,
-        language: document.documentElement.lang,
-        overflowingElements: [...document.querySelectorAll("body *")]
-          .filter((element) => !element.closest(".section-nav"))
-          .map((element) => {
-            const rect = element.getBoundingClientRect();
-            return {
-              className: element.className,
-              left: Math.round(rect.left),
-              right: Math.round(rect.right),
-              tagName: element.tagName,
-            };
-          })
-          .filter(({ left, right }) => left < 0 || right > window.innerWidth)
-          .slice(0, 8),
-        scrollWidth: document.documentElement.scrollWidth,
-        contactTexts: [...document.querySelectorAll(".contact-list a")].map((link) =>
-          link.childNodes[0]?.textContent.trim(),
-        ),
-        entityLinks: [...document.querySelectorAll(".li-entity-link")].map((link) => link.href),
-        externalIconCount: document.querySelectorAll('.project-btn-secondary .external-icon').length,
-        externalLinkCount: document.querySelectorAll('.project-btn-secondary').length,
-        resumeActionCount: document.querySelectorAll(".resume-action").length,
-        sectionLinks: [...document.querySelectorAll(".section-nav a")].map((link) => ({
-          targetExists: Boolean(document.querySelector(new URL(link.href).hash)),
-          text: link.textContent.trim(),
-        })),
-        sectionNavPosition: getComputedStyle(document.querySelector(".section-nav")).position,
-        sectionNavFits:
-          document.querySelector(".section-nav").scrollWidth <=
-          document.querySelector(".section-nav").clientWidth,
-        skipTargetTabIndex: skipTarget?.tabIndex,
-        toolbarRole: document.querySelector(".controls-group")?.getAttribute("role"),
-        footerExists: Boolean(document.querySelector(".resume-footer")),
-        projectThumbnailCount: document.querySelectorAll('.project-thumbnail[src$=".webp"]').length,
-        visualSectionOrder: panels
-          .toSorted((a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top)
-          .map(panelName),
-      };
-    });
-
-    assert.equal(state.language, scenario.language);
-    assert.equal(state.direction, scenario.language === "ar" ? "rtl" : "ltr");
-    assert.ok(state.heading, "The resume heading should be visible");
-    assert.equal(state.brokenImages, 0);
-    assert.ok(
-      state.scrollWidth <= state.clientWidth,
-      `Horizontal overflow at ${scenario.width}px in ${scenario.language}: ${state.scrollWidth}px scroll / ${state.clientWidth}px client / ${state.innerWidth}px viewport; ${JSON.stringify(state.overflowingElements)}`,
-    );
-    assert.deepEqual(state.overflowingElements, []);
-    assert.deepEqual(runtimeErrors, []);
-    assert.equal(state.buttonsAreNamed, true);
-    assert.equal(new Set(state.buttonNames).size, state.buttonNames.length);
-    assert.equal(state.skipTargetTabIndex, -1);
-    assert.equal(state.sectionLinks.length, 6);
-    assert.ok(state.sectionLinks.every(({ targetExists, text }) => targetExists && text));
-    assert.equal(state.sectionNavPosition, "sticky");
-    assert.equal(state.toolbarRole, "group");
-    assert.equal(state.footerExists, true);
-    assert.equal(state.projectThumbnailCount, 5);
-    assert.equal(state.resumeActionCount, 0);
-    assert.equal(state.externalIconCount, state.externalLinkCount);
-    assert.deepEqual(state.entityLinks, [
-      "https://advansys-is.com/",
-      "https://www.se.com/eg/en/",
-      "https://iti.gov.eg/iti/home",
-      "https://www.menofia.edu.eg/",
-    ]);
-    assert.deepEqual(
-      state.contactTexts.slice(1),
-      scenario.language === "ar"
-        ? ["لينكد إن", "معرض دريبل"]
-        : ["LinkedIn profile", "Dribbble portfolio"],
-    );
-
-    if (scenario.width <= 375) {
-      assert.deepEqual(state.visualSectionOrder, state.domSectionOrder);
-    }
-
-    if (scenario.width <= 560) {
-      assert.equal(state.ambientAnimationName, "none");
-      assert.equal(state.sectionNavFits, true);
-    }
-
-    const accessibility = await new AxeBuilder({ page }).analyze();
-    assert.deepEqual(
-      accessibility.violations.map(({ id, impact }) => ({ id, impact })),
-      [],
-    );
-
-    if (scenario.language === "en" && scenario.width === 320) {
-      await page.evaluate(() => {
-        window.print = () => {
-          window.__printCalled = true;
-        };
-        document.querySelector("[data-print-resume]").click();
+    try {
+      const context = await browser.newContext({
+        viewport: { width: scenario.width, height: scenario.height },
       });
-      assert.equal(await page.evaluate(() => window.__printCalled), true);
-
-      const themeBeforeShortcut = await page.locator("html").getAttribute("data-theme");
-      await page.locator("body").press("t");
-      assert.equal(
-        await page.locator("html").getAttribute("data-theme"),
-        themeBeforeShortcut,
+      await context.route(/https:\/\/fonts\.googleapis\.com\//, (route) =>
+        route.fulfill({ body: "", contentType: "text/css", status: 200 }),
       );
+      const page = await context.newPage();
+      const runtimeErrors = [];
 
-      await page.locator('.section-nav a[href="#projects"]').click();
-      assert.equal(
-        await page.locator("#projects").evaluate((panel) => getComputedStyle(panel).animationName),
-        "targetPanel",
-      );
+      page.on("console", (message) => {
+        if (message.type() === "error") runtimeErrors.push(message.text());
+      });
+      page.on("pageerror", (error) => runtimeErrors.push(error.message));
 
-      const firstProject = page.locator(".featured article").first();
-      await firstProject.locator("a").first().focus();
-      await page.waitForTimeout(60);
-      assert.notEqual(await firstProject.evaluate((article) => getComputedStyle(article).transform), "none");
+      const response = await page.goto(baseUrl, { waitUntil: "networkidle" });
+      assert.equal(response?.status(), 200);
 
-      const firstEntity = page.locator(".li-entity-link").first();
-      await firstEntity.hover();
-      await page.waitForTimeout(60);
-      assert.notEqual(
-        await firstEntity.locator(".li-company-logo").evaluate((logo) => getComputedStyle(logo).transform),
-        "none",
-      );
-
-      for (const selector of [".theme-toggle", ".contrast-toggle"]) {
-        const toggle = page.locator(selector);
-        const before = {
-          label: await toggle.getAttribute("aria-label"),
-          pressed: await toggle.getAttribute("aria-pressed"),
-        };
-        await toggle.click();
-        const after = {
-          label: await toggle.getAttribute("aria-label"),
-          pressed: await toggle.getAttribute("aria-pressed"),
-        };
-        assert.equal(after.label, before.label);
-        assert.notEqual(after.pressed, before.pressed);
-        await toggle.click();
+      if (scenario.language === "ar") {
+        await page.getByLabel("Switch to Arabic", { exact: true }).click();
       }
-    }
 
-    if (scenario.width === 768) {
-      await page.locator(".lang-toggle").focus();
-      const tooltip = await page.locator(".lang-toggle").evaluate((button) => {
-        const style = getComputedStyle(button, "::before");
-        return { left: style.left, right: style.right };
+      await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+      await page.waitForTimeout(200);
+      await page.evaluate(() => window.scrollTo(0, 0));
+      await page.evaluate(() => document.fonts.ready);
+
+      const state = await page.evaluate(() => {
+        const panels = [...document.querySelectorAll(".content-grid .panel")];
+        const panelName = (panel) => panel.querySelector("h2")?.textContent?.trim();
+        const buttons = [...document.querySelectorAll("button")];
+        const buttonNames = buttons
+          .map((button) => button.getAttribute("aria-label"))
+          .filter(Boolean);
+        const skipLink = document.querySelector(".skip-link");
+        const skipTarget = skipLink
+          ? document.querySelector(new URL(skipLink.href).hash)
+          : null;
+
+        return {
+          ambientAnimationName: getComputedStyle(
+            document.querySelector(".ambient-particles"),
+          ).animationName,
+          brokenImages: [...document.images].filter(
+            (image) => !image.complete || image.naturalWidth === 0,
+          ).length,
+          buttonNames,
+          buttonsAreNamed: buttons.every((button) =>
+            Boolean(button.getAttribute("aria-label") || button.textContent.trim()),
+          ),
+          clientWidth: document.documentElement.clientWidth,
+          direction: document.documentElement.dir,
+          domSectionOrder: panels.map(panelName),
+          heading: document.querySelector("h1")?.textContent?.trim(),
+          innerWidth: window.innerWidth,
+          language: document.documentElement.lang,
+          overflowingElements: [...document.querySelectorAll("body *")]
+            .filter((element) => !element.closest(".section-nav"))
+            .map((element) => {
+              const rect = element.getBoundingClientRect();
+              return {
+                className: element.className,
+                left: Math.round(rect.left),
+                right: Math.round(rect.right),
+                tagName: element.tagName,
+              };
+            })
+            .filter(({ left, right }) => left < 0 || right > window.innerWidth)
+            .slice(0, 8),
+          scrollWidth: document.documentElement.scrollWidth,
+          contactTexts: [...document.querySelectorAll(".contact-list a")].map((link) =>
+            link.childNodes[0]?.textContent.trim(),
+          ),
+          entityLinks: [...document.querySelectorAll(".li-entity-link")].map((link) => link.href),
+          externalIconCount: document.querySelectorAll('.project-btn-secondary .external-icon').length,
+          externalLinkCount: document.querySelectorAll('.project-btn-secondary').length,
+          resumeActionCount: document.querySelectorAll(".resume-action").length,
+          sectionLinks: [...document.querySelectorAll(".section-nav a")].map((link) => ({
+            targetExists: Boolean(document.querySelector(new URL(link.href).hash)),
+            text: link.textContent.trim(),
+          })),
+          sectionNavPosition: getComputedStyle(document.querySelector(".section-nav")).position,
+          sectionNavFits:
+            document.querySelector(".section-nav").scrollWidth <=
+            document.querySelector(".section-nav").clientWidth,
+          skipTargetTabIndex: skipTarget?.tabIndex,
+          toolbarRole: document.querySelector(".controls-group")?.getAttribute("role"),
+          footerExists: Boolean(document.querySelector(".resume-footer")),
+          projectThumbnailCount: document.querySelectorAll('.project-thumbnail[src$=".webp"]').length,
+          visualSectionOrder: panels
+            .toSorted((a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top)
+            .map(panelName),
+        };
       });
-      const outsideEdge = scenario.language === "ar" ? tooltip.left : tooltip.right;
-      assert.notEqual(outsideEdge, "auto", "Tablet tooltip should open away from the portrait");
-    }
 
-    await context.close();
-    console.log(`Passed ${scenario.language} at ${scenario.width}x${scenario.height}`);
+      assert.equal(state.language, scenario.language);
+      assert.equal(state.direction, scenario.language === "ar" ? "rtl" : "ltr");
+      assert.ok(state.heading, "The resume heading should be visible");
+      assert.equal(state.brokenImages, 0);
+      assert.ok(
+        state.scrollWidth <= state.clientWidth,
+        `Horizontal overflow at ${scenario.width}px in ${scenario.language}: ${state.scrollWidth}px scroll / ${state.clientWidth}px client / ${state.innerWidth}px viewport; ${JSON.stringify(state.overflowingElements)}`,
+      );
+      assert.deepEqual(state.overflowingElements, []);
+      assert.deepEqual(runtimeErrors, []);
+      assert.equal(state.buttonsAreNamed, true);
+      assert.equal(new Set(state.buttonNames).size, state.buttonNames.length);
+      assert.equal(state.skipTargetTabIndex, -1);
+      assert.equal(state.sectionLinks.length, 6);
+      assert.ok(state.sectionLinks.every(({ targetExists, text }) => targetExists && text));
+      assert.equal(state.sectionNavPosition, "sticky");
+      assert.equal(state.toolbarRole, "group");
+      assert.equal(state.footerExists, true);
+      assert.equal(state.projectThumbnailCount, 5);
+      assert.equal(state.resumeActionCount, 0);
+      assert.equal(state.externalIconCount, state.externalLinkCount);
+      assert.deepEqual(state.entityLinks, [
+        "https://advansys-is.com/",
+        "https://www.se.com/eg/en/",
+        "https://iti.gov.eg/iti/home",
+        "https://www.menofia.edu.eg/",
+      ]);
+      assert.deepEqual(
+        state.contactTexts.slice(1),
+        scenario.language === "ar"
+          ? ["لينكد إن", "معرض دريبل"]
+          : ["LinkedIn profile", "Dribbble portfolio"],
+      );
+
+      if (scenario.width <= 375) {
+        assert.deepEqual(state.visualSectionOrder, state.domSectionOrder);
+      }
+
+      if (scenario.width <= 560) {
+        assert.equal(state.ambientAnimationName, "none");
+        assert.equal(state.sectionNavFits, true);
+      }
+
+      const accessibility = await new AxeBuilder({ page }).analyze();
+      assert.deepEqual(
+        accessibility.violations.map(({ id, impact }) => ({ id, impact })),
+        [],
+      );
+
+      if (scenario.language === "en" && scenario.width === 320) {
+        await page.evaluate(() => {
+          window.print = () => {
+            window.__printCalled = true;
+          };
+          document.querySelector("[data-print-resume]").click();
+        });
+        assert.equal(await page.evaluate(() => window.__printCalled), true);
+
+        const themeBeforeShortcut = await page.locator("html").getAttribute("data-theme");
+        await page.locator("body").press("t");
+        assert.equal(
+          await page.locator("html").getAttribute("data-theme"),
+          themeBeforeShortcut,
+        );
+
+        await page.locator('.section-nav a[href="#projects"]').click();
+        assert.equal(
+          await page.locator("#projects").evaluate((panel) => getComputedStyle(panel).animationName),
+          "targetPanel",
+        );
+
+        const firstProject = page.locator(".featured article").first();
+        await firstProject.locator("a").first().focus();
+        await page.waitForTimeout(60);
+        assert.notEqual(await firstProject.evaluate((article) => getComputedStyle(article).transform), "none");
+
+        const firstEntity = page.locator(".li-entity-link").first();
+        await firstEntity.hover();
+        await page.waitForTimeout(60);
+        assert.notEqual(
+          await firstEntity.locator(".li-company-logo").evaluate((logo) => getComputedStyle(logo).transform),
+          "none",
+        );
+
+        for (const selector of [".theme-toggle", ".contrast-toggle"]) {
+          const toggle = page.locator(selector);
+          const before = {
+            label: await toggle.getAttribute("aria-label"),
+            pressed: await toggle.getAttribute("aria-pressed"),
+          };
+          await toggle.click();
+          const after = {
+            label: await toggle.getAttribute("aria-label"),
+            pressed: await toggle.getAttribute("aria-pressed"),
+          };
+          assert.equal(after.label, before.label);
+          assert.notEqual(after.pressed, before.pressed);
+          await toggle.click();
+        }
+      }
+
+      if (scenario.width === 768) {
+        await page.locator(".lang-toggle").focus();
+        const tooltip = await page.locator(".lang-toggle").evaluate((button) => {
+          const style = getComputedStyle(button, "::before");
+          return { left: style.left, right: style.right };
+        });
+        const outsideEdge = scenario.language === "ar" ? tooltip.left : tooltip.right;
+        assert.notEqual(outsideEdge, "auto", "Tablet tooltip should open away from the portrait");
+      }
+
+      await context.close();
+      console.log(`Passed ${scenario.language} at ${scenario.width}x${scenario.height}`);
+    } catch (err) {
+      console.error(`❌ FAILED scenario: ${scenario.language} at ${scenario.width}x${scenario.height}`);
+      console.error(err);
+      throw err;
+    }
   }
 
   const caseStudyFiles = [
