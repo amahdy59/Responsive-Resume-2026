@@ -1,41 +1,62 @@
 import assert from "node:assert/strict";
-import { spawn } from "node:child_process";
+import { createReadStream, existsSync } from "node:fs";
+import { stat } from "node:fs/promises";
+import { createServer } from "node:http";
+import { extname, normalize, resolve } from "node:path";
 import AxeBuilder from "@axe-core/playwright";
 import { chromium } from "playwright";
 
-const server = spawn(
-  process.execPath,
-  ["scripts/serve.mjs", "--root", "dist", "--port", "0"],
-  { stdio: ["ignore", "pipe", "inherit"] },
-);
+const root = resolve(process.cwd(), "dist");
+const mimeTypes = {
+  ".css": "text/css; charset=utf-8",
+  ".html": "text/html; charset=utf-8",
+  ".jpg": "image/jpeg",
+  ".jpeg": "image/jpeg",
+  ".js": "application/javascript; charset=utf-8",
+  ".json": "application/json; charset=utf-8",
+  ".png": "image/png",
+  ".svg": "image/svg+xml",
+  ".webp": "image/webp",
+};
 
-const baseUrl = await new Promise((resolve, reject) => {
-  let output = "";
+function getSafePath(urlPath) {
+  const decodedPath = decodeURIComponent(urlPath.split("?")[0]);
+  const cleanPath = normalize(decodedPath);
+  const requestedPath = decodedPath === "/" ? "index.html" : cleanPath.replace(/^[/\\]+/, "");
+  const resolvedPath = resolve(root, requestedPath);
+  if (!resolvedPath.startsWith(root)) return null;
+  return resolvedPath;
+}
 
-  server.stdout.setEncoding("utf8");
-  server.stdout.on("data", (chunk) => {
-    output += chunk;
-    const match = output.match(/http:\/\/127\.0\.0\.1:\d+/);
-    if (match) resolve(match[0]);
+const server = createServer(async (request, response) => {
+  const filePath = getSafePath(request.url || "/");
+  if (!filePath || !existsSync(filePath)) {
+    response.writeHead(404, { "content-type": "text/plain; charset=utf-8" });
+    response.end("Not found");
+    return;
+  }
+  const fileStat = await stat(filePath);
+  if (fileStat.isDirectory()) {
+    response.writeHead(301, { location: `${request.url?.replace(/\/?$/, "/") || "/"}index.html` });
+    response.end();
+    return;
+  }
+  const extension = extname(filePath).toLowerCase();
+  response.writeHead(200, {
+    "cache-control": "no-cache",
+    "content-type": mimeTypes[extension] || "application/octet-stream",
   });
-  server.once("error", reject);
-  server.once("exit", (code) => {
-    reject(new Error(`Preview server exited before starting (code ${code})`));
-  });
+  createReadStream(filePath).pipe(response);
 });
 
-async function waitForServer() {
-  for (let attempt = 0; attempt < 30; attempt += 1) {
-    try {
-      const response = await fetch(baseUrl);
-      if (response.ok) return;
-    } catch {
-      // The server is still starting.
-    }
-    await new Promise((resolve) => setTimeout(resolve, 200));
-  }
-  throw new Error(`Timed out waiting for ${baseUrl}`);
-}
+const baseUrl = await new Promise((res, rej) => {
+  server.listen(0, "127.0.0.1", () => {
+    const address = server.address();
+    const port = typeof address === "object" && address ? address.port : 0;
+    res(`http://127.0.0.1:${port}`);
+  });
+  server.on("error", rej);
+});
 
 const scenarios = [
   { language: "en", width: 320, height: 700 },
@@ -49,15 +70,13 @@ const scenarios = [
 let browser;
 
 try {
-  console.log("▶ [1/4] Waiting for local preview server...");
-  await waitForServer();
-  console.log(`▶ [2/4] Preview server listening at: ${baseUrl}`);
+  console.log(`▶ In-process preview server listening at: ${baseUrl}`);
   
   const healthRes = await fetch(`${baseUrl}/?smoke=1`);
-  console.log(`▶ [3/4] Initial HTTP health probe status: ${healthRes.status}`);
+  console.log(`▶ Initial HTTP health probe status: ${healthRes.status}`);
   assert.equal(healthRes.status, 200);
 
-  console.log("▶ [4/4] Launching headless Chromium browser...");
+  console.log("▶ Launching headless Chromium browser...");
   browser = await chromium.launch({
     headless: true,
     args: ["--no-sandbox", "--disable-setuid-sandbox", "--disable-dev-shm-usage"],
@@ -368,5 +387,5 @@ try {
   process.exitCode = 1;
 } finally {
   await browser?.close();
-  server.kill();
+  server.close();
 }
