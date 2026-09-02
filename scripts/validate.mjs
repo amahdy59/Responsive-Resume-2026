@@ -172,7 +172,7 @@ for (const { file, source } of htmlDocuments.filter(
 }
 
 if (
-  /WCAG 2\.2 AAA|Analytics show high daily retention|Reduced average request turnaround from 3 days/.test(
+  /WCAG 2\.2 AAA|Analytics show high daily retention|Reduced average request turnaround from 3 days|reducing HR ticket turnaround by 60%|maximize user conversion and engagement|45m Early Warning|<4h Request Turnaround|Real-time interactive operational dashboard/.test(
     allHtmlSource + script,
   )
 ) {
