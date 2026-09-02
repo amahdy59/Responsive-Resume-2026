@@ -6,7 +6,9 @@ import { extname, normalize, resolve } from "node:path";
 import AxeBuilder from "@axe-core/playwright";
 import { chromium } from "playwright";
 
-const root = resolve(process.cwd(), "dist");
+import { fileURLToPath } from "node:url";
+
+const root = resolve(fileURLToPath(new URL("../dist", import.meta.url)));
 const mimeTypes = {
   ".css": "text/css; charset=utf-8",
   ".html": "text/html; charset=utf-8",
@@ -40,10 +42,17 @@ const server = createServer(async (request, response) => {
   }
   const fileStat = await stat(filePath);
   if (fileStat.isDirectory()) {
-    response.writeHead(301, {
-      location: `${request.url?.replace(/\/?$/, "/") || "/"}index.html`,
-    });
-    response.end();
+    const indexPath = resolve(filePath, "index.html");
+    if (existsSync(indexPath)) {
+      response.writeHead(200, {
+        "cache-control": "no-cache",
+        "content-type": mimeTypes[".html"],
+      });
+      createReadStream(indexPath).pipe(response);
+      return;
+    }
+    response.writeHead(404, { "content-type": "text/plain; charset=utf-8" });
+    response.end("Not found");
     return;
   }
   const extension = extname(filePath).toLowerCase();
