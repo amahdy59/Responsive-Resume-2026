@@ -49,12 +49,20 @@ const scenarios = [
 let browser;
 
 try {
+  console.log("▶ [1/4] Waiting for local preview server...");
   await waitForServer();
-  assert.equal((await fetch(`${baseUrl}/?smoke=1`)).status, 200);
+  console.log(`▶ [2/4] Preview server listening at: ${baseUrl}`);
+  
+  const healthRes = await fetch(`${baseUrl}/?smoke=1`);
+  console.log(`▶ [3/4] Initial HTTP health probe status: ${healthRes.status}`);
+  assert.equal(healthRes.status, 200);
+
+  console.log("▶ [4/4] Launching headless Chromium browser...");
   browser = await chromium.launch({
     headless: true,
     args: ["--no-sandbox", "--disable-setuid-sandbox", "--disable-dev-shm-usage"],
   });
+  console.log("✅ Chromium browser ready. Running viewport scenarios...");
 
   for (const scenario of scenarios) {
     try {
