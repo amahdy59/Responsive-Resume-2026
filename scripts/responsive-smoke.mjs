@@ -51,7 +51,10 @@ let browser;
 try {
   await waitForServer();
   assert.equal((await fetch(`${baseUrl}/?smoke=1`)).status, 200);
-  browser = await chromium.launch({ headless: true });
+  browser = await chromium.launch({
+    headless: true,
+    args: ["--no-sandbox", "--disable-setuid-sandbox", "--disable-dev-shm-usage"],
+  });
 
   for (const scenario of scenarios) {
     const context = await browser.newContext({
