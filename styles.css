@@ -2952,21 +2952,11 @@ h1 {
   font-size: 0.9rem;
   font-weight: 700;
   text-decoration: none !important;
-  transition: background-color var(--motion-normal) var(--ease-standard), border-color var(--motion-normal) var(--ease-standard), color var(--motion-normal) var(--ease-standard), transform var(--motion-normal) var(--ease-standard);
-}
-
-.case-nav-back-pill:hover,
-.case-nav-back-pill:focus-visible {
-  background: var(--blue);
-  color: #fff;
-  border-color: var(--blue);
-  transform: translateX(-3px);
-  box-shadow: 0 4px 12px rgb(0 0 0 / 12%);
-}
-
-[dir="rtl"] .case-nav-back-pill:hover,
-[dir="rtl"] .case-nav-back-pill:focus-visible {
-  transform: translateX(3px);
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    box-shadow 180ms ease;
 }
 
 .case-nav-back-pill svg {
@@ -2974,6 +2964,29 @@ h1 {
   height: 16px;
   stroke: currentcolor;
   stroke-width: 2.2;
+  transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.case-nav-back-pill:hover,
+.case-nav-back-pill:focus-visible {
+  background: var(--blue);
+  color: #fff;
+  border-color: var(--blue);
+  box-shadow: 0 4px 12px rgb(0 0 0 / 12%);
+}
+
+.case-nav-back-pill:hover svg,
+.case-nav-back-pill:focus-visible svg {
+  transform: translateX(-3px);
+}
+
+[dir="rtl"] .case-nav-back-pill svg {
+  transform: scaleX(-1);
+}
+
+[dir="rtl"] .case-nav-back-pill:hover svg,
+[dir="rtl"] .case-nav-back-pill:focus-visible svg {
+  transform: scaleX(-1) translateX(-3px);
 }
 
 .case-study-controls {
@@ -2996,7 +3009,11 @@ h1 {
   display: inline-grid;
   place-items: center;
   cursor: pointer;
-  transition: background-color var(--motion-normal) var(--ease-standard), border-color var(--motion-normal) var(--ease-standard), color var(--motion-normal) var(--ease-standard), transform var(--motion-normal) var(--ease-standard);
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    box-shadow 180ms ease;
 }
 
 .case-study-controls .theme-toggle:hover,
@@ -3008,7 +3025,7 @@ h1 {
   background: color-mix(in srgb, var(--blue) 15%, transparent);
   border-color: var(--blue);
   color: var(--blue);
-  transform: scale(1.06);
+  box-shadow: 0 2px 8px rgb(0 0 0 / 8%);
 }
 
 .case-study-controls .theme-toggle > span:first-child,
@@ -3019,13 +3036,23 @@ h1 {
   box-shadow: none !important;
 }
 
-[dir="rtl"] .case-nav-back-pill svg {
-  transform: scaleX(-1);
+/* ── Reading Progress Bar ── */
+.reading-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--blue), var(--link-aaa));
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+  z-index: 9999;
+  pointer-events: none;
+  transition: transform 60ms linear;
 }
 
-[dir="rtl"] .pagination-prev .pagination-arrow-box svg,
-[dir="rtl"] .pagination-next .pagination-arrow-box svg {
-  transform: scaleX(-1);
+[dir="rtl"] .reading-progress-bar {
+  transform-origin: 100% 50%;
 }
 
 /* ── Case Study Card ── */
@@ -3485,7 +3512,9 @@ h1 {
   background: color-mix(in srgb, var(--blue) 10%, transparent);
   color: var(--blue);
   flex: 0 0 38px;
-  transition: background-color var(--motion-normal) var(--ease-standard), color var(--motion-normal) var(--ease-standard), transform var(--motion-normal) var(--ease-standard);
+  transition:
+    background-color 180ms ease,
+    color 180ms ease;
 }
 
 .pagination-card:hover .pagination-arrow-box,
@@ -3499,6 +3528,32 @@ h1 {
   height: 18px;
   stroke: currentcolor;
   stroke-width: 2.2;
+  transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pagination-prev:hover .pagination-arrow-box svg,
+.pagination-prev:focus-visible .pagination-arrow-box svg {
+  transform: translateX(-3px);
+}
+
+.pagination-next:hover .pagination-arrow-box svg,
+.pagination-next:focus-visible .pagination-arrow-box svg {
+  transform: translateX(3px);
+}
+
+[dir="rtl"] .pagination-prev .pagination-arrow-box svg,
+[dir="rtl"] .pagination-next .pagination-arrow-box svg {
+  transform: scaleX(-1);
+}
+
+[dir="rtl"] .pagination-prev:hover .pagination-arrow-box svg,
+[dir="rtl"] .pagination-prev:focus-visible .pagination-arrow-box svg {
+  transform: scaleX(-1) translateX(-3px);
+}
+
+[dir="rtl"] .pagination-next:hover .pagination-arrow-box svg,
+[dir="rtl"] .pagination-next:focus-visible .pagination-arrow-box svg {
+  transform: scaleX(-1) translateX(3px);
 }
 
 .pagination-info {

@@ -1384,6 +1384,40 @@ function initCollapsibleProjectCards() {
   });
 }
 
+/**
+ * Initializes a smooth reading progress bar for case study pages.
+ */
+function initReadingProgressBar() {
+  if (!document.querySelector(".case-study-card")) return;
+
+  let bar = document.querySelector(".reading-progress-bar");
+  if (!bar) {
+    bar = document.createElement("div");
+    bar.className = "reading-progress-bar";
+    bar.setAttribute("aria-hidden", "true");
+    document.body.prepend(bar);
+  }
+
+  let ticking = false;
+  const updateProgress = () => {
+    const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+    if (totalHeight > 0) {
+      const progress = Math.min(Math.max(window.scrollY / totalHeight, 0), 1);
+      bar.style.transform = `scaleX(${progress})`;
+    }
+    ticking = false;
+  };
+
+  window.addEventListener("scroll", () => {
+    if (!ticking) {
+      requestAnimationFrame(updateProgress);
+      ticking = true;
+    }
+  }, { passive: true });
+
+  updateProgress();
+}
+
 function initialize() {
   initResponsiveContentOrder();
   initSectionNavigation();
@@ -1391,6 +1425,7 @@ function initialize() {
   bindCopyButtons();
   initProjectFilters();
   initCollapsibleProjectCards();
+  initReadingProgressBar();
 
   setTheme(savedTheme || (prefersDark ? "dark" : "light"));
   setContrast(savedContrast);
