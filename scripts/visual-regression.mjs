@@ -107,10 +107,16 @@ try {
     },
   ];
   for (const scenario of scenarios) {
-    const page = await browser.newPage({
+    const context = await browser.newContext({
       viewport: { width: scenario.width, height: scenario.height },
       reducedMotion: "reduce",
     });
+    await context.route(
+      /https:\/\/(fonts\.googleapis\.com|fonts\.gstatic\.com)\/.*/,
+      (route) =>
+        route.fulfill({ body: "", contentType: "text/css", status: 200 }),
+    );
+    const page = await context.newPage();
     if (scenario.preferences) {
       await page.addInitScript((preferences) => {
         if (preferences.theme)
@@ -119,7 +125,9 @@ try {
           localStorage.setItem("resume-contrast", preferences.contrast);
       }, scenario.preferences);
     }
-    await page.goto(`${baseUrl}${scenario.path}`, { waitUntil: "load" });
+    await page.goto(`${baseUrl}${scenario.path}`, {
+      waitUntil: "domcontentloaded",
+    });
     await page.evaluate(() => document.fonts.ready);
     const actualPath = resolve(evidenceDir, `${scenario.name}.png`);
     const baselinePath = resolve(baselineDir, `${scenario.name}.png`);
@@ -194,7 +202,7 @@ try {
       );
       console.log(`Passed ${scenario.name}`);
     }
-    await page.close();
+    await context.close();
   }
 } finally {
   await browser.close();

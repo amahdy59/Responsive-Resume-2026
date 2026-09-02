@@ -155,6 +155,31 @@ if (
   );
 }
 
+if (
+  html.includes("project-filter-pill") ||
+  script.includes("initProjectFilters")
+) {
+  errors.push(
+    "The small project set must remain directly scannable without filters.",
+  );
+}
+
+if (
+  (html.match(/project-card-featured/g) || []).length !== 3 ||
+  (html.match(/project-card-compact/g) || []).length !== 2
+) {
+  errors.push("Projects must keep a three-featured, two-compact hierarchy.");
+}
+
+if (
+  (html.match(/data-copy=/g) || []).length !== 1 ||
+  /data-copy="https:\/\/(?:www\.)?(?:linkedin|dribbble)/.test(html)
+) {
+  errors.push(
+    "Only the email action should expose a copy control in the hero.",
+  );
+}
+
 for (const { file, source } of htmlDocuments.filter(
   ({ file }) => file !== "index.html",
 )) {

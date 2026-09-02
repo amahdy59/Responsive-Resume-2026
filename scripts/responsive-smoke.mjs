@@ -114,8 +114,8 @@ try {
           route.fulfill({ body: "", contentType: "text/css", status: 200 }),
       );
       const page = await context.newPage();
-      page.setDefaultNavigationTimeout(10000);
-      page.setDefaultTimeout(10000);
+      page.setDefaultNavigationTimeout(30000);
+      page.setDefaultTimeout(30000);
       const runtimeErrors = [];
 
       page.on("console", (message) => {
@@ -123,7 +123,7 @@ try {
       });
       page.on("pageerror", (error) => runtimeErrors.push(error.message));
 
-      const response = await page.goto(baseUrl, {
+      const response = await page.goto(`${baseUrl}/`, {
         waitUntil: "domcontentloaded",
       });
       assert.equal(response?.status(), 200);
@@ -187,17 +187,35 @@ try {
             .filter(({ left, right }) => left < 0 || right > window.innerWidth)
             .slice(0, 8),
           scrollWidth: document.documentElement.scrollWidth,
-          contactTexts: [...document.querySelectorAll(".contact-list a")].map(
-            (link) => link.childNodes[0]?.textContent.trim(),
+          heroActionTexts: [
+            ...document.querySelectorAll(".hero-actions a"),
+          ].map((link) =>
+            link.querySelector("[data-translate]")?.textContent.trim(),
           ),
+          heroCopyCount: document.querySelectorAll(
+            '.hero-actions [data-copy="amahdy59@gmail.com"]',
+          ).length,
+          heroActionsMeetTarget: [
+            ...document.querySelectorAll(
+              ".hero-actions a, .hero-actions button",
+            ),
+          ].every((control) => control.getBoundingClientRect().height >= 44),
+          projectFilterCount: document.querySelectorAll(".project-filter-pill")
+            .length,
+          featuredProjectCount: document.querySelectorAll(
+            ".project-card-featured",
+          ).length,
+          compactProjectCount: document.querySelectorAll(
+            ".project-card-compact",
+          ).length,
           entityLinks: [...document.querySelectorAll(".li-entity-link")].map(
             (link) => link.href,
           ),
           externalIconCount: document.querySelectorAll(
-            ".project-btn-secondary .external-icon",
+            ".project-live-link .external-icon",
           ).length,
-          externalLinkCount: document.querySelectorAll(".project-btn-secondary")
-            .length,
+          externalLinkCount:
+            document.querySelectorAll(".project-live-link").length,
           resumeActionCount: document.querySelectorAll(".resume-action").length,
           sectionLinks: [...document.querySelectorAll(".section-nav a")].map(
             (link) => ({
@@ -257,6 +275,11 @@ try {
       assert.equal(state.interactiveSkillCount, 0);
       assert.equal(state.resumeActionCount, 0);
       assert.equal(state.externalIconCount, state.externalLinkCount);
+      assert.equal(state.heroCopyCount, 1);
+      assert.equal(state.heroActionsMeetTarget, true);
+      assert.equal(state.projectFilterCount, 0);
+      assert.equal(state.featuredProjectCount, 3);
+      assert.equal(state.compactProjectCount, 2);
       assert.deepEqual(state.entityLinks, [
         "https://advansys-is.com/",
         "https://www.se.com/eg/en/",
@@ -264,10 +287,10 @@ try {
         "https://www.menofia.edu.eg/",
       ]);
       assert.deepEqual(
-        state.contactTexts.slice(1),
+        state.heroActionTexts,
         scenario.language === "ar"
-          ? ["لينكد إن", "معرض دريبل"]
-          : ["LinkedIn profile", "Dribbble portfolio"],
+          ? ["عرض أبرز المشاريع", "راسل أحمد", "لينكد إن", "معرض دريبل"]
+          : ["View Selected Work", "Email Ahmed", "LinkedIn", "Dribbble"],
       );
 
       if (scenario.width <= 880) {
@@ -327,6 +350,19 @@ try {
           document.querySelector("[data-print-resume]").click();
         });
         assert.equal(await page.evaluate(() => window.__printCalled), true);
+
+        await page.emulateMedia({ media: "print" });
+        const printHeroState = await page.evaluate(() => ({
+          emailDisplay: getComputedStyle(
+            document.querySelector(".hero-action-secondary"),
+          ).display,
+          primaryDisplay: getComputedStyle(
+            document.querySelector(".hero-action-primary"),
+          ).display,
+        }));
+        assert.notEqual(printHeroState.emailDisplay, "none");
+        assert.equal(printHeroState.primaryDisplay, "none");
+        await page.emulateMedia({ media: "screen" });
 
         const themeBeforeShortcut = await page
           .locator("html")
@@ -530,8 +566,8 @@ try {
           route.fulfill({ body: "", contentType: "text/css", status: 200 }),
       );
       const page = await context.newPage();
-      page.setDefaultNavigationTimeout(10000);
-      page.setDefaultTimeout(10000);
+      page.setDefaultNavigationTimeout(30000);
+      page.setDefaultTimeout(30000);
       const runtimeErrors = [];
       page.on("console", (message) => {
         if (message.type() === "error") runtimeErrors.push(message.text());

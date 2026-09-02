@@ -100,6 +100,9 @@ const translations = {
     footer_email: "راسل أحمد",
     footer_text:
       "هل تبحث عن خبرة في تجربة المستخدم، أو المنتجات سهلة الوصول، أو تجارب البيانات الداعمة للقرار؟",
+    featured_work: "أعمال مختارة",
+    more_projects: "مشاريع إضافية",
+    hero_actions_label: "إجراءات ملف الأعمال والتواصل",
     external_site_hint: "يفتح في موقع خارجي",
     highlights_label: "أبرز النقاط",
     job1_b1:
@@ -205,13 +208,7 @@ const translations = {
     tooltip_theme_light: "التبديل إلى الوضع الفاتح",
     tooltip_visit_live_site: "زيارة الموقع المباشر",
     ux_tag: "تصميم تجربة المستخدم",
-    visit_live_project: "زيارة موقع المشروع المباشر",
-    filter_all: "الكل",
-    filter_ux: "تصميم UX",
-    filter_data: "تصوير البيانات",
-    filter_projects_label: "تصفية المشاريع حسب الفئة",
-    filter_showing: "عرض",
-    filter_projects: "مشاريع",
+    visit_live_project: "عرض المشروع الحي",
     collapse_project: "طي",
     expand_project: "توسيع",
 
@@ -385,8 +382,8 @@ const translations = {
     control_contrast: "Contrast",
     control_language: "العربية",
     control_theme: "Theme",
-    contact_dribbble: "Dribbble portfolio",
-    contact_linkedin: "LinkedIn profile",
+    contact_dribbble: "Dribbble",
+    contact_linkedin: "LinkedIn",
     contact_links_label: "Contact links",
     data_tag: "Data Visualization",
     display_settings_label: "Display settings",
@@ -401,6 +398,9 @@ const translations = {
     footer_email: "Email Ahmed",
     footer_text:
       "Looking for UX leadership, accessible products, or decision-ready data experiences?",
+    featured_work: "Featured Work",
+    more_projects: "More Projects",
+    hero_actions_label: "Portfolio and contact actions",
     external_site_hint: "opens external site",
     highlights_label: "Career highlights",
     job1_b1:
@@ -511,13 +511,7 @@ const translations = {
     tooltip_theme_light: "Switch to light mode",
     tooltip_visit_live_site: "Visit Live Site",
     ux_tag: "UX Design",
-    visit_live_project: "Visit live project",
-    filter_all: "All",
-    filter_ux: "UX Design",
-    filter_data: "Data Visualization",
-    filter_projects_label: "Filter projects by category",
-    filter_showing: "Showing",
-    filter_projects: "projects",
+    visit_live_project: "View Live Project",
     collapse_project: "Collapse",
     expand_project: "Expand",
 
@@ -1324,134 +1318,6 @@ function updatePrintStyles() {
  * and language to boot the UI.
  */
 /**
- * Project Filter Pills
- * ─────────────────────────────────────────────────────────────────────
- * Supports:
- *  - 3 filter buttons (All / UX Design / Data Visualization)
- *  - aria-pressed state management (exactly one active at a time)
- *  - Arrow-key navigation within the filter bar (roving focus)
- *  - Animated show/hide (respects prefers-reduced-motion)
- *  - ARIA live region announces count of visible projects
- *  - Hides the category group h3 when that group's filter is active
- *  - Fully bilingual (EN/AR) via the existing translation system
- */
-function initProjectFilters() {
-  const filterBar = document.querySelector(".project-filter-bar");
-  if (!filterBar) return;
-
-  const pills = Array.from(filterBar.querySelectorAll(".project-filter-pill"));
-  const articles = Array.from(
-    document.querySelectorAll(".projects-panel article[data-category]"),
-  );
-  const groups = Array.from(
-    document.querySelectorAll(
-      ".projects-panel .project-group[data-group-category]",
-    ),
-  );
-  const announcement = document.getElementById("filter-results-announcement");
-  const prefersReduced = window.matchMedia(
-    "(prefers-reduced-motion: reduce)",
-  ).matches;
-
-  function applyFilter(filterValue) {
-    pills.forEach((pill) => {
-      const isActive = pill.dataset.filter === filterValue;
-      pill.classList.toggle("is-active", isActive);
-      pill.setAttribute("aria-pressed", isActive ? "true" : "false");
-    });
-
-    let visibleCount = 0;
-
-    articles.forEach((article) => {
-      const matches =
-        filterValue === "all" || article.dataset.category === filterValue;
-      if (matches) {
-        visibleCount++;
-        article.removeAttribute("hidden");
-        if (!prefersReduced) {
-          article.style.animationName = "none";
-          // Force reflow to restart animation
-          void article.offsetHeight;
-          article.style.animationName = "";
-        }
-      } else {
-        article.setAttribute("hidden", "");
-      }
-    });
-
-    // Show/hide group headers: hide h3 when a specific filter is active
-    groups.forEach((group) => {
-      if (filterValue === "all") {
-        group.removeAttribute("hidden");
-      } else if (group.dataset.groupCategory === filterValue) {
-        group.removeAttribute("hidden");
-        // Hide the h3 since the filter pill already conveys the category
-        const h3 = group.querySelector("h3");
-        if (h3) h3.setAttribute("hidden", "");
-      } else {
-        group.setAttribute("hidden", "");
-        const h3 = group.querySelector("h3");
-        if (h3) h3.removeAttribute("hidden");
-      }
-    });
-
-    // Restore h3 visibility when "All" is active
-    if (filterValue === "all") {
-      groups.forEach((group) => {
-        const h3 = group.querySelector("h3");
-        if (h3) h3.removeAttribute("hidden");
-      });
-    }
-
-    // Announce to screen readers
-    if (announcement) {
-      const lang = getCurrentLanguage();
-      const t = translations[lang] || translations.en;
-      const showingText = t.filter_showing || "Showing";
-      const projectsText = t.filter_projects || "projects";
-      announcement.textContent = `${showingText} ${visibleCount} ${projectsText}`;
-    }
-  }
-
-  // Click handler
-  filterBar.addEventListener("click", (e) => {
-    const pill = e.target.closest(".project-filter-pill");
-    if (!pill) return;
-    applyFilter(pill.dataset.filter);
-    pill.focus();
-  });
-
-  // Arrow-key roving focus within filter bar
-  filterBar.addEventListener("keydown", (e) => {
-    const isRTL = document.documentElement.dir === "rtl";
-    const prev = isRTL ? "ArrowRight" : "ArrowLeft";
-    const next = isRTL ? "ArrowLeft" : "ArrowRight";
-
-    if (e.key !== prev && e.key !== next && e.key !== "Home" && e.key !== "End")
-      return;
-
-    e.preventDefault();
-    const idx = pills.indexOf(document.activeElement);
-    let target;
-
-    if (e.key === next) target = pills[(idx + 1) % pills.length];
-    else if (e.key === prev)
-      target = pills[(idx - 1 + pills.length) % pills.length];
-    else if (e.key === "Home") target = pills[0];
-    else if (e.key === "End") target = pills[pills.length - 1];
-
-    if (target) {
-      target.focus();
-      applyFilter(target.dataset.filter);
-    }
-  });
-}
-
-/**
- * Enhances project cards with accessible expand/collapse toggle controls.
- * Preserves the scannable card header and metadata chips when collapsed.
- */
-/**
  * Initializes a smooth reading progress bar for case study pages.
  */
 function initReadingProgressBar() {
@@ -1495,7 +1361,6 @@ function initialize() {
   initSectionNavigation();
   enhanceLinkedCards();
   bindCopyButtons();
-  initProjectFilters();
   initReadingProgressBar();
 
   setTheme(savedTheme || (prefersDark ? "dark" : "light"));

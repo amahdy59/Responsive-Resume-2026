@@ -203,34 +203,38 @@
             </div>
           </div>
           <div class="hero-controls-wrapper">
-            <ul
-              class="contact-list"
-              aria-label="Contact links"
+            <nav
+              class="hero-actions"
+              aria-label="Portfolio and contact actions"
               data-translate-attr="aria-label"
-              data-translate-attr-key="contact_links_label"
+              data-translate-attr-key="hero_actions_label"
             >
-              <li>
-                <span class="contact-icon" aria-hidden="true"><svg><use href="#icon-mail"></use></svg></span>
-                <a href="mailto:amahdy59@gmail.com" lang="en" dir="ltr">amahdy59@gmail.com</a>
+              <a class="hero-action hero-action-primary" href="#projects">
+                <svg aria-hidden="true"><use href="#icon-folder"></use></svg>
+                <span data-translate="hero_cta_work">View Selected Work</span>
+              </a>
+              <div class="hero-email-action">
+                <a class="hero-action hero-action-secondary" href="mailto:amahdy59@gmail.com">
+                  <svg aria-hidden="true"><use href="#icon-mail"></use></svg>
+                  <span data-translate="footer_email">Email Ahmed</span>
+                </a>
                 <button class="copy-button" type="button" data-copy="amahdy59@gmail.com" aria-label="Copy email address" data-tooltip="Copy email address" data-tooltip-key="tooltip_copy_email">
                   <span aria-hidden="true"><svg><use href="#icon-copy"></use></svg></span>
                 </button>
-              </li>
-              <li>
-                <span class="contact-icon" aria-hidden="true"><svg><use href="#icon-linkedin"></use></svg></span>
-                <a href="https://www.linkedin.com/in/creativemahdy" target="_blank" rel="noopener noreferrer" dir="auto" data-translate="contact_linkedin">LinkedIn profile</a>
-                <button class="copy-button" type="button" data-copy="https://www.linkedin.com/in/creativemahdy" aria-label="Copy LinkedIn profile link" data-tooltip="Copy LinkedIn profile link" data-tooltip-key="tooltip_copy_linkedin">
-                  <span aria-hidden="true"><svg><use href="#icon-copy"></use></svg></span>
-                </button>
-              </li>
-              <li>
-                <span class="contact-icon" aria-hidden="true"><svg><use href="#icon-dribbble"></use></svg></span>
-                <a href="https://dribbble.com/creativemahdy" target="_blank" rel="noopener noreferrer" dir="auto" data-translate="contact_dribbble">Dribbble portfolio</a>
-                <button class="copy-button" type="button" data-copy="https://dribbble.com/creativemahdy" aria-label="Copy Dribbble profile link" data-tooltip="Copy Dribbble profile link" data-tooltip-key="tooltip_copy_dribbble">
-                  <span aria-hidden="true"><svg><use href="#icon-copy"></use></svg></span>
-                </button>
-              </li>
-            </ul>
+              </div>
+              <div class="hero-social-links">
+                <a class="hero-social-link" href="https://www.linkedin.com/in/creativemahdy" target="_blank" rel="noopener noreferrer">
+                  <svg aria-hidden="true"><use href="#icon-linkedin"></use></svg>
+                  <span data-translate="contact_linkedin">LinkedIn</span>
+                  <svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg>
+                </a>
+                <a class="hero-social-link" href="https://dribbble.com/creativemahdy" target="_blank" rel="noopener noreferrer">
+                  <svg aria-hidden="true"><use href="#icon-dribbble"></use></svg>
+                  <span data-translate="contact_dribbble">Dribbble</span>
+                  <svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg>
+                </a>
+              </div>
+            </nav>
             <div
               class="controls-group"
               role="group"
@@ -357,112 +361,63 @@
             <section class="panel panel-primary featured projects-panel" id="projects">
               <h2><span class="panel-icon-box" aria-hidden="true"><svg><use href="#icon-folder"></use></svg></span><span data-translate="sect_projects">Projects</span></h2>
 
-              <!-- Project filter pills -->
-              <div
-                class="project-filter-bar"
-                role="group"
-                aria-label="Filter projects by category"
-                data-translate-attr="aria-label"
-                data-translate-attr-key="filter_projects_label"
-              >
-                <button
-                  class="project-filter-pill is-active"
-                  type="button"
-                  data-filter="all"
-                  aria-pressed="true"
-                  data-translate="filter_all"
-                >All <span class="filter-count" aria-hidden="true">5</span></button>
-                <button
-                  class="project-filter-pill"
-                  type="button"
-                  data-filter="ux"
-                  aria-pressed="false"
-                  data-translate="filter_ux"
-                >UX Design <span class="filter-count" aria-hidden="true">4</span></button>
-                <button
-                  class="project-filter-pill"
-                  type="button"
-                  data-filter="data"
-                  aria-pressed="false"
-                  data-translate="filter_data"
-                >Data Visualization <span class="filter-count" aria-hidden="true">1</span></button>
-              </div>
-              <!-- Live region announces filter results to screen readers -->
-              <p class="sr-only" role="status" aria-live="polite" aria-atomic="true" id="filter-results-announcement"></p>
-
-              <div class="project-group" data-group-category="ux">
-                <h3 data-translate="proj_ux_header">UX Projects</h3>
-                <article data-category="ux">
+              <div class="project-group featured-projects">
+                <h3 data-translate="featured_work">Featured Work</h3>
+                <article class="project-card project-card-featured">
                   <div class="project-header">
-                    <h4><span data-translate="proj_ux3_title">Haj Arafa App</span></h4>
+                    <h4 id="project-haj-title"><a href="project-haj-arafa.html" data-translate="proj_ux3_title">Haj Arafa App</a></h4>
                   </div>
                   <div class="project-body">
                     <div class="project-body-inner">
-                      <img class="project-thumbnail" src="assets/case-haj-arafa-800.webp" srcset="assets/case-haj-arafa-480.webp 480w, assets/case-haj-arafa-800.webp 800w, assets/case-haj-arafa-1200.webp 1200w" sizes="(max-width: 880px) calc(100vw - 52px), 560px" alt="" width="1440" height="890" loading="lazy" decoding="async" />
+                      <a class="project-thumbnail-link" href="project-haj-arafa.html" aria-labelledby="project-haj-title"><img class="project-thumbnail" src="assets/case-haj-arafa-800.webp" srcset="assets/case-haj-arafa-480.webp 480w, assets/case-haj-arafa-800.webp 800w, assets/case-haj-arafa-1200.webp 1200w" sizes="(max-width: 880px) calc(100vw - 52px), 560px" alt="Haj Arafa App interface preview" width="1440" height="890" loading="lazy" decoding="async" /></a>
+                      <p class="project-meta"><span data-translate="project_owner_ux">Ahmed Mahdy · UX Designer</span><span data-translate="project_type_independent">Independent Project</span><span data-translate="project_status_live">Live Interactive Build</span></p>
                       <p data-translate="proj_ux3_desc">
                         An accessible mobile e-commerce concept with search-first navigation and a consolidated guest checkout.
                       </p>
                       <div class="project-actions">
                         <a href="project-haj-arafa.html" class="btn btn-primary" data-translate="read_case_study">Read Case Study</a>
-                        <a href="https://amahdy59.github.io/Hajarafaapp/" class="btn btn-secondary btn-icon" target="_blank" rel="noopener noreferrer" aria-label="Visit live site: Haj Arafa App" data-tooltip="Visit Live Site" data-tooltip-key="tooltip_visit_live_site">
-                          <svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg>
+                        <a href="https://amahdy59.github.io/Hajarafaapp/" class="btn btn-secondary project-live-link" target="_blank" rel="noopener noreferrer">
+                          <span data-translate="visit_live_project">View Live Project</span><svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg>
                         </a>
                       </div>
                     </div>
                   </div>
                 </article>
-                <article data-category="ux">
+                <article class="project-card project-card-featured">
                   <div class="project-header">
-                    <h4><span data-translate="proj_ux2_title">Cairo International Airport - Command Hub</span></h4>
+                    <h4 id="project-cairo-title"><a href="project-cairo-airport.html" data-translate="proj_ux2_title">Cairo International Airport - Command Hub</a></h4>
                   </div>
                   <div class="project-body">
                     <div class="project-body-inner">
-                      <img class="project-thumbnail" src="assets/case-cairo-airport-800.webp" srcset="assets/case-cairo-airport-480.webp 480w, assets/case-cairo-airport-800.webp 800w, assets/case-cairo-airport-1200.webp 1200w" sizes="(max-width: 880px) calc(100vw - 52px), 560px" alt="" width="1440" height="1586" loading="lazy" decoding="async" />
+                      <a class="project-thumbnail-link" href="project-cairo-airport.html" aria-labelledby="project-cairo-title"><img class="project-thumbnail" src="assets/case-cairo-airport-800.webp" srcset="assets/case-cairo-airport-480.webp 480w, assets/case-cairo-airport-800.webp 800w, assets/case-cairo-airport-1200.webp 1200w" sizes="(max-width: 880px) calc(100vw - 52px), 560px" alt="Cairo Airport dashboard interface preview" width="1440" height="1586" loading="lazy" decoding="async" /></a>
+                      <p class="project-meta"><span data-translate="project_owner_data">Ahmed Mahdy · UX &amp; Data Visualization</span><span data-translate="project_type_independent">Independent Project</span><span data-translate="project_status_live">Live Interactive Build</span></p>
                       <p data-translate="proj_ux2_desc">
                         An interactive operational dashboard concept focused on clear data visualization, information hierarchy, and responsive behavior.
                       </p>
                       <div class="project-actions">
                         <a href="project-cairo-airport.html" class="btn btn-primary" data-translate="read_case_study">Read Case Study</a>
-                        <a href="https://amahdy59.github.io/Cairo-International-Airpot-CIA-Dashboard/" class="btn btn-secondary btn-icon" target="_blank" rel="noopener noreferrer" aria-label="Visit live site: Cairo International Airport - Command Hub" data-tooltip="Visit Live Site" data-tooltip-key="tooltip_visit_live_site">
-                          <svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg>
+                        <a href="https://amahdy59.github.io/Cairo-International-Airpot-CIA-Dashboard/" class="btn btn-secondary project-live-link" target="_blank" rel="noopener noreferrer">
+                          <span data-translate="visit_live_project">View Live Project</span><svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg>
                         </a>
                       </div>
                     </div>
                   </div>
                 </article>
-                <article data-category="ux">
+                <article class="project-card project-card-featured">
                   <div class="project-header">
-                    <h4><span data-translate="proj_ux1_title">Human Resources Tool</span></h4>
+                    <h4 id="project-hr-title"><a href="project-hr-tool.html" data-translate="proj_ux1_title">Human Resources Tool</a></h4>
                   </div>
                   <div class="project-body">
                     <div class="project-body-inner">
-                      <img class="project-thumbnail" src="assets/case-hr-tool-800.webp" srcset="assets/case-hr-tool-480.webp 480w, assets/case-hr-tool-800.webp 800w, assets/case-hr-tool-1200.webp 1200w" sizes="(max-width: 880px) calc(100vw - 52px), 560px" alt="" width="1440" height="890" loading="lazy" decoding="async" />
+                      <a class="project-thumbnail-link" href="project-hr-tool.html" aria-labelledby="project-hr-title"><img class="project-thumbnail" src="assets/case-hr-tool-800.webp" srcset="assets/case-hr-tool-480.webp 480w, assets/case-hr-tool-800.webp 800w, assets/case-hr-tool-1200.webp 1200w" sizes="(max-width: 880px) calc(100vw - 52px), 560px" alt="HR management interface preview" width="1440" height="890" loading="lazy" decoding="async" /></a>
+                      <p class="project-meta"><span data-translate="project_owner_ux">Ahmed Mahdy · UX Designer</span><span data-translate="project_type_independent">Independent Project</span><span data-translate="project_status_live">Live Interactive Build</span></p>
                       <p data-translate="proj_ux1_desc">
                         A responsive, privacy-focused HR SaaS concept for leave requests, role-based approvals, and request-status visibility.
                       </p>
                       <div class="project-actions">
                         <a href="project-hr-tool.html" class="btn btn-primary" data-translate="read_case_study">Read Case Study</a>
-                        <a href="https://amahdy59.github.io/hr-tool-v2/" class="btn btn-secondary btn-icon" target="_blank" rel="noopener noreferrer" aria-label="Visit live site: Human Resources Tool" data-tooltip="Visit Live Site" data-tooltip-key="tooltip_visit_live_site">
-                          <svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </article>
-                <article data-category="ux">
-                  <div class="project-header">
-                    <h4><span data-translate="proj_ux4_title">Azkar App – Daily Fortress</span></h4>
-                  </div>
-                  <div class="project-body">
-                    <div class="project-body-inner">
-                      <img class="project-thumbnail" src="assets/case-azkar-app-800.webp" srcset="assets/case-azkar-app-480.webp 480w, assets/case-azkar-app-800.webp 800w, assets/case-azkar-app-1200.webp 1200w" sizes="(max-width: 880px) calc(100vw - 52px), 560px" alt="" width="1440" height="890" loading="lazy" decoding="async" />
-                      <p data-translate="proj_ux4_desc">
-                        An accessible Arabic-first remembrance and prayer-time application with offline support, calm reading, and clear progress.
-                      </p>
-                      <div class="project-actions">
-                        <a href="project-azkar-app.html" class="btn btn-primary" data-translate="read_case_study">Read Case Study</a>
-                        <a href="https://amahdy59.github.io/Azkarapp/#/home" class="btn btn-secondary btn-icon" target="_blank" rel="noopener noreferrer" aria-label="Visit live site: Azkar App" data-tooltip="Visit Live Site" data-tooltip-key="tooltip_visit_live_site">
-                          <svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg>
+                        <a href="https://amahdy59.github.io/hr-tool-v2/" class="btn btn-secondary project-live-link" target="_blank" rel="noopener noreferrer">
+                          <span data-translate="visit_live_project">View Live Project</span><svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg>
                         </a>
                       </div>
                     </div>
@@ -470,22 +425,43 @@
                 </article>
               </div>
 
-              <div class="project-group" data-group-category="data">
-                <h3 data-translate="proj_data_header">Data Analysis &amp; Visualization Projects</h3>
-                <article data-category="data">
+              <div class="project-group additional-projects">
+                <h3 data-translate="more_projects">More Projects</h3>
+                <article class="project-card project-card-compact">
                   <div class="project-header">
-                    <h4><span data-translate="proj_data1_title">A Data-Driven LEGO Explorer</span></h4>
+                    <h4 id="project-azkar-title"><a href="project-azkar-app.html" data-translate="proj_ux4_title">Azkar App – Daily Fortress</a></h4>
                   </div>
                   <div class="project-body">
                     <div class="project-body-inner">
-                      <img class="project-thumbnail" src="assets/case-lego-explorer-800.webp" srcset="assets/case-lego-explorer-480.webp 480w, assets/case-lego-explorer-800.webp 800w, assets/case-lego-explorer-1200.webp 1200w" sizes="(max-width: 880px) calc(100vw - 52px), 560px" alt="" width="1440" height="810" loading="lazy" decoding="async" />
+                      <a class="project-thumbnail-link" href="project-azkar-app.html" aria-labelledby="project-azkar-title"><img class="project-thumbnail" src="assets/case-azkar-app-800.webp" srcset="assets/case-azkar-app-480.webp 480w, assets/case-azkar-app-800.webp 800w, assets/case-azkar-app-1200.webp 1200w" sizes="(max-width: 880px) calc(100vw - 52px), 560px" alt="Azkar App interface preview" width="1440" height="890" loading="lazy" decoding="async" /></a>
+                      <p class="project-meta"><span data-translate="project_owner_ux">Ahmed Mahdy · UX Designer</span><span data-translate="project_status_live">Live Interactive Build</span></p>
+                      <p data-translate="proj_ux4_desc">
+                        An accessible Arabic-first remembrance and prayer-time application with offline support, calm reading, and clear progress.
+                      </p>
+                      <div class="project-actions">
+                        <a href="project-azkar-app.html" class="btn btn-primary" data-translate="read_case_study">Read Case Study</a>
+                        <a href="https://amahdy59.github.io/Azkarapp/#/home" class="btn btn-secondary project-live-link" target="_blank" rel="noopener noreferrer">
+                          <span data-translate="visit_live_project">View Live Project</span><svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+                <article class="project-card project-card-compact">
+                  <div class="project-header">
+                    <h4 id="project-lego-title"><a href="project-lego-explorer.html" data-translate="proj_data1_title">A Data-Driven LEGO Explorer</a></h4>
+                  </div>
+                  <div class="project-body">
+                    <div class="project-body-inner">
+                      <a class="project-thumbnail-link" href="project-lego-explorer.html" aria-labelledby="project-lego-title"><img class="project-thumbnail" src="assets/case-lego-explorer-800.webp" srcset="assets/case-lego-explorer-480.webp 480w, assets/case-lego-explorer-800.webp 800w, assets/case-lego-explorer-1200.webp 1200w" sizes="(max-width: 880px) calc(100vw - 52px), 560px" alt="LEGO Explorer dashboard preview" width="1440" height="810" loading="lazy" decoding="async" /></a>
+                      <p class="project-meta"><span data-translate="project_owner_data">Ahmed Mahdy · UX &amp; Data Visualization</span><span data-translate="project_status_live">Live Interactive Build</span></p>
                       <p data-translate="proj_data1_desc">
                         An interactive Tableau visualization experience that helps users explore LEGO sets by theme, age, price, and set count.
                       </p>
                       <div class="project-actions">
                         <a href="project-lego-explorer.html" class="btn btn-primary" data-translate="read_case_study">Read Case Study</a>
-                        <a href="https://mavenshowcase.com/project/24967" class="btn btn-secondary btn-icon" target="_blank" rel="noopener noreferrer" aria-label="Visit live site: A Data-Driven LEGO Explorer" data-tooltip="Visit Live Site" data-tooltip-key="tooltip_visit_live_site">
-                          <svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg>
+                        <a href="https://mavenshowcase.com/project/24967" class="btn btn-secondary project-live-link" target="_blank" rel="noopener noreferrer">
+                          <span data-translate="visit_live_project">View Live Project</span><svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg>
                         </a>
                       </div>
                     </div>
