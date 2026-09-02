@@ -61,10 +61,12 @@ try {
       const context = await browser.newContext({
         viewport: { width: scenario.width, height: scenario.height },
       });
-      await context.route(/https:\/\/fonts\.googleapis\.com\//, (route) =>
+      await context.route(/https:\/\/(fonts\.googleapis\.com|fonts\.gstatic\.com)\/.*/, (route) =>
         route.fulfill({ body: "", contentType: "text/css", status: 200 }),
       );
       const page = await context.newPage();
+      page.setDefaultNavigationTimeout(10000);
+      page.setDefaultTimeout(10000);
       const runtimeErrors = [];
 
       page.on("console", (message) => {
@@ -72,7 +74,7 @@ try {
       });
       page.on("pageerror", (error) => runtimeErrors.push(error.message));
 
-      const response = await page.goto(baseUrl, { waitUntil: "networkidle" });
+      const response = await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
       assert.equal(response?.status(), 200);
 
       if (scenario.language === "ar") {
@@ -283,19 +285,21 @@ try {
   for (const file of caseStudyFiles) {
     try {
       const context = await browser.newContext({ viewport: { width: 375, height: 812 } });
-      await context.route(/https:\/\/fonts\.googleapis\.com\//, (route) =>
+      await context.route(/https:\/\/(fonts\.googleapis\.com|fonts\.gstatic\.com)\/.*/, (route) =>
         route.fulfill({ body: "", contentType: "text/css", status: 200 }),
       );
       const page = await context.newPage();
+      page.setDefaultNavigationTimeout(10000);
+      page.setDefaultTimeout(10000);
       const runtimeErrors = [];
       page.on("console", (message) => {
         if (message.type() === "error") runtimeErrors.push(message.text());
       });
       page.on("pageerror", (error) => runtimeErrors.push(error.message));
 
-      await page.goto(baseUrl);
+      await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
       await page.evaluate(() => localStorage.setItem("resume-lang", "ar"));
-      const response = await page.goto(`${baseUrl}/${file}`, { waitUntil: "networkidle" });
+      const response = await page.goto(`${baseUrl}/${file}`, { waitUntil: "domcontentloaded" });
       assert.equal(response?.status(), 200);
 
       const state = await page.evaluate(() => ({
