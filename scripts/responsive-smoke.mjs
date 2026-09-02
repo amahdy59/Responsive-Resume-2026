@@ -294,6 +294,7 @@ try {
       await context.close();
       console.log(`Passed ${scenario.language} at ${scenario.width}x${scenario.height}`);
     } catch (err) {
+      console.error(`::error::Failed scenario ${scenario.language} at ${scenario.width}x${scenario.height}: ${err.message}`);
       console.error(`❌ FAILED scenario: ${scenario.language} at ${scenario.width}x${scenario.height}`);
       console.error(err);
       throw err;
@@ -376,12 +377,14 @@ try {
       await context.close();
       console.log(`Passed case study ${file}`);
     } catch (err) {
+      console.error(`::error::Failed case study ${file}: ${err.message}`);
       console.error(`❌ FAILED case study: ${file}`);
       console.error(err);
       throw err;
     }
   }
 } catch (error) {
+  console.error(`::error::FATAL Smoke test failure: ${error.stack || error.message || error}`);
   console.error("FATAL Smoke test failure:", error);
   process.exitCode = 1;
 } finally {
