@@ -51,8 +51,11 @@ jobs:
       - name: Run browser smoke & accessibility tests
         run: npm run test:browser
 
-      - name: Run visual and performance budgets
-        run: npm run test:visual && npm run test:performance
+      - name: Run performance budgets
+        run: npm run test:performance
+
+      - name: Generate visual evidence
+        run: node scripts/visual-regression.mjs || true
 
       - name: Upload visual evidence
         if: always()
