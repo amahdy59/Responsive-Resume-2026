@@ -91,6 +91,19 @@
   box-sizing: border-box;
 }
 
+img,
+video,
+svg {
+  max-inline-size: 100%;
+  block-size: auto;
+}
+
+p,
+li,
+dd {
+  overflow-wrap: anywhere;
+}
+
 html {
   scroll-behavior: smooth;
   overflow-x: clip;
@@ -113,6 +126,12 @@ body {
   color: var(--text);
   font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   line-height: 1.6;
+}
+
+.case-study-section p,
+.case-study-hero p,
+.panel p {
+  max-inline-size: 68ch;
 }
 
 :where(
