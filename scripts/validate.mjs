@@ -147,7 +147,8 @@ if (
 
 if (
   html.includes("project-toggle") ||
-  script.includes("initProjectCollapses")
+  script.includes("project-toggle") ||
+  script.includes("initCollapsibleProjectCards")
 ) {
   errors.push(
     "Project cards must expose their essential content without collapse controls.",

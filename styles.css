@@ -565,7 +565,7 @@ h1 {
   align-items: center;
   min-height: 44px;
   padding: 9px 14px;
-  color: var(--blue-deep);
+  color: #004d70;
   background: #fff;
   border: 1px solid #fff;
   border-radius: 9px;
@@ -1303,16 +1303,13 @@ h1 {
   margin-top: 14px;
 }
 
-/* ── Collapsible Project Cards ── */
 .project-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  cursor: pointer;
   min-height: 36px;
   padding: 2px 0;
-  user-select: none;
 }
 
 .project-header h4 {
@@ -1329,101 +1326,12 @@ h1 {
   color: var(--blue);
 }
 
-.project-toggle {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  width: 44px;
-  height: 44px;
-  min-width: 44px;
-  min-height: 44px;
-  padding: 0;
-  background: color-mix(in srgb, var(--project-accent) 10%, transparent);
-  border: 1px solid color-mix(in srgb, var(--project-accent) 25%, transparent);
-  border-radius: 10px;
-  color: var(--project-accent);
-  cursor: pointer;
-  font: inherit;
-  box-sizing: border-box;
-  transition:
-    background-color 160ms ease,
-    border-color 160ms ease,
-    color 160ms ease,
-    transform 160ms ease;
-}
-
-.project-toggle:hover {
-  background: color-mix(in srgb, var(--project-accent) 22%, transparent);
-  border-color: var(--project-accent);
-  color: var(--project-accent);
-}
-
-.project-toggle:focus-visible {
-  outline: 2.5px solid var(--blue);
-  outline-offset: 2px;
-}
-
-.project-toggle-icon {
-  width: 14px;
-  height: 14px;
-  transition: transform 280ms cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Collapsed state — rotate chevron */
-.featured article.is-collapsed .project-toggle-icon {
-  transform: rotate(-90deg);
-}
-
-[dir="rtl"] .featured article.is-collapsed .project-toggle-icon {
-  transform: rotate(90deg);
-}
-
-/* project-body — smooth height collapse using CSS Grid 0fr/1fr trick */
 .project-body {
-  display: grid;
-  grid-template-rows: 1fr;
-  transition:
-    grid-template-rows 280ms cubic-bezier(0.4, 0, 0.2, 1),
-    opacity 200ms ease;
-  opacity: 1;
+  display: block;
 }
 
 .project-body-inner {
-  overflow: hidden;
-  min-height: 0;
   padding-top: 10px;
-}
-
-.featured article.is-collapsed {
-  padding-bottom: 12px;
-}
-
-.featured article.is-collapsed .project-body {
-  grid-template-rows: 0fr;
-  opacity: 0;
-}
-
-.featured article.is-collapsed .project-body-inner {
-  padding-top: 0;
-  visibility: hidden;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .project-body {
-    transition: none;
-  }
-
-  .project-toggle-icon {
-    transition: none;
-  }
-}
-
-@media (forced-colors: active) {
-  .project-toggle {
-    border: 1px solid ButtonText;
-    forced-color-adjust: auto;
-  }
 }
 
 /* ── LinkedIn-Style Timeline ── */

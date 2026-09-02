@@ -1067,25 +1067,6 @@ function updateContrastButton(lang) {
  * current language and expansion state.
  * @param {'en'|'ar'} lang - Language code.
  */
-function updateProjectToggles(lang) {
-  document.querySelectorAll(".featured article").forEach((card) => {
-    const toggle = card.querySelector(".project-toggle");
-    const header = card.querySelector(".project-header");
-    if (!toggle || !header) return;
-
-    const isCollapsed = card.classList.contains("is-collapsed");
-    const expanded = !isCollapsed;
-    const actionKey = expanded ? "collapse_project" : "expand_project";
-    const actionText = getTranslation(
-      lang,
-      actionKey,
-      expanded ? "Collapse" : "Expand",
-    );
-    const titleText = header.querySelector("h4")?.textContent.trim() || "";
-    toggle.setAttribute("aria-label", `${actionText}: ${titleText}`);
-  });
-}
-
 /**
  * Orchestrates a full UI refresh for a language switch or initial load.
  * Runs all translation, metadata, link, button, and aria-label update functions.
@@ -1099,7 +1080,6 @@ function refreshUi(lang) {
   }
   updateExternalLinks(lang);
   updateCopyButtons(lang);
-  updateProjectToggles(lang);
   updateLanguageButton(lang);
   updateThemeButton(lang);
   updateContrastButton(lang);
@@ -1505,66 +1485,6 @@ function initProjectFilters() {
  * Enhances project cards with accessible expand/collapse toggle controls.
  * Preserves the scannable card header and metadata chips when collapsed.
  */
-function initCollapsibleProjectCards() {
-  const cards = document.querySelectorAll(".featured article");
-  if (!cards.length) return;
-
-  cards.forEach((card, index) => {
-    const header = card.querySelector(".project-header");
-    const body = card.querySelector(".project-body");
-    if (!header || !body) return;
-
-    const bodyId = body.id || `project-body-${index + 1}`;
-    body.id = bodyId;
-
-    if (!header.querySelector(".project-toggle")) {
-      const toggle = document.createElement("button");
-      toggle.className = "project-toggle";
-      toggle.type = "button";
-      toggle.setAttribute("aria-expanded", "true");
-      toggle.setAttribute("aria-controls", bodyId);
-
-      const getToggleLabel = (expanded) => {
-        const lang = getCurrentLanguage();
-        const actionKey = expanded ? "collapse_project" : "expand_project";
-        const actionText = getTranslation(
-          lang,
-          actionKey,
-          expanded ? "Collapse" : "Expand",
-        );
-        const titleText = header.querySelector("h4")?.textContent.trim() || "";
-        return `${actionText}: ${titleText}`;
-      };
-
-      toggle.setAttribute("aria-label", getToggleLabel(true));
-      toggle.innerHTML = `
-        <svg class="project-toggle-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="6 9 12 15 18 9"></polyline>
-        </svg>
-      `;
-
-      header.appendChild(toggle);
-
-      const toggleState = () => {
-        const isCollapsed = card.classList.toggle("is-collapsed");
-        const expanded = !isCollapsed;
-        toggle.setAttribute("aria-expanded", String(expanded));
-        toggle.setAttribute("aria-label", getToggleLabel(expanded));
-      };
-
-      toggle.addEventListener("click", (e) => {
-        e.stopPropagation();
-        toggleState();
-      });
-
-      header.addEventListener("click", (e) => {
-        if (e.target.closest("a, button")) return;
-        toggleState();
-      });
-    }
-  });
-}
-
 /**
  * Initializes a smooth reading progress bar for case study pages.
  */
@@ -1610,7 +1530,6 @@ function initialize() {
   enhanceLinkedCards();
   bindCopyButtons();
   initProjectFilters();
-  initCollapsibleProjectCards();
   initReadingProgressBar();
 
   setTheme(savedTheme || (prefersDark ? "dark" : "light"));
