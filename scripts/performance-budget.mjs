@@ -1,20 +1,66 @@
 import assert from "node:assert/strict";
-import { spawn } from "node:child_process";
+import { createReadStream, existsSync } from "node:fs";
+import { stat } from "node:fs/promises";
+import { createServer } from "node:http";
+import { extname, normalize, resolve } from "node:path";
 import { chromium } from "playwright";
 
-const port = 4191;
-const baseUrl = `http://127.0.0.1:${port}`;
-const server = spawn(
-  process.execPath,
-  ["scripts/serve.mjs", "--root", "dist", "--port", String(port)],
-  { stdio: "ignore" },
-);
-for (let attempt = 0; attempt < 30; attempt += 1) {
-  try {
-    if ((await fetch(baseUrl)).ok) break;
-  } catch {}
-  await new Promise((done) => setTimeout(done, 200));
+const root = resolve(process.cwd(), "dist");
+const mimeTypes = {
+  ".css": "text/css; charset=utf-8",
+  ".html": "text/html; charset=utf-8",
+  ".jpg": "image/jpeg",
+  ".jpeg": "image/jpeg",
+  ".js": "application/javascript; charset=utf-8",
+  ".json": "application/json; charset=utf-8",
+  ".png": "image/png",
+  ".svg": "image/svg+xml",
+  ".webp": "image/webp",
+  ".woff2": "font/woff2",
+};
+
+function getSafePath(urlPath) {
+  const decodedPath = decodeURIComponent(urlPath.split("?")[0]);
+  const cleanPath = normalize(decodedPath);
+  const requestedPath =
+    decodedPath === "/" ? "index.html" : cleanPath.replace(/^[/\\]+/, "");
+  const resolvedPath = resolve(root, requestedPath);
+  if (!resolvedPath.startsWith(root)) return null;
+  return resolvedPath;
 }
+
+const server = createServer(async (request, response) => {
+  const filePath = getSafePath(request.url || "/");
+  if (!filePath || !existsSync(filePath)) {
+    response.writeHead(404, { "content-type": "text/plain; charset=utf-8" });
+    response.end("Not found");
+    return;
+  }
+  const fileStat = await stat(filePath);
+  if (fileStat.isDirectory()) {
+    response.writeHead(301, {
+      location: `${request.url?.replace(/\/?$/, "/") || "/"}index.html`,
+    });
+    response.end();
+    return;
+  }
+  const extension = extname(filePath).toLowerCase();
+  response.writeHead(200, {
+    "cache-control": "no-cache",
+    "content-type": mimeTypes[extension] || "application/octet-stream",
+  });
+  createReadStream(filePath).pipe(response);
+});
+
+const baseUrl = await new Promise((res, rej) => {
+  server.listen(0, "127.0.0.1", () => {
+    const address = server.address();
+    const port = typeof address === "object" && address ? address.port : 0;
+    res(`http://127.0.0.1:${port}`);
+  });
+  server.on("error", rej);
+});
+
 const browser = await chromium.launch({ headless: true });
 try {
   const page = await browser.newPage({
@@ -54,5 +100,5 @@ try {
   );
 } finally {
   await browser.close();
-  server.kill();
+  server.close();
 }

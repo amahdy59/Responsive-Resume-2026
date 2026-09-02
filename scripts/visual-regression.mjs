@@ -7,7 +7,7 @@ import pixelmatch from "pixelmatch";
 import { chromium } from "playwright";
 import { PNG } from "pngjs";
 
-const port = 4190;
+const port = 20_000 + (process.pid % 20_000);
 const baseUrl = `http://127.0.0.1:${port}`;
 const baselineDir = resolve("tests", "visual-baselines");
 const evidenceDir = resolve("artifacts", "visual");
@@ -18,12 +18,17 @@ const server = spawn(
   ["scripts/serve.mjs", "--root", "dist", "--port", String(port)],
   { stdio: "ignore" },
 );
+let serverReady = false;
 for (let attempt = 0; attempt < 30; attempt += 1) {
   try {
-    if ((await fetch(baseUrl)).ok) break;
+    if ((await fetch(baseUrl)).ok) {
+      serverReady = true;
+      break;
+    }
   } catch {}
   await new Promise((done) => setTimeout(done, 200));
 }
+assert.equal(serverReady, true, "Visual test server did not become ready");
 await mkdir(baselineDir, { recursive: true });
 await mkdir(evidenceDir, { recursive: true });
 const browser = await chromium.launch({ headless: true });
@@ -31,6 +36,20 @@ try {
   const scenarios = [
     { name: "home-en-mobile", path: "/en/", width: 375, height: 812 },
     { name: "home-ar-desktop", path: "/ar/", width: 1440, height: 900 },
+    {
+      name: "home-en-dark",
+      path: "/en/",
+      width: 1280,
+      height: 800,
+      preferences: { theme: "dark" },
+    },
+    {
+      name: "home-ar-high-contrast",
+      path: "/ar/",
+      width: 375,
+      height: 812,
+      preferences: { contrast: "high" },
+    },
     {
       name: "case-en-tablet",
       path: "/en/case-studies/haj-arafa/",
@@ -43,6 +62,14 @@ try {
       viewport: { width: scenario.width, height: scenario.height },
       reducedMotion: "reduce",
     });
+    if (scenario.preferences) {
+      await page.addInitScript((preferences) => {
+        if (preferences.theme)
+          localStorage.setItem("resume-theme", preferences.theme);
+        if (preferences.contrast)
+          localStorage.setItem("resume-contrast", preferences.contrast);
+      }, scenario.preferences);
+    }
     await page.goto(`${baseUrl}${scenario.path}`, { waitUntil: "load" });
     await page.evaluate(() => document.fonts.ready);
     const actualPath = resolve(evidenceDir, `${scenario.name}.png`);

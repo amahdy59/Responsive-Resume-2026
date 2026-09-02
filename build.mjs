@@ -123,12 +123,7 @@ function replaceTextPreservingChildren(node, value) {
   else node.textContent = value;
 }
 
-function localizeDocument(document, language, translations, page) {
-  const dictionary = translations[language];
-  document.documentElement.lang = language;
-  document.documentElement.dir = language === "ar" ? "rtl" : "ltr";
-  document.body.dataset.staticLocale = language;
-  document.body.dataset.staticPath = page.localizedPath;
+function applyTranslations(document, dictionary) {
   document.querySelectorAll("[data-translate]").forEach((node) => {
     const value = dictionary[node.dataset.translate];
     if (value) replaceTextPreservingChildren(node, value);
@@ -137,6 +132,15 @@ function localizeDocument(document, language, translations, page) {
     const value = dictionary[node.dataset.translateAttrKey];
     if (value) node.setAttribute(node.dataset.translateAttr, value);
   });
+}
+
+function localizeDocument(document, language, translations, page) {
+  const dictionary = translations[language];
+  document.documentElement.lang = language;
+  document.documentElement.dir = language === "ar" ? "rtl" : "ltr";
+  document.body.dataset.staticLocale = language;
+  document.body.dataset.staticPath = page.localizedPath;
+  applyTranslations(document, dictionary);
 
   const projectTitle = page.key ? dictionary[`${page.key}_title`] : "";
   const description = page.key
@@ -293,6 +297,7 @@ const pages = [
 for (const page of pages) {
   const source = await readFile(join(root, page.file), "utf8");
   const { document: legacyDocument } = parseHTML(source);
+  if (page.key) applyTranslations(legacyDocument, translations.en);
   const legacyPath = page.file === "index.html" ? "/" : `/${page.file}`;
   ensureAlternateLinks(legacyDocument, page.localizedPath, legacyPath);
   addSecurityMetadata(legacyDocument);

@@ -8,8 +8,14 @@ const storageKeys = {
 const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
 const savedTheme = localStorage.getItem(storageKeys.theme);
 const routeLanguage = location.pathname.match(/^\/(en|ar)(?:\/|$)/)?.[1];
-const savedLang = routeLanguage || localStorage.getItem(storageKeys.lang)
-  || (navigator.languages?.some((language) => language.toLowerCase().startsWith("ar")) ? "ar" : "en");
+const savedLang =
+  routeLanguage ||
+  localStorage.getItem(storageKeys.lang) ||
+  (navigator.languages?.some((language) =>
+    language.toLowerCase().startsWith("ar"),
+  )
+    ? "ar"
+    : "en");
 const savedContrast = localStorage.getItem(storageKeys.contrast) || "normal";
 
 const controls = {
@@ -28,7 +34,8 @@ const metaNodes = {
   personSchema: document.getElementById("person-schema"),
 };
 
-const copyToast = document.querySelector(".copy-toast") || document.createElement("div");
+const copyToast =
+  document.querySelector(".copy-toast") || document.createElement("div");
 let toastTimer = 0;
 
 copyToast.setAttribute("role", "status");
@@ -91,17 +98,23 @@ const translations = {
     exp_tag: "خبرة +8 سنوات",
     footer_cta: "لنعمل معاً",
     footer_email: "راسل أحمد",
-    footer_text: "هل تبحث عن خبرة في تجربة المستخدم، أو المنتجات سهلة الوصول، أو تجارب البيانات الداعمة للقرار؟",
+    footer_text:
+      "هل تبحث عن خبرة في تجربة المستخدم، أو المنتجات سهلة الوصول، أو تجارب البيانات الداعمة للقرار؟",
     external_site_hint: "يفتح في موقع خارجي",
     highlights_label: "أبرز النقاط",
-    job1_b1: "قيادة تصميم تجربة وواجهة المستخدم (UX/UI) لمنصات (SaaS) المؤسسية و(B2B) المعقدة، وتقديم حلول تتمحور حول المستخدم.",
-    job1_b2: "تأسيس أنظمة تصميم قابلة للتوسع باستخدام Figma وAdobe Creative Suite والمنهجيات الحديثة.",
-    job1_b3: "الاستفادة من أدوات التصميم المدعومة بالذكاء الاصطناعي لتسريع النماذج الأولية وتلخيص أبحاث تجربة المستخدم.",
+    job1_b1:
+      "قيادة تصميم تجربة وواجهة المستخدم (UX/UI) لمنصات (SaaS) المؤسسية و(B2B) المعقدة، وتقديم حلول تتمحور حول المستخدم.",
+    job1_b2:
+      "تأسيس أنظمة تصميم قابلة للتوسع باستخدام Figma وAdobe Creative Suite والمنهجيات الحديثة.",
+    job1_b3:
+      "الاستفادة من أدوات التصميم المدعومة بالذكاء الاصطناعي لتسريع النماذج الأولية وتلخيص أبحاث تجربة المستخدم.",
     job1_company: "أدفانسيز للحلول البرمجية",
     job1_date: "يناير 2023 - الحالي · 3 سنوات و6 أشهر",
     job1_title: "مصمم تجربة المستخدم",
-    job2_b1: "إعادة تصميم منصات وواجهات التعلم المؤسسية، مما زاد من تفاعل المستخدمين ومعدلات إكمال التدريب بنسبة 30%.",
-    job2_b2: "تحويل المتطلبات التقنية المعقدة إلى تجارب تعلم إلكترونية B2B سهلة الوصول وبديهية.",
+    job2_b1:
+      "إعادة تصميم منصات وواجهات التعلم المؤسسية، مما زاد من تفاعل المستخدمين ومعدلات إكمال التدريب بنسبة 30%.",
+    job2_b2:
+      "تحويل المتطلبات التقنية المعقدة إلى تجارب تعلم إلكترونية B2B سهلة الوصول وبديهية.",
     job2_company: "شنايدر إلكتريك",
     job2_date: "يوليو 2018 - يناير 2023 · 4 سنوات و7 أشهر",
     job2_location: "محافظة القاهرة، مصر",
@@ -168,10 +181,12 @@ const translations = {
     skills_ux_header: "تصميم تجربة المستخدم",
     skip_link: "تجاوز إلى محتوى السيرة الذاتية",
     title: "مصمم تجربة المستخدم ومصور بيانات",
-    hero_value_prop: "مصمم تجربة مستخدم أول وخبير نمذجة بالذكاء الاصطناعي بخبرة 8+ سنوات في تحويل مسارات العمل المؤسسية المعقدة وأنظمة التعلم والبيانات إلى منتجات رقمية سهلة الوصول وعالية الأداء.",
+    hero_value_prop:
+      "مصمم تجربة مستخدم أول وخبير نمذجة بالذكاء الاصطناعي بخبرة 8+ سنوات في تحويل مسارات العمل المؤسسية المعقدة وأنظمة التعلم والبيانات إلى منتجات رقمية سهلة الوصول وعالية الأداء.",
     hero_cta_work: "عرض أبرز المشاريع",
     hero_cta_print: "طباعة / حفظ السيرة الذاتية",
-    hero_value: "أحوّل المنتجات المعقدة والبيانات إلى تجارب واضحة وسهلة الوصول، مستفيداً من خبرتي في التعلم الإلكتروني وإنتاج الفيديو.",
+    hero_value:
+      "أحوّل المنتجات المعقدة والبيانات إلى تجارب واضحة وسهلة الوصول، مستفيداً من خبرتي في التعلم الإلكتروني وإنتاج الفيديو.",
     view_selected_work: "عرض أبرز الأعمال",
     proj_haj_chip_type: "تجارة عبر الجوال",
     proj_haj_chip_role: "كبير مصممي UX",
@@ -192,7 +207,8 @@ const translations = {
     project_owner_data: "أحمد مهدي · تصميم UX وتصوير البيانات",
     project_type_independent: "مشروع مستقل",
     project_status_live: "تنفيذ تفاعلي مباشر",
-    project_disclosure: "جميع مشاريع تجربة المستخدم من تصميم أحمد مهدي في Figma. استُخدمت أدوات Antigravity وCodex وClaude للمساعدة في تحويل التصاميم إلى تطبيقات حية تحت مراجعته وتوجيهه.",
+    project_disclosure:
+      "جميع مشاريع تجربة المستخدم من تصميم أحمد مهدي في Figma. استُخدمت أدوات Antigravity وCodex وClaude للمساعدة في تحويل التصاميم إلى تطبيقات حية تحت مراجعته وتوجيهه.",
     toast_copied: "تم النسخ",
     toast_failed: "فشل النسخ",
     tooltip_contrast: "تبديل التباين العالي",
@@ -248,88 +264,127 @@ const translations = {
     cs_sec5_title: "05 الأدلة والتحقق المستقبلي",
     cs_sec6_title: "06 الملكية وما تعلمته",
     cs_provenance_ownership: "الملكية",
-    cs_provenance_ownership_desc: "صمم أحمد مهدي تجربة المستخدم، وبنية المعلومات، والتوجه البصري، والمحتوى، واتخذ القرارات النهائية للمشروع.",
+    cs_provenance_ownership_desc:
+      "صمم أحمد مهدي تجربة المستخدم، وبنية المعلومات، والتوجه البصري، والمحتوى، واتخذ القرارات النهائية للمشروع.",
     cs_provenance_background: "المنظور المهني",
-    cs_provenance_background_desc: "استفاد العمل من خبرته في تصميم تجربة المستخدم ومن خلفيته في التعلم الإلكتروني وإنتاج الفيديو لتبسيط المعلومات وتوضيح التسلسل والسرد.",
+    cs_provenance_background_desc:
+      "استفاد العمل من خبرته في تصميم تجربة المستخدم ومن خلفيته في التعلم الإلكتروني وإنتاج الفيديو لتبسيط المعلومات وتوضيح التسلسل والسرد.",
     cs_provenance_ai: "التنفيذ بمساعدة الذكاء الاصطناعي",
-    cs_provenance_ai_desc: "حوّل أحمد تصاميم Figma إلى مشروع حي بمساعدة وكلاء Antigravity وCodex وClaude، ثم راجع التنفيذ وصقله واختبره.",
+    cs_provenance_ai_desc:
+      "حوّل أحمد تصاميم Figma إلى مشروع حي بمساعدة وكلاء Antigravity وCodex وClaude، ثم راجع التنفيذ وصقله واختبره.",
     cs_provenance_evidence: "حدود الأدلة",
-    cs_provenance_evidence_desc: "المتاح هو التصميم والتنفيذ الحي وقرارات دراسة الحالة. لا تُنسب نتائج أعمال كمية ما لم يوجد مصدر وقياس موثق.",
-    cs_haj_learning: "التعلم الخاص: تصميم مسار تجارة إلكترونية قصير ومتجاوب، وتوجيه وكلاء الذكاء الاصطناعي لتنفيذ حالات التنقل والدفع بدقة.",
-    cs_cairo_learning: "التعلم الخاص: الحفاظ على هرمية المعلومات والوضوح البصري عند تحويل لوحة تشغيل كثيفة البيانات من Figma إلى تجربة حية.",
-    cs_hr_learning: "التعلم الخاص: نمذجة مسارات العمل القائمة على الأدوار وحالات الموافقة، ومراجعة المخرجات المولدة بالذكاء الاصطناعي من منظور سهولة الوصول.",
-    cs_azkar_learning: "التعلم الخاص: حماية أولوية العربية واتجاه RTL وجودة القراءة أثناء استخدام الوكلاء لتنفيذ تجربة حساسة للمحتوى.",
-    cs_lego_learning: "التعلم الخاص: تحويل استكشاف البيانات إلى قصة بصرية تفاعلية، واختيار الأداة أو الوكيل الأنسب لكل مهمة بدلاً من الاعتماد على أداة واحدة.",
+    cs_provenance_evidence_desc:
+      "المتاح هو التصميم والتنفيذ الحي وقرارات دراسة الحالة. لا تُنسب نتائج أعمال كمية ما لم يوجد مصدر وقياس موثق.",
+    cs_haj_learning:
+      "التعلم الخاص: تصميم مسار تجارة إلكترونية قصير ومتجاوب، وتوجيه وكلاء الذكاء الاصطناعي لتنفيذ حالات التنقل والدفع بدقة.",
+    cs_cairo_learning:
+      "التعلم الخاص: الحفاظ على هرمية المعلومات والوضوح البصري عند تحويل لوحة تشغيل كثيفة البيانات من Figma إلى تجربة حية.",
+    cs_hr_learning:
+      "التعلم الخاص: نمذجة مسارات العمل القائمة على الأدوار وحالات الموافقة، ومراجعة المخرجات المولدة بالذكاء الاصطناعي من منظور سهولة الوصول.",
+    cs_azkar_learning:
+      "التعلم الخاص: حماية أولوية العربية واتجاه RTL وجودة القراءة أثناء استخدام الوكلاء لتنفيذ تجربة حساسة للمحتوى.",
+    cs_lego_learning:
+      "التعلم الخاص: تحويل استكشاف البيانات إلى قصة بصرية تفاعلية، واختيار الأداة أو الوكيل الأنسب لكل مهمة بدلاً من الاعتماد على أداة واحدة.",
 
     // Case Study 1: Haj Arafa App
     cs_haj_title: "تطبيق حاج عرفة",
     cs_haj_badge: "تجارة رقمية عبر الجوال • تجربة مستخدم المتجر",
-    cs_haj_sub: "واجهة متجر إلكتروني مصممة للجوال أولاً تتميز بتنقل قائم على البحث وتجربة دفع سريعة من خطوتين.",
-    cs_haj_role: "كبير مصممي تجربة المستخدم",
+    cs_haj_sub:
+      "واجهة متجر إلكتروني مصممة للجوال أولاً تتميز بتنقل قائم على البحث وتجربة دفع سريعة من خطوتين.",
+    cs_haj_role: "مصمم تجربة المستخدم",
     cs_haj_timeline: "3 أشهر",
     cs_haj_platform: "تطبيق ويب للجوال",
-    cs_haj_status: "متاح بالإنتاج",
-    cs_haj_sec1_desc: "كان متسوقو الجوال يعانون من معدلات ارتداد مرتفعة بسبب القوائم المتشعبة المعقدة وعملية الدفع الطويلة التي كانت تفرض إنشاء حساب مسبق.",
-    cs_haj_sec2_desc: "تم إجراء دراسات لرحلة المستخدم لتصميم شريط تنقل يركز على البحث، وإمكانية الشراء كزائر، وأزرار تفاعلية بارزة بقياس 44 بكسل، مصممة ومختبرة وفق معايير WCAG 2.2 ذات الصلة.",
-    cs_haj_sec2_callout: "تم تقليل مراحل الدفع من 5 خطوات منفصلة إلى مسار مرن متسلسل مع إكمال تلقائي للعناوين وتفصيل فوري للتكاليف.",
-    cs_haj_sec4_desc: "تصميم تجربة تسوق سلسة تختصر بشكل كبير المسار من استكشاف المنتجات وحتى تأكيد الطلب.",
-    cs_haj_sec5_desc: "التطبيق متاح للاستخدام الفعلي عبر الإنترنت. سيتم تتبع تحليلات معدل التحويل ونسب التخلي عن السلة خلال التحديثات القادمة.",
+    cs_haj_status: "تنفيذ تفاعلي مباشر",
+    cs_haj_sec1_desc:
+      "ركز موجز التصميم على تبسيط تصنيفات الجوال المتشعبة ومسار دفع طويل كان يتطلب إنشاء حساب.",
+    cs_haj_sec2_desc:
+      "تم تخطيط رحلة التسوق المقصودة وتصميم تنقل يركز على البحث، ودفع للزائر، وأهداف لمس بارزة بقياس 44 بكسل مسترشدة بمعايير WCAG 2.2 ذات الصلة.",
+    cs_haj_sec2_callout:
+      "جُمعت خمس مراحل للواجهة في مفهوم دفع واحد قائم على الأكورديون مع إكمال العنوان وتفصيل واضح للتكلفة.",
+    cs_haj_sec4_desc:
+      "تم تقديم تنفيذ حي ومتجاوب بمسار أقصر وأوضح من استكشاف المنتج إلى تأكيد الطلب.",
+    cs_haj_sec5_desc:
+      "يوضح التنفيذ الحي الرحلة المقترحة. لم تُقَس نتائج التحويل أو التخلي عن السلة بعد، وتتطلب تحليلات إنتاج تحترم الخصوصية.",
 
     // Case Study 2: Cairo International Airport - Command Hub
     cs_cairo_title: "مطار القاهرة الدولي - مركز التحكم والعمليات",
     cs_cairo_badge: "العمليات والطيران • لوحة معلومات Tableau",
-    cs_cairo_sub: "لوحة قيادة وتحكم تشغيلية مؤسسية تجمع بيانات مدارج الطيران الحية، ودقة مواعيد الرحلات، واختناقات الخدمات الأرضية.",
-    cs_cairo_role: "محلل ومصور بيانات تجربة المستخدم",
+    cs_cairo_sub:
+      "لوحة قيادة وتحكم تشغيلية مؤسسية تجمع بيانات مدارج الطيران الحية، ودقة مواعيد الرحلات، واختناقات الخدمات الأرضية.",
+    cs_cairo_role: "مصمم تجربة المستخدم ومصور البيانات",
     cs_cairo_timeline: "4 أشهر",
     cs_cairo_platform: "Tableau Desktop و Cloud",
-    cs_cairo_status: "لوحة منشورة",
-    cs_cairo_sec1_desc: "كان مديرو المحطات يعانون من تشتت البيانات عبر أنظمة مناولة الأمتعة، وأوقات دوران الطائرات، وازدحام البوابات، مما أدى إلى بطء اتخاذ القرارات.",
-    cs_cairo_sec2_desc: "تم بناء مسار بيانات متكامل باستخدام SQL وTableau لتجميع القياسات في مربعات بصرية واضحة مع تصفية تفاعلية تعتمد على الحدود الحرجة.",
-    cs_cairo_sec2_callout: "تطبيق رادار إنذار مبكر ملون يرصد مخاطر تأخير دوران الطائرات قبل 45 دقيقة من موعد الإقلاع المحدد.",
-    cs_cairo_sec4_desc: "تحويل البيانات المعقدة إلى رؤية استيعابية فورية تمكن مديري النوبات من توزيع معدات الدعم الأرضي استباقياً.",
-    cs_cairo_sec5_desc: "تم نشر اللوحة واستخدامها في مراجعات العمليات. وتتضمن التحسينات المستقبلية نماذج تنبؤية لحركة تدفق الركاب.",
+    cs_cairo_status: "تنفيذ تفاعلي مباشر",
+    cs_cairo_sec1_desc:
+      "كان تحدي التصميم هو توحيد مؤشرات الأمتعة ودوران الطائرات وازدحام البوابات في واجهة واحدة سريعة المسح لمديري المحطات.",
+    cs_cairo_sec2_desc:
+      "نُظمت اللوحة في مربعات بصرية واضحة مع تصفية تفاعلية للحدود، مع تمثيل SQL وTableau ضمن مسار البيانات المقترح.",
+    cs_cairo_sec2_callout:
+      "صُمم نمط تحذير لوني قابل للضبط لإظهار مخاطر دوران الطائرات قبل أن تصبح حرجة.",
+    cs_cairo_sec4_desc:
+      "تم تقديم تنفيذ حي للوحة يوضح هرمية العمليات وتفاعلات دعم القرار المقترحة.",
+    cs_cairo_sec5_desc:
+      "التنفيذ الحي هو الدليل المتاح. لم يُقَس التبني التشغيلي أو أثر زمن الاستجابة بصورة مستقلة.",
 
     // Case Study 3: HR Management Tool
     cs_hr_title: "منظومة إدارة الموارد البشرية",
     cs_hr_badge: "تجربة مستخدم مؤسسية • تصميم منصة SaaS",
-    cs_hr_sub: "منصة شاملة لإدارة القوى العاملة تعمل على تبسيط طلبات الإجازات ومراجعات الأداء وجداول نوبات الأقسام.",
-    cs_hr_role: "كبير مصممي تجربة وواجهة المستخدم",
+    cs_hr_sub:
+      "منصة شاملة لإدارة القوى العاملة تعمل على تبسيط طلبات الإجازات ومراجعات الأداء وجداول نوبات الأقسام.",
+    cs_hr_role: "مصمم تجربة المستخدم",
     cs_hr_timeline: "4 أشهر",
     cs_hr_platform: "تطبيق ويب سحابي (SaaS)",
-    cs_hr_status: "منشور بالإنتاج",
-    cs_hr_sec1_desc: "كان الموظفون ومسؤولو الموارد البشرية يواجهون استمارات ورقية مبعثرة، وموافقات بريدية غير واضحة، وغياب الشفافية حول أرصدة الإجازات المتبقية.",
-    cs_hr_sec2_desc: "تصميم لوحات تحكم مرنة مع بوابات خدمة ذاتية للطلبات، وتوجيه تلقائي للموافقات حسب الصلاحيات، وجداول تقويمية تفاعلية سهلة الوصول.",
-    cs_hr_sec2_callout: "ابتكار واجهة اعتماد مجمعة بنقرة واحدة تتيح لرؤساء الأقسام اعتماد تعديلات الجداول المتكررة خلال ثوانٍ معدودة.",
-    cs_hr_sec4_desc: "صُمم مسار الخدمة الذاتية والموافقات لتقليل التأخير وتحسين وضوح حالة الطلب، ويتطلب قياس الأثر الفعلي بيانات إنتاج موثقة.",
-    cs_hr_sec5_desc: "النظام قيد الاستخدام الفعلي من فرق مؤسسية متعددة. وتشمل الإضافات القادمة توصيات مدعومة بالذكاء الاصطناعي لدمج الكفاءات الجديدة.",
+    cs_hr_status: "تنفيذ تفاعلي مباشر",
+    cs_hr_sec1_desc:
+      "تناول موجز التصميم النماذج المبعثرة، وسلاسل الموافقة عبر البريد، ومحدودية رؤية أرصدة الإجازات.",
+    cs_hr_sec2_desc:
+      "صُممت لوحات مرنة مع طلبات خدمة ذاتية، وتوجيه للموافقات حسب الأدوار، وجداول تقويمية سهلة الوصول.",
+    cs_hr_sec2_callout:
+      "أُنشئ مفهوم نافذة مراجعة مجمعة لاعتماد تعديلات الجداول المتكررة من عرض واحد مركز.",
+    cs_hr_sec4_desc:
+      "صُمم مسار الخدمة الذاتية والموافقات لتقليل التأخير وتحسين وضوح حالة الطلب، ويتطلب قياس الأثر الفعلي بيانات إنتاج موثقة.",
+    cs_hr_sec5_desc:
+      "يوضح التنفيذ الحي مسار العمل. يتطلب إثبات التبني في الإنتاج أو الوقت الموفر بيانات مؤسسية موثقة.",
 
     // Case Study 4: Azkar Application
     cs_azkar_title: "تطبيق الأذكار اليومية",
     cs_azkar_badge: "تجربة مستخدم الجوال • تطبيقات الإنتاجية الإسلامية",
-    cs_azkar_sub: "تطبيق إسلامي سهل الوصول ويعمل دون اتصال بالإنترنت، يقدم تتبعاً يومياً للأذكار ومسبحة إلكترونية تفاعلية سلسة.",
-    cs_azkar_role: "مصمم تجربة المستخدم ومطور الواجهات",
+    cs_azkar_sub:
+      "تطبيق إسلامي سهل الوصول ويعمل دون اتصال بالإنترنت، يقدم تتبعاً يومياً للأذكار ومسبحة إلكترونية تفاعلية سلسة.",
+    cs_azkar_role: "مصمم تجربة المستخدم",
     cs_azkar_timeline: "شهران",
     cs_azkar_platform: "تطبيق ويب تقدمي (PWA)",
-    cs_azkar_status: "متاح بالإنتاج",
-    cs_azkar_sec1_desc: "تعاني العديد من تطبيقات الأذكار التقليدية من ازدحام النصوص، والإعلانات المزعجة، وضعف العمل دون إنترنت، وضعف التباين في ظروف الإضاءة المختلفة.",
-    cs_azkar_sec2_desc: "تصميم تجربة قراءة صافية بخط عربي عالي الوضوح، ومسبحة تفاعلية بلمس مريح، وأنماط داكنة وعالية التباين دون أي اعتماد على الاتصال بالإنترنت.",
-    cs_azkar_sec2_callout: "ابتكار وضع تركيز خالٍ من أي مشتتات مع عداد تقدم محفوظ ومراجع ميسرة للأذكار.",
-    cs_azkar_sec4_desc: "تقديم تطبيق فوري التحميل وموفر لطاقة البطارية يوفر للمستخدمين تجربة يومية مطمئنة عبر مختلف الشاشات.",
-    cs_azkar_sec5_desc: "التطبيق متاح مجاناً للجميع. وينبغي أن يقيس التحقق المستقبلي إكمال جلسات الذكر والعودة اليومية مع احترام الخصوصية.",
+    cs_azkar_status: "تنفيذ تفاعلي مباشر",
+    cs_azkar_sec1_desc:
+      "تعاني العديد من تطبيقات الأذكار التقليدية من ازدحام النصوص، والإعلانات المزعجة، وضعف العمل دون إنترنت، وضعف التباين في ظروف الإضاءة المختلفة.",
+    cs_azkar_sec2_desc:
+      "تصميم تجربة قراءة صافية بخط عربي عالي الوضوح، ومسبحة تفاعلية بلمس مريح، وأنماط داكنة وعالية التباين دون أي اعتماد على الاتصال بالإنترنت.",
+    cs_azkar_sec2_callout:
+      "ابتكار وضع تركيز خالٍ من أي مشتتات مع عداد تقدم محفوظ ومراجع ميسرة للأذكار.",
+    cs_azkar_sec4_desc:
+      "تم تقديم تنفيذ خفيف ومتجاوب يركز على القراءة الهادئة، ووضوح التقدم، والاستخدام الموثوق عبر أحجام الشاشات.",
+    cs_azkar_sec5_desc:
+      "التطبيق متاح مجاناً للجميع. وينبغي أن يقيس التحقق المستقبلي إكمال جلسات الذكر والعودة اليومية مع احترام الخصوصية.",
 
     // Case Study 5: A Data-Driven LEGO Explorer
     cs_lego_title: "مستكشف مجموعات LEGO بالبيانات",
     cs_lego_badge: "تحليل وتصميم بصري • لوحة Power BI",
-    cs_lego_sub: "منصة استكشاف بصري تفاعلية تحلل أسعار مجموعات LEGO التاريخية وعدد القطع وتطور السمات عبر العقود.",
+    cs_lego_sub:
+      "منصة استكشاف بصري تفاعلية تحلل أسعار مجموعات LEGO التاريخية وعدد القطع وتطور السمات عبر العقود.",
     cs_lego_role: "مصور بيانات ومهندس لوحات معلومات",
     cs_lego_timeline: "شهران",
     cs_lego_platform: "Power BI وتحليلات Python",
-    cs_lego_status: "عرض تفاعلي",
-    cs_lego_sec1_desc: "واجه هواة ومجمعو LEGO صعوبة في تقييم القيمة الاستثمارية ونسبة السعر لكل قطعة ودورات حياة المجموعات من الكتالوجات الثابتة.",
-    cs_lego_sec2_desc: "استخراج ومعالجة بيانات الكتالوجات عبر عقود باستخدام Python وPower Query، مع بناء مخططات تفاعلية وهياكل توزيع بصرية دقيقة.",
-    cs_lego_sec2_callout: "تطوير مصفوفة كفاءة سعر القطعة التي تتيح للمستخدمين تحديد المجموعات ذات القيمة الاستثنائية بلمحة سريعة.",
-    cs_lego_sec4_desc: "تقديم بيئة استكشافية ممتعة تجمع بين الفضول التفاعلي ورواية القصص عبر علم البيانات.",
-    cs_lego_sec5_desc: "تم استعراض التقرير التفاعلي في مجتمعات تصميم البيانات. وستتضمن التحديثات المستقبلية تتبع أسعار سوق إعادة البيع الحي.",
+    cs_lego_status: "تنفيذ تفاعلي مباشر",
+    cs_lego_sec1_desc:
+      "واجه هواة ومجمعو LEGO صعوبة في تقييم القيمة الاستثمارية ونسبة السعر لكل قطعة ودورات حياة المجموعات من الكتالوجات الثابتة.",
+    cs_lego_sec2_desc:
+      "استخراج ومعالجة بيانات الكتالوجات عبر عقود باستخدام Python وPower Query، مع بناء مخططات تفاعلية وهياكل توزيع بصرية دقيقة.",
+    cs_lego_sec2_callout:
+      "تطوير مصفوفة كفاءة سعر القطعة التي تتيح للمستخدمين تحديد المجموعات ذات القيمة الاستثنائية بلمحة سريعة.",
+    cs_lego_sec4_desc:
+      "تقديم بيئة استكشافية ممتعة تجمع بين الفضول التفاعلي ورواية القصص عبر علم البيانات.",
+    cs_lego_sec5_desc:
+      "تم استعراض التقرير التفاعلي في مجتمعات تصميم البيانات. وستتضمن التحديثات المستقبلية تتبع أسعار سوق إعادة البيع الحي.",
   },
   en: {
     about_text:
@@ -361,17 +416,23 @@ const translations = {
     exp_tag: "8+ years experience",
     footer_cta: "Let’s work together",
     footer_email: "Email Ahmed",
-    footer_text: "Looking for UX leadership, accessible products, or decision-ready data experiences?",
+    footer_text:
+      "Looking for UX leadership, accessible products, or decision-ready data experiences?",
     external_site_hint: "opens external site",
     highlights_label: "Career highlights",
-    job1_b1: "Leading UX/UI design for complex enterprise and B2B SaaS platforms, delivering user-centered solutions.",
-    job1_b2: "Building scalable design systems using Figma, Adobe Creative Suite, and modern methodologies.",
-    job1_b3: "Leveraging AI design tools to accelerate prototyping workflows and synthesize UX research.",
+    job1_b1:
+      "Leading UX/UI design for complex enterprise and B2B SaaS platforms, delivering user-centered solutions.",
+    job1_b2:
+      "Building scalable design systems using Figma, Adobe Creative Suite, and modern methodologies.",
+    job1_b3:
+      "Leveraging AI design tools to accelerate prototyping workflows and synthesize UX research.",
     job1_company: "Advansys IS",
     job1_date: "Jan 2023 - Present · 3 yrs 6 mos",
     job1_title: "UX Designer",
-    job2_b1: "Redesigned corporate learning platforms and interfaces, increasing user engagement and course completion rates by 30%.",
-    job2_b2: "Translated complex technical requirements into accessible, intuitive B2B e-learning experiences.",
+    job2_b1:
+      "Redesigned corporate learning platforms and interfaces, increasing user engagement and course completion rates by 30%.",
+    job2_b2:
+      "Translated complex technical requirements into accessible, intuitive B2B e-learning experiences.",
     job2_company: "Schneider Electric",
     job2_date: "Jul 2018 - Jan 2023 · 4 yrs 7 mos",
     job2_location: "Cairo Governorate, Egypt",
@@ -438,10 +499,12 @@ const translations = {
     skills_ux_header: "Core UX & Design",
     skip_link: "Skip to resume content",
     title: "UX Designer & Data Visualizer",
-    hero_value_prop: "Senior UX Designer & AI-Assisted Prototyper with 8+ years experience turning complex enterprise workflows, eLearning systems, and data into accessible, decision-ready products.",
+    hero_value_prop:
+      "Senior UX Designer & AI-Assisted Prototyper with 8+ years experience turning complex enterprise workflows, eLearning systems, and data into accessible, decision-ready products.",
     hero_cta_work: "View Selected Work",
     hero_cta_print: "Print / Save Résumé",
-    hero_value: "I turn complex products and data into clear, accessible experiences, informed by a background in eLearning and video authoring.",
+    hero_value:
+      "I turn complex products and data into clear, accessible experiences, informed by a background in eLearning and video authoring.",
     view_selected_work: "View Selected Work",
     proj_haj_chip_type: "Mobile E-Commerce",
     proj_haj_chip_role: "Lead UX Designer",
@@ -462,7 +525,8 @@ const translations = {
     project_owner_data: "Ahmed Mahdy · UX & Data Visualization",
     project_type_independent: "Independent Project",
     project_status_live: "Live Interactive Build",
-    project_disclosure: "All UX projects were designed by Ahmed Mahdy in Figma. Antigravity, Codex, and Claude assisted in translating the designs into live applications under his direction and review.",
+    project_disclosure:
+      "All UX projects were designed by Ahmed Mahdy in Figma. Antigravity, Codex, and Claude assisted in translating the designs into live applications under his direction and review.",
     toast_copied: "Copied",
     toast_copy_cert: "Certification link copied to clipboard",
     toast_copy_dribbble: "Dribbble link copied to clipboard",
@@ -523,88 +587,127 @@ const translations = {
     cs_sec5_title: "05 Evidence & Next Validation",
     cs_sec6_title: "06 Ownership & Learning",
     cs_provenance_ownership: "Ownership",
-    cs_provenance_ownership_desc: "Ahmed Mahdy owned the UX design, information architecture, visual direction, content, and final project decisions.",
+    cs_provenance_ownership_desc:
+      "Ahmed Mahdy owned the UX design, information architecture, visual direction, content, and final project decisions.",
     cs_provenance_background: "Professional perspective",
-    cs_provenance_background_desc: "The work draws on his UX practice and background in eLearning and video authoring to simplify information, sequence interactions, and build a clear narrative.",
+    cs_provenance_background_desc:
+      "The work draws on his UX practice and background in eLearning and video authoring to simplify information, sequence interactions, and build a clear narrative.",
     cs_provenance_ai: "AI-assisted implementation",
-    cs_provenance_ai_desc: "Ahmed translated the Figma designs into a live project with assistance from Antigravity, Codex, and Claude agents, then reviewed, refined, and tested the implementation.",
+    cs_provenance_ai_desc:
+      "Ahmed translated the Figma designs into a live project with assistance from Antigravity, Codex, and Claude agents, then reviewed, refined, and tested the implementation.",
     cs_provenance_evidence: "Evidence boundary",
-    cs_provenance_evidence_desc: "Evidence shown is the design, live implementation, and documented case-study decisions. No quantitative business outcome is attributed without a documented source and measurement.",
-    cs_haj_learning: "Special learning: shaping a concise responsive commerce journey and directing AI agents to implement navigation and checkout states faithfully.",
-    cs_cairo_learning: "Special learning: preserving information hierarchy and visual clarity while translating a dense operational dashboard from Figma into a live experience.",
-    cs_hr_learning: "Special learning: modeling role-based workflows and approval states while reviewing AI-generated implementation for accessibility and clarity.",
-    cs_azkar_learning: "Special learning: protecting Arabic-first, RTL, and reading-quality requirements while using agents on a content-sensitive experience.",
-    cs_lego_learning: "Special learning: turning data exploration into interactive visual storytelling and choosing the best agent or tool for each task instead of relying on one tool.",
+    cs_provenance_evidence_desc:
+      "Evidence shown is the design, live implementation, and documented case-study decisions. No quantitative business outcome is attributed without a documented source and measurement.",
+    cs_haj_learning:
+      "Special learning: shaping a concise responsive commerce journey and directing AI agents to implement navigation and checkout states faithfully.",
+    cs_cairo_learning:
+      "Special learning: preserving information hierarchy and visual clarity while translating a dense operational dashboard from Figma into a live experience.",
+    cs_hr_learning:
+      "Special learning: modeling role-based workflows and approval states while reviewing AI-generated implementation for accessibility and clarity.",
+    cs_azkar_learning:
+      "Special learning: protecting Arabic-first, RTL, and reading-quality requirements while using agents on a content-sensitive experience.",
+    cs_lego_learning:
+      "Special learning: turning data exploration into interactive visual storytelling and choosing the best agent or tool for each task instead of relying on one tool.",
 
     // Case Study 1: Haj Arafa App
     cs_haj_title: "Haj Arafa App",
     cs_haj_badge: "Mobile Commerce • E-Commerce UX",
-    cs_haj_sub: "Mobile-first e-commerce interface showcasing search-first navigation and express 2-step checkout.",
-    cs_haj_role: "Lead UX Designer",
+    cs_haj_sub:
+      "Mobile-first e-commerce interface showcasing search-first navigation and express 2-step checkout.",
+    cs_haj_role: "UX Designer",
     cs_haj_timeline: "3 Months",
     cs_haj_platform: "Mobile-First Web App",
-    cs_haj_status: "Production Live",
-    cs_haj_sec1_desc: "Mobile shoppers were experiencing high bounce rates due to deeply nested category menus and a lengthy, multi-step checkout process with forced account creation.",
-    cs_haj_sec2_desc: "Conducted user journeys to design search-first mobile navigation, guest checkout, and prominent 44px touch targets, designed and tested against relevant WCAG 2.2 criteria.",
-    cs_haj_sec2_callout: "Reduced checkout friction from 5 disjointed steps down to a single streamlined accordion flow with instant address autofill and clear cost breakdowns.",
-    cs_haj_sec4_desc: "Created a frictionless shopping experience that significantly shortens the path from product discovery to order confirmation.",
-    cs_haj_sec5_desc: "Live store application is available online. Conversion rate analytics and cart abandonment data will be monitored over upcoming quarterly releases.",
+    cs_haj_status: "Live Interactive Build",
+    cs_haj_sec1_desc:
+      "The design brief focused on simplifying deeply nested mobile categories and a lengthy checkout flow that required account creation.",
+    cs_haj_sec2_desc:
+      "Mapped the intended shopping journey and designed search-first navigation, guest checkout, and prominent 44px touch targets informed by relevant WCAG 2.2 criteria.",
+    cs_haj_sec2_callout:
+      "Consolidated five interface stages into one accordion-based checkout concept with address autofill and a clear cost breakdown.",
+    cs_haj_sec4_desc:
+      "Delivered a live responsive implementation with a shorter, clearer path from product discovery to order confirmation.",
+    cs_haj_sec5_desc:
+      "The live implementation demonstrates the proposed journey. Conversion and abandonment outcomes have not yet been measured and require privacy-conscious production analytics.",
 
     // Case Study 2: Cairo International Airport - Command Hub
     cs_cairo_title: "Cairo International Airport - Command Hub",
     cs_cairo_badge: "Operations & Aviation • Tableau Dashboard",
-    cs_cairo_sub: "Enterprise operational command dashboard consolidating live runway telemetry, flight punctuality, and ground service bottlenecks.",
-    cs_cairo_role: "Data Analytics & UX Visualizer",
+    cs_cairo_sub:
+      "Enterprise operational command dashboard consolidating live runway telemetry, flight punctuality, and ground service bottlenecks.",
+    cs_cairo_role: "UX & Data Visualization Designer",
     cs_cairo_timeline: "4 Months",
     cs_cairo_platform: "Tableau Desktop & Cloud",
-    cs_cairo_status: "Deployed Dashboard",
-    cs_cairo_sec1_desc: "Airport station managers were overwhelmed by disparate data feeds across baggage handling, flight turnaround times, and gate congestion, causing delayed response times.",
-    cs_cairo_sec2_desc: "Structured an end-to-end data pipeline using SQL and Tableau to aggregate telemetry into clear visual quadrants with interactive threshold filtering.",
-    cs_cairo_sec2_callout: "Implemented an automated color-coded early warning radar that flags turnaround risks 45 minutes prior to scheduled departure.",
-    cs_cairo_sec4_desc: "Transformed complex telemetry into immediate situational awareness, empowering shift managers to proactively allocate ground support equipment.",
-    cs_cairo_sec5_desc: "Dashboard deployed and utilized in operations reviews. Ongoing iterations include predictive passenger throughput models.",
+    cs_cairo_status: "Live Interactive Build",
+    cs_cairo_sec1_desc:
+      "The design challenge was to unify baggage, turnaround, and gate-congestion signals into one interface that could be scanned quickly by station managers.",
+    cs_cairo_sec2_desc:
+      "Structured the dashboard around clear visual quadrants and interactive threshold filtering, with SQL and Tableau represented in the proposed data workflow.",
+    cs_cairo_sec2_callout:
+      "Designed a configurable color-coded warning pattern to surface turnaround risks before they become critical.",
+    cs_cairo_sec4_desc:
+      "Delivered a live dashboard implementation demonstrating the proposed operational hierarchy and decision-support interactions.",
+    cs_cairo_sec5_desc:
+      "The live implementation is the available evidence. Operational adoption and response-time impact have not been independently measured.",
 
     // Case Study 3: HR Management Tool
     cs_hr_title: "HR Management Tool",
     cs_hr_badge: "Enterprise UX • SaaS Product Design",
-    cs_hr_sub: "All-in-one workforce operations platform streamlining leave approvals, performance reviews, and department shift scheduling.",
-    cs_hr_role: "Lead UX/UI Designer",
+    cs_hr_sub:
+      "All-in-one workforce operations platform streamlining leave approvals, performance reviews, and department shift scheduling.",
+    cs_hr_role: "UX Designer",
     cs_hr_timeline: "4 Months",
     cs_hr_platform: "Web Application (SaaS)",
-    cs_hr_status: "Production Deployed",
-    cs_hr_sec1_desc: "Employees and HR personnel faced fragmented paper forms, confusing email approval chains, and lack of visibility into available leave balances.",
-    cs_hr_sec2_desc: "Engineered modular dashboards with self-service request portals, instant role-based approval routing, and accessible interactive calendar timelines.",
-    cs_hr_sec2_callout: "Engineered a 1-click batch review modal that allows department heads to approve recurring team schedule adjustments in seconds.",
-    cs_hr_sec4_desc: "Designed the self-service and approval flow to reduce delays and improve request-status clarity; verified production data is still required to quantify the operational impact.",
-    cs_hr_sec5_desc: "System actively used by multiple corporate teams. Planned additions include AI-assisted talent onboarding recommendations.",
+    cs_hr_status: "Live Interactive Build",
+    cs_hr_sec1_desc:
+      "The design brief addressed fragmented forms, email approval chains, and limited visibility into leave balances.",
+    cs_hr_sec2_desc:
+      "Designed modular dashboards with self-service requests, role-based approval routing, and accessible calendar timelines.",
+    cs_hr_sec2_callout:
+      "Created a batch-review modal concept for approving recurring team schedule adjustments from one focused view.",
+    cs_hr_sec4_desc:
+      "Designed the self-service and approval flow to reduce delays and improve request-status clarity; verified production data is still required to quantify the operational impact.",
+    cs_hr_sec5_desc:
+      "The live implementation demonstrates the workflow. Production adoption and time-saved outcomes require documented organizational data.",
 
     // Case Study 4: Azkar Application
     cs_azkar_title: "Azkar Application",
     cs_azkar_badge: "Mobile UX • Islamic Productivity",
-    cs_azkar_sub: "Accessible, offline-capable digital remembrance suite featuring dynamic daily Dhikr tracking and interactive Tasbeeh counter.",
-    cs_azkar_role: "UX Designer & Frontend Developer",
+    cs_azkar_sub:
+      "Accessible, offline-capable digital remembrance suite featuring dynamic daily Dhikr tracking and interactive Tasbeeh counter.",
+    cs_azkar_role: "UX Designer",
     cs_azkar_timeline: "2 Months",
     cs_azkar_platform: "Progressive Web App (PWA)",
-    cs_azkar_status: "Live Production",
-    cs_azkar_sec1_desc: "Traditional remembrance apps often suffer from cluttered typography, intrusive ads, lack of offline reliability, and poor contrast under varying lighting conditions.",
-    cs_azkar_sec2_desc: "Designed an uncluttered reading experience with large Arabic typography, tactile counter feedback, dark and high contrast modes, and zero network dependency.",
-    cs_azkar_sec2_callout: "Crafted a zero-distraction focus mode with persistent progress counters and instant Arabic/English recitation references.",
-    cs_azkar_sec4_desc: "Delivered an instant-loading, battery-friendly application that provides spiritual peace of mind across all device formats.",
-    cs_azkar_sec5_desc: "Freely available live application. Future validation should measure remembrance-session completion and daily return behavior with privacy-respecting analytics.",
+    cs_azkar_status: "Live Interactive Build",
+    cs_azkar_sec1_desc:
+      "Traditional remembrance apps often suffer from cluttered typography, intrusive ads, lack of offline reliability, and poor contrast under varying lighting conditions.",
+    cs_azkar_sec2_desc:
+      "Designed an uncluttered reading experience with large Arabic typography, tactile counter feedback, dark and high contrast modes, and zero network dependency.",
+    cs_azkar_sec2_callout:
+      "Crafted a zero-distraction focus mode with persistent progress counters and instant Arabic/English recitation references.",
+    cs_azkar_sec4_desc:
+      "Delivered a lightweight, responsive implementation focused on calm reading, clear progress, and reliable use across screen sizes.",
+    cs_azkar_sec5_desc:
+      "Freely available live application. Future validation should measure remembrance-session completion and daily return behavior with privacy-respecting analytics.",
 
     // Case Study 5: A Data-Driven LEGO Explorer
     cs_lego_title: "A Data-Driven LEGO Explorer",
     cs_lego_badge: "Analytics & Visual Design • Power BI",
-    cs_lego_sub: "Interactive visual exploration platform analyzing historical LEGO set pricing, piece counts, and theme progressions across decades.",
-    cs_lego_role: "Data Visualizer & Dashboard Architect",
+    cs_lego_sub:
+      "Interactive visual exploration platform analyzing historical LEGO set pricing, piece counts, and theme progressions across decades.",
+    cs_lego_role: "Data Visualization Designer",
     cs_lego_timeline: "2 Months",
     cs_lego_platform: "Power BI & Python Analytics",
-    cs_lego_status: "Interactive Showcase",
-    cs_lego_sec1_desc: "LEGO enthusiasts and collectors struggled to evaluate investment value, piece-to-price ratios, and historical theme lifecycles from static catalogs.",
-    cs_lego_sec2_desc: "Extracted and transformed multi-decade catalog datasets using Python and Power Query, building dynamic scatter plots and theme distribution hierarchies.",
-    cs_lego_sec2_callout: "Developed an intuitive price-per-piece efficiency matrix allowing users to spot exceptional value sets at a glance.",
-    cs_lego_sec4_desc: "Created an engaging, analytical playground that bridges playful curiosity with data science storytelling.",
-    cs_lego_sec5_desc: "Interactive report showcased to data design communities. Future updates will incorporate real-time secondary market resale feeds.",
+    cs_lego_status: "Live Interactive Build",
+    cs_lego_sec1_desc:
+      "LEGO enthusiasts and collectors struggled to evaluate investment value, piece-to-price ratios, and historical theme lifecycles from static catalogs.",
+    cs_lego_sec2_desc:
+      "Extracted and transformed multi-decade catalog datasets using Python and Power Query, building dynamic scatter plots and theme distribution hierarchies.",
+    cs_lego_sec2_callout:
+      "Developed an intuitive price-per-piece efficiency matrix allowing users to spot exceptional value sets at a glance.",
+    cs_lego_sec4_desc:
+      "Created an engaging, analytical playground that bridges playful curiosity with data science storytelling.",
+    cs_lego_sec5_desc:
+      "Interactive report showcased to data design communities. Future updates will incorporate real-time secondary market resale feeds.",
   },
 };
 
@@ -663,13 +766,23 @@ function updateThemeColor() {
  */
 function updateMetadata(lang) {
   const projectKey = document.body.dataset.projectKey;
-  const projectTitle = projectKey ? getTranslation(lang, `${projectKey}_title`) : "";
+  const projectTitle = projectKey
+    ? getTranslation(lang, `${projectKey}_title`)
+    : "";
   const title = projectTitle
     ? `${projectTitle} | ${lang === "ar" ? "ملف أعمال أحمد مهدي" : "Ahmed Mahdy Portfolio"}`
     : getTranslation(lang, "meta_title", document.title);
   const description = projectKey
-    ? getTranslation(lang, `${projectKey}_sub`, metaNodes.description?.getAttribute("content") || "")
-    : getTranslation(lang, "meta_description", metaNodes.description?.getAttribute("content") || "");
+    ? getTranslation(
+        lang,
+        `${projectKey}_sub`,
+        metaNodes.description?.getAttribute("content") || "",
+      )
+    : getTranslation(
+        lang,
+        "meta_description",
+        metaNodes.description?.getAttribute("content") || "",
+      );
 
   document.title = title;
   metaNodes.description?.setAttribute("content", description);
@@ -684,10 +797,15 @@ function updateMetadata(lang) {
         const schema = JSON.parse(metaNodes.personSchema.textContent);
         const entries = Array.isArray(schema) ? schema : [schema];
         const person = entries.find((entry) => entry["@type"] === "Person");
-        const creativeWork = entries.find((entry) => entry["@type"] === "CreativeWork");
-        const breadcrumbs = entries.find((entry) => entry["@type"] === "BreadcrumbList");
+        const creativeWork = entries.find(
+          (entry) => entry["@type"] === "CreativeWork",
+        );
+        const breadcrumbs = entries.find(
+          (entry) => entry["@type"] === "BreadcrumbList",
+        );
 
-        if (person) person.jobTitle = getTranslation(lang, "title", person.jobTitle);
+        if (person)
+          person.jobTitle = getTranslation(lang, "title", person.jobTitle);
         if (creativeWork) {
           creativeWork.name = projectTitle;
           creativeWork.headline = projectTitle;
@@ -700,17 +818,25 @@ function updateMetadata(lang) {
         // Keep the static project-specific schema when it cannot be parsed.
       }
     } else {
-      metaNodes.personSchema.textContent = JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "Person",
-        name: "Ahmed Mahdy",
-        jobTitle: getTranslation(lang, "title", "UX Designer & Data Visualizer"),
-        email: siteMeta.email,
-        url: siteMeta.url,
-        image: siteMeta.image,
-        sameAs: siteMeta.sameAs,
-        knowsAbout: siteMeta.knowsAbout,
-      }, null, 2);
+      metaNodes.personSchema.textContent = JSON.stringify(
+        {
+          "@context": "https://schema.org",
+          "@type": "Person",
+          name: "Ahmed Mahdy",
+          jobTitle: getTranslation(
+            lang,
+            "title",
+            "UX Designer & Data Visualizer",
+          ),
+          email: siteMeta.email,
+          url: siteMeta.url,
+          image: siteMeta.image,
+          sameAs: siteMeta.sameAs,
+          knowsAbout: siteMeta.knowsAbout,
+        },
+        null,
+        2,
+      );
     }
   }
 }
@@ -725,7 +851,9 @@ function updateTranslatedText(lang) {
     const value = getTranslation(lang, key);
 
     if (!value) return;
-    const textNode = [...node.childNodes].find((child) => child.nodeType === Node.TEXT_NODE);
+    const textNode = [...node.childNodes].find(
+      (child) => child.nodeType === Node.TEXT_NODE,
+    );
     if (textNode && node.children.length) textNode.textContent = `${value} `;
     else node.textContent = value;
   });
@@ -767,7 +895,9 @@ function ensureExternalLinkNotes(lang) {
   const noteText = getTranslation(
     lang,
     "opens_new_tab",
-    lang === "ar" ? " \u064a\u0641\u062a\u062d \u0641\u064a \u062a\u0628\u0648\u064a\u0628 \u062c\u062f\u064a\u062f" : " opens in new tab",
+    lang === "ar"
+      ? " \u064a\u0641\u062a\u062d \u0641\u064a \u062a\u0628\u0648\u064a\u0628 \u062c\u062f\u064a\u062f"
+      : " opens in new tab",
   );
 
   document.querySelectorAll('a[target="_blank"]').forEach((link) => {
@@ -783,7 +913,10 @@ function ensureExternalLinkNotes(lang) {
     }
 
     if (!link.querySelector(".external-icon")) {
-      const icon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      const icon = document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        "svg",
+      );
       const use = document.createElementNS("http://www.w3.org/2000/svg", "use");
 
       icon.classList.add("external-icon");
@@ -808,7 +941,9 @@ function updateExternalLinks(lang) {
   const newTabText = getTranslation(
     lang,
     "opens_new_tab",
-    lang === "ar" ? "\u064a\u0641\u062a\u062d \u0641\u064a \u062a\u0628\u0648\u064a\u0628 \u062c\u062f\u064a\u062f" : "opens in new tab",
+    lang === "ar"
+      ? "\u064a\u0641\u062a\u062d \u0641\u064a \u062a\u0628\u0648\u064a\u0628 \u062c\u062f\u064a\u062f"
+      : "opens in new tab",
   ).trim();
 
   ensureExternalLinkNotes(lang);
@@ -819,7 +954,9 @@ function updateExternalLinks(lang) {
       const article = link.closest("article");
       const projectTitle = article?.querySelector("h4")?.textContent?.trim();
       const fallbackKey = link.dataset.tooltipKey;
-      const baseLabel = fallbackKey ? getTranslation(lang, fallbackKey, "Visit live site") : "Visit live site";
+      const baseLabel = fallbackKey
+        ? getTranslation(lang, fallbackKey, "Visit live site")
+        : "Visit live site";
       label = projectTitle ? `${baseLabel}: ${projectTitle}` : baseLabel;
     }
     const context = [hint, newTabText].filter(Boolean).join(", ");
@@ -828,7 +965,14 @@ function updateExternalLinks(lang) {
     link.setAttribute("title", context || label);
 
     if (link.dataset.tooltipKey) {
-      link.setAttribute("data-tooltip", getTranslation(lang, link.dataset.tooltipKey, link.getAttribute("data-tooltip") || ""));
+      link.setAttribute(
+        "data-tooltip",
+        getTranslation(
+          lang,
+          link.dataset.tooltipKey,
+          link.getAttribute("data-tooltip") || "",
+        ),
+      );
     }
   });
 }
@@ -841,9 +985,14 @@ function updateExternalLinks(lang) {
 function updateCopyButtons(lang) {
   document.querySelectorAll("[data-copy]").forEach((button) => {
     const key = button.dataset.tooltipKey;
-    const genericLabel = getTranslation(lang, key, button.getAttribute("aria-label") || "");
+    const genericLabel = getTranslation(
+      lang,
+      key,
+      button.getAttribute("aria-label") || "",
+    );
     const link = button.closest("li, article")?.querySelector("a");
-    const includesSubject = key === "tooltip_copy_cert" || key === "tooltip_copy_project";
+    const includesSubject =
+      key === "tooltip_copy_cert" || key === "tooltip_copy_project";
     const subject = includesSubject && link ? getLinkText(link) : "";
     const label = subject ? `${genericLabel}: ${subject}` : genericLabel;
 
@@ -884,7 +1033,10 @@ function updateThemeButton(lang) {
     ? getTranslation(lang, "tooltip_theme_light")
     : getTranslation(lang, "tooltip_theme_dark");
 
-  controls.themeToggle?.setAttribute("aria-label", getTranslation(lang, "aria_dark_mode"));
+  controls.themeToggle?.setAttribute(
+    "aria-label",
+    getTranslation(lang, "aria_dark_mode"),
+  );
   controls.themeToggle?.setAttribute("aria-pressed", String(isDark));
   controls.themeToggle?.setAttribute("data-tooltip", tooltip);
   setUseIcon(controls.themeToggle, isDark ? "#icon-sun" : "#icon-moon");
@@ -903,7 +1055,10 @@ function updateContrastButton(lang) {
     getTranslation(lang, "aria_high_contrast_mode"),
   );
   controls.contrastToggle?.setAttribute("aria-pressed", String(isHigh));
-  controls.contrastToggle?.setAttribute("data-tooltip", getTranslation(lang, "tooltip_contrast"));
+  controls.contrastToggle?.setAttribute(
+    "data-tooltip",
+    getTranslation(lang, "tooltip_contrast"),
+  );
   controls.contrastToggle?.classList.toggle("active", isHigh);
 }
 
@@ -921,7 +1076,11 @@ function updateProjectToggles(lang) {
     const isCollapsed = card.classList.contains("is-collapsed");
     const expanded = !isCollapsed;
     const actionKey = expanded ? "collapse_project" : "expand_project";
-    const actionText = getTranslation(lang, actionKey, expanded ? "Collapse" : "Expand");
+    const actionText = getTranslation(
+      lang,
+      actionKey,
+      expanded ? "Collapse" : "Expand",
+    );
     const titleText = header.querySelector("h4")?.textContent.trim() || "";
     toggle.setAttribute("aria-label", `${actionText}: ${titleText}`);
   });
@@ -1003,9 +1162,8 @@ async function copyText(value) {
   const textarea = document.createElement("textarea");
   const selection = window.getSelection();
   const activeElement = document.activeElement;
-  const originalRange = selection && selection.rangeCount > 0
-    ? selection.getRangeAt(0)
-    : null;
+  const originalRange =
+    selection && selection.rangeCount > 0 ? selection.getRangeAt(0) : null;
 
   textarea.value = value;
   textarea.setAttribute("readonly", "");
@@ -1091,27 +1249,31 @@ function createCopyButton(value, label, key) {
  * Safe to call multiple times — skips cards that already have a copy button.
  */
 function enhanceLinkedCards() {
-  document.querySelectorAll(".compact-list a, .featured h4 a").forEach((link) => {
-    const container = link.closest("li, article");
+  document
+    .querySelectorAll(".compact-list a, .featured h4 a")
+    .forEach((link) => {
+      const container = link.closest("li, article");
 
-    if (!container || container.querySelector(".copy-button")) {
-      return;
-    }
-
-    const isCertification = link.closest(".compact-list") !== null;
-    const tooltipKey = isCertification ? "tooltip_copy_cert" : "tooltip_copy_project";
-    const label = getTranslation(getCurrentLanguage(), tooltipKey);
-    const copyButton = createCopyButton(link.href, label, tooltipKey);
-
-    container.appendChild(copyButton);
-    container.addEventListener("click", (event) => {
-      if (event.target.closest("a, button")) {
+      if (!container || container.querySelector(".copy-button")) {
         return;
       }
 
-      link.click();
+      const isCertification = link.closest(".compact-list") !== null;
+      const tooltipKey = isCertification
+        ? "tooltip_copy_cert"
+        : "tooltip_copy_project";
+      const label = getTranslation(getCurrentLanguage(), tooltipKey);
+      const copyButton = createCopyButton(link.href, label, tooltipKey);
+
+      container.appendChild(copyButton);
+      container.addEventListener("click", (event) => {
+        if (event.target.closest("a, button")) {
+          return;
+        }
+
+        link.click();
+      });
     });
-  });
 }
 
 /**
@@ -1167,15 +1329,19 @@ function updatePrintStyles() {
   const lang = getCurrentLanguage();
   const isRtl = root.getAttribute("dir") === "rtl";
   const nameText =
-    document.querySelector('h1[data-translate="name"]')?.textContent?.trim() || "Ahmed Mahdy";
+    document.querySelector('h1[data-translate="name"]')?.textContent?.trim() ||
+    "Ahmed Mahdy";
   const titleText =
     document.querySelector('p[data-translate="title"]')?.textContent?.trim() ||
     "UX Designer & Data Visualizer";
-  const dateText = new Date().toLocaleDateString(lang === "ar" ? "ar-EG" : "en-US", {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-  });
+  const dateText = new Date().toLocaleDateString(
+    lang === "ar" ? "ar-EG" : "en-US",
+    {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    },
+  );
   const pageText = lang === "ar" ? "صفحة" : "Page";
   const ofText = lang === "ar" ? "من" : "of";
   const leftContent = isRtl ? `"${nameText} | ${titleText}"` : `"${dateText}"`;
@@ -1228,10 +1394,18 @@ function initProjectFilters() {
   if (!filterBar) return;
 
   const pills = Array.from(filterBar.querySelectorAll(".project-filter-pill"));
-  const articles = Array.from(document.querySelectorAll(".projects-panel article[data-category]"));
-  const groups = Array.from(document.querySelectorAll(".projects-panel .project-group[data-group-category]"));
+  const articles = Array.from(
+    document.querySelectorAll(".projects-panel article[data-category]"),
+  );
+  const groups = Array.from(
+    document.querySelectorAll(
+      ".projects-panel .project-group[data-group-category]",
+    ),
+  );
   const announcement = document.getElementById("filter-results-announcement");
-  const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const prefersReduced = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
 
   function applyFilter(filterValue) {
     pills.forEach((pill) => {
@@ -1243,7 +1417,8 @@ function initProjectFilters() {
     let visibleCount = 0;
 
     articles.forEach((article) => {
-      const matches = filterValue === "all" || article.dataset.category === filterValue;
+      const matches =
+        filterValue === "all" || article.dataset.category === filterValue;
       if (matches) {
         visibleCount++;
         article.removeAttribute("hidden");
@@ -1306,14 +1481,16 @@ function initProjectFilters() {
     const prev = isRTL ? "ArrowRight" : "ArrowLeft";
     const next = isRTL ? "ArrowLeft" : "ArrowRight";
 
-    if (e.key !== prev && e.key !== next && e.key !== "Home" && e.key !== "End") return;
+    if (e.key !== prev && e.key !== next && e.key !== "Home" && e.key !== "End")
+      return;
 
     e.preventDefault();
     const idx = pills.indexOf(document.activeElement);
     let target;
 
     if (e.key === next) target = pills[(idx + 1) % pills.length];
-    else if (e.key === prev) target = pills[(idx - 1 + pills.length) % pills.length];
+    else if (e.key === prev)
+      target = pills[(idx - 1 + pills.length) % pills.length];
     else if (e.key === "Home") target = pills[0];
     else if (e.key === "End") target = pills[pills.length - 1];
 
@@ -1346,11 +1523,15 @@ function initCollapsibleProjectCards() {
       toggle.type = "button";
       toggle.setAttribute("aria-expanded", "true");
       toggle.setAttribute("aria-controls", bodyId);
-      
+
       const getToggleLabel = (expanded) => {
         const lang = getCurrentLanguage();
         const actionKey = expanded ? "collapse_project" : "expand_project";
-        const actionText = getTranslation(lang, actionKey, expanded ? "Collapse" : "Expand");
+        const actionText = getTranslation(
+          lang,
+          actionKey,
+          expanded ? "Collapse" : "Expand",
+        );
         const titleText = header.querySelector("h4")?.textContent.trim() || "";
         return `${actionText}: ${titleText}`;
       };
@@ -1400,7 +1581,8 @@ function initReadingProgressBar() {
 
   let ticking = false;
   const updateProgress = () => {
-    const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const totalHeight =
+      document.documentElement.scrollHeight - window.innerHeight;
     if (totalHeight > 0) {
       const progress = Math.min(Math.max(window.scrollY / totalHeight, 0), 1);
       bar.style.transform = `scaleX(${progress})`;
@@ -1408,12 +1590,16 @@ function initReadingProgressBar() {
     ticking = false;
   };
 
-  window.addEventListener("scroll", () => {
-    if (!ticking) {
-      requestAnimationFrame(updateProgress);
-      ticking = true;
-    }
-  }, { passive: true });
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (!ticking) {
+        requestAnimationFrame(updateProgress);
+        ticking = true;
+      }
+    },
+    { passive: true },
+  );
 
   updateProgress();
 }
@@ -1434,18 +1620,30 @@ function initialize() {
 
 function initSectionNavigation() {
   const links = [...document.querySelectorAll('.section-nav a[href^="#"]')];
-  const targets = links.map((link) => document.querySelector(link.getAttribute("href"))).filter(Boolean);
-  if (!links.length || !targets.length || !("IntersectionObserver" in window)) return;
-  const setCurrent = (id) => links.forEach((link) => {
-    if (link.getAttribute("href") === `#${id}`) link.setAttribute("aria-current", "location");
-    else link.removeAttribute("aria-current");
-  });
-  const observer = new IntersectionObserver((entries) => {
-    const visible = entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-    if (visible) setCurrent(visible.target.id);
-  }, { rootMargin: "-20% 0px -65%", threshold: [0, 0.1, 0.5] });
+  const targets = links
+    .map((link) => document.querySelector(link.getAttribute("href")))
+    .filter(Boolean);
+  if (!links.length || !targets.length || !("IntersectionObserver" in window))
+    return;
+  const setCurrent = (id) =>
+    links.forEach((link) => {
+      if (link.getAttribute("href") === `#${id}`)
+        link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+    });
+  const observer = new IntersectionObserver(
+    (entries) => {
+      const visible = entries
+        .filter((entry) => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (visible) setCurrent(visible.target.id);
+    },
+    { rootMargin: "-20% 0px -65%", threshold: [0, 0.1, 0.5] },
+  );
   targets.forEach((target) => observer.observe(target));
-  links.forEach((link) => link.addEventListener("click", () => setCurrent(link.hash.slice(1))));
+  links.forEach((link) =>
+    link.addEventListener("click", () => setCurrent(link.hash.slice(1))),
+  );
 }
 
 function initResponsiveContentOrder() {
@@ -1453,21 +1651,42 @@ function initResponsiveContentOrder() {
   const sidebar = content?.querySelector(".sidebar");
   const mainColumn = content?.querySelector(".main-column");
   const sections = Object.fromEntries(
-    ["projects", "employment", "about", "skills", "education", "certifications"]
-      .map((id) => [id, document.getElementById(id)]),
+    [
+      "projects",
+      "employment",
+      "about",
+      "skills",
+      "education",
+      "certifications",
+    ].map((id) => [id, document.getElementById(id)]),
   );
-  if (!content || !sidebar || !mainColumn || Object.values(sections).some((section) => !section)) return;
+  if (
+    !content ||
+    !sidebar ||
+    !mainColumn ||
+    Object.values(sections).some((section) => !section)
+  )
+    return;
 
   const narrow = window.matchMedia("(max-width: 880px)");
   const applyOrder = () => {
     if (narrow.matches) {
       content.append(mainColumn, sidebar);
       mainColumn.append(sections.projects, sections.employment);
-      sidebar.append(sections.about, sections.skills, sections.education, sections.certifications);
+      sidebar.append(
+        sections.about,
+        sections.skills,
+        sections.education,
+        sections.certifications,
+      );
     } else {
       content.append(sidebar, mainColumn);
       sidebar.append(sections.about, sections.certifications, sections.skills);
-      mainColumn.append(sections.projects, sections.employment, sections.education);
+      mainColumn.append(
+        sections.projects,
+        sections.employment,
+        sections.education,
+      );
     }
   };
 
@@ -1502,7 +1721,10 @@ window.addEventListener("beforeprint", updatePrintStyles);
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape") {
     const focused = document.activeElement;
-    if (focused instanceof HTMLElement && focused.hasAttribute("data-tooltip")) {
+    if (
+      focused instanceof HTMLElement &&
+      focused.hasAttribute("data-tooltip")
+    ) {
       focused.blur();
     }
   }
@@ -1512,20 +1734,30 @@ initialize();
 
 /* Reveal content once as it enters the viewport. */
 function initScrollReveal() {
-  const revealElements = document.querySelectorAll('.panel, .li-experience-group, .featured article, .case-study-section');
+  const revealElements = document.querySelectorAll(
+    ".panel, .li-experience-group, .featured article, .case-study-section",
+  );
 
-  if (!("IntersectionObserver" in window) || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    revealElements.forEach((element) => element.classList.add("reveal", "active"));
+  if (
+    !("IntersectionObserver" in window) ||
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  ) {
+    revealElements.forEach((element) =>
+      element.classList.add("reveal", "active"),
+    );
     return;
   }
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      entry.target.classList.add("active");
-      observer.unobserve(entry.target);
-    });
-  }, { threshold: 0.08, rootMargin: "0px 0px -32px" });
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("active");
+        observer.unobserve(entry.target);
+      });
+    },
+    { threshold: 0.08, rootMargin: "0px 0px -32px" },
+  );
 
   revealElements.forEach((element) => {
     element.classList.add("reveal");
@@ -1546,7 +1778,10 @@ function initImageLightbox() {
     lightbox = document.createElement("dialog");
     lightbox.id = "image-lightbox";
     lightbox.className = "image-lightbox";
-    lightbox.setAttribute("aria-label", getTranslation(getCurrentLanguage(), "cs_image_preview"));
+    lightbox.setAttribute(
+      "aria-label",
+      getTranslation(getCurrentLanguage(), "cs_image_preview"),
+    );
     lightbox.innerHTML = `
       <div class="lightbox-content">
         <button class="lightbox-close-btn" type="button">
@@ -1562,11 +1797,17 @@ function initImageLightbox() {
     lightboxImg = lightbox.querySelector(".lightbox-img");
     lightboxCaption = lightbox.querySelector(".lightbox-caption");
     closeBtn = lightbox.querySelector(".lightbox-close-btn");
-    closeBtn.setAttribute("aria-label", getTranslation(getCurrentLanguage(), "cs_close_image_preview"));
+    closeBtn.setAttribute(
+      "aria-label",
+      getTranslation(getCurrentLanguage(), "cs_close_image_preview"),
+    );
 
     closeBtn.addEventListener("click", closeLightbox);
     lightbox.addEventListener("click", (e) => {
-      if (e.target === lightbox || e.target.classList.contains("lightbox-img-wrapper")) {
+      if (
+        e.target === lightbox ||
+        e.target.classList.contains("lightbox-img-wrapper")
+      ) {
         closeLightbox();
       }
     });
@@ -1590,8 +1831,14 @@ function initImageLightbox() {
     lightboxImg.src = imgSrc;
     lightboxImg.alt = altText || "";
     lightboxCaption.textContent = captionText || altText || "";
-    lightbox.setAttribute("aria-label", getTranslation(getCurrentLanguage(), "cs_image_preview"));
-    closeBtn.setAttribute("aria-label", getTranslation(getCurrentLanguage(), "cs_close_image_preview"));
+    lightbox.setAttribute(
+      "aria-label",
+      getTranslation(getCurrentLanguage(), "cs_image_preview"),
+    );
+    closeBtn.setAttribute(
+      "aria-label",
+      getTranslation(getCurrentLanguage(), "cs_close_image_preview"),
+    );
     lightbox.showModal();
     closeBtn.focus({ preventScroll: true });
   }
@@ -1602,21 +1849,30 @@ function initImageLightbox() {
   }
 
   function restoreLightboxState() {
-    if (lightboxImg) lightboxImg.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E";
+    if (lightboxImg)
+      lightboxImg.src =
+        "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E";
     if (lastActiveElement && typeof lastActiveElement.focus === "function") {
       lastActiveElement.focus();
     }
   }
 
   // Attach to case study images
-  const targetImages = document.querySelectorAll(".case-study-image, .case-showcase-wrapper img");
+  const targetImages = document.querySelectorAll(
+    ".case-study-image, .case-showcase-wrapper img",
+  );
   targetImages.forEach((img) => {
     img.setAttribute("tabindex", "0");
     img.setAttribute("role", "button");
-    img.setAttribute("aria-label", `${getTranslation(getCurrentLanguage(), "cs_zoom_image")}: ${img.alt || getTranslation(getCurrentLanguage(), "cs_image_preview")}`);
+    img.setAttribute(
+      "aria-label",
+      `${getTranslation(getCurrentLanguage(), "cs_zoom_image")}: ${img.alt || getTranslation(getCurrentLanguage(), "cs_image_preview")}`,
+    );
 
     const handleOpen = () => {
-      const caption = img.closest("figure")?.querySelector("figcaption")?.textContent || img.alt;
+      const caption =
+        img.closest("figure")?.querySelector("figcaption")?.textContent ||
+        img.alt;
       openLightbox(img.src, img.alt, caption);
     };
 
@@ -1648,7 +1904,11 @@ function initLiveEmbedViewer() {
 
       if (isOpen) {
         const iframe = container.querySelector(".live-embed-iframe");
-        if (iframe && iframe.getAttribute("src") === "about:blank" && iframe.dataset.src) {
+        if (
+          iframe &&
+          iframe.getAttribute("src") === "about:blank" &&
+          iframe.dataset.src
+        ) {
           iframe.src = iframe.dataset.src;
         }
         container.scrollIntoView({ behavior: "smooth", block: "nearest" });
@@ -1659,7 +1919,9 @@ function initLiveEmbedViewer() {
   const deviceButtons = document.querySelectorAll("[data-set-device]");
   deviceButtons.forEach((btn) => {
     btn.addEventListener("click", () => {
-      const frameContainer = document.querySelector(".live-embed-frame-container");
+      const frameContainer = document.querySelector(
+        ".live-embed-frame-container",
+      );
       if (!frameContainer) return;
 
       deviceButtons.forEach((b) => {

@@ -145,6 +145,15 @@ if (
   );
 }
 
+if (
+  html.includes("project-toggle") ||
+  script.includes("initProjectCollapses")
+) {
+  errors.push(
+    "Project cards must expose their essential content without collapse controls.",
+  );
+}
+
 for (const { file, source } of htmlDocuments.filter(
   ({ file }) => file !== "index.html",
 )) {

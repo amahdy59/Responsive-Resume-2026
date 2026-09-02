@@ -415,7 +415,7 @@ try {
     });
     const page = await context.newPage();
     const response = await page.goto(`${baseUrl}/${language}/`, {
-      waitUntil: "domcontentloaded",
+      waitUntil: "load",
     });
     assert.equal(response?.status(), 200);
     assert.equal(await page.locator("html").getAttribute("lang"), language);
@@ -450,6 +450,57 @@ try {
     );
     await context.close();
     console.log(`Passed static no-JavaScript route /${language}/`);
+  }
+
+  {
+    const context = await browser.newContext({
+      reducedMotion: "reduce",
+      viewport: { width: 1280, height: 800 },
+    });
+    await context.addInitScript(() => {
+      localStorage.setItem("resume-lang", "ar");
+      localStorage.setItem("resume-theme", "dark");
+      localStorage.setItem("resume-contrast", "high");
+    });
+    const page = await context.newPage();
+    await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
+    const preferences = await page.locator("html").evaluate((root) => ({
+      contrast: root.dataset.contrast,
+      direction: root.dir,
+      language: root.lang,
+      reducedMotion: matchMedia("(prefers-reduced-motion: reduce)").matches,
+      theme: root.dataset.theme,
+    }));
+    assert.deepEqual(preferences, {
+      contrast: "high",
+      direction: "rtl",
+      language: "ar",
+      reducedMotion: true,
+      theme: "dark",
+    });
+    const accessibility = await new AxeBuilder({ page }).analyze();
+    assert.deepEqual(accessibility.violations, []);
+    await context.close();
+    console.log("Passed persisted preferences and reduced motion");
+  }
+
+  {
+    const context = await browser.newContext({
+      forcedColors: "active",
+      viewport: { width: 1280, height: 800 },
+    });
+    const page = await context.newPage();
+    await page.goto(`${baseUrl}/en/`, { waitUntil: "domcontentloaded" });
+    assert.equal(
+      await page.evaluate(() => matchMedia("(forced-colors: active)").matches),
+      true,
+    );
+    const accessibility = await new AxeBuilder({ page })
+      .disableRules(["color-contrast"])
+      .analyze();
+    assert.deepEqual(accessibility.violations, []);
+    await context.close();
+    console.log("Passed OS forced-colors mode");
   }
 
   const caseStudyFiles = [
@@ -530,6 +581,13 @@ try {
         sandbox: document
           .querySelector(".live-embed-iframe")
           ?.getAttribute("sandbox"),
+        provenanceItems: document.querySelectorAll(".provenance-grid > div")
+          .length,
+        projectLearning: document
+          .querySelector(
+            '.case-learning, .provenance-grid [data-translate$="_learning"], [data-translate*="learning"]',
+          )
+          ?.textContent?.trim(),
       }));
 
       assert.equal(state.language, "ar");
@@ -559,6 +617,8 @@ try {
       assert.equal(state.previewHidden, true);
       assert.equal(state.selectedDevices, 1);
       assert.ok(state.sandbox?.includes("allow-scripts"));
+      assert.equal(state.provenanceItems, 4);
+      assert.ok(state.projectLearning);
       assert.deepEqual(runtimeErrors, []);
 
       const caseImage = page.locator(".case-study-image").first();
