@@ -215,30 +215,6 @@
             </div>
           </div>
           <div class="hero-controls-wrapper">
-            <div
-              class="controls-group"
-              role="group"
-              aria-label="Display settings"
-              data-translate-attr="aria-label"
-              data-translate-attr-key="display_settings_label"
-            >
-              <button class="lang-toggle" type="button" data-tooltip="Switch Language" aria-label="Switch to Arabic">
-                <span aria-hidden="true"><svg><use href="#icon-globe"></use></svg></span>
-                <span class="control-label" data-translate="control_language">Language</span>
-              </button>
-              <button class="theme-toggle" type="button" data-tooltip="Switch Theme" aria-label="Dark mode">
-                <span aria-hidden="true"><svg><use href="#icon-moon"></use></svg></span>
-                <span class="control-label" data-translate="control_theme">Theme</span>
-              </button>
-              <button class="contrast-toggle" type="button" data-tooltip="Toggle Contrast" aria-label="High contrast mode">
-                <span aria-hidden="true"><svg><use href="#icon-contrast"></use></svg></span>
-                <span class="control-label" data-translate="control_contrast">Contrast</span>
-              </button>
-              <button class="print-button" type="button" data-print-resume data-tooltip="Print / Save PDF" aria-label="Print or save as PDF" data-tooltip-key="print_resume_action">
-                <span aria-hidden="true"><svg><use href="#icon-print"></use></svg></span>
-                <span class="control-label" data-translate="print_resume_action">Print / Save PDF</span>
-              </button>
-            </div>
             <ul
               class="contact-list"
               aria-label="Contact links"
@@ -267,6 +243,30 @@
                 </button>
               </li>
             </ul>
+            <div
+              class="controls-group"
+              role="group"
+              aria-label="Display settings"
+              data-translate-attr="aria-label"
+              data-translate-attr-key="display_settings_label"
+            >
+              <button class="lang-toggle" type="button" data-tooltip="Switch Language" aria-label="Switch to Arabic">
+                <span aria-hidden="true"><svg><use href="#icon-globe"></use></svg></span>
+                <span class="control-label" data-translate="control_language">Language</span>
+              </button>
+              <button class="theme-toggle" type="button" data-tooltip="Switch Theme" aria-label="Dark mode">
+                <span aria-hidden="true"><svg><use href="#icon-moon"></use></svg></span>
+                <span class="control-label" data-translate="control_theme">Theme</span>
+              </button>
+              <button class="contrast-toggle" type="button" data-tooltip="Toggle Contrast" aria-label="High contrast mode">
+                <span aria-hidden="true"><svg><use href="#icon-contrast"></use></svg></span>
+                <span class="control-label" data-translate="control_contrast">Contrast</span>
+              </button>
+              <button class="print-button" type="button" data-print-resume data-tooltip="Print / Save PDF" aria-label="Print or save as PDF" data-tooltip-key="print_resume_action">
+                <span aria-hidden="true"><svg><use href="#icon-print"></use></svg></span>
+                <span class="control-label" data-translate="print_resume_action">Print / Save PDF</span>
+              </button>
+            </div>
           </div>
         </header>
 
@@ -296,7 +296,7 @@
                 <h2><span class="panel-icon-box" aria-hidden="true"><svg><use href="#icon-user"></use></svg></span><span data-translate="sect_about">About Me</span></h2>
                 <button class="audio-play-btn" type="button" data-audio-id="resume-about" aria-label="Listen to About Me" title="Listen to narration">
                   <svg class="audio-icon" aria-hidden="true"><use href="#icon-volume"></use></svg>
-                  <span class="audio-btn-text">Listen</span>
+                  <span class="audio-btn-text" data-translate="cs_listen">Listen</span>
                 </button>
               </div>
               <p data-translate="about_text">
@@ -313,7 +313,7 @@
                 <h2><span class="panel-icon-box" aria-hidden="true"><svg><use href="#icon-award"></use></svg></span><span data-translate="sect_certs">Certifications</span></h2>
                 <button class="audio-play-btn" type="button" data-audio-id="resume-certifications" aria-label="Listen to Certifications" title="Listen to narration">
                   <svg class="audio-icon" aria-hidden="true"><use href="#icon-volume"></use></svg>
-                  <span class="audio-btn-text">Listen</span>
+                  <span class="audio-btn-text" data-translate="cs_listen">Listen</span>
                 </button>
               </div>
               <ul class="compact-list">
@@ -330,31 +330,31 @@
               <div class="skill-group">
                 <h3 data-translate="skills_ux_header">Core UX & Design</h3>
                 <div class="pills" role="list" aria-label="Core UX &amp; Design skills">
-                  <span role="listitem" tabindex="0" data-skill-filter="ux" data-translate="skill_ux1">Interaction Design</span>
-                  <span role="listitem" tabindex="0" data-skill-filter="ux" data-translate="skill_ux2">Information Architecture</span>
-                  <span role="listitem" tabindex="0" data-skill-filter="ux" data-translate="skill_ux3">User Research</span>
-                  <span role="listitem" tabindex="0" data-skill-filter="ux" data-translate="skill_ux4">Usability Testing</span>
-                  <span role="listitem" tabindex="0" data-skill-filter="ux" data-translate="skill_ux5">Wireframing</span>
-                  <span role="listitem" tabindex="0" data-skill-filter="ux" data-translate="skill_ux6">Prototyping</span>
-                  <span role="listitem" tabindex="0" data-skill-filter="ux" data-translate="skill_ux7">Figma</span>
-                  <span role="listitem" tabindex="0" data-skill-filter="ux" data-translate="skill_ux8">Design Systems</span>
-                  <span role="listitem" tabindex="0" data-skill-filter="ux" data-translate="skill_ux9">Accessibility</span>
-                  <span role="listitem" tabindex="0" data-skill-filter="ux" data-translate="skill_ux10">Enterprise & SaaS Design</span>
-                  <span role="listitem" tabindex="0" data-skill-filter="ux" data-translate="skill_ux11">Adobe Creative Suite</span>
-                  <span role="listitem" tabindex="0" data-skill-filter="ux" data-translate="skill_ux12">AI Design Tools</span>
+                  <span role="listitem" data-translate="skill_ux1">Interaction Design</span>
+                  <span role="listitem" data-translate="skill_ux2">Information Architecture</span>
+                  <span role="listitem" data-translate="skill_ux3">User Research</span>
+                  <span role="listitem" data-translate="skill_ux4">Usability Testing</span>
+                  <span role="listitem" data-translate="skill_ux5">Wireframing</span>
+                  <span role="listitem" data-translate="skill_ux6">Prototyping</span>
+                  <span role="listitem" data-translate="skill_ux7">Figma</span>
+                  <span role="listitem" data-translate="skill_ux8">Design Systems</span>
+                  <span role="listitem" data-translate="skill_ux9">Accessibility</span>
+                  <span role="listitem" data-translate="skill_ux10">Enterprise & SaaS Design</span>
+                  <span role="listitem" data-translate="skill_ux11">Adobe Creative Suite</span>
+                  <span role="listitem" data-translate="skill_ux12">AI Design Tools</span>
                 </div>
               </div>
               <div class="skill-group">
                 <h3 data-translate="skills_data_header">Data Analysis & Visualization</h3>
                 <div class="pills" role="list" aria-label="Data Analysis &amp; Visualization skills">
-                  <span role="listitem" tabindex="0" data-skill-filter="data" data-translate="skill_data1">Microsoft Excel (Advanced)</span>
-                  <span role="listitem" tabindex="0" data-skill-filter="data" data-translate="skill_data2">Power BI</span>
-                  <span role="listitem" tabindex="0" data-skill-filter="data" data-translate="skill_data3">Tableau</span>
-                  <span role="listitem" tabindex="0" data-skill-filter="data" data-translate="skill_data4">Python</span>
-                  <span role="listitem" tabindex="0" data-skill-filter="data" data-translate="skill_data5">SQL</span>
-                  <span role="listitem" tabindex="0" data-skill-filter="data" data-translate="skill_data6">Dashboard Design</span>
-                  <span role="listitem" tabindex="0" data-skill-filter="data" data-translate="skill_data7">Data Storytelling</span>
-                  <span role="listitem" tabindex="0" data-skill-filter="data" data-translate="skill_data8">KPI Analysis</span>
+                  <span role="listitem" data-translate="skill_data1">Microsoft Excel (Advanced)</span>
+                  <span role="listitem" data-translate="skill_data2">Power BI</span>
+                  <span role="listitem" data-translate="skill_data3">Tableau</span>
+                  <span role="listitem" data-translate="skill_data4">Python</span>
+                  <span role="listitem" data-translate="skill_data5">SQL</span>
+                  <span role="listitem" data-translate="skill_data6">Dashboard Design</span>
+                  <span role="listitem" data-translate="skill_data7">Data Storytelling</span>
+                  <span role="listitem" data-translate="skill_data8">KPI Analysis</span>
                 </div>
               </div>
             </section>
@@ -536,7 +536,7 @@
                 <h2><span class="panel-icon-box" aria-hidden="true"><svg><use href="#icon-briefcase"></use></svg></span><span data-translate="sect_jobs">Employment</span></h2>
                 <button class="audio-play-btn" type="button" data-audio-id="resume-employment" aria-label="Listen to Employment history" title="Listen to narration">
                   <svg class="audio-icon" aria-hidden="true"><use href="#icon-volume"></use></svg>
-                  <span class="audio-btn-text">Listen</span>
+                  <span class="audio-btn-text" data-translate="cs_listen">Listen</span>
                 </button>
               </div>
               <div class="timeline">
@@ -664,5 +664,6 @@
 
     <div class="copy-toast" role="status" aria-live="polite" aria-atomic="true"></div>
     <script src="script.js"></script>
+    <script src="audio-player.js"></script>
   </body>
 </html>

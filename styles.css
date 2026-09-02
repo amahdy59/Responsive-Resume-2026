@@ -253,6 +253,74 @@ button:focus-visible {
     radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.25) 0%, transparent 50%),
     radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.15) 0%, transparent 40%),
     radial-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px);
+}
+
+.external-icon {
+  display: inline-block;
+  width: 0.86em;
+  height: 0.86em;
+  margin-inline-start: 0.32em;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2.3;
+  transform: translateY(0.08em);
+  opacity: 0.58;
+  pointer-events: none;
+  transition: opacity 150ms ease, transform 150ms ease;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 4px;
+  /* Ensure focus ring is always visible regardless of background */
+  box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.12);
+}
+
+.resume-shell {
+  position: relative;
+  width: auto;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: clamp(14px, 3vw, 40px);
+}
+
+.resume-card {
+  position: relative;
+  min-height: calc(100vh - clamp(28px, 6vw, 80px));
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  transition:
+    background-color 420ms ease,
+    border-color 420ms ease,
+    box-shadow 420ms ease;
+}
+
+.hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: 160px;
+  padding: clamp(20px, 3.5vw, 28px) clamp(16px, 3vw, 24px);
+  background: var(--hero-gradient);
+  border-radius: 15px 15px 0 0;
+  transition: background 520ms ease;
+}
+
+.hero-pattern {
+  position: absolute;
+  inset: 0;
+  opacity: 0.25;
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.25) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.15) 0%, transparent 40%),
+    radial-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px);
   background-size: 100% 100%, 100% 100%, 20px 20px;
   border-radius: 15px 15px 0 0;
   pointer-events: none;
@@ -260,7 +328,6 @@ button:focus-visible {
 
 .hero-controls-wrapper {
   display: flex;
-  flex-direction: row-reverse;
   align-items: center;
   gap: 16px;
   position: relative;
@@ -496,7 +563,9 @@ h1 {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 6px 10px;
+  padding: 6px 12px;
+  padding-inline-end: 48px;
+  min-height: 48px;
   background: rgba(255, 255, 255, 0.12);
   border: 1px solid rgba(255, 255, 255, 0.22);
   border-radius: 9px;
@@ -521,16 +590,18 @@ h1 {
 }
 
 .contact-list a {
+  flex: 1 1 auto;
   display: inline-flex;
   align-items: center;
   min-height: 44px;
-  padding-inline-end: 32px;
+  padding: 0;
   color: #ffffff;
   overflow-wrap: anywhere;
   font-size: 0.9rem;
   font-weight: 500;
   line-height: 1.45;
   text-align: start;
+  unicode-bidi: isolate;
 }
 
 .contact-icon,
@@ -920,18 +991,6 @@ h1 {
   font-size: 0.9rem;
   font-weight: 500;
   transition: all 150ms ease;
-}
-
-.pills span[data-skill-filter] {
-  cursor: pointer;
-}
-
-.pills span[data-skill-filter]:hover,
-.pills span[data-skill-filter]:focus-visible {
-  background: color-mix(in srgb, var(--blue) 18%, var(--pill-bg));
-  border-color: var(--blue);
-  color: var(--text);
-  transform: translateY(-1px);
 }
 
 /* ── Featured Projects ── */
@@ -2107,11 +2166,11 @@ h1 {
   }
 
   .main-column {
-    order: 2;
+    order: 1;
   }
 
   .sidebar {
-    order: 1;
+    order: 2;
   }
 
   .panel {
@@ -2723,7 +2782,8 @@ h1 {
 }
 
 .case-study-controls .theme-toggle,
-.case-study-controls .contrast-toggle {
+.case-study-controls .contrast-toggle,
+.case-study-controls .lang-toggle {
   width: 40px;
   height: 40px;
   min-width: 40px;
@@ -2740,8 +2800,10 @@ h1 {
 
 .case-study-controls .theme-toggle:hover,
 .case-study-controls .contrast-toggle:hover,
+.case-study-controls .lang-toggle:hover,
 .case-study-controls .theme-toggle:focus-visible,
-.case-study-controls .contrast-toggle:focus-visible {
+.case-study-controls .contrast-toggle:focus-visible,
+.case-study-controls .lang-toggle:focus-visible {
   background: color-mix(in srgb, var(--blue) 15%, transparent);
   border-color: var(--blue);
   color: var(--blue);
@@ -2749,10 +2811,20 @@ h1 {
 }
 
 .case-study-controls .theme-toggle > span:first-child,
-.case-study-controls .contrast-toggle > span:first-child {
+.case-study-controls .contrast-toggle > span:first-child,
+.case-study-controls .lang-toggle > span:first-child {
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
+}
+
+[dir="rtl"] .case-nav-back-pill svg {
+  transform: scaleX(-1);
+}
+
+[dir="rtl"] .pagination-prev .pagination-arrow-box svg,
+[dir="rtl"] .pagination-next .pagination-arrow-box svg {
+  transform: scaleX(-1);
 }
 
 /* ── Case Study Card ── */
@@ -3504,9 +3576,14 @@ h1 {
   transition: opacity 220ms ease;
 }
 
-.image-lightbox.is-open {
+.image-lightbox[open] {
   display: flex;
   opacity: 1;
+}
+
+.image-lightbox::backdrop {
+  background: rgba(4, 12, 24, 0.88);
+  backdrop-filter: blur(16px);
 }
 
 .lightbox-content {
@@ -3525,7 +3602,7 @@ h1 {
   transition: transform 220ms cubic-bezier(0.2, 0, 0, 1);
 }
 
-.image-lightbox.is-open .lightbox-content {
+.image-lightbox[open] .lightbox-content {
   transform: scale(1);
 }
 

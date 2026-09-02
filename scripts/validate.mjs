@@ -40,9 +40,10 @@ function getDictionaryKeys(language) {
   return [...new Set([...match[2].matchAll(dictionaryKeyPattern)].map((item) => item[1]))].sort();
 }
 
+const allHtmlSource = htmlDocuments.map(({ source }) => source).join("\n");
 const htmlKeys = [
-  ...uniqueMatches(html, htmlTextKeyPattern),
-  ...uniqueMatches(html, htmlAttrKeyPattern),
+  ...uniqueMatches(allHtmlSource, htmlTextKeyPattern),
+  ...uniqueMatches(allHtmlSource, htmlAttrKeyPattern),
 ].sort();
 
 const errors = [];
@@ -99,6 +100,30 @@ if (/serviceWorker\.register|event\.key\.toLowerCase\(\)/.test(script)) {
 
 if (htmlDocuments.some(({ source }) => /assets\/case-[^"]+\.jpg/.test(source))) {
   errors.push("A case study still references a superseded JPEG asset.");
+}
+
+if (!html.includes('<script src="audio-player.js"></script>')) {
+  errors.push("Homepage audio controls exist without loading audio-player.js.");
+}
+
+if (html.includes("data-skill-filter") || /role="listitem"[^>]*tabindex/.test(html)) {
+  errors.push("Informational skill chips must not behave as keyboard controls.");
+}
+
+for (const { file, source } of htmlDocuments.filter(({ file }) => file !== "index.html")) {
+  if (!/data-project-key="cs_[^"]+"/.test(source)) {
+    errors.push(`${file} is missing its project-specific localization metadata key.`);
+  }
+  if (!/data-toggle-embed[^>]*aria-controls="live-embed-viewer"/.test(source)) {
+    errors.push(`${file} preview toggle is missing aria-controls.`);
+  }
+  if (!/class="live-embed-iframe"[^>]*sandbox=/.test(source)) {
+    errors.push(`${file} live preview iframe is not sandboxed.`);
+  }
+}
+
+if (/WCAG 2\.2 AAA|Analytics show high daily retention|Reduced average request turnaround from 3 days/.test(allHtmlSource + script)) {
+  errors.push("Unsupported accessibility or outcome claims remain in published content.");
 }
 
 for (const assetPath of [

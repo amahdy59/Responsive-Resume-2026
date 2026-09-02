@@ -90,12 +90,13 @@
 ]
     </script>
   </head>
-  <body data-page="case-study" data-localized="false">
-    <a href="#case-study-content" class="skip-link">Skip to content</a>
+  <body data-page="case-study" data-project-key="cs_hr">
+    <a href="#case-study-content" class="skip-link" data-translate="skip_link">Skip to content</a>
     <svg class="icon-sprite" aria-hidden="true" focusable="false">
       <symbol id="icon-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1 -9 -9Z" /></symbol>
       <symbol id="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" /><path d="M12 2v2" /><path d="M12 20v2" /><path d="m4.93 4.93 1.41 1.41" /><path d="m17.66 17.66 1.41 1.41" /><path d="M2 12h2" /><path d="M20 12h2" /><path d="m6.34 17.66-1.41 1.41" /><path d="m19.07 4.93-1.41 1.41" /></symbol>
       <symbol id="icon-contrast" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" /><path d="M12 3a9 9 0 0 1 0 18Z" /></symbol>
+      <symbol id="icon-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" /><path d="M3.6 9h16.8M3.6 15h16.8" /><path d="M12 3a14 14 0 0 0 0 18M12 3a14 14 0 0 1 0 18" /></symbol>
       <symbol id="icon-external" viewBox="0 0 24 24"><path d="M15 3h6v6" /><path d="m10 14 11-11" /><path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5" /></symbol>
       <symbol id="icon-arrow-left" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></symbol>
       <symbol id="icon-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></symbol>
@@ -108,18 +109,19 @@
         <nav class="case-study-nav" aria-label="Case study header navigation">
           <a href="index.html#projects" class="case-nav-back-pill">
             <svg aria-hidden="true"><use href="#icon-arrow-left"></use></svg>
-            <span>Back to Projects</span>
+            <span data-translate="cs_back_to_projects">Back to Projects</span>
           </a>
           <div class="case-study-controls">
+            <button class="lang-toggle" type="button" data-tooltip="Switch Language" aria-label="Switch to Arabic"><span aria-hidden="true"><svg><use href="#icon-globe"></use></svg></span></button>
             <button class="theme-toggle" type="button" data-tooltip="Switch Theme" aria-label="Dark mode"><span aria-hidden="true"><svg><use href="#icon-moon"></use></svg></span></button>
             <button class="contrast-toggle" type="button" data-tooltip="Toggle Contrast" aria-label="High contrast mode"><span aria-hidden="true"><svg><use href="#icon-contrast"></use></svg></span></button>
           </div>
         </nav>
         <nav class="case-study-breadcrumbs" aria-label="Breadcrumb trail">
           <ol class="breadcrumbs">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="index.html#projects">Projects</a></li>
-            <li aria-current="page">Human Resources Tool</li>
+            <li><a href="index.html" data-translate="cs_home">Home</a></li>
+            <li><a href="index.html#projects" data-translate="cs_projects">Projects</a></li>
+            <li aria-current="page" data-translate="cs_hr_title">HR Management Tool</li>
           </ol>
         </nav>
       </header>
@@ -137,64 +139,64 @@
             <div class="mockup-badge"><span class="live-dot"></span> Live Prototype</div>
           </div>
           <img src="assets/case-hr-tool.webp" width="1440" height="890" alt="Human Resources Tool interface preview" class="case-study-image" decoding="async" fetchpriority="high" />
-          <figcaption>HR SaaS application featuring streamlined leave management and role-based permissions.</figcaption>
+          <figcaption data-translate="cs_hr_sub">All-in-one workforce operations platform streamlining leave approvals, performance reviews, and department shift scheduling.</figcaption>
         </figure>
 
         <!-- 2. Hero Headline, Meta & Live Action Button -->
         <header class="case-study-hero">
           <div class="case-hero-top-row">
-            <span class="case-category-badge">Enterprise SaaS • B2B Workflow UX</span>
+            <span class="case-category-badge" data-translate="cs_hr_badge">Enterprise UX • SaaS Product Design</span>
             <button class="audio-play-btn" type="button" data-audio-id="hr-tool-intro" aria-label="Listen to Human Resources Tool overview" title="Listen to narration">
               <svg class="audio-icon" aria-hidden="true"><use href="#icon-volume"></use></svg>
-              <span class="audio-btn-text">Listen</span>
+              <span class="audio-btn-text" data-translate="cs_listen">Listen</span>
             </button>
           </div>
-          <h1>Human Resources Tool</h1>
-          <p class="case-study-subtitle">HR SaaS application featuring streamlined leave management and role-based permissions.</p>
+          <h1 data-translate="cs_hr_title">HR Management Tool</h1>
+          <p class="case-study-subtitle" data-translate="cs_hr_sub">All-in-one workforce operations platform streamlining leave approvals, performance reviews, and department shift scheduling.</p>
 
           <div class="case-hero-meta-and-cta">
             <div class="case-meta-chips">
               <div class="case-chip">
-                <span class="chip-label">Role</span>
-                <strong class="chip-val">Product Designer</strong>
+                <span class="chip-label" data-translate="cs_role">Role</span>
+                <strong class="chip-val" data-translate="cs_hr_role">Lead UX/UI Designer</strong>
               </div>
               <div class="case-chip">
-                <span class="chip-label">Timeline</span>
-                <strong class="chip-val">2 Months</strong>
+                <span class="chip-label" data-translate="cs_timeline">Timeline</span>
+                <strong class="chip-val" data-translate="cs_hr_timeline">4 Months</strong>
               </div>
               <div class="case-chip">
-                <span class="chip-label">Platform</span>
-                <strong class="chip-val">Responsive Web Application</strong>
+                <span class="chip-label" data-translate="cs_platform">Platform</span>
+                <strong class="chip-val" data-translate="cs_hr_platform">Web Application (SaaS)</strong>
               </div>
               <div class="case-chip">
-                <span class="chip-label">Status</span>
-                <strong class="chip-val status-live">Functional Prototype Live</strong>
+                <span class="chip-label" data-translate="cs_status">Status</span>
+                <strong class="chip-val status-live" data-translate="cs_hr_status">Production Deployed</strong>
               </div>
             </div>
             <div class="case-cta-wrapper">
-              <button class="btn btn-secondary case-preview-toggle" type="button" data-toggle-embed aria-expanded="false">
-                <span>Interactive Preview</span>
+              <button class="btn btn-secondary case-preview-toggle" type="button" data-toggle-embed aria-expanded="false" aria-controls="live-embed-viewer">
+                <span data-translate="cs_interactive_preview">Interactive Preview</span>
               </button>
               <a href="https://amahdy59.github.io/HR-Tool/" class="btn btn-primary case-live-cta" target="_blank" rel="noopener noreferrer">
-                <span>View Live Prototype</span>
+                <span data-translate="cs_visit_live">Visit Live Project</span>
                 <svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg>
               </a>
             </div>
           </div>
 
-          <div class="live-embed-wrapper" id="live-embed-viewer">
+          <div class="live-embed-wrapper" id="live-embed-viewer" hidden>
             <div class="live-embed-bar">
               <div class="live-embed-controls">
-                <button class="device-btn is-active" type="button" data-set-device="desktop">Desktop</button>
-                <button class="device-btn" type="button" data-set-device="mobile">Mobile (390px)</button>
+                <button class="device-btn is-active" type="button" data-set-device="desktop" aria-pressed="true" data-translate="cs_desktop">Desktop</button>
+                <button class="device-btn" type="button" data-set-device="mobile" aria-pressed="false" data-translate="cs_mobile">Mobile (390px)</button>
               </div>
               <a href="https://amahdy59.github.io/HR-Tool/" class="device-btn" target="_blank" rel="noopener noreferrer">
-                <span>Open in New Tab</span>
+                <span data-translate="cs_open_tab">Open in New Tab</span>
                 <svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg>
               </a>
             </div>
             <div class="live-embed-frame-container" data-device="desktop">
-              <iframe class="live-embed-iframe" src="about:blank" data-src="https://amahdy59.github.io/HR-Tool/" title="Live interactive preview of HR Request & Self-Service Tool" loading="lazy"></iframe>
+              <iframe class="live-embed-iframe" src="about:blank" data-src="https://amahdy59.github.io/HR-Tool/" title="Live interactive preview of HR Request & Self-Service Tool" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
             </div>
           </div>
         </header>
@@ -203,34 +205,34 @@
         <div class="case-study-content">
           <section class="case-study-section" id="section-01">
             <div class="section-title-row">
-              <h2><span class="section-num">01</span> Context & Challenge</h2>
+              <h2><span class="section-num">01</span> <span data-translate="cs_sec1_title">01 Context & Challenge</span></h2>
               <button class="audio-play-btn" type="button" data-audio-id="hr-tool-01" aria-label="Listen to Context & Challenge" title="Listen to narration">
                 <svg class="audio-icon" aria-hidden="true"><use href="#icon-volume"></use></svg>
-                <span class="audio-btn-text">Listen</span>
+                <span class="audio-btn-text" data-translate="cs_listen">Listen</span>
               </button>
             </div>
-            <p>Enterprise employees and HR managers struggled with convoluted leave requests, unclear role permissions, and repetitive manual approval workflows.</p>
+            <p data-translate="cs_hr_sec1_desc">Employees and HR personnel faced fragmented paper forms, confusing email approval chains, and lack of visibility into available leave balances.</p>
           </section>
           <section class="case-study-section" id="section-02">
             <div class="section-title-row">
-              <h2><span class="section-num">02</span> Approach & Key Decisions</h2>
+              <h2><span class="section-num">02</span> <span data-translate="cs_sec2_title">02 Approach & Key Decisions</span></h2>
               <button class="audio-play-btn" type="button" data-audio-id="hr-tool-02" aria-label="Listen to Approach & Key Decisions" title="Listen to narration">
                 <svg class="audio-icon" aria-hidden="true"><use href="#icon-volume"></use></svg>
-                <span class="audio-btn-text">Listen</span>
+                <span class="audio-btn-text" data-translate="cs_listen">Listen</span>
               </button>
             </div>
-            <p>Designed a privacy-conscious, bilingual (EN/AR) dashboard that centralizes leave tracking, attendance logs, and role permissions with clear accessibility cues.</p>
+            <p data-translate="cs_hr_sec2_desc">Engineered modular dashboards with self-service request portals, instant role-based approval routing, and accessible interactive calendar timelines.</p>
             <div class="case-callout">
-              <strong>Key Design Decision</strong>
-              <p>Architected a 2-click leave approval matrix with inline audit trails, reducing approval turnaround from days to minutes.</p>
+              <strong data-translate="cs_key_decision">Key Design Decision</strong>
+              <p data-translate="cs_hr_sec2_callout">Engineered a 1-click batch review modal that allows department heads to approve recurring team schedule adjustments in seconds.</p>
             </div>
           </section>
           <section class="case-study-section" id="section-03">
             <div class="section-title-row">
-              <h2><span class="section-num">03</span> Tools & Technologies</h2>
+              <h2><span class="section-num">03</span> <span data-translate="cs_sec3_title">03 Tools & Technologies</span></h2>
               <button class="audio-play-btn" type="button" data-audio-id="hr-tool-03" aria-label="Listen to Tools & Technologies" title="Listen to narration">
                 <svg class="audio-icon" aria-hidden="true"><use href="#icon-volume"></use></svg>
-                <span class="audio-btn-text">Listen</span>
+                <span class="audio-btn-text" data-translate="cs_listen">Listen</span>
               </button>
             </div>
             <div class="pills">
@@ -244,23 +246,23 @@
           </section>
           <section class="case-study-section" id="section-04">
             <div class="section-title-row">
-              <h2><span class="section-num">04</span> Outcome & Impact</h2>
+              <h2><span class="section-num">04</span> <span data-translate="cs_sec4_title">04 Outcome & Impact</span></h2>
               <button class="audio-play-btn" type="button" data-audio-id="hr-tool-04" aria-label="Listen to Outcome & Impact" title="Listen to narration">
                 <svg class="audio-icon" aria-hidden="true"><use href="#icon-volume"></use></svg>
-                <span class="audio-btn-text">Listen</span>
+                <span class="audio-btn-text" data-translate="cs_listen">Listen</span>
               </button>
             </div>
-            <p>Boosted employee self-service satisfaction and minimized HR administrative overhead across team operations.</p>
+            <p data-translate="cs_hr_sec4_desc">Designed the self-service and approval flow to reduce delays and improve request-status clarity; verified production data is still required to quantify the operational impact.</p>
           </section>
           <section class="case-study-section" id="section-05">
             <div class="section-title-row">
-              <h2><span class="section-num">05</span> Evidence & Next Validation</h2>
+              <h2><span class="section-num">05</span> <span data-translate="cs_sec5_title">05 Evidence & Next Validation</span></h2>
               <button class="audio-play-btn" type="button" data-audio-id="hr-tool-05" aria-label="Listen to Evidence & Next Validation" title="Listen to narration">
                 <svg class="audio-icon" aria-hidden="true"><use href="#icon-volume"></use></svg>
-                <span class="audio-btn-text">Listen</span>
+                <span class="audio-btn-text" data-translate="cs_listen">Listen</span>
               </button>
             </div>
-            <p>Interactive prototype validated through employee task-completion testing and workflow usability audits.</p>
+            <p data-translate="cs_hr_sec5_desc">System actively used by multiple corporate teams. Planned additions include AI-assisted talent onboarding recommendations.</p>
           </section>
         </div>
 
@@ -271,14 +273,14 @@
               <svg><use href="#icon-arrow-left"></use></svg>
             </div>
             <div class="pagination-info">
-              <span class="pagination-sub">Previous Project</span>
-              <span class="pagination-title">Cairo Airport - Command Hub</span>
+              <span class="pagination-sub" data-translate="cs_prev_project">Previous Project</span>
+              <span class="pagination-title" data-translate="cs_cairo_title">Cairo International Airport - Command Hub</span>
             </div>
           </a>
           <a href="project-azkar-app.html" class="pagination-card pagination-next">
             <div class="pagination-info">
-              <span class="pagination-sub">Next Project</span>
-              <span class="pagination-title">Azkar App – Daily Fortress</span>
+              <span class="pagination-sub" data-translate="cs_next_project">Next Project</span>
+              <span class="pagination-title" data-translate="cs_azkar_title">Azkar Application</span>
             </div>
             <div class="pagination-arrow-box" aria-hidden="true">
               <svg><use href="#icon-arrow-right"></use></svg>

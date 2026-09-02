@@ -90,12 +90,13 @@
 ]
     </script>
   </head>
-  <body data-page="case-study" data-localized="false">
-    <a href="#case-study-content" class="skip-link">Skip to content</a>
+  <body data-page="case-study" data-project-key="cs_haj">
+    <a href="#case-study-content" class="skip-link" data-translate="skip_link">Skip to content</a>
     <svg class="icon-sprite" aria-hidden="true" focusable="false">
       <symbol id="icon-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1 -9 -9Z" /></symbol>
       <symbol id="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" /><path d="M12 2v2" /><path d="M12 20v2" /><path d="m4.93 4.93 1.41 1.41" /><path d="m17.66 17.66 1.41 1.41" /><path d="M2 12h2" /><path d="M20 12h2" /><path d="m6.34 17.66-1.41 1.41" /><path d="m19.07 4.93-1.41 1.41" /></symbol>
       <symbol id="icon-contrast" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" /><path d="M12 3a9 9 0 0 1 0 18Z" /></symbol>
+      <symbol id="icon-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" /><path d="M3.6 9h16.8M3.6 15h16.8" /><path d="M12 3a14 14 0 0 0 0 18M12 3a14 14 0 0 1 0 18" /></symbol>
       <symbol id="icon-external" viewBox="0 0 24 24"><path d="M15 3h6v6" /><path d="m10 14 11-11" /><path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5" /></symbol>
       <symbol id="icon-arrow-left" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></symbol>
       <symbol id="icon-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></symbol>
@@ -108,18 +109,19 @@
         <nav class="case-study-nav" aria-label="Case study header navigation">
           <a href="index.html#projects" class="case-nav-back-pill">
             <svg aria-hidden="true"><use href="#icon-arrow-left"></use></svg>
-            <span>Back to Projects</span>
+            <span data-translate="cs_back_to_projects">Back to Projects</span>
           </a>
           <div class="case-study-controls">
+            <button class="lang-toggle" type="button" data-tooltip="Switch Language" aria-label="Switch to Arabic"><span aria-hidden="true"><svg><use href="#icon-globe"></use></svg></span></button>
             <button class="theme-toggle" type="button" data-tooltip="Switch Theme" aria-label="Dark mode"><span aria-hidden="true"><svg><use href="#icon-moon"></use></svg></span></button>
             <button class="contrast-toggle" type="button" data-tooltip="Toggle Contrast" aria-label="High contrast mode"><span aria-hidden="true"><svg><use href="#icon-contrast"></use></svg></span></button>
           </div>
         </nav>
         <nav class="case-study-breadcrumbs" aria-label="Breadcrumb trail">
           <ol class="breadcrumbs">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="index.html#projects">Projects</a></li>
-            <li aria-current="page">Haj Arafa App</li>
+            <li><a href="index.html" data-translate="cs_home">Home</a></li>
+            <li><a href="index.html#projects" data-translate="cs_projects">Projects</a></li>
+            <li aria-current="page" data-translate="cs_haj_title">Haj Arafa App</li>
           </ol>
         </nav>
       </header>
@@ -137,64 +139,64 @@
             <div class="mockup-badge"><span class="live-dot"></span> Live Prototype</div>
           </div>
           <img src="assets/case-haj-arafa.webp" width="1440" height="890" alt="Haj Arafa App interface preview" class="case-study-image" decoding="async" fetchpriority="high" />
-          <figcaption>Mobile-first e-commerce interface showcasing search-first navigation and express 2-step checkout.</figcaption>
+          <figcaption data-translate="cs_haj_sub">Mobile-first e-commerce interface showcasing search-first navigation and express 2-step checkout.</figcaption>
         </figure>
 
         <!-- 2. Hero Headline, Meta & Live Action Button -->
         <header class="case-study-hero">
           <div class="case-hero-top-row">
-            <span class="case-category-badge">Mobile Commerce • E-Commerce UX</span>
+            <span class="case-category-badge" data-translate="cs_haj_badge">Mobile Commerce • E-Commerce UX</span>
             <button class="audio-play-btn" type="button" data-audio-id="haj-arafa-intro" aria-label="Listen to Haj Arafa App overview" title="Listen to narration">
               <svg class="audio-icon" aria-hidden="true"><use href="#icon-volume"></use></svg>
-              <span class="audio-btn-text">Listen</span>
+              <span class="audio-btn-text" data-translate="cs_listen">Listen</span>
             </button>
           </div>
-          <h1>Haj Arafa App</h1>
-          <p class="case-study-subtitle">Mobile-first e-commerce interface showcasing search-first navigation and express 2-step checkout.</p>
+          <h1 data-translate="cs_haj_title">Haj Arafa App</h1>
+          <p class="case-study-subtitle" data-translate="cs_haj_sub">Mobile-first e-commerce interface showcasing search-first navigation and express 2-step checkout.</p>
 
           <div class="case-hero-meta-and-cta">
             <div class="case-meta-chips">
               <div class="case-chip">
-                <span class="chip-label">Role</span>
-                <strong class="chip-val">Lead UX Designer</strong>
+                <span class="chip-label" data-translate="cs_role">Role</span>
+                <strong class="chip-val" data-translate="cs_haj_role">Lead UX Designer</strong>
               </div>
               <div class="case-chip">
-                <span class="chip-label">Timeline</span>
-                <strong class="chip-val">3 Months</strong>
+                <span class="chip-label" data-translate="cs_timeline">Timeline</span>
+                <strong class="chip-val" data-translate="cs_haj_timeline">3 Months</strong>
               </div>
               <div class="case-chip">
-                <span class="chip-label">Platform</span>
-                <strong class="chip-val">Mobile-First Web App</strong>
+                <span class="chip-label" data-translate="cs_platform">Platform</span>
+                <strong class="chip-val" data-translate="cs_haj_platform">Mobile-First Web App</strong>
               </div>
               <div class="case-chip">
-                <span class="chip-label">Status</span>
-                <strong class="chip-val status-live">Production Live</strong>
+                <span class="chip-label" data-translate="cs_status">Status</span>
+                <strong class="chip-val status-live" data-translate="cs_haj_status">Production Live</strong>
               </div>
             </div>
             <div class="case-cta-wrapper">
-              <button class="btn btn-secondary case-preview-toggle" type="button" data-toggle-embed aria-expanded="false">
-                <span>Interactive Preview</span>
+              <button class="btn btn-secondary case-preview-toggle" type="button" data-toggle-embed aria-expanded="false" aria-controls="live-embed-viewer">
+                <span data-translate="cs_interactive_preview">Interactive Preview</span>
               </button>
               <a href="https://amahdy59.github.io/Hajarafaapp/" class="btn btn-primary case-live-cta" target="_blank" rel="noopener noreferrer">
-                <span>Visit Live Project</span>
+                <span data-translate="cs_visit_live">Visit Live Project</span>
                 <svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg>
               </a>
             </div>
           </div>
 
-          <div class="live-embed-wrapper" id="live-embed-viewer">
+          <div class="live-embed-wrapper" id="live-embed-viewer" hidden>
             <div class="live-embed-bar">
               <div class="live-embed-controls">
-                <button class="device-btn is-active" type="button" data-set-device="desktop">Desktop</button>
-                <button class="device-btn" type="button" data-set-device="mobile">Mobile (390px)</button>
+                <button class="device-btn is-active" type="button" data-set-device="desktop" aria-pressed="true" data-translate="cs_desktop">Desktop</button>
+                <button class="device-btn" type="button" data-set-device="mobile" aria-pressed="false" data-translate="cs_mobile">Mobile (390px)</button>
               </div>
               <a href="https://amahdy59.github.io/Hajarafaapp/" class="device-btn" target="_blank" rel="noopener noreferrer">
-                <span>Open in New Tab</span>
+                <span data-translate="cs_open_tab">Open in New Tab</span>
                 <svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg>
               </a>
             </div>
             <div class="live-embed-frame-container" data-device="desktop">
-              <iframe class="live-embed-iframe" src="about:blank" data-src="https://amahdy59.github.io/Hajarafaapp/" title="Live interactive preview of Haj Arafa App" loading="lazy"></iframe>
+              <iframe class="live-embed-iframe" src="about:blank" data-src="https://amahdy59.github.io/Hajarafaapp/" title="Live interactive preview of Haj Arafa App" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
             </div>
           </div>
         </header>
@@ -203,34 +205,34 @@
         <div class="case-study-content">
           <section class="case-study-section" id="section-01">
             <div class="section-title-row">
-              <h2><span class="section-num">01</span> Context & Challenge</h2>
+              <h2><span class="section-num">01</span> <span data-translate="cs_sec1_title">01 Context & Challenge</span></h2>
               <button class="audio-play-btn" type="button" data-audio-id="haj-arafa-01" aria-label="Listen to Context & Challenge" title="Listen to narration">
                 <svg class="audio-icon" aria-hidden="true"><use href="#icon-volume"></use></svg>
-                <span class="audio-btn-text">Listen</span>
+                <span class="audio-btn-text" data-translate="cs_listen">Listen</span>
               </button>
             </div>
-            <p>Mobile shoppers were experiencing high bounce rates due to deeply nested category menus and a lengthy, multi-step checkout process with forced account creation.</p>
+            <p data-translate="cs_haj_sec1_desc">Mobile shoppers were experiencing high bounce rates due to deeply nested category menus and a lengthy, multi-step checkout process with forced account creation.</p>
           </section>
           <section class="case-study-section" id="section-02">
             <div class="section-title-row">
-              <h2><span class="section-num">02</span> Approach & Key Decisions</h2>
+              <h2><span class="section-num">02</span> <span data-translate="cs_sec2_title">02 Approach & Key Decisions</span></h2>
               <button class="audio-play-btn" type="button" data-audio-id="haj-arafa-02" aria-label="Listen to Approach & Key Decisions" title="Listen to narration">
                 <svg class="audio-icon" aria-hidden="true"><use href="#icon-volume"></use></svg>
-                <span class="audio-btn-text">Listen</span>
+                <span class="audio-btn-text" data-translate="cs_listen">Listen</span>
               </button>
             </div>
-            <p>Conducted user journeys to design a search-first mobile navigation bar, guest checkout capabilities, and prominent 44px touch targets conforming to WCAG 2.2 AAA accessibility.</p>
+            <p data-translate="cs_haj_sec2_desc">Conducted user journeys to design search-first mobile navigation, guest checkout, and prominent 44px touch targets, designed and tested against relevant WCAG 2.2 criteria.</p>
             <div class="case-callout">
-              <strong>Key Design Decision</strong>
-              <p>Reduced checkout friction from 5 disjointed steps down to a single streamlined accordion flow with instant address autofill and clear cost breakdowns.</p>
+              <strong data-translate="cs_key_decision">Key Design Decision</strong>
+              <p data-translate="cs_haj_sec2_callout">Reduced checkout friction from 5 disjointed steps down to a single streamlined accordion flow with instant address autofill and clear cost breakdowns.</p>
             </div>
           </section>
           <section class="case-study-section" id="section-03">
             <div class="section-title-row">
-              <h2><span class="section-num">03</span> Tools & Technologies</h2>
+              <h2><span class="section-num">03</span> <span data-translate="cs_sec3_title">03 Tools & Technologies</span></h2>
               <button class="audio-play-btn" type="button" data-audio-id="haj-arafa-03" aria-label="Listen to Tools & Technologies" title="Listen to narration">
                 <svg class="audio-icon" aria-hidden="true"><use href="#icon-volume"></use></svg>
-                <span class="audio-btn-text">Listen</span>
+                <span class="audio-btn-text" data-translate="cs_listen">Listen</span>
               </button>
             </div>
             <div class="pills">
@@ -239,28 +241,28 @@
               <span class="skill-btn">Wireframing</span>
               <span class="skill-btn">Prototyping</span>
               <span class="skill-btn">E-Commerce UX</span>
-              <span class="skill-btn">WCAG 2.2 AAA</span>
+              <span class="skill-btn">WCAG 2.2 informed</span>
             </div>
           </section>
           <section class="case-study-section" id="section-04">
             <div class="section-title-row">
-              <h2><span class="section-num">04</span> Outcome & Impact</h2>
+              <h2><span class="section-num">04</span> <span data-translate="cs_sec4_title">04 Outcome & Impact</span></h2>
               <button class="audio-play-btn" type="button" data-audio-id="haj-arafa-04" aria-label="Listen to Outcome & Impact" title="Listen to narration">
                 <svg class="audio-icon" aria-hidden="true"><use href="#icon-volume"></use></svg>
-                <span class="audio-btn-text">Listen</span>
+                <span class="audio-btn-text" data-translate="cs_listen">Listen</span>
               </button>
             </div>
-            <p>Created a frictionless shopping experience that significantly shortens the path from product discovery to order confirmation.</p>
+            <p data-translate="cs_haj_sec4_desc">Created a frictionless shopping experience that significantly shortens the path from product discovery to order confirmation.</p>
           </section>
           <section class="case-study-section" id="section-05">
             <div class="section-title-row">
-              <h2><span class="section-num">05</span> Evidence & Next Validation</h2>
+              <h2><span class="section-num">05</span> <span data-translate="cs_sec5_title">05 Evidence & Next Validation</span></h2>
               <button class="audio-play-btn" type="button" data-audio-id="haj-arafa-05" aria-label="Listen to Evidence & Next Validation" title="Listen to narration">
                 <svg class="audio-icon" aria-hidden="true"><use href="#icon-volume"></use></svg>
-                <span class="audio-btn-text">Listen</span>
+                <span class="audio-btn-text" data-translate="cs_listen">Listen</span>
               </button>
             </div>
-            <p>Live store application is available online. Conversion rate analytics and cart abandonment data will be monitored over upcoming quarterly releases.</p>
+            <p data-translate="cs_haj_sec5_desc">Live store application is available online. Conversion rate analytics and cart abandonment data will be monitored over upcoming quarterly releases.</p>
           </section>
         </div>
 
@@ -271,14 +273,14 @@
               <svg><use href="#icon-arrow-left"></use></svg>
             </div>
             <div class="pagination-info">
-              <span class="pagination-sub">Previous Project</span>
-              <span class="pagination-title">A Data-Driven LEGO Explorer</span>
+              <span class="pagination-sub" data-translate="cs_prev_project">Previous Project</span>
+              <span class="pagination-title" data-translate="cs_lego_title">A Data-Driven LEGO Explorer</span>
             </div>
           </a>
           <a href="project-cairo-airport.html" class="pagination-card pagination-next">
             <div class="pagination-info">
-              <span class="pagination-sub">Next Project</span>
-              <span class="pagination-title">Cairo Airport - Command Hub</span>
+              <span class="pagination-sub" data-translate="cs_next_project">Next Project</span>
+              <span class="pagination-title" data-translate="cs_cairo_title">Cairo International Airport - Command Hub</span>
             </div>
             <div class="pagination-arrow-box" aria-hidden="true">
               <svg><use href="#icon-arrow-right"></use></svg>

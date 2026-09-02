@@ -142,6 +142,8 @@ try {
           heading: document.querySelector("h1")?.textContent?.trim(),
           innerWidth: window.innerWidth,
           language: document.documentElement.lang,
+          audioControllerReady: Boolean(window.AntigravityAudio),
+          interactiveSkillCount: document.querySelectorAll('.pills [data-skill-filter], .pills [tabindex="0"]').length,
           overflowingElements: [...document.querySelectorAll("body *")]
             .filter((element) => !element.closest(".section-nav"))
             .map((element) => {
@@ -200,6 +202,8 @@ try {
       assert.equal(state.toolbarRole, "group");
       assert.equal(state.footerExists, true);
       assert.equal(state.projectThumbnailCount, 5);
+      assert.equal(state.audioControllerReady, true);
+      assert.equal(state.interactiveSkillCount, 0);
       assert.equal(state.resumeActionCount, 0);
       assert.equal(state.externalIconCount, state.externalLinkCount);
       assert.deepEqual(state.entityLinks, [
@@ -215,8 +219,14 @@ try {
           : ["LinkedIn profile", "Dribbble portfolio"],
       );
 
-      if (scenario.width <= 375) {
+      if (scenario.width <= 880) {
         assert.deepEqual(state.visualSectionOrder, state.domSectionOrder);
+        assert.deepEqual(
+          state.domSectionOrder,
+          scenario.language === "ar"
+            ? ["المشاريع", "الخبرات المهنية", "نبذة عني", "المهارات", "التعليم", "الشهادات المهنية"]
+            : ["Projects", "Employment", "About Me", "Skills", "Education", "Certifications"],
+        );
       }
 
       if (scenario.width <= 560) {
@@ -230,6 +240,19 @@ try {
       );
 
       if (scenario.language === "en" && scenario.width === 320) {
+        await page.evaluate(() => {
+          window.Audio = class {
+            pause() {}
+            play() { return Promise.resolve(); }
+            set currentTime(_value) {}
+          };
+        });
+        const audioButton = page.locator(".audio-play-btn").first();
+        await audioButton.click();
+        assert.equal(await audioButton.getAttribute("aria-pressed"), "true");
+        await page.locator("body").press("Escape");
+        assert.equal(await audioButton.getAttribute("aria-pressed"), "false");
+
         await page.evaluate(() => {
           window.print = () => {
             window.__printCalled = true;
@@ -341,10 +364,24 @@ try {
         resumeHref: document.querySelector('.case-study-nav a')?.getAttribute("href"),
         scrollWidth: document.documentElement.scrollWidth,
         title: document.title,
+        description: document.querySelector('meta[name="description"]')?.content,
+        projectKey: document.body.dataset.projectKey,
+        schemaTypes: (() => {
+          try {
+            const schema = JSON.parse(document.querySelector('#person-schema')?.textContent || "[]");
+            return (Array.isArray(schema) ? schema : [schema]).map((entry) => entry["@type"]);
+          } catch {
+            return ["invalid"];
+          }
+        })(),
+        previewControls: document.querySelector('[data-toggle-embed]')?.getAttribute("aria-controls"),
+        previewHidden: document.querySelector('#live-embed-viewer')?.hidden,
+        selectedDevices: document.querySelectorAll('[data-set-device][aria-pressed="true"]').length,
+        sandbox: document.querySelector('.live-embed-iframe')?.getAttribute("sandbox"),
       }));
 
-      assert.equal(state.language, "en");
-      assert.equal(state.direction, "ltr");
+      assert.equal(state.language, "ar");
+      assert.equal(state.direction, "rtl");
       assert.ok(state.heading);
       assert.equal(state.brokenImages, 0);
       assert.ok(
@@ -355,11 +392,29 @@ try {
       assert.equal(state.resumeHref, "index.html#projects");
       assert.ok(state.canonical?.endsWith(file));
       assert.notEqual(state.title, "Ahmed Mahdy | UX Designer & Data Visualizer");
-      assert.equal(state.languageNotice, "دراسة الحالة متاحة حالياً باللغة الإنجليزية.");
+      assert.ok(state.title.includes(state.heading));
+      assert.ok(!state.description.includes("السيرة الذاتية"));
+      assert.match(state.projectKey, /^cs_/);
+      assert.deepEqual(state.schemaTypes, ["Person", "CreativeWork", "BreadcrumbList"]);
+      assert.equal(state.previewControls, "live-embed-viewer");
+      assert.equal(state.previewHidden, true);
+      assert.equal(state.selectedDevices, 1);
+      assert.ok(state.sandbox?.includes("allow-scripts"));
       assert.deepEqual(runtimeErrors, []);
 
-      for (const selector of [".theme-toggle", ".contrast-toggle"]) {
-        await page.locator(selector).click();
+      const caseImage = page.locator(".case-study-image").first();
+      await caseImage.click();
+      assert.equal(await page.locator("#image-lightbox").evaluate((dialog) => dialog.open), true);
+      await page.keyboard.press("Tab");
+      assert.equal(
+        await page.evaluate(() => Boolean(document.activeElement?.closest("#image-lightbox"))),
+        true,
+      );
+      await page.keyboard.press("Escape");
+      assert.equal(await page.locator("#image-lightbox").evaluate((dialog) => dialog.open), false);
+
+      for (const selector of [".lang-toggle", ".theme-toggle", ".contrast-toggle"]) {
+        await page.locator(selector).first().click();
         await page.waitForTimeout(250);
         const accessibility = await new AxeBuilder({ page }).analyze();
         assert.deepEqual(

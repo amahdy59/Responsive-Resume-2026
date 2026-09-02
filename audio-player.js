@@ -38,13 +38,16 @@
     const textEl = btn.querySelector('.audio-btn-text');
     const useEl = btn.querySelector('use');
 
+    const isArabic = document.documentElement.lang === 'ar';
     if (isPlaying) {
       btn.classList.add('is-playing');
-      if (textEl) textEl.textContent = 'Pause';
+      if (textEl) textEl.textContent = isArabic ? 'إيقاف مؤقت' : 'Pause';
+      btn.setAttribute('aria-label', isArabic ? 'إيقاف السرد مؤقتًا' : 'Pause narration');
       if (useEl) useEl.setAttribute('href', '#icon-pause');
     } else {
       btn.classList.remove('is-playing');
-      if (textEl) textEl.textContent = 'Listen';
+      if (textEl) textEl.textContent = isArabic ? 'استمع' : 'Listen';
+      btn.setAttribute('aria-label', isArabic ? 'استمع إلى المحتوى' : 'Listen to this content');
       if (useEl) useEl.setAttribute('href', '#icon-volume');
     }
   }
@@ -81,21 +84,11 @@
 
     const audioSrc = `assets/audio/${audioId}.mp3`;
 
-    fetch(audioSrc, { method: 'HEAD' })
-      .then(res => {
-        if (res.ok) {
-          const audio = new Audio(audioSrc);
-          currentAudio = audio;
-          audio.onended = stopAllAudio;
-          audio.onerror = () => fallbackSpeech(targetContainer, btn);
-          audio.play().catch(() => fallbackSpeech(targetContainer, btn));
-        } else {
-          fallbackSpeech(targetContainer, btn);
-        }
-      })
-      .catch(() => {
-        fallbackSpeech(targetContainer, btn);
-      });
+    const audio = new Audio(audioSrc);
+    currentAudio = audio;
+    audio.onended = stopAllAudio;
+    audio.onerror = () => fallbackSpeech(targetContainer, btn);
+    audio.play().catch(() => fallbackSpeech(targetContainer, btn));
   }
 
   function fallbackSpeech(targetContainer, btn) {
