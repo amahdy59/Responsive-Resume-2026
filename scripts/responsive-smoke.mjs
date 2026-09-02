@@ -281,66 +281,75 @@ try {
   ];
 
   for (const file of caseStudyFiles) {
-    const context = await browser.newContext({ viewport: { width: 375, height: 812 } });
-    await context.route(/https:\/\/fonts\.googleapis\.com\//, (route) =>
-      route.fulfill({ body: "", contentType: "text/css", status: 200 }),
-    );
-    const page = await context.newPage();
-    const runtimeErrors = [];
-    page.on("console", (message) => {
-      if (message.type() === "error") runtimeErrors.push(message.text());
-    });
-    page.on("pageerror", (error) => runtimeErrors.push(error.message));
-
-    await page.goto(baseUrl);
-    await page.evaluate(() => localStorage.setItem("resume-lang", "ar"));
-    const response = await page.goto(`${baseUrl}/${file}`, { waitUntil: "networkidle" });
-    assert.equal(response?.status(), 200);
-
-    const state = await page.evaluate(() => ({
-      brokenImages: [...document.images].filter((image) => !image.complete || image.naturalWidth === 0).length,
-      canonical: document.querySelector('link[rel="canonical"]')?.href,
-      clientWidth: document.documentElement.clientWidth,
-      direction: document.documentElement.dir,
-      heading: document.querySelector("h1")?.textContent?.trim(),
-      language: document.documentElement.lang,
-      languageNotice: document.querySelector(".case-language-note")?.textContent.trim(),
-      paginationLinks: document.querySelectorAll(".case-study-pagination a").length,
-      resumeHref: document.querySelector('.case-study-nav a')?.getAttribute("href"),
-      scrollWidth: document.documentElement.scrollWidth,
-      title: document.title,
-    }));
-
-    assert.equal(state.language, "en");
-    assert.equal(state.direction, "ltr");
-    assert.ok(state.heading);
-    assert.equal(state.brokenImages, 0);
-    assert.equal(state.scrollWidth, state.clientWidth);
-    assert.equal(state.paginationLinks, 2);
-    assert.equal(state.resumeHref, "index.html#projects");
-    assert.ok(state.canonical?.endsWith(file));
-    assert.notEqual(state.title, "Ahmed Mahdy | UX Designer & Data Visualizer");
-    assert.equal(state.languageNotice, "دراسة الحالة متاحة حالياً باللغة الإنجليزية.");
-    assert.deepEqual(runtimeErrors, []);
-
-    for (const selector of [".theme-toggle", ".contrast-toggle"]) {
-      await page.locator(selector).click();
-      await page.waitForTimeout(250);
-      const accessibility = await new AxeBuilder({ page }).analyze();
-      assert.deepEqual(
-        accessibility.violations.map(({ id, impact }) => ({ id, impact })),
-        [],
+    try {
+      const context = await browser.newContext({ viewport: { width: 375, height: 812 } });
+      await context.route(/https:\/\/fonts\.googleapis\.com\//, (route) =>
+        route.fulfill({ body: "", contentType: "text/css", status: 200 }),
       );
+      const page = await context.newPage();
+      const runtimeErrors = [];
+      page.on("console", (message) => {
+        if (message.type() === "error") runtimeErrors.push(message.text());
+      });
+      page.on("pageerror", (error) => runtimeErrors.push(error.message));
+
+      await page.goto(baseUrl);
+      await page.evaluate(() => localStorage.setItem("resume-lang", "ar"));
+      const response = await page.goto(`${baseUrl}/${file}`, { waitUntil: "networkidle" });
+      assert.equal(response?.status(), 200);
+
+      const state = await page.evaluate(() => ({
+        brokenImages: [...document.images].filter((image) => !image.complete || image.naturalWidth === 0).length,
+        canonical: document.querySelector('link[rel="canonical"]')?.href,
+        clientWidth: document.documentElement.clientWidth,
+        direction: document.documentElement.dir,
+        heading: document.querySelector("h1")?.textContent?.trim(),
+        language: document.documentElement.lang,
+        languageNotice: document.querySelector(".case-language-note")?.textContent.trim(),
+        paginationLinks: document.querySelectorAll(".case-study-pagination a").length,
+        resumeHref: document.querySelector('.case-study-nav a')?.getAttribute("href"),
+        scrollWidth: document.documentElement.scrollWidth,
+        title: document.title,
+      }));
+
+      assert.equal(state.language, "en");
+      assert.equal(state.direction, "ltr");
+      assert.ok(state.heading);
+      assert.equal(state.brokenImages, 0);
+      assert.ok(
+        state.scrollWidth <= state.clientWidth,
+        `Case study ${file} has horizontal overflow: scrollWidth=${state.scrollWidth}px clientWidth=${state.clientWidth}px`,
+      );
+      assert.equal(state.paginationLinks, 2);
+      assert.equal(state.resumeHref, "index.html#projects");
+      assert.ok(state.canonical?.endsWith(file));
+      assert.notEqual(state.title, "Ahmed Mahdy | UX Designer & Data Visualizer");
+      assert.equal(state.languageNotice, "دراسة الحالة متاحة حالياً باللغة الإنجليزية.");
+      assert.deepEqual(runtimeErrors, []);
+
+      for (const selector of [".theme-toggle", ".contrast-toggle"]) {
+        await page.locator(selector).click();
+        await page.waitForTimeout(250);
+        const accessibility = await new AxeBuilder({ page }).analyze();
+        assert.deepEqual(
+          accessibility.violations.map(({ id, impact }) => ({ id, impact })),
+          [],
+        );
+      }
+
+      await page.emulateMedia({ media: "print" });
+      assert.equal(
+        await page.locator(".case-study-section").first().evaluate((section) => getComputedStyle(section).opacity),
+        "1",
+      );
+
+      await context.close();
+      console.log(`Passed case study ${file}`);
+    } catch (err) {
+      console.error(`❌ FAILED case study: ${file}`);
+      console.error(err);
+      throw err;
     }
-
-    await page.emulateMedia({ media: "print" });
-    assert.equal(
-      await page.locator(".case-study-section").first().evaluate((section) => getComputedStyle(section).opacity),
-      "1",
-    );
-
-    await context.close();
-    console.log(`Passed case study ${file}`);
   }
 } catch (error) {
   console.error("FATAL Smoke test failure:", error);
