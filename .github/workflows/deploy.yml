@@ -42,8 +42,14 @@ jobs:
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
 
-      - name: Validate, build, and run browser smoke tests
-        run: npm test
+      - name: Validate assets and dictionaries
+        run: npm run check
+
+      - name: Build static distribution
+        run: npm run build
+
+      - name: Run browser smoke & accessibility tests
+        run: npm run test:browser
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
