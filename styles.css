@@ -540,76 +540,6 @@ h1 {
   margin-top: 12px;
 }
 
-.identity-copy > .hero-value {
-  max-width: 42rem;
-  margin-top: 12px;
-  color: #fff;
-  font-size: 0.94rem;
-  line-height: 1.55;
-}
-
-.hero-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 14px;
-}
-
-.hero-work-action,
-.hero-print-action {
-  margin-top: 0;
-}
-
-.hero-work-action {
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
-  padding: 9px 14px;
-  color: #004d70;
-  background: #fff;
-  border: 1px solid #fff;
-  border-radius: 9px;
-  font-size: 0.86rem;
-  font-weight: 750;
-  text-decoration: none;
-}
-
-.hero-work-action:hover,
-.hero-work-action:focus-visible {
-  color: #fff;
-  background: transparent;
-}
-
-.hero-print-action {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  min-height: 44px;
-  margin-top: 14px;
-  padding: 9px 14px;
-  color: #fff;
-  background: rgb(255 255 255 / 14%);
-  border: 1px solid rgb(255 255 255 / 42%);
-  border-radius: 9px;
-  font: inherit;
-  font-size: 0.86rem;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.hero-print-action:hover,
-.hero-print-action:focus-visible {
-  background: rgb(255 255 255 / 26%);
-}
-
-.hero-print-action svg {
-  width: 17px;
-  height: 17px;
-  fill: none;
-  stroke: currentcolor;
-  stroke-width: 2;
-}
-
 .tags span {
   padding: 3px 9px;
   background: var(--tag-bg);
@@ -1269,32 +1199,7 @@ h1 {
   color: var(--text-secondary);
 }
 
-.projects-panel > .project-disclosure {
-  margin: 10px 0 16px;
-  padding: 10px 12px;
-  color: var(--text-secondary);
-  background: var(--surface-soft);
-  border-inline-start: 3px solid var(--blue);
-  border-radius: var(--radius-sm);
-  font-size: var(--text-sm);
-  line-height: 1.55;
-}
 
-.featured article .project-card-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin: 0 0 10px;
-  color: var(--text-secondary);
-  font-size: var(--text-xs);
-}
-
-.project-card-meta span {
-  padding: 3px 7px;
-  background: var(--surface-soft);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-pill);
-}
 
 .project-actions {
   display: flex;
