@@ -55,6 +55,7 @@ function fetchJson(url) {
 function checkLiveUrl(url) {
   return new Promise((resolve) => {
     const start = Date.now();
+    const minimumBytes = url.endsWith("/robots.txt") ? 20 : 500;
     https
       .get(url, (res) => {
         let bodyLength = 0;
@@ -65,7 +66,7 @@ function checkLiveUrl(url) {
             status: res.statusCode,
             durationMs: Date.now() - start,
             sizeBytes: bodyLength,
-            ok: res.statusCode === 200 && bodyLength > 500,
+            ok: res.statusCode === 200 && bodyLength > minimumBytes,
           });
         });
       })
@@ -233,9 +234,8 @@ async function verifyDeployment() {
       "🎉 ALL SYSTEMS OPERATIONAL: Deployment is 100% live & verified!",
     );
   } else {
-    console.warn(
-      "⚠️ Some endpoints returned non-200 responses. Check DNS/Pages propagation.",
-    );
+    console.warn("⚠️ One or more production health checks failed.");
+    process.exitCode = 1;
   }
   console.log("========================================================\n");
 }
