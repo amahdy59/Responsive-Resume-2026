@@ -15,12 +15,16 @@ const CASE_STUDY_PATHS = [
 
 function fetchJson(url) {
   return new Promise((resolve, reject) => {
-    const options = {
-      headers: {
-        "User-Agent": "Portfolio-Deployment-Checker/1.0",
-        Accept: "application/vnd.github.v3+json",
-      },
+    const headers = {
+      "User-Agent": "Portfolio-Deployment-Checker/1.0",
+      Accept: "application/vnd.github.v3+json",
     };
+    const token = process.env.GITHUB_TOKEN || process.env.GH_TOKEN;
+    if (token) {
+      headers.Authorization = `Bearer ${token}`;
+    }
+
+    const options = { headers };
 
     https.get(url, options, (res) => {
       let data = "";
@@ -126,6 +130,10 @@ async function verifyDeployment() {
         );
       }
     } catch (err) {
+      if (err.message.includes("403") || err.message.includes("rate limit")) {
+        console.log("\nℹ️ GitHub API rate limit reached for unauthenticated requests. Skipping to live health checks...");
+        break;
+      }
       process.stdout.write(`\r[Warning] API fetch notice: ${err.message}   `);
     }
 
@@ -133,16 +141,13 @@ async function verifyDeployment() {
   }
 
   if (!run || run.status !== "completed") {
-    console.log("\n\n⚠️ Timed out waiting for GitHub Actions run to complete.");
-    console.log(`👉 Check status manually at: https://github.com/${REPO_OWNER}/${REPO_NAME}/actions`);
-    return;
-  }
-
-  // Fetch job details
-  try {
-    const jobsData = await fetchJson(
-      `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/actions/runs/${run.id}/jobs`
-    );
+    console.log("\n\n⚠️ Could not poll GitHub Actions status (rate limit or timeout). Proceeding to live checks.");
+  } else {
+    // Fetch job details
+    try {
+      const jobsData = await fetchJson(
+        `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/actions/runs/${run.id}/jobs`
+      );
 
     console.log("📋 Workflow Step Breakdown:");
     if (jobsData.jobs && jobsData.jobs.length) {
@@ -165,13 +170,14 @@ async function verifyDeployment() {
     console.log(`Could not fetch job step details: ${err.message}`);
   }
 
-  if (run.conclusion !== "success") {
-    console.error(`\n❌ Deployment FAILED for commit ${shortSha}!`);
-    console.error(`🔗 Workflow logs: ${run.html_url}`);
-    process.exit(1);
-  }
+    if (run.conclusion !== "success") {
+      console.error(`\n❌ Deployment FAILED for commit ${shortSha}!`);
+      console.error(`🔗 Workflow logs: ${run.html_url}`);
+      process.exit(1);
+    }
 
-  console.log(`\n✅ GitHub Actions deployment SUCCEEDED for commit ${shortSha}!`);
+    console.log(`\n✅ GitHub Actions deployment SUCCEEDED for commit ${shortSha}!`);
+  }
 
   // Run live production endpoint health check
   console.log("\n🌐 Running Live Production Health Checks...");
