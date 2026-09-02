@@ -27,17 +27,25 @@ const htmlAttrKeyPattern = /data-translate-attr-key="([^"]+)"/g;
 const blankLinkPattern = /<a\b[^>]*target="_blank"[^>]*rel="([^"]*)"[^>]*>/g;
 
 function uniqueMatches(source, pattern) {
-  return [...new Set([...source.matchAll(pattern)].map((match) => match[1]))].sort();
+  return [
+    ...new Set([...source.matchAll(pattern)].map((match) => match[1])),
+  ].sort();
 }
 
 function getDictionaryKeys(language) {
-  const match = [...script.matchAll(translationKeyPattern)].find((item) => item[1] === language);
+  const match = [...script.matchAll(translationKeyPattern)].find(
+    (item) => item[1] === language,
+  );
 
   if (!match) {
     throw new Error(`Missing translation dictionary for "${language}"`);
   }
 
-  return [...new Set([...match[2].matchAll(dictionaryKeyPattern)].map((item) => item[1]))].sort();
+  return [
+    ...new Set(
+      [...match[2].matchAll(dictionaryKeyPattern)].map((item) => item[1]),
+    ),
+  ].sort();
 }
 
 const allHtmlSource = htmlDocuments.map(({ source }) => source).join("\n");
@@ -69,23 +77,41 @@ for (const { file, source } of htmlDocuments) {
     const relValue = match[1];
 
     if (!relValue.includes("noopener") || !relValue.includes("noreferrer")) {
-      errors.push(`${file} has an external link without rel="noopener noreferrer": ${match[0]}`);
+      errors.push(
+        `${file} has an external link without rel="noopener noreferrer": ${match[0]}`,
+      );
     }
   }
 
   const ids = [...source.matchAll(/\bid="([^"]+)"/g)].map((match) => match[1]);
   const duplicateIds = ids.filter((id, index) => ids.indexOf(id) !== index);
   if (duplicateIds.length > 0) {
-    errors.push(`${file} has duplicate IDs: ${[...new Set(duplicateIds)].join(", ")}`);
+    errors.push(
+      `${file} has duplicate IDs: ${[...new Set(duplicateIds)].join(", ")}`,
+    );
   }
 
   if (source.includes("placehold.co")) {
     errors.push(`${file} still uses a placeholder image.`);
   }
 
-  for (const match of source.matchAll(/\b(?:href|src|srcset)="((?:project-[^"]+\.html)|(?:assets\/[^"]+))"/g)) {
+  for (const match of source.matchAll(
+    /\b(?:href|src)="((?:project-[^"]+\.html)|(?:assets\/[^"]+))"/g,
+  )) {
     if (!existsSync(resolve(root, match[1]))) {
       errors.push(`${file} references missing local resource: ${match[1]}`);
+    }
+  }
+
+  for (const match of source.matchAll(/\bsrcset="([^"]+)"/g)) {
+    for (const candidate of match[1].split(",")) {
+      const resource = candidate.trim().split(/\s+/)[0];
+      if (
+        resource.startsWith("assets/") &&
+        !existsSync(resolve(root, resource))
+      ) {
+        errors.push(`${file} references missing responsive image: ${resource}`);
+      }
     }
   }
 }
@@ -95,10 +121,14 @@ if (htmlDocuments.some(({ source }) => source.includes('rel="manifest"'))) {
 }
 
 if (/serviceWorker\.register|event\.key\.toLowerCase\(\)/.test(script)) {
-  errors.push("Removed PWA registration or global character shortcuts were reintroduced.");
+  errors.push(
+    "Removed PWA registration or global character shortcuts were reintroduced.",
+  );
 }
 
-if (htmlDocuments.some(({ source }) => /assets\/case-[^"]+\.jpg/.test(source))) {
+if (
+  htmlDocuments.some(({ source }) => /assets\/case-[^"]+\.jpg/.test(source))
+) {
   errors.push("A case study still references a superseded JPEG asset.");
 }
 
@@ -106,13 +136,22 @@ if (!html.includes('<script src="audio-player.js"></script>')) {
   errors.push("Homepage audio controls exist without loading audio-player.js.");
 }
 
-if (html.includes("data-skill-filter") || /role="listitem"[^>]*tabindex/.test(html)) {
-  errors.push("Informational skill chips must not behave as keyboard controls.");
+if (
+  html.includes("data-skill-filter") ||
+  /role="listitem"[^>]*tabindex/.test(html)
+) {
+  errors.push(
+    "Informational skill chips must not behave as keyboard controls.",
+  );
 }
 
-for (const { file, source } of htmlDocuments.filter(({ file }) => file !== "index.html")) {
+for (const { file, source } of htmlDocuments.filter(
+  ({ file }) => file !== "index.html",
+)) {
   if (!/data-project-key="cs_[^"]+"/.test(source)) {
-    errors.push(`${file} is missing its project-specific localization metadata key.`);
+    errors.push(
+      `${file} is missing its project-specific localization metadata key.`,
+    );
   }
   if (!/data-toggle-embed[^>]*aria-controls="live-embed-viewer"/.test(source)) {
     errors.push(`${file} preview toggle is missing aria-controls.`);
@@ -122,8 +161,14 @@ for (const { file, source } of htmlDocuments.filter(({ file }) => file !== "inde
   }
 }
 
-if (/WCAG 2\.2 AAA|Analytics show high daily retention|Reduced average request turnaround from 3 days/.test(allHtmlSource + script)) {
-  errors.push("Unsupported accessibility or outcome claims remain in published content.");
+if (
+  /WCAG 2\.2 AAA|Analytics show high daily retention|Reduced average request turnaround from 3 days/.test(
+    allHtmlSource + script,
+  )
+) {
+  errors.push(
+    "Unsupported accessibility or outcome claims remain in published content.",
+  );
 }
 
 for (const assetPath of [
@@ -148,7 +193,9 @@ for (const assetPath of [
 }
 
 if (!html.includes('rel="canonical" href="https://creativemahdy.space/"')) {
-  warnings.push("Canonical URL is missing or has changed from the expected production URL.");
+  warnings.push(
+    "Canonical URL is missing or has changed from the expected production URL.",
+  );
 }
 
 if (errors.length > 0) {
@@ -167,7 +214,9 @@ if (errors.length > 0) {
   process.exit(1);
 }
 
-console.log("Validation passed: all assets, translation dictionaries, and case study links verified.");
+console.log(
+  "Validation passed: all assets, translation dictionaries, and case study links verified.",
+);
 
 if (warnings.length > 0) {
   console.log("\nWarnings:");

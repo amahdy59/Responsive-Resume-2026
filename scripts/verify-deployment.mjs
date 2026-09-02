@@ -6,11 +6,17 @@ const REPO_NAME = "Responsive-Resume-2026";
 const PRODUCTION_DOMAIN = "https://creativemahdy.space";
 const CASE_STUDY_PATHS = [
   "/",
+  "/en/",
+  "/ar/",
+  "/sitemap.xml",
+  "/robots.txt",
   "/project-haj-arafa.html",
   "/project-cairo-airport.html",
   "/project-hr-tool.html",
   "/project-azkar-app.html",
   "/project-lego-explorer.html",
+  "/en/case-studies/haj-arafa/",
+  "/ar/case-studies/haj-arafa/",
 ];
 
 function fetchJson(url) {
@@ -26,48 +32,52 @@ function fetchJson(url) {
 
     const options = { headers };
 
-    https.get(url, options, (res) => {
-      let data = "";
-      res.on("data", (chunk) => (data += chunk));
-      res.on("end", () => {
-        try {
-          if (res.statusCode >= 400) {
-            reject(new Error(`HTTP ${res.statusCode}: ${data}`));
-          } else {
-            resolve(JSON.parse(data));
+    https
+      .get(url, options, (res) => {
+        let data = "";
+        res.on("data", (chunk) => (data += chunk));
+        res.on("end", () => {
+          try {
+            if (res.statusCode >= 400) {
+              reject(new Error(`HTTP ${res.statusCode}: ${data}`));
+            } else {
+              resolve(JSON.parse(data));
+            }
+          } catch (err) {
+            reject(err);
           }
-        } catch (err) {
-          reject(err);
-        }
-      });
-    }).on("error", reject);
+        });
+      })
+      .on("error", reject);
   });
 }
 
 function checkLiveUrl(url) {
   return new Promise((resolve) => {
     const start = Date.now();
-    https.get(url, (res) => {
-      let bodyLength = 0;
-      res.on("data", (chunk) => (bodyLength += chunk.length));
-      res.on("end", () => {
+    https
+      .get(url, (res) => {
+        let bodyLength = 0;
+        res.on("data", (chunk) => (bodyLength += chunk.length));
+        res.on("end", () => {
+          resolve({
+            url,
+            status: res.statusCode,
+            durationMs: Date.now() - start,
+            sizeBytes: bodyLength,
+            ok: res.statusCode === 200 && bodyLength > 500,
+          });
+        });
+      })
+      .on("error", (err) => {
         resolve({
           url,
-          status: res.statusCode,
+          status: 0,
+          error: err.message,
           durationMs: Date.now() - start,
-          sizeBytes: bodyLength,
-          ok: res.statusCode === 200 && bodyLength > 500,
+          ok: false,
         });
       });
-    }).on("error", (err) => {
-      resolve({
-        url,
-        status: 0,
-        error: err.message,
-        durationMs: Date.now() - start,
-        ok: false,
-      });
-    });
   });
 }
 
@@ -96,7 +106,9 @@ async function verifyDeployment() {
   console.log(`📡 Repository: ${REPO_OWNER}/${REPO_NAME}`);
   console.log("========================================================\n");
 
-  console.log(`⏳ Monitoring GitHub Actions workflow for commit ${shortSha}...`);
+  console.log(
+    `⏳ Monitoring GitHub Actions workflow for commit ${shortSha}...`,
+  );
 
   let run = null;
   const maxAttempts = 45; // ~3.5 minutes max
@@ -104,20 +116,23 @@ async function verifyDeployment() {
   for (let attempt = 1; attempt <= maxAttempts; attempt++) {
     try {
       const data = await fetchJson(
-        `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/actions/runs?per_page=10`
+        `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/actions/runs?per_page=10`,
       );
 
       const matchingRun = data.workflow_runs?.find(
-        (r) => r.head_sha.startsWith(targetSha) || targetSha.startsWith(r.head_sha)
+        (r) =>
+          r.head_sha.startsWith(targetSha) || targetSha.startsWith(r.head_sha),
       );
 
       if (matchingRun) {
         run = matchingRun;
         const status = run.status.toUpperCase();
-        const conclusion = run.conclusion ? run.conclusion.toUpperCase() : "PENDING";
+        const conclusion = run.conclusion
+          ? run.conclusion.toUpperCase()
+          : "PENDING";
 
         process.stdout.write(
-          `\r[Attempt ${attempt}/${maxAttempts}] Workflow: ${run.name} | Status: ${status} | Conclusion: ${conclusion}   `
+          `\r[Attempt ${attempt}/${maxAttempts}] Workflow: ${run.name} | Status: ${status} | Conclusion: ${conclusion}   `,
         );
 
         if (run.status === "completed") {
@@ -126,12 +141,14 @@ async function verifyDeployment() {
         }
       } else {
         process.stdout.write(
-          `\r[Attempt ${attempt}/${maxAttempts}] Waiting for GitHub Actions to register commit ${shortSha}...   `
+          `\r[Attempt ${attempt}/${maxAttempts}] Waiting for GitHub Actions to register commit ${shortSha}...   `,
         );
       }
     } catch (err) {
       if (err.message.includes("403") || err.message.includes("rate limit")) {
-        console.log("\nℹ️ GitHub API rate limit reached for unauthenticated requests. Skipping to live health checks...");
+        console.log(
+          "\nℹ️ GitHub API rate limit reached for unauthenticated requests. Skipping to live health checks...",
+        );
         break;
       }
       process.stdout.write(`\r[Warning] API fetch notice: ${err.message}   `);
@@ -141,34 +158,38 @@ async function verifyDeployment() {
   }
 
   if (!run || run.status !== "completed") {
-    console.log("\n\n⚠️ Could not poll GitHub Actions status (rate limit or timeout). Proceeding to live checks.");
+    console.log(
+      "\n\n⚠️ Could not poll GitHub Actions status (rate limit or timeout). Proceeding to live checks.",
+    );
   } else {
     // Fetch job details
     try {
       const jobsData = await fetchJson(
-        `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/actions/runs/${run.id}/jobs`
+        `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/actions/runs/${run.id}/jobs`,
       );
 
-    console.log("📋 Workflow Step Breakdown:");
-    if (jobsData.jobs && jobsData.jobs.length) {
-      for (const job of jobsData.jobs) {
-        console.log(`\n  Job: ${job.name} (${job.conclusion})`);
-        for (const step of job.steps) {
-          const icon =
-            step.conclusion === "success"
-              ? "✅"
-              : step.conclusion === "failure"
-              ? "❌"
-              : step.conclusion === "skipped"
-              ? "⏭️"
-              : "⏳";
-          console.log(`    ${icon} ${step.name} [${step.conclusion || step.status}]`);
+      console.log("📋 Workflow Step Breakdown:");
+      if (jobsData.jobs?.length) {
+        for (const job of jobsData.jobs) {
+          console.log(`\n  Job: ${job.name} (${job.conclusion})`);
+          for (const step of job.steps) {
+            const icon =
+              step.conclusion === "success"
+                ? "✅"
+                : step.conclusion === "failure"
+                  ? "❌"
+                  : step.conclusion === "skipped"
+                    ? "⏭️"
+                    : "⏳";
+            console.log(
+              `    ${icon} ${step.name} [${step.conclusion || step.status}]`,
+            );
+          }
         }
       }
+    } catch (err) {
+      console.log(`Could not fetch job step details: ${err.message}`);
     }
-  } catch (err) {
-    console.log(`Could not fetch job step details: ${err.message}`);
-  }
 
     if (run.conclusion !== "success") {
       console.error(`\n❌ Deployment FAILED for commit ${shortSha}!`);
@@ -176,7 +197,9 @@ async function verifyDeployment() {
       process.exit(1);
     }
 
-    console.log(`\n✅ GitHub Actions deployment SUCCEEDED for commit ${shortSha}!`);
+    console.log(
+      `\n✅ GitHub Actions deployment SUCCEEDED for commit ${shortSha}!`,
+    );
   }
 
   // Run live production endpoint health check
@@ -192,23 +215,27 @@ async function verifyDeployment() {
       console.log(
         `  ✅ [HTTP ${result.status}] ${path.padEnd(30)} (${result.durationMs}ms, ${(
           result.sizeBytes / 1024
-        ).toFixed(1)} KB)`
+        ).toFixed(1)} KB)`,
       );
     } else {
       allLiveOk = false;
       console.error(
         `  ❌ [HTTP ${result.status || "ERR"}] ${path.padEnd(30)} Error: ${
           result.error || "Invalid response"
-        }`
+        }`,
       );
     }
   }
 
   console.log("\n========================================================");
   if (allLiveOk) {
-    console.log("🎉 ALL SYSTEMS OPERATIONAL: Deployment is 100% live & verified!");
+    console.log(
+      "🎉 ALL SYSTEMS OPERATIONAL: Deployment is 100% live & verified!",
+    );
   } else {
-    console.warn("⚠️ Some endpoints returned non-200 responses. Check DNS/Pages propagation.");
+    console.warn(
+      "⚠️ Some endpoints returned non-200 responses. Check DNS/Pages propagation.",
+    );
   }
   console.log("========================================================\n");
 }

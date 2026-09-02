@@ -28,7 +28,8 @@ const mimeTypes = {
 function getSafePath(urlPath) {
   const decodedPath = decodeURIComponent(urlPath.split("?")[0]);
   const cleanPath = normalize(decodedPath);
-  const requestedPath = decodedPath === "/" ? "index.html" : cleanPath.replace(/^[/\\]+/, "");
+  const requestedPath =
+    decodedPath === "/" ? "index.html" : cleanPath.replace(/^[/\\]+/, "");
   const resolvedPath = resolve(root, requestedPath);
 
   if (!resolvedPath.startsWith(root)) {
@@ -50,7 +51,9 @@ const server = createServer(async (request, response) => {
   const fileStat = await stat(filePath);
 
   if (fileStat.isDirectory()) {
-    response.writeHead(301, { location: `${request.url?.replace(/\/?$/, "/") || "/"}index.html` });
+    response.writeHead(301, {
+      location: `${request.url?.replace(/\/?$/, "/") || "/"}index.html`,
+    });
     response.end();
     return;
   }
@@ -66,6 +69,7 @@ const server = createServer(async (request, response) => {
 
 server.listen(port, "127.0.0.1", () => {
   const address = server.address();
-  const activePort = typeof address === "object" && address ? address.port : port;
+  const activePort =
+    typeof address === "object" && address ? address.port : port;
   console.log(`Serving ${join(root)} at http://127.0.0.1:${activePort}`);
 });

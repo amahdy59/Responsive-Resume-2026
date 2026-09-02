@@ -17,12 +17,15 @@ const mimeTypes = {
   ".png": "image/png",
   ".svg": "image/svg+xml",
   ".webp": "image/webp",
+  ".woff2": "font/woff2",
+  ".xml": "application/xml; charset=utf-8",
 };
 
 function getSafePath(urlPath) {
   const decodedPath = decodeURIComponent(urlPath.split("?")[0]);
   const cleanPath = normalize(decodedPath);
-  const requestedPath = decodedPath === "/" ? "index.html" : cleanPath.replace(/^[/\\]+/, "");
+  const requestedPath =
+    decodedPath === "/" ? "index.html" : cleanPath.replace(/^[/\\]+/, "");
   const resolvedPath = resolve(root, requestedPath);
   if (!resolvedPath.startsWith(root)) return null;
   return resolvedPath;
@@ -37,7 +40,9 @@ const server = createServer(async (request, response) => {
   }
   const fileStat = await stat(filePath);
   if (fileStat.isDirectory()) {
-    response.writeHead(301, { location: `${request.url?.replace(/\/?$/, "/") || "/"}index.html` });
+    response.writeHead(301, {
+      location: `${request.url?.replace(/\/?$/, "/") || "/"}index.html`,
+    });
     response.end();
     return;
   }
@@ -65,13 +70,16 @@ const scenarios = [
   { language: "ar", width: 375, height: 812 },
   { language: "en", width: 768, height: 1024 },
   { language: "ar", width: 768, height: 1024 },
+  { language: "en", width: 1280, height: 800 },
+  { language: "ar", width: 1440, height: 900 },
+  { language: "en", width: 1920, height: 1080 },
 ];
 
 let browser;
 
 try {
   console.log(`▶ In-process preview server listening at: ${baseUrl}`);
-  
+
   const healthRes = await fetch(`${baseUrl}/?smoke=1`);
   console.log(`▶ Initial HTTP health probe status: ${healthRes.status}`);
   assert.equal(healthRes.status, 200);
@@ -79,7 +87,11 @@ try {
   console.log("▶ Launching headless Chromium browser...");
   browser = await chromium.launch({
     headless: true,
-    args: ["--no-sandbox", "--disable-setuid-sandbox", "--disable-dev-shm-usage"],
+    args: [
+      "--no-sandbox",
+      "--disable-setuid-sandbox",
+      "--disable-dev-shm-usage",
+    ],
   });
   console.log("✅ Chromium browser ready. Running viewport scenarios...");
 
@@ -88,8 +100,10 @@ try {
       const context = await browser.newContext({
         viewport: { width: scenario.width, height: scenario.height },
       });
-      await context.route(/https:\/\/(fonts\.googleapis\.com|fonts\.gstatic\.com)\/.*/, (route) =>
-        route.fulfill({ body: "", contentType: "text/css", status: 200 }),
+      await context.route(
+        /https:\/\/(fonts\.googleapis\.com|fonts\.gstatic\.com)\/.*/,
+        (route) =>
+          route.fulfill({ body: "", contentType: "text/css", status: 200 }),
       );
       const page = await context.newPage();
       page.setDefaultNavigationTimeout(10000);
@@ -101,7 +115,9 @@ try {
       });
       page.on("pageerror", (error) => runtimeErrors.push(error.message));
 
-      const response = await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
+      const response = await page.goto(baseUrl, {
+        waitUntil: "domcontentloaded",
+      });
       assert.equal(response?.status(), 200);
 
       if (scenario.language === "ar") {
@@ -115,7 +131,8 @@ try {
 
       const state = await page.evaluate(() => {
         const panels = [...document.querySelectorAll(".content-grid .panel")];
-        const panelName = (panel) => panel.querySelector("h2")?.textContent?.trim();
+        const panelName = (panel) =>
+          panel.querySelector("h2")?.textContent?.trim();
         const buttons = [...document.querySelectorAll("button")];
         const buttonNames = buttons
           .map((button) => button.getAttribute("aria-label"))
@@ -134,7 +151,9 @@ try {
           ).length,
           buttonNames,
           buttonsAreNamed: buttons.every((button) =>
-            Boolean(button.getAttribute("aria-label") || button.textContent.trim()),
+            Boolean(
+              button.getAttribute("aria-label") || button.textContent.trim(),
+            ),
           ),
           clientWidth: document.documentElement.clientWidth,
           direction: document.documentElement.dir,
@@ -143,7 +162,9 @@ try {
           innerWidth: window.innerWidth,
           language: document.documentElement.lang,
           audioControllerReady: Boolean(window.AntigravityAudio),
-          interactiveSkillCount: document.querySelectorAll('.pills [data-skill-filter], .pills [tabindex="0"]').length,
+          interactiveSkillCount: document.querySelectorAll(
+            '.pills [data-skill-filter], .pills [tabindex="0"]',
+          ).length,
           overflowingElements: [...document.querySelectorAll("body *")]
             .filter((element) => !element.closest(".section-nav"))
             .map((element) => {
@@ -158,27 +179,45 @@ try {
             .filter(({ left, right }) => left < 0 || right > window.innerWidth)
             .slice(0, 8),
           scrollWidth: document.documentElement.scrollWidth,
-          contactTexts: [...document.querySelectorAll(".contact-list a")].map((link) =>
-            link.childNodes[0]?.textContent.trim(),
+          contactTexts: [...document.querySelectorAll(".contact-list a")].map(
+            (link) => link.childNodes[0]?.textContent.trim(),
           ),
-          entityLinks: [...document.querySelectorAll(".li-entity-link")].map((link) => link.href),
-          externalIconCount: document.querySelectorAll('.project-btn-secondary .external-icon').length,
-          externalLinkCount: document.querySelectorAll('.project-btn-secondary').length,
+          entityLinks: [...document.querySelectorAll(".li-entity-link")].map(
+            (link) => link.href,
+          ),
+          externalIconCount: document.querySelectorAll(
+            ".project-btn-secondary .external-icon",
+          ).length,
+          externalLinkCount: document.querySelectorAll(".project-btn-secondary")
+            .length,
           resumeActionCount: document.querySelectorAll(".resume-action").length,
-          sectionLinks: [...document.querySelectorAll(".section-nav a")].map((link) => ({
-            targetExists: Boolean(document.querySelector(new URL(link.href).hash)),
-            text: link.textContent.trim(),
-          })),
-          sectionNavPosition: getComputedStyle(document.querySelector(".section-nav")).position,
+          sectionLinks: [...document.querySelectorAll(".section-nav a")].map(
+            (link) => ({
+              targetExists: Boolean(
+                document.querySelector(new URL(link.href).hash),
+              ),
+              text: link.textContent.trim(),
+            }),
+          ),
+          sectionNavPosition: getComputedStyle(
+            document.querySelector(".section-nav"),
+          ).position,
           sectionNavFits:
             document.querySelector(".section-nav").scrollWidth <=
             document.querySelector(".section-nav").clientWidth,
           skipTargetTabIndex: skipTarget?.tabIndex,
-          toolbarRole: document.querySelector(".controls-group")?.getAttribute("role"),
+          toolbarRole: document
+            .querySelector(".controls-group")
+            ?.getAttribute("role"),
           footerExists: Boolean(document.querySelector(".resume-footer")),
-          projectThumbnailCount: document.querySelectorAll('.project-thumbnail[src$=".webp"]').length,
+          projectThumbnailCount: document.querySelectorAll(
+            '.project-thumbnail[src$=".webp"]',
+          ).length,
           visualSectionOrder: panels
-            .toSorted((a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top)
+            .toSorted(
+              (a, b) =>
+                a.getBoundingClientRect().top - b.getBoundingClientRect().top,
+            )
             .map(panelName),
         };
       });
@@ -197,7 +236,11 @@ try {
       assert.equal(new Set(state.buttonNames).size, state.buttonNames.length);
       assert.equal(state.skipTargetTabIndex, -1);
       assert.equal(state.sectionLinks.length, 6);
-      assert.ok(state.sectionLinks.every(({ targetExists, text }) => targetExists && text));
+      assert.ok(
+        state.sectionLinks.every(
+          ({ targetExists, text }) => targetExists && text,
+        ),
+      );
       assert.equal(state.sectionNavPosition, "sticky");
       assert.equal(state.toolbarRole, "group");
       assert.equal(state.footerExists, true);
@@ -224,8 +267,22 @@ try {
         assert.deepEqual(
           state.domSectionOrder,
           scenario.language === "ar"
-            ? ["المشاريع", "الخبرات المهنية", "نبذة عني", "المهارات", "التعليم", "الشهادات المهنية"]
-            : ["Projects", "Employment", "About Me", "Skills", "Education", "Certifications"],
+            ? [
+                "المشاريع",
+                "الخبرات المهنية",
+                "نبذة عني",
+                "المهارات",
+                "التعليم",
+                "الشهادات المهنية",
+              ]
+            : [
+                "Projects",
+                "Employment",
+                "About Me",
+                "Skills",
+                "Education",
+                "Certifications",
+              ],
         );
       }
 
@@ -243,7 +300,9 @@ try {
         await page.evaluate(() => {
           window.Audio = class {
             pause() {}
-            play() { return Promise.resolve(); }
+            play() {
+              return Promise.resolve();
+            }
             set currentTime(_value) {}
           };
         });
@@ -261,7 +320,9 @@ try {
         });
         assert.equal(await page.evaluate(() => window.__printCalled), true);
 
-        const themeBeforeShortcut = await page.locator("html").getAttribute("data-theme");
+        const themeBeforeShortcut = await page
+          .locator("html")
+          .getAttribute("data-theme");
         await page.locator("body").press("t");
         assert.equal(
           await page.locator("html").getAttribute("data-theme"),
@@ -270,20 +331,29 @@ try {
 
         await page.locator('.section-nav a[href="#projects"]').click();
         assert.equal(
-          await page.locator("#projects").evaluate((panel) => getComputedStyle(panel).animationName),
+          await page
+            .locator("#projects")
+            .evaluate((panel) => getComputedStyle(panel).animationName),
           "targetPanel",
         );
 
         const firstProject = page.locator(".featured article").first();
         await firstProject.locator("a").first().focus();
         await page.waitForTimeout(60);
-        assert.notEqual(await firstProject.evaluate((article) => getComputedStyle(article).transform), "none");
+        assert.notEqual(
+          await firstProject.evaluate(
+            (article) => getComputedStyle(article).transform,
+          ),
+          "none",
+        );
 
         const firstEntity = page.locator(".li-entity-link").first();
         await firstEntity.hover();
         await page.waitForTimeout(60);
         assert.notEqual(
-          await firstEntity.locator(".li-company-logo").evaluate((logo) => getComputedStyle(logo).transform),
+          await firstEntity
+            .locator(".li-company-logo")
+            .evaluate((logo) => getComputedStyle(logo).transform),
           "none",
         );
 
@@ -306,22 +376,80 @@ try {
 
       if (scenario.width === 768) {
         await page.locator(".lang-toggle").focus();
-        const tooltip = await page.locator(".lang-toggle").evaluate((button) => {
-          const style = getComputedStyle(button, "::before");
-          return { left: style.left, right: style.right };
-        });
-        const outsideEdge = scenario.language === "ar" ? tooltip.left : tooltip.right;
-        assert.notEqual(outsideEdge, "auto", "Tablet tooltip should open away from the portrait");
+        const tooltip = await page
+          .locator(".lang-toggle")
+          .evaluate((button) => {
+            const style = getComputedStyle(button, "::before");
+            return { left: style.left, right: style.right };
+          });
+        const outsideEdge =
+          scenario.language === "ar" ? tooltip.left : tooltip.right;
+        assert.notEqual(
+          outsideEdge,
+          "auto",
+          "Tablet tooltip should open away from the portrait",
+        );
       }
 
       await context.close();
-      console.log(`Passed ${scenario.language} at ${scenario.width}x${scenario.height}`);
+      console.log(
+        `Passed ${scenario.language} at ${scenario.width}x${scenario.height}`,
+      );
     } catch (err) {
-      console.error(`::error::Failed scenario ${scenario.language} at ${scenario.width}x${scenario.height}: ${err.message}`);
-      console.error(`❌ FAILED scenario: ${scenario.language} at ${scenario.width}x${scenario.height}`);
+      console.error(
+        `::error::Failed scenario ${scenario.language} at ${scenario.width}x${scenario.height}: ${err.message}`,
+      );
+      console.error(
+        `❌ FAILED scenario: ${scenario.language} at ${scenario.width}x${scenario.height}`,
+      );
       console.error(err);
       throw err;
     }
+  }
+
+  for (const language of ["en", "ar"]) {
+    const context = await browser.newContext({
+      javaScriptEnabled: false,
+      locale: language === "ar" ? "ar-EG" : "en-US",
+      viewport: { width: 1280, height: 800 },
+    });
+    const page = await context.newPage();
+    const response = await page.goto(`${baseUrl}/${language}/`, {
+      waitUntil: "domcontentloaded",
+    });
+    assert.equal(response?.status(), 200);
+    assert.equal(await page.locator("html").getAttribute("lang"), language);
+    assert.equal(
+      await page.locator("html").getAttribute("dir"),
+      language === "ar" ? "rtl" : "ltr",
+    );
+    assert.ok(await page.locator("h1").textContent());
+    assert.equal(
+      await page
+        .locator('link[rel="stylesheet"]')
+        .first()
+        .evaluate((link) => Boolean(link.sheet)),
+      true,
+      `/${language}/ must load its generated stylesheet`,
+    );
+    assert.equal(
+      await page.locator('link[rel="alternate"][hreflang="en"]').count(),
+      1,
+    );
+    assert.equal(
+      await page.locator('link[rel="alternate"][hreflang="ar"]').count(),
+      1,
+    );
+    assert.equal(
+      await page.locator('link[rel="alternate"][hreflang="x-default"]').count(),
+      1,
+    );
+    assert.equal(
+      await page.locator('meta[http-equiv="Content-Security-Policy"]').count(),
+      1,
+    );
+    await context.close();
+    console.log(`Passed static no-JavaScript route /${language}/`);
   }
 
   const caseStudyFiles = [
@@ -334,9 +462,13 @@ try {
 
   for (const file of caseStudyFiles) {
     try {
-      const context = await browser.newContext({ viewport: { width: 375, height: 812 } });
-      await context.route(/https:\/\/(fonts\.googleapis\.com|fonts\.gstatic\.com)\/.*/, (route) =>
-        route.fulfill({ body: "", contentType: "text/css", status: 200 }),
+      const context = await browser.newContext({
+        viewport: { width: 375, height: 812 },
+      });
+      await context.route(
+        /https:\/\/(fonts\.googleapis\.com|fonts\.gstatic\.com)\/.*/,
+        (route) =>
+          route.fulfill({ body: "", contentType: "text/css", status: 200 }),
       );
       const page = await context.newPage();
       page.setDefaultNavigationTimeout(10000);
@@ -349,35 +481,55 @@ try {
 
       await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
       await page.evaluate(() => localStorage.setItem("resume-lang", "ar"));
-      const response = await page.goto(`${baseUrl}/${file}`, { waitUntil: "domcontentloaded" });
+      const response = await page.goto(`${baseUrl}/${file}`, {
+        waitUntil: "domcontentloaded",
+      });
       assert.equal(response?.status(), 200);
 
       const state = await page.evaluate(() => ({
-        brokenImages: [...document.images].filter((image) => !image.complete || image.naturalWidth === 0).length,
+        brokenImages: [...document.images].filter(
+          (image) => !image.complete || image.naturalWidth === 0,
+        ).length,
         canonical: document.querySelector('link[rel="canonical"]')?.href,
         clientWidth: document.documentElement.clientWidth,
         direction: document.documentElement.dir,
         heading: document.querySelector("h1")?.textContent?.trim(),
         language: document.documentElement.lang,
-        languageNotice: document.querySelector(".case-language-note")?.textContent.trim(),
-        paginationLinks: document.querySelectorAll(".case-study-pagination a").length,
-        resumeHref: document.querySelector('.case-study-nav a')?.getAttribute("href"),
+        languageNotice: document
+          .querySelector(".case-language-note")
+          ?.textContent.trim(),
+        paginationLinks: document.querySelectorAll(".case-study-pagination a")
+          .length,
+        resumeHref: document
+          .querySelector(".case-study-nav a")
+          ?.getAttribute("href"),
         scrollWidth: document.documentElement.scrollWidth,
         title: document.title,
-        description: document.querySelector('meta[name="description"]')?.content,
+        description: document.querySelector('meta[name="description"]')
+          ?.content,
         projectKey: document.body.dataset.projectKey,
         schemaTypes: (() => {
           try {
-            const schema = JSON.parse(document.querySelector('#person-schema')?.textContent || "[]");
-            return (Array.isArray(schema) ? schema : [schema]).map((entry) => entry["@type"]);
+            const schema = JSON.parse(
+              document.querySelector("#person-schema")?.textContent || "[]",
+            );
+            return (Array.isArray(schema) ? schema : [schema]).map(
+              (entry) => entry["@type"],
+            );
           } catch {
             return ["invalid"];
           }
         })(),
-        previewControls: document.querySelector('[data-toggle-embed]')?.getAttribute("aria-controls"),
-        previewHidden: document.querySelector('#live-embed-viewer')?.hidden,
-        selectedDevices: document.querySelectorAll('[data-set-device][aria-pressed="true"]').length,
-        sandbox: document.querySelector('.live-embed-iframe')?.getAttribute("sandbox"),
+        previewControls: document
+          .querySelector("[data-toggle-embed]")
+          ?.getAttribute("aria-controls"),
+        previewHidden: document.querySelector("#live-embed-viewer")?.hidden,
+        selectedDevices: document.querySelectorAll(
+          '[data-set-device][aria-pressed="true"]',
+        ).length,
+        sandbox: document
+          .querySelector(".live-embed-iframe")
+          ?.getAttribute("sandbox"),
       }));
 
       assert.equal(state.language, "ar");
@@ -391,11 +543,18 @@ try {
       assert.equal(state.paginationLinks, 2);
       assert.equal(state.resumeHref, "index.html#projects");
       assert.ok(state.canonical?.endsWith(file));
-      assert.notEqual(state.title, "Ahmed Mahdy | UX Designer & Data Visualizer");
+      assert.notEqual(
+        state.title,
+        "Ahmed Mahdy | UX Designer & Data Visualizer",
+      );
       assert.ok(state.title.includes(state.heading));
       assert.ok(!state.description.includes("السيرة الذاتية"));
       assert.match(state.projectKey, /^cs_/);
-      assert.deepEqual(state.schemaTypes, ["Person", "CreativeWork", "BreadcrumbList"]);
+      assert.deepEqual(state.schemaTypes, [
+        "Person",
+        "CreativeWork",
+        "BreadcrumbList",
+      ]);
       assert.equal(state.previewControls, "live-embed-viewer");
       assert.equal(state.previewHidden, true);
       assert.equal(state.selectedDevices, 1);
@@ -404,16 +563,28 @@ try {
 
       const caseImage = page.locator(".case-study-image").first();
       await caseImage.click();
-      assert.equal(await page.locator("#image-lightbox").evaluate((dialog) => dialog.open), true);
+      assert.equal(
+        await page.locator("#image-lightbox").evaluate((dialog) => dialog.open),
+        true,
+      );
       await page.keyboard.press("Tab");
       assert.equal(
-        await page.evaluate(() => Boolean(document.activeElement?.closest("#image-lightbox"))),
+        await page.evaluate(() =>
+          Boolean(document.activeElement?.closest("#image-lightbox")),
+        ),
         true,
       );
       await page.keyboard.press("Escape");
-      assert.equal(await page.locator("#image-lightbox").evaluate((dialog) => dialog.open), false);
+      assert.equal(
+        await page.locator("#image-lightbox").evaluate((dialog) => dialog.open),
+        false,
+      );
 
-      for (const selector of [".lang-toggle", ".theme-toggle", ".contrast-toggle"]) {
+      for (const selector of [
+        ".lang-toggle",
+        ".theme-toggle",
+        ".contrast-toggle",
+      ]) {
         await page.locator(selector).first().click();
         await page.waitForTimeout(250);
         const accessibility = await new AxeBuilder({ page }).analyze();
@@ -425,7 +596,10 @@ try {
 
       await page.emulateMedia({ media: "print" });
       assert.equal(
-        await page.locator(".case-study-section").first().evaluate((section) => getComputedStyle(section).opacity),
+        await page
+          .locator(".case-study-section")
+          .first()
+          .evaluate((section) => getComputedStyle(section).opacity),
         "1",
       );
 
@@ -439,7 +613,9 @@ try {
     }
   }
 } catch (error) {
-  console.error(`::error::FATAL Smoke test failure: ${error.stack || error.message || error}`);
+  console.error(
+    `::error::FATAL Smoke test failure: ${error.stack || error.message || error}`,
+  );
   console.error("FATAL Smoke test failure:", error);
   process.exitCode = 1;
 } finally {

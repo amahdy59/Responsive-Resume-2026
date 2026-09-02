@@ -1,0 +1,10 @@
+{
+  "extends": ["html-validate:recommended"],
+  "rules": {
+    "aria-label-misuse": "off",
+    "doctype-style": "off",
+    "no-raw-characters": "off",
+    "prefer-native-element": "off",
+    "void-style": "off"
+  }
+}

@@ -7,7 +7,8 @@ const storageKeys = {
 
 const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
 const savedTheme = localStorage.getItem(storageKeys.theme);
-const savedLang = localStorage.getItem(storageKeys.lang)
+const routeLanguage = location.pathname.match(/^\/(en|ar)(?:\/|$)/)?.[1];
+const savedLang = routeLanguage || localStorage.getItem(storageKeys.lang)
   || (navigator.languages?.some((language) => language.toLowerCase().startsWith("ar")) ? "ar" : "en");
 const savedContrast = localStorage.getItem(storageKeys.contrast) || "normal";
 
@@ -200,6 +201,8 @@ const translations = {
     cs_image_preview: "معاينة الصورة",
     cs_close_image_preview: "إغلاق معاينة الصورة",
     cs_zoom_image: "تكبير الصورة",
+    print_portfolio_title: "أحمد مهدي — ملف الأعمال التفاعلي ودراسات الحالة",
+    print_scan_online: "امسح للعرض عبر الإنترنت",
     cs_role: "الدور",
     cs_timeline: "المدة",
     cs_platform: "المنصة",
@@ -434,6 +437,8 @@ const translations = {
     cs_image_preview: "Image preview",
     cs_close_image_preview: "Close image preview",
     cs_zoom_image: "Zoom image",
+    print_portfolio_title: "Ahmed Mahdy — Interactive Portfolio & Case Studies",
+    print_scan_online: "Scan to View Online",
     cs_role: "Role",
     cs_timeline: "Timeline",
     cs_platform: "Platform",
@@ -641,9 +646,10 @@ function updateTranslatedText(lang) {
     const key = node.dataset.translate;
     const value = getTranslation(lang, key);
 
-    if (value) {
-      node.textContent = value;
-    }
+    if (!value) return;
+    const textNode = [...node.childNodes].find((child) => child.nodeType === Node.TEXT_NODE);
+    if (textNode && node.children.length) textNode.textContent = `${value} `;
+    else node.textContent = value;
   });
 }
 
@@ -869,6 +875,12 @@ function setContrast(contrast) {
  * @param {'en'|'ar'} lang - Language code to activate.
  */
 function setLanguage(lang, persist = true) {
+  const staticLocale = document.body.dataset.staticLocale;
+  if (persist && staticLocale && lang !== staticLocale) {
+    localStorage.setItem(storageKeys.lang, lang);
+    location.assign(`/${lang}${document.body.dataset.staticPath || "/"}`);
+    return;
+  }
   root.setAttribute("lang", lang);
   root.setAttribute("dir", lang === "ar" ? "rtl" : "ltr");
   if (persist) localStorage.setItem(storageKeys.lang, lang);
@@ -1261,6 +1273,7 @@ function initProjectCollapses() {
 
 function initialize() {
   initResponsiveContentOrder();
+  initSectionNavigation();
   enhanceLinkedCards();
   bindCopyButtons();
   initProjectFilters();
@@ -1269,6 +1282,22 @@ function initialize() {
   setTheme(savedTheme || (prefersDark ? "dark" : "light"));
   setContrast(savedContrast);
   setLanguage(savedLang, true);
+}
+
+function initSectionNavigation() {
+  const links = [...document.querySelectorAll('.section-nav a[href^="#"]')];
+  const targets = links.map((link) => document.querySelector(link.getAttribute("href"))).filter(Boolean);
+  if (!links.length || !targets.length || !("IntersectionObserver" in window)) return;
+  const setCurrent = (id) => links.forEach((link) => {
+    if (link.getAttribute("href") === `#${id}`) link.setAttribute("aria-current", "location");
+    else link.removeAttribute("aria-current");
+  });
+  const observer = new IntersectionObserver((entries) => {
+    const visible = entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+    if (visible) setCurrent(visible.target.id);
+  }, { rootMargin: "-20% 0px -65%", threshold: [0, 0.1, 0.5] });
+  targets.forEach((target) => observer.observe(target));
+  links.forEach((link) => link.addEventListener("click", () => setCurrent(link.hash.slice(1))));
 }
 
 function initResponsiveContentOrder() {
