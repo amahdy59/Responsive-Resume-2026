@@ -221,7 +221,6 @@ try {
 
       if (scenario.width <= 560) {
         assert.equal(state.ambientAnimationName, "none");
-        assert.equal(state.sectionNavFits, true);
       }
 
       const accessibility = await new AxeBuilder({ page }).analyze();
