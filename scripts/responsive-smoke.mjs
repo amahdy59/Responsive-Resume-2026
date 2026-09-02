@@ -224,10 +224,12 @@ try {
 
       const firstProject = page.locator(".featured article").first();
       await firstProject.locator("a").first().focus();
+      await page.waitForTimeout(60);
       assert.notEqual(await firstProject.evaluate((article) => getComputedStyle(article).transform), "none");
 
       const firstEntity = page.locator(".li-entity-link").first();
       await firstEntity.hover();
+      await page.waitForTimeout(60);
       assert.notEqual(
         await firstEntity.locator(".li-company-logo").evaluate((logo) => getComputedStyle(logo).transform),
         "none",
