@@ -168,6 +168,13 @@ const translations = {
     skills_ux_header: "تصميم تجربة المستخدم",
     skip_link: "تجاوز إلى محتوى السيرة الذاتية",
     title: "مصمم تجربة المستخدم ومصور بيانات",
+    hero_value: "أحوّل المنتجات المعقدة والبيانات إلى تجارب واضحة وسهلة الوصول، مستفيداً من خبرتي في التعلم الإلكتروني وإنتاج الفيديو.",
+    view_selected_work: "عرض أبرز الأعمال",
+    project_owner_ux: "أحمد مهدي · مصمم تجربة المستخدم",
+    project_owner_data: "أحمد مهدي · تصميم UX وتصوير البيانات",
+    project_type_independent: "مشروع مستقل",
+    project_status_live: "تنفيذ تفاعلي مباشر",
+    project_disclosure: "جميع مشاريع تجربة المستخدم من تصميم أحمد مهدي في Figma. استُخدمت أدوات Antigravity وCodex وClaude للمساعدة في تحويل التصاميم إلى تطبيقات حية تحت مراجعته وتوجيهه.",
     toast_copied: "تم النسخ",
     toast_failed: "فشل النسخ",
     tooltip_contrast: "تبديل التباين العالي",
@@ -221,6 +228,20 @@ const translations = {
     cs_sec3_title: "03 الأدوات والتقنيات",
     cs_sec4_title: "04 النتائج والأثر",
     cs_sec5_title: "05 الأدلة والتحقق المستقبلي",
+    cs_sec6_title: "06 الملكية وما تعلمته",
+    cs_provenance_ownership: "الملكية",
+    cs_provenance_ownership_desc: "صمم أحمد مهدي تجربة المستخدم، وبنية المعلومات، والتوجه البصري، والمحتوى، واتخذ القرارات النهائية للمشروع.",
+    cs_provenance_background: "المنظور المهني",
+    cs_provenance_background_desc: "استفاد العمل من خبرته في تصميم تجربة المستخدم ومن خلفيته في التعلم الإلكتروني وإنتاج الفيديو لتبسيط المعلومات وتوضيح التسلسل والسرد.",
+    cs_provenance_ai: "التنفيذ بمساعدة الذكاء الاصطناعي",
+    cs_provenance_ai_desc: "حوّل أحمد تصاميم Figma إلى مشروع حي بمساعدة وكلاء Antigravity وCodex وClaude، ثم راجع التنفيذ وصقله واختبره.",
+    cs_provenance_evidence: "حدود الأدلة",
+    cs_provenance_evidence_desc: "المتاح هو التصميم والتنفيذ الحي وقرارات دراسة الحالة. لا تُنسب نتائج أعمال كمية ما لم يوجد مصدر وقياس موثق.",
+    cs_haj_learning: "التعلم الخاص: تصميم مسار تجارة إلكترونية قصير ومتجاوب، وتوجيه وكلاء الذكاء الاصطناعي لتنفيذ حالات التنقل والدفع بدقة.",
+    cs_cairo_learning: "التعلم الخاص: الحفاظ على هرمية المعلومات والوضوح البصري عند تحويل لوحة تشغيل كثيفة البيانات من Figma إلى تجربة حية.",
+    cs_hr_learning: "التعلم الخاص: نمذجة مسارات العمل القائمة على الأدوار وحالات الموافقة، ومراجعة المخرجات المولدة بالذكاء الاصطناعي من منظور سهولة الوصول.",
+    cs_azkar_learning: "التعلم الخاص: حماية أولوية العربية واتجاه RTL وجودة القراءة أثناء استخدام الوكلاء لتنفيذ تجربة حساسة للمحتوى.",
+    cs_lego_learning: "التعلم الخاص: تحويل استكشاف البيانات إلى قصة بصرية تفاعلية، واختيار الأداة أو الوكيل الأنسب لكل مهمة بدلاً من الاعتماد على أداة واحدة.",
 
     // Case Study 1: Haj Arafa App
     cs_haj_title: "تطبيق حاج عرفة",
@@ -399,6 +420,13 @@ const translations = {
     skills_ux_header: "Core UX & Design",
     skip_link: "Skip to resume content",
     title: "UX Designer & Data Visualizer",
+    hero_value: "I turn complex products and data into clear, accessible experiences, informed by a background in eLearning and video authoring.",
+    view_selected_work: "View Selected Work",
+    project_owner_ux: "Ahmed Mahdy · UX Designer",
+    project_owner_data: "Ahmed Mahdy · UX & Data Visualization",
+    project_type_independent: "Independent Project",
+    project_status_live: "Live Interactive Build",
+    project_disclosure: "All UX projects were designed by Ahmed Mahdy in Figma. Antigravity, Codex, and Claude assisted in translating the designs into live applications under his direction and review.",
     toast_copied: "Copied",
     toast_copy_cert: "Certification link copied to clipboard",
     toast_copy_dribbble: "Dribbble link copied to clipboard",
@@ -457,6 +485,20 @@ const translations = {
     cs_sec3_title: "03 Tools & Technologies",
     cs_sec4_title: "04 Outcome & Impact",
     cs_sec5_title: "05 Evidence & Next Validation",
+    cs_sec6_title: "06 Ownership & Learning",
+    cs_provenance_ownership: "Ownership",
+    cs_provenance_ownership_desc: "Ahmed Mahdy owned the UX design, information architecture, visual direction, content, and final project decisions.",
+    cs_provenance_background: "Professional perspective",
+    cs_provenance_background_desc: "The work draws on his UX practice and background in eLearning and video authoring to simplify information, sequence interactions, and build a clear narrative.",
+    cs_provenance_ai: "AI-assisted implementation",
+    cs_provenance_ai_desc: "Ahmed translated the Figma designs into a live project with assistance from Antigravity, Codex, and Claude agents, then reviewed, refined, and tested the implementation.",
+    cs_provenance_evidence: "Evidence boundary",
+    cs_provenance_evidence_desc: "Evidence shown is the design, live implementation, and documented case-study decisions. No quantitative business outcome is attributed without a documented source and measurement.",
+    cs_haj_learning: "Special learning: shaping a concise responsive commerce journey and directing AI agents to implement navigation and checkout states faithfully.",
+    cs_cairo_learning: "Special learning: preserving information hierarchy and visual clarity while translating a dense operational dashboard from Figma into a live experience.",
+    cs_hr_learning: "Special learning: modeling role-based workflows and approval states while reviewing AI-generated implementation for accessibility and clarity.",
+    cs_azkar_learning: "Special learning: protecting Arabic-first, RTL, and reading-quality requirements while using agents on a content-sensitive experience.",
+    cs_lego_learning: "Special learning: turning data exploration into interactive visual storytelling and choosing the best agent or tool for each task instead of relying on one tool.",
 
     // Case Study 1: Haj Arafa App
     cs_haj_title: "Haj Arafa App",
@@ -1225,59 +1267,12 @@ function initProjectFilters() {
   });
 }
 
-/**
- * Expandable & Collapsible Projects
- * ─────────────────────────────────────────────────────────────────────
- * Allows users to collapse/expand each project card:
- *  - Click on .project-toggle button or .project-header
- *  - Updates aria-expanded ("true" | "false")
- *  - Updates aria-label ("Collapse [Title]" / "Expand [Title]")
- *  - Animates smooth height collapse via CSS grid
- *  - Keyboard accessible via the toggle button
- */
-function initProjectCollapses() {
-  const articles = document.querySelectorAll(".projects-panel article[data-category]");
-  if (!articles.length) return;
-
-  articles.forEach((article) => {
-    const header = article.querySelector(".project-header");
-    const toggle = article.querySelector(".project-toggle");
-    const titleEl = article.querySelector("h4");
-    if (!header || !toggle) return;
-
-    function updateAriaLabel(isCollapsed) {
-      const lang = getCurrentLanguage();
-      const t = translations[lang] || translations.en;
-      const actionPrefix = isCollapsed ? (t.expand_project || "Expand") : (t.collapse_project || "Collapse");
-      const titleText = titleEl ? titleEl.textContent.trim() : "project";
-      toggle.setAttribute("aria-label", `${actionPrefix} ${titleText}`);
-    }
-
-    function toggleCollapse(event) {
-      // Prevent toggle if clicking on a link or button inside header other than the toggle
-      if (event.target.closest("a, .btn, .copy-button") && !event.target.closest(".project-toggle")) {
-        return;
-      }
-
-      const isCurrentlyCollapsed = article.classList.contains("is-collapsed");
-      const nextCollapsed = !isCurrentlyCollapsed;
-
-      article.classList.toggle("is-collapsed", nextCollapsed);
-      toggle.setAttribute("aria-expanded", nextCollapsed ? "false" : "true");
-      updateAriaLabel(nextCollapsed);
-    }
-
-    header.addEventListener("click", toggleCollapse);
-  });
-}
-
 function initialize() {
   initResponsiveContentOrder();
   initSectionNavigation();
   enhanceLinkedCards();
   bindCopyButtons();
   initProjectFilters();
-  initProjectCollapses();
 
   setTheme(savedTheme || (prefersDark ? "dark" : "light"));
   setContrast(savedContrast);
