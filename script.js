@@ -168,8 +168,26 @@ const translations = {
     skills_ux_header: "تصميم تجربة المستخدم",
     skip_link: "تجاوز إلى محتوى السيرة الذاتية",
     title: "مصمم تجربة المستخدم ومصور بيانات",
+    hero_value_prop: "مصمم تجربة مستخدم أول وخبير نمذجة بالذكاء الاصطناعي بخبرة 8+ سنوات في تحويل مسارات العمل المؤسسية المعقدة وأنظمة التعلم والبيانات إلى منتجات رقمية سهلة الوصول وعالية الأداء.",
+    hero_cta_work: "عرض أبرز المشاريع",
+    hero_cta_print: "طباعة / حفظ السيرة الذاتية",
     hero_value: "أحوّل المنتجات المعقدة والبيانات إلى تجارب واضحة وسهلة الوصول، مستفيداً من خبرتي في التعلم الإلكتروني وإنتاج الفيديو.",
     view_selected_work: "عرض أبرز الأعمال",
+    proj_haj_chip_type: "تجارة عبر الجوال",
+    proj_haj_chip_role: "كبير مصممي UX",
+    proj_haj_chip_highlight: "دفع سريع من خطوتين",
+    proj_cairo_chip_type: "لوحة عمليات Tableau",
+    proj_cairo_chip_role: "تحليل وتصميم UX",
+    proj_cairo_chip_highlight: "إنذار مبكر قبل 45 دقيقة",
+    proj_hr_chip_type: "منظومة SaaS للمؤسسات",
+    proj_hr_chip_role: "كبير مصممي UX/UI",
+    proj_hr_chip_highlight: "معالجة الطلبات في <4 ساعات",
+    proj_azkar_chip_type: "تطبيق PWA إسلامي",
+    proj_azkar_chip_role: "تصميم UX وتطوير واجهات",
+    proj_azkar_chip_highlight: "يعمل 100% بدون إنترنت",
+    proj_lego_chip_type: "تحليلات Power BI و Tableau",
+    proj_lego_chip_role: "مصور بيانات",
+    proj_lego_chip_highlight: "تحليل +18,000 مجموعة",
     project_owner_ux: "أحمد مهدي · مصمم تجربة المستخدم",
     project_owner_data: "أحمد مهدي · تصميم UX وتصوير البيانات",
     project_type_independent: "مشروع مستقل",
@@ -420,8 +438,26 @@ const translations = {
     skills_ux_header: "Core UX & Design",
     skip_link: "Skip to resume content",
     title: "UX Designer & Data Visualizer",
+    hero_value_prop: "Senior UX Designer & AI-Assisted Prototyper with 8+ years experience turning complex enterprise workflows, eLearning systems, and data into accessible, decision-ready products.",
+    hero_cta_work: "View Selected Work",
+    hero_cta_print: "Print / Save Résumé",
     hero_value: "I turn complex products and data into clear, accessible experiences, informed by a background in eLearning and video authoring.",
     view_selected_work: "View Selected Work",
+    proj_haj_chip_type: "Mobile E-Commerce",
+    proj_haj_chip_role: "Lead UX Designer",
+    proj_haj_chip_highlight: "2-Step Fast Checkout",
+    proj_cairo_chip_type: "Tableau Operations Radar",
+    proj_cairo_chip_role: "Data Analytics & UX",
+    proj_cairo_chip_highlight: "45m Early Warning",
+    proj_hr_chip_type: "Enterprise SaaS",
+    proj_hr_chip_role: "Lead UX/UI Designer",
+    proj_hr_chip_highlight: "<4h Request Turnaround",
+    proj_azkar_chip_type: "Islamic PWA",
+    proj_azkar_chip_role: "UX & Frontend Developer",
+    proj_azkar_chip_highlight: "100% Offline Capable",
+    proj_lego_chip_type: "Power BI & Tableau Analytics",
+    proj_lego_chip_role: "Data Visualizer",
+    proj_lego_chip_highlight: "18,000+ Sets Indexed",
     project_owner_ux: "Ahmed Mahdy · UX Designer",
     project_owner_data: "Ahmed Mahdy · UX & Data Visualization",
     project_type_independent: "Independent Project",
@@ -872,6 +908,26 @@ function updateContrastButton(lang) {
 }
 
 /**
+ * Updates aria-label on all collapsible project card toggle buttons to match
+ * current language and expansion state.
+ * @param {'en'|'ar'} lang - Language code.
+ */
+function updateProjectToggles(lang) {
+  document.querySelectorAll(".featured article").forEach((card) => {
+    const toggle = card.querySelector(".project-toggle");
+    const header = card.querySelector(".project-header");
+    if (!toggle || !header) return;
+
+    const isCollapsed = card.classList.contains("is-collapsed");
+    const expanded = !isCollapsed;
+    const actionKey = expanded ? "collapse_project" : "expand_project";
+    const actionText = getTranslation(lang, actionKey, expanded ? "Collapse" : "Expand");
+    const titleText = header.querySelector("h4")?.textContent.trim() || "";
+    toggle.setAttribute("aria-label", `${actionText}: ${titleText}`);
+  });
+}
+
+/**
  * Orchestrates a full UI refresh for a language switch or initial load.
  * Runs all translation, metadata, link, button, and aria-label update functions.
  * @param {'en'|'ar'} lang - Language code to apply.
@@ -884,6 +940,7 @@ function refreshUi(lang) {
   }
   updateExternalLinks(lang);
   updateCopyButtons(lang);
+  updateProjectToggles(lang);
   updateLanguageButton(lang);
   updateThemeButton(lang);
   updateContrastButton(lang);
@@ -1267,12 +1324,73 @@ function initProjectFilters() {
   });
 }
 
+/**
+ * Enhances project cards with accessible expand/collapse toggle controls.
+ * Preserves the scannable card header and metadata chips when collapsed.
+ */
+function initCollapsibleProjectCards() {
+  const cards = document.querySelectorAll(".featured article");
+  if (!cards.length) return;
+
+  cards.forEach((card, index) => {
+    const header = card.querySelector(".project-header");
+    const body = card.querySelector(".project-body");
+    if (!header || !body) return;
+
+    const bodyId = body.id || `project-body-${index + 1}`;
+    body.id = bodyId;
+
+    if (!header.querySelector(".project-toggle")) {
+      const toggle = document.createElement("button");
+      toggle.className = "project-toggle";
+      toggle.type = "button";
+      toggle.setAttribute("aria-expanded", "true");
+      toggle.setAttribute("aria-controls", bodyId);
+      
+      const getToggleLabel = (expanded) => {
+        const lang = getCurrentLanguage();
+        const actionKey = expanded ? "collapse_project" : "expand_project";
+        const actionText = getTranslation(lang, actionKey, expanded ? "Collapse" : "Expand");
+        const titleText = header.querySelector("h4")?.textContent.trim() || "";
+        return `${actionText}: ${titleText}`;
+      };
+
+      toggle.setAttribute("aria-label", getToggleLabel(true));
+      toggle.innerHTML = `
+        <svg class="project-toggle-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+      `;
+
+      header.appendChild(toggle);
+
+      const toggleState = () => {
+        const isCollapsed = card.classList.toggle("is-collapsed");
+        const expanded = !isCollapsed;
+        toggle.setAttribute("aria-expanded", String(expanded));
+        toggle.setAttribute("aria-label", getToggleLabel(expanded));
+      };
+
+      toggle.addEventListener("click", (e) => {
+        e.stopPropagation();
+        toggleState();
+      });
+
+      header.addEventListener("click", (e) => {
+        if (e.target.closest("a, button")) return;
+        toggleState();
+      });
+    }
+  });
+}
+
 function initialize() {
   initResponsiveContentOrder();
   initSectionNavigation();
   enhanceLinkedCards();
   bindCopyButtons();
   initProjectFilters();
+  initCollapsibleProjectCards();
 
   setTheme(savedTheme || (prefersDark ? "dark" : "light"));
   setContrast(savedContrast);

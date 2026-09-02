@@ -522,11 +522,75 @@ h1 {
   color: var(--hero-title);
 }
 
-.identity-copy > p {
+.hero-role-title {
   margin-top: 4px;
   color: var(--hero-subtitle);
   font-size: clamp(1rem, 2.2vw, 1.25rem);
   font-weight: 500;
+}
+
+.hero-value-prop {
+  margin-top: 8px;
+  max-width: 540px;
+  color: rgb(255 255 255 / 92%);
+  font-size: clamp(0.86rem, 1.8vw, 0.95rem);
+  line-height: 1.55;
+  font-weight: 400;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.hero-cta-btn {
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 8px 16px;
+  min-height: 44px;
+  border-radius: 9px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition:
+    transform var(--motion-normal) var(--ease-standard),
+    background-color var(--motion-normal) var(--ease-standard),
+    box-shadow var(--motion-normal) var(--ease-standard);
+}
+
+.hero-actions .btn-primary {
+  background: #fff;
+  color: var(--blue);
+  border: 1px solid #fff;
+  box-shadow: 0 4px 14px rgb(0 0 0 / 16%);
+}
+
+.hero-actions .btn-primary:hover,
+.hero-actions .btn-primary:focus-visible {
+  background: #f0f7ff;
+  color: var(--blue);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgb(0 0 0 / 22%);
+}
+
+.hero-actions .btn-secondary {
+  background: rgb(255 255 255 / 15%);
+  color: #fff;
+  border: 1px solid rgb(255 255 255 / 35%);
+  backdrop-filter: blur(8px);
+}
+
+.hero-actions .btn-secondary:hover,
+.hero-actions .btn-secondary:focus-visible {
+  background: rgb(255 255 255 / 26%);
+  border-color: rgb(255 255 255 / 60%);
+  transform: translateY(-2px);
 }
 
 .tags,
@@ -1239,23 +1303,70 @@ h1 {
 /* ── Collapsible Project Cards ── */
 .project-header {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   gap: 12px;
   cursor: pointer;
   min-height: 36px;
-  padding: 2px 0;
+  padding: 4px 0;
   user-select: none;
 }
 
-.project-header h4 {
-  flex: 1;
+.project-header-info {
+  flex: 1 1 auto;
   min-width: 0;
+}
+
+.project-header h4 {
   color: var(--text);
-  font-size: 1rem;
-  font-weight: 600;
+  font-size: 1.05rem;
+  font-weight: 700;
   line-height: 1.35;
   transition: color 180ms ease;
+}
+
+.project-card-chips {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.project-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  border-radius: 6px;
+  line-height: 1.4;
+  letter-spacing: 0.01em;
+  unicode-bidi: isolate;
+}
+
+.project-chip.chip-type {
+  background: color-mix(in srgb, var(--blue) 12%, transparent);
+  color: var(--blue);
+  border: 1px solid color-mix(in srgb, var(--blue) 25%, transparent);
+}
+
+.project-chip.chip-role {
+  background: color-mix(in srgb, var(--tag-bg, #64748b) 12%, transparent);
+  color: var(--text-muted);
+  border: 1px solid var(--line);
+}
+
+.project-chip.chip-highlight {
+  background: color-mix(in srgb, #10b981 12%, transparent);
+  color: #059669;
+  border: 1px solid color-mix(in srgb, #10b981 25%, transparent);
+}
+
+[data-theme="dark"] .project-chip.chip-highlight {
+  color: #34d399;
+  background: color-mix(in srgb, #10b981 18%, transparent);
+  border-color: color-mix(in srgb, #10b981 35%, transparent);
 }
 
 .featured article:hover .project-header h4 {
@@ -2440,6 +2551,9 @@ h1 {
   .lang-toggle,
   .contrast-toggle,
   .controls-group,
+  .hero-actions,
+  .project-toggle,
+  .project-filters,
   .ambient-particles,
   .hero-pattern,
   .section-nav,
@@ -3280,6 +3394,44 @@ h1 {
   font-size: 0.94rem;
   text-transform: uppercase;
   letter-spacing: 0.04em;
+}
+
+.provenance-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.provenance-card {
+  padding: 16px 18px;
+  background: color-mix(in srgb, var(--panel) 70%, transparent);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 4%);
+  transition:
+    border-color var(--motion-normal) var(--ease-standard),
+    transform var(--motion-normal) var(--ease-standard);
+}
+
+.provenance-card:hover {
+  border-color: var(--blue);
+  transform: translateY(-2px);
+}
+
+.provenance-card strong {
+  display: block;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.provenance-card p {
+  font-size: 0.86rem;
+  line-height: 1.55;
+  color: var(--text-muted);
+  margin: 0;
 }
 
 /* ── Pagination Cards ── */
