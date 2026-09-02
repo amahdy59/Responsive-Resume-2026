@@ -1,0 +1,15 @@
+#!/bin/sh
+# Automated Git Pre-Push Hook for Ahmed Mahdy's Portfolio
+echo "🛡️  Running automated pre-push tests..."
+npm test
+EXIT_CODE=$?
+
+if [ $EXIT_CODE -ne 0 ]; then
+  echo ""
+  echo "❌ Push rejected: Automated test suite failed."
+  echo "👉 Run 'npm test' locally to diagnose and fix errors before pushing."
+  exit 1
+fi
+
+echo "✅ Pre-push verification passed. Proceeding with push..."
+exit 0

@@ -127,8 +127,8 @@ try {
           link.childNodes[0]?.textContent.trim(),
         ),
         entityLinks: [...document.querySelectorAll(".li-entity-link")].map((link) => link.href),
-        externalIconCount: document.querySelectorAll('a[target="_blank"] .external-icon').length,
-        externalLinkCount: document.querySelectorAll('a[target="_blank"]').length,
+        externalIconCount: document.querySelectorAll('.project-btn-secondary .external-icon').length,
+        externalLinkCount: document.querySelectorAll('.project-btn-secondary').length,
         resumeActionCount: document.querySelectorAll(".resume-action").length,
         sectionLinks: [...document.querySelectorAll(".section-nav a")].map((link) => ({
           targetExists: Boolean(document.querySelector(new URL(link.href).hash)),
@@ -331,6 +331,9 @@ try {
     await context.close();
     console.log(`Passed case study ${file}`);
   }
+} catch (error) {
+  console.error("FATAL Smoke test failure:", error);
+  process.exitCode = 1;
 } finally {
   await browser?.close();
   server.kill();

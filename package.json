@@ -9,7 +9,10 @@
     "dev": "npm run build && node scripts/serve.mjs --root dist --port 4173",
     "preview": "npm run build && node scripts/serve.mjs --root dist --port 4174",
     "test": "npm run check && npm run build && npm run test:browser",
-    "test:browser": "node scripts/responsive-smoke.mjs"
+    "test:browser": "node scripts/responsive-smoke.mjs",
+    "verify:deploy": "node scripts/verify-deployment.mjs",
+    "ship": "node scripts/ship.mjs",
+    "prepare": "git config core.hooksPath .githooks"
   },
   "devDependencies": {
     "@axe-core/playwright": "4.13.0",
