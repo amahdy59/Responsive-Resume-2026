@@ -188,10 +188,25 @@
             />
             <div class="identity-copy">
               <h1 data-translate="name">Ahmed Mahdy</h1>
-              <p class="hero-role-title" data-translate="title">Senior UX Designer &amp; Data Visualizer</p>
+              <p data-translate="title">UX Designer &amp; Data Visualizer</p>
+              <div
+                class="tags"
+                role="list"
+                aria-label="Highlights"
+                data-translate-attr="aria-label"
+                data-translate-attr-key="highlights_label"
+              >
+                <span role="listitem" data-translate="exp_tag">8+ years experience</span>
+                <span role="listitem" data-translate="ux_tag">UX Design</span>
+                <span role="listitem" data-translate="data_tag">Data Visualization</span>
+              </div>
+              <p class="hero-value" data-translate="hero_value">I turn complex products and data into clear, accessible experiences, informed by a background in eLearning and video authoring.</p>
               <div class="hero-actions">
-                <a href="#projects" class="btn btn-primary hero-cta-btn" data-translate="hero_cta_work">View Selected Work</a>
-                <button class="btn btn-secondary hero-cta-btn" type="button" data-print-resume data-translate="hero_cta_print">Print / Save Résumé</button>
+                <a class="hero-work-action" href="#projects" data-translate="view_selected_work">View Selected Work</a>
+                <button class="hero-print-action" type="button" data-print-resume>
+                  <svg aria-hidden="true"><use href="#icon-print"></use></svg>
+                  <span data-translate="print_resume_action">Print / Save PDF</span>
+                </button>
               </div>
             </div>
           </div>
@@ -349,6 +364,7 @@
           >
             <section class="panel panel-primary featured projects-panel" id="projects">
               <h2><span class="panel-icon-box" aria-hidden="true"><svg><use href="#icon-folder"></use></svg></span><span data-translate="sect_projects">Projects</span></h2>
+              <p class="project-disclosure" data-translate="project_disclosure">All UX projects were designed by Ahmed Mahdy in Figma. Antigravity, Codex, and Claude assisted in translating the designs into live applications under his direction and review.</p>
 
               <!-- Project filter pills -->
               <div
@@ -387,19 +403,11 @@
                 <h3 data-translate="proj_ux_header">UX Projects</h3>
                 <article data-category="ux">
                   <div class="project-header">
-                    <div class="project-header-info">
-                      <h4><span data-translate="proj_ux3_title">Haj Arafa App</span></h4>
-                      <div class="project-byline">
-                        <span class="byline-item" data-translate="proj_haj_chip_type">Mobile E-Commerce</span>
-                        <span class="byline-sep" aria-hidden="true">•</span>
-                        <span class="byline-item" data-translate="proj_haj_chip_role">Lead UX Designer</span>
-                        <span class="byline-sep" aria-hidden="true">•</span>
-                        <span class="byline-item byline-highlight" data-translate="proj_haj_chip_highlight">2-Step Fast Checkout</span>
-                      </div>
-                    </div>
+                    <h4><span data-translate="proj_ux3_title">Haj Arafa App</span></h4>
                   </div>
                   <div class="project-body">
                     <div class="project-body-inner">
+                      <p class="project-card-meta"><span data-translate="project_owner_ux">Ahmed Mahdy · UX Designer</span><span data-translate="project_type_independent">Independent Project</span><span data-translate="project_status_live">Live Interactive Build</span></p>
                       <img class="project-thumbnail" src="assets/case-haj-arafa-800.webp" srcset="assets/case-haj-arafa-480.webp 480w, assets/case-haj-arafa-800.webp 800w, assets/case-haj-arafa-1200.webp 1200w" sizes="(max-width: 880px) calc(100vw - 52px), 560px" alt="" width="1440" height="890" loading="lazy" decoding="async" />
                       <p data-translate="proj_ux3_desc">
                         An intuitive, accessible e-commerce experience designed with responsive layouts and seamless navigation to maximize user conversion and engagement.
@@ -415,19 +423,11 @@
                 </article>
                 <article data-category="ux">
                   <div class="project-header">
-                    <div class="project-header-info">
-                      <h4><span data-translate="proj_ux2_title">Cairo International Airport - Command Hub</span></h4>
-                      <div class="project-byline">
-                        <span class="byline-item" data-translate="proj_cairo_chip_type">Tableau Operations Radar</span>
-                        <span class="byline-sep" aria-hidden="true">•</span>
-                        <span class="byline-item" data-translate="proj_cairo_chip_role">Data Analytics & UX</span>
-                        <span class="byline-sep" aria-hidden="true">•</span>
-                        <span class="byline-item byline-highlight" data-translate="proj_cairo_chip_highlight">45m Early Warning</span>
-                      </div>
-                    </div>
+                    <h4><span data-translate="proj_ux2_title">Cairo International Airport - Command Hub</span></h4>
                   </div>
                   <div class="project-body">
                     <div class="project-body-inner">
+                      <p class="project-card-meta"><span data-translate="project_owner_ux">Ahmed Mahdy · UX Designer</span><span data-translate="project_type_independent">Independent Project</span><span data-translate="project_status_live">Live Interactive Build</span></p>
                       <img class="project-thumbnail" src="assets/case-cairo-airport-800.webp" srcset="assets/case-cairo-airport-480.webp 480w, assets/case-cairo-airport-800.webp 800w, assets/case-cairo-airport-1200.webp 1200w" sizes="(max-width: 880px) calc(100vw - 52px), 560px" alt="" width="1440" height="1586" loading="lazy" decoding="async" />
                       <p data-translate="proj_ux2_desc">
                         A high-fidelity operational command dashboard focusing on real-time data visualization, clear information hierarchy, and responsive performance.
@@ -443,19 +443,11 @@
                 </article>
                 <article data-category="ux">
                   <div class="project-header">
-                    <div class="project-header-info">
-                      <h4><span data-translate="proj_ux1_title">Human Resources Tool</span></h4>
-                      <div class="project-byline">
-                        <span class="byline-item" data-translate="proj_hr_chip_type">Enterprise SaaS</span>
-                        <span class="byline-sep" aria-hidden="true">•</span>
-                        <span class="byline-item" data-translate="proj_hr_chip_role">Lead UX/UI Designer</span>
-                        <span class="byline-sep" aria-hidden="true">•</span>
-                        <span class="byline-item byline-highlight" data-translate="proj_hr_chip_highlight">&lt;4h Request Turnaround</span>
-                      </div>
-                    </div>
+                    <h4><span data-translate="proj_ux1_title">Human Resources Tool</span></h4>
                   </div>
                   <div class="project-body">
                     <div class="project-body-inner">
+                      <p class="project-card-meta"><span data-translate="project_owner_ux">Ahmed Mahdy · UX Designer</span><span data-translate="project_type_independent">Independent Project</span><span data-translate="project_status_live">Live Interactive Build</span></p>
                       <img class="project-thumbnail" src="assets/case-hr-tool-800.webp" srcset="assets/case-hr-tool-480.webp 480w, assets/case-hr-tool-800.webp 800w, assets/case-hr-tool-1200.webp 1200w" sizes="(max-width: 880px) calc(100vw - 52px), 560px" alt="" width="1440" height="890" loading="lazy" decoding="async" />
                       <p data-translate="proj_ux1_desc">
                         A responsive, privacy-centric HR SaaS application optimizing leave requests and role management through modern, user-friendly interfaces.
@@ -471,19 +463,11 @@
                 </article>
                 <article data-category="ux">
                   <div class="project-header">
-                    <div class="project-header-info">
-                      <h4><span data-translate="proj_ux4_title">Azkar App – Daily Fortress</span></h4>
-                      <div class="project-byline">
-                        <span class="byline-item" data-translate="proj_azkar_chip_type">Islamic PWA</span>
-                        <span class="byline-sep" aria-hidden="true">•</span>
-                        <span class="byline-item" data-translate="proj_azkar_chip_role">UX & Frontend Developer</span>
-                        <span class="byline-sep" aria-hidden="true">•</span>
-                        <span class="byline-item byline-highlight" data-translate="proj_azkar_chip_highlight">100% Offline Capable</span>
-                      </div>
-                    </div>
+                    <h4><span data-translate="proj_ux4_title">Azkar App – Daily Fortress</span></h4>
                   </div>
                   <div class="project-body">
                     <div class="project-body-inner">
+                      <p class="project-card-meta"><span data-translate="project_owner_ux">Ahmed Mahdy · UX Designer</span><span data-translate="project_type_independent">Independent Project</span><span data-translate="project_status_live">Live Interactive Build</span></p>
                       <img class="project-thumbnail" src="assets/case-azkar-app-800.webp" srcset="assets/case-azkar-app-480.webp 480w, assets/case-azkar-app-800.webp 800w, assets/case-azkar-app-1200.webp 1200w" sizes="(max-width: 880px) calc(100vw - 52px), 560px" alt="" width="1440" height="890" loading="lazy" decoding="async" />
                       <p data-translate="proj_ux4_desc">
                         A serene, accessible Islamic daily remembrance and prayer times web application designed for spiritual consistency and focus.
@@ -503,19 +487,11 @@
                 <h3 data-translate="proj_data_header">Data Analysis &amp; Visualization Projects</h3>
                 <article data-category="data">
                   <div class="project-header">
-                    <div class="project-header-info">
-                      <h4><span data-translate="proj_data1_title">A Data-Driven LEGO Explorer</span></h4>
-                      <div class="project-byline">
-                        <span class="byline-item" data-translate="proj_lego_chip_type">Power BI & Tableau Analytics</span>
-                        <span class="byline-sep" aria-hidden="true">•</span>
-                        <span class="byline-item" data-translate="proj_lego_chip_role">Data Visualizer</span>
-                        <span class="byline-sep" aria-hidden="true">•</span>
-                        <span class="byline-item byline-highlight" data-translate="proj_lego_chip_highlight">18,000+ Sets Indexed</span>
-                      </div>
-                    </div>
+                    <h4><span data-translate="proj_data1_title">A Data-Driven LEGO Explorer</span></h4>
                   </div>
                   <div class="project-body">
                     <div class="project-body-inner">
+                      <p class="project-card-meta"><span data-translate="project_owner_data">Ahmed Mahdy · UX &amp; Data Visualization</span><span data-translate="project_type_independent">Independent Project</span><span data-translate="project_status_live">Live Interactive Build</span></p>
                       <img class="project-thumbnail" src="assets/case-lego-explorer-800.webp" srcset="assets/case-lego-explorer-480.webp 480w, assets/case-lego-explorer-800.webp 800w, assets/case-lego-explorer-1200.webp 1200w" sizes="(max-width: 880px) calc(100vw - 52px), 560px" alt="" width="1440" height="810" loading="lazy" decoding="async" />
                       <p data-translate="proj_data1_desc">
                         An interactive Tableau visualization experience that helps users explore LEGO sets by theme, age, price, and set count.

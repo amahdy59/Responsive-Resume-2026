@@ -522,67 +522,11 @@ h1 {
   color: var(--hero-title);
 }
 
-.hero-role-title {
+.identity-copy > p {
   margin-top: 4px;
   color: var(--hero-subtitle);
-  font-size: clamp(1.02rem, 2vw, 1.2rem);
-  font-weight: 600;
-}
-
-.hero-actions {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px;
-  margin-top: 12px;
-}
-
-.hero-cta-btn {
-  font-size: 0.84rem;
-  font-weight: 600;
-  padding: 0 14px;
-  height: 38px;
-  min-height: 38px;
-  border-radius: 8px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  cursor: pointer;
-  box-sizing: border-box;
-  transition:
-    transform var(--motion-normal) var(--ease-standard),
-    background-color var(--motion-normal) var(--ease-standard),
-    box-shadow var(--motion-normal) var(--ease-standard);
-}
-
-.hero-actions .btn-primary {
-  background: #fff;
-  color: var(--blue);
-  border: 1px solid #fff;
-  box-shadow: 0 2px 8px rgb(0 0 0 / 12%);
-}
-
-.hero-actions .btn-primary:hover,
-.hero-actions .btn-primary:focus-visible {
-  background: #f0f7ff;
-  color: var(--blue);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgb(0 0 0 / 16%);
-}
-
-.hero-actions .btn-secondary {
-  background: rgb(255 255 255 / 16%);
-  color: #fff;
-  border: 1px solid rgb(255 255 255 / 40%);
-  backdrop-filter: blur(8px);
-}
-
-.hero-actions .btn-secondary:hover,
-.hero-actions .btn-secondary:focus-visible {
-  background: rgb(255 255 255 / 26%);
-  border-color: rgb(255 255 255 / 65%);
-  transform: translateY(-1px);
+  font-size: clamp(1rem, 2.2vw, 1.25rem);
+  font-weight: 500;
 }
 
 .tags,
@@ -594,6 +538,46 @@ h1 {
 
 .tags {
   margin-top: 12px;
+}
+
+.identity-copy > .hero-value {
+  max-width: 42rem;
+  margin-top: 12px;
+  color: #fff;
+  font-size: 0.94rem;
+  line-height: 1.55;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.hero-work-action,
+.hero-print-action {
+  margin-top: 0;
+}
+
+.hero-work-action {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 9px 14px;
+  color: var(--blue-deep);
+  background: #fff;
+  border: 1px solid #fff;
+  border-radius: 9px;
+  font-size: 0.86rem;
+  font-weight: 750;
+  text-decoration: none;
+}
+
+.hero-work-action:hover,
+.hero-work-action:focus-visible {
+  color: #fff;
+  background: transparent;
 }
 
 .hero-print-action {
@@ -1285,6 +1269,33 @@ h1 {
   color: var(--text-secondary);
 }
 
+.projects-panel > .project-disclosure {
+  margin: 10px 0 16px;
+  padding: 10px 12px;
+  color: var(--text-secondary);
+  background: var(--surface-soft);
+  border-inline-start: 3px solid var(--blue);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-sm);
+  line-height: 1.55;
+}
+
+.featured article .project-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0 0 10px;
+  color: var(--text-secondary);
+  font-size: var(--text-xs);
+}
+
+.project-card-meta span {
+  padding: 3px 7px;
+  background: var(--surface-soft);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+}
+
 .project-actions {
   display: flex;
   align-items: center;
@@ -1295,53 +1306,23 @@ h1 {
 /* ── Collapsible Project Cards ── */
 .project-header {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
   gap: 12px;
   cursor: pointer;
   min-height: 36px;
-  padding: 4px 0;
+  padding: 2px 0;
   user-select: none;
-}
-
-.project-header-info {
-  flex: 1 1 auto;
-  min-width: 0;
 }
 
 .project-header h4 {
+  flex: 1;
+  min-width: 0;
   color: var(--text);
-  font-size: 1.05rem;
-  font-weight: 700;
+  font-size: 1rem;
+  font-weight: 600;
   line-height: 1.35;
   transition: color 180ms ease;
-}
-
-.project-byline {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 6px;
-  margin-top: 4px;
-  font-size: 0.82rem;
-  color: var(--text-muted);
-  line-height: 1.4;
-  unicode-bidi: isolate;
-}
-
-.byline-item {
-  font-weight: 500;
-}
-
-.byline-sep {
-  opacity: 0.45;
-  user-select: none;
-  font-size: 0.75rem;
-}
-
-.byline-highlight {
-  color: var(--link-aaa);
-  font-weight: 600;
 }
 
 .featured article:hover .project-header h4 {
