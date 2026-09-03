@@ -174,7 +174,11 @@ try {
             '.pills [data-skill-filter], .pills [tabindex="0"]',
           ).length,
           overflowingElements: [...document.querySelectorAll("body *")]
-            .filter((element) => !element.closest(".section-nav"))
+            .filter(
+              (element) =>
+                !element.closest(".section-nav") &&
+                !element.closest(".footer-sections"),
+            )
             .map((element) => {
               const rect = element.getBoundingClientRect();
               return {
@@ -208,7 +212,7 @@ try {
           projectThumbnailCount:
             document.querySelectorAll(".project-thumbnail").length,
           projectTitleLinks: [
-            ...document.querySelectorAll("#projects article h4 > a"),
+            ...document.querySelectorAll("#projects article h3 > a"),
           ].map((a) => new URL(a.href).pathname),
           projectThumbnailLinks: document.querySelectorAll(
             "#projects a.project-thumbnail-link > .project-thumbnail",
@@ -307,16 +311,16 @@ try {
                 "الخبرات المهنية",
                 "نبذة عني",
                 "المهارات",
-                "التعليم",
                 "الشهادات المهنية",
+                "التعليم",
               ]
             : [
                 "Projects",
                 "Employment",
                 "About Me",
                 "Skills",
-                "Education",
                 "Certifications",
+                "Education",
               ],
         );
       }

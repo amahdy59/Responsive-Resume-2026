@@ -93,9 +93,25 @@ const translations = {
     cert4: "مهارات Excel للأعمال",
     cert5: "تصميم تجربة المستخدم من جوجل (Google UX Design)",
     back_to_top: "العودة إلى الأعلى",
-    control_contrast: "التباين",
-    control_language: "English",
-    control_theme: "المظهر",
+    footer_tagline: "أصمم تجارب بديهية وأحول البيانات إلى مرئيات واضحة ومؤثرة تساعد الناس على اتخاذ قرارات أفضل.",
+    footer_quick_links: "روابط سريعة",
+    footer_resources: "الموارد",
+    footer_connect: "تواصل معي",
+    footer_available: "متاح لفرص جديدة",
+    footer_cta_title: "لنعمل معًا",
+    footer_cta_desc: "أنا دائمًا منفتح لمناقشة المشاريع والفرص الجديدة.",
+    footer_send_email: "أرسل لي بريدًا إلكترونيًا",
+    footer_copyright: "© ٢٠٢٤ أحمد مهدي. جميع الحقوق محفوظة.",
+    footer_built_with: "صُنع بشغف ودقة",
+    hero_title: "مصمم تجربة المستخدم ومُصوِّر البيانات",
+    control_contrast: "التباين العالي",
+    control_contrast_state: "إيقاف",
+    control_language: "اللغة",
+    control_language_state: "English",
+    control_print_label: "طباعة / حفظ",
+    control_print_state: "PDF",
+    control_theme: "الوضع الداكن",
+    control_theme_state: "تشغيل",
     contact_dribbble: "معرض دريبل",
     contact_linkedin: "لينكد إن",
     contact_links_label: "روابط التواصل",
@@ -181,6 +197,9 @@ const translations = {
       "لوحة معلومات لمبيعات علاقات العملاء (CRM) تم بناؤها في Google Sheets لتتبع أداء الفريق الربع سنوي عبر التصور المعتمد على الرسوم البيانية.",
     proj_data2_title: "لوحة معلومات أداء المبيعات",
     proj_data_header: "مشاريع تحليل وتصوير البيانات",
+    filter_all: "الكل",
+    filter_ux: "تصميم تجربة المستخدم",
+    filter_data: "تصوير البيانات",
     proj_ux1_desc:
       "تصور متجاوب يركز على الخصوصية لأداة موارد بشرية (SaaS) تدعم طلبات الإجازات والموافقات حسب الدور ووضوح حالة الطلب.",
     proj_ux1_title: "أداة الموارد البشرية",
@@ -456,9 +475,25 @@ const translations = {
     cert4: "Excel Skills for Business",
     cert5: "Google UX Design",
     back_to_top: "Back to top",
-    control_contrast: "Contrast",
-    control_language: "العربية",
-    control_theme: "Theme",
+    control_contrast: "High Contrast",
+    control_contrast_state: "Off",
+    control_language: "Language",
+    control_language_state: "العربية",
+    control_print_label: "Print / Save",
+    control_print_state: "PDF",
+    control_theme: "Dark Mode",
+    control_theme_state: "On",
+    footer_tagline: "I design intuitive experiences and turn data into clear, impactful visuals that help people make better decisions.",
+    footer_quick_links: "Quick Links",
+    footer_resources: "Resources",
+    footer_connect: "Let's Connect",
+    footer_available: "Available for new opportunities",
+    footer_cta_title: "Let's work together",
+    footer_cta_desc: "I'm always open to discussing new projects and opportunities.",
+    footer_send_email: "Send me an email",
+    footer_copyright: "© 2024 Ahmed Mahdy. All rights reserved.",
+    footer_built_with: "Built with passion and precision",
+    hero_title: "UX Designer & Data Visualizer",
     contact_dribbble: "Dribbble",
     contact_linkedin: "LinkedIn",
     contact_links_label: "Contact links",
@@ -544,6 +579,9 @@ const translations = {
       "CRM sales dashboard built in Google Sheets to track quarterly team performance via chart-driven visualization.",
     proj_data2_title: "Sales Performance Dashboard",
     proj_data_header: "Data Analysis & Visualization Projects",
+    filter_all: "All",
+    filter_ux: "UX Design",
+    filter_data: "Data Visualization",
     proj_ux1_desc:
       "Responsive, privacy-focused HR SaaS concept for leave requests, role-based approvals, and request-status visibility.",
     proj_ux1_title: "HR Management Tool",
@@ -1042,7 +1080,7 @@ function updateExternalLinks(lang) {
     let label = getLinkText(link);
     if (!label) {
       const article = link.closest("article");
-      const projectTitle = article?.querySelector("h4")?.textContent?.trim();
+      const projectTitle = article?.querySelector("h3")?.textContent?.trim();
       const fallbackKey = link.dataset.tooltipKey;
       const baseLabel = fallbackKey
         ? getTranslation(lang, fallbackKey, "Visit live site")
@@ -1080,7 +1118,9 @@ function updateCopyButtons(lang) {
       key,
       button.getAttribute("aria-label") || "",
     );
-    const link = button.closest("li, article")?.querySelector("a");
+    const container = button.closest("li, article");
+    const link =
+      container?.querySelector("h3 a, h4 a") || container?.querySelector("a");
     const includesSubject =
       key === "tooltip_copy_cert" || key === "tooltip_copy_project";
     const subject = includesSubject && link ? getLinkText(link) : "";
@@ -1322,7 +1362,7 @@ function createCopyButton(value, label, key) {
  * Safe to call multiple times — skips cards that already have a copy button.
  */
 function enhanceLinkedCards() {
-  document.querySelectorAll(".featured h4 a").forEach((link) => {
+  document.querySelectorAll(".featured h3 a").forEach((link) => {
     const container = link.closest("article");
 
     if (!container || container.querySelector(".copy-button")) {
@@ -1330,7 +1370,9 @@ function enhanceLinkedCards() {
     }
 
     const tooltipKey = "tooltip_copy_project";
-    const label = getTranslation(getCurrentLanguage(), tooltipKey);
+    const baseLabel = getTranslation(getCurrentLanguage(), tooltipKey);
+    const projectName = link.textContent.trim();
+    const label = projectName ? `${baseLabel}: ${projectName}` : baseLabel;
     const copyButton = createCopyButton(link.href, label, tooltipKey);
 
     container.appendChild(copyButton);

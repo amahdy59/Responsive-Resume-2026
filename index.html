@@ -327,18 +327,22 @@
               <button class="lang-toggle" type="button" data-tooltip="Switch Language" aria-label="Switch to Arabic">
                 <span aria-hidden="true"><svg><use href="#icon-globe"></use></svg></span>
                 <span class="control-label" data-translate="control_language">Language</span>
+                <span class="control-state" data-translate="control_language_state">English</span>
               </button>
               <button class="theme-toggle" type="button" data-tooltip="Switch Theme" aria-label="Dark mode">
                 <span aria-hidden="true"><svg><use href="#icon-moon"></use></svg></span>
-                <span class="control-label" data-translate="control_theme">Theme</span>
+                <span class="control-label" data-translate="control_theme">Dark Mode</span>
+                <span class="control-state" data-translate="control_theme_state">On</span>
               </button>
               <button class="contrast-toggle" type="button" data-tooltip="Toggle Contrast" aria-label="High contrast mode">
                 <span aria-hidden="true"><svg><use href="#icon-contrast"></use></svg></span>
-                <span class="control-label" data-translate="control_contrast">Contrast</span>
+                <span class="control-label" data-translate="control_contrast">High Contrast</span>
+                <span class="control-state" data-translate="control_contrast_state">Off</span>
               </button>
               <button class="print-button" type="button" data-print-resume data-tooltip="Print / Save PDF" aria-label="Print or save as PDF" data-tooltip-key="print_resume_action">
                 <span aria-hidden="true"><svg><use href="#icon-print"></use></svg></span>
-                <span class="control-label" data-translate="print_resume_action">Print / Save PDF</span>
+                <span class="control-label" data-translate="control_print_label">Print / Save</span>
+                <span class="control-state" data-translate="control_print_state">PDF</span>
               </button>
             </div>
           </aside>
@@ -377,249 +381,71 @@
         </nav>
 
         <div class="content-grid" id="resume-content" tabindex="-1">
-          <aside
-            class="sidebar"
-            aria-label="Profile details"
-            data-translate-attr="aria-label"
-            data-translate-attr-key="profile_details_label"
-          >
-            <section class="panel panel-secondary about-panel" id="about">
-              <div class="panel-heading-row">
-                <h2><span class="panel-icon-box" aria-hidden="true"><svg><use href="#icon-user"></use></svg></span><span data-translate="sect_about">About Me</span></h2>
-                <button class="audio-play-btn" type="button" data-audio-id="resume-about" aria-label="Listen to About Me" title="Listen to narration">
-                  <svg class="audio-icon" aria-hidden="true"><use href="#icon-volume"></use></svg>
-                  <span class="audio-btn-text" data-translate="cs_listen">Listen</span>
-                </button>
-              </div>
-              <p data-translate="about_text">
-                UX Designer & Data Visualizer with 8+ years of experience turning user and
-                business needs into decision-ready dashboards and user-centered digital
-                experiences. Skilled in user research, information architecture, data
-                storytelling, visualization, and accessible interface design with Excel,
-                Power BI, Tableau, SQL, and Python.
-              </p>
-            </section>
+          <section class="panel panel-primary featured projects-panel" id="projects">
+            <h2><span class="panel-icon-box" aria-hidden="true"><svg><use href="#icon-folder"></use></svg></span><span data-translate="sect_projects">Projects</span></h2>
 
-            <section class="panel panel-secondary certifications-panel" id="certifications">
-              <div class="panel-heading-row">
-                <h2><span class="panel-icon-box" aria-hidden="true"><svg><use href="#icon-award"></use></svg></span><span data-translate="sect_certs">Certifications</span></h2>
-                <span class="cert-count-badge"><span class="cert-count">5</span> <span data-translate="certs_count_label">Certifications</span></span>
-              </div>
-              <p class="panel-subtitle" data-translate="certs_subtitle">Professional certifications that validate my expertise and commitment to continuous learning.</p>
-              <ul class="compact-list">
-                <li>
-                  <div class="cert-card-body">
-                    <a href="https://www.coursera.org/account/accomplishments/professional-cert/0OYUGNC1DRF5" target="_blank" rel="noopener noreferrer"><span data-translate="cert1">Google Data Analytics</span></a>
-                    <p class="credential-meta"><svg class="credential-meta-icon" aria-hidden="true"><use href="#icon-award"></use></svg> <span data-translate="cert1_meta">Google &middot; 2024</span></p>
-                    <p class="cert-desc" data-translate="cert1_desc">Build job-ready skills in data cleaning, analysis, visualization, and data-driven decision making using real-world datasets.</p>
+              <article class="project-card project-card-featured" data-category="ux">
+                <a class="project-thumbnail-link" href="project-haj-arafa.html" aria-labelledby="project-haj-title"><img class="project-thumbnail" src="assets/case-haj-arafa-800.webp" srcset="assets/case-haj-arafa-480.webp 480w, assets/case-haj-arafa-800.webp 800w, assets/case-haj-arafa-1200.webp 1200w" sizes="(max-width: 960px) calc(100vw - 52px), 900px" alt="Haj Arafa App interface preview" width="1440" height="890" loading="lazy" decoding="async" /></a>
+                <div class="project-card-content">
+                  <span class="project-card-tag" data-translate="filter_ux">UX Design</span>
+                  <h3 id="project-haj-title"><a href="project-haj-arafa.html" data-translate="proj_ux3_title">Haj Arafa App</a></h3>
+                  <p data-translate="proj_ux3_desc">Accessible mobile e-commerce concept with search-first navigation and a consolidated guest checkout.</p>
+                  <div class="project-actions">
+                    <a href="project-haj-arafa.html" class="btn btn-primary" data-translate="read_case_study">Read Case Study</a>
+                    <a href="https://amahdy59.github.io/Hajarafaapp/" class="btn btn-secondary project-live-link" target="_blank" rel="noopener noreferrer" aria-label="Visit live site: Haj Arafa App"><span data-translate="visit_live_project">View Live Project</span><svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg></a>
                   </div>
-                  <a class="cert-external-link" href="https://www.coursera.org/account/accomplishments/professional-cert/0OYUGNC1DRF5" target="_blank" rel="noopener noreferrer" aria-label="View Google Data Analytics certificate"><svg aria-hidden="true"><use href="#icon-external"></use></svg></a>
-                </li>
-                <li>
-                  <div class="cert-card-body">
-                    <a href="https://www.coursera.org/account/accomplishments/professional-cert/JQPVYZ6VYF52" target="_blank" rel="noopener noreferrer"><span data-translate="cert2">Tableau Business Intelligence Analyst</span></a>
-                    <p class="credential-meta"><svg class="credential-meta-icon" aria-hidden="true"><use href="#icon-award"></use></svg> <span data-translate="cert2_meta">Tableau &middot; 2024</span></p>
-                    <p class="cert-desc" data-translate="cert2_desc">Demonstrates proficiency in Tableau to connect, analyze, visualize, and share data to drive business insights.</p>
-                  </div>
-                  <a class="cert-external-link" href="https://www.coursera.org/account/accomplishments/professional-cert/JQPVYZ6VYF52" target="_blank" rel="noopener noreferrer" aria-label="View Tableau BI Analyst certificate"><svg aria-hidden="true"><use href="#icon-external"></use></svg></a>
-                </li>
-                <li>
-                  <div class="cert-card-body">
-                    <a href="https://www.coursera.org/account/accomplishments/specialization/5XR5AHBP79KW" target="_blank" rel="noopener noreferrer"><span data-translate="cert3">Excel Skills for Data Analytics and Visualization</span></a>
-                    <p class="credential-meta"><svg class="credential-meta-icon" aria-hidden="true"><use href="#icon-award"></use></svg> <span data-translate="cert3_meta">Macquarie University &middot; 2024</span></p>
-                    <p class="cert-desc" data-translate="cert3_desc">Advanced Excel skills for data analysis, modeling, visualization, and automation using formulas and pivot tables.</p>
-                  </div>
-                  <a class="cert-external-link" href="https://www.coursera.org/account/accomplishments/specialization/5XR5AHBP79KW" target="_blank" rel="noopener noreferrer" aria-label="View Excel Data Analytics certificate"><svg aria-hidden="true"><use href="#icon-external"></use></svg></a>
-                </li>
-                <li>
-                  <div class="cert-card-body">
-                    <a href="https://www.coursera.org/account/accomplishments/specialization/DCL8H4YT5UWG" target="_blank" rel="noopener noreferrer"><span data-translate="cert4">Excel Skills for Business</span></a>
-                    <p class="credential-meta"><svg class="credential-meta-icon" aria-hidden="true"><use href="#icon-award"></use></svg> <span data-translate="cert4_meta">Macquarie University &middot; 2024</span></p>
-                    <p class="cert-desc" data-translate="cert4_desc">Business-focused Excel proficiency covering data management, advanced formulas, and professional reporting.</p>
-                  </div>
-                  <a class="cert-external-link" href="https://www.coursera.org/account/accomplishments/specialization/DCL8H4YT5UWG" target="_blank" rel="noopener noreferrer" aria-label="View Excel Business certificate"><svg aria-hidden="true"><use href="#icon-external"></use></svg></a>
-                </li>
-                <li>
-                  <div class="cert-card-body">
-                    <a href="https://www.coursera.org/account/accomplishments/professional-cert/49PCMPYYGLJV" target="_blank" rel="noopener noreferrer"><span data-translate="cert5">Google UX Design</span></a>
-                    <p class="credential-meta"><svg class="credential-meta-icon" aria-hidden="true"><use href="#icon-award"></use></svg> <span data-translate="cert5_meta">Google &middot; 2023</span></p>
-                    <p class="cert-desc" data-translate="cert5_desc">Foundational UX design principles including user research, wireframing, prototyping, and usability testing.</p>
-                  </div>
-                  <a class="cert-external-link" href="https://www.coursera.org/account/accomplishments/professional-cert/49PCMPYYGLJV" target="_blank" rel="noopener noreferrer" aria-label="View Google UX Design certificate"><svg aria-hidden="true"><use href="#icon-external"></use></svg></a>
-                </li>
-              </ul>
-            </section>
+                </div>
+              </article>
 
-            <section class="panel panel-secondary skills-panel" id="skills">
-              <div class="panel-heading-row">
-                <h2><span class="panel-icon-box" aria-hidden="true"><svg><use href="#icon-code"></use></svg></span><span data-translate="sect_skills">Skills</span></h2>
-                <button class="audio-play-btn" type="button" data-audio-id="resume-skills" aria-label="Listen to Skills" title="Listen to narration">
-                  <svg class="audio-icon" aria-hidden="true"><use href="#icon-volume"></use></svg>
-                  <span class="audio-btn-text" data-translate="cs_listen">Listen</span>
-                </button>
-              </div>
-              <p class="panel-subtitle" data-translate="skills_subtitle">A blend of design thinking, data expertise, and modern tools to build clarity-driven, user-centered digital experiences.</p>
-              <div class="skill-group">
-                <div class="skill-group-header">
-                  <span class="skill-group-icon" aria-hidden="true"><svg><use href="#icon-flow"></use></svg></span>
-                  <div>
-                    <h3 data-translate="skills_ux_header">Core UX & Design</h3>
-                    <p class="skill-group-desc" data-translate="skills_ux_desc">Crafting intuitive interfaces and seamless experiences that solve real user and business problems.</p>
-                  </div>
-                </div>
-                <div class="pills" role="list" aria-label="Core UX &amp; Design skills">
-                  <span role="listitem" data-level="advanced" data-translate="skill_ux1">Interaction Design</span>
-                  <span role="listitem" data-level="advanced" data-translate="skill_ux2">Information Architecture</span>
-                  <span role="listitem" data-level="advanced" data-translate="skill_ux3">User Research</span>
-                  <span role="listitem" data-level="advanced" data-translate="skill_ux5">Wireframing</span>
-                  <span role="listitem" data-level="advanced" data-translate="skill_ux6">Prototyping</span>
-                  <span role="listitem" data-level="advanced" data-translate="skill_ux4">Usability Testing</span>
-                  <span role="listitem" data-level="expert" data-translate="skill_ux8">Design Systems</span>
-                  <span role="listitem" data-level="expert" data-translate="skill_ux9">Accessibility</span>
-                </div>
-              </div>
-              <div class="skill-group">
-                <div class="skill-group-header">
-                  <span class="skill-group-icon" aria-hidden="true"><svg><use href="#icon-chart"></use></svg></span>
-                  <div>
-                    <h3 data-translate="skills_data_header">Data Analysis & Visualization</h3>
-                    <p class="skill-group-desc" data-translate="skills_data_desc">Turning data into meaningful insights and impactful visual stories.</p>
-                  </div>
-                </div>
-                <div class="pills" role="list" aria-label="Data Analysis &amp; Visualization skills">
-                  <span role="listitem" data-level="advanced" data-translate="skill_data1">Excel (Advanced)</span>
-                  <span role="listitem" data-level="advanced" data-translate="skill_data2">Power BI</span>
-                  <span role="listitem" data-level="advanced" data-translate="skill_data3">Tableau</span>
-                  <span role="listitem" data-level="proficient" data-translate="skill_data4">Python</span>
-                  <span role="listitem" data-level="proficient" data-translate="skill_data5">SQL</span>
-                  <span role="listitem" data-level="advanced" data-translate="skill_data6">Dashboard Design</span>
-                  <span role="listitem" data-level="expert" data-translate="skill_data7">Data Storytelling</span>
-                  <span role="listitem" data-level="expert" data-translate="skill_data8">KPI Analysis</span>
-                </div>
-              </div>
-              <div class="skill-group">
-                <div class="skill-group-header">
-                  <span class="skill-group-icon" aria-hidden="true"><svg><use href="#icon-code"></use></svg></span>
-                  <div>
-                    <h3 data-translate="skills_tools_header">Tools & Technologies</h3>
-                    <p class="skill-group-desc" data-translate="skills_tools_desc">Technologies I use to design, analyze, prototype, and deliver data-informed solutions.</p>
-                  </div>
-                </div>
-                <div class="pills" role="list" aria-label="Tools &amp; Technologies">
-                  <span role="listitem" data-level="expert" data-translate="skill_ux7">Figma</span>
-                  <span role="listitem" data-level="expert" data-translate="skill_ux11">Adobe Creative Suite</span>
-                  <span role="listitem" data-level="advanced" data-translate="skill_tool1">Microsoft 365</span>
-                  <span role="listitem" data-level="proficient" data-translate="skill_tool2">Google Workspace</span>
-                  <span role="listitem" data-level="advanced" data-translate="skill_tool3">Looker Studio</span>
-                  <span role="listitem" data-level="proficient" data-translate="skill_tool4">Git & GitHub</span>
-                </div>
-              </div>
-              <div class="skill-legend" aria-label="Proficiency legend">
-                <span class="legend-item"><span class="legend-dot" data-level="proficient"></span> <span data-translate="skill_level_proficient">Proficient</span></span>
-                <span class="legend-item"><span class="legend-dot" data-level="advanced"></span> <span data-translate="skill_level_advanced">Advanced</span></span>
-                <span class="legend-item"><span class="legend-dot" data-level="expert"></span> <span data-translate="skill_level_expert">Expert</span></span>
-                <span class="legend-tagline" data-translate="skills_tagline">Continuously learning & exploring new tools</span>
-              </div>
-            </section>
-          </aside>
-
-          <section
-            class="main-column"
-            aria-label="Main resume content"
-            data-translate-attr="aria-label"
-            data-translate-attr-key="main_resume_label"
-          >
-            <section class="panel panel-primary featured projects-panel" id="projects">
-              <h2><span class="panel-icon-box" aria-hidden="true"><svg><use href="#icon-folder"></use></svg></span><span data-translate="sect_projects">Projects</span></h2>
-
-              <div class="project-group" data-group-category="ux">
-                <h3 data-translate="proj_ux_header">UX Projects</h3>
-                <article data-category="ux">
-                  <div class="project-header">
-                    <h4 id="project-haj-title"><a href="project-haj-arafa.html" data-translate="proj_ux3_title">Haj Arafa App</a></h4>
-                  </div>
-                  <div class="project-body">
-                    <div class="project-body-inner">
-                      <a class="project-thumbnail-link" href="project-haj-arafa.html" aria-labelledby="project-haj-title"><img class="project-thumbnail" src="assets/case-haj-arafa-800.webp" srcset="assets/case-haj-arafa-480.webp 480w, assets/case-haj-arafa-800.webp 800w, assets/case-haj-arafa-1200.webp 1200w" sizes="(max-width: 880px) calc(100vw - 52px), 560px" alt="Haj Arafa App interface preview" width="1440" height="890" loading="lazy" decoding="async" /></a>
-                      <p data-translate="proj_ux3_desc">
-                        Accessible mobile e-commerce concept with search-first navigation and a consolidated guest checkout.
-                      </p>
-                      <div class="project-actions">
-                        <a href="project-haj-arafa.html" class="btn btn-primary" data-translate="read_case_study">Read Case Study</a>
-                        <a href="https://amahdy59.github.io/Hajarafaapp/" class="btn btn-secondary project-live-link" target="_blank" rel="noopener noreferrer" aria-label="Visit live site: Haj Arafa App"><span data-translate="visit_live_project">View Live Project</span><svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg></a>
-                      </div>
+              <div class="project-grid">
+                <article class="project-card project-card-compact" data-category="ux">
+                  <a class="project-thumbnail-link" href="project-cairo-airport.html" aria-labelledby="project-cairo-title"><img class="project-thumbnail" src="assets/case-cairo-airport-800.webp" srcset="assets/case-cairo-airport-480.webp 480w, assets/case-cairo-airport-800.webp 800w, assets/case-cairo-airport-1200.webp 1200w" sizes="(max-width: 560px) calc(100vw - 52px), 440px" alt="Cairo Airport dashboard interface preview" width="1440" height="1586" loading="lazy" decoding="async" /></a>
+                  <div class="project-card-content">
+                    <span class="project-card-tag" data-translate="filter_ux">UX Design</span>
+                    <h3 id="project-cairo-title"><a href="project-cairo-airport.html" data-translate="proj_ux2_title">Cairo International Airport - Command Hub</a></h3>
+                    <p data-translate="proj_ux2_desc">A high-fidelity operational command dashboard focusing on real-time data visualization, clear information hierarchy, and responsive performance.</p>
+                    <div class="project-actions">
+                      <a href="project-cairo-airport.html" class="btn btn-primary" data-translate="read_case_study">Read Case Study</a>
+                      <a href="https://amahdy59.github.io/Cairo-International-Airpot-CIA-Dashboard/" class="btn btn-secondary project-live-link" target="_blank" rel="noopener noreferrer" aria-label="Visit live site: Cairo International Airport - Command Hub"><span data-translate="visit_live_project">View Live Project</span><svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg></a>
                     </div>
                   </div>
                 </article>
-                <article data-category="ux">
-                  <div class="project-header">
-                    <h4 id="project-cairo-title"><a href="project-cairo-airport.html" data-translate="proj_ux2_title">Cairo International Airport - Command Hub</a></h4>
-                  </div>
-                  <div class="project-body">
-                    <div class="project-body-inner">
-                      <a class="project-thumbnail-link" href="project-cairo-airport.html" aria-labelledby="project-cairo-title"><img class="project-thumbnail" src="assets/case-cairo-airport-800.webp" srcset="assets/case-cairo-airport-480.webp 480w, assets/case-cairo-airport-800.webp 800w, assets/case-cairo-airport-1200.webp 1200w" sizes="(max-width: 880px) calc(100vw - 52px), 560px" alt="Cairo Airport dashboard interface preview" width="1440" height="1586" loading="lazy" decoding="async" /></a>
-                      <p data-translate="proj_ux2_desc">
-                        A high-fidelity operational command dashboard focusing on real-time data visualization, clear information hierarchy, and responsive performance.
-                      </p>
-                      <div class="project-actions">
-                        <a href="project-cairo-airport.html" class="btn btn-primary" data-translate="read_case_study">Read Case Study</a>
-                        <a href="https://amahdy59.github.io/Cairo-International-Airpot-CIA-Dashboard/" class="btn btn-secondary project-live-link" target="_blank" rel="noopener noreferrer" aria-label="Visit live site: Cairo International Airport - Command Hub"><span data-translate="visit_live_project">View Live Project</span><svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg></a>
-                      </div>
-                    </div>
-                  </div>
-                </article>
-                <article data-category="ux">
-                  <div class="project-header">
-                    <h4 id="project-hr-title"><a href="project-hr-tool.html" data-translate="proj_ux1_title">Human Resources Tool</a></h4>
-                  </div>
-                  <div class="project-body">
-                    <div class="project-body-inner">
-                      <a class="project-thumbnail-link" href="project-hr-tool.html" aria-labelledby="project-hr-title"><img class="project-thumbnail" src="assets/case-hr-tool-800.webp" srcset="assets/case-hr-tool-480.webp 480w, assets/case-hr-tool-800.webp 800w, assets/case-hr-tool-1200.webp 1200w" sizes="(max-width: 880px) calc(100vw - 52px), 560px" alt="HR management interface preview" width="1440" height="890" loading="lazy" decoding="async" /></a>
-                      <p data-translate="proj_ux1_desc">
-                        A responsive, privacy-centric HR SaaS application optimizing leave requests and role management through modern, user-friendly interfaces.
-                      </p>
-                      <div class="project-actions">
-                        <a href="project-hr-tool.html" class="btn btn-primary" data-translate="read_case_study">Read Case Study</a>
-                        <a href="https://amahdy59.github.io/hr-tool-v2/" class="btn btn-secondary project-live-link" target="_blank" rel="noopener noreferrer" aria-label="Visit live site: Human Resources Tool"><span data-translate="visit_live_project">View Live Project</span><svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg></a>
-                      </div>
-                    </div>
-                  </div>
-                </article>
-                <article data-category="ux">
-                  <div class="project-header">
-                    <h4 id="project-azkar-title"><a href="project-azkar-app.html" data-translate="proj_ux4_title">Azkar App – Daily Fortress</a></h4>
-                  </div>
-                  <div class="project-body">
-                    <div class="project-body-inner">
-                      <a class="project-thumbnail-link" href="project-azkar-app.html" aria-labelledby="project-azkar-title"><img class="project-thumbnail" src="assets/case-azkar-app-800.webp" srcset="assets/case-azkar-app-480.webp 480w, assets/case-azkar-app-800.webp 800w, assets/case-azkar-app-1200.webp 1200w" sizes="(max-width: 880px) calc(100vw - 52px), 560px" alt="Azkar App interface preview" width="1440" height="890" loading="lazy" decoding="async" /></a>
-                      <p data-translate="proj_ux4_desc">
-                        A serene, accessible Islamic daily remembrance and prayer times web application designed for spiritual consistency and focus.
-                      </p>
-                      <div class="project-actions">
-                        <a href="project-azkar-app.html" class="btn btn-primary" data-translate="read_case_study">Read Case Study</a>
-                        <a href="https://amahdy59.github.io/Azkarapp/#/home" class="btn btn-secondary project-live-link" target="_blank" rel="noopener noreferrer" aria-label="Visit live site: Azkar App"><span data-translate="visit_live_project">View Live Project</span><svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg></a>
-                      </div>
-                    </div>
-                  </div>
-                </article>
-              </div>
 
-              <div class="project-group" data-group-category="data">
-                <h3 data-translate="proj_data_header">Data Analysis &amp; Visualization Projects</h3>
-                <article data-category="data">
-                  <div class="project-header">
-                    <h4 id="project-lego-title"><a href="project-lego-explorer.html" data-translate="proj_data1_title">A Data-Driven LEGO Explorer</a></h4>
+                <article class="project-card project-card-compact" data-category="ux">
+                  <a class="project-thumbnail-link" href="project-hr-tool.html" aria-labelledby="project-hr-title"><img class="project-thumbnail" src="assets/case-hr-tool-800.webp" srcset="assets/case-hr-tool-480.webp 480w, assets/case-hr-tool-800.webp 800w, assets/case-hr-tool-1200.webp 1200w" sizes="(max-width: 560px) calc(100vw - 52px), 440px" alt="HR management interface preview" width="1440" height="890" loading="lazy" decoding="async" /></a>
+                  <div class="project-card-content">
+                    <span class="project-card-tag" data-translate="filter_ux">UX Design</span>
+                    <h3 id="project-hr-title"><a href="project-hr-tool.html" data-translate="proj_ux1_title">Human Resources Tool</a></h3>
+                    <p data-translate="proj_ux1_desc">A responsive, privacy-centric HR SaaS application optimizing leave requests and role management through modern, user-friendly interfaces.</p>
+                    <div class="project-actions">
+                      <a href="project-hr-tool.html" class="btn btn-primary" data-translate="read_case_study">Read Case Study</a>
+                      <a href="https://amahdy59.github.io/hr-tool-v2/" class="btn btn-secondary project-live-link" target="_blank" rel="noopener noreferrer" aria-label="Visit live site: Human Resources Tool"><span data-translate="visit_live_project">View Live Project</span><svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg></a>
+                    </div>
                   </div>
-                  <div class="project-body">
-                    <div class="project-body-inner">
-                      <a class="project-thumbnail-link" href="project-lego-explorer.html" aria-labelledby="project-lego-title"><img class="project-thumbnail" src="assets/case-lego-explorer-800.webp" srcset="assets/case-lego-explorer-480.webp 480w, assets/case-lego-explorer-800.webp 800w, assets/case-lego-explorer-1200.webp 1200w" sizes="(max-width: 880px) calc(100vw - 52px), 560px" alt="LEGO Explorer dashboard preview" width="1440" height="810" loading="lazy" decoding="async" /></a>
-                      <p data-translate="proj_data1_desc">
-                        An interactive Tableau visualization experience that helps users explore LEGO sets by theme, age, price, and set count.
-                      </p>
-                      <div class="project-actions">
-                        <a href="project-lego-explorer.html" class="btn btn-primary" data-translate="read_case_study">Read Case Study</a>
-                        <a href="https://mavenshowcase.com/project/24967" class="btn btn-secondary project-live-link" target="_blank" rel="noopener noreferrer" aria-label="Visit live site: A Data-Driven LEGO Explorer"><span data-translate="visit_live_project">View Live Project</span><svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg></a>
-                      </div>
+                </article>
+
+                <article class="project-card project-card-compact" data-category="ux">
+                  <a class="project-thumbnail-link" href="project-azkar-app.html" aria-labelledby="project-azkar-title"><img class="project-thumbnail" src="assets/case-azkar-app-800.webp" srcset="assets/case-azkar-app-480.webp 480w, assets/case-azkar-app-800.webp 800w, assets/case-azkar-app-1200.webp 1200w" sizes="(max-width: 560px) calc(100vw - 52px), 440px" alt="Azkar App interface preview" width="1440" height="890" loading="lazy" decoding="async" /></a>
+                  <div class="project-card-content">
+                    <span class="project-card-tag" data-translate="filter_ux">UX Design</span>
+                    <h3 id="project-azkar-title"><a href="project-azkar-app.html" data-translate="proj_ux4_title">Azkar App – Daily Fortress</a></h3>
+                    <p data-translate="proj_ux4_desc">A serene, accessible Islamic daily remembrance and prayer times web application designed for spiritual consistency and focus.</p>
+                    <div class="project-actions">
+                      <a href="project-azkar-app.html" class="btn btn-primary" data-translate="read_case_study">Read Case Study</a>
+                      <a href="https://amahdy59.github.io/Azkarapp/#/home" class="btn btn-secondary project-live-link" target="_blank" rel="noopener noreferrer" aria-label="Visit live site: Azkar App"><span data-translate="visit_live_project">View Live Project</span><svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg></a>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="project-card project-card-compact" data-category="data">
+                  <a class="project-thumbnail-link" href="project-lego-explorer.html" aria-labelledby="project-lego-title"><img class="project-thumbnail" src="assets/case-lego-explorer-800.webp" srcset="assets/case-lego-explorer-480.webp 480w, assets/case-lego-explorer-800.webp 800w, assets/case-lego-explorer-1200.webp 1200w" sizes="(max-width: 560px) calc(100vw - 52px), 440px" alt="LEGO Explorer dashboard preview" width="1440" height="810" loading="lazy" decoding="async" /></a>
+                  <div class="project-card-content">
+                    <span class="project-card-tag" data-translate="filter_data">Data Visualization</span>
+                    <h3 id="project-lego-title"><a href="project-lego-explorer.html" data-translate="proj_data1_title">A Data-Driven LEGO Explorer</a></h3>
+                    <p data-translate="proj_data1_desc">An interactive Tableau visualization experience that helps users explore LEGO sets by theme, age, price, and set count.</p>
+                    <div class="project-actions">
+                      <a href="project-lego-explorer.html" class="btn btn-primary" data-translate="read_case_study">Read Case Study</a>
+                      <a href="https://mavenshowcase.com/project/24967" class="btn btn-secondary project-live-link" target="_blank" rel="noopener noreferrer" aria-label="Visit live site: A Data-Driven LEGO Explorer"><span data-translate="visit_live_project">View Live Project</span><svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg></a>
                     </div>
                   </div>
                 </article>
@@ -744,7 +570,146 @@
               </div>
             </section>
 
-            <section class="panel panel-secondary timeline-panel education-panel" id="education">
+            <section class="panel panel-primary about-panel" id="about">
+              <div class="panel-heading-row">
+                <h2><span class="panel-icon-box" aria-hidden="true"><svg><use href="#icon-user"></use></svg></span><span data-translate="sect_about">About Me</span></h2>
+                <button class="audio-play-btn" type="button" data-audio-id="resume-about" aria-label="Listen to About Me" title="Listen to narration">
+                  <svg class="audio-icon" aria-hidden="true"><use href="#icon-volume"></use></svg>
+                  <span class="audio-btn-text" data-translate="cs_listen">Listen</span>
+                </button>
+              </div>
+              <p data-translate="about_text">
+                UX Designer &amp; Data Visualizer with 8+ years of experience turning user and
+                business needs into decision-ready dashboards and user-centered digital
+                experiences. Skilled in user research, information architecture, data
+                storytelling, visualization, and accessible interface design with Excel,
+                Power BI, Tableau, SQL, and Python.
+              </p>
+            </section>
+
+            <section class="panel panel-primary skills-panel" id="skills">
+              <div class="panel-heading-row">
+                <h2><span class="panel-icon-box" aria-hidden="true"><svg><use href="#icon-code"></use></svg></span><span data-translate="sect_skills">Skills</span></h2>
+                <button class="audio-play-btn" type="button" data-audio-id="resume-skills" aria-label="Listen to Skills" title="Listen to narration">
+                  <svg class="audio-icon" aria-hidden="true"><use href="#icon-volume"></use></svg>
+                  <span class="audio-btn-text" data-translate="cs_listen">Listen</span>
+                </button>
+              </div>
+              <p class="panel-subtitle" data-translate="skills_subtitle">A blend of design thinking, data expertise, and modern tools to build clarity-driven, user-centered digital experiences.</p>
+              <div class="skill-group">
+                <div class="skill-group-header">
+                  <span class="skill-group-icon" aria-hidden="true"><svg><use href="#icon-flow"></use></svg></span>
+                  <div>
+                    <h3 data-translate="skills_ux_header">Core UX &amp; Design</h3>
+                    <p class="skill-group-desc" data-translate="skills_ux_desc">Crafting intuitive interfaces and seamless experiences that solve real user and business problems.</p>
+                  </div>
+                </div>
+                <div class="pills" role="list" aria-label="Core UX &amp; Design skills">
+                  <span role="listitem" data-level="advanced" data-translate="skill_ux1">Interaction Design</span>
+                  <span role="listitem" data-level="advanced" data-translate="skill_ux2">Information Architecture</span>
+                  <span role="listitem" data-level="advanced" data-translate="skill_ux3">User Research</span>
+                  <span role="listitem" data-level="advanced" data-translate="skill_ux5">Wireframing</span>
+                  <span role="listitem" data-level="advanced" data-translate="skill_ux6">Prototyping</span>
+                  <span role="listitem" data-level="advanced" data-translate="skill_ux4">Usability Testing</span>
+                  <span role="listitem" data-level="expert" data-translate="skill_ux8">Design Systems</span>
+                  <span role="listitem" data-level="expert" data-translate="skill_ux9">Accessibility</span>
+                </div>
+              </div>
+              <div class="skill-group">
+                <div class="skill-group-header">
+                  <span class="skill-group-icon" aria-hidden="true"><svg><use href="#icon-chart"></use></svg></span>
+                  <div>
+                    <h3 data-translate="skills_data_header">Data Analysis &amp; Visualization</h3>
+                    <p class="skill-group-desc" data-translate="skills_data_desc">Turning data into meaningful insights and impactful visual stories.</p>
+                  </div>
+                </div>
+                <div class="pills" role="list" aria-label="Data Analysis &amp; Visualization skills">
+                  <span role="listitem" data-level="advanced" data-translate="skill_data1">Excel (Advanced)</span>
+                  <span role="listitem" data-level="advanced" data-translate="skill_data2">Power BI</span>
+                  <span role="listitem" data-level="advanced" data-translate="skill_data3">Tableau</span>
+                  <span role="listitem" data-level="proficient" data-translate="skill_data4">Python</span>
+                  <span role="listitem" data-level="proficient" data-translate="skill_data5">SQL</span>
+                  <span role="listitem" data-level="advanced" data-translate="skill_data6">Dashboard Design</span>
+                  <span role="listitem" data-level="expert" data-translate="skill_data7">Data Storytelling</span>
+                  <span role="listitem" data-level="expert" data-translate="skill_data8">KPI Analysis</span>
+                </div>
+              </div>
+              <div class="skill-group">
+                <div class="skill-group-header">
+                  <span class="skill-group-icon" aria-hidden="true"><svg><use href="#icon-code"></use></svg></span>
+                  <div>
+                    <h3 data-translate="skills_tools_header">Tools &amp; Technologies</h3>
+                    <p class="skill-group-desc" data-translate="skills_tools_desc">Technologies I use to design, analyze, prototype, and deliver data-informed solutions.</p>
+                  </div>
+                </div>
+                <div class="pills" role="list" aria-label="Tools &amp; Technologies">
+                  <span role="listitem" data-level="expert" data-translate="skill_ux7">Figma</span>
+                  <span role="listitem" data-level="expert" data-translate="skill_ux11">Adobe Creative Suite</span>
+                  <span role="listitem" data-level="advanced" data-translate="skill_tool1">Microsoft 365</span>
+                  <span role="listitem" data-level="proficient" data-translate="skill_tool2">Google Workspace</span>
+                  <span role="listitem" data-level="advanced" data-translate="skill_tool3">Looker Studio</span>
+                  <span role="listitem" data-level="proficient" data-translate="skill_tool4">Git & GitHub</span>
+                </div>
+              </div>
+              <div class="skill-legend" aria-label="Proficiency legend">
+                <span class="legend-item"><span class="legend-dot" data-level="proficient"></span> <span data-translate="skill_level_proficient">Proficient</span></span>
+                <span class="legend-item"><span class="legend-dot" data-level="advanced"></span> <span data-translate="skill_level_advanced">Advanced</span></span>
+                <span class="legend-item"><span class="legend-dot" data-level="expert"></span> <span data-translate="skill_level_expert">Expert</span></span>
+                <span class="legend-tagline" data-translate="skills_tagline">Continuously learning &amp; exploring new tools</span>
+              </div>
+            </section>
+
+            <section class="panel panel-primary certifications-panel" id="certifications">
+              <div class="panel-heading-row">
+                <h2><span class="panel-icon-box" aria-hidden="true"><svg><use href="#icon-award"></use></svg></span><span data-translate="sect_certs">Certifications</span></h2>
+                <span class="cert-count-badge"><span class="cert-count">5</span> <span data-translate="certs_count_label">Certifications</span></span>
+              </div>
+              <p class="panel-subtitle" data-translate="certs_subtitle">Professional certifications that validate my expertise and commitment to continuous learning.</p>
+              <ul class="compact-list">
+                <li>
+                  <div class="cert-card-body">
+                    <a href="https://www.coursera.org/account/accomplishments/professional-cert/0OYUGNC1DRF5" target="_blank" rel="noopener noreferrer"><span data-translate="cert1">Google Data Analytics</span></a>
+                    <p class="credential-meta"><svg class="credential-meta-icon" aria-hidden="true"><use href="#icon-award"></use></svg> <span data-translate="cert1_meta">Google &middot; 2024</span></p>
+                    <p class="cert-desc" data-translate="cert1_desc">Build job-ready skills in data cleaning, analysis, visualization, and data-driven decision making using real-world datasets.</p>
+                  </div>
+                  <a class="cert-external-link" href="https://www.coursera.org/account/accomplishments/professional-cert/0OYUGNC1DRF5" target="_blank" rel="noopener noreferrer" aria-label="View Google Data Analytics certificate"><svg aria-hidden="true"><use href="#icon-external"></use></svg></a>
+                </li>
+                <li>
+                  <div class="cert-card-body">
+                    <a href="https://www.coursera.org/account/accomplishments/professional-cert/JQPVYZ6VYF52" target="_blank" rel="noopener noreferrer"><span data-translate="cert2">Tableau Business Intelligence Analyst</span></a>
+                    <p class="credential-meta"><svg class="credential-meta-icon" aria-hidden="true"><use href="#icon-award"></use></svg> <span data-translate="cert2_meta">Tableau &middot; 2024</span></p>
+                    <p class="cert-desc" data-translate="cert2_desc">Demonstrates proficiency in Tableau to connect, analyze, visualize, and share data to drive business insights.</p>
+                  </div>
+                  <a class="cert-external-link" href="https://www.coursera.org/account/accomplishments/professional-cert/JQPVYZ6VYF52" target="_blank" rel="noopener noreferrer" aria-label="View Tableau BI Analyst certificate"><svg aria-hidden="true"><use href="#icon-external"></use></svg></a>
+                </li>
+                <li>
+                  <div class="cert-card-body">
+                    <a href="https://www.coursera.org/account/accomplishments/specialization/5XR5AHBP79KW" target="_blank" rel="noopener noreferrer"><span data-translate="cert3">Excel Skills for Data Analytics and Visualization</span></a>
+                    <p class="credential-meta"><svg class="credential-meta-icon" aria-hidden="true"><use href="#icon-award"></use></svg> <span data-translate="cert3_meta">Macquarie University &middot; 2024</span></p>
+                    <p class="cert-desc" data-translate="cert3_desc">Advanced Excel skills for data analysis, modeling, visualization, and automation using formulas and pivot tables.</p>
+                  </div>
+                  <a class="cert-external-link" href="https://www.coursera.org/account/accomplishments/specialization/5XR5AHBP79KW" target="_blank" rel="noopener noreferrer" aria-label="View Excel Data Analytics certificate"><svg aria-hidden="true"><use href="#icon-external"></use></svg></a>
+                </li>
+                <li>
+                  <div class="cert-card-body">
+                    <a href="https://www.coursera.org/account/accomplishments/specialization/DCL8H4YT5UWG" target="_blank" rel="noopener noreferrer"><span data-translate="cert4">Excel Skills for Business</span></a>
+                    <p class="credential-meta"><svg class="credential-meta-icon" aria-hidden="true"><use href="#icon-award"></use></svg> <span data-translate="cert4_meta">Macquarie University &middot; 2024</span></p>
+                    <p class="cert-desc" data-translate="cert4_desc">Business-focused Excel proficiency covering data management, advanced formulas, and professional reporting.</p>
+                  </div>
+                  <a class="cert-external-link" href="https://www.coursera.org/account/accomplishments/specialization/DCL8H4YT5UWG" target="_blank" rel="noopener noreferrer" aria-label="View Excel Business certificate"><svg aria-hidden="true"><use href="#icon-external"></use></svg></a>
+                </li>
+                <li>
+                  <div class="cert-card-body">
+                    <a href="https://www.coursera.org/account/accomplishments/professional-cert/49PCMPYYGLJV" target="_blank" rel="noopener noreferrer"><span data-translate="cert5">Google UX Design</span></a>
+                    <p class="credential-meta"><svg class="credential-meta-icon" aria-hidden="true"><use href="#icon-award"></use></svg> <span data-translate="cert5_meta">Google &middot; 2023</span></p>
+                    <p class="cert-desc" data-translate="cert5_desc">Foundational UX design principles including user research, wireframing, prototyping, and usability testing.</p>
+                  </div>
+                  <a class="cert-external-link" href="https://www.coursera.org/account/accomplishments/professional-cert/49PCMPYYGLJV" target="_blank" rel="noopener noreferrer" aria-label="View Google UX Design certificate"><svg aria-hidden="true"><use href="#icon-external"></use></svg></a>
+                </li>
+              </ul>
+            </section>
+
+            <section class="panel panel-primary timeline-panel education-panel" id="education">
               <div class="panel-heading-row">
                 <h2><span class="panel-icon-box" aria-hidden="true"><svg><use href="#icon-education"></use></svg></span><span data-translate="sect_edu">Education</span></h2>
                 <button class="audio-play-btn" type="button" data-audio-id="resume-education" aria-label="Listen to Education" title="Listen to narration">
@@ -798,7 +763,6 @@
                 </div>
               </div>
             </section>
-          </section>
         </div>
         <div class="print-qr-card" aria-hidden="true">
           <div class="print-qr-info">
@@ -810,7 +774,77 @@
       </section>
     </main>
 
+    <footer class="site-footer">
+      <div class="footer-nav-bar">
+        <div class="footer-identity">
+          <img class="footer-avatar" src="assets/ahmed-mahdy.webp" alt="" width="40" height="40" loading="lazy" decoding="async" aria-hidden="true" />
+          <div class="footer-identity-text">
+            <span class="footer-name">Ahmed Mahdy</span>
+            <span class="footer-title" data-translate="hero_title">UX Designer &amp; Data Visualizer</span>
+          </div>
+        </div>
+        <nav class="footer-sections" aria-label="Footer section navigation">
+          <a href="#projects"><svg aria-hidden="true"><use href="#icon-folder"></use></svg> <span data-translate="sect_projects">Projects</span></a>
+          <a href="#employment"><svg aria-hidden="true"><use href="#icon-briefcase"></use></svg> <span data-translate="sect_jobs">Employment</span></a>
+          <a href="#about"><svg aria-hidden="true"><use href="#icon-user"></use></svg> <span data-translate="sect_about">About Me</span></a>
+          <a href="#skills"><svg aria-hidden="true"><use href="#icon-code"></use></svg> <span data-translate="sect_skills">Skills</span></a>
+          <a href="#certifications"><svg aria-hidden="true"><use href="#icon-award"></use></svg> <span data-translate="sect_certs">Certifications</span></a>
+          <a href="#education"><svg aria-hidden="true"><use href="#icon-education"></use></svg> <span data-translate="sect_edu">Education</span></a>
+        </nav>
+        <a href="#" class="footer-back-to-top" aria-label="Back to top"><svg aria-hidden="true" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg> <span data-translate="back_to_top">Back to top</span></a>
+      </div>
 
+      <div class="footer-content">
+        <div class="footer-tagline-col">
+          <span class="footer-star" aria-hidden="true"><svg><use href="#icon-spark"></use></svg></span>
+          <p data-translate="footer_tagline">I design intuitive experiences and turn data into clear, impactful visuals that help people make better decisions.</p>
+        </div>
+
+        <div class="footer-links-col">
+          <h3 data-translate="footer_quick_links">Quick Links</h3>
+          <ul>
+            <li><a href="#projects" data-translate="sect_projects">Projects</a></li>
+            <li><a href="#employment" data-translate="sect_jobs">Employment</a></li>
+            <li><a href="#about" data-translate="sect_about">About Me</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links-col">
+          <h3 data-translate="footer_resources">Resources</h3>
+          <ul>
+            <li><a href="#skills" data-translate="sect_skills">Skills</a></li>
+            <li><a href="#certifications" data-translate="sect_certs">Certifications</a></li>
+            <li><a href="#education" data-translate="sect_edu">Education</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-connect-col">
+          <h3 data-translate="footer_connect">Let's Connect</h3>
+          <div class="footer-social-icons">
+            <a href="https://www.linkedin.com/in/creativemahdy" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg aria-hidden="true"><use href="#icon-linkedin"></use></svg></a>
+            <a href="https://dribbble.com/creativemahdy" target="_blank" rel="noopener noreferrer" aria-label="Dribbble"><svg aria-hidden="true"><use href="#icon-dribbble"></use></svg></a>
+            <a href="mailto:amahdy59@gmail.com" aria-label="Email"><svg aria-hidden="true"><use href="#icon-mail"></use></svg></a>
+          </div>
+          <p class="footer-availability"><span class="availability-dot" aria-hidden="true"></span> <span data-translate="footer_available">Available for new opportunities</span></p>
+        </div>
+
+        <div class="footer-cta-col">
+          <div class="footer-cta-card">
+            <span class="footer-cta-icon" aria-hidden="true"><svg><use href="#icon-mail"></use></svg></span>
+            <div>
+              <strong data-translate="footer_cta_title">Let's work together</strong>
+              <p data-translate="footer_cta_desc">I'm always open to discussing new projects and opportunities.</p>
+            </div>
+          </div>
+          <a href="mailto:amahdy59@gmail.com" class="btn btn-secondary footer-email-btn"><span data-translate="footer_send_email">Send me an email</span> <svg aria-hidden="true" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span data-translate="footer_copyright">&copy; 2024 Ahmed Mahdy. All rights reserved.</span>
+        <span class="footer-heart" data-translate="footer_built_with">Built with passion and precision</span>
+      </div>
+    </footer>
 
     <div class="copy-toast" role="status" aria-live="polite" aria-atomic="true"></div>
     <script src="script.js"></script>

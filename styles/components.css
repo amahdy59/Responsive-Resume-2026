@@ -212,14 +212,16 @@
   margin-top: 1.2em;
 }
 
-.sidebar .panel-secondary .pills span {
-  padding-block: 4px;
-}
-
 html[lang="ar"] .panel h2,
 html[lang="ar"] .project-header h4,
 html[lang="ar"] .credential-meta {
   letter-spacing: 0;
+}
+
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
 .pills span {
