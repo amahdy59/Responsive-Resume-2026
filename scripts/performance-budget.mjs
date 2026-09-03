@@ -61,11 +61,16 @@ const baseUrl = await new Promise((res, rej) => {
   server.on("error", rej);
 });
 
-const browser = await chromium.launch({ headless: true });
+const browser = await chromium.launch({
+  headless: true,
+  args: ["--no-sandbox", "--disable-setuid-sandbox", "--disable-dev-shm-usage"],
+});
 try {
   const page = await browser.newPage({
     viewport: { width: 1280, height: 800 },
   });
+  page.setDefaultNavigationTimeout(30000);
+  page.setDefaultTimeout(30000);
   const devtools = await page.context().newCDPSession(page);
   let transferredBytes = 0;
   await devtools.send("Network.enable");
@@ -83,8 +88,8 @@ try {
         if (!entry.hadRecentInput) window.__quality.cls += entry.value;
     }).observe({ type: "layout-shift", buffered: true });
   });
-  await page.goto(`${baseUrl}/en/`, { waitUntil: "networkidle" });
-  await page.waitForTimeout(500);
+  await page.goto(`${baseUrl}/en/`, { waitUntil: "load" });
+  await page.waitForTimeout(1000);
   const metrics = await page.evaluate(() => ({ ...window.__quality }));
   console.log(
     `Performance metrics: LCP ${metrics.lcp.toFixed(0)}ms, CLS ${metrics.cls.toFixed(3)}, ${(transferredBytes / 1024).toFixed(0)}KB transferred.`,

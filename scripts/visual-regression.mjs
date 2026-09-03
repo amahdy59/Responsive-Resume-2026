@@ -80,7 +80,10 @@ const isCI = Boolean(process.env.CI || process.env.GITHUB_ACTIONS);
 
 await mkdir(baselineDir, { recursive: true });
 await mkdir(evidenceDir, { recursive: true });
-const browser = await chromium.launch({ headless: true });
+const browser = await chromium.launch({
+  headless: true,
+  args: ["--no-sandbox", "--disable-setuid-sandbox", "--disable-dev-shm-usage"],
+});
 try {
   const scenarios = [
     { name: "home-en-mobile", path: "/en/", width: 375, height: 812 },
