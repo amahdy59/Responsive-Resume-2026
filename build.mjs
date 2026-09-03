@@ -28,12 +28,29 @@ const caseStudies = [
 ];
 const requiredPaths = [
   "index.html",
-  "styles.css",
+  "styles",
   "fonts.css",
   "script.js",
   "audio-player.js",
   "preference-bootstrap.js",
   "assets",
+];
+// Cascade-dependent load order for the styles/ source partials: tokens before
+// anything that reads them, base/animations/components before the two
+// page-domain files, then the cross-cutting override layers (responsive,
+// accessibility modes, print) last. Concatenated 1:1 into the single
+// fingerprinted styles.css bundle below — this list is the only place that
+// order is decided.
+const styleBundleOrder = [
+  "tokens.css",
+  "base.css",
+  "animations.css",
+  "components.css",
+  "home.css",
+  "case-study.css",
+  "responsive.css",
+  "accessibility-modes.css",
+  "print.css",
 ];
 const hash = (value) =>
   createHash("sha256").update(value).digest("hex").slice(0, 10);
@@ -256,8 +273,15 @@ await fingerprintDirectory(
 );
 const scriptSource = await readFile(join(root, "script.js"), "utf8");
 const translations = readTranslations(scriptSource);
+const stylesBundle = (
+  await Promise.all(
+    styleBundleOrder.map((file) =>
+      readFile(join(root, "styles", file), "utf8"),
+    ),
+  )
+).join("\n");
 const bundleSources = new Map([
-  ["styles.css", await readFile(join(root, "styles.css"), "utf8")],
+  ["styles.css", stylesBundle],
   ["fonts.css", await readFile(join(root, "fonts.css"), "utf8")],
   ["script.js", scriptSource],
   ["audio-player.js", await readFile(join(root, "audio-player.js"), "utf8")],

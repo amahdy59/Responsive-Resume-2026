@@ -24,13 +24,22 @@ Live site: [creativemahdy.space](https://creativemahdy.space/)
 │   ├── serve.mjs
 │   ├── responsive-smoke.mjs
 │   └── validate.mjs
+├── styles/
+│   ├── tokens.css
+│   ├── base.css
+│   ├── animations.css
+│   ├── components.css
+│   ├── home.css
+│   ├── case-study.css
+│   ├── responsive.css
+│   ├── accessibility-modes.css
+│   └── print.css
 ├── build.mjs
 ├── preference-bootstrap.js
 ├── fonts.css
 ├── index.html
 ├── project-*.html
 ├── script.js
-├── styles.css
 ├── CNAME
 ├── ACCESSIBILITY.md
 ├── CONTENT_GUIDE.md

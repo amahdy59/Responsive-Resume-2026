@@ -1,0 +1,275 @@
+/* Viewport breakpoints for both the homepage and case-study pages. Grouped
+   here so a layout bug at a given width has one place to check. */
+
+@media screen and (min-width: 561px) {
+  /* Keep tooltips beside the vertical controls column on tablet and desktop. */
+  html[lang="en"] .controls-group [data-tooltip]::before {
+    bottom: 50% !important;
+    left: auto !important;
+    right: calc(100% + 8px) !important;
+    transform: translateY(50%) scale(0.9) !important;
+  }
+
+  html[lang="en"] .controls-group [data-tooltip]::after {
+    bottom: 50% !important;
+    left: auto !important;
+    right: calc(100% + 2px) !important;
+    transform: translateY(50%) scale(0.9) !important;
+    border-color: transparent transparent transparent var(--text) !important;
+    border-width: 5px 0 5px 5px !important;
+  }
+
+  html[lang="en"] .controls-group [data-tooltip]:hover::before,
+  html[lang="en"] .controls-group [data-tooltip]:focus-visible::before {
+    transform: translateY(50%) scale(1) !important;
+    opacity: 1 !important;
+  }
+
+  html[lang="en"] .controls-group [data-tooltip]:hover::after,
+  html[lang="en"] .controls-group [data-tooltip]:focus-visible::after {
+    transform: translateY(50%) scale(1) !important;
+    opacity: 1 !important;
+  }
+
+  html[lang="ar"] .controls-group [data-tooltip]::before {
+    bottom: 50% !important;
+    right: auto !important;
+    left: calc(100% + 8px) !important;
+    transform: translateY(50%) scale(0.9) !important;
+  }
+
+  html[lang="ar"] .controls-group [data-tooltip]::after {
+    bottom: 50% !important;
+    right: auto !important;
+    left: calc(100% + 2px) !important;
+    transform: translateY(50%) scale(0.9) !important;
+    border-color: transparent var(--text) transparent transparent !important;
+    border-width: 5px 5px 5px 0 !important;
+  }
+
+  html[lang="ar"] .controls-group [data-tooltip]:hover::before,
+  html[lang="ar"] .controls-group [data-tooltip]:focus-visible::before {
+    transform: translateY(50%) scale(1) !important;
+    opacity: 1 !important;
+  }
+
+  html[lang="ar"] .controls-group [data-tooltip]:hover::after,
+  html[lang="ar"] .controls-group [data-tooltip]:focus-visible::after {
+    transform: translateY(50%) scale(1) !important;
+    opacity: 1 !important;
+  }
+}
+
+@media screen and (min-width: 561px) and (max-width: 1080px) {
+  /* ── Tablet Hero ── */
+  .hero {
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 24px 20px;
+  }
+
+  .hero-identity {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+
+  .hero-contact-card {
+    flex: 1 1 auto;
+  }
+
+  .hero-controls-rail {
+    flex: 0 0 auto;
+  }
+}
+
+@media screen and (max-width: 880px) {
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (max-width: 560px) {
+  .resume-shell {
+    padding: 0;
+  }
+
+  .resume-card,
+  .hero {
+    border-radius: 0;
+  }
+
+  .resume-card {
+    min-height: 100vh;
+    border-width: 0;
+  }
+
+  .hero {
+    min-height: auto;
+    padding: 20px 16px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 18px;
+  }
+
+  .hero-identity {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 16px;
+  }
+
+  .identity-copy {
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero-bio {
+    text-align: center;
+  }
+
+  .tags {
+    justify-content: center;
+  }
+
+  .hero-ctas {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .hero-availability {
+    justify-content: center;
+  }
+
+  .hero-contact-card {
+    width: 100%;
+    flex: 1 1 100%;
+  }
+
+  .hero-controls-rail {
+    width: 100%;
+  }
+
+  .controls-group {
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    gap: 8px;
+  }
+
+  .controls-group > button {
+    flex: 1 1 44px;
+    max-width: 60px;
+  }
+
+  .ambient-particles {
+    animation: none;
+  }
+
+  .section-nav {
+    display: flex;
+    overflow-x: auto;
+    gap: 4px;
+    padding: 4px 8px;
+    width: 100%;
+    scrollbar-width: none;
+  }
+
+  .section-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .section-nav a,
+  .section-nav-link {
+    padding: 8px 10px;
+    font-size: 0.8rem;
+    min-height: 44px;
+  }
+
+  html {
+    scroll-padding-top: 112px;
+  }
+
+  .panel {
+    scroll-margin-top: 112px;
+    padding: 15px;
+  }
+
+  .content-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 14px;
+  }
+
+  .main-column {
+    order: 1;
+  }
+
+  .sidebar {
+    order: 2;
+  }
+
+  .timeline article {
+    grid-template-columns: 1fr !important;
+    gap: 0 !important;
+  }
+
+  .copy-button {
+    opacity: 0.85;
+  }
+}
+
+@media (min-width: 561px) {
+  .case-showcase-wrapper {
+    margin: -40px -40px 36px;
+    border-radius: 17px 17px 0 0;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .case-study-pagination {
+    grid-template-columns: 1fr;
+  }
+
+  .pagination-next {
+    justify-content: flex-start;
+    text-align: start;
+  }
+}
+
+@media (max-width: 560px) {
+  .case-study-shell {
+    width: min(100% - 16px, 980px);
+  }
+
+  .case-study-nav {
+    padding: 8px 12px;
+  }
+
+  .case-study-breadcrumbs {
+    display: none;
+  }
+
+  .case-study-card {
+    margin-top: 8px;
+    padding: 18px;
+  }
+
+  .case-hero-meta-and-cta {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .case-cta-wrapper {
+    width: 100%;
+  }
+
+  .case-live-cta {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .case-study-pagination > * {
+    flex: 1 1 100%;
+  }
+}

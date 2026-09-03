@@ -1,0 +1,36 @@
+/* @keyframes definitions used by components across the site. Order does
+   not matter here — keyframe names are resolved wherever they're used. */
+
+/* Subtle reveal used by the optional live project preview. */
+@keyframes project-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes driftParticles {
+  from {
+    background-position: 0 0, 28px 24px;
+  }
+
+  to {
+    background-position: 112px 56px, -44px 96px;
+  }
+}
+
+@keyframes targetPanel {
+  from {
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--blue) 35%, transparent);
+  }
+}
+
+@keyframes pulse-audio {
+  0%, 100% { box-shadow: 0 0 0 0 rgb(16 185 129 / 40%); }
+  50% { box-shadow: 0 0 0 6px rgb(16 185 129 / 0%); }
+}

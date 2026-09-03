@@ -1,0 +1,166 @@
+/* Global reset, base typography, links, and page-shell elements shared by
+   every page. */
+
+* {
+  box-sizing: border-box;
+}
+
+img,
+video,
+svg {
+  max-inline-size: 100%;
+  block-size: auto;
+}
+
+p,
+li,
+dd {
+  overflow-wrap: anywhere;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: clip;
+
+  /* WCAG 2.4.11: prevent focus from being hidden under any fixed/sticky elements */
+  scroll-padding-top: 96px;
+}
+
+html,
+body {
+  transition:
+    background-color 420ms ease,
+    color 420ms ease;
+}
+
+body {
+  position: relative;
+  margin: 0;
+  overflow-x: hidden;
+  background: var(--page-background);
+  color: var(--text);
+  font-family: "Inter Variable", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.6;
+}
+
+.case-study-section p,
+.case-study-hero p,
+.panel p {
+  max-inline-size: 68ch;
+}
+
+:where(
+  .resume-card,
+  .panel,
+  .hero-cta,
+  .compact-list li,
+  .featured article,
+  .tags span,
+  .pills span,
+  .copy-button
+) {
+  transition-property: background-color, background, border-color, box-shadow, color, opacity, transform;
+  transition-duration: 260ms;
+  transition-timing-function: ease;
+}
+
+body::selection {
+  color: #fff;
+  background: var(--blue);
+}
+
+.ambient-particles {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.38;
+  background-image:
+    radial-gradient(circle, color-mix(in srgb, var(--blue) 48%, transparent) 1px, transparent 1.6px),
+    radial-gradient(circle, color-mix(in srgb, var(--blue) 28%, transparent) 1px, transparent 1.6px);
+  background-position: 0 0, 28px 24px;
+  background-size: 56px 56px, 72px 72px;
+  animation: driftParticles 24s linear infinite;
+  pointer-events: none;
+}
+
+.icon-sprite {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+a {
+  color: inherit;
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 150ms ease;
+}
+
+a:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.22em;
+}
+
+.external-icon {
+  display: inline-block;
+  width: 0.86em;
+  height: 0.86em;
+  margin-inline-start: 0.32em;
+  fill: none;
+  stroke: currentcolor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2.3;
+  transform: translateY(0.08em);
+  opacity: 0.58;
+  pointer-events: none;
+  transition: opacity 150ms ease, transform 150ms ease;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 4px;
+
+  /* Ensure focus ring is always visible regardless of background */
+  box-shadow: 0 0 0 5px rgb(0 0 0 / 12%);
+}
+
+.resume-shell {
+  position: relative;
+  width: auto;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: clamp(14px, 3vw, 40px);
+}
+
+.resume-card {
+  position: relative;
+  min-height: calc(100vh - clamp(28px, 6vw, 80px));
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  transition:
+    background-color 420ms ease,
+    border-color 420ms ease,
+    box-shadow 420ms ease;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Bilingual and RTL support */
+[dir="rtl"] {
+  font-family: "Cairo Variable", system-ui, -apple-system, sans-serif;
+}

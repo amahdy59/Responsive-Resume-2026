@@ -1,0 +1,168 @@
+/* Design tokens: color, spacing, motion, and z-index custom properties for
+   light and dark mode. Nothing here renders on its own. */
+
+:root {
+  color-scheme: light;
+  --page: #faf9f7;
+  --surface: #faf9f7;
+  --panel: #faf9f7;
+  --line: rgb(26 35 50 / 15%);
+  --soft-line: rgb(26 35 50 / 10%);
+  --text: #1a2332;
+  --muted: #3d4a5c; /* AAA-compliant: ~7.4:1 contrast on #faf9f7 */
+  --blue: #005e87; /* AAA-compliant: ~7.1:1 contrast on #faf9f7 */
+  --accent: #005e87; /* Unified single accent â€” replaces old --green */
+  --project-accent: #005e87;
+  --link-aaa: #004b6e; /* AAA: ~7.8:1 on white, â‰¥8.2:1 on card bg â€” project title links */
+  --focus: #0073b7; /* AAA focus ring: ~7.5:1 on white and on most panel backgrounds */
+  --text-secondary: #2c3a4a; /* Descriptive body text: ~8.5:1 on #faf9f7 */
+  --hero-title: #1a2332;
+  --hero-subtitle: #005e87;
+  --hero-role-color: #005e87;
+  --hero-bio-color: #3d4a5c;
+  --hero-surface: #fff;
+  --hero-border: rgb(26 35 50 / 12%);
+  --hero-shadow: 0 10px 30px rgb(26 35 50 / 6%);
+  --hero-contact-card-bg: #fff;
+  --hero-contact-card-border: rgb(26 35 50 / 12%);
+  --hero-contact-card-shadow: 0 6px 20px rgb(26 35 50 / 5%);
+  --hero-contact-item-hover: rgb(0 94 135 / 4%);
+  --hero-tag-bg: #fff;
+  --hero-tag-border: rgb(26 35 50 / 14%);
+  --hero-tag-text: #1a2332;
+  --hero-btn-primary-bg: #005e87;
+  --hero-btn-primary-text: #fff;
+  --hero-btn-ghost-text: #005e87;
+  --hero-rail-bg: #fff;
+  --hero-rail-border: rgb(26 35 50 / 12%);
+  --hero-rail-color: #3d4a5c;
+  --hero-action-btn-bg: #f8fafc;
+  --hero-action-btn-border: rgb(26 35 50 / 12%);
+  --hero-avatar-glow: 0 0 0 3px #005e87, 0 0 24px rgb(0 94 135 / 25%);
+  --page-background:
+    radial-gradient(circle at 12% 8%, rgb(0 118 168 / 12%), transparent 34rem),
+    linear-gradient(125deg, #faf9f7, #d8d4ce);
+  --hero-gradient: linear-gradient(90deg, #005f88 0%, #0076a8 50%, #005f88 100%);
+  --contact-bg: rgb(255 255 255 / 10%);
+  --tag-bg: rgb(255 255 255 / 20%);
+  --project-bg: rgb(219 234 254 / 45%);
+  --panel-primary-bg:
+    linear-gradient(135deg, rgb(0 118 168 / 6%), rgb(250 249 247 / 88%) 50%, rgb(250 249 247 / 96%) 100%),
+    var(--panel);
+  --panel-secondary-bg:
+    linear-gradient(135deg, rgb(0 118 168 / 4%), rgb(250 249 247 / 88%) 50%, rgb(250 249 247 / 96%) 100%),
+    var(--panel);
+  --employment-card-bg: transparent;
+  --inner-card: rgb(255 255 255 / 55%);
+  --translucent-card: rgb(255 255 255 / 58%);
+  --cert-card: rgb(219 234 254 / 55%);
+  --pill-bg: #e8f0fe;
+  --date-bg: rgb(255 255 255 / 72%);
+  --date-text: #3d4a5c; /* AAA-compliant: matches --muted for 7:1 */
+  --copy-bg: rgb(255 255 255 / 24%);
+  --shadow: 0 25px 50px rgb(26 35 50 / 18%);
+  --logo-bg: #fff;
+  --button-bg: #005e87;
+  --button-text: #fff;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-body: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.5rem;
+  --text-display: clamp(2rem, 4vw, 3rem);
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-pill: 999px;
+  --shadow-1: 0 4px 8px rgb(0 0 0 / 13%);
+  --shadow-2: 0 16px 40px rgb(0 0 0 / 25%);
+  --motion-fast: 120ms;
+  --motion-normal: 180ms;
+  --motion-slow: 260ms;
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-emphasized: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --z-navigation: 10;
+  --z-popover: 20;
+  --z-dialog: 1000;
+  --z-toast: 1100;
+  --color-text-primary: var(--text);
+  --color-text-secondary: var(--muted);
+  --color-surface: var(--surface);
+  --color-action: var(--blue);
+  --color-focus: var(--focus);
+  --color-success: #16794a;
+  --color-warning: #9a6700;
+  --color-danger: #b42318;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #0d1117;
+  --surface: #161b22; /* GitHub's card/box canvas */
+  --panel: #161b22; /* GitHub's overlay canvas */
+  --logo-bg: #fff;
+  --line: #30363d; /* GitHub's border default */
+  --soft-line: #21262d; /* GitHub's border muted */
+  --text: #f0f6fc; /* GitHub's fg default (meets AAA contrast ratio > 14:1) */
+  --muted: #cbd5e1; /* AAA secondary text (meets AAA contrast ratio > 9:1) */
+  --blue: #79c0ff; /* Lighter GitHub blue accent to guarantee AAA contrast (> 8.5:1) */
+  --accent: #79c0ff;
+  --project-accent: #79c0ff;
+  --link-aaa: #79c0ff;
+  --focus: #388bfd; /* GitHub's focus ring blue */
+  --text-secondary: #e2e8f0; /* Crisp secondary body text (> 12:1) */
+  --hero-title: #f0f6fc;
+  --hero-subtitle: #79c0ff;
+  --hero-role-color: #79c0ff;
+  --hero-bio-color: #cbd5e1;
+  --hero-surface: #0a1120;
+  --hero-border: rgb(255 255 255 / 8%);
+  --hero-shadow: 0 15px 35px rgb(0 0 0 / 40%);
+  --hero-contact-card-bg: #0d172e;
+  --hero-contact-card-border: rgb(255 255 255 / 8%);
+  --hero-contact-card-shadow: 0 8px 25px rgb(0 0 0 / 35%);
+  --hero-contact-item-hover: rgb(255 255 255 / 4%);
+  --hero-tag-bg: rgb(255 255 255 / 4%);
+  --hero-tag-border: rgb(255 255 255 / 12%);
+  --hero-tag-text: #cbd5e1;
+  --hero-btn-primary-bg: #2563eb;
+  --hero-btn-primary-text: #fff;
+  --hero-btn-ghost-text: #79c0ff;
+  --hero-rail-bg: rgb(255 255 255 / 4%);
+  --hero-rail-border: rgb(255 255 255 / 8%);
+  --hero-rail-color: #cbd5e1;
+  --hero-action-btn-bg: rgb(255 255 255 / 5%);
+  --hero-action-btn-border: rgb(255 255 255 / 8%);
+  --hero-avatar-glow: 0 0 0 3px #3b82f6, 0 0 30px rgb(59 130 246 / 50%);
+  --page-background:
+    radial-gradient(circle at 18% 8%, rgb(56 139 253 / 10%), transparent 40rem),
+    radial-gradient(circle at 82% 12%, rgb(56 139 253 / 5%), transparent 35rem),
+    linear-gradient(125deg, #0d1117 0%, #161b22 100%);
+  --hero-gradient: linear-gradient(90deg, #1f242c 0%, #161b22 50%, #1f242c 100%);
+  --contact-bg: rgb(48 54 61 / 40%);
+  --tag-bg: rgb(48 54 61 / 60%);
+  --project-bg: rgb(56 139 253 / 8%);
+  --panel-primary-bg:
+    linear-gradient(135deg, rgb(56 139 253 / 6%), #161b22 100%),
+    var(--panel);
+  --panel-secondary-bg:
+    linear-gradient(135deg, rgb(48 54 61 / 6%), #161b22 100%),
+    var(--panel);
+  --employment-card-bg: transparent;
+  --inner-card: #0d1117;
+  --translucent-card: rgb(22 27 34 / 85%);
+  --cert-card: rgb(56 139 253 / 5%);
+  --pill-bg: rgb(56 139 253 / 15%);
+  --date-bg: rgb(48 54 61 / 30%);
+  --date-text: #cbd5e1; /* Matches --muted for > 9:1 AAA contrast */
+  --copy-bg: rgb(240 246 252 / 10%);
+  --shadow: 0 25px 50px rgb(0 0 0 / 55%);
+  --button-bg: #1f6feb;
+  --button-text: #fff;
+}

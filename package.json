@@ -8,7 +8,7 @@
     "check": "node scripts/validate.mjs",
     "lint": "npm run lint:html && npm run lint:css && npm run lint:js",
     "lint:html": "html-validate *.html",
-    "lint:css": "stylelint *.css",
+    "lint:css": "stylelint *.css styles/*.css",
     "lint:js": "biome check build.mjs preference-bootstrap.js scripts",
     "dev": "npm run build && node scripts/serve.mjs --root dist --port 4173",
     "preview": "npm run build && node scripts/serve.mjs --root dist --port 4174",

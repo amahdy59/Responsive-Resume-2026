@@ -1,0 +1,231 @@
+/* Cross-cutting accessibility modes: forced-colors, prefers-reduced-motion,
+   and [data-contrast="high"] overrides for both page types. */
+
+[data-contrast="high"] .skip-link {
+  background: #000;
+  color: #ff0;
+  border: 2px solid #ff0;
+  border-top: none;
+}
+
+[data-contrast="high"] .skip-link:focus-visible {
+  outline: 2px solid #ff0;
+  outline-offset: 2px;
+}
+
+/* High Contrast Mode overrides */
+[data-contrast="high"] {
+  --page: #000;
+  --surface: #000;
+  --panel: #000;
+  --line: #fff;
+  --soft-line: #fff;
+  --text: #fff;
+  --muted: #86efac; /* Softer mint green instead of harsh yellow */
+  --blue: #0ff;
+  --accent: #0ff;
+  --project-accent: #0ff;
+  --focus: #86efac; /* Softer focus ring green */
+  --page-background: #000;
+  --hero-gradient: #000;
+  --hero-title: #fff;
+  --hero-subtitle: #86efac;
+  --project-bg: #000;
+  --cert-card: #000;
+  --panel-primary-bg: #000;
+  --panel-secondary-bg: #000;
+  --translucent-card: #000;
+  --pill-bg: #000;
+  --date-bg: #000;
+  --date-text: #86efac;
+}
+
+[data-contrast="high"] .hero-cta {
+  background: #000 !important;
+  border: 2px solid #0ff !important;
+  color: #0ff !important;
+  box-shadow: none !important;
+}
+
+[data-contrast="high"] .hero-cta:hover,
+[data-contrast="high"] .hero-cta:focus-visible {
+  background: #0ff !important;
+  color: #000 !important;
+}
+
+[data-contrast="high"] .theme-toggle {
+  display: none !important;
+}
+
+[data-contrast="high"] .panel {
+  border: 2px solid #fff;
+}
+
+[data-contrast="high"] .compact-list li,
+[data-contrast="high"] .featured article {
+  border: 2px solid #fff;
+  backdrop-filter: none;
+}
+
+[data-contrast="high"] .pills span {
+  border: 1px solid #0ff;
+  color: #0ff;
+}
+
+[data-contrast="high"] .compact-list a,
+[data-contrast="high"] .featured h4 a {
+  color: #0ff !important;
+}
+
+[data-contrast="high"] .external-icon {
+  opacity: 1;
+}
+
+[data-contrast="high"] .li-company-name {
+  color: #0ff;
+}
+
+[data-contrast="high"] .li-entity-link:hover .li-company-name,
+[data-contrast="high"] .li-entity-link:focus-visible .li-company-name {
+  color: #86efac;
+}
+
+[data-contrast="high"] .compact-list a:hover,
+[data-contrast="high"] .featured h4 a:hover {
+  color: #86efac !important;
+  text-decoration: underline !important;
+}
+
+[data-contrast="high"] .panel h2 {
+  color: #fff !important;
+}
+
+[data-contrast="high"] .panel h2 .panel-icon-box {
+  background: #86efac !important;
+  color: #000 !important;
+}
+
+/* Enhanced tactile button borders and visibility in High Contrast Mode */
+[data-contrast="high"] .lang-toggle,
+[data-contrast="high"] .contrast-toggle,
+[data-contrast="high"] .print-button {
+  border: 2px solid #fff !important;
+  background: #000 !important;
+  color: #fff !important;
+  border-radius: 6px !important;
+}
+
+[data-contrast="high"] .copy-button {
+  border: 2px solid #fff !important;
+  background: #000 !important;
+  color: #fff !important;
+  border-radius: 6px !important;
+  opacity: 0.25 !important; /* Softer default visibility to prevent visual clutter */
+}
+
+/* Keep copy buttons interactive on hover/focus */
+[data-contrast="high"] .copy-button:hover,
+[data-contrast="high"] .copy-button:focus-visible,
+[data-contrast="high"] .contact-list li:hover .copy-button,
+[data-contrast="high"] .contact-list li:focus-within .copy-button,
+[data-contrast="high"] .compact-list li:hover .copy-button,
+[data-contrast="high"] .compact-list li:focus-within .copy-button,
+[data-contrast="high"] .featured article:hover .copy-button,
+[data-contrast="high"] .featured article:focus-within .copy-button {
+  opacity: 1 !important;
+}
+
+[data-contrast="high"] .copy-button span {
+  background: #000 !important;
+  border: 1px solid #fff !important;
+}
+
+[data-contrast="high"] .copy-button:hover,
+[data-contrast="high"] .copy-button:focus-visible,
+[data-contrast="high"] .lang-toggle:hover,
+[data-contrast="high"] .lang-toggle:focus-visible,
+[data-contrast="high"] .contrast-toggle:hover,
+[data-contrast="high"] .contrast-toggle:focus-visible,
+[data-contrast="high"] .print-button:hover,
+[data-contrast="high"] .print-button:focus-visible {
+  border-color: #0ff !important;
+  color: #0ff !important;
+}
+
+[data-contrast="high"] .copy-button:hover span,
+[data-contrast="high"] .copy-button:focus-visible span {
+  border-color: #0ff !important;
+}
+
+/* Explicit high-visibility keyboard focus rings */
+[data-contrast="high"] a:focus-visible,
+[data-contrast="high"] button:focus-visible {
+  outline: 3px solid #86efac !important;
+  outline-offset: 4px !important;
+  box-shadow: none !important;
+}
+
+@media (forced-colors: active) {
+  :root {
+    --page: Canvas;
+    --surface: Canvas;
+    --panel: Canvas;
+    --line: ButtonBorder;
+    --soft-line: ButtonBorder;
+    --text: CanvasText;
+    --muted: HighlightText;
+    --blue: LinkText;
+    --accent: Highlight;
+    --focus: Highlight;
+    --page-background: Canvas;
+    --hero-title: CanvasText;
+    --hero-subtitle: HighlightText;
+    --project-bg: Canvas;
+    --cert-card: Canvas;
+    --pill-bg: Canvas;
+    --date-bg: Canvas;
+    --date-text: LinkText;
+  }
+
+  .theme-toggle {
+    display: none !important;
+  }
+
+  .panel,
+  .compact-list li,
+  .featured article {
+    border: 1.5px solid ButtonBorder !important;
+  }
+
+  .hero-cta {
+    background: ButtonFace !important;
+    border: 1.5px solid ButtonBorder !important;
+    color: ButtonText !important;
+    box-shadow: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+  }
+}
+
+[data-contrast="high"] {
+  --button-bg: #0ff;
+  --button-text: #000;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal.active {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
