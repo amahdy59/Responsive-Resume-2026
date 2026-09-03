@@ -187,35 +187,32 @@ try {
             .filter(({ left, right }) => left < 0 || right > window.innerWidth)
             .slice(0, 8),
           scrollWidth: document.documentElement.scrollWidth,
-          heroActionTexts: [
-            ...document.querySelectorAll(".hero-actions a"),
-          ].map((link) =>
-            link.querySelector("[data-translate]")?.textContent.trim(),
-          ),
+          heroContactLinks: document.querySelectorAll(".contact-list a").length,
           heroCopyCount: document.querySelectorAll(
-            '.hero-actions [data-copy="amahdy59@gmail.com"]',
+            '.contact-list [data-copy="amahdy59@gmail.com"]',
           ).length,
-          heroActionsMeetTarget: [
-            ...document.querySelectorAll(
-              ".hero-actions a, .hero-actions button",
-            ),
-          ].every((control) => control.getBoundingClientRect().height >= 44),
+          heroContactMeetTarget: [
+            ...document.querySelectorAll(".contact-list li"),
+          ].every((li) => li.getBoundingClientRect().height >= 44),
+          heroCtaTarget: (() => {
+            const cta = document.querySelector(".hero-cta");
+            if (!cta) return null;
+            const box = cta.getBoundingClientRect();
+            return {
+              hash: new URL(cta.href).hash,
+              visible: box.width > 0 && box.height >= 40,
+            };
+          })(),
           projectFilterCount: document.querySelectorAll(".project-filter-pill")
             .length,
-          featuredProjectCount: document.querySelectorAll(
-            ".project-card-featured",
+          projectThumbnailCount:
+            document.querySelectorAll(".project-thumbnail").length,
+          projectTitleLinks: [
+            ...document.querySelectorAll("#projects article h4 > a"),
+          ].map((a) => new URL(a.href).pathname),
+          projectThumbnailLinks: document.querySelectorAll(
+            "#projects a.project-thumbnail-link > .project-thumbnail",
           ).length,
-          compactProjectCount: document.querySelectorAll(
-            ".project-card-compact",
-          ).length,
-          entityLinks: [...document.querySelectorAll(".li-entity-link")].map(
-            (link) => link.href,
-          ),
-          externalIconCount: document.querySelectorAll(
-            ".project-live-link .external-icon",
-          ).length,
-          externalLinkCount:
-            document.querySelectorAll(".project-live-link").length,
           resumeActionCount: document.querySelectorAll(".resume-action").length,
           sectionLinks: [...document.querySelectorAll(".section-nav a")].map(
             (link) => ({
@@ -236,9 +233,6 @@ try {
             .querySelector(".controls-group")
             ?.getAttribute("role"),
           footerExists: Boolean(document.querySelector(".resume-footer")),
-          projectThumbnailCount: document.querySelectorAll(
-            '.project-thumbnail[src$=".webp"]',
-          ).length,
           visualSectionOrder: panels
             .toSorted(
               (a, b) =>
@@ -269,28 +263,38 @@ try {
       );
       assert.equal(state.sectionNavPosition, "sticky");
       assert.equal(state.toolbarRole, "group");
-      assert.equal(state.footerExists, true);
+      assert.equal(state.footerExists, false);
       assert.equal(state.projectThumbnailCount, 5);
       assert.equal(state.audioControllerReady, true);
       assert.equal(state.interactiveSkillCount, 0);
       assert.equal(state.resumeActionCount, 0);
-      assert.equal(state.externalIconCount, state.externalLinkCount);
+      assert.ok(
+        state.heroContactLinks >= 3,
+        "Contact list must have at least 3 links",
+      );
       assert.equal(state.heroCopyCount, 1);
-      assert.equal(state.heroActionsMeetTarget, true);
+      assert.equal(state.heroContactMeetTarget, true);
       assert.equal(state.projectFilterCount, 0);
-      assert.equal(state.featuredProjectCount, 3);
-      assert.equal(state.compactProjectCount, 2);
-      assert.deepEqual(state.entityLinks, [
-        "https://advansys-is.com/",
-        "https://www.se.com/eg/en/",
-        "https://iti.gov.eg/iti/home",
-        "https://www.menofia.edu.eg/",
-      ]);
       assert.deepEqual(
-        state.heroActionTexts,
-        scenario.language === "ar"
-          ? ["عرض أبرز المشاريع", "راسل أحمد", "لينكد إن", "معرض دريبل"]
-          : ["View Selected Work", "Email Ahmed", "LinkedIn", "Dribbble"],
+        state.heroCtaTarget,
+        { hash: "#projects", visible: true },
+        "Hero must expose a visible primary CTA pointing at #projects",
+      );
+      assert.equal(
+        state.projectTitleLinks.length,
+        5,
+        "Every project title must link to its case study",
+      );
+      assert.ok(
+        state.projectTitleLinks.every((path) =>
+          /\/project-[a-z-]+\.html$/.test(path),
+        ),
+        `Project titles must link to case-study pages: ${state.projectTitleLinks.join(", ")}`,
+      );
+      assert.equal(
+        state.projectThumbnailLinks,
+        5,
+        "Every project thumbnail must link to its case study",
       );
 
       if (scenario.width <= 880) {
@@ -353,15 +357,23 @@ try {
 
         await page.emulateMedia({ media: "print" });
         const printHeroState = await page.evaluate(() => ({
-          emailDisplay: getComputedStyle(
-            document.querySelector(".hero-action-secondary"),
+          contactListDisplay: getComputedStyle(
+            document.querySelector(".contact-list"),
           ).display,
-          primaryDisplay: getComputedStyle(
-            document.querySelector(".hero-action-primary"),
+          emailLinkDisplay: getComputedStyle(
+            document.querySelector('.contact-list a[href^="mailto:"]'),
+          ).display,
+          copyButtonDisplay: getComputedStyle(
+            document.querySelector(".contact-list .copy-button"),
+          ).display,
+          controlsDisplay: getComputedStyle(
+            document.querySelector(".controls-group"),
           ).display,
         }));
-        assert.notEqual(printHeroState.emailDisplay, "none");
-        assert.equal(printHeroState.primaryDisplay, "none");
+        assert.notEqual(printHeroState.contactListDisplay, "none");
+        assert.notEqual(printHeroState.emailLinkDisplay, "none");
+        assert.equal(printHeroState.copyButtonDisplay, "none");
+        assert.equal(printHeroState.controlsDisplay, "none");
         await page.emulateMedia({ media: "screen" });
 
         const themeBeforeShortcut = await page

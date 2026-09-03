@@ -164,19 +164,16 @@ if (
   );
 }
 
-if (
-  (html.match(/project-card-featured/g) || []).length !== 3 ||
-  (html.match(/project-card-compact/g) || []).length !== 2
-) {
-  errors.push("Projects must keep a three-featured, two-compact hierarchy.");
+if ((html.match(/class="project-thumbnail"/g) || []).length !== 5) {
+  errors.push("Projects section must contain exactly 5 project thumbnails.");
 }
 
 if (
-  (html.match(/data-copy=/g) || []).length !== 1 ||
-  /data-copy="https:\/\/(?:www\.)?(?:linkedin|dribbble)/.test(html)
+  (html.match(/data-copy=/g) || []).length < 1 ||
+  !html.includes('data-copy="amahdy59@gmail.com"')
 ) {
   errors.push(
-    "Only the email action should expose a copy control in the hero.",
+    "At least one email copy control must exist in the contact list.",
   );
 }
 
