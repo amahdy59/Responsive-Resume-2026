@@ -159,6 +159,35 @@
       </symbol>
       <symbol id="icon-volume" viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
       <symbol id="icon-pause" viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16" fill="currentColor"/><rect x="14" y="4" width="4" height="16" fill="currentColor"/></symbol>
+      <symbol id="icon-download" viewBox="0 0 24 24">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        <polyline points="7 10 12 15 17 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        <line x1="12" y1="15" x2="12" y2="3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      </symbol>
+      <symbol id="icon-send" viewBox="0 0 24 24">
+        <line x1="22" y1="2" x2="11" y2="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        <polygon points="22 2 15 22 11 13 2 9 22 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      </symbol>
+      <symbol id="icon-arrow-up-right" viewBox="0 0 24 24">
+        <line x1="7" y1="17" x2="17" y2="7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        <polyline points="7 7 17 7 17 17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      </symbol>
+      <symbol id="icon-gem" viewBox="0 0 24 24">
+        <polygon points="6 3 18 3 22 9 12 22 2 9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        <line x1="2" y1="9" x2="22" y2="9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        <line x1="12" y1="22" x2="6" y2="9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        <line x1="12" y1="22" x2="18" y2="9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      </symbol>
+      <symbol id="icon-grid" viewBox="0 0 24 24">
+        <rect x="3" y="3" width="7" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="2" />
+        <rect x="14" y="3" width="7" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="2" />
+        <rect x="14" y="14" width="7" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="2" />
+        <rect x="3" y="14" width="7" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="2" />
+      </symbol>
+      <symbol id="icon-clock" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        <polyline points="12 6 12 12 16 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      </symbol>
     </svg>
     <div class="ambient-particles" aria-hidden="true"></div>
     <main
@@ -175,20 +204,26 @@
         data-translate-attr-key="resume_card_label"
       >
         <header class="hero" aria-label="Profile introduction">
-          <div class="identity">
-            <img
-              class="avatar"
-              src="assets/ahmed-mahdy.webp"
-              alt="Ahmed Mahdy"
-              width="128"
-              height="128"
-              loading="eager"
-              decoding="async"
-              fetchpriority="high"
-            />
+          <div class="hero-identity">
+            <div class="avatar-wrap">
+              <img
+                class="avatar"
+                src="assets/ahmed-mahdy.webp"
+                alt="Ahmed Mahdy"
+                width="128"
+                height="128"
+                loading="eager"
+                decoding="async"
+                fetchpriority="high"
+              />
+              <span class="avatar-badge" aria-hidden="true"></span>
+            </div>
             <div class="identity-copy">
               <h1 data-translate="name">Ahmed Mahdy</h1>
-              <p data-translate="title">UX Designer &amp; Data Visualizer</p>
+              <p class="hero-role" data-translate="title">UX Designer &amp; Data Visualizer</p>
+              <p class="hero-bio" data-translate="hero_bio">
+                I help businesses turn complex data into clear insights and beautiful experiences that people love to use.
+              </p>
               <div
                 class="tags"
                 role="list"
@@ -196,45 +231,92 @@
                 data-translate-attr="aria-label"
                 data-translate-attr-key="highlights_label"
               >
-                <span role="listitem" data-translate="exp_tag">8+ years experience</span>
-                <span role="listitem" data-translate="ux_tag">UX Design</span>
-                <span role="listitem" data-translate="data_tag">Data Visualization</span>
+                <span class="tag-pill" role="listitem">
+                  <svg class="tag-icon" aria-hidden="true"><use href="#icon-clock"></use></svg>
+                  <span data-translate="exp_tag">8+ years experience</span>
+                </span>
+                <span class="tag-pill" role="listitem">
+                  <svg class="tag-icon" aria-hidden="true"><use href="#icon-gem"></use></svg>
+                  <span data-translate="ux_tag">UX Design</span>
+                </span>
+                <span class="tag-pill" role="listitem">
+                  <svg class="tag-icon" aria-hidden="true"><use href="#icon-chart"></use></svg>
+                  <span data-translate="data_tag">Data Visualization</span>
+                </span>
               </div>
-              <a class="hero-cta" href="#projects">
-                <svg aria-hidden="true"><use href="#icon-folder"></use></svg>
-                <span data-translate="hero_cta_work">View Selected Work</span>
-              </a>
+              <div class="hero-ctas">
+                <a class="btn btn-primary hero-btn-work hero-cta" href="#projects">
+                  <svg class="btn-icon" aria-hidden="true"><use href="#icon-folder"></use></svg>
+                  <span data-translate="hero_cta_work">View Selected Work</span>
+                </a>
+                <button class="btn btn-ghost hero-btn-resume" type="button" data-print-resume aria-label="Download Résumé" data-translate-attr="aria-label" data-translate-attr-key="hero_cta_resume">
+                  <svg class="btn-icon" aria-hidden="true"><use href="#icon-download"></use></svg>
+                  <span data-translate="hero_cta_resume">Download Résumé</span>
+                </button>
+              </div>
+              <div class="hero-availability">
+                <span class="status-pulse" aria-hidden="true"></span>
+                <span data-translate="hero_availability">Available for new projects</span>
+              </div>
             </div>
           </div>
-          <div class="hero-controls-wrapper">
+
+          <div class="hero-contact-card" aria-label="Contact and profiles">
             <ul
               class="contact-list"
               aria-label="Contact links"
               data-translate-attr="aria-label"
               data-translate-attr-key="contact_links_label"
             >
-              <li>
-                <span class="contact-icon" aria-hidden="true"><svg><use href="#icon-mail"></use></svg></span>
-                <a href="mailto:amahdy59@gmail.com" lang="en" dir="ltr">amahdy59@gmail.com</a>
-                <button class="copy-button" type="button" data-copy="amahdy59@gmail.com" aria-label="Copy email address" data-tooltip="Copy email address" data-tooltip-key="tooltip_copy_email">
-                  <span aria-hidden="true"><svg><use href="#icon-copy"></use></svg></span>
-                </button>
+              <li class="contact-item">
+                <span class="contact-icon contact-icon-mail" aria-hidden="true"><svg><use href="#icon-mail"></use></svg></span>
+                <div class="contact-info">
+                  <a class="contact-link-main" href="mailto:amahdy59@gmail.com" aria-label="Email: amahdy59@gmail.com">
+                    <span class="contact-label" lang="en" dir="ltr">amah••••59@gmail.com</span>
+                  </a>
+                  <span class="contact-desc" data-translate="contact_email_sub">Protected email</span>
+                </div>
+                <div class="contact-actions">
+                  <a class="contact-action-btn" href="mailto:amahdy59@gmail.com" aria-label="Send email to Ahmed Mahdy" data-tooltip="Send email" data-tooltip-key="tooltip_send_email">
+                    <svg aria-hidden="true"><use href="#icon-send"></use></svg>
+                  </a>
+                  <button class="copy-button" type="button" data-copy="amahdy59@gmail.com" aria-label="Copy email address" data-tooltip="Copy email address" data-tooltip-key="tooltip_copy_email">
+                    <span aria-hidden="true"><svg><use href="#icon-copy"></use></svg></span>
+                  </button>
+                </div>
               </li>
-              <li>
-                <span class="contact-icon" aria-hidden="true"><svg><use href="#icon-linkedin"></use></svg></span>
-                <a href="https://www.linkedin.com/in/creativemahdy" target="_blank" rel="noopener noreferrer" dir="auto" data-translate="contact_linkedin">LinkedIn profile</a>
-                <button class="copy-button" type="button" data-copy="https://www.linkedin.com/in/creativemahdy" aria-label="Copy LinkedIn profile link" data-tooltip="Copy LinkedIn profile link" data-tooltip-key="tooltip_copy_linkedin">
-                  <span aria-hidden="true"><svg><use href="#icon-copy"></use></svg></span>
-                </button>
+              <li class="contact-item">
+                <span class="contact-icon contact-icon-linkedin" aria-hidden="true"><svg><use href="#icon-linkedin"></use></svg></span>
+                <div class="contact-info">
+                  <a class="contact-link-main" href="https://www.linkedin.com/in/creativemahdy" target="_blank" rel="noopener noreferrer">
+                    <span class="contact-label" data-translate="contact_linkedin">LinkedIn</span>
+                  </a>
+                  <span class="contact-desc" data-translate="contact_li_sub">Professional profile</span>
+                </div>
+                <div class="contact-actions">
+                  <a class="contact-action-btn" href="https://www.linkedin.com/in/creativemahdy" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile (opens in new tab)">
+                    <svg class="external-arrow-icon" aria-hidden="true"><use href="#icon-arrow-up-right"></use></svg>
+                  </a>
+                </div>
               </li>
-              <li>
-                <span class="contact-icon" aria-hidden="true"><svg><use href="#icon-dribbble"></use></svg></span>
-                <a href="https://dribbble.com/creativemahdy" target="_blank" rel="noopener noreferrer" dir="auto" data-translate="contact_dribbble">Dribbble portfolio</a>
-                <button class="copy-button" type="button" data-copy="https://dribbble.com/creativemahdy" aria-label="Copy Dribbble profile link" data-tooltip="Copy Dribbble profile link" data-tooltip-key="tooltip_copy_dribbble">
-                  <span aria-hidden="true"><svg><use href="#icon-copy"></use></svg></span>
-                </button>
+              <li class="contact-item">
+                <span class="contact-icon contact-icon-dribbble" aria-hidden="true"><svg><use href="#icon-dribbble"></use></svg></span>
+                <div class="contact-info">
+                  <a class="contact-link-main" href="https://dribbble.com/creativemahdy" target="_blank" rel="noopener noreferrer">
+                    <span class="contact-label" data-translate="contact_dribbble">Dribbble</span>
+                  </a>
+                  <span class="contact-desc" data-translate="contact_dr_sub">Selected design work</span>
+                </div>
+                <div class="contact-actions">
+                  <a class="contact-action-btn" href="https://dribbble.com/creativemahdy" target="_blank" rel="noopener noreferrer" aria-label="Dribbble portfolio (opens in new tab)">
+                    <svg class="external-arrow-icon" aria-hidden="true"><use href="#icon-arrow-up-right"></use></svg>
+                  </a>
+                </div>
               </li>
             </ul>
+          </div>
+
+          <aside class="hero-controls-rail" aria-label="Display settings">
             <div
               class="controls-group"
               role="group"
@@ -259,7 +341,7 @@
                 <span class="control-label" data-translate="print_resume_action">Print / Save PDF</span>
               </button>
             </div>
-          </div>
+          </aside>
         </header>
 
         <nav
@@ -268,12 +350,30 @@
           data-translate-attr="aria-label"
           data-translate-attr-key="section_nav_label"
         >
-          <a href="#projects" data-translate="sect_projects">Projects</a>
-          <a href="#employment" data-translate="sect_jobs">Employment</a>
-          <a href="#about" data-translate="sect_about">About Me</a>
-          <a href="#skills" data-translate="sect_skills">Skills</a>
-          <a href="#certifications" data-translate="sect_certs">Certifications</a>
-          <a href="#education" data-translate="sect_edu">Education</a>
+          <a href="#projects" class="section-nav-link active">
+            <svg class="section-nav-icon" aria-hidden="true"><use href="#icon-folder"></use></svg>
+            <span data-translate="sect_projects">Projects</span>
+          </a>
+          <a href="#employment" class="section-nav-link">
+            <svg class="section-nav-icon" aria-hidden="true"><use href="#icon-briefcase"></use></svg>
+            <span data-translate="sect_jobs">Employment</span>
+          </a>
+          <a href="#about" class="section-nav-link">
+            <svg class="section-nav-icon" aria-hidden="true"><use href="#icon-user"></use></svg>
+            <span data-translate="sect_about">About Me</span>
+          </a>
+          <a href="#skills" class="section-nav-link">
+            <svg class="section-nav-icon" aria-hidden="true"><use href="#icon-grid"></use></svg>
+            <span data-translate="sect_skills">Skills</span>
+          </a>
+          <a href="#certifications" class="section-nav-link">
+            <svg class="section-nav-icon" aria-hidden="true"><use href="#icon-award"></use></svg>
+            <span data-translate="sect_certs">Certifications</span>
+          </a>
+          <a href="#education" class="section-nav-link">
+            <svg class="section-nav-icon" aria-hidden="true"><use href="#icon-education"></use></svg>
+            <span data-translate="sect_edu">Education</span>
+          </a>
         </nav>
 
         <div class="content-grid" id="resume-content" tabindex="-1">
