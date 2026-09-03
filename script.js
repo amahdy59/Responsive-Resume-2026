@@ -76,6 +76,8 @@ const translations = {
     aria_switch_to_arabic: "التبديل إلى العربية",
     aria_switch_to_english: "التبديل إلى الإنجليزية",
     cert1: "تحليل البيانات من جوجل (Google Data Analytics)",
+    cert_meta_professional: "شهادة احترافية · كورسيرا",
+    cert_meta_specialization: "تخصص · كورسيرا",
     cert2: "تحليل ذكاء الأعمال Tableau (Tableau Business Intelligence Analyst)",
     cert3: "مهارات Excel لتحليل البيانات والتصوير المرئي",
     cert4: "مهارات Excel للأعمال",
@@ -374,6 +376,8 @@ const translations = {
     aria_switch_to_arabic: "Switch to Arabic",
     aria_switch_to_english: "Switch to English",
     cert1: "Google Data Analytics",
+    cert_meta_professional: "Professional Certificate · Coursera",
+    cert_meta_specialization: "Specialization · Coursera",
     cert2: "Tableau Business Intelligence Analyst",
     cert3: "Excel Skills for Data Analytics and Visualization",
     cert4: "Excel Skills for Business",
@@ -1184,36 +1188,51 @@ function createCopyButton(value, label, key) {
 }
 
 /**
- * Dynamically injects copy buttons into certification and project cards,
- * and makes the entire card clickable (excluding the link and button themselves).
+ * Dynamically injects a share/copy button into project cards and makes the
+ * whole card clickable (excluding the link and button themselves).
+ * Certifications deliberately carry credential metadata instead of a copy
+ * button — nobody copies a certificate name, and five of them turned the
+ * panel into noise.
  * Safe to call multiple times — skips cards that already have a copy button.
  */
 function enhanceLinkedCards() {
-  document
-    .querySelectorAll(".compact-list a, .featured h4 a")
-    .forEach((link) => {
-      const container = link.closest("li, article");
+  document.querySelectorAll(".featured h4 a").forEach((link) => {
+    const container = link.closest("article");
 
-      if (!container || container.querySelector(".copy-button")) {
+    if (!container || container.querySelector(".copy-button")) {
+      return;
+    }
+
+    const tooltipKey = "tooltip_copy_project";
+    const label = getTranslation(getCurrentLanguage(), tooltipKey);
+    const copyButton = createCopyButton(link.href, label, tooltipKey);
+
+    container.appendChild(copyButton);
+    container.addEventListener("click", (event) => {
+      if (event.target.closest("a, button")) {
         return;
       }
 
-      const isCertification = link.closest(".compact-list") !== null;
-      const tooltipKey = isCertification
-        ? "tooltip_copy_cert"
-        : "tooltip_copy_project";
-      const label = getTranslation(getCurrentLanguage(), tooltipKey);
-      const copyButton = createCopyButton(link.href, label, tooltipKey);
-
-      container.appendChild(copyButton);
-      container.addEventListener("click", (event) => {
-        if (event.target.closest("a, button")) {
-          return;
-        }
-
-        link.click();
-      });
+      link.click();
     });
+  });
+
+  document.querySelectorAll(".compact-list li").forEach((item) => {
+    const link = item.querySelector("a");
+
+    if (!link || item.dataset.cardBound === "true") {
+      return;
+    }
+
+    item.dataset.cardBound = "true";
+    item.addEventListener("click", (event) => {
+      if (event.target.closest("a, button")) {
+        return;
+      }
+
+      link.click();
+    });
+  });
 }
 
 /**

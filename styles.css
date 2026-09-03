@@ -874,12 +874,16 @@ h1 {
   grid-auto-rows: min-content;
 }
 
+/* The 4px inline-start bar is the page's accent spine: it repeats the hero
+   blue at medium weight all the way down, so the hero stops reading as a
+   stuck-on banner. */
 .panel {
   scroll-margin-top: 76px;
   padding: 18px;
   background: var(--panel);
   border: 1px solid var(--line);
   border-inline-start-width: 4px;
+  border-inline-start-color: color-mix(in srgb, var(--blue) 55%, var(--line));
   border-radius: 14px;
   box-shadow: 0 4px 8px rgb(0 0 0 / 13%);
   transition:
@@ -897,9 +901,10 @@ h1 {
   align-items: center;
   gap: 8px;
   margin-bottom: 14px;
-  font-size: 1.05rem;
-  line-height: 1.35;
-  letter-spacing: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
 }
 
 .panel h2 svg {
@@ -977,7 +982,7 @@ h1 {
   position: relative;
   background: var(--cert-card);
   padding: 0;
-  padding-inline-end: 42px;
+  padding-inline-end: 12px;
   color: var(--text);
   font-size: 0.95rem;
   font-weight: 500;
@@ -1008,7 +1013,20 @@ h1 {
 .compact-list a {
   display: block;
   min-height: 44px;
-  padding: 10px 12px;
+  padding: 10px 12px 2px;
+}
+
+/* Credential type and platform, derived from the accomplishment URL — this
+   replaces the copy button that used to sit on every certification. */
+.credential-meta {
+  margin: 0;
+  padding: 0 12px 10px;
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+  text-wrap: balance;
 }
 
 /* â”€â”€ Skills & Pills â”€â”€ */
@@ -1016,12 +1034,45 @@ h1 {
   margin-top: 14px;
 }
 
+/* Group labels inside a panel read as an eyebrow above their items, not as a
+   rival to the panel heading. The trailing rule carries the eye across. */
 .skill-group h3,
 .project-group h3 {
-  margin-bottom: 8px;
-  color: var(--text);
-  font-size: 0.84rem;
-  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.skill-group h3::after,
+.project-group h3::after {
+  flex: 1;
+  height: 1px;
+  background: var(--soft-line);
+  content: "";
+}
+
+/* Arabic is cursive and caseless: tracking loosens the joins and
+   text-transform does nothing, so the eyebrow leans on size and colour. */
+html[lang="ar"] .skill-group h3,
+html[lang="ar"] .project-group h3 {
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+html[lang="ar"] .panel h2,
+html[lang="ar"] .project-header h4,
+html[lang="ar"] .credential-meta {
+  letter-spacing: 0;
+}
+
+.project-group + .project-group {
+  margin-top: 22px;
 }
 
 .pills span {
@@ -1066,12 +1117,14 @@ h1 {
     border-color 220ms ease;
 }
 
+/* Source captures range from 16:9 to nearly square, so crop them all to one
+   ratio — otherwise card heights jump down the column. */
 .project-thumbnail {
   display: block;
   width: 100%;
   max-width: 100%;
   height: auto;
-  max-height: 160px;
+  aspect-ratio: 16 / 7;
   margin-bottom: 12px;
   object-fit: cover;
   object-position: top;
@@ -1106,8 +1159,9 @@ h1 {
 .featured h4,
 .timeline-card h3 {
   color: var(--text);
-  font-size: 1rem;
-  line-height: 1.35;
+  font-size: 1.12rem;
+  font-weight: 650;
+  line-height: 1.3;
 }
 
 .panel-primary.featured h4 a {
@@ -1157,9 +1211,10 @@ h1 {
   flex: 1;
   min-width: 0;
   color: var(--text);
-  font-size: 1rem;
-  font-weight: 600;
-  line-height: 1.35;
+  font-size: 1.12rem;
+  font-weight: 650;
+  line-height: 1.3;
+  letter-spacing: -0.005em;
   transition: color 180ms ease;
 }
 
@@ -3015,19 +3070,22 @@ h1 {
 }
 
 /* â”€â”€ Audio Narration Trigger Button â”€â”€ */
+
+/* Secondary affordance: it sits beside a heading, so it stays quiet until
+   hovered rather than competing with the section title. */
 .audio-play-btn {
   display: inline-flex;
   align-items: center;
   gap: 6px;
   height: 34px;
   min-height: 34px;
-  padding: 0 12px;
-  background: color-mix(in srgb, var(--blue) 8%, transparent);
-  border: 1px solid color-mix(in srgb, var(--blue) 25%, transparent);
+  padding: 0 10px;
+  background: transparent;
+  border: 1px solid transparent;
   border-radius: 8px;
-  color: var(--link-aaa);
+  color: var(--muted);
   font-family: inherit;
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 600;
   cursor: pointer;
   box-sizing: border-box;
@@ -3040,11 +3098,9 @@ h1 {
 
 .audio-play-btn:hover,
 .audio-play-btn:focus-visible {
-  background: var(--blue);
-  color: #fff;
-  border-color: var(--blue);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 10px rgb(0 0 0 / 12%);
+  background: color-mix(in srgb, var(--blue) 10%, transparent);
+  border-color: color-mix(in srgb, var(--blue) 30%, transparent);
+  color: var(--link-aaa);
 }
 
 .audio-play-btn.is-playing {
@@ -3073,6 +3129,20 @@ h1 {
   justify-content: space-between;
   gap: 12px;
   margin-bottom: 12px;
+}
+
+/* Accent rule under every section title, whether or not the title shares a
+   row with a Listen button. */
+.panel-heading-row,
+.panel > h2 {
+  padding-bottom: 10px;
+  border-bottom: 1px solid color-mix(in srgb, var(--blue) 26%, transparent);
+}
+
+.panel-heading-row h2 {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: 0;
 }
 
 .panel-heading-row h2 {
@@ -3359,6 +3429,20 @@ h1 {
     color 160ms ease,
     transform 160ms ease,
     box-shadow 160ms ease;
+}
+
+/* The live-site action carries a visible label — an icon-only button read as
+   an unfinished element, especially full-width on mobile. */
+.project-live-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.project-live-link .external-icon {
+  flex: 0 0 auto;
+  width: 14px;
+  height: 14px;
 }
 
 .btn-icon {
