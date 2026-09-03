@@ -214,6 +214,20 @@
     gap: 0 !important;
   }
 
+  .employment-panel .li-experience-group {
+    grid-template-columns: 1fr;
+  }
+
+  .li-date-aside {
+    flex-flow: row wrap;
+    gap: 4px 10px;
+    margin-bottom: 8px;
+  }
+
+  .impact-cards {
+    grid-template-columns: 1fr;
+  }
+
   .copy-button {
     opacity: 0.85;
   }
