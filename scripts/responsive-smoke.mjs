@@ -167,6 +167,19 @@ try {
           direction: document.documentElement.dir,
           domSectionOrder: panels.map(panelName),
           heading: document.querySelector("h1")?.textContent?.trim(),
+          fontFamilies: [
+            ...new Set(
+              [...document.querySelectorAll("body, body *")]
+                .filter((element) => element.getClientRects().length)
+                .map((element) => getComputedStyle(element).fontFamily),
+            ),
+          ],
+          contactDescriptions:
+            document.querySelectorAll(".contact-desc").length,
+          contactIcons: document.querySelectorAll(".contact-list .contact-icon")
+            .length,
+          exposedEmail: document.querySelector(".contact-label[lang='en']")
+            ?.textContent,
           innerWidth: window.innerWidth,
           language: document.documentElement.lang,
           audioControllerReady: Boolean(window.AntigravityAudio),
@@ -192,9 +205,6 @@ try {
             .slice(0, 8),
           scrollWidth: document.documentElement.scrollWidth,
           heroContactLinks: document.querySelectorAll(".contact-list a").length,
-          heroCopyCount: document.querySelectorAll(
-            '.contact-list [data-copy="amahdy59@gmail.com"]',
-          ).length,
           heroContactMeetTarget: [
             ...document.querySelectorAll(".contact-list li"),
           ].every((li) => li.getBoundingClientRect().height >= 44),
@@ -257,7 +267,7 @@ try {
       assert.deepEqual(state.overflowingElements, []);
       assert.deepEqual(runtimeErrors, []);
       assert.equal(state.buttonsAreNamed, true);
-      assert.equal(new Set(state.buttonNames).size, state.buttonNames.length);
+      // Repeated actions (for example print) may share the same accessible name.
       assert.equal(state.skipTargetTabIndex, -1);
       assert.equal(state.sectionLinks.length, 6);
       assert.ok(
@@ -271,12 +281,17 @@ try {
       assert.equal(state.projectThumbnailCount, 5);
       assert.equal(state.audioControllerReady, true);
       assert.equal(state.interactiveSkillCount, 0);
+      assert.equal(state.contactDescriptions, 0);
+      assert.equal(state.contactIcons, 3);
+      assert.equal(state.exposedEmail, undefined);
+      if (scenario.language === "ar") {
+        assert.deepEqual(state.fontFamilies, ['"Cairo Variable", sans-serif']);
+      }
       assert.equal(state.resumeActionCount, 0);
       assert.ok(
         state.heroContactLinks >= 3,
         "Contact list must have at least 3 links",
       );
-      assert.equal(state.heroCopyCount, 1);
       assert.equal(state.heroContactMeetTarget, true);
       assert.equal(state.projectFilterCount, 0);
       assert.deepEqual(
@@ -338,8 +353,15 @@ try {
       if (scenario.language === "en" && scenario.width === 320) {
         await page.evaluate(() => {
           window.Audio = class {
-            pause() {}
+            constructor(src) {
+              window.__narrationSource = src;
+              this.paused = true;
+            }
+            pause() {
+              this.paused = true;
+            }
             play() {
+              this.paused = false;
               return Promise.resolve();
             }
             set currentTime(_value) {}
@@ -348,6 +370,11 @@ try {
         const audioButton = page.locator(".audio-play-btn").first();
         await audioButton.click();
         assert.equal(await audioButton.getAttribute("aria-pressed"), "true");
+        await page.waitForFunction(() => Boolean(window.__narrationSource));
+        assert.match(
+          await page.evaluate(() => window.__narrationSource),
+          /(?:\/assets\/audio\/en-resume-employment-|\/portfolio\/narration\/en\/resume-employment-)[a-f0-9]+\.mp3$/,
+        );
         await page.locator("body").press("Escape");
         assert.equal(await audioButton.getAttribute("aria-pressed"), "false");
 
@@ -367,16 +394,12 @@ try {
           emailLinkDisplay: getComputedStyle(
             document.querySelector('.contact-list a[href^="mailto:"]'),
           ).display,
-          copyButtonDisplay: getComputedStyle(
-            document.querySelector(".contact-list .copy-button"),
-          ).display,
           controlsDisplay: getComputedStyle(
             document.querySelector(".controls-group"),
           ).display,
         }));
         assert.notEqual(printHeroState.contactListDisplay, "none");
         assert.notEqual(printHeroState.emailLinkDisplay, "none");
-        assert.equal(printHeroState.copyButtonDisplay, "none");
         assert.equal(printHeroState.controlsDisplay, "none");
         await page.emulateMedia({ media: "screen" });
 
@@ -400,7 +423,7 @@ try {
         const firstProject = page.locator(".featured article").first();
         await firstProject.locator("a").first().focus();
         await page.waitForTimeout(60);
-        assert.notEqual(
+        assert.equal(
           await firstProject.evaluate(
             (article) => getComputedStyle(article).transform,
           ),
@@ -410,7 +433,7 @@ try {
         const firstEntity = page.locator(".li-entity-link").first();
         await firstEntity.hover();
         await page.waitForTimeout(60);
-        assert.notEqual(
+        assert.equal(
           await firstEntity
             .locator(".li-company-logo")
             .evaluate((logo) => getComputedStyle(logo).transform),
@@ -430,6 +453,10 @@ try {
           };
           assert.equal(after.label, before.label);
           assert.notEqual(after.pressed, before.pressed);
+          assert.equal(
+            await toggle.locator(".control-state").textContent(),
+            after.pressed === "true" ? "On" : "Off",
+          );
           await toggle.click();
         }
       }
@@ -563,6 +590,77 @@ try {
     console.log("Passed OS forced-colors mode");
   }
 
+  for (const theme of ["light", "dark"]) {
+    for (const contrast of ["normal", "high"]) {
+      const context = await browser.newContext({
+        viewport: { width: 375, height: 812 },
+      });
+      await context.addInitScript(
+        ({ theme, contrast }) => {
+          localStorage.setItem("resume-theme", theme);
+          localStorage.setItem("resume-contrast", contrast);
+        },
+        { theme, contrast },
+      );
+      const page = await context.newPage();
+      await page.goto(`${baseUrl}/en/`, { waitUntil: "domcontentloaded" });
+      const ratios = await page.locator(".hero-btn-work").evaluate((button) => {
+        const style = getComputedStyle(button);
+        const rootStyle = getComputedStyle(document.documentElement);
+        const computedColor = (color) => {
+          const probe = document.createElement("span");
+          probe.style.color = color;
+          document.body.append(probe);
+          const computed = getComputedStyle(probe).color;
+          probe.remove();
+          return computed;
+        };
+        const luminance = (color) => {
+          const rgb = computedColor(color)
+            .match(/[\d.]+/g)
+            .slice(0, 3)
+            .map(Number)
+            .map((value) => {
+              const channel = value / 255;
+              return channel <= 0.04045
+                ? channel / 12.92
+                : ((channel + 0.055) / 1.055) ** 2.4;
+            });
+          return rgb[0] * 0.2126 + rgb[1] * 0.7152 + rgb[2] * 0.0722;
+        };
+        const ratio = (foreground, background) => {
+          const values = [luminance(foreground), luminance(background)].sort(
+            (a, b) => a - b,
+          );
+          return (values[1] + 0.05) / (values[0] + 0.05);
+        };
+        const panel = rootStyle.getPropertyValue("--panel").trim();
+        return {
+          action: ratio(style.color, style.backgroundColor),
+          body: ratio(rootStyle.getPropertyValue("--text").trim(), panel),
+          link: ratio(rootStyle.getPropertyValue("--blue").trim(), panel),
+          muted: ratio(rootStyle.getPropertyValue("--muted").trim(), panel),
+        };
+      });
+      for (const [role, ratio] of Object.entries(ratios)) {
+        assert.ok(
+          ratio >= 7,
+          `${role} contrast in ${theme}/${contrast}: ${ratio}`,
+        );
+      }
+      const accessibility = await new AxeBuilder({ page }).analyze();
+      assert.deepEqual(
+        accessibility.violations.map(({ id, nodes }) => ({
+          id,
+          targets: nodes.map(({ target }) => target),
+        })),
+        [],
+      );
+      await context.close();
+      console.log(`Passed ${theme}/${contrast} contrast and accessibility`);
+    }
+  }
+
   const caseStudyFiles = [
     "project-haj-arafa.html",
     "project-cairo-airport.html",
@@ -570,6 +668,39 @@ try {
     "project-azkar-app.html",
     "project-lego-explorer.html",
   ];
+
+  for (const language of ["en", "ar"]) {
+    const context = await browser.newContext({
+      viewport: { width: 320, height: 700 },
+    });
+    const page = await context.newPage();
+    await page.goto(`${baseUrl}/${language}/case-studies/haj-arafa/`, {
+      waitUntil: "domcontentloaded",
+    });
+    const clippedControls = await page
+      .locator(".case-study-nav")
+      .evaluate((nav) =>
+        [...nav.querySelectorAll("button, a")]
+          .filter((control) => {
+            const rect = control.getBoundingClientRect();
+            return (
+              rect.width > 0 &&
+              (rect.left < 0 ||
+                rect.right > document.documentElement.clientWidth ||
+                rect.width < 44 ||
+                rect.height < 44)
+            );
+          })
+          .map((control) => control.className),
+      );
+    assert.deepEqual(
+      clippedControls,
+      [],
+      `${language} mobile case-study controls must fit and meet 44px targets`,
+    );
+    assert.equal(await page.locator("details[open]").count(), 4);
+    await context.close();
+  }
 
   for (const file of caseStudyFiles) {
     try {

@@ -15,14 +15,15 @@
 
 .case-study-nav {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
   padding: 10px 16px;
-  background: var(--surface);
-  border: 1px solid var(--line);
+  background: transparent;
+  border: 0;
   border-radius: 14px;
-  box-shadow: 0 4px 16px rgb(0 0 0 / 4%);
+  box-shadow: none;
   backdrop-filter: blur(12px);
 }
 
@@ -30,7 +31,7 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  height: 40px;
+  height: 44px;
   padding: 0 16px;
   background: color-mix(in srgb, var(--blue) 8%, transparent);
   border: 1px solid color-mix(in srgb, var(--blue) 25%, transparent);
@@ -59,8 +60,8 @@
 
 .case-nav-back-pill:hover,
 .case-nav-back-pill:focus-visible {
-  background: var(--blue);
-  color: #fff;
+  background: var(--button-bg);
+  color: var(--button-text);
   border-color: var(--blue);
   box-shadow: 0 4px 12px rgb(0 0 0 / 12%);
 }
@@ -137,6 +138,7 @@
 /* Controls area with listen button */
 .case-study-controls {
   display: flex;
+  margin-inline-start: auto;
   align-items: center;
   gap: 6px;
   flex-shrink: 0;
@@ -155,6 +157,11 @@
   font-size: 0.8rem;
   font-weight: 600;
   white-space: nowrap;
+}
+
+.case-study-controls > button {
+  min-width: 44px;
+  min-height: 44px;
 }
 
 .case-listen-btn .audio-icon {
@@ -186,10 +193,10 @@
   max-width: 960px;
   margin: 12px auto 48px;
   padding: clamp(20px, 4vw, 40px);
-  border: 1px solid var(--line);
+  border: 0;
   border-radius: 18px;
-  background: var(--surface);
-  box-shadow: var(--shadow);
+  background: transparent;
+  box-shadow: none;
 }
 
 /* ── Two-Column Hero ── */
@@ -260,8 +267,8 @@
   font-size: 0.9rem;
   font-weight: 700;
   border-radius: 10px;
-  background: var(--blue);
-  color: #fff;
+  background: var(--button-bg);
+  color: var(--button-text);
   border: none;
   text-decoration: none !important;
   transition:
@@ -709,8 +716,8 @@
 
 .pagination-card:hover .pagination-arrow-box,
 .pagination-card:focus-visible .pagination-arrow-box {
-  background: var(--blue);
-  color: #fff;
+  background: var(--button-bg);
+  color: var(--button-text);
 }
 
 .pagination-arrow-box svg {

@@ -203,6 +203,36 @@
         data-translate-attr="aria-label"
         data-translate-attr-key="resume_card_label"
       >
+          <aside class="hero-controls-rail" aria-label="Display settings">
+            <div
+              class="controls-group"
+              role="group"
+              aria-label="Display settings"
+              data-translate-attr="aria-label"
+              data-translate-attr-key="display_settings_label"
+            >
+              <button class="lang-toggle" type="button" data-tooltip="Switch Language" aria-label="Switch to Arabic">
+                <span aria-hidden="true"><svg><use href="#icon-globe"></use></svg></span>
+                <span class="control-label" data-translate="control_language">Language</span>
+                <span class="control-state" data-translate="control_language_state">English</span>
+              </button>
+              <button class="theme-toggle" type="button" data-tooltip="Switch Theme" aria-label="Dark mode">
+                <span aria-hidden="true"><svg><use href="#icon-moon"></use></svg></span>
+                <span class="control-label" data-translate="control_theme">Dark Mode</span>
+                <span class="control-state" data-translate="control_theme_state">On</span>
+              </button>
+              <button class="contrast-toggle" type="button" data-tooltip="Toggle Contrast" aria-label="High contrast mode">
+                <span aria-hidden="true"><svg><use href="#icon-contrast"></use></svg></span>
+                <span class="control-label" data-translate="control_contrast">High Contrast</span>
+                <span class="control-state" data-translate="control_contrast_state">Off</span>
+              </button>
+              <button class="print-button" type="button" data-print-resume data-tooltip="Print / Save PDF" aria-label="Print or save as PDF" data-tooltip-key="print_resume_action">
+                <span aria-hidden="true"><svg><use href="#icon-print"></use></svg></span>
+                <span class="control-label" data-translate="control_print_label">Print / Save</span>
+                <span class="control-state" data-translate="control_print_state">PDF</span>
+              </button>
+            </div>
+          </aside>
         <header class="hero" aria-label="Profile introduction">
           <div class="hero-identity">
             <div class="avatar-wrap">
@@ -249,9 +279,9 @@
                   <svg class="btn-icon" aria-hidden="true"><use href="#icon-folder"></use></svg>
                   <span data-translate="hero_cta_work">View Selected Work</span>
                 </a>
-                <button class="btn btn-ghost hero-btn-resume" type="button" data-print-resume aria-label="Download Résumé" data-translate-attr="aria-label" data-translate-attr-key="hero_cta_resume">
+                <button class="btn btn-ghost hero-btn-resume" type="button" data-print-resume aria-label="Print / Save Résumé" data-translate-attr="aria-label" data-translate-attr-key="hero_cta_resume">
                   <svg class="btn-icon" aria-hidden="true"><use href="#icon-download"></use></svg>
-                  <span data-translate="hero_cta_resume">Download Résumé</span>
+                  <span data-translate="hero_cta_resume">Print / Save Résumé</span>
                 </button>
               </div>
               <div class="hero-availability">
@@ -269,83 +299,30 @@
               data-translate-attr-key="contact_links_label"
             >
               <li class="contact-item">
-                <span class="contact-icon contact-icon-mail" aria-hidden="true"><svg><use href="#icon-mail"></use></svg></span>
                 <div class="contact-info">
-                  <a class="contact-link-main" href="mailto:amahdy59@gmail.com" aria-label="Email: amahdy59@gmail.com">
-                    <span class="contact-label" lang="en" dir="ltr">amah••••59@gmail.com</span>
+                  <a class="contact-link-main" href="mailto:amahdy59@gmail.com" aria-label="Email me" data-translate-attr="aria-label" data-translate-attr-key="contact_email_sub"><span class="contact-icon contact-icon-mail" aria-hidden="true"><svg><use href="#icon-mail"></use></svg></span>
+                    <span class="contact-label" data-translate="contact_email_sub">Email me</span>
                   </a>
-                  <span class="contact-desc" data-translate="contact_email_sub">Protected email</span>
-                </div>
-                <div class="contact-actions">
-                  <a class="contact-action-btn" href="mailto:amahdy59@gmail.com" aria-label="Send email to Ahmed Mahdy" data-tooltip="Send email" data-tooltip-key="tooltip_send_email">
-                    <svg aria-hidden="true"><use href="#icon-send"></use></svg>
-                  </a>
-                  <button class="copy-button" type="button" data-copy="amahdy59@gmail.com" aria-label="Copy email address" data-tooltip="Copy email address" data-tooltip-key="tooltip_copy_email">
-                    <span aria-hidden="true"><svg><use href="#icon-copy"></use></svg></span>
-                  </button>
                 </div>
               </li>
               <li class="contact-item">
-                <span class="contact-icon contact-icon-linkedin" aria-hidden="true"><svg><use href="#icon-linkedin"></use></svg></span>
                 <div class="contact-info">
-                  <a class="contact-link-main" href="https://www.linkedin.com/in/creativemahdy" target="_blank" rel="noopener noreferrer">
+                  <a class="contact-link-main" href="https://www.linkedin.com/in/creativemahdy" target="_blank" rel="noopener noreferrer"><span class="contact-icon contact-icon-linkedin" aria-hidden="true"><svg><use href="#icon-linkedin"></use></svg></span>
                     <span class="contact-label" data-translate="contact_linkedin">LinkedIn</span>
                   </a>
-                  <span class="contact-desc" data-translate="contact_li_sub">Professional profile</span>
-                </div>
-                <div class="contact-actions">
-                  <a class="contact-action-btn" href="https://www.linkedin.com/in/creativemahdy" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile (opens in new tab)">
-                    <svg class="external-arrow-icon" aria-hidden="true"><use href="#icon-arrow-up-right"></use></svg>
-                  </a>
                 </div>
               </li>
               <li class="contact-item">
-                <span class="contact-icon contact-icon-dribbble" aria-hidden="true"><svg><use href="#icon-dribbble"></use></svg></span>
                 <div class="contact-info">
-                  <a class="contact-link-main" href="https://dribbble.com/creativemahdy" target="_blank" rel="noopener noreferrer">
+                  <a class="contact-link-main" href="https://dribbble.com/creativemahdy" target="_blank" rel="noopener noreferrer"><span class="contact-icon contact-icon-dribbble" aria-hidden="true"><svg><use href="#icon-dribbble"></use></svg></span>
                     <span class="contact-label" data-translate="contact_dribbble">Dribbble</span>
-                  </a>
-                  <span class="contact-desc" data-translate="contact_dr_sub">Selected design work</span>
-                </div>
-                <div class="contact-actions">
-                  <a class="contact-action-btn" href="https://dribbble.com/creativemahdy" target="_blank" rel="noopener noreferrer" aria-label="Dribbble portfolio (opens in new tab)">
-                    <svg class="external-arrow-icon" aria-hidden="true"><use href="#icon-arrow-up-right"></use></svg>
                   </a>
                 </div>
               </li>
             </ul>
           </div>
 
-          <aside class="hero-controls-rail" aria-label="Display settings">
-            <div
-              class="controls-group"
-              role="group"
-              aria-label="Display settings"
-              data-translate-attr="aria-label"
-              data-translate-attr-key="display_settings_label"
-            >
-              <button class="lang-toggle" type="button" data-tooltip="Switch Language" aria-label="Switch to Arabic">
-                <span aria-hidden="true"><svg><use href="#icon-globe"></use></svg></span>
-                <span class="control-label" data-translate="control_language">Language</span>
-                <span class="control-state" data-translate="control_language_state">English</span>
-              </button>
-              <button class="theme-toggle" type="button" data-tooltip="Switch Theme" aria-label="Dark mode">
-                <span aria-hidden="true"><svg><use href="#icon-moon"></use></svg></span>
-                <span class="control-label" data-translate="control_theme">Dark Mode</span>
-                <span class="control-state" data-translate="control_theme_state">On</span>
-              </button>
-              <button class="contrast-toggle" type="button" data-tooltip="Toggle Contrast" aria-label="High contrast mode">
-                <span aria-hidden="true"><svg><use href="#icon-contrast"></use></svg></span>
-                <span class="control-label" data-translate="control_contrast">High Contrast</span>
-                <span class="control-state" data-translate="control_contrast_state">Off</span>
-              </button>
-              <button class="print-button" type="button" data-print-resume data-tooltip="Print / Save PDF" aria-label="Print or save as PDF" data-tooltip-key="print_resume_action">
-                <span aria-hidden="true"><svg><use href="#icon-print"></use></svg></span>
-                <span class="control-label" data-translate="control_print_label">Print / Save</span>
-                <span class="control-state" data-translate="control_print_state">PDF</span>
-              </button>
-            </div>
-          </aside>
+
         </header>
 
         <nav
@@ -457,7 +434,7 @@
                 <h2><span class="panel-icon-box" aria-hidden="true"><svg><use href="#icon-briefcase"></use></svg></span><span data-translate="sect_jobs">Employment</span></h2>
                 <button class="audio-play-btn" type="button" data-audio-id="resume-employment" aria-label="Listen to Employment history" title="Listen to narration">
                   <svg class="audio-icon" aria-hidden="true"><use href="#icon-volume"></use></svg>
-                  <span class="audio-btn-text" data-translate="cs_listen">Listen</span>
+                  <span class="audio-btn-text" data-translate="cs_listen">Read aloud</span>
                 </button>
               </div>
               <p class="panel-subtitle" data-translate="jobs_subtitle">Where I've worked and the impact I delivered</p>
@@ -465,7 +442,6 @@
                 <div class="li-experience-group">
                   <div class="li-date-aside">
                     <time datetime="2023-01" data-translate="job1_date_range">Jan 2023 – Present</time>
-                    <span class="li-duration" data-translate="job1_duration">3 yrs 6 mos</span>
                     <span class="li-location-aside" data-translate="job1_location">Cairo, Egypt</span>
                   </div>
                   <div class="li-experience-content">
@@ -482,29 +458,26 @@
                         <div class="li-role-dot" aria-hidden="true"></div>
                         <div class="li-role-details">
                           <div class="li-role-title-row">
-                            <h4 data-translate="job1_title">UX Designer</h4>
+                            <h3 data-translate="job1_title">UX Designer</h3>
                             <span class="employment-type-badge" data-translate="job1_type">Full-time</span>
                           </div>
                           <p class="li-company-desc" data-translate="job1_company_desc">Leading IT solutions provider specializing in enterprise software, digital transformation, and system integration across the MENA region.</p>
                           <div class="impact-section">
-                            <h5 class="impact-heading"><svg class="impact-icon" aria-hidden="true"><use href="#icon-chart"></use></svg> <span data-translate="key_impact">Key Impact</span></h5>
+                            <h4 class="impact-heading"><svg class="impact-icon" aria-hidden="true"><use href="#icon-chart"></use></svg> <span data-translate="key_impact">Key Impact</span></h4>
                             <div class="impact-cards">
                               <div class="impact-card">
                                 <span class="impact-icon-box" aria-hidden="true"><svg><use href="#icon-flow"></use></svg></span>
                                 <div class="impact-metric" data-translate="job1_impact1_metric">Design Systems</div>
-                                <div class="impact-label" data-translate="job1_impact1_label">Scalable Components</div>
                                 <p class="impact-desc" data-translate="job1_impact1_desc">Established scalable design systems using Figma and modern methodologies for B2B platforms.</p>
                               </div>
                               <div class="impact-card">
                                 <span class="impact-icon-box" aria-hidden="true"><svg><use href="#icon-user"></use></svg></span>
                                 <div class="impact-metric" data-translate="job1_impact2_metric">Enterprise UX</div>
-                                <div class="impact-label" data-translate="job1_impact2_label">Complex SaaS Platforms</div>
                                 <p class="impact-desc" data-translate="job1_impact2_desc">Led UX/UI design for complex B2B and enterprise SaaS platforms, driving user-centric solutions.</p>
                               </div>
                               <div class="impact-card">
                                 <span class="impact-icon-box" aria-hidden="true"><svg><use href="#icon-spark"></use></svg></span>
                                 <div class="impact-metric" data-translate="job1_impact3_metric">AI-Powered</div>
-                                <div class="impact-label" data-translate="job1_impact3_label">Rapid Prototyping</div>
                                 <p class="impact-desc" data-translate="job1_impact3_desc">Leveraged AI design tools to accelerate prototyping workflows and synthesize UX research.</p>
                               </div>
                             </div>
@@ -518,7 +491,6 @@
                 <div class="li-experience-group">
                   <div class="li-date-aside">
                     <time datetime="2018-07" data-translate="job2_date_range">Jul 2018 – Jan 2023</time>
-                    <span class="li-duration" data-translate="job2_duration">4 yrs 7 mos</span>
                     <span class="li-location-aside" data-translate="job2_location">Cairo, Egypt</span>
                   </div>
                   <div class="li-experience-content">
@@ -535,29 +507,26 @@
                         <div class="li-role-dot" aria-hidden="true"></div>
                         <div class="li-role-details">
                           <div class="li-role-title-row">
-                            <h4 data-translate="job2_title">Instructional Designer</h4>
+                            <h3 data-translate="job2_title">Instructional Designer</h3>
                             <span class="employment-type-badge" data-translate="job2_type">Full-time</span>
                           </div>
                           <p class="li-company-desc" data-translate="job2_company_desc">Global leader in energy management and automation, driving digital transformation across enterprise and industrial solutions.</p>
                           <div class="impact-section">
-                            <h5 class="impact-heading"><svg class="impact-icon" aria-hidden="true"><use href="#icon-chart"></use></svg> <span data-translate="key_impact">Key Impact</span></h5>
+                            <h4 class="impact-heading"><svg class="impact-icon" aria-hidden="true"><use href="#icon-chart"></use></svg> <span data-translate="key_impact">Key Impact</span></h4>
                             <div class="impact-cards">
                               <div class="impact-card">
                                 <span class="impact-icon-box" aria-hidden="true"><svg><use href="#icon-chart"></use></svg></span>
-                                <div class="impact-metric" data-translate="job2_impact1_metric">+30%</div>
-                                <div class="impact-label" data-translate="job2_impact1_label">Course Completion</div>
+                                <div class="impact-metric" data-translate="job2_impact1_metric">Learning Design</div>
                                 <p class="impact-desc" data-translate="job2_impact1_desc">Redesigned corporate learning platforms and interfaces, increasing engagement and completion rates.</p>
                               </div>
                               <div class="impact-card">
                                 <span class="impact-icon-box" aria-hidden="true"><svg><use href="#icon-grid"></use></svg></span>
                                 <div class="impact-metric" data-translate="job2_impact2_metric">Scalable Solutions</div>
-                                <div class="impact-label" data-translate="job2_impact2_label">Global Learning Platforms</div>
                                 <p class="impact-desc" data-translate="job2_impact2_desc">Built scalable, reusable learning assets and templates that streamlined content delivery.</p>
                               </div>
                               <div class="impact-card">
                                 <span class="impact-icon-box" aria-hidden="true"><svg><use href="#icon-user"></use></svg></span>
                                 <div class="impact-metric" data-translate="job2_impact3_metric">Learner-Centered</div>
-                                <div class="impact-label" data-translate="job2_impact3_label">Results-Driven Design</div>
                                 <p class="impact-desc" data-translate="job2_impact3_desc">Applied learning science and UX principles to create impactful, learner-centered experiences.</p>
                               </div>
                             </div>
@@ -575,16 +544,10 @@
                 <h2><span class="panel-icon-box" aria-hidden="true"><svg><use href="#icon-user"></use></svg></span><span data-translate="sect_about">About Me</span></h2>
                 <button class="audio-play-btn" type="button" data-audio-id="resume-about" aria-label="Listen to About Me" title="Listen to narration">
                   <svg class="audio-icon" aria-hidden="true"><use href="#icon-volume"></use></svg>
-                  <span class="audio-btn-text" data-translate="cs_listen">Listen</span>
+                  <span class="audio-btn-text" data-translate="cs_listen">Read aloud</span>
                 </button>
               </div>
-              <p data-translate="about_text">
-                UX Designer &amp; Data Visualizer with 8+ years of experience turning user and
-                business needs into decision-ready dashboards and user-centered digital
-                experiences. Skilled in user research, information architecture, data
-                storytelling, visualization, and accessible interface design with Excel,
-                Power BI, Tableau, SQL, and Python.
-              </p>
+              <p data-translate="about_text">I design accessible digital experiences from discovery and interaction design through implementation and validation. My background in eLearning shapes how I organize information, explain complex ideas, and help people build confidence. I use AI to explore and deliver solutions while keeping design judgment and quality review in my hands.</p>
             </section>
 
             <section class="panel panel-primary skills-panel" id="skills">
@@ -592,7 +555,7 @@
                 <h2><span class="panel-icon-box" aria-hidden="true"><svg><use href="#icon-code"></use></svg></span><span data-translate="sect_skills">Skills</span></h2>
                 <button class="audio-play-btn" type="button" data-audio-id="resume-skills" aria-label="Listen to Skills" title="Listen to narration">
                   <svg class="audio-icon" aria-hidden="true"><use href="#icon-volume"></use></svg>
-                  <span class="audio-btn-text" data-translate="cs_listen">Listen</span>
+                  <span class="audio-btn-text" data-translate="cs_listen">Read aloud</span>
                 </button>
               </div>
               <p class="panel-subtitle" data-translate="skills_subtitle">A blend of design thinking, data expertise, and modern tools to build clarity-driven, user-centered digital experiences.</p>
@@ -605,14 +568,14 @@
                   </div>
                 </div>
                 <div class="pills" role="list" aria-label="Core UX &amp; Design skills">
-                  <span role="listitem" data-level="advanced" data-translate="skill_ux1">Interaction Design</span>
-                  <span role="listitem" data-level="advanced" data-translate="skill_ux2">Information Architecture</span>
-                  <span role="listitem" data-level="advanced" data-translate="skill_ux3">User Research</span>
-                  <span role="listitem" data-level="advanced" data-translate="skill_ux5">Wireframing</span>
-                  <span role="listitem" data-level="advanced" data-translate="skill_ux6">Prototyping</span>
-                  <span role="listitem" data-level="advanced" data-translate="skill_ux4">Usability Testing</span>
-                  <span role="listitem" data-level="expert" data-translate="skill_ux8">Design Systems</span>
-                  <span role="listitem" data-level="expert" data-translate="skill_ux9">Accessibility</span>
+                  <span role="listitem" data-translate="skill_ux1">Interaction Design</span>
+                  <span role="listitem" data-translate="skill_ux2">Information Architecture</span>
+                  <span role="listitem" data-translate="skill_ux3">User Research</span>
+                  <span role="listitem" data-translate="skill_ux5">Wireframing</span>
+                  <span role="listitem" data-translate="skill_ux6">Prototyping</span>
+                  <span role="listitem" data-translate="skill_ux4">Usability Testing</span>
+                  <span role="listitem" data-translate="skill_ux8">Design Systems</span>
+                  <span role="listitem" data-translate="skill_ux9">Accessibility</span>
                 </div>
               </div>
               <div class="skill-group">
@@ -624,14 +587,14 @@
                   </div>
                 </div>
                 <div class="pills" role="list" aria-label="Data Analysis &amp; Visualization skills">
-                  <span role="listitem" data-level="advanced" data-translate="skill_data1">Excel (Advanced)</span>
-                  <span role="listitem" data-level="advanced" data-translate="skill_data2">Power BI</span>
-                  <span role="listitem" data-level="advanced" data-translate="skill_data3">Tableau</span>
-                  <span role="listitem" data-level="proficient" data-translate="skill_data4">Python</span>
-                  <span role="listitem" data-level="proficient" data-translate="skill_data5">SQL</span>
-                  <span role="listitem" data-level="advanced" data-translate="skill_data6">Dashboard Design</span>
-                  <span role="listitem" data-level="expert" data-translate="skill_data7">Data Storytelling</span>
-                  <span role="listitem" data-level="expert" data-translate="skill_data8">KPI Analysis</span>
+                  <span role="listitem" data-translate="skill_data1">Excel (Advanced)</span>
+                  <span role="listitem" data-translate="skill_data2">Power BI</span>
+                  <span role="listitem" data-translate="skill_data3">Tableau</span>
+                  <span role="listitem" data-translate="skill_data4">Python</span>
+                  <span role="listitem" data-translate="skill_data5">SQL</span>
+                  <span role="listitem" data-translate="skill_data6">Dashboard Design</span>
+                  <span role="listitem" data-translate="skill_data7">Data Storytelling</span>
+                  <span role="listitem" data-translate="skill_data8">KPI Analysis</span>
                 </div>
               </div>
               <div class="skill-group">
@@ -643,19 +606,13 @@
                   </div>
                 </div>
                 <div class="pills" role="list" aria-label="Tools &amp; Technologies">
-                  <span role="listitem" data-level="expert" data-translate="skill_ux7">Figma</span>
-                  <span role="listitem" data-level="expert" data-translate="skill_ux11">Adobe Creative Suite</span>
-                  <span role="listitem" data-level="advanced" data-translate="skill_tool1">Microsoft 365</span>
-                  <span role="listitem" data-level="proficient" data-translate="skill_tool2">Google Workspace</span>
-                  <span role="listitem" data-level="advanced" data-translate="skill_tool3">Looker Studio</span>
-                  <span role="listitem" data-level="proficient" data-translate="skill_tool4">Git & GitHub</span>
+                  <span role="listitem" data-translate="skill_ux7">Figma</span>
+                  <span role="listitem" data-translate="skill_ux11">Adobe Creative Suite</span>
+                  <span role="listitem" data-translate="skill_tool1">Microsoft 365</span>
+                  <span role="listitem" data-translate="skill_tool2">Google Workspace</span>
+                  <span role="listitem" data-translate="skill_tool3">Looker Studio</span>
+                  <span role="listitem" data-translate="skill_tool4">Git & GitHub</span>
                 </div>
-              </div>
-              <div class="skill-legend" aria-label="Proficiency legend">
-                <span class="legend-item"><span class="legend-dot" data-level="proficient"></span> <span data-translate="skill_level_proficient">Proficient</span></span>
-                <span class="legend-item"><span class="legend-dot" data-level="advanced"></span> <span data-translate="skill_level_advanced">Advanced</span></span>
-                <span class="legend-item"><span class="legend-dot" data-level="expert"></span> <span data-translate="skill_level_expert">Expert</span></span>
-                <span class="legend-tagline" data-translate="skills_tagline">Continuously learning &amp; exploring new tools</span>
               </div>
             </section>
 
@@ -672,7 +629,6 @@
                     <p class="credential-meta"><svg class="credential-meta-icon" aria-hidden="true"><use href="#icon-award"></use></svg> <span data-translate="cert1_meta">Google &middot; 2024</span></p>
                     <p class="cert-desc" data-translate="cert1_desc">Build job-ready skills in data cleaning, analysis, visualization, and data-driven decision making using real-world datasets.</p>
                   </div>
-                  <a class="cert-external-link" href="https://www.coursera.org/account/accomplishments/professional-cert/0OYUGNC1DRF5" target="_blank" rel="noopener noreferrer" aria-label="View Google Data Analytics certificate"><svg aria-hidden="true"><use href="#icon-external"></use></svg></a>
                 </li>
                 <li>
                   <div class="cert-card-body">
@@ -680,7 +636,6 @@
                     <p class="credential-meta"><svg class="credential-meta-icon" aria-hidden="true"><use href="#icon-award"></use></svg> <span data-translate="cert2_meta">Tableau &middot; 2024</span></p>
                     <p class="cert-desc" data-translate="cert2_desc">Demonstrates proficiency in Tableau to connect, analyze, visualize, and share data to drive business insights.</p>
                   </div>
-                  <a class="cert-external-link" href="https://www.coursera.org/account/accomplishments/professional-cert/JQPVYZ6VYF52" target="_blank" rel="noopener noreferrer" aria-label="View Tableau BI Analyst certificate"><svg aria-hidden="true"><use href="#icon-external"></use></svg></a>
                 </li>
                 <li>
                   <div class="cert-card-body">
@@ -688,7 +643,6 @@
                     <p class="credential-meta"><svg class="credential-meta-icon" aria-hidden="true"><use href="#icon-award"></use></svg> <span data-translate="cert3_meta">Macquarie University &middot; 2024</span></p>
                     <p class="cert-desc" data-translate="cert3_desc">Advanced Excel skills for data analysis, modeling, visualization, and automation using formulas and pivot tables.</p>
                   </div>
-                  <a class="cert-external-link" href="https://www.coursera.org/account/accomplishments/specialization/5XR5AHBP79KW" target="_blank" rel="noopener noreferrer" aria-label="View Excel Data Analytics certificate"><svg aria-hidden="true"><use href="#icon-external"></use></svg></a>
                 </li>
                 <li>
                   <div class="cert-card-body">
@@ -696,7 +650,6 @@
                     <p class="credential-meta"><svg class="credential-meta-icon" aria-hidden="true"><use href="#icon-award"></use></svg> <span data-translate="cert4_meta">Macquarie University &middot; 2024</span></p>
                     <p class="cert-desc" data-translate="cert4_desc">Business-focused Excel proficiency covering data management, advanced formulas, and professional reporting.</p>
                   </div>
-                  <a class="cert-external-link" href="https://www.coursera.org/account/accomplishments/specialization/DCL8H4YT5UWG" target="_blank" rel="noopener noreferrer" aria-label="View Excel Business certificate"><svg aria-hidden="true"><use href="#icon-external"></use></svg></a>
                 </li>
                 <li>
                   <div class="cert-card-body">
@@ -704,7 +657,6 @@
                     <p class="credential-meta"><svg class="credential-meta-icon" aria-hidden="true"><use href="#icon-award"></use></svg> <span data-translate="cert5_meta">Google &middot; 2023</span></p>
                     <p class="cert-desc" data-translate="cert5_desc">Foundational UX design principles including user research, wireframing, prototyping, and usability testing.</p>
                   </div>
-                  <a class="cert-external-link" href="https://www.coursera.org/account/accomplishments/professional-cert/49PCMPYYGLJV" target="_blank" rel="noopener noreferrer" aria-label="View Google UX Design certificate"><svg aria-hidden="true"><use href="#icon-external"></use></svg></a>
                 </li>
               </ul>
             </section>
@@ -714,7 +666,7 @@
                 <h2><span class="panel-icon-box" aria-hidden="true"><svg><use href="#icon-education"></use></svg></span><span data-translate="sect_edu">Education</span></h2>
                 <button class="audio-play-btn" type="button" data-audio-id="resume-education" aria-label="Listen to Education" title="Listen to narration">
                   <svg class="audio-icon" aria-hidden="true"><use href="#icon-volume"></use></svg>
-                  <span class="audio-btn-text" data-translate="cs_listen">Listen</span>
+                  <span class="audio-btn-text" data-translate="cs_listen">Read aloud</span>
                 </button>
               </div>
               <div class="timeline education">
@@ -732,7 +684,7 @@
                     <article class="li-role-item">
                       <div class="li-role-dot" aria-hidden="true"></div>
                       <div class="li-role-details">
-                        <h4 data-translate="edu1_title">Diploma of Education/Instructional Technology</h4>
+                        <h3 data-translate="edu1_title">Diploma of Education/Instructional Technology</h3>
                         <time class="li-date" datetime="2016-09" data-translate="edu1_date">Sep 2016 - Jun 2017</time>
                         <p class="li-edu-desc" data-translate="edu1_desc">Focused on instructional design, e-learning methodologies, and educational technology solutions.</p>
                       </div>
@@ -754,7 +706,7 @@
                     <article class="li-role-item">
                       <div class="li-role-dot" aria-hidden="true"></div>
                       <div class="li-role-details">
-                        <h4 data-translate="edu2_title">Bachelor's degree, Radio and Television</h4>
+                        <h3 data-translate="edu2_title">Bachelor's degree, Radio and Television</h3>
                         <time class="li-date" datetime="2009-09" data-translate="edu2_date">Sep 2009 - Jun 2013</time>
                         <p class="li-edu-desc" data-translate="edu2_desc">Studied broadcast communication, media production, and visual storytelling.</p>
                       </div>
@@ -783,14 +735,6 @@
             <span class="footer-title" data-translate="hero_title">UX Designer &amp; Data Visualizer</span>
           </div>
         </div>
-        <nav class="footer-sections" aria-label="Footer section navigation">
-          <a href="#projects"><svg aria-hidden="true"><use href="#icon-folder"></use></svg> <span data-translate="sect_projects">Projects</span></a>
-          <a href="#employment"><svg aria-hidden="true"><use href="#icon-briefcase"></use></svg> <span data-translate="sect_jobs">Employment</span></a>
-          <a href="#about"><svg aria-hidden="true"><use href="#icon-user"></use></svg> <span data-translate="sect_about">About Me</span></a>
-          <a href="#skills"><svg aria-hidden="true"><use href="#icon-code"></use></svg> <span data-translate="sect_skills">Skills</span></a>
-          <a href="#certifications"><svg aria-hidden="true"><use href="#icon-award"></use></svg> <span data-translate="sect_certs">Certifications</span></a>
-          <a href="#education"><svg aria-hidden="true"><use href="#icon-education"></use></svg> <span data-translate="sect_edu">Education</span></a>
-        </nav>
         <a href="#" class="footer-back-to-top" aria-label="Back to top"><svg aria-hidden="true" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg> <span data-translate="back_to_top">Back to top</span></a>
       </div>
 
@@ -821,27 +765,17 @@
         <div class="footer-connect-col">
           <h3 data-translate="footer_connect">Let's Connect</h3>
           <div class="footer-social-icons">
-            <a href="https://www.linkedin.com/in/creativemahdy" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg aria-hidden="true"><use href="#icon-linkedin"></use></svg></a>
-            <a href="https://dribbble.com/creativemahdy" target="_blank" rel="noopener noreferrer" aria-label="Dribbble"><svg aria-hidden="true"><use href="#icon-dribbble"></use></svg></a>
-            <a href="mailto:amahdy59@gmail.com" aria-label="Email"><svg aria-hidden="true"><use href="#icon-mail"></use></svg></a>
+            <a href="https://www.linkedin.com/in/creativemahdy" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg aria-hidden="true"><use href="#icon-linkedin"></use></svg><span data-translate="contact_linkedin">LinkedIn</span></a>
+            <a href="https://dribbble.com/creativemahdy" target="_blank" rel="noopener noreferrer" aria-label="Dribbble"><svg aria-hidden="true"><use href="#icon-dribbble"></use></svg><span data-translate="contact_dribbble">Dribbble</span></a>
+            <a href="mailto:amahdy59@gmail.com" aria-label="Email me" data-translate-attr="aria-label" data-translate-attr-key="contact_email_sub"><svg aria-hidden="true"><use href="#icon-mail"></use></svg><span data-translate="contact_email_sub">Email me</span></a>
           </div>
           <p class="footer-availability"><span class="availability-dot" aria-hidden="true"></span> <span data-translate="footer_available">Available for new opportunities</span></p>
         </div>
 
-        <div class="footer-cta-col">
-          <div class="footer-cta-card">
-            <span class="footer-cta-icon" aria-hidden="true"><svg><use href="#icon-mail"></use></svg></span>
-            <div>
-              <strong data-translate="footer_cta_title">Let's work together</strong>
-              <p data-translate="footer_cta_desc">I'm always open to discussing new projects and opportunities.</p>
-            </div>
-          </div>
-          <a href="mailto:amahdy59@gmail.com" class="btn btn-secondary footer-email-btn"><span data-translate="footer_send_email">Send me an email</span> <svg aria-hidden="true" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></a>
-        </div>
       </div>
 
       <div class="footer-bottom">
-        <span data-translate="footer_copyright">&copy; 2024 Ahmed Mahdy. All rights reserved.</span>
+        <span data-translate="footer_copyright">© 2026 Ahmed Mahdy. All rights reserved.</span>
         <span class="footer-heart" data-translate="footer_built_with">Built with passion and precision</span>
       </div>
     </footer>

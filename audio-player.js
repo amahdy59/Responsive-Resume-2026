@@ -12,7 +12,11 @@
   let currentActiveContainer = null;
   let isPaused = false;
   let currentUtterance = null;
+  let currentMedia = null;
   let cachedVoices = [];
+  const narrationManifest = fetch(new URL('/assets/audio/narration.json', window.location.origin))
+    .then(response => response.ok ? response.json() : {})
+    .catch(() => ({}));
 
   function loadVoices() {
     if (!('speechSynthesis' in window)) return [];
@@ -48,6 +52,11 @@
   }
 
   function stopAllAudio() {
+    if (currentMedia) {
+      currentMedia.pause();
+      currentMedia.currentTime = 0;
+      currentMedia = null;
+    }
     if (window.speechSynthesis) {
       window.speechSynthesis.cancel();
     }
@@ -65,6 +74,12 @@
   }
 
   function pauseAudio() {
+    if (currentMedia && !currentMedia.paused) {
+      currentMedia.pause();
+      isPaused = true;
+      if (currentBtn) setButtonState(currentBtn, false, true);
+      return;
+    }
     if (window.speechSynthesis && window.speechSynthesis.speaking && !window.speechSynthesis.paused) {
       window.speechSynthesis.pause();
       isPaused = true;
@@ -75,6 +90,12 @@
   }
 
   function resumeAudio() {
+    if (currentMedia && currentMedia.paused) {
+      currentMedia.play().catch(stopAllAudio);
+      isPaused = false;
+      if (currentBtn) setButtonState(currentBtn, true);
+      return;
+    }
     if (window.speechSynthesis && window.speechSynthesis.paused) {
       window.speechSynthesis.resume();
       isPaused = false;
@@ -104,8 +125,12 @@
     } else {
       btn.classList.remove('is-playing');
       btn.setAttribute('aria-pressed', 'false');
-      if (textEl) textEl.textContent = isArabic ? 'استمع' : 'Listen';
-      btn.setAttribute('aria-label', isArabic ? 'استمع إلى المحتوى' : 'Listen to this content');
+      const label = btn.classList.contains('case-listen-btn')
+        ? (isArabic ? 'قراءة دراسة الحالة بصوت مسموع' : 'Read case study aloud')
+        : (isArabic ? 'قراءة صوتية' : 'Read aloud');
+      const section = btn.closest('.panel')?.querySelector('h2')?.textContent.trim();
+      if (textEl) textEl.textContent = label;
+      btn.setAttribute('aria-label', section ? `${label}: ${section}` : label);
       if (useEl) useEl.setAttribute('href', '#icon-volume');
     }
   }
@@ -129,17 +154,18 @@
     return text;
   }
 
-  function playNarration(btn) {
-    if (!('speechSynthesis' in window)) {
-      return;
-    }
-
+  async function playNarration(btn) {
     const targetSelector = btn.getAttribute('data-target-selector');
     const targetContainer = targetSelector
       ? document.querySelector(targetSelector)
       : btn.closest('.case-study-section, .panel, .case-study-hero, article, header') || btn.parentElement;
 
     if (currentBtn === btn) {
+      if (currentMedia) {
+        if (currentMedia.paused) resumeAudio();
+        else pauseAudio();
+        return;
+      }
       if (window.speechSynthesis.speaking) {
         if (window.speechSynthesis.paused || isPaused) {
           resumeAudio();
@@ -163,8 +189,27 @@
       targetContainer.classList.add('audio-reading-active');
     }
 
-    const lang = document.documentElement.getAttribute('lang') || 'en';
+    const lang = (document.documentElement.getAttribute('lang') || 'en').startsWith('ar') ? 'ar' : 'en';
+    const recording = (await narrationManifest)[`${lang}/${btn.dataset.audioId}`];
+    if (recording?.url) {
+      const media = new Audio(recording.url);
+      currentMedia = media;
+      media.onended = () => { if (currentMedia === media) stopAllAudio(); };
+      media.onerror = () => { if (currentMedia === media) stopAllAudio(); };
+      try {
+        await media.play();
+        return;
+      } catch {
+        currentMedia = null;
+      }
+    }
+
     const isArabic = lang.startsWith('ar');
+
+    if (!('speechSynthesis' in window)) {
+      stopAllAudio();
+      return;
+    }
 
     const utterance = new SpeechSynthesisUtterance(textToRead);
     utterance.lang = isArabic ? 'ar-SA' : 'en-US';
@@ -177,11 +222,11 @@
     }
 
     utterance.onend = function () {
-      stopAllAudio();
+      if (currentUtterance === utterance) stopAllAudio();
     };
 
     utterance.onerror = function () {
-      stopAllAudio();
+      if (currentUtterance === utterance) stopAllAudio();
     };
 
     window._activeUtterance = utterance;
@@ -200,13 +245,13 @@
     });
 
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && window.speechSynthesis && (window.speechSynthesis.speaking || window.speechSynthesis.paused)) {
+      if (e.key === 'Escape' && (currentMedia || (window.speechSynthesis && (window.speechSynthesis.speaking || window.speechSynthesis.paused)))) {
         stopAllAudio();
       }
     });
 
     document.addEventListener('visibilitychange', function () {
-      if (document.hidden && window.speechSynthesis && window.speechSynthesis.speaking && !window.speechSynthesis.paused) {
+      if (document.hidden && (currentMedia || (window.speechSynthesis && window.speechSynthesis.speaking && !window.speechSynthesis.paused))) {
         pauseAudio();
       }
     });

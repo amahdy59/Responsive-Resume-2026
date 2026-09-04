@@ -63,7 +63,7 @@
 @media screen and (min-width: 561px) and (max-width: 1080px) {
   /* ── Tablet Hero ── */
   .hero {
-    flex-wrap: wrap;
+    grid-template-columns: 1fr;
     gap: 20px;
     padding: 24px 20px;
   }
@@ -75,6 +75,12 @@
 
   .hero-contact-card {
     flex: 1 1 auto;
+    width: 100%;
+    max-width: none;
+  }
+
+  .hero-contact-card .contact-list {
+    flex-flow: row wrap;
   }
 
   .hero-controls-rail {
@@ -98,6 +104,7 @@
   }
 
   .hero {
+    display: flex;
     min-height: auto;
     padding: 20px 16px;
     flex-direction: column;
@@ -137,10 +144,39 @@
   .hero-contact-card {
     width: 100%;
     flex: 1 1 100%;
+    max-width: none;
+    padding: 0;
+    border: 0;
+    box-shadow: none;
+    background: transparent;
+  }
+
+  .contact-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+
+  .contact-item:first-child {
+    grid-column: 1 / -1;
+  }
+
+  .contact-item {
+    padding: 0 8px;
+    gap: 8px;
+  }
+
+  .contact-icon {
+    display: inline-grid;
+  }
+
+  .hero-contact-card .contact-label {
+    font-size: 0.875rem;
   }
 
   .hero-controls-rail {
     width: 100%;
+    padding: 8px;
   }
 
   .controls-group {
@@ -148,20 +184,30 @@
     justify-content: center;
     width: 100%;
     gap: 8px;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
   .controls-group > button {
-    flex: 1 1 0;
-    max-width: 80px;
-    padding: 8px 4px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 6px 2px;
+    gap: 2px;
+  }
+
+  .controls-group button > span:first-child {
+    width: 24px;
+    height: 24px;
   }
 
   .control-label {
-    font-size: 0.6rem;
+    font-size: 0.7rem;
+    white-space: normal;
   }
 
   .control-state {
-    font-size: 0.55rem;
+    font-size: 0.7rem;
   }
 
   .ambient-particles {
@@ -194,12 +240,12 @@
 
   .panel {
     scroll-margin-top: 112px;
-    padding: 15px;
+    padding: 20px 16px;
   }
 
   .content-grid {
-    gap: 14px;
-    padding: 14px;
+    gap: 40px;
+    padding: 32px 16px;
   }
 
   .project-grid {
@@ -223,6 +269,31 @@
 
   .impact-cards {
     grid-template-columns: 1fr;
+  }
+
+  .compact-list li {
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 12px;
+  }
+
+  .compact-list li::before {
+    flex-basis: 40px;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+  }
+
+  .impact-card {
+    padding: 0 0 0 14px;
+    background: transparent;
+    border: 0;
+    border-inline-start: 2px solid var(--line);
+    border-radius: 0;
+  }
+
+  [dir="rtl"] .impact-card {
+    padding: 0 14px 0 0;
   }
 
   .copy-button {
@@ -259,9 +330,14 @@
   }
 
   .footer-bottom {
+    grid-template-columns: 1fr;
     flex-direction: column;
     text-align: center;
     padding: 14px 16px;
+  }
+
+  .footer-heart {
+    text-align: center;
   }
 }
 
@@ -387,4 +463,46 @@
   .provenance-grid {
     grid-template-columns: 1fr;
   }
+}
+
+@media screen and (max-width: 800px) {
+  .skill-group {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .footer-content {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .footer-tagline-col {
+    grid-column: 1 / -1;
+  }
+
+  .impact-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (max-width: 560px) {
+  .employment-panel .li-experience-group {
+    padding: 20px 16px;
+  }
+
+  .li-roles-list {
+    margin-inline-start: 0;
+  }
+
+  .skills-panel .pills {
+    gap: 8px;
+  }
+
+  .skills-panel .pills span {
+    font-size: 0.875rem;
+  }
+
+  .footer-connect-col {
+    grid-column: 1 / -1;
+  }
+
 }

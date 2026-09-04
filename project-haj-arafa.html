@@ -115,7 +115,7 @@
           <div class="case-study-controls">
             <button class="audio-play-btn case-listen-btn" type="button" data-audio-id="haj-arafa-intro" aria-label="Listen to case study" title="Listen to narration">
               <svg class="audio-icon" aria-hidden="true"><use href="#icon-volume"></use></svg>
-              <span class="audio-btn-text" data-translate="cs_listen_full">Listen to case study</span>
+              <span class="audio-btn-text" data-translate="cs_listen_full">Read case study aloud</span>
             </button>
             <button class="lang-toggle" type="button" data-tooltip="Switch Language" aria-label="Switch to Arabic"><span aria-hidden="true"><svg><use href="#icon-globe"></use></svg></span></button>
             <button class="theme-toggle" type="button" data-tooltip="Switch Theme" aria-label="Dark mode"><span aria-hidden="true"><svg><use href="#icon-moon"></use></svg></span></button>
@@ -139,14 +139,14 @@
                 <svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg>
               </a>
               <button class="btn btn-secondary case-preview-toggle" type="button" data-toggle-embed aria-expanded="false" aria-controls="live-embed-viewer">
-                <span data-translate="cs_view_prototype">View UX Prototype</span>
+                <span data-translate="cs_view_prototype">Preview live site</span>
                 <svg class="btn-info-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
               </button>
             </div>
           </div>
           <figure class="case-hero-image">
             <img src="assets/case-haj-arafa-800.webp" srcset="assets/case-haj-arafa-480.webp 480w, assets/case-haj-arafa-800.webp 800w, assets/case-haj-arafa-1200.webp 1200w" sizes="(max-width: 560px) calc(100vw - 32px), 460px" width="1440" height="890" alt="Haj Arafa App interface preview" class="case-study-image" decoding="async" fetchpriority="high" />
-            <figcaption class="case-image-hint" data-translate="cs_hover_expand">Hover or tap to expand</figcaption>
+            <figcaption class="case-image-hint" data-translate="cs_hover_expand">Open image preview</figcaption>
           </figure>
         </header>
 
@@ -199,7 +199,7 @@
         </nav>
 
         <div class="case-study-content">
-          <details class="case-accordion" id="section-01">
+          <details class="case-accordion" id="section-01" open>
             <summary>
               <span class="section-num">01</span>
               <span class="accordion-title" data-translate="cs_sec1_title">Context & Challenge</span>
@@ -211,23 +211,23 @@
                 <div class="provenance-card">
                   <svg class="provenance-icon" aria-hidden="true"><use href="#icon-user"></use></svg>
                   <strong data-translate="cs_haj_sec1_card1_title">User problem</strong>
-                  <p data-translate="cs_haj_sec1_card1_desc">Shoppers struggled to find products quickly and faced a long, multi-step checkout that created friction and dropped conversions.</p>
+                  <p data-translate="cs_haj_sec1_card1_desc">The brief called for easier product discovery and a shorter checkout journey. These needs informed the concept; they are not findings from a reported user study.</p>
                 </div>
                 <div class="provenance-card">
                   <svg class="provenance-icon" aria-hidden="true"><use href="#icon-chart"></use></svg>
                   <strong data-translate="cs_haj_sec1_card2_title">Business problem</strong>
-                  <p data-translate="cs_haj_sec1_card2_desc">High cart abandonment and low repeat purchases impacted revenue and customer trust in the brand experience.</p>
+                  <p data-translate="cs_haj_sec1_card2_desc">The brief identified checkout friction as a business risk. Production abandonment and repeat-purchase data were not available for this concept.</p>
                 </div>
                 <div class="provenance-card">
                   <svg class="provenance-icon" aria-hidden="true"><use href="#icon-check-shield"></use></svg>
                   <strong data-translate="cs_haj_sec1_card3_title">Design goal</strong>
-                  <p data-translate="cs_haj_sec1_card3_desc">Create a mobile-first experience with search-first navigation and an express 2-step checkout that builds trust and boosts conversions.</p>
+                  <p data-translate="cs_haj_sec1_card3_desc">Design a mobile-first shopping journey with search-first navigation and a shorter guest checkout.</p>
                 </div>
               </div>
             </div>
           </details>
 
-          <details class="case-accordion" id="section-02">
+          <details class="case-accordion" id="section-02" open>
             <summary>
               <span class="section-num">02</span>
               <span class="accordion-title" data-translate="cs_sec2_title">Approach & Key Decisions</span>
@@ -260,7 +260,7 @@
             </div>
           </details>
 
-          <details class="case-accordion" id="section-04">
+          <details class="case-accordion" id="section-04" open>
             <summary>
               <span class="section-num">04</span>
               <span class="accordion-title" data-translate="cs_sec4_title">Outcome & Impact</span>
@@ -272,23 +272,23 @@
                 <div class="provenance-card">
                   <svg class="provenance-icon" aria-hidden="true"><use href="#icon-chart"></use></svg>
                   <strong data-translate="cs_haj_sec4_card1_title">Search-first navigation</strong>
-                  <p data-translate="cs_haj_sec4_card1_desc">Prominent 44px search and curated categories help users find products faster and with less effort.</p>
+                  <p data-translate="cs_haj_sec4_card1_desc">The implementation gives search and curated categories prominent positions. Findability remains a question for usability testing.</p>
                 </div>
                 <div class="provenance-card">
                   <svg class="provenance-icon" aria-hidden="true"><use href="#icon-check-shield"></use></svg>
                   <strong data-translate="cs_haj_sec4_card2_title">Streamlined checkout</strong>
-                  <p data-translate="cs_haj_sec4_card2_desc">Express 2-step checkout reduces friction, shortens the purchase path, and increases conversion.</p>
+                  <p data-translate="cs_haj_sec4_card2_desc">The proposed checkout shortens the purchase path. Its effect on conversion has not yet been measured.</p>
                 </div>
                 <div class="provenance-card">
                   <svg class="provenance-icon" aria-hidden="true"><use href="#icon-monitor"></use></svg>
                   <strong data-translate="cs_haj_sec4_card3_title">Responsive implementation</strong>
-                  <p data-translate="cs_haj_sec4_card3_desc">Built mobile-first with accessible components and WCAG 2.2 compliance for a consistent experience across devices.</p>
+                  <p data-translate="cs_haj_sec4_card3_desc">Built mobile-first with keyboard interaction, visible focus states, and responsive layouts informed by WCAG 2.2.</p>
                 </div>
               </div>
             </div>
           </details>
 
-          <details class="case-accordion" id="section-05">
+          <details class="case-accordion" id="section-05" open>
             <summary>
               <span class="section-num">05</span>
               <span class="accordion-title" data-translate="cs_sec5_title">Results & Validation</span>

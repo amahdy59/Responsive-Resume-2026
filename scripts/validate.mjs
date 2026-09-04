@@ -168,12 +168,13 @@ if ((html.match(/class="project-thumbnail"/g) || []).length !== 5) {
   errors.push("Projects section must contain exactly 5 project thumbnails.");
 }
 
-if (
-  (html.match(/data-copy=/g) || []).length < 1 ||
-  !html.includes('data-copy="amahdy59@gmail.com"')
-) {
+if ((html.match(/class="contact-icon contact-icon-/g) || []).length !== 3) {
+  errors.push("The hero must present email, LinkedIn, and Dribbble uniformly.");
+}
+
+if (/class="contact-label"[^>]*>[^<]*@/.test(html)) {
   errors.push(
-    "At least one email copy control must exist in the contact list.",
+    "The full email address must not be exposed as visible hero text.",
   );
 }
 

@@ -271,7 +271,9 @@ await fingerprintDirectory(
   "assets",
   assetMapping,
 );
-const scriptSource = await readFile(join(root, "script.js"), "utf8");
+const scriptSource = (
+  await readFile(join(root, "script.js"), "utf8")
+).replaceAll("\r\n", "\n");
 const translations = readTranslations(scriptSource);
 const stylesBundle = (
   await Promise.all(

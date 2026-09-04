@@ -1,4 +1,7 @@
 node_modules/
+.env
+.env.*
+!.env.example
 dist/
 .astro/
 .vercel/
@@ -8,6 +11,7 @@ desktop-*.png
 mobile-*.png
 assets/screenshots/
 artifacts/
+assets/audio/*.mp3
 
 # OS/editor noise
 .DS_Store

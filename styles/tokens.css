@@ -3,10 +3,10 @@
 
 :root {
   color-scheme: light;
-  --page: #faf9f7;
-  --surface: #faf9f7;
-  --panel: #faf9f7;
-  --line: rgb(26 35 50 / 15%);
+  --page: #f5f7fa;
+  --surface: #fff;
+  --panel: #fff;
+  --line: #7c8796;
   --soft-line: rgb(26 35 50 / 10%);
   --text: #1a2332;
   --muted: #3d4a5c; /* AAA-compliant: ~7.4:1 contrast on #faf9f7 */
@@ -40,12 +40,12 @@
   --hero-action-btn-border: rgb(26 35 50 / 12%);
   --hero-avatar-glow: 0 0 0 3px #005e87, 0 0 24px rgb(0 94 135 / 25%);
   --page-background:
-    radial-gradient(circle at 12% 8%, rgb(0 118 168 / 12%), transparent 34rem),
-    linear-gradient(125deg, #faf9f7, #d8d4ce);
+    radial-gradient(circle at 12% 0%, rgb(0 94 135 / 7%), transparent 34rem),
+    var(--page);
   --hero-gradient: linear-gradient(90deg, #005f88 0%, #0076a8 50%, #005f88 100%);
   --contact-bg: rgb(255 255 255 / 10%);
   --tag-bg: rgb(255 255 255 / 20%);
-  --project-bg: rgb(219 234 254 / 45%);
+  --project-bg: #fff;
   --panel-primary-bg:
     linear-gradient(135deg, rgb(0 118 168 / 6%), rgb(250 249 247 / 88%) 50%, rgb(250 249 247 / 96%) 100%),
     var(--panel);
@@ -107,7 +107,7 @@
   --surface: #161b22; /* GitHub's card/box canvas */
   --panel: #161b22; /* GitHub's overlay canvas */
   --logo-bg: #fff;
-  --line: #30363d; /* GitHub's border default */
+  --line: #6e7681;
   --soft-line: #21262d; /* GitHub's border muted */
   --text: #f0f6fc; /* GitHub's fg default (meets AAA contrast ratio > 14:1) */
   --muted: #cbd5e1; /* AAA secondary text (meets AAA contrast ratio > 9:1) */
@@ -131,7 +131,7 @@
   --hero-tag-bg: rgb(255 255 255 / 4%);
   --hero-tag-border: rgb(255 255 255 / 12%);
   --hero-tag-text: #cbd5e1;
-  --hero-btn-primary-bg: #2563eb;
+  --hero-btn-primary-bg: #164fae;
   --hero-btn-primary-text: #fff;
   --hero-btn-ghost-text: #79c0ff;
   --hero-rail-bg: rgb(255 255 255 / 4%);
@@ -141,13 +141,12 @@
   --hero-action-btn-border: rgb(255 255 255 / 8%);
   --hero-avatar-glow: 0 0 0 3px #3b82f6, 0 0 30px rgb(59 130 246 / 50%);
   --page-background:
-    radial-gradient(circle at 18% 8%, rgb(56 139 253 / 10%), transparent 40rem),
-    radial-gradient(circle at 82% 12%, rgb(56 139 253 / 5%), transparent 35rem),
-    linear-gradient(125deg, #0d1117 0%, #161b22 100%);
+    radial-gradient(circle at 12% 0%, rgb(121 192 255 / 8%), transparent 36rem),
+    var(--page);
   --hero-gradient: linear-gradient(90deg, #1f242c 0%, #161b22 50%, #1f242c 100%);
   --contact-bg: rgb(48 54 61 / 40%);
   --tag-bg: rgb(48 54 61 / 60%);
-  --project-bg: rgb(56 139 253 / 8%);
+  --project-bg: #161b22;
   --panel-primary-bg:
     linear-gradient(135deg, rgb(56 139 253 / 6%), #161b22 100%),
     var(--panel);
@@ -163,6 +162,6 @@
   --date-text: #cbd5e1; /* Matches --muted for > 9:1 AAA contrast */
   --copy-bg: rgb(240 246 252 / 10%);
   --shadow: 0 25px 50px rgb(0 0 0 / 55%);
-  --button-bg: #1f6feb;
+  --button-bg: #164fae;
   --button-text: #fff;
 }

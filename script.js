@@ -70,7 +70,7 @@ const siteMeta = {
 const translations = {
   ar: {
     about_text:
-      "مصمم تجربة مستخدم ومصور بيانات بخبرة تزيد عن 8 سنوات في تحويل احتياجات المستخدمين والأعمال إلى لوحات معلومات تفاعلية وتجارب رقمية متمحورة حول المستخدم. ماهر في أبحاث المستخدم، وبنية المعلومات، وسرد البيانات، وتصميم الواجهات سهلة الوصول باستخدام Excel وPower BI وTableau وSQL وPython.",
+      "أصمم تجارب رقمية سهلة الوصول، من فهم الاحتياجات وتصميم التفاعل إلى التنفيذ والتحقق من الجودة. تشكّل خبرتي في التعلم الإلكتروني طريقتي في تنظيم المعلومات وتبسيط الأفكار المعقدة ومساعدة الناس على التعلم بثقة. أستخدم الذكاء الاصطناعي لاستكشاف الحلول وتنفيذها مع احتفاظي بمسؤولية القرارات التصميمية ومراجعة الجودة.",
     aria_dark_mode: "الوضع الداكن",
     aria_high_contrast_mode: "وضع التباين العالي",
     aria_switch_to_arabic: "التبديل إلى العربية",
@@ -101,7 +101,7 @@ const translations = {
     footer_cta_title: "لنعمل معًا",
     footer_cta_desc: "أنا دائمًا منفتح لمناقشة المشاريع والفرص الجديدة.",
     footer_send_email: "أرسل لي بريدًا إلكترونيًا",
-    footer_copyright: "© ٢٠٢٤ أحمد مهدي. جميع الحقوق محفوظة.",
+    footer_copyright: "© ٢٠٢٦ أحمد مهدي. جميع الحقوق محفوظة.",
     footer_built_with: "صُنع بشغف ودقة",
     hero_title: "مصمم تجربة المستخدم ومُصوِّر البيانات",
     control_contrast: "التباين العالي",
@@ -145,7 +145,7 @@ const translations = {
       "الاستفادة من أدوات التصميم المدعومة بالذكاء الاصطناعي لتسريع النماذج الأولية وتلخيص أبحاث تجربة المستخدم.",
     job1_company: "أدفانسيز للحلول البرمجية",
     job1_company_desc: "شركة رائدة في حلول تكنولوجيا المعلومات متخصصة في البرمجيات المؤسسية والتحول الرقمي وتكامل الأنظمة في منطقة الشرق الأوسط وشمال أفريقيا.",
-    job1_date: "يناير 2023 - الحالي · 3 سنوات و6 أشهر",
+    job1_date: "يناير 2023 - الحالي",
     job1_date_range: "يناير 2023 – الحالي",
     job1_duration: "3 سنوات و6 أشهر",
     job1_location: "القاهرة، مصر",
@@ -168,14 +168,14 @@ const translations = {
       "تحويل المتطلبات التقنية المعقدة إلى تجارب تعلم إلكترونية B2B سهلة الوصول وبديهية.",
     job2_company: "شنايدر إلكتريك",
     job2_company_desc: "شركة عالمية رائدة في إدارة الطاقة والأتمتة، تقود التحول الرقمي عبر الحلول المؤسسية والصناعية.",
-    job2_date: "يوليو 2018 - يناير 2023 · 4 سنوات و7 أشهر",
+    job2_date: "يوليو 2018 - يناير 2023",
     job2_date_range: "يوليو 2018 – يناير 2023",
     job2_duration: "4 سنوات و7 أشهر",
     job2_location: "القاهرة، مصر",
     job2_type: "دوام كامل",
     job2_title: "مصمم تعليمي",
-    job2_impact1_metric: "+30%",
-    job2_impact1_label: "إكمال الدورات",
+    job2_impact1_metric: "تصميم التعلم",
+    job2_impact1_label: "تجارب تعليمية",
     job2_impact1_desc: "إعادة تصميم منصات التعلم المؤسسية وواجهاتها، مما زاد من التفاعل ومعدلات الإكمال.",
     job2_impact2_metric: "حلول قابلة للتوسع",
     job2_impact2_label: "منصات تعلم عالمية",
@@ -275,9 +275,9 @@ const translations = {
     toast_copied: "تم النسخ",
     hero_bio:
       "أساعد الشركات في تحويل البيانات المعقدة إلى رؤى واضحة وتجارب رقمية متميزة يحب الناس استخدامها.",
-    hero_cta_resume: "تحميل السيرة الذاتية",
+    hero_cta_resume: "طباعة / حفظ السيرة الذاتية",
     hero_availability: "متاح لمشاريع جديدة",
-    contact_email_sub: "بريد محمي",
+    contact_email_sub: "راسلني",
     contact_li_sub: "الملف المهني",
     contact_dr_sub: "معرض الأعمال",
     tooltip_contrast: "تبديل التباين العالي",
@@ -300,7 +300,7 @@ const translations = {
     cs_back_to_projects: "العودة إلى المشاريع",
     cs_home: "الرئيسية",
     cs_projects: "المشاريع",
-    cs_listen: "استمع",
+    cs_listen: "قراءة صوتية",
     cs_pause: "إيقاف مؤقت",
     cs_hide_preview: "إخفاء المعاينة التفاعلية",
     cs_image_preview: "معاينة الصورة",
@@ -319,10 +319,10 @@ const translations = {
     cs_mobile: "الجوال (390px)",
     cs_open_tab: "فتح في نافذة جديدة",
     cs_key_decision: "قرار التصميم الرئيسي",
-    cs_listen_full: "استمع للدراسة",
+    cs_listen_full: "قراءة دراسة الحالة بصوت مسموع",
     cs_open_live: "فتح الموقع الحي",
-    cs_view_prototype: "عرض النموذج الأولي",
-    cs_hover_expand: "مرر للتكبير أو انقر للتوسيع",
+    cs_view_prototype: "معاينة الموقع الحي",
+    cs_hover_expand: "فتح معاينة الصورة",
     cs_a11y_note: "مصمم مع مراعاة إمكانية الوصول، WCAG 2.2، والأداء.",
     cs_sec1_short: "السياق والتحدي",
     cs_sec2_short: "المنهجية والقرارات",
@@ -333,25 +333,25 @@ const translations = {
     cs_haj_badge1: "التجارة عبر الجوال",
     cs_haj_badge2: "تجربة المستخدم للتجارة الإلكترونية",
     cs_haj_sec1_card1_title: "مشكلة المستخدم",
-    cs_haj_sec1_card1_desc: "واجه المتسوقون صعوبة في العثور على المنتجات بسرعة وواجهوا عملية دفع طويلة ومتعددة الخطوات.",
+    cs_haj_sec1_card1_desc: "ركز موجز المشروع على تسهيل اكتشاف المنتجات واختصار رحلة الدفع. وجّهت هذه الاحتياجات التصور، ولا تمثل نتائج دراسة مستخدمين موثقة.",
     cs_haj_sec1_card2_title: "مشكلة الأعمال",
-    cs_haj_sec1_card2_desc: "أثر ارتفاع نسبة التخلي عن سلة التسوق وانخفاض المشتريات المتكررة على الإيرادات وثقة العملاء.",
+    cs_haj_sec1_card2_desc: "حدد موجز المشروع تعقيد الدفع بوصفه مخاطرة تجارية. لم تتوفر بيانات فعلية عن ترك السلة أو تكرار الشراء لهذا التصور.",
     cs_haj_sec1_card3_title: "هدف التصميم",
-    cs_haj_sec1_card3_desc: "إنشاء تجربة تعطي الأولوية للجوال مع بحث أولاً ودفع سريع من خطوتين يعزز الثقة.",
+    cs_haj_sec1_card3_desc: "تصميم رحلة تسوق تبدأ بالجوال، مع تنقل يركز على البحث ودفع أقصر للزوار.",
     cs_haj_sec4_card1_title: "تنقل بحثي أولاً",
-    cs_haj_sec4_card1_desc: "بحث بارز بحجم 44 بكسل وفئات مختارة تساعد المستخدمين في العثور على المنتجات بسهولة.",
+    cs_haj_sec4_card1_desc: "يبرز التنفيذ البحث والفئات المختارة. وتبقى سهولة العثور على المنتجات موضوعاً لاختبار قابلية الاستخدام.",
     cs_haj_sec4_card2_title: "دفع مبسط",
-    cs_haj_sec4_card2_desc: "دفع سريع من خطوتين يقلل الاحتكاك ويزيد معدل التحويل.",
+    cs_haj_sec4_card2_desc: "يختصر تصور الدفع مسار الشراء. ولم يُقَس أثره على معدل التحويل بعد.",
     cs_haj_sec4_card3_title: "تنفيذ متجاوب",
-    cs_haj_sec4_card3_desc: "بُني بأولوية الجوال مع مكونات متاحة ومتوافقة مع WCAG 2.2.",
+    cs_haj_sec4_card3_desc: "تنفيذ يبدأ بالجوال، مع تفاعل بلوحة المفاتيح ومؤشرات تركيز واضحة وتخطيطات متجاوبة تسترشد بمعايير WCAG 2.2.",
     cs_prev_project: "المشروع السابق",
     cs_next_project: "المشروع التالي",
-    cs_sec1_title: "01 السياق والتحدي",
-    cs_sec2_title: "02 المنهجية والقرارات الرئيسية",
-    cs_sec3_title: "03 الأدوات والتقنيات",
-    cs_sec4_title: "04 النتائج والأثر",
-    cs_sec5_title: "05 الأدلة والتحقق المستقبلي",
-    cs_sec6_title: "06 الملكية وما تعلمته",
+    cs_sec1_title: "السياق والتحدي",
+    cs_sec2_title: "المنهجية والقرارات الرئيسية",
+    cs_sec3_title: "الأدوات والتقنيات",
+    cs_sec4_title: "النتائج والأثر",
+    cs_sec5_title: "الأدلة والتحقق المستقبلي",
+    cs_sec6_title: "الملكية وما تعلمته",
     cs_provenance_ownership: "الملكية",
     cs_provenance_ownership_desc:
       "صمم أحمد مهدي تجربة المستخدم، وبنية المعلومات، والتوجه البصري، والمحتوى، واتخذ القرارات النهائية للمشروع.",
@@ -485,7 +485,7 @@ const translations = {
   },
   en: {
     about_text:
-      "UX Designer & Data Visualizer with 8+ years of experience turning user and business needs into decision-ready dashboards and user-centered digital experiences. Skilled in user research, information architecture, data storytelling, visualization, and accessible interface design with Excel, Power BI, Tableau, SQL, and Python.",
+      "I design accessible digital experiences from discovery and interaction design through implementation and validation. My background in eLearning shapes how I organize information, explain complex ideas, and help people build confidence. I use AI to explore and deliver solutions while keeping design judgment and quality review in my hands.",
     aria_dark_mode: "Dark mode",
     aria_high_contrast_mode: "High contrast mode",
     aria_switch_to_arabic: "Switch to Arabic",
@@ -524,7 +524,7 @@ const translations = {
     footer_cta_title: "Let's work together",
     footer_cta_desc: "I'm always open to discussing new projects and opportunities.",
     footer_send_email: "Send me an email",
-    footer_copyright: "© 2024 Ahmed Mahdy. All rights reserved.",
+    footer_copyright: "© 2026 Ahmed Mahdy. All rights reserved.",
     footer_built_with: "Built with passion and precision",
     hero_title: "UX Designer & Data Visualizer",
     contact_dribbble: "Dribbble",
@@ -560,7 +560,7 @@ const translations = {
       "Leveraging AI design tools to accelerate prototyping workflows and synthesize UX research.",
     job1_company: "Advansys IS",
     job1_company_desc: "Leading IT solutions provider specializing in enterprise software, digital transformation, and system integration across the MENA region.",
-    job1_date: "Jan 2023 - Present · 3 yrs 6 mos",
+    job1_date: "Jan 2023 - Present",
     job1_date_range: "Jan 2023 – Present",
     job1_duration: "3 yrs 6 mos",
     job1_location: "Cairo, Egypt",
@@ -583,14 +583,14 @@ const translations = {
       "Translated complex technical requirements into accessible, intuitive B2B e-learning experiences.",
     job2_company: "Schneider Electric",
     job2_company_desc: "Global leader in energy management and automation, driving digital transformation across enterprise and industrial solutions.",
-    job2_date: "Jul 2018 - Jan 2023 · 4 yrs 7 mos",
+    job2_date: "Jul 2018 - Jan 2023",
     job2_date_range: "Jul 2018 – Jan 2023",
     job2_duration: "4 yrs 7 mos",
     job2_location: "Cairo, Egypt",
     job2_type: "Full-time",
     job2_title: "Instructional Designer",
-    job2_impact1_metric: "+30%",
-    job2_impact1_label: "Course Completion",
+    job2_impact1_metric: "Learning Design",
+    job2_impact1_label: "Course experiences",
     job2_impact1_desc: "Redesigned corporate learning platforms and interfaces, increasing engagement and completion rates.",
     job2_impact2_metric: "Scalable Solutions",
     job2_impact2_label: "Global Learning Platforms",
@@ -695,9 +695,9 @@ const translations = {
     toast_copy_project: "Project link copied to clipboard",
     hero_bio:
       "I help businesses turn complex data into clear insights and beautiful experiences that people love to use.",
-    hero_cta_resume: "Download Résumé",
+    hero_cta_resume: "Print / Save Résumé",
     hero_availability: "Available for new projects",
-    contact_email_sub: "Protected email",
+    contact_email_sub: "Email me",
     contact_li_sub: "Professional profile",
     contact_dr_sub: "Selected design work",
     tooltip_contrast: "Toggle high contrast",
@@ -720,7 +720,7 @@ const translations = {
     cs_back_to_projects: "Back to Projects",
     cs_home: "Home",
     cs_projects: "Projects",
-    cs_listen: "Listen",
+    cs_listen: "Read aloud",
     cs_pause: "Pause",
     cs_hide_preview: "Hide Interactive Preview",
     cs_image_preview: "Image preview",
@@ -739,10 +739,10 @@ const translations = {
     cs_mobile: "Mobile (390px)",
     cs_open_tab: "Open in New Tab",
     cs_key_decision: "Key Design Decision",
-    cs_listen_full: "Listen to case study",
+    cs_listen_full: "Read case study aloud",
     cs_open_live: "Open Live Website",
-    cs_view_prototype: "View UX Prototype",
-    cs_hover_expand: "Hover or tap to expand",
+    cs_view_prototype: "Preview live site",
+    cs_hover_expand: "Open image preview",
     cs_a11y_note: "Designed with accessibility, WCAG 2.2, and performance in mind.",
     cs_sec1_short: "Context & Challenge",
     cs_sec2_short: "Approach & Decisions",
@@ -753,25 +753,25 @@ const translations = {
     cs_haj_badge1: "Mobile Commerce",
     cs_haj_badge2: "E-Commerce UX",
     cs_haj_sec1_card1_title: "User problem",
-    cs_haj_sec1_card1_desc: "Shoppers struggled to find products quickly and faced a long, multi-step checkout that created friction and dropped conversions.",
+    cs_haj_sec1_card1_desc: "The brief called for easier product discovery and a shorter checkout journey. These needs informed the concept; they are not findings from a reported user study.",
     cs_haj_sec1_card2_title: "Business problem",
-    cs_haj_sec1_card2_desc: "High cart abandonment and low repeat purchases impacted revenue and customer trust in the brand experience.",
+    cs_haj_sec1_card2_desc: "The brief identified checkout friction as a business risk. Production abandonment and repeat-purchase data were not available for this concept.",
     cs_haj_sec1_card3_title: "Design goal",
-    cs_haj_sec1_card3_desc: "Create a mobile-first experience with search-first navigation and an express 2-step checkout that builds trust and boosts conversions.",
+    cs_haj_sec1_card3_desc: "Design a mobile-first shopping journey with search-first navigation and a shorter guest checkout.",
     cs_haj_sec4_card1_title: "Search-first navigation",
-    cs_haj_sec4_card1_desc: "Prominent 44px search and curated categories help users find products faster and with less effort.",
+    cs_haj_sec4_card1_desc: "The implementation gives search and curated categories prominent positions. Findability remains a question for usability testing.",
     cs_haj_sec4_card2_title: "Streamlined checkout",
-    cs_haj_sec4_card2_desc: "Express 2-step checkout reduces friction, shortens the purchase path, and increases conversion.",
+    cs_haj_sec4_card2_desc: "The proposed checkout shortens the purchase path. Its effect on conversion has not yet been measured.",
     cs_haj_sec4_card3_title: "Responsive implementation",
-    cs_haj_sec4_card3_desc: "Built mobile-first with accessible components and WCAG 2.2 compliance for a consistent experience across devices.",
+    cs_haj_sec4_card3_desc: "Built mobile-first with keyboard interaction, visible focus states, and responsive layouts informed by WCAG 2.2.",
     cs_prev_project: "Previous Project",
     cs_next_project: "Next Project",
-    cs_sec1_title: "01 Context & Challenge",
-    cs_sec2_title: "02 Approach & Key Decisions",
-    cs_sec3_title: "03 Tools & Technologies",
-    cs_sec4_title: "04 Outcome & Impact",
-    cs_sec5_title: "05 Evidence & Next Validation",
-    cs_sec6_title: "06 Ownership & Learning",
+    cs_sec1_title: "Context & Challenge",
+    cs_sec2_title: "Approach & Key Decisions",
+    cs_sec3_title: "Tools & Technologies",
+    cs_sec4_title: "Outcome & Impact",
+    cs_sec5_title: "Evidence & Next Validation",
+    cs_sec6_title: "Ownership & Learning",
     cs_provenance_ownership: "Ownership",
     cs_provenance_ownership_desc:
       "Ahmed Mahdy owned the UX design, information architecture, visual direction, content, and final project decisions.",
@@ -1106,7 +1106,7 @@ function ensureExternalLinkNotes(lang) {
       link.appendChild(note);
     }
 
-    if (!link.querySelector(".external-icon")) {
+    if (!link.closest(".footer-social-icons, .contact-list") && !link.querySelector('use[href="#icon-external"], use[href="#icon-arrow-up-right"]')) {
       const icon = document.createElementNS(
         "http://www.w3.org/2000/svg",
         "svg",
@@ -1144,6 +1144,12 @@ function updateExternalLinks(lang) {
 
   document.querySelectorAll('a[target="_blank"]').forEach((link) => {
     let label = getLinkText(link);
+    if (!label) {
+      const equivalent = [...document.querySelectorAll('a[href]')].find(
+        (candidate) => candidate !== link && candidate.href === link.href && getLinkText(candidate),
+      );
+      if (equivalent) label = getLinkText(equivalent);
+    }
     if (!label) {
       const article = link.closest("article");
       const projectTitle = article?.querySelector("h3")?.textContent?.trim();
@@ -1213,7 +1219,7 @@ function updateLanguageButton(lang) {
   document.querySelectorAll(".lang-toggle").forEach((button) => {
     button.setAttribute("aria-label", nextLanguageLabel);
     button.setAttribute("data-tooltip", getTranslation(lang, "tooltip_lang"));
-    const label = button.querySelector(".control-label");
+    const label = button.querySelector(".control-state");
     if (label) label.setAttribute("lang", lang === "ar" ? "en" : "ar");
   });
 }
@@ -1235,6 +1241,8 @@ function updateThemeButton(lang) {
   );
   controls.themeToggle?.setAttribute("aria-pressed", String(isDark));
   controls.themeToggle?.setAttribute("data-tooltip", tooltip);
+  const state = controls.themeToggle?.querySelector(".control-state");
+  if (state) state.textContent = lang === "ar" ? (isDark ? "تشغيل" : "إيقاف") : (isDark ? "On" : "Off");
   setUseIcon(controls.themeToggle, isDark ? "#icon-sun" : "#icon-moon");
 }
 
@@ -1256,6 +1264,8 @@ function updateContrastButton(lang) {
     getTranslation(lang, "tooltip_contrast"),
   );
   controls.contrastToggle?.classList.toggle("active", isHigh);
+  const state = controls.contrastToggle?.querySelector(".control-state");
+  if (state) state.textContent = lang === "ar" ? (isHigh ? "تشغيل" : "إيقاف") : (isHigh ? "On" : "Off");
 }
 
 /**
@@ -1279,6 +1289,21 @@ function refreshUi(lang) {
   updateLanguageButton(lang);
   updateThemeButton(lang);
   updateContrastButton(lang);
+  document.querySelectorAll("[data-print-resume]").forEach((button) => {
+    const label = lang === "ar" ? "طباعة أو حفظ السيرة الذاتية" : "Print or save résumé";
+    button.setAttribute("aria-label", label);
+    button.setAttribute("data-tooltip", label);
+  });
+  document.querySelectorAll(".audio-play-btn:not(.is-playing)").forEach((button) => {
+    const section = button.closest(".panel")?.querySelector("h2")?.textContent.trim();
+    const label = translations[lang][button.classList.contains("case-listen-btn") ? "cs_listen_full" : "cs_listen"];
+    button.setAttribute("aria-label", section ? `${label}: ${section}` : label);
+    button.setAttribute("title", label);
+  });
+  document.querySelectorAll('.skills-panel [role="list"]').forEach((list) => {
+    const heading = list.closest(".skill-group")?.querySelector("h3")?.textContent;
+    if (heading) list.setAttribute("aria-label", heading);
+  });
 }
 
 /**

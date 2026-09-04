@@ -30,6 +30,26 @@
   --hero-gradient: #000;
   --hero-title: #fff;
   --hero-subtitle: #86efac;
+  --hero-surface: #000;
+  --hero-role-color: #0ff;
+  --hero-bio-color: #fff;
+  --hero-border: #fff;
+  --hero-contact-card-bg: #000;
+  --hero-contact-card-border: #fff;
+  --hero-tag-bg: #000;
+  --hero-tag-border: #fff;
+  --hero-tag-text: #fff;
+  --hero-action-btn-bg: #000;
+  --hero-action-btn-border: #fff;
+  --hero-rail-bg: #000;
+  --hero-rail-border: #fff;
+  --hero-rail-color: #fff;
+  --hero-btn-ghost-text: #0ff;
+  --hero-btn-primary-bg: #0ff;
+  --hero-btn-primary-text: #000;
+  --text-secondary: #fff;
+  --link-aaa: #0ff;
+  --inner-card: #000;
   --project-bg: #000;
   --cert-card: #000;
   --panel-primary-bg: #000;
@@ -59,6 +79,7 @@
 
 [data-contrast="high"] .panel {
   border: 2px solid #fff;
+  box-shadow: none;
 }
 
 [data-contrast="high"] .compact-list li,
@@ -120,7 +141,7 @@
   background: #000 !important;
   color: #fff !important;
   border-radius: 6px !important;
-  opacity: 0.25 !important; /* Softer default visibility to prevent visual clutter */
+  opacity: 1 !important;
 }
 
 /* Keep copy buttons interactive on hover/focus */

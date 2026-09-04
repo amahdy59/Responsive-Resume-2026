@@ -313,7 +313,7 @@
     break-inside: avoid !important;
   }
 
-  .featured h4 {
+  .featured h3 {
     font-size: 10pt !important;
     font-weight: 600 !important;
     color: #1a202c !important;
@@ -321,7 +321,7 @@
     margin-bottom: 2px !important;
   }
 
-  .featured h4 a {
+  .featured h3 a {
     text-decoration: underline !important;
     color: #1a202c !important;
     font-weight: 600 !important;
@@ -371,7 +371,7 @@
     margin-bottom: 4px !important;
   }
 
-  .li-role-details h4 {
+  .li-role-details h3 {
     font-size: 10.5pt !important;
     font-weight: 600 !important;
     color: #1a202c !important;
