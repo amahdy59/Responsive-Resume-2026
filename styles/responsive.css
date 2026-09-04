@@ -265,10 +265,31 @@
   }
 }
 
-@media (min-width: 561px) {
-  .case-showcase-wrapper {
-    margin: -40px -40px 36px;
-    border-radius: 17px 17px 0 0;
+/* ── Case Study Tablet ── */
+@media screen and (min-width: 561px) and (max-width: 960px) {
+  .case-study-hero {
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .case-meta-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .case-meta-item:nth-child(2) {
+    border-radius: 0 12px 0 0;
+  }
+
+  .case-meta-item:nth-child(3) {
+    border-radius: 0 0 0 12px;
+  }
+
+  [dir="rtl"] .case-meta-item:nth-child(2) {
+    border-radius: 12px 0 0;
+  }
+
+  [dir="rtl"] .case-meta-item:nth-child(3) {
+    border-radius: 0 0 12px;
   }
 }
 
@@ -283,6 +304,7 @@
   }
 }
 
+/* ── Case Study Mobile ── */
 @media (max-width: 560px) {
   .case-study-shell {
     width: min(100% - 16px, 980px);
@@ -296,26 +318,73 @@
     display: none;
   }
 
+  .case-listen-btn .audio-btn-text {
+    display: none;
+  }
+
   .case-study-card {
     margin-top: 8px;
     padding: 18px;
   }
 
-  .case-hero-meta-and-cta {
-    flex-direction: column;
-    align-items: stretch;
+  .case-study-hero {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .case-hero-image {
+    order: 2;
+  }
+
+  .case-meta-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .case-meta-item {
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .case-meta-item:first-child {
+    border-radius: 12px 12px 0 0;
+  }
+
+  .case-meta-item:last-child {
+    border-radius: 0 0 12px 12px;
+  }
+
+  [dir="rtl"] .case-meta-item:first-child {
+    border-radius: 12px 12px 0 0;
+  }
+
+  [dir="rtl"] .case-meta-item:last-child {
+    border-radius: 0 0 12px 12px;
+  }
+
+  .case-meta-label {
+    flex: 1;
+  }
+
+  .case-section-nav {
+    display: none;
   }
 
   .case-cta-wrapper {
-    width: 100%;
+    flex-direction: column;
   }
 
-  .case-live-cta {
+  .case-live-cta,
+  .case-preview-toggle {
     width: 100%;
     justify-content: center;
   }
 
   .case-study-pagination > * {
     flex: 1 1 100%;
+  }
+
+  .provenance-grid {
+    grid-template-columns: 1fr;
   }
 }

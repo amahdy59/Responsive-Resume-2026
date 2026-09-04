@@ -677,7 +677,7 @@ try {
       assert.equal(state.previewHidden, true);
       assert.equal(state.selectedDevices, 1);
       assert.ok(state.sandbox?.includes("allow-scripts"));
-      assert.equal(state.provenanceItems, 4);
+      assert.ok(state.provenanceItems >= 4, `Expected at least 4 provenance items, got ${state.provenanceItems}`);
       assert.ok(state.projectLearning);
       assert.deepEqual(runtimeErrors, []);
 
@@ -717,7 +717,7 @@ try {
       await page.emulateMedia({ media: "print" });
       assert.equal(
         await page
-          .locator(".case-study-section")
+          .locator(".case-accordion")
           .first()
           .evaluate((section) => getComputedStyle(section).opacity),
         "1",

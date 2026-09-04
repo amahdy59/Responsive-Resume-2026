@@ -90,6 +90,12 @@
       <symbol id="icon-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></symbol>
       <symbol id="icon-volume" viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
       <symbol id="icon-pause" viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16" fill="currentColor"/><rect x="14" y="4" width="4" height="16" fill="currentColor"/></symbol>
+      <symbol id="icon-chevron-down" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="icon-check-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9 12l2 2 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="icon-user" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="7" r="4" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+      <symbol id="icon-calendar" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 2v4M8 2v4M3 10h18" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+      <symbol id="icon-monitor" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 21h8M12 17v4" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+      <symbol id="icon-signal" viewBox="0 0 24 24"><path d="M2 20h.01M7 20v-4M12 20v-8M17 20V8M22 20V4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
     </svg>
     <div class="ambient-particles" aria-hidden="true"></div>
     <main class="resume-shell case-study-shell" id="case-study-content">
@@ -99,194 +105,200 @@
             <svg aria-hidden="true"><use href="#icon-arrow-left"></use></svg>
             <span data-translate="cs_back_to_projects">Back to Projects</span>
           </a>
+          <nav class="case-study-breadcrumbs" aria-label="Breadcrumb trail">
+            <ol class="breadcrumbs">
+              <li><a href="index.html" data-translate="cs_home">Home</a></li>
+              <li><a href="index.html#projects" data-translate="cs_projects">Projects</a></li>
+              <li aria-current="page" data-translate="cs_azkar_title">Azkar Application</li>
+            </ol>
+          </nav>
           <div class="case-study-controls">
+            <button class="audio-play-btn case-listen-btn" type="button" data-audio-id="azkar-app-intro" aria-label="Listen to case study" title="Listen to narration">
+              <svg class="audio-icon" aria-hidden="true"><use href="#icon-volume"></use></svg>
+              <span class="audio-btn-text" data-translate="cs_listen_full">Listen to case study</span>
+            </button>
             <button class="lang-toggle" type="button" data-tooltip="Switch Language" aria-label="Switch to Arabic"><span aria-hidden="true"><svg><use href="#icon-globe"></use></svg></span></button>
             <button class="theme-toggle" type="button" data-tooltip="Switch Theme" aria-label="Dark mode"><span aria-hidden="true"><svg><use href="#icon-moon"></use></svg></span></button>
             <button class="contrast-toggle" type="button" data-tooltip="Toggle Contrast" aria-label="High contrast mode"><span aria-hidden="true"><svg><use href="#icon-contrast"></use></svg></span></button>
           </div>
         </nav>
-        <nav class="case-study-breadcrumbs" aria-label="Breadcrumb trail">
-          <ol class="breadcrumbs">
-            <li><a href="index.html" data-translate="cs_home">Home</a></li>
-            <li><a href="index.html#projects" data-translate="cs_projects">Projects</a></li>
-            <li aria-current="page" data-translate="cs_azkar_title">Azkar Application</li>
-          </ol>
-        </nav>
       </header>
 
       <article class="case-study-card panel reveal active">
-        <!-- 1. Hero Showcase Mockup at top of card -->
-        <figure class="case-showcase-wrapper">
-          <div class="mockup-header" aria-hidden="true">
-            <div class="mockup-dots">
-              <span class="mockup-dot red"></span>
-              <span class="mockup-dot yellow"></span>
-              <span class="mockup-dot green"></span>
-            </div>
-            <div class="mockup-url">amahdy59.github.io/Azkarapp</div>
-            <div class="mockup-badge"><span class="live-dot"></span> Live App</div>
-          </div>
-          <img src="assets/case-azkar-app-800.webp" srcset="assets/case-azkar-app-480.webp 480w, assets/case-azkar-app-800.webp 800w, assets/case-azkar-app-1200.webp 1200w" sizes="(max-width: 960px) calc(100vw - 32px), 920px" width="1440" height="890" alt="Azkar App Daily Fortress user interface showcase" class="case-study-image" decoding="async" fetchpriority="high" />
-          <figcaption data-translate="cs_azkar_sub">Accessible, offline-capable digital remembrance suite featuring dynamic daily Dhikr tracking and interactive Tasbeeh counter.</figcaption>
-        </figure>
-
-        <!-- 2. Hero Headline, Meta & Live Action Button -->
         <header class="case-study-hero">
-          <div class="case-hero-top-row">
-            <span class="case-category-badge" data-translate="cs_azkar_badge">Mobile UX • Islamic Productivity</span>
-            <button class="audio-play-btn" type="button" data-audio-id="azkar-app-intro" aria-label="Listen to Azkar App overview" title="Listen to narration">
-              <svg class="audio-icon" aria-hidden="true"><use href="#icon-volume"></use></svg>
-              <span class="audio-btn-text" data-translate="cs_listen">Listen</span>
-            </button>
-          </div>
-          <h1 data-translate="cs_azkar_title">Azkar Application</h1>
-          <p class="case-study-subtitle" data-translate="cs_azkar_sub">Accessible, offline-capable digital remembrance suite featuring dynamic daily Dhikr tracking and interactive Tasbeeh counter.</p>
-
-          <div class="case-hero-meta-and-cta">
-            <div class="case-meta-chips">
-              <div class="case-chip">
-                <span class="chip-label" data-translate="cs_role">Role</span>
-                <strong class="chip-val" data-translate="cs_azkar_role">UX Designer & Frontend Developer</strong>
-              </div>
-              <div class="case-chip">
-                <span class="chip-label" data-translate="cs_timeline">Timeline</span>
-                <strong class="chip-val" data-translate="cs_azkar_timeline">2 Months</strong>
-              </div>
-              <div class="case-chip">
-                <span class="chip-label" data-translate="cs_platform">Platform</span>
-                <strong class="chip-val" data-translate="cs_azkar_platform">Progressive Web App (PWA)</strong>
-              </div>
-              <div class="case-chip">
-                <span class="chip-label" data-translate="cs_status">Status</span>
-                <strong class="chip-val status-live" data-translate="cs_azkar_status">Live Production</strong>
-              </div>
+          <div class="case-hero-text">
+            <div class="case-category-badges">
+              <span class="case-category-badge" data-translate="cs_azkar_badge1">Mobile UX</span>
+              <span class="case-category-badge" data-translate="cs_azkar_badge2">Islamic Productivity</span>
             </div>
+            <h1 data-translate="cs_azkar_title">Azkar Application</h1>
+            <p class="case-study-subtitle" data-translate="cs_azkar_sub">Accessible, offline-capable digital remembrance suite featuring dynamic daily Dhikr tracking and interactive Tasbeeh counter.</p>
             <div class="case-cta-wrapper">
-              <button class="btn btn-secondary case-preview-toggle" type="button" data-toggle-embed aria-expanded="false" aria-controls="live-embed-viewer">
-                <span data-translate="cs_interactive_preview">Interactive Preview</span>
-              </button>
               <a href="https://amahdy59.github.io/Azkarapp/#/home" class="btn btn-primary case-live-cta" target="_blank" rel="noopener noreferrer">
                 <span data-translate="cs_visit_live">Visit Live Project</span>
                 <svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg>
               </a>
+              <button class="btn btn-secondary case-preview-toggle" type="button" data-toggle-embed aria-expanded="false" aria-controls="live-embed-viewer">
+                <span data-translate="cs_interactive_preview">Interactive Preview</span>
+                <svg class="btn-info-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+              </button>
             </div>
           </div>
-
-          <div class="live-embed-wrapper" id="live-embed-viewer" hidden>
-            <div class="live-embed-bar">
-              <div class="live-embed-controls">
-                <button class="device-btn is-active" type="button" data-set-device="desktop" aria-pressed="true" data-translate="cs_desktop">Desktop</button>
-                <button class="device-btn" type="button" data-set-device="mobile" aria-pressed="false" data-translate="cs_mobile">Mobile (390px)</button>
-              </div>
-              <a href="https://amahdy59.github.io/Azkarapp/#/home" class="device-btn" target="_blank" rel="noopener noreferrer">
-                <span data-translate="cs_open_tab">Open in New Tab</span>
-                <svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg>
-              </a>
-            </div>
-            <div class="live-embed-frame-container" data-device="desktop">
-              <iframe class="live-embed-iframe" src="about:blank" data-src="https://amahdy59.github.io/Azkarapp/#/home" title="Live interactive preview of Azkar Application" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
-            </div>
-          </div>
+          <figure class="case-hero-image">
+            <img src="assets/case-azkar-app-800.webp" srcset="assets/case-azkar-app-480.webp 480w, assets/case-azkar-app-800.webp 800w, assets/case-azkar-app-1200.webp 1200w" sizes="(max-width: 560px) calc(100vw - 32px), 460px" width="1440" height="890" alt="Azkar App Daily Fortress user interface showcase" class="case-study-image" decoding="async" fetchpriority="high" />
+            <figcaption class="case-image-hint" data-translate="cs_hover_expand">Hover or tap to expand</figcaption>
+          </figure>
         </header>
 
-        <!-- 3. Numbered Content Story Sections with Audio -->
-        <div class="case-study-content">
-          <section class="case-study-section" id="section-01">
-            <div class="section-title-row">
-              <h2><span class="section-num">01</span> <span data-translate="cs_sec1_title">01 Context & Challenge</span></h2>
-              <button class="audio-play-btn" type="button" data-audio-id="azkar-app-01" aria-label="Listen to Context & Spiritual Habit Loop" title="Listen to narration">
-                <svg class="audio-icon" aria-hidden="true"><use href="#icon-volume"></use></svg>
-                <span class="audio-btn-text" data-translate="cs_listen">Listen</span>
-              </button>
-            </div>
-            <p data-translate="cs_azkar_sec1_desc">Traditional remembrance apps often suffer from cluttered typography, intrusive ads, lack of offline reliability, and poor contrast under varying lighting conditions.</p>
-          </section>
-
-          <section class="case-study-section" id="section-02">
-            <div class="section-title-row">
-              <h2><span class="section-num">02</span> <span data-translate="cs_sec2_title">02 Approach & Key Decisions</span></h2>
-              <button class="audio-play-btn" type="button" data-audio-id="azkar-app-02" aria-label="Listen to Information Architecture & Daily Wird Flow" title="Listen to narration">
-                <svg class="audio-icon" aria-hidden="true"><use href="#icon-volume"></use></svg>
-                <span class="audio-btn-text" data-translate="cs_listen">Listen</span>
-              </button>
-            </div>
-            <p data-translate="cs_azkar_sec2_desc">Designed an uncluttered reading experience with large Arabic typography, tactile counter feedback, dark and high contrast modes, and zero network dependency.</p>
-            <div class="case-callout">
-              <strong data-translate="cs_key_decision">Key Design Decision</strong>
-              <p data-translate="cs_azkar_sec2_callout">Crafted a zero-distraction focus mode with persistent progress counters and instant Arabic/English recitation references.</p>
-            </div>
-          </section>
-
-          <section class="case-study-section" id="section-03">
-            <div class="section-title-row">
-              <h2><span class="section-num">03</span> <span data-translate="cs_sec3_title">03 Tools & Technologies</span></h2>
-              <button class="audio-play-btn" type="button" data-audio-id="azkar-app-03" aria-label="Listen to Tools & Technologies" title="Listen to narration">
-                <svg class="audio-icon" aria-hidden="true"><use href="#icon-volume"></use></svg>
-                <span class="audio-btn-text" data-translate="cs_listen">Listen</span>
-              </button>
-            </div>
-            <div class="pills">
-              <span class="skill-btn">Figma</span>
-              <span class="skill-btn">Islamic UX Design</span>
-              <span class="skill-btn">Bilingual EN/AR RTL</span>
-              <span class="skill-btn">Midnight Dark Mode</span>
-              <span class="skill-btn">PWA & Offline First</span>
-              <span class="skill-btn">WCAG 2.2 informed</span>
-            </div>
-          </section>
-
-          <section class="case-study-section" id="section-04">
-            <div class="section-title-row">
-              <h2><span class="section-num">04</span> <span data-translate="cs_sec4_title">04 Outcome & Impact</span></h2>
-              <button class="audio-play-btn" type="button" data-audio-id="azkar-app-04" aria-label="Listen to Accessible Design & Midnight Theme" title="Listen to narration">
-                <svg class="audio-icon" aria-hidden="true"><use href="#icon-volume"></use></svg>
-                <span class="audio-btn-text" data-translate="cs_listen">Listen</span>
-              </button>
-            </div>
-            <p data-translate="cs_azkar_sec4_desc">Delivered an instant-loading, battery-friendly application that provides spiritual peace of mind across all device formats.</p>
-          </section>
-
-          <section class="case-study-section" id="section-05">
-            <div class="section-title-row">
-              <h2><span class="section-num">05</span> <span data-translate="cs_sec5_title">05 Evidence & Next Validation</span></h2>
-              <button class="audio-play-btn" type="button" data-audio-id="azkar-app-05" aria-label="Listen to Outcome & Community Engagement" title="Listen to narration">
-                <svg class="audio-icon" aria-hidden="true"><use href="#icon-volume"></use></svg>
-                <span class="audio-btn-text" data-translate="cs_listen">Listen</span>
-              </button>
-            </div>
-            <p data-translate="cs_azkar_sec5_desc">Freely available live application. Future validation should measure remembrance-session completion and daily return behavior with privacy-respecting analytics.</p>
-          </section>
-
-          <section class="case-study-section" id="section-06">
-            <div class="section-title-row">
-              <h2><span class="section-num">06</span> <span data-translate="cs_sec6_title">06 Project Provenance & Learnings</span></h2>
-              <button class="audio-play-btn" type="button" data-audio-id="azkar-app-06" aria-label="Listen to Project Provenance & Learnings" title="Listen to narration">
-                <svg class="audio-icon" aria-hidden="true"><use href="#icon-volume"></use></svg>
-                <span class="audio-btn-text" data-translate="cs_listen">Listen</span>
-              </button>
-            </div>
-            <div class="provenance-grid">
-              <div class="provenance-card">
-                <strong data-translate="cs_provenance_ownership">Ownership</strong>
-                <p data-translate="cs_provenance_ownership_desc">Ahmed Mahdy owned the UX design, information architecture, visual direction, content, and final project decisions.</p>
-              </div>
-              <div class="provenance-card">
-                <strong data-translate="cs_provenance_background">Professional Perspective</strong>
-                <p data-translate="cs_provenance_background_desc">The work draws on his UX practice and background in eLearning and video authoring to simplify information, sequence interactions, and build a clear narrative.</p>
-              </div>
-              <div class="provenance-card">
-                <strong data-translate="cs_provenance_ai">AI-Assisted Implementation</strong>
-                <p data-translate="cs_provenance_ai_desc">Ahmed translated the Figma designs into a live project with assistance from Antigravity, Codex, and Claude agents, then reviewed, refined, and tested the implementation.</p>
-              </div>
-              <div class="provenance-card">
-                <strong data-translate="cs_provenance_evidence">Special Learning</strong>
-                <p data-translate="cs_azkar_learning">Special learning: protecting Arabic-first, RTL, and reading-quality requirements while using agents on a content-sensitive experience.</p>
-              </div>
-            </div>
-          </section>
+        <div class="case-meta-grid">
+          <div class="case-meta-item">
+            <svg class="case-meta-icon" aria-hidden="true"><use href="#icon-user"></use></svg>
+            <span class="case-meta-label" data-translate="cs_role">Role</span>
+            <strong class="case-meta-val" data-translate="cs_azkar_role">UX Designer & Frontend Developer</strong>
+          </div>
+          <div class="case-meta-item">
+            <svg class="case-meta-icon" aria-hidden="true"><use href="#icon-calendar"></use></svg>
+            <span class="case-meta-label" data-translate="cs_timeline">Timeline</span>
+            <strong class="case-meta-val" data-translate="cs_azkar_timeline">2 Months</strong>
+          </div>
+          <div class="case-meta-item">
+            <svg class="case-meta-icon" aria-hidden="true"><use href="#icon-monitor"></use></svg>
+            <span class="case-meta-label" data-translate="cs_platform">Platform</span>
+            <strong class="case-meta-val" data-translate="cs_azkar_platform">Progressive Web App (PWA)</strong>
+          </div>
+          <div class="case-meta-item">
+            <svg class="case-meta-icon" aria-hidden="true"><use href="#icon-signal"></use></svg>
+            <span class="case-meta-label" data-translate="cs_status">Status</span>
+            <strong class="case-meta-val status-live" data-translate="cs_azkar_status">Live Production</strong>
+          </div>
         </div>
 
-        <!-- 4. Directional Bottom Pagination -->
+        <div class="live-embed-wrapper" id="live-embed-viewer" hidden>
+          <div class="live-embed-bar">
+            <div class="live-embed-controls">
+              <button class="device-btn is-active" type="button" data-set-device="desktop" aria-pressed="true" data-translate="cs_desktop">Desktop</button>
+              <button class="device-btn" type="button" data-set-device="mobile" aria-pressed="false" data-translate="cs_mobile">Mobile (390px)</button>
+            </div>
+            <a href="https://amahdy59.github.io/Azkarapp/#/home" class="device-btn" target="_blank" rel="noopener noreferrer">
+              <span data-translate="cs_open_tab">Open in New Tab</span>
+              <svg class="external-icon" aria-hidden="true"><use href="#icon-external"></use></svg>
+            </a>
+          </div>
+          <div class="live-embed-frame-container" data-device="desktop">
+            <iframe class="live-embed-iframe" src="about:blank" data-src="https://amahdy59.github.io/Azkarapp/#/home" title="Live interactive preview of Azkar Application" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
+          </div>
+        </div>
+
+        <nav class="case-section-nav" aria-label="Case study sections">
+          <a href="#section-01" class="case-section-link is-active"><span class="case-section-link-num">01</span> <span data-translate="cs_sec1_short">Context & Challenge</span></a>
+          <a href="#section-02" class="case-section-link"><span class="case-section-link-num">02</span> <span data-translate="cs_sec2_short">Approach & Decisions</span></a>
+          <a href="#section-03" class="case-section-link"><span class="case-section-link-num">03</span> <span data-translate="cs_sec3_short">Tools & Tech</span></a>
+          <a href="#section-04" class="case-section-link"><span class="case-section-link-num">04</span> <span data-translate="cs_sec4_short">Outcome & Impact</span></a>
+          <a href="#section-05" class="case-section-link"><span class="case-section-link-num">05</span> <span data-translate="cs_sec5_short">Evidence & Validation</span></a>
+          <a href="#section-06" class="case-section-link"><span class="case-section-link-num">06</span> <span data-translate="cs_sec6_short">Provenance & Learnings</span></a>
+        </nav>
+
+        <div class="case-study-content">
+          <details class="case-accordion" id="section-01">
+            <summary>
+              <span class="section-num">01</span>
+              <span class="accordion-title" data-translate="cs_sec1_title">Context & Challenge</span>
+              <svg class="accordion-chevron" aria-hidden="true"><use href="#icon-chevron-down"></use></svg>
+            </summary>
+            <div class="accordion-body">
+              <p data-translate="cs_azkar_sec1_desc">Traditional remembrance apps often suffer from cluttered typography, intrusive ads, lack of offline reliability, and poor contrast under varying lighting conditions.</p>
+            </div>
+          </details>
+
+          <details class="case-accordion" id="section-02">
+            <summary>
+              <span class="section-num">02</span>
+              <span class="accordion-title" data-translate="cs_sec2_title">Approach & Key Decisions</span>
+              <svg class="accordion-chevron" aria-hidden="true"><use href="#icon-chevron-down"></use></svg>
+            </summary>
+            <div class="accordion-body">
+              <p data-translate="cs_azkar_sec2_desc">Designed an uncluttered reading experience with large Arabic typography, tactile counter feedback, dark and high contrast modes, and zero network dependency.</p>
+              <div class="case-callout">
+                <strong data-translate="cs_key_decision">Key Design Decision</strong>
+                <p data-translate="cs_azkar_sec2_callout">Crafted a zero-distraction focus mode with persistent progress counters and instant Arabic/English recitation references.</p>
+              </div>
+            </div>
+          </details>
+
+          <details class="case-accordion" id="section-03">
+            <summary>
+              <span class="section-num">03</span>
+              <span class="accordion-title" data-translate="cs_sec3_title">Tools & Technologies</span>
+              <svg class="accordion-chevron" aria-hidden="true"><use href="#icon-chevron-down"></use></svg>
+            </summary>
+            <div class="accordion-body">
+              <div class="pills">
+                <span class="skill-btn">Figma</span>
+                <span class="skill-btn">Islamic UX Design</span>
+                <span class="skill-btn">Bilingual EN/AR RTL</span>
+                <span class="skill-btn">Midnight Dark Mode</span>
+                <span class="skill-btn">PWA & Offline First</span>
+                <span class="skill-btn">WCAG 2.2 informed</span>
+              </div>
+            </div>
+          </details>
+
+          <details class="case-accordion" id="section-04">
+            <summary>
+              <span class="section-num">04</span>
+              <span class="accordion-title" data-translate="cs_sec4_title">Outcome & Impact</span>
+              <svg class="accordion-chevron" aria-hidden="true"><use href="#icon-chevron-down"></use></svg>
+            </summary>
+            <div class="accordion-body">
+              <p data-translate="cs_azkar_sec4_desc">Delivered an instant-loading, battery-friendly application that provides spiritual peace of mind across all device formats.</p>
+            </div>
+          </details>
+
+          <details class="case-accordion" id="section-05">
+            <summary>
+              <span class="section-num">05</span>
+              <span class="accordion-title" data-translate="cs_sec5_title">Evidence & Next Validation</span>
+              <svg class="accordion-chevron" aria-hidden="true"><use href="#icon-chevron-down"></use></svg>
+            </summary>
+            <div class="accordion-body">
+              <p data-translate="cs_azkar_sec5_desc">Freely available live application. Future validation should measure remembrance-session completion and daily return behavior with privacy-respecting analytics.</p>
+            </div>
+          </details>
+
+          <details class="case-accordion" id="section-06">
+            <summary>
+              <span class="section-num">06</span>
+              <span class="accordion-title" data-translate="cs_sec6_title">Project Provenance & Learnings</span>
+              <svg class="accordion-chevron" aria-hidden="true"><use href="#icon-chevron-down"></use></svg>
+            </summary>
+            <div class="accordion-body">
+              <div class="provenance-grid">
+                <div class="provenance-card">
+                  <strong data-translate="cs_provenance_ownership">Ownership</strong>
+                  <p data-translate="cs_provenance_ownership_desc">Ahmed Mahdy owned the UX design, information architecture, visual direction, content, and final project decisions.</p>
+                </div>
+                <div class="provenance-card">
+                  <strong data-translate="cs_provenance_background">Professional Perspective</strong>
+                  <p data-translate="cs_provenance_background_desc">The work draws on his UX practice and background in eLearning and video authoring to simplify information, sequence interactions, and build a clear narrative.</p>
+                </div>
+                <div class="provenance-card">
+                  <strong data-translate="cs_provenance_ai">AI-Assisted Implementation</strong>
+                  <p data-translate="cs_provenance_ai_desc">Ahmed translated the Figma designs into a live project with assistance from Antigravity, Codex, and Claude agents, then reviewed, refined, and tested the implementation.</p>
+                </div>
+                <div class="provenance-card">
+                  <strong data-translate="cs_provenance_evidence">Special Learning</strong>
+                  <p data-translate="cs_azkar_learning">Special learning: protecting Arabic-first, RTL, and reading-quality requirements while using agents on a content-sensitive experience.</p>
+                </div>
+              </div>
+            </div>
+          </details>
+        </div>
+
+        <div class="case-a11y-note">
+          <svg aria-hidden="true"><use href="#icon-check-shield"></use></svg>
+          <span data-translate="cs_a11y_note">Designed with accessibility, WCAG 2.2, and performance in mind.</span>
+        </div>
+
         <footer class="case-study-pagination" aria-label="Case study pagination">
           <a href="project-hr-tool.html" class="pagination-card pagination-prev">
             <div class="pagination-arrow-box" aria-hidden="true">
