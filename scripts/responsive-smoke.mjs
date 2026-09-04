@@ -677,7 +677,10 @@ try {
       assert.equal(state.previewHidden, true);
       assert.equal(state.selectedDevices, 1);
       assert.ok(state.sandbox?.includes("allow-scripts"));
-      assert.ok(state.provenanceItems >= 4, `Expected at least 4 provenance items, got ${state.provenanceItems}`);
+      assert.ok(
+        state.provenanceItems >= 4,
+        `Expected at least 4 provenance items, got ${state.provenanceItems}`,
+      );
       assert.ok(state.projectLearning);
       assert.deepEqual(runtimeErrors, []);
 
