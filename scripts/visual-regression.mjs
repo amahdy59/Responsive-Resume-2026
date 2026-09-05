@@ -120,6 +120,7 @@ try {
         route.fulfill({ body: "", contentType: "text/css", status: 200 }),
     );
     const page = await context.newPage();
+    page.setDefaultNavigationTimeout(60000);
     if (scenario.preferences) {
       await page.addInitScript((preferences) => {
         if (preferences.theme)

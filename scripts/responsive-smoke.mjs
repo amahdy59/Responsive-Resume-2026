@@ -380,6 +380,13 @@ try {
           await page.locator("[data-audio-speed] option").count(),
           5,
         );
+        assert.equal(
+          await page.locator(".audio-player-artwork svg").count(),
+          1,
+        );
+        assert.ok(
+          (await page.locator(".audio-player-controls svg").count()) >= 6,
+        );
         await page.waitForFunction(() => Boolean(window.__narrationSource));
         assert.match(
           await page.evaluate(() => window.__narrationSource),
@@ -413,11 +420,55 @@ try {
           controlsDisplay: getComputedStyle(
             document.querySelector(".controls-group"),
           ).display,
+          printContactDisplay: getComputedStyle(
+            document.querySelector(".print-contact"),
+          ).display,
+          avatarDisplay: getComputedStyle(
+            document.querySelector(".avatar-wrap"),
+          ).display,
+          projectImageDisplay: getComputedStyle(
+            document.querySelector(".project-thumbnail-link"),
+          ).display,
+          resumeCardDisplay: getComputedStyle(
+            document.querySelector(".resume-card"),
+          ).display,
+          printResumeDisplay: getComputedStyle(
+            document.querySelector(".print-resume-document"),
+          ).display,
         }));
         assert.notEqual(printHeroState.contactListDisplay, "none");
         assert.notEqual(printHeroState.emailLinkDisplay, "none");
         assert.equal(printHeroState.controlsDisplay, "none");
+        assert.equal(printHeroState.printContactDisplay, "flex");
+        assert.equal(printHeroState.avatarDisplay, "none");
+        assert.equal(printHeroState.projectImageDisplay, "none");
+        assert.equal(printHeroState.resumeCardDisplay, "none");
+        assert.equal(printHeroState.printResumeDisplay, "block");
         await page.emulateMedia({ media: "screen" });
+
+        assert.equal(
+          await page
+            .locator(".skills-panel .pills > [role='listitem']")
+            .count(),
+          await page.locator(".skills-panel .skill-item-icon").count(),
+        );
+        assert.equal(
+          await page.locator(".compact-list > li").count(),
+          await page.locator(".compact-list .cert-item-icon").count(),
+        );
+
+        await page.evaluate(() =>
+          window.scrollTo(0, document.body.scrollHeight),
+        );
+        await page.waitForFunction(
+          () => !document.querySelector(".back-to-top-fab").hidden,
+        );
+        await page.locator(".back-to-top-fab").click();
+        await page.waitForFunction(() => window.scrollY < 5);
+        assert.equal(
+          await page.evaluate(() => document.activeElement?.id),
+          "main-content",
+        );
 
         const themeBeforeShortcut = await page
           .locator("html")

@@ -1348,6 +1348,12 @@ function refreshUi(lang) {
     const heading = list.closest(".skill-group")?.querySelector("h3")?.textContent;
     if (heading) list.setAttribute("aria-label", heading);
   });
+  const backToTop = document.querySelector(".back-to-top-fab");
+  if (backToTop) {
+    const label = translations[lang].back_to_top;
+    backToTop.setAttribute("aria-label", label);
+    backToTop.setAttribute("title", label);
+  }
   refreshCaseSectionJump(lang);
   window.AntigravityAudio?.refreshLabels?.();
 }
@@ -1590,6 +1596,16 @@ function bindCopyButtons() {
  * page counter — localised for the active language and text direction.
  */
 function updatePrintStyles() {
+  const printDocument = document.querySelector(".print-resume-document");
+  if (printDocument) {
+    const walker = document.createTreeWalker(printDocument, NodeFilter.SHOW_TEXT);
+    let node = walker.nextNode();
+    while (node) {
+      node.nodeValue = node.nodeValue.replace(/\s*[–—·]\s*/g, " - ");
+      node = walker.nextNode();
+    }
+  }
+
   const lang = getCurrentLanguage();
   const isRtl = root.getAttribute("dir") === "rtl";
   const nameText =
@@ -1680,6 +1696,43 @@ function initReadingProgressBar() {
   updateProgress();
 }
 
+/** Keeps a reachable route back to the page heading once the first view is left. */
+function initBackToTop() {
+  const main = document.getElementById("main-content");
+  if (!main) return;
+
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = "back-to-top-fab";
+  button.hidden = true;
+  button.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>';
+  document.body.append(button);
+
+  let ticking = false;
+  const update = () => {
+    button.hidden = window.scrollY < Math.min(520, window.innerHeight * 0.72);
+    ticking = false;
+  };
+
+  window.addEventListener("scroll", () => {
+    if (ticking) return;
+    requestAnimationFrame(update);
+    ticking = true;
+  }, { passive: true });
+
+  button.addEventListener("click", () => {
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.scrollTo({ top: 0, behavior: reducedMotion ? "auto" : "smooth" });
+    window.setTimeout(() => {
+      main.setAttribute("tabindex", "-1");
+      main.focus({ preventScroll: true });
+      main.addEventListener("blur", () => main.removeAttribute("tabindex"), { once: true });
+    }, reducedMotion ? 0 : 350);
+  });
+
+  update();
+}
+
 function initialize() {
   initResponsiveContentOrder();
   initSectionNavigation();
@@ -1687,6 +1740,7 @@ function initialize() {
   enhanceLinkedCards();
   bindCopyButtons();
   initReadingProgressBar();
+  initBackToTop();
 
   setTheme(savedTheme || (prefersDark ? "dark" : "light"));
   setContrast(savedContrast);

@@ -91,13 +91,22 @@
   box-shadow: none;
 }
 
+[data-contrast="high"] .audio-player-artwork,
+[data-contrast="high"] .back-to-top-fab,
+[data-contrast="high"] .cert-item-icon {
+  border: 2px solid #0ff;
+  background: #000;
+  color: #0ff;
+  box-shadow: none;
+}
+
 [data-contrast="high"] .compact-list li,
 [data-contrast="high"] .featured article {
   border: 2px solid #fff;
   backdrop-filter: none;
 }
 
-[data-contrast="high"] .pills span {
+[data-contrast="high"] .pills > span {
   border: 1px solid #0ff;
   color: #0ff;
 }

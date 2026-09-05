@@ -593,19 +593,30 @@ html[lang="ar"] .external-arrow-icon {
 }
 
 .compact-list li::before {
-  counter-increment: certification;
-  content: counter(certification, decimal-leading-zero);
+  display: none;
+}
+
+.cert-item-icon {
   display: grid;
   place-items: center;
   flex: 0 0 48px;
   width: 48px;
   height: 48px;
-  border: 1px solid color-mix(in srgb, var(--blue) 45%, var(--line));
-  border-radius: 12px;
-  background: color-mix(in srgb, var(--blue) 12%, var(--panel));
+  border: 1px solid color-mix(in srgb, var(--blue) 38%, var(--line));
+  border-radius: 13px;
+  background: linear-gradient(145deg, color-mix(in srgb, var(--blue) 17%, var(--panel)), color-mix(in srgb, var(--blue) 8%, var(--surface)));
   color: var(--blue);
-  font-size: 0.8rem;
-  font-weight: 800;
+}
+
+.cert-item-icon svg {
+  display: block;
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentcolor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .compact-list li:hover,
@@ -1176,7 +1187,7 @@ html[lang="ar"] .skill-group h3 {
 }
 
 .credential-meta-icon {
-  display: inline-block;
+  display: none;
   width: 12px;
   height: 12px;
   vertical-align: -1px;
@@ -1546,6 +1557,8 @@ html[lang="ar"] .skill-group h3 {
 }
 
 /* Print-only portfolio verification banner */
+.print-contact,
+.print-resume-document,
 .print-qr-card {
   display: none;
 }
@@ -1574,7 +1587,7 @@ html[lang="ar"] .skill-group h3 {
   display: none;
 }
 
-.skills-panel .pills span {
+.skills-panel .pills > span {
   display: flex;
   align-items: center;
   min-height: 48px;
@@ -1584,6 +1597,7 @@ html[lang="ar"] .skill-group h3 {
   border-radius: 8px;
   padding: 10px 12px;
   margin: 0;
+  gap: 9px;
 }
 
 .project-card {

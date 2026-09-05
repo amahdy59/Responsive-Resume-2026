@@ -56,7 +56,7 @@ body {
   .compact-list li,
   .featured article,
   .tags span,
-  .pills span,
+  .pills > span,
   .copy-button
 ) {
   transition-property: background-color, background, border-color, box-shadow, color, opacity, transform;

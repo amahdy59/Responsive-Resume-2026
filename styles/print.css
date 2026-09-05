@@ -1,519 +1,541 @@
-/* Print stylesheet for both the homepage (resume printing) and case-study
-   pages. */
-
-/* Print Stylesheet */
+/* Paper-first output: a compact, single-column résumé for ATS parsing and a
+   clean long-form treatment for case studies. */
 @media print {
-  /* ── Page geometry ── */
   @page {
-    size: auto;
-
-    /* Clean margins: 22mm top margin leaves space for the 20px running header,
-       plus ~12px of extra white space before the main text content. */
-    margin: 22mm 12mm 14mm;
+    size: a4;
+    margin: 15mm 14mm 14mm;
 
     @top-left {
-      /* Date content injected dynamically by JS */
-      font-family: "Inter Variable", "Cairo Variable", system-ui, -apple-system, sans-serif;
-      font-size: 8pt;
-      color: #718096;
+      font: 500 7.5pt "Inter Variable", "Cairo Variable", Arial, sans-serif;
+      color: #526172;
       vertical-align: top;
-      margin-top: 6mm;
-    }
-
-    @top-center {
-      content: "";
-      vertical-align: top;
-      margin-top: 6mm;
+      margin-top: 5mm;
     }
 
     @top-right {
-      /* Name | Title injected dynamically by JS */
-      font-family: "Inter Variable", "Cairo Variable", system-ui, -apple-system, sans-serif;
-      font-size: 8pt;
-      color: #718096;
-      font-weight: 500;
+      font: 650 7.5pt "Inter Variable", "Cairo Variable", Arial, sans-serif;
+      color: #25364a;
       vertical-align: top;
-      margin-top: 6mm;
+      margin-top: 5mm;
     }
-
-    @bottom-left { content: ""; }
 
     @bottom-center {
-      /* Translated page numbers injected dynamically by JS */
-      font-family: "Inter Variable", "Cairo Variable", system-ui, -apple-system, sans-serif;
-      font-size: 8pt;
-      color: #718096;
+      font: 500 7.5pt "Inter Variable", "Cairo Variable", Arial, sans-serif;
+      color: #526172;
     }
-
-    @bottom-right { content: ""; }
   }
 
-  /* ── Base ── */
+  *, *::before, *::after {
+    animation: none !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    transition: none !important;
+  }
+
+  html, body { background: #fff !important; color: #182230 !important; }
+
   body {
-    background: #fff !important;
-    color: #2d3748 !important;
-    font-family: "Inter Variable", system-ui, -apple-system, BlinkMacSystemFont, sans-serif !important;
-    font-size: 9.5pt !important;
-    line-height: 1.45 !important;
-    padding: 0 !important;
     margin: 0 !important;
-  }
-
-  [dir="rtl"] body {
-    font-family: "Cairo Variable", sans-serif !important;
-  }
-
-  /* ── Shell ── */
-  .resume-shell {
     padding: 0 !important;
-    width: 100% !important;
+    font-family: "Inter Variable", Arial, sans-serif !important;
+    font-size: 9.2pt !important;
+    line-height: 1.38 !important;
   }
 
-  .resume-card {
-    border: none !important;
-    box-shadow: none !important;
-    background: #fff !important;
-    padding: 0 !important;
-  }
+  html[lang="ar"] body { font-family: "Cairo Variable", Arial, sans-serif !important; }
 
-  /* ── Hero / Header ── */
-  .hero {
-    display: flex !important;
-    flex-direction: row !important;
-    justify-content: space-between !important;
-    align-items: flex-start !important;
-    width: 100% !important;
-    background: none !important;
-    border-bottom: 0.5pt solid #cbd5e0 !important;
-    padding: 8px 0 12px !important;
-    margin-bottom: 12px !important;
-    min-height: auto !important;
-  }
-
-  .identity {
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: center !important;
-    gap: 14px !important;
-  }
-
-  .avatar {
-    display: none !important;
-  }
-
-  h1 {
-    color: #1a202c !important;
-    font-size: 20pt !important;
-    margin: 0 0 2px !important;
-    font-weight: 700 !important;
-  }
-
-  .identity-copy p {
-    color: #4a5568 !important;
-    font-size: 11pt !important;
-    margin: 0 !important;
-  }
-
-  .tags {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    gap: 6px !important;
-    margin-top: 8px !important;
-  }
-
-  .tags span {
-    display: inline-block !important;
-    padding: 2px 6px !important;
-    background: #f1f5f9 !important;
-    border: 1px solid #e2e8f0 !important;
-    border-radius: 6px !important;
-    color: #475569 !important;
-    font-size: 8pt !important;
-    font-weight: 500 !important;
-  }
-
-  .hero-controls-wrapper {
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: flex-start !important;
-  }
-
-  .contact-list {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 5px !important;
-    background: none !important;
-    border: none !important;
-    padding: 0 !important;
-  }
-
-  .contact-list li {
-    display: flex !important;
-    align-items: center !important;
-    padding: 0 !important;
-    background: none !important;
-    border: none !important;
-    box-shadow: none !important;
-  }
-
-  .contact-list a {
-    color: #2d3748 !important;
+  a {
+    color: #173f68 !important;
     text-decoration: underline !important;
-    font-size: 9pt !important;
+    text-decoration-thickness: 0.5pt !important;
+    text-underline-offset: 1.5pt !important;
   }
 
-  .contact-icon {
-    display: inline-grid !important;
-    place-items: center !important;
-    width: 14px !important;
-    height: 14px !important;
-    color: #4a5568 !important;
-    margin-inline: 0 6px !important;
-  }
+  p, li { orphans: 3; widows: 3; }
 
-  .contact-icon svg {
-    display: block !important;
-    width: 14px !important;
-    height: 14px !important;
-  }
-
-  /* ── Hide web-only controls ── */
+  .ambient-particles,
+  .hero-controls-rail,
+  .controls-group,
+  .hero-contact-card,
+  .section-nav,
+  .hero-ctas,
+  .hero-availability,
+  .avatar-wrap,
+  .panel-subtitle,
+  .panel-icon-box,
+  .audio-play-btn,
+  .global-audio-player,
+  .back-to-top-fab,
   .copy-button,
   .external-icon,
-  .print-button,
-  .theme-toggle,
-  .lang-toggle,
-  .contrast-toggle,
-  .controls-group,
-  .ambient-particles,
-  .section-nav,
-  .hero-cta,
-  .skip-link {
-    display: none !important;
+  .project-thumbnail-link,
+  .project-actions,
+  .project-toggle,
+  .skill-group-icon,
+  .skill-item-icon,
+  .cert-item-icon,
+  .cert-count-badge,
+  .cert-desc,
+  .credential-meta-icon,
+  .cert-external-link,
+  .li-company-logo,
+  .li-role-dot,
+  .impact-icon,
+  .impact-icon-box,
+  .degree-badge,
+  .print-qr-card,
+  .site-footer,
+  .skip-link { display: none !important; }
+
+  .resume-shell,
+  .resume-card {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: #fff !important;
   }
 
-  /* ── Semantic ordering for ATS & PDF readability ── */
+  .hero {
+    display: block !important;
+    min-height: auto !important;
+    margin: 0 0 5mm !important;
+    padding: 0 0 4mm !important;
+    border: 0 !important;
+    border-bottom: 1.25pt solid #173f68 !important;
+    background: #fff !important;
+  }
+
+  .hero-identity, .identity-copy { display: block !important; width: 100% !important; }
+
+  h1 {
+    margin: 0 !important;
+    color: #102a43 !important;
+    font-size: 22pt !important;
+    font-weight: 760 !important;
+    line-height: 1.08 !important;
+    letter-spacing: -0.02em !important;
+  }
+
+  .hero-role {
+    margin: 2px 0 0 !important;
+    color: #173f68 !important;
+    font-size: 11.5pt !important;
+    font-weight: 650 !important;
+  }
+
+  .hero-bio, .tags { display: none !important; }
+
+  .print-contact {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 2px 10px !important;
+    margin: -3mm 0 5mm !important;
+    padding: 0 0 4mm !important;
+    border-bottom: 0.5pt solid #b9c5d2 !important;
+    color: #34495e !important;
+    font-size: 8.4pt !important;
+    font-style: normal !important;
+  }
+
+  .print-contact > *:not(:last-child)::after {
+    content: " | ";
+    margin-inline-start: 10px;
+    color: #8391a1;
+    text-decoration: none;
+  }
+
   .content-grid {
     display: flex !important;
     flex-direction: column !important;
-    padding: 0 !important;
-    padding-top: 6px !important;
-  }
-
-  /* Hoist the panels into the flex container so we can reorder them globally */
-  .sidebar,
-  .main-column {
-    display: contents !important;
-  }
-
-  /* Enforce semantic block order for print: Projects before Skills */
-  .sidebar section:nth-child(1) { order: 1 !important; } /* About Me */
-  .sidebar section:nth-child(2) { order: 2 !important; } /* Certifications */
-  .main-column section:nth-child(1) { order: 3 !important; } /* Projects */
-  .sidebar section:nth-child(3) { order: 4 !important; } /* Skills */
-  .main-column section:nth-child(2) { order: 5 !important; } /* Employment */
-  .main-column section:nth-child(3) { order: 6 !important; } /* Education */
-
-  /* ── Panels ── */
-  .panel {
-    background: #fff !important;
-    border: none !important;
-    box-shadow: none !important;
-    padding: 0 !important;
-    margin-bottom: 12px !important;
-
-    /* Allow panels to split across pages so content fills each page efficiently */
-    break-inside: auto !important;
-    break-inside: auto !important;
-  }
-
-  .panel h2 {
-    border-bottom: none !important;
-    padding-bottom: 0 !important;
-    margin-top: 0 !important;
-    margin-bottom: 10px !important;
-    font-size: 13pt !important;
-    color: #1a202c !important;
-    font-weight: 700 !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.75px !important;
-    line-height: 1.4 !important;
-    padding-top: 2px !important;
-    break-after: avoid !important;
-    break-after: avoid !important;
-  }
-
-  .panel h2 .panel-icon-box {
-    display: none !important;
-  }
-
-  /* ── Skills panel ── */
-  .skills-panel {
-    margin-top: 10px !important;
-  }
-
-  /* ── Sub-section group headers ── */
-  .project-group h3,
-  .skill-group h3 {
-    margin-top: 12px !important;
-    margin-bottom: 5px !important;
-    font-size: 10.5pt !important;
-    color: #2d3748 !important;
-    font-weight: 600 !important;
-    text-transform: none !important;
-    letter-spacing: normal !important;
-  }
-
-  .project-group:first-of-type h3,
-  .skill-group:first-of-type h3 {
-    margin-top: 0 !important;
-  }
-
-  /* ── Certifications list ── */
-  .compact-list {
-    list-style: disc !important;
-    padding-inline-start: 18px !important;
-    margin: 6px 0 0 !important;
-  }
-
-  .compact-list li {
-    display: list-item !important;
-    background: none !important;
-    border: none !important;
-    box-shadow: none !important;
-    backdrop-filter: none !important;
-    padding: 0 !important;
-    margin-bottom: 5px !important;
-
-    /* Each cert item stays intact */
-    break-inside: avoid !important;
-    break-inside: avoid !important;
-  }
-
-  .compact-list a {
-    display: inline !important;
-    min-height: auto !important;
-    padding: 0 !important;
-    text-decoration: underline !important;
-    color: #2d3748 !important;
-    font-weight: 500 !important;
-  }
-
-  /* ── Project articles ── */
-  .featured article {
-    background: none !important;
-    border: none !important;
-    box-shadow: none !important;
-    backdrop-filter: none !important;
-    padding: 0 !important;
-    margin-bottom: 8px !important;
-
-    /* Keep each project intact */
-    break-inside: avoid !important;
-    break-inside: avoid !important;
-  }
-
-  .featured h3 {
-    font-size: 10pt !important;
-    font-weight: 600 !important;
-    color: #1a202c !important;
-    margin-top: 6px !important;
-    margin-bottom: 2px !important;
-  }
-
-  .featured h3 a {
-    text-decoration: underline !important;
-    color: #1a202c !important;
-    font-weight: 600 !important;
-  }
-
-  .featured p {
-    margin-top: 1px !important;
-    margin-bottom: 6px !important;
-    color: #4a5568 !important;
-    font-size: 9.5pt !important;
-  }
-
-  /* ── Timeline (Employment & Education) ── */
-  .timeline {
-    gap: 8px !important;
-  }
-
-   .li-roles-list {
-    border: none !important;
+    gap: 0 !important;
     margin: 0 !important;
     padding: 0 !important;
   }
 
-  .li-role-item::before {
-    display: none !important;
+  .sidebar, .main-column { display: contents !important; }
+  .about-panel { order: 1 !important; }
+  .skills-panel { order: 2 !important; }
+  .employment-panel { order: 3 !important; }
+  .projects-panel { order: 4 !important; break-before: page !important; }
+  .education-panel { order: 5 !important; }
+  .certifications-panel { order: 6 !important; }
+
+  .panel {
+    break-inside: auto !important;
+    margin: 0 0 4mm !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: #fff !important;
   }
+
+  .panel-heading-row { display: block !important; margin: 0 !important; padding: 0 !important; border: 0 !important; }
+
+  .panel h2 {
+    margin: 0 0 2.2mm !important;
+    padding: 0 0 1.2mm !important;
+    border: 0 !important;
+    border-bottom: 0.75pt solid #91a4b7 !important;
+    color: #102a43 !important;
+    font-size: 11.5pt !important;
+    font-weight: 760 !important;
+    letter-spacing: 0.035em !important;
+    line-height: 1.2 !important;
+    text-transform: uppercase !important;
+    break-after: avoid !important;
+  }
+
+  html[lang="ar"] .panel h2 { letter-spacing: 0 !important; }
+  .about-panel p { max-width: none !important; margin: 0 !important; color: #27384a !important; }
+
+  .skill-group {
+    display: grid !important;
+    grid-template-columns: 42mm 1fr !important;
+    gap: 3mm !important;
+    margin: 0 0 1.6mm !important;
+    break-inside: avoid !important;
+  }
+
+  .skill-group-header { display: block !important; margin: 0 !important; }
+  .skill-group h3 { margin: 0 !important; color: #263b50 !important; font-size: 9.1pt !important; font-weight: 700 !important; line-height: 1.35 !important; }
+  .skill-group-desc { display: none !important; }
+  .pills { display: block !important; margin: 0 !important; }
+
+  .pills > span {
+    display: inline !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    color: #27384a !important;
+    font-size: 8.9pt !important;
+    font-weight: 500 !important;
+  }
+
+  .pills > span::after { content: ", "; }
+  .pills > span:last-child::after { content: ""; }
+
+  .timeline,
+  .li-roles-list,
+  .li-experience-content,
+  .li-role-details { display: block !important; margin: 0 !important; padding: 0 !important; border: 0 !important; }
 
   .li-experience-group {
     display: block !important;
-    margin-bottom: 0 !important;
-    break-inside: avoid !important;
-    break-inside: avoid !important;
-  }
-
-  .li-company-logo, .li-role-dot {
-    display: none !important;
-  }
-
-  .li-company-info {
-    min-height: auto !important;
-  }
-
-  .li-company-name {
-    color: #2d6e9e !important;
-    font-size: 10pt !important;
-    margin-top: 1px !important;
-    margin-bottom: 4px !important;
-  }
-
-  .li-role-details h3 {
-    font-size: 10.5pt !important;
-    font-weight: 600 !important;
-    color: #1a202c !important;
-    margin-top: 0 !important;
-    margin-bottom: 2px !important;
-  }
-
-  .li-date {
-    background: none !important;
-    border: none !important;
+    margin: 0 0 3mm !important;
     padding: 0 !important;
-    color: #718096 !important;
-    font-size: 8.5pt !important;
-    display: block !important;
-    margin-bottom: 1px !important;
-  }
-
-  .li-location {
-    display: none !important;
-  }
-
-  .li-role-details ul {
-    margin: 4px 0 0 !important;
-    padding-inline-start: 16px !important;
-    list-style-type: disc !important;
-  }
-
-  .li-role-details li {
-    margin-bottom: 3px !important;
-    color: #4a5568 !important;
-    font-size: 9pt !important;
-    line-height: 1.4 !important;
-  }
-
-  /* ── Skills pills ── */
-  .skill-group {
-    break-inside: avoid !important;
+    border: 0 !important;
+    background: transparent !important;
     break-inside: avoid !important;
   }
 
-  .pills {
+  .li-date-aside {
     display: flex !important;
     flex-wrap: wrap !important;
-    gap: 3px 5px !important;
+    gap: 1mm 3mm !important;
+    margin: 0 0 1mm !important;
+    color: #526172 !important;
+    font-size: 8.2pt !important;
+    font-weight: 600 !important;
   }
 
-  .pills span {
-    display: inline !important;
-    border: none !important;
-    background: none !important;
-    color: #2d3748 !important;
-    padding: 0 !important;
+  .li-company-header,
+  .li-entity-link,
+  .li-company-info,
+  .li-role-title-row {
+    display: flex !important;
+    align-items: baseline !important;
+    flex-wrap: wrap !important;
+    gap: 1.5mm 3mm !important;
+    min-height: 0 !important;
     margin: 0 !important;
-    font-weight: 500 !important;
-    font-size: 9.5pt !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
   }
 
-  .pills span::after {
-    content: "," !important;
+  .li-company-name,
+  .li-role-details h3 { margin: 0 !important; color: #182230 !important; font-size: 10pt !important; font-weight: 730 !important; line-height: 1.3 !important; }
+  .li-role-details h3 { color: #173f68 !important; }
+
+  .employment-type-badge,
+  .li-date {
+    display: inline !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+    color: #526172 !important;
+    font-size: 8.2pt !important;
+    font-weight: 600 !important;
   }
 
-  .pills span:last-child::after {
-    content: "" !important;
+  .li-company-desc, .impact-heading, .li-edu-desc { display: none !important; }
+  .impact-section { margin: 1.2mm 0 0 !important; }
+  .impact-cards { display: block !important; margin: 0 !important; }
+
+  .impact-card {
+    position: relative;
+    display: block !important;
+    margin: 0 0 0.8mm !important;
+    padding: 0 0 0 4mm !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    break-inside: avoid !important;
   }
 
-  /* ── Page-2 content breathing room ──
-     When employment panel continues on page 2, add extra top margin
-     to create visible breathing room between the fixed header and content. */
-  .timeline-panel {
-    break-inside: auto !important;
-    break-inside: auto !important;
-  }
+  [dir="rtl"] .impact-card { padding: 0 4mm 0 0 !important; }
+  .impact-card::before { content: "•"; position: absolute; inset-inline-start: 1mm; color: #173f68; }
+  .impact-metric { display: inline !important; color: #263b50 !important; font-size: 8.9pt !important; font-weight: 700 !important; }
+  .impact-metric::after { content: ": "; }
+  .impact-desc { display: inline !important; margin: 0 !important; color: #27384a !important; font-size: 8.8pt !important; line-height: 1.35 !important; }
 
-  /* Education section: always keeps its heading attached to its first entry */
-  .timeline-panel .panel h2 {
+  .featured, .project-group, .project-grid { display: block !important; margin: 0 !important; padding: 0 !important; }
+
+  .project-group > h3 {
+    margin: 0 0 1mm !important;
+    color: #526172 !important;
+    font-size: 8.4pt !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
     break-after: avoid !important;
-    break-after: avoid !important;
   }
 
-  /* ── Education panel ── */
-  .timeline-panel:has(.education) {
-    /* Flow naturally */
+  .project-card,
+  .featured article {
+    display: block !important;
+    margin: 0 0 2mm !important;
+    padding: 0 0 0 4mm !important;
+    border: 0 !important;
+    border-inline-start: 1.5pt solid #9bb0c5 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    break-inside: avoid !important;
   }
-}
 
-@media print {
-  .case-study-header-bar,
-  .case-study-nav,
-  .case-study-breadcrumbs,
-  .case-cta-wrapper,
-    .case-study-pagination,
-    .audio-play-btn,
-    .global-audio-player {
-      display: none !important;
-    }
+  [dir="rtl"] .project-card,
+  [dir="rtl"] .featured article { padding: 0 4mm 0 0 !important; }
+  .project-card-content { padding: 0 !important; }
 
-  .reveal,
-  .reveal.active {
+  .project-card-tag {
+    display: inline !important;
+    margin: 0 0.8mm 0 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+    color: #526172 !important;
+    font-size: 7.8pt !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+  }
+
+  .project-card h3, .featured h3 { display: inline !important; margin: 0 !important; color: #182230 !important; font-size: 9.4pt !important; font-weight: 730 !important; }
+  .project-card p, .featured article p { max-width: none !important; margin: 0.5mm 0 0 !important; color: #27384a !important; font-size: 8.6pt !important; line-height: 1.32 !important; }
+  .education-panel .li-experience-group { margin-bottom: 2mm !important; }
+
+  .compact-list {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 1.5mm 5mm !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    list-style: none !important;
+  }
+
+  .compact-list li {
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    break-inside: avoid !important;
+  }
+
+  .cert-card-body > a { display: inline !important; min-height: 0 !important; margin: 0 !important; padding: 0 !important; color: #182230 !important; font-size: 8.8pt !important; font-weight: 700 !important; }
+  .credential-meta { display: block !important; margin: 0 !important; padding: 0 !important; color: #526172 !important; font-size: 7.8pt !important; }
+
+  body[data-page="case-study"] .case-study-header-bar,
+  body[data-page="case-study"] .case-study-nav,
+  body[data-page="case-study"] .case-study-breadcrumbs,
+  body[data-page="case-study"] .case-section-nav,
+  body[data-page="case-study"] .case-section-jump,
+  body[data-page="case-study"] .case-cta-wrapper,
+  body[data-page="case-study"] .case-study-pagination,
+  body[data-page="case-study"] .live-embed-viewer,
+  body[data-page="case-study"] dialog { display: none !important; }
+
+  body[data-page="case-study"] .case-study-card,
+  body[data-page="case-study"] .case-study-shell {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: #fff !important;
+  }
+
+  body[data-page="case-study"] .case-study-section,
+  body[data-page="case-study"] .case-accordion {
     opacity: 1 !important;
     transform: none !important;
-    transition: none !important;
+    break-inside: auto !important;
   }
-}
 
-@media print {
-  .print-qr-card {
+  /* The screen composition is intentionally replaced by a linear semantic
+     document so visual order and PDF extraction order always match. */
+  body:not([data-page="case-study"]) .resume-card { display: none !important; }
+
+  .print-resume-document {
+    display: block !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    color: #182230 !important;
+  }
+
+  .print-resume-document .print-resume-header {
+    margin: 0 0 5mm !important;
+    padding: 0 0 4mm !important;
+    border-bottom: 1.25pt solid #173f68 !important;
+  }
+
+  .print-resume-document .print-resume-name {
+    margin: 0 !important;
+    color: #102a43 !important;
+    font-size: 22pt !important;
+    font-weight: 760 !important;
+    line-height: 1.08 !important;
+    letter-spacing: -0.02em !important;
+  }
+
+  .print-resume-document .print-resume-role {
+    margin: 2px 0 2.5mm !important;
+    color: #173f68 !important;
+    font-size: 11.5pt !important;
+    font-weight: 650 !important;
+  }
+
+  .print-resume-document address {
     display: flex !important;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 20px;
-    padding: 10px 16px;
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    background: var(--surface);
-    break-inside: avoid;
+    flex-wrap: wrap !important;
+    gap: 1mm 3mm !important;
+    color: #34495e !important;
+    font-size: 8.4pt !important;
+    font-style: normal !important;
   }
 
-  .print-qr-info {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
+  .print-resume-document address > *:not(:last-child)::after {
+    content: " | ";
+    margin-inline-start: 3mm;
+    color: #8391a1;
   }
 
-  .print-qr-title {
-    font-size: 10pt;
-    font-weight: 700;
-    color: var(--text);
+  .print-resume-document > section {
+    margin: 0 0 4mm !important;
+    break-inside: auto !important;
   }
 
-  .print-qr-url {
-    font-size: 9pt;
-    color: var(--blue);
-    font-weight: 600;
+  .print-resume-document > section > h2 {
+    margin: 0 0 2mm !important;
+    padding: 0 0 1mm !important;
+    border-bottom: 0.75pt solid #91a4b7 !important;
+    color: #102a43 !important;
+    font-size: 11.5pt !important;
+    font-weight: 760 !important;
+    letter-spacing: 0.035em !important;
+    line-height: 1.2 !important;
+    text-transform: uppercase !important;
+    break-after: avoid !important;
   }
 
-  .print-qr-badge {
-    font-size: 8.5pt;
-    font-weight: 700;
-    color: var(--text);
-    padding: 4px 10px;
-    border: 1px solid var(--line);
-    border-radius: 6px;
-    background: #fff;
+  .print-resume-document > section > p {
+    margin: 0 !important;
+    color: #27384a !important;
   }
+
+  .print-skill-list { margin: 0 !important; }
+
+  .print-skill-list > div {
+    display: grid !important;
+    grid-template-columns: 42mm 1fr !important;
+    gap: 3mm !important;
+    padding: 1.2mm 0 !important;
+    border-bottom: 0.35pt solid #d4dce4 !important;
+    break-inside: avoid !important;
+  }
+
+  .print-skill-list dt {
+    color: #263b50 !important;
+    font-weight: 700 !important;
+  }
+
+  .print-skill-list dd { margin: 0 !important; color: #27384a !important; }
+
+  .print-role {
+    margin: 0 0 3mm !important;
+    break-inside: avoid !important;
+  }
+
+  .print-role h3,
+  .print-projects h3,
+  .print-education h3 {
+    margin: 0 !important;
+    color: #182230 !important;
+    font-size: 9.8pt !important;
+    font-weight: 730 !important;
+    line-height: 1.3 !important;
+  }
+
+  .print-role .print-meta,
+  .print-education p {
+    margin: 0.4mm 0 1mm !important;
+    color: #526172 !important;
+    font-size: 8.2pt !important;
+    font-weight: 600 !important;
+  }
+
+  .print-role ul {
+    margin: 0 !important;
+    padding-inline-start: 5mm !important;
+  }
+
+  .print-role li { margin: 0 0 0.7mm !important; color: #27384a !important; }
+
+  .print-projects { break-before: page !important; }
+
+  .print-projects article {
+    margin: 0 0 2mm !important;
+    padding-inline-start: 4mm !important;
+    border-inline-start: 1.5pt solid #9bb0c5 !important;
+    break-inside: avoid !important;
+  }
+
+  .print-projects article p {
+    margin: 0.4mm 0 0 !important;
+    color: #27384a !important;
+    font-size: 8.7pt !important;
+  }
+
+  .print-education { margin: 0 0 2mm !important; break-inside: avoid !important; }
+
+  .print-certifications {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 2mm 5mm !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    list-style: none !important;
+  }
+
+  .print-certifications li { break-inside: avoid !important; }
+  .print-certifications a { display: block !important; color: #182230 !important; font-weight: 700 !important; }
+  .print-certifications span { display: block !important; color: #526172 !important; font-size: 7.8pt !important; }
 }

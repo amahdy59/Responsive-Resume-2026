@@ -3,8 +3,8 @@
   'use strict';
 
   const labels = {
-    en: { player: 'Narration player', previous: 'Previous section', next: 'Next section', pause: 'Pause', resume: 'Resume', stop: 'Stop', speed: 'Playback speed', progress: 'Narration progress', listen: 'Listen', listenCase: 'Listen to case study', playing: 'Playing', paused: 'Narration paused', stopped: 'Narration stopped', unavailable: 'Narration is unavailable' },
-    ar: { player: 'مشغل السرد الصوتي', previous: 'القسم السابق', next: 'القسم التالي', pause: 'إيقاف مؤقت', resume: 'استئناف', stop: 'إيقاف', speed: 'سرعة التشغيل', progress: 'تقدم السرد', listen: 'استمع', listenCase: 'استمع إلى دراسة الحالة', playing: 'قيد التشغيل', paused: 'تم إيقاف السرد مؤقتًا', stopped: 'تم إيقاف السرد', unavailable: 'السرد الصوتي غير متاح' },
+    en: { player: 'Narration player', nowPlaying: 'Now narrating', previous: 'Previous section', next: 'Next section', pause: 'Pause', resume: 'Resume', stop: 'Close player', speed: 'Playback speed', progress: 'Narration progress', listen: 'Listen', listenCase: 'Listen to case study', playing: 'Playing', paused: 'Narration paused', stopped: 'Narration stopped', unavailable: 'Narration is unavailable' },
+    ar: { player: 'مشغل السرد الصوتي', nowPlaying: 'يُروى الآن', previous: 'القسم السابق', next: 'القسم التالي', pause: 'إيقاف مؤقت', resume: 'استئناف', stop: 'إغلاق المشغل', speed: 'سرعة التشغيل', progress: 'تقدم السرد', listen: 'استمع', listenCase: 'استمع إلى دراسة الحالة', playing: 'قيد التشغيل', paused: 'تم إيقاف السرد مؤقتًا', stopped: 'تم إيقاف السرد', unavailable: 'السرد الصوتي غير متاح' },
   };
   const allowedRates = [0.75, 1, 1.25, 1.5, 2];
   const savedRate = Number(localStorage.getItem('resume-audio-rate'));
@@ -24,6 +24,17 @@
 
   const language = () => (document.documentElement.lang === 'ar' ? 'ar' : 'en');
   const copy = () => labels[language()];
+
+  const icons = {
+    volume: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5Z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg>',
+    previous: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 20 9 12l10-8v16ZM5 19V5"/></svg>',
+    next: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 4 10 8-10 8V4Zm14 1v14"/></svg>',
+    play: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 5 11 7-11 7V5Z"/></svg>',
+    pause: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14M16 5v14"/></svg>',
+    close: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>',
+    speed: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 14a8 8 0 1 1 16 0M12 14l4-4"/><path d="M7 18h10"/></svg>',
+    chevron: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 10 4 4 4-4"/></svg>',
+  };
 
   function loadVoices() {
     if (!('speechSynthesis' in window)) return [];
@@ -65,6 +76,7 @@
     range.disabled = !seekable;
     range.max = seekable ? String(duration) : '1';
     range.value = seekable ? String(currentTime) : '0';
+    range.style.setProperty('--audio-progress', `${seekable ? (currentTime / duration) * 100 : 0}%`);
     player.querySelector('[data-audio-time]').textContent = `${formatTime(currentTime)} / ${formatTime(duration)}`;
   }
 
@@ -85,12 +97,20 @@
     document.querySelectorAll('.audio-play-btn').forEach((button) => setButtonState(button, button === currentBtn ? (isPaused ? 'paused' : 'playing') : 'idle'));
     if (!player) return;
     player.setAttribute('aria-label', copy().player);
-    player.querySelector('[data-audio-previous]').textContent = copy().previous;
-    player.querySelector('[data-audio-next]').textContent = copy().next;
-    player.querySelector('[data-audio-stop]').textContent = copy().stop;
+    player.querySelector('[data-audio-eyebrow]').textContent = copy().nowPlaying;
+    for (const [selector, label] of [['[data-audio-previous]', copy().previous], ['[data-audio-next]', copy().next], ['[data-audio-stop]', copy().stop]]) {
+      const control = player.querySelector(selector);
+      control.setAttribute('aria-label', label);
+      control.title = label;
+    }
     player.querySelector('[data-audio-speed-label]').textContent = copy().speed;
     player.querySelector('[data-audio-progress]').setAttribute('aria-label', copy().progress);
-    player.querySelector('[data-audio-toggle]').textContent = isPaused ? copy().resume : copy().pause;
+    const toggle = player.querySelector('[data-audio-toggle]');
+    const toggleLabel = isPaused ? copy().resume : copy().pause;
+    toggle.setAttribute('aria-label', toggleLabel);
+    toggle.title = toggleLabel;
+    toggle.querySelector('[data-audio-toggle-icon]').innerHTML = isPaused ? icons.play : icons.pause;
+    toggle.querySelector('[data-audio-toggle-label]').textContent = toggleLabel;
     if (currentBtn) player.querySelector('[data-audio-title]').textContent = getTitle(currentBtn);
   }
 
@@ -99,7 +119,7 @@
     player.className = 'global-audio-player';
     player.hidden = true;
     player.setAttribute('role', 'region');
-    player.innerHTML = `<div class="audio-player-summary"><strong data-audio-title></strong><span data-audio-time>0:00 / --:--</span></div><input class="audio-player-progress" data-audio-progress type="range" min="0" max="1" value="0" step="0.1" disabled><div class="audio-player-controls"><button type="button" data-audio-previous></button><button type="button" data-audio-toggle></button><button type="button" data-audio-next></button><label class="audio-player-speed"><span data-audio-speed-label></span><select data-audio-speed>${allowedRates.map((rate) => `<option value="${rate}">${rate}×</option>`).join('')}</select></label><button type="button" data-audio-stop></button></div>`;
+    player.innerHTML = `<div class="audio-player-summary"><span class="audio-player-artwork" aria-hidden="true">${icons.volume}</span><span class="audio-player-copy"><span class="audio-player-eyebrow" data-audio-eyebrow></span><strong data-audio-title></strong></span><span class="audio-player-time" data-audio-time>0:00 / --:--</span></div><div class="audio-player-track"><input class="audio-player-progress" data-audio-progress type="range" min="0" max="1" value="0" step="0.1" disabled></div><div class="audio-player-controls"><div class="audio-player-transport"><button class="audio-control audio-control-icon" type="button" data-audio-previous>${icons.previous}</button><button class="audio-control audio-control-primary" type="button" data-audio-toggle><span data-audio-toggle-icon>${icons.pause}</span><span data-audio-toggle-label></span></button><button class="audio-control audio-control-icon" type="button" data-audio-next>${icons.next}</button></div><label class="audio-player-speed"><span class="audio-speed-label">${icons.speed}<span data-audio-speed-label></span></span><span class="audio-select-shell"><select data-audio-speed>${allowedRates.map((rate) => `<option value="${rate}">${rate}×</option>`).join('')}</select>${icons.chevron}</span></label><button class="audio-control audio-control-icon audio-control-close" type="button" data-audio-stop>${icons.close}</button></div>`;
     document.body.append(player);
     liveStatus = document.createElement('p');
     liveStatus.className = 'sr-only audio-live-status';
