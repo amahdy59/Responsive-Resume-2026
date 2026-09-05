@@ -110,9 +110,11 @@
 }
 
 .copy-button svg {
-  width: 14px;
-  height: 14px;
-  fill: currentcolor;
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentcolor;
+  stroke-width: 2;
   transition:
     transform 150ms ease,
     color 150ms ease;
@@ -286,10 +288,10 @@ html[lang="ar"] .credential-meta {
 [data-tooltip]::before {
   content: attr(data-tooltip);
   position: absolute;
-  bottom: calc(100% + 6px);
+  bottom: 100%;
   left: 50%;
   transform: translateX(-50%) scale(0.9);
-  padding: 5px 10px;
+  padding: 8px 10px;
   background: var(--text);
   color: var(--surface);
   font-size: 0.72rem;
@@ -903,15 +905,6 @@ html[lang="ar"] .credential-meta {
   background: color-mix(in srgb, var(--blue) 20%, transparent);
 }
 
-.reveal {
-  opacity: 1;
-  transform: none;
-}
-
-.reveal.active {
-  opacity: 1;
-  transform: none;
-}
 
 .btn-secondary {
   display: inline-flex;

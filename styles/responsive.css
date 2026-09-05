@@ -6,7 +6,7 @@
   html[lang="en"] .controls-group [data-tooltip]::before {
     bottom: 50% !important;
     left: auto !important;
-    right: calc(100% + 8px) !important;
+    right: 100% !important;
     transform: translateY(50%) scale(0.9) !important;
   }
 
@@ -34,7 +34,7 @@
   html[lang="ar"] .controls-group [data-tooltip]::before {
     bottom: 50% !important;
     right: auto !important;
-    left: calc(100% + 8px) !important;
+    left: 100% !important;
     transform: translateY(50%) scale(0.9) !important;
   }
 

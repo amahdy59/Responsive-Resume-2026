@@ -446,8 +446,8 @@
 }
 
 .contact-actions .copy-button svg {
-  fill: currentcolor;
-  stroke: none;
+  width: 18px;
+  height: 18px;
 }
 
 .contact-action-btn:hover,
@@ -603,6 +603,12 @@ html[lang="ar"] .external-arrow-icon {
 .section-nav-link[aria-current] {
   color: var(--blue);
   border-bottom-color: var(--blue);
+}
+
+/* Inset rings stay visible inside the horizontally scrolling navigation. */
+.section-nav a:focus-visible {
+  outline-offset: -4px;
+  box-shadow: none;
 }
 
 .section-nav a:active,

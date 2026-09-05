@@ -657,6 +657,88 @@ try {
     console.log("Passed OS forced-colors mode");
   }
 
+  for (const language of ["en", "ar"]) {
+    const context = await browser.newContext({
+      viewport: { width: 1280, height: 800 },
+      reducedMotion: "reduce",
+    });
+    const page = await context.newPage();
+    await page.goto(`${baseUrl}/${language}/`, { waitUntil: "load" });
+    const toggle = page.locator(".lang-toggle");
+    await toggle.focus();
+    await page.keyboard.press("Escape");
+    assert.equal(
+      await toggle.evaluate((el) => document.activeElement === el),
+      true,
+      "Escape must preserve tooltip trigger focus",
+    );
+    await page.waitForFunction(
+      () =>
+        getComputedStyle(document.querySelector(".lang-toggle"), "::before")
+          .opacity === "0",
+    );
+    await page.keyboard.press("Tab");
+    await page.keyboard.press("Shift+Tab");
+    await page.waitForFunction(
+      () =>
+        getComputedStyle(document.querySelector(".lang-toggle"), "::before")
+          .opacity === "1",
+    );
+
+    const summary = page.locator(".resume-download-menu > summary");
+    await summary.focus();
+    assert.equal(
+      await summary.evaluate((el) => getComputedStyle(el).outlineStyle),
+      "solid",
+    );
+    await page.keyboard.press("Enter");
+    await page.keyboard.press("Tab");
+    assert.equal(
+      await page.locator(".resume-download-menu").evaluate((el) => el.open),
+      true,
+    );
+    await page.keyboard.press("Escape");
+    assert.equal(
+      await summary.evaluate((el) => document.activeElement === el),
+      true,
+    );
+    await page.keyboard.press("Enter");
+    await page.locator(".section-nav a").first().focus();
+    assert.equal(
+      await page.locator(".resume-download-menu").evaluate((el) => el.open),
+      false,
+      "Download disclosure must close when focus leaves it",
+    );
+    assert.equal(
+      await page
+        .locator(".section-nav a")
+        .first()
+        .evaluate((el) => getComputedStyle(el).outlineOffset),
+      "-4px",
+    );
+
+    await page.route("https://**/*", (route) => route.abort());
+    await page.goto(`${baseUrl}/${language}/case-studies/haj-arafa/`, {
+      waitUntil: "load",
+    });
+    await page.evaluate(() => {
+      window.previewScrollBehavior = null;
+      Element.prototype.scrollIntoView = (options) => {
+        window.previewScrollBehavior = options.behavior;
+      };
+    });
+    await page.locator("[data-toggle-embed]").click();
+    assert.equal(
+      await page.evaluate(() => window.previewScrollBehavior),
+      "auto",
+      "Preview scrolling must respect reduced motion",
+    );
+    await context.close();
+    console.log(
+      `Passed keyboard disclosure, tooltip dismissal, and preview motion (${language})`,
+    );
+  }
+
   for (const theme of ["light", "dark"]) {
     for (const contrast of ["normal", "high"]) {
       const context = await browser.newContext({

@@ -263,11 +263,35 @@
   --button-text: #000;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .reveal,
-  .reveal.active {
+
+/* Keep dismissal stronger than the responsive tooltip placement rules. */
+[data-tooltip][data-tooltip-dismissed]::before,
+[data-tooltip][data-tooltip-dismissed]::after,
+html[lang] .controls-group [data-tooltip][data-tooltip-dismissed]::before,
+html[lang] .controls-group [data-tooltip][data-tooltip-dismissed]::after {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+[data-contrast="high"] .section-nav a:focus-visible {
+  outline-offset: -4px !important;
+}
+
+@media (hover: none), (pointer: coarse) {
+  .copy-button {
     opacity: 1;
-    transform: none;
-    transition: none;
+  }
+
+  [data-tooltip]::before,
+  [data-tooltip]::after {
+    display: none;
+  }
+}
+
+/* Feedback belongs on the control being pressed, with no layout movement. */
+@media (prefers-reduced-motion: no-preference) {
+  :where(.btn, .hero-cta, .audio-player-controls button):active {
+    transform: scale(0.98);
+    transition-duration: var(--motion-fast);
   }
 }

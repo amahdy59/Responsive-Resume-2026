@@ -18,7 +18,10 @@ const htmlDocuments = [
     source: readFileSync(resolve(root, file), "utf8"),
   })),
 ];
-const script = readFileSync(resolve(root, "script.js"), "utf8");
+const script = readFileSync(resolve(root, "script.js"), "utf8").replace(
+  /\r\n/g,
+  "\n",
+);
 const readme = readFileSync(resolve(root, "README.md"), "utf8");
 const projects = JSON.parse(
   readFileSync(resolve(root, "data", "projects.json"), "utf8"),

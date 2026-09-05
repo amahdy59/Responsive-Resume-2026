@@ -108,8 +108,7 @@ a:hover {
   transition: opacity 150ms ease, transform 150ms ease;
 }
 
-a:focus-visible,
-button:focus-visible {
+:focus-visible {
   outline: 3px solid var(--focus);
   outline-offset: 4px;
 

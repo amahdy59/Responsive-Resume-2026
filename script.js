@@ -1751,6 +1751,10 @@ function initResumeDownloadMenu() {
     if (menu.open && !menu.contains(event.target)) menu.open = false;
   });
 
+  menu.addEventListener("focusout", (event) => {
+    if (!menu.contains(event.relatedTarget)) menu.open = false;
+  });
+
   menu.addEventListener("keydown", (event) => {
     if (event.key !== "Escape") return;
     menu.open = false;
@@ -1944,52 +1948,23 @@ document.querySelectorAll("[data-print-resume]").forEach((button) => {
 
 window.addEventListener("beforeprint", updatePrintStyles);
 
+// Dismiss help without losing the user's place in the keyboard sequence.
 document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape") {
-    const focused = document.activeElement;
-    if (
-      focused instanceof HTMLElement &&
-      focused.hasAttribute("data-tooltip")
-    ) {
-      focused.blur();
-    }
-  }
+  if (event.key !== "Escape") return;
+  document.querySelectorAll("[data-tooltip]").forEach((element) => {
+    element.dataset.tooltipDismissed = "true";
+  });
 });
-
-initialize();
-
-/* Reveal content once as it enters the viewport. */
-function initScrollReveal() {
-  const revealElements = document.querySelectorAll(
-    ".panel, .li-experience-group, .featured article, .case-study-section",
-  );
-
-  if (
-    !("IntersectionObserver" in window) ||
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches
-  ) {
-    revealElements.forEach((element) =>
-      element.classList.add("reveal", "active"),
-    );
-    return;
-  }
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add("active");
-        observer.unobserve(entry.target);
-      });
-    },
-    { threshold: 0.08, rootMargin: "0px 0px -32px" },
-  );
-
-  revealElements.forEach((element) => {
-    element.classList.add("reveal");
-    observer.observe(element);
+for (const eventName of ["pointerover", "focusin"]) {
+  document.addEventListener(eventName, (event) => {
+    const trigger = event.target.closest?.("[data-tooltip]");
+    if (trigger && !trigger.contains(event.relatedTarget)) {
+      delete trigger.dataset.tooltipDismissed;
+    }
   });
 }
+
+initialize();
 
 /* ── Interactive Image Lightbox Modal ── */
 function initImageLightbox() {
@@ -2137,7 +2112,10 @@ function initLiveEmbedViewer() {
         ) {
           iframe.src = iframe.dataset.src;
         }
-        container.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        container.scrollIntoView({
+          behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+          block: "nearest",
+        });
       }
     });
   });
@@ -2163,6 +2141,5 @@ function initLiveEmbedViewer() {
   });
 }
 
-initScrollReveal();
 initImageLightbox();
 initLiveEmbedViewer();
