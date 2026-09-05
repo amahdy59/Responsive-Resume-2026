@@ -6,24 +6,34 @@
     margin: 15mm 14mm 14mm;
 
     @top-left {
-      font: 500 7.5pt "Inter Variable", "Cairo Variable", Arial, sans-serif;
+      font: 500 8pt Aptos, Arial, sans-serif;
       color: #526172;
       vertical-align: top;
       margin-top: 5mm;
     }
 
     @top-right {
-      font: 650 7.5pt "Inter Variable", "Cairo Variable", Arial, sans-serif;
+      font: 650 8pt Aptos, Arial, sans-serif;
       color: #25364a;
       vertical-align: top;
       margin-top: 5mm;
     }
 
     @bottom-center {
-      font: 500 7.5pt "Inter Variable", "Cairo Variable", Arial, sans-serif;
+      content: "Page " counter(page) " of " counter(pages);
+      font: 500 8pt Aptos, Arial, sans-serif;
       color: #526172;
     }
   }
+
+  @page resume-ar {
+    @bottom-center {
+      content: "صفحة " counter(page) " من " counter(pages);
+      font-family: "Cairo Variable", Arial, sans-serif;
+    }
+  }
+
+  html[lang="ar"] body { page: resume-ar; }
 
   *, *::before, *::after {
     animation: none !important;
@@ -37,9 +47,9 @@
   body {
     margin: 0 !important;
     padding: 0 !important;
-    font-family: "Inter Variable", Arial, sans-serif !important;
-    font-size: 9.2pt !important;
-    line-height: 1.38 !important;
+    font-family: Aptos, Arial, sans-serif !important;
+    font-size: 10.5pt !important;
+    line-height: 1.42 !important;
   }
 
   html[lang="ar"] body { font-family: "Cairo Variable", Arial, sans-serif !important; }
@@ -101,8 +111,8 @@
   .hero {
     display: block !important;
     min-height: auto !important;
-    margin: 0 0 5mm !important;
-    padding: 0 0 4mm !important;
+    margin: 0 0 6mm !important;
+    padding: 0 0 4.5mm !important;
     border: 0 !important;
     border-bottom: 1.25pt solid #173f68 !important;
     background: #fff !important;
@@ -113,7 +123,7 @@
   h1 {
     margin: 0 !important;
     color: #102a43 !important;
-    font-size: 22pt !important;
+    font-size: 25pt !important;
     font-weight: 760 !important;
     line-height: 1.08 !important;
     letter-spacing: -0.02em !important;
@@ -122,7 +132,7 @@
   .hero-role {
     margin: 2px 0 0 !important;
     color: #173f68 !important;
-    font-size: 11.5pt !important;
+    font-size: 13pt !important;
     font-weight: 650 !important;
   }
 
@@ -136,7 +146,7 @@
     padding: 0 0 4mm !important;
     border-bottom: 0.5pt solid #b9c5d2 !important;
     color: #34495e !important;
-    font-size: 8.4pt !important;
+    font-size: 9.4pt !important;
     font-style: normal !important;
   }
 
@@ -165,7 +175,7 @@
 
   .panel {
     break-inside: auto !important;
-    margin: 0 0 4mm !important;
+    margin: 0 0 5mm !important;
     padding: 0 !important;
     border: 0 !important;
     border-radius: 0 !important;
@@ -180,7 +190,7 @@
     border: 0 !important;
     border-bottom: 0.75pt solid #91a4b7 !important;
     color: #102a43 !important;
-    font-size: 11.5pt !important;
+    font-size: 12.5pt !important;
     font-weight: 760 !important;
     letter-spacing: 0.035em !important;
     line-height: 1.2 !important;
@@ -399,6 +409,7 @@
     margin: 0 !important;
     padding: 0 !important;
     color: #182230 !important;
+    font-size: 11.5pt !important;
   }
 
   .print-resume-document .print-resume-header {
@@ -464,23 +475,23 @@
   .print-skill-list { margin: 0 !important; }
 
   .print-skill-list > div {
-    display: grid !important;
-    grid-template-columns: 42mm 1fr !important;
-    gap: 3mm !important;
-    padding: 1.2mm 0 !important;
+    display: block !important;
+    padding: 1.6mm 0 !important;
     border-bottom: 0.35pt solid #d4dce4 !important;
     break-inside: avoid !important;
   }
 
   .print-skill-list dt {
+    display: inline !important;
     color: #263b50 !important;
     font-weight: 700 !important;
   }
 
-  .print-skill-list dd { margin: 0 !important; color: #27384a !important; }
+  .print-skill-list dt::after { content: ": "; }
+  .print-skill-list dd { display: inline !important; margin: 0 !important; color: #27384a !important; }
 
   .print-role {
-    margin: 0 0 3mm !important;
+    margin: 0 0 4mm !important;
     break-inside: avoid !important;
   }
 
@@ -489,7 +500,7 @@
   .print-education h3 {
     margin: 0 !important;
     color: #182230 !important;
-    font-size: 9.8pt !important;
+    font-size: 11pt !important;
     font-weight: 730 !important;
     line-height: 1.3 !important;
   }
@@ -498,7 +509,7 @@
   .print-education p {
     margin: 0.4mm 0 1mm !important;
     color: #526172 !important;
-    font-size: 8.2pt !important;
+    font-size: 9.3pt !important;
     font-weight: 600 !important;
   }
 
@@ -507,12 +518,12 @@
     padding-inline-start: 5mm !important;
   }
 
-  .print-role li { margin: 0 0 0.7mm !important; color: #27384a !important; }
+  .print-role li { margin: 0 0 1mm !important; color: #27384a !important; }
 
   .print-projects { break-before: page !important; }
 
   .print-projects article {
-    margin: 0 0 2mm !important;
+    margin: 0 0 3mm !important;
     padding-inline-start: 4mm !important;
     border-inline-start: 1.5pt solid #9bb0c5 !important;
     break-inside: avoid !important;
@@ -521,21 +532,19 @@
   .print-projects article p {
     margin: 0.4mm 0 0 !important;
     color: #27384a !important;
-    font-size: 8.7pt !important;
+    font-size: 11.5pt !important;
   }
 
-  .print-education { margin: 0 0 2mm !important; break-inside: avoid !important; }
+  .print-education { margin: 0 0 3mm !important; break-inside: avoid !important; }
 
   .print-certifications {
-    display: grid !important;
-    grid-template-columns: 1fr 1fr !important;
-    gap: 2mm 5mm !important;
+    display: block !important;
     margin: 0 !important;
     padding: 0 !important;
     list-style: none !important;
   }
 
-  .print-certifications li { break-inside: avoid !important; }
+  .print-certifications li { margin-bottom: 3mm !important; break-inside: avoid !important; }
   .print-certifications a { display: block !important; color: #182230 !important; font-weight: 700 !important; }
-  .print-certifications span { display: block !important; color: #526172 !important; font-size: 7.8pt !important; }
+  .print-certifications span { display: block !important; color: #526172 !important; font-size: 9pt !important; }
 }

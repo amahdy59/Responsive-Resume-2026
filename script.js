@@ -275,7 +275,12 @@ const translations = {
     toast_copied: "تم النسخ",
     hero_bio:
       "أصمم منتجات رقمية سهلة الوصول وأحوّل البيانات المعقدة إلى تجارب واضحة تدعم اتخاذ القرار.",
-    hero_cta_resume: "طباعة / حفظ السيرة الذاتية",
+    hero_cta_resume: "تنزيل السيرة الذاتية",
+    resume_menu_label: "خيارات تنزيل السيرة الذاتية",
+    resume_formats_label: "صيغ السيرة الذاتية",
+    resume_pdf: "تنزيل PDF بالإنجليزية",
+    resume_docx: "تنزيل Word بالإنجليزية",
+    resume_print: "طباعة هذه الصفحة",
     hero_availability: "متاح لمشاريع جديدة",
     contact_email_sub: "راسلني",
     contact_li_sub: "الملف المهني",
@@ -717,7 +722,12 @@ const translations = {
     toast_copy_project: "Project link copied to clipboard",
     hero_bio:
       "I design accessible digital products and turn complex data into clear, decision-ready experiences.",
-    hero_cta_resume: "Print / Save Résumé",
+    hero_cta_resume: "Download Résumé",
+    resume_menu_label: "Résumé download options",
+    resume_formats_label: "Résumé formats",
+    resume_pdf: "Download PDF",
+    resume_docx: "Download Word",
+    resume_print: "Print this page",
     hero_availability: "Available for new projects",
     contact_email_sub: "Email me",
     contact_li_sub: "Professional profile",
@@ -1733,6 +1743,21 @@ function initBackToTop() {
   update();
 }
 
+function initResumeDownloadMenu() {
+  const menu = document.querySelector(".resume-download-menu");
+  if (!(menu instanceof HTMLDetailsElement)) return;
+
+  document.addEventListener("click", (event) => {
+    if (menu.open && !menu.contains(event.target)) menu.open = false;
+  });
+
+  menu.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape") return;
+    menu.open = false;
+    menu.querySelector("summary")?.focus();
+  });
+}
+
 function initialize() {
   initResponsiveContentOrder();
   initSectionNavigation();
@@ -1741,6 +1766,7 @@ function initialize() {
   bindCopyButtons();
   initReadingProgressBar();
   initBackToTop();
+  initResumeDownloadMenu();
 
   setTheme(savedTheme || (prefersDark ? "dark" : "light"));
   setContrast(savedContrast);

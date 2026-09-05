@@ -14,7 +14,7 @@
 
 .hero-identity {
   position: relative;
-  z-index: 1;
+  z-index: 3;
   display: flex;
   align-items: center;
   gap: clamp(16px, 2.5vw, 24px);
@@ -174,6 +174,92 @@
 .hero-btn-resume .btn-icon {
   width: 16px;
   height: 16px;
+  fill: none;
+  stroke: currentcolor;
+  stroke-width: 2;
+}
+
+.resume-download-menu {
+  position: relative;
+}
+
+.resume-download-menu > summary {
+  list-style: none;
+}
+
+.resume-download-menu > summary::-webkit-details-marker {
+  display: none;
+}
+
+.resume-menu-chevron {
+  width: 7px;
+  height: 7px;
+  margin-inline-start: 2px;
+  border-inline-end: 1.5px solid currentcolor;
+  border-bottom: 1.5px solid currentcolor;
+  transform: translateY(-2px) rotate(45deg);
+  transition: transform 160ms ease;
+}
+
+.resume-download-menu[open] .resume-menu-chevron {
+  transform: translateY(2px) rotate(225deg);
+}
+
+.resume-download-options {
+  position: absolute;
+  z-index: 20;
+  inset-block-start: calc(100% + 8px);
+  inset-inline-end: 0;
+  display: grid;
+  width: max-content;
+  min-width: 220px;
+  padding: 6px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+  box-shadow: var(--shadow-2);
+}
+
+.resume-download-options > a,
+.resume-download-options > button {
+  display: grid;
+  grid-template-columns: 42px 1fr;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 8px 10px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 650;
+  text-align: start;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.resume-download-options > a:hover,
+.resume-download-options > a:focus-visible,
+.resume-download-options > button:hover,
+.resume-download-options > button:focus-visible {
+  background: var(--hero-contact-item-hover);
+  color: var(--blue);
+  text-decoration: none;
+}
+
+.resume-format-mark {
+  color: var(--muted);
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.035em;
+}
+
+.resume-download-options svg {
+  width: 17px;
+  height: 17px;
+  margin-inline: auto;
   fill: none;
   stroke: currentcolor;
   stroke-width: 2;

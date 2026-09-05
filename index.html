@@ -279,10 +279,27 @@
                   <svg class="btn-icon" aria-hidden="true"><use href="#icon-folder"></use></svg>
                   <span data-translate="hero_cta_work">View Selected Work</span>
                 </a>
-                <button class="btn btn-ghost hero-btn-resume" type="button" data-print-resume aria-label="Print / Save Résumé" data-translate-attr="aria-label" data-translate-attr-key="hero_cta_resume">
-                  <svg class="btn-icon" aria-hidden="true"><use href="#icon-download"></use></svg>
-                  <span data-translate="hero_cta_resume">Print / Save Résumé</span>
-                </button>
+                <details class="resume-download-menu">
+                  <summary class="btn btn-ghost hero-btn-resume" aria-label="Download résumé" data-translate-attr="aria-label" data-translate-attr-key="resume_menu_label">
+                    <svg class="btn-icon" aria-hidden="true"><use href="#icon-download"></use></svg>
+                    <span data-translate="hero_cta_resume">Download Résumé</span>
+                    <span class="resume-menu-chevron" aria-hidden="true"></span>
+                  </summary>
+                  <div class="resume-download-options" aria-label="Résumé formats" data-translate-attr="aria-label" data-translate-attr-key="resume_formats_label">
+                    <a href="assets/documents/ahmed-mahdy-resume.pdf" download>
+                      <span class="resume-format-mark" aria-hidden="true">PDF</span>
+                      <span data-translate="resume_pdf">Download PDF</span>
+                    </a>
+                    <a href="assets/documents/ahmed-mahdy-resume.docx" download>
+                      <span class="resume-format-mark" aria-hidden="true">DOCX</span>
+                      <span data-translate="resume_docx">Download Word</span>
+                    </a>
+                    <button type="button" data-print-resume>
+                      <svg aria-hidden="true"><use href="#icon-print"></use></svg>
+                      <span data-translate="resume_print">Print this page</span>
+                    </button>
+                  </div>
+                </details>
               </div>
               <div class="hero-availability">
                 <span class="status-pulse" aria-hidden="true"></span>

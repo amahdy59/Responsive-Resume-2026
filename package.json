@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "node build.mjs",
+    "build:resume-documents": "python scripts/build-resume-documents.py",
     "audio:generate": "npm run build && node --env-file=.env.local scripts/narration-generate.mjs --generate",
     "check": "node scripts/validate.mjs",
     "lint": "npm run lint:html && npm run lint:css && npm run lint:js",
