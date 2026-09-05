@@ -82,6 +82,34 @@ function checkLiveUrl(url) {
   });
 }
 
+async function checkNarrationAudio() {
+  const manifestResponse = await fetch(
+    `${PRODUCTION_DOMAIN}/assets/audio/narration.json`,
+  );
+  if (!manifestResponse.ok)
+    throw new Error("Narration manifest is unavailable");
+
+  const manifest = await manifestResponse.json();
+  const keys = ["en/resume-employment", "ar/resume-employment"];
+  return Promise.all(
+    keys.map(async (key) => {
+      const response = await fetch(manifest[key]?.url, {
+        headers: { Origin: PRODUCTION_DOMAIN, Range: "bytes=0-1023" },
+      });
+      const allowedOrigin = response.headers.get("access-control-allow-origin");
+      return {
+        key,
+        status: response.status,
+        type: response.headers.get("content-type") || "",
+        ok:
+          [200, 206].includes(response.status) &&
+          response.headers.get("content-type")?.startsWith("audio/") &&
+          [PRODUCTION_DOMAIN, "*"].includes(allowedOrigin),
+      };
+    }),
+  );
+}
+
 function sleep(ms) {
   return new Promise((r) => setTimeout(r, ms));
 }
@@ -226,6 +254,24 @@ async function verifyDeployment() {
         }`,
       );
     }
+  }
+
+  try {
+    for (const result of await checkNarrationAudio()) {
+      if (result.ok) {
+        console.log(
+          `  ✅ [HTTP ${result.status}] narration ${result.key} (${result.type})`,
+        );
+      } else {
+        allLiveOk = false;
+        console.error(
+          `  ❌ [HTTP ${result.status}] narration ${result.key} failed CORS or media validation`,
+        );
+      }
+    }
+  } catch (error) {
+    allLiveOk = false;
+    console.error(`  ❌ Narration verification failed: ${error.message}`);
   }
 
   console.log("\n========================================================");
