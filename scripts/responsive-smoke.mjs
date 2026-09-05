@@ -269,7 +269,7 @@ try {
       assert.equal(state.buttonsAreNamed, true);
       // Repeated actions (for example print) may share the same accessible name.
       assert.equal(state.skipTargetTabIndex, -1);
-      assert.equal(state.sectionLinks.length, 6);
+      assert.equal(state.sectionLinks.length, 4);
       assert.ok(
         state.sectionLinks.every(
           ({ targetExists, text }) => targetExists && text,
@@ -370,6 +370,16 @@ try {
         const audioButton = page.locator(".audio-play-btn").first();
         await audioButton.click();
         assert.equal(await audioButton.getAttribute("aria-pressed"), "true");
+        assert.equal(
+          await page
+            .locator(".global-audio-player")
+            .evaluate((player) => player.hidden),
+          false,
+        );
+        assert.equal(
+          await page.locator("[data-audio-speed] option").count(),
+          5,
+        );
         await page.waitForFunction(() => Boolean(window.__narrationSource));
         assert.match(
           await page.evaluate(() => window.__narrationSource),
@@ -377,6 +387,12 @@ try {
         );
         await page.locator("body").press("Escape");
         assert.equal(await audioButton.getAttribute("aria-pressed"), "false");
+        assert.equal(
+          await page
+            .locator(".global-audio-player")
+            .evaluate((player) => player.hidden),
+          true,
+        );
 
         await page.evaluate(() => {
           window.print = () => {
@@ -774,6 +790,15 @@ try {
           ?.getAttribute("sandbox"),
         provenanceItems: document.querySelectorAll(".provenance-grid > div")
           .length,
+        repeatedDisclosureItems: document.querySelectorAll(
+          '[data-translate^="cs_provenance_ownership"], [data-translate^="cs_provenance_background"], [data-translate^="cs_provenance_ai"]',
+        ).length,
+        jumpMenuVisible:
+          getComputedStyle(document.querySelector(".case-section-jump"))
+            .display !== "none",
+        jumpMenuOptions: document.querySelectorAll(".case-section-jump option")
+          .length,
+        tradeoffs: document.querySelectorAll(".case-tradeoff").length,
         projectLearning: document
           .querySelector(
             '.case-learning, .provenance-grid [data-translate$="_learning"], [data-translate*="learning"]',
@@ -808,10 +833,11 @@ try {
       assert.equal(state.previewHidden, true);
       assert.equal(state.selectedDevices, 1);
       assert.ok(state.sandbox?.includes("allow-scripts"));
-      assert.ok(
-        state.provenanceItems >= 4,
-        `Expected at least 4 provenance items, got ${state.provenanceItems}`,
-      );
+      assert.ok(state.provenanceItems >= 1);
+      assert.equal(state.repeatedDisclosureItems, 0);
+      assert.equal(state.jumpMenuVisible, true);
+      assert.equal(state.jumpMenuOptions, 6);
+      assert.equal(state.tradeoffs, 1);
       assert.ok(state.projectLearning);
       assert.deepEqual(runtimeErrors, []);
 

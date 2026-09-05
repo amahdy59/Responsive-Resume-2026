@@ -6,7 +6,7 @@
     <meta
       id="meta-description"
       name="description"
-      content="Interactive Tableau dashboard exploring 18,000+ LEGO sets across historical themes and complexity tiers."
+      content="Interactive Power BI dashboard, supported by Python analysis, exploring LEGO sets across historical themes and complexity tiers."
     />
     <meta name="theme-color" content="#005f88" />
     <link rel="canonical" href="https://creativemahdy.space/project-lego-explorer.html" />
@@ -14,13 +14,13 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta id="og-title" property="og:title" content="A Data-Driven LEGO Explorer | Ahmed Mahdy Portfolio" />
-    <meta id="og-description" property="og:description" content="Interactive Tableau dashboard exploring 18,000+ LEGO sets across historical themes and complexity tiers." />
+    <meta id="og-description" property="og:description" content="Interactive Power BI dashboard, supported by Python analysis, exploring LEGO sets across historical themes and complexity tiers." />
     <meta property="og:url" content="https://creativemahdy.space/project-lego-explorer.html" />
     <meta property="og:site_name" content="Ahmed Mahdy Portfolio Resume" />
     <meta property="og:image" content="https://creativemahdy.space/assets/og-lego-explorer.png" />
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
-    <meta id="twitter-title" property="twitter:title" content="LEGO Historical Inventory Explorer | Ahmed Mahdy Portfolio" />
+    <meta id="twitter-title" property="twitter:title" content="A Data-Driven LEGO Explorer | Ahmed Mahdy Portfolio" />
     <meta id="twitter-description" property="twitter:description" content="Interactive analytical exploration across 70+ years of LEGO parts, themes, and sets with dynamic trend analysis." />
     <meta property="twitter:image" content="https://creativemahdy.space/assets/og-lego-explorer.png" />
     <script src="preference-bootstrap.js"></script>
@@ -43,7 +43,7 @@
     "@type": "CreativeWork",
     "name": "A Data-Driven LEGO Explorer",
     "headline": "A Data-Driven LEGO Explorer",
-    "description": "Interactive Tableau dashboard exploring 18,000+ LEGO sets across historical themes and complexity tiers.",
+    "description": "Interactive Power BI dashboard, supported by Python analysis, exploring LEGO sets across historical themes and complexity tiers.",
     "url": "https://creativemahdy.space/project-lego-explorer.html",
     "author": {
       "@type": "Person",
@@ -115,7 +115,7 @@
           <div class="case-study-controls">
             <button class="audio-play-btn case-listen-btn" type="button" data-audio-id="lego-explorer-intro" aria-label="Listen to case study" title="Listen to narration">
               <svg class="audio-icon" aria-hidden="true"><use href="#icon-volume"></use></svg>
-              <span class="audio-btn-text" data-translate="cs_listen_full">Read case study aloud</span>
+              <span class="audio-btn-text" data-translate="cs_listen_full">Listen to case study</span>
             </button>
             <button class="lang-toggle" type="button" data-tooltip="Switch Language" aria-label="Switch to Arabic"><span aria-hidden="true"><svg><use href="#icon-globe"></use></svg></span></button>
             <button class="theme-toggle" type="button" data-tooltip="Switch Theme" aria-label="Dark mode"><span aria-hidden="true"><svg><use href="#icon-moon"></use></svg></span></button>
@@ -146,7 +146,7 @@
           </div>
           <figure class="case-hero-image">
             <img src="assets/case-lego-explorer-800.webp" srcset="assets/case-lego-explorer-480.webp 480w, assets/case-lego-explorer-800.webp 800w, assets/case-lego-explorer-1200.webp 1200w" sizes="(max-width: 560px) calc(100vw - 32px), 460px" width="1440" height="810" alt="A Data-Driven LEGO Explorer interface preview" class="case-study-image" decoding="async" fetchpriority="high" />
-            <figcaption class="case-image-hint" data-translate="cs_hover_expand">Open image preview</figcaption>
+            <figcaption class="case-image-hint" data-translate="cs_lego_image_caption">Notice how filters and value indicators support comparison without hiding the underlying set data.</figcaption>
           </figure>
         </header>
 
@@ -221,6 +221,7 @@
               <div class="case-callout">
                 <strong data-translate="cs_key_decision">Key Design Decision</strong>
                 <p data-translate="cs_lego_sec2_callout">Developed an intuitive price-per-piece efficiency matrix allowing users to spot exceptional value sets at a glance.</p>
+                <p class="case-tradeoff"><strong data-translate="cs_tradeoff">Trade-off:</strong> <span data-translate="cs_lego_tradeoff">Price per piece makes comparison approachable but cannot represent rarity, condition, or resale value alone, so it is presented as an exploration aid rather than buying advice.</span></p>
               </div>
             </div>
           </details>
@@ -274,19 +275,7 @@
             <div class="accordion-body">
               <div class="provenance-grid">
                 <div class="provenance-card">
-                  <strong data-translate="cs_provenance_ownership">Ownership</strong>
-                  <p data-translate="cs_provenance_ownership_desc">Ahmed Mahdy owned the UX design, information architecture, visual direction, content, and final project decisions.</p>
-                </div>
-                <div class="provenance-card">
-                  <strong data-translate="cs_provenance_background">Professional Perspective</strong>
-                  <p data-translate="cs_provenance_background_desc">The work draws on his UX practice and background in eLearning and video authoring to simplify information, sequence interactions, and build a clear narrative.</p>
-                </div>
-                <div class="provenance-card">
-                  <strong data-translate="cs_provenance_ai">AI-Assisted Implementation</strong>
-                  <p data-translate="cs_provenance_ai_desc">Ahmed translated the Figma designs into a live project with assistance from Antigravity, Codex, and Claude agents, then reviewed, refined, and tested the implementation.</p>
-                </div>
-                <div class="provenance-card">
-                  <strong data-translate="cs_provenance_evidence">Special Learning</strong>
+                  <strong data-translate="cs_special_learning">What I learned</strong>
                   <p data-translate="cs_lego_learning">Special learning: turning data exploration into interactive visual storytelling and choosing the best agent or tool for each task instead of relying on one tool.</p>
                 </div>
               </div>
@@ -306,7 +295,7 @@
             </div>
             <div class="pagination-info">
               <span class="pagination-sub" data-translate="cs_prev_project">Previous Project</span>
-              <span class="pagination-title" data-translate="cs_azkar_title">Azkar Application</span>
+              <span class="pagination-title" data-translate="cs_azkar_title">Azkar App – Daily Fortress</span>
             </div>
           </a>
           <a href="project-haj-arafa.html" class="pagination-card pagination-next">

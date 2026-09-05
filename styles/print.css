@@ -462,10 +462,11 @@
   .case-study-nav,
   .case-study-breadcrumbs,
   .case-cta-wrapper,
-  .case-study-pagination,
-  .audio-play-btn {
-    display: none !important;
-  }
+    .case-study-pagination,
+    .audio-play-btn,
+    .global-audio-player {
+      display: none !important;
+    }
 
   .reveal,
   .reveal.active {

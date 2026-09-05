@@ -1,272 +1,260 @@
-/**
- * Audio Narration Controller for Ahmed Mahdy Portfolio Resume
- * Accessible per-section narration with native Web Speech API,
- * intelligent multilingual voice selection (Arabic & English),
- * and robust Play / Pause / Resume / Stop lifecycle.
- */
-
+/** One accessible narration controller shared by the résumé and case studies. */
 (function () {
   'use strict';
 
+  const labels = {
+    en: { player: 'Narration player', previous: 'Previous section', next: 'Next section', pause: 'Pause', resume: 'Resume', stop: 'Stop', speed: 'Playback speed', progress: 'Narration progress', listen: 'Listen', listenCase: 'Listen to case study', playing: 'Playing', paused: 'Narration paused', stopped: 'Narration stopped', unavailable: 'Narration is unavailable' },
+    ar: { player: 'مشغل السرد الصوتي', previous: 'القسم السابق', next: 'القسم التالي', pause: 'إيقاف مؤقت', resume: 'استئناف', stop: 'إيقاف', speed: 'سرعة التشغيل', progress: 'تقدم السرد', listen: 'استمع', listenCase: 'استمع إلى دراسة الحالة', playing: 'قيد التشغيل', paused: 'تم إيقاف السرد مؤقتًا', stopped: 'تم إيقاف السرد', unavailable: 'السرد الصوتي غير متاح' },
+  };
+  const allowedRates = [0.75, 1, 1.25, 1.5, 2];
+  const savedRate = Number(localStorage.getItem('resume-audio-rate'));
+  let playbackRate = allowedRates.includes(savedRate) ? savedRate : 1;
   let currentBtn = null;
-  let currentActiveContainer = null;
-  let isPaused = false;
+  let currentContainer = null;
   let currentUtterance = null;
   let currentMedia = null;
+  let isPaused = false;
   let cachedVoices = [];
-  const narrationManifest = fetch(new URL('/assets/audio/narration.json', window.location.origin))
-    .then(response => response.ok ? response.json() : {})
+  let player;
+  let liveStatus;
+  let playlist = [];
+  const manifest = fetch(new URL('/assets/audio/narration.json', location.origin))
+    .then((response) => (response.ok ? response.json() : {}))
     .catch(() => ({}));
+
+  const language = () => (document.documentElement.lang === 'ar' ? 'ar' : 'en');
+  const copy = () => labels[language()];
 
   function loadVoices() {
     if (!('speechSynthesis' in window)) return [];
-    cachedVoices = window.speechSynthesis.getVoices() || [];
+    cachedVoices = speechSynthesis.getVoices() || [];
     return cachedVoices;
-  }
-
-  if ('speechSynthesis' in window) {
-    loadVoices();
-    if (window.speechSynthesis.onvoiceschanged !== undefined) {
-      window.speechSynthesis.onvoiceschanged = loadVoices;
-    }
   }
 
   function getBestVoice(lang) {
     const voices = cachedVoices.length ? cachedVoices : loadVoices();
-    if (!voices.length) return null;
-
-    if (lang === 'ar') {
-      return (
-        voices.find(v => v.lang.startsWith('ar') && (v.name.includes('Natural') || v.name.includes('Google') || v.name.includes('Neural'))) ||
-        voices.find(v => v.lang.startsWith('ar')) ||
-        null
-      );
-    }
-
-    return (
-      voices.find(v => v.lang.startsWith('en') && (v.name.includes('Natural') || v.name.includes('Google') || v.name.includes('Premium') || v.name.includes('Neural'))) ||
-      voices.find(v => v.lang.startsWith('en-US')) ||
-      voices.find(v => v.lang.startsWith('en')) ||
-      null
-    );
+    const preferred = ['Natural', 'Google', 'Premium', 'Neural'];
+    return voices.find((voice) => voice.lang.startsWith(lang) && preferred.some((name) => voice.name.includes(name))) || voices.find((voice) => voice.lang.startsWith(lang)) || null;
   }
 
-  function stopAllAudio() {
+  function getContainer(button) {
+    const target = button?.getAttribute('data-target-selector');
+    if (button?.classList.contains('case-listen-btn')) return document.querySelector('.case-study-card');
+    return (target ? document.querySelector(target) : button?.closest('.case-study-section, .panel, .case-study-hero, article, header')) || button?.parentElement;
+  }
+
+  function getTitle(button) {
+    return getContainer(button)?.querySelector('h1, h2, h3')?.textContent.trim() || document.querySelector('h1')?.textContent.trim() || copy().player;
+  }
+
+  function formatTime(value) {
+    if (!Number.isFinite(value) || value < 0) return '--:--';
+    return `${Math.floor(value / 60)}:${Math.floor(value % 60).toString().padStart(2, '0')}`;
+  }
+
+  function announce(message) {
+    if (liveStatus) liveStatus.textContent = message;
+  }
+
+  function updateProgress() {
+    if (!player) return;
+    const range = player.querySelector('[data-audio-progress]');
+    const duration = currentMedia?.duration;
+    const currentTime = currentMedia?.currentTime || 0;
+    const seekable = Number.isFinite(duration) && duration > 0;
+    range.disabled = !seekable;
+    range.max = seekable ? String(duration) : '1';
+    range.value = seekable ? String(currentTime) : '0';
+    player.querySelector('[data-audio-time]').textContent = `${formatTime(currentTime)} / ${formatTime(duration)}`;
+  }
+
+  function setButtonState(button, state) {
+    if (!button) return;
+    const text = button.querySelector('.audio-btn-text');
+    const use = button.querySelector('use');
+    const idleLabel = button.classList.contains('case-listen-btn') ? copy().listenCase : copy().listen;
+    const label = state === 'playing' ? copy().pause : state === 'paused' ? copy().resume : idleLabel;
+    button.classList.toggle('is-playing', state === 'playing');
+    button.setAttribute('aria-pressed', String(state === 'playing'));
+    button.setAttribute('aria-label', `${label}: ${getTitle(button)}`);
+    if (text) text.textContent = label;
+    if (use) use.setAttribute('href', state === 'playing' ? '#icon-pause' : '#icon-volume');
+  }
+
+  function refreshLabels() {
+    document.querySelectorAll('.audio-play-btn').forEach((button) => setButtonState(button, button === currentBtn ? (isPaused ? 'paused' : 'playing') : 'idle'));
+    if (!player) return;
+    player.setAttribute('aria-label', copy().player);
+    player.querySelector('[data-audio-previous]').textContent = copy().previous;
+    player.querySelector('[data-audio-next]').textContent = copy().next;
+    player.querySelector('[data-audio-stop]').textContent = copy().stop;
+    player.querySelector('[data-audio-speed-label]').textContent = copy().speed;
+    player.querySelector('[data-audio-progress]').setAttribute('aria-label', copy().progress);
+    player.querySelector('[data-audio-toggle]').textContent = isPaused ? copy().resume : copy().pause;
+    if (currentBtn) player.querySelector('[data-audio-title]').textContent = getTitle(currentBtn);
+  }
+
+  function createPlayer() {
+    player = document.createElement('aside');
+    player.className = 'global-audio-player';
+    player.hidden = true;
+    player.setAttribute('role', 'region');
+    player.innerHTML = `<div class="audio-player-summary"><strong data-audio-title></strong><span data-audio-time>0:00 / --:--</span></div><input class="audio-player-progress" data-audio-progress type="range" min="0" max="1" value="0" step="0.1" disabled><div class="audio-player-controls"><button type="button" data-audio-previous></button><button type="button" data-audio-toggle></button><button type="button" data-audio-next></button><label class="audio-player-speed"><span data-audio-speed-label></span><select data-audio-speed>${allowedRates.map((rate) => `<option value="${rate}">${rate}×</option>`).join('')}</select></label><button type="button" data-audio-stop></button></div>`;
+    document.body.append(player);
+    liveStatus = document.createElement('p');
+    liveStatus.className = 'sr-only audio-live-status';
+    liveStatus.setAttribute('aria-live', 'polite');
+    document.body.append(liveStatus);
+    player.querySelector('[data-audio-speed]').value = String(playbackRate);
+    player.querySelector('[data-audio-toggle]').addEventListener('click', () => (isPaused ? resumeAudio() : pauseAudio()));
+    player.querySelector('[data-audio-stop]').addEventListener('click', () => stopAllAudio(true));
+    player.querySelector('[data-audio-previous]').addEventListener('click', () => {
+      const index = playlist.indexOf(currentBtn);
+      if (index > 0) playNarration(playlist[index - 1]);
+    });
+    player.querySelector('[data-audio-next]').addEventListener('click', () => {
+      const index = playlist.indexOf(currentBtn);
+      if (index >= 0 && index < playlist.length - 1) playNarration(playlist[index + 1]);
+    });
+    player.querySelector('[data-audio-speed]').addEventListener('change', (event) => {
+      playbackRate = Number(event.target.value);
+      localStorage.setItem('resume-audio-rate', String(playbackRate));
+      if (currentMedia) currentMedia.playbackRate = playbackRate;
+    });
+    player.querySelector('[data-audio-progress]').addEventListener('input', (event) => {
+      if (currentMedia && Number.isFinite(currentMedia.duration)) currentMedia.currentTime = Number(event.target.value);
+    });
+    refreshLabels();
+  }
+
+  function showPlayer() {
+    const index = playlist.indexOf(currentBtn);
+    player.hidden = false;
+    document.body.classList.add('has-audio-player');
+    player.querySelector('[data-audio-title]').textContent = getTitle(currentBtn);
+    player.querySelector('[data-audio-previous]').disabled = index <= 0;
+    player.querySelector('[data-audio-next]').disabled = index < 0 || index >= playlist.length - 1;
+    updateProgress();
+    refreshLabels();
+  }
+
+  function clearSources() {
     if (currentMedia) {
       currentMedia.pause();
       currentMedia.currentTime = 0;
       currentMedia = null;
     }
-    if (window.speechSynthesis) {
-      window.speechSynthesis.cancel();
-    }
+    if ('speechSynthesis' in window) speechSynthesis.cancel();
     currentUtterance = null;
     isPaused = false;
+  }
 
-    if (currentBtn) {
-      setButtonState(currentBtn, false);
-      currentBtn = null;
-    }
-    if (currentActiveContainer) {
-      currentActiveContainer.classList.remove('audio-reading-active');
-      currentActiveContainer = null;
-    }
+  function stopAllAudio(shouldAnnounce = false) {
+    clearSources();
+    setButtonState(currentBtn, 'idle');
+    currentBtn = null;
+    currentContainer?.classList.remove('audio-reading-active');
+    currentContainer = null;
+    player.hidden = true;
+    document.body.classList.remove('has-audio-player');
+    if (shouldAnnounce) announce(copy().stopped);
   }
 
   function pauseAudio() {
-    if (currentMedia && !currentMedia.paused) {
-      currentMedia.pause();
-      isPaused = true;
-      if (currentBtn) setButtonState(currentBtn, false, true);
-      return;
-    }
-    if (window.speechSynthesis && window.speechSynthesis.speaking && !window.speechSynthesis.paused) {
-      window.speechSynthesis.pause();
-      isPaused = true;
-      if (currentBtn) {
-        setButtonState(currentBtn, false, true);
-      }
-    }
+    if (currentMedia && !currentMedia.paused) currentMedia.pause();
+    else if ('speechSynthesis' in window && speechSynthesis.speaking && !speechSynthesis.paused) speechSynthesis.pause();
+    else return;
+    isPaused = true;
+    setButtonState(currentBtn, 'paused');
+    refreshLabels();
+    announce(copy().paused);
   }
 
   function resumeAudio() {
-    if (currentMedia && currentMedia.paused) {
-      currentMedia.play().catch(stopAllAudio);
-      isPaused = false;
-      if (currentBtn) setButtonState(currentBtn, true);
+    if (currentMedia?.paused) currentMedia.play().catch(() => stopAllAudio());
+    else if ('speechSynthesis' in window && speechSynthesis.paused) speechSynthesis.resume();
+    else return;
+    isPaused = false;
+    setButtonState(currentBtn, 'playing');
+    refreshLabels();
+    announce(`${copy().playing}: ${getTitle(currentBtn)}`);
+  }
+
+  function narrationText(container) {
+    if (!container) return '';
+    const clone = container.cloneNode(true);
+    clone.querySelectorAll('.audio-play-btn, .section-num, .mockup-header, .skip-link, .project-actions, .external-icon, script, style, .sr-only, .project-toggle').forEach((element) => element.remove());
+    return (clone.textContent || '').replace(/\b0[1-6]\b/g, '').replace(/•/g, ', ').replace(/\s+/g, ' ').trim();
+  }
+
+  function startSpeech(text, lang) {
+    currentMedia = null;
+    updateProgress();
+    if (!('speechSynthesis' in window)) {
+      stopAllAudio();
+      announce(copy().unavailable);
       return;
     }
-    if (window.speechSynthesis && window.speechSynthesis.paused) {
-      window.speechSynthesis.resume();
-      isPaused = false;
-      if (currentBtn) {
-        setButtonState(currentBtn, true);
-      }
-    }
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = lang === 'ar' ? 'ar-SA' : 'en-US';
+    utterance.rate = playbackRate * (lang === 'ar' ? 0.92 : 1);
+    utterance.voice = getBestVoice(lang);
+    utterance.onend = () => currentUtterance === utterance && stopAllAudio();
+    utterance.onerror = () => currentUtterance === utterance && stopAllAudio();
+    currentUtterance = utterance;
+    speechSynthesis.speak(utterance);
   }
 
-  function setButtonState(btn, isPlaying, isPausedState = false) {
-    const isArabic = document.documentElement.lang === 'ar';
-    const textEl = btn.querySelector('.audio-btn-text');
-    const useEl = btn.querySelector('use');
-
-    if (isPlaying) {
-      btn.classList.add('is-playing');
-      btn.setAttribute('aria-pressed', 'true');
-      if (textEl) textEl.textContent = isArabic ? 'إيقاف مؤقت' : 'Pause';
-      btn.setAttribute('aria-label', isArabic ? 'إيقاف السرد مؤقتًا' : 'Pause narration');
-      if (useEl) useEl.setAttribute('href', '#icon-pause');
-    } else if (isPausedState) {
-      btn.classList.remove('is-playing');
-      btn.setAttribute('aria-pressed', 'false');
-      if (textEl) textEl.textContent = isArabic ? 'استئناف' : 'Resume';
-      btn.setAttribute('aria-label', isArabic ? 'استئناف السرد' : 'Resume narration');
-      if (useEl) useEl.setAttribute('href', '#icon-volume');
-    } else {
-      btn.classList.remove('is-playing');
-      btn.setAttribute('aria-pressed', 'false');
-      const label = btn.classList.contains('case-listen-btn')
-        ? (isArabic ? 'قراءة دراسة الحالة بصوت مسموع' : 'Read case study aloud')
-        : (isArabic ? 'قراءة صوتية' : 'Read aloud');
-      const section = btn.closest('.panel')?.querySelector('h2')?.textContent.trim();
-      if (textEl) textEl.textContent = label;
-      btn.setAttribute('aria-label', section ? `${label}: ${section}` : label);
-      if (useEl) useEl.setAttribute('href', '#icon-volume');
+  async function playNarration(button) {
+    if (currentBtn === button) {
+      if (isPaused) resumeAudio(); else pauseAudio();
+      return;
     }
-  }
+    clearSources();
+    setButtonState(currentBtn, 'idle');
+    currentContainer?.classList.remove('audio-reading-active');
+    const container = getContainer(button);
+    const text = narrationText(container);
+    if (!text) return;
+    currentBtn = button;
+    currentContainer = container;
+    container?.classList.add('audio-reading-active');
+    setButtonState(button, 'playing');
+    showPlayer();
+    announce(`${copy().playing}: ${getTitle(button)}`);
 
-  function getCleanNarrationText(targetContainer) {
-    if (!targetContainer) return '';
-    const clone = targetContainer.cloneNode(true);
-    
-    const removeEls = clone.querySelectorAll(
-      '.audio-play-btn, .section-num, .mockup-header, .skip-link, .project-actions, .external-icon, script, style, .sr-only, .project-toggle'
-    );
-    removeEls.forEach(el => el.remove());
-
-    let text = clone.textContent || '';
-    text = text
-      .replace(/\b0[1-6]\b/g, '')
-      .replace(/•/g, ', ')
-      .replace(/\s+/g, ' ')
-      .trim();
-
-    return text;
-  }
-
-  async function playNarration(btn) {
-    const targetSelector = btn.getAttribute('data-target-selector');
-    const targetContainer = targetSelector
-      ? document.querySelector(targetSelector)
-      : btn.closest('.case-study-section, .panel, .case-study-hero, article, header') || btn.parentElement;
-
-    if (currentBtn === btn) {
-      if (currentMedia) {
-        if (currentMedia.paused) resumeAudio();
-        else pauseAudio();
-        return;
-      }
-      if (window.speechSynthesis.speaking) {
-        if (window.speechSynthesis.paused || isPaused) {
-          resumeAudio();
-        } else {
-          pauseAudio();
-        }
-        return;
-      }
-    }
-
-    stopAllAudio();
-
-    const textToRead = getCleanNarrationText(targetContainer);
-    if (!textToRead) return;
-
-    currentBtn = btn;
-    setButtonState(btn, true);
-
-    if (targetContainer) {
-      currentActiveContainer = targetContainer;
-      targetContainer.classList.add('audio-reading-active');
-    }
-
-    const lang = (document.documentElement.getAttribute('lang') || 'en').startsWith('ar') ? 'ar' : 'en';
-    const recording = (await narrationManifest)[`${lang}/${btn.dataset.audioId}`];
+    const lang = language();
+    const recording = (await manifest)[`${lang}/${button.dataset.audioId}`];
     if (recording?.url) {
       const media = new Audio(recording.url);
       currentMedia = media;
-      media.onended = () => { if (currentMedia === media) stopAllAudio(); };
-      media.onerror = () => { if (currentMedia === media) stopAllAudio(); };
-      try {
-        await media.play();
-        return;
-      } catch {
-        currentMedia = null;
-      }
+      media.preload = 'metadata';
+      media.playbackRate = playbackRate;
+      media.ontimeupdate = updateProgress;
+      media.onloadedmetadata = updateProgress;
+      media.onended = () => currentMedia === media && stopAllAudio();
+      media.onerror = () => currentMedia === media && startSpeech(text, lang);
+      try { await media.play(); return; } catch { if (currentMedia === media) currentMedia = null; }
     }
-
-    const isArabic = lang.startsWith('ar');
-
-    if (!('speechSynthesis' in window)) {
-      stopAllAudio();
-      return;
-    }
-
-    const utterance = new SpeechSynthesisUtterance(textToRead);
-    utterance.lang = isArabic ? 'ar-SA' : 'en-US';
-    utterance.rate = isArabic ? 0.92 : 1.0;
-    utterance.pitch = 1.0;
-
-    const voice = getBestVoice(isArabic ? 'ar' : 'en');
-    if (voice) {
-      utterance.voice = voice;
-    }
-
-    utterance.onend = function () {
-      if (currentUtterance === utterance) stopAllAudio();
-    };
-
-    utterance.onerror = function () {
-      if (currentUtterance === utterance) stopAllAudio();
-    };
-
-    window._activeUtterance = utterance;
-    currentUtterance = utterance;
-
-    window.speechSynthesis.speak(utterance);
+    startSpeech(text, lang);
   }
 
-  function initAudioControls() {
-    document.addEventListener('click', function (e) {
-      const btn = e.target.closest('.audio-play-btn');
-      if (btn) {
-        e.preventDefault();
-        playNarration(btn);
-      }
+  function init() {
+    playlist = [...document.querySelectorAll('.audio-play-btn')];
+    createPlayer();
+    if ('speechSynthesis' in window) {
+      loadVoices();
+      speechSynthesis.addEventListener?.('voiceschanged', loadVoices);
+    }
+    document.addEventListener('click', (event) => {
+      const button = event.target.closest('.audio-play-btn');
+      if (button) { event.preventDefault(); playNarration(button); }
     });
-
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && (currentMedia || (window.speechSynthesis && (window.speechSynthesis.speaking || window.speechSynthesis.paused)))) {
-        stopAllAudio();
-      }
-    });
-
-    document.addEventListener('visibilitychange', function () {
-      if (document.hidden && (currentMedia || (window.speechSynthesis && window.speechSynthesis.speaking && !window.speechSynthesis.paused))) {
-        pauseAudio();
-      }
-    });
+    document.addEventListener('keydown', (event) => event.key === 'Escape' && currentBtn && stopAllAudio(true));
+    document.addEventListener('visibilitychange', () => document.hidden && currentBtn && !isPaused && pauseAudio());
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initAudioControls);
-  } else {
-    initAudioControls();
-  }
-
-  window.AntigravityAudio = {
-    play: playNarration,
-    stop: stopAllAudio,
-    pause: pauseAudio,
-    resume: resumeAudio
-  };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+  window.AntigravityAudio = { play: playNarration, stop: stopAllAudio, pause: pauseAudio, resume: resumeAudio, refreshLabels };
 })();

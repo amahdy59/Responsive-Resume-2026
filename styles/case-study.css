@@ -446,6 +446,10 @@
   display: none;
 }
 
+.case-section-jump {
+  display: none;
+}
+
 .case-section-link {
   display: inline-flex;
   align-items: center;
@@ -575,6 +579,17 @@
   color: var(--text);
   font-size: 1rem;
   line-height: 1.65;
+}
+
+.case-tradeoff {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--soft-line);
+  color: var(--muted);
+}
+
+.case-tradeoff strong {
+  color: var(--text);
 }
 
 [dir="rtl"] .case-callout {

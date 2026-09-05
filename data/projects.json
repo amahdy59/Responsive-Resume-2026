@@ -1,0 +1,83 @@
+[
+  {
+    "id": "haj-arafa",
+    "file": "project-haj-arafa.html",
+    "homeTitleKey": "proj_ux3_title",
+    "caseTitleKey": "cs_haj_title",
+    "title": {
+      "en": "Haj Arafa App",
+      "ar": "تطبيق حاج عرفة"
+    },
+    "platform": {
+      "en": "Mobile-First Web App",
+      "ar": "تطبيق ويب للجوال"
+    },
+    "caseStudyUrl": "project-haj-arafa.html",
+    "liveUrl": "https://amahdy59.github.io/Hajarafaapp/"
+  },
+  {
+    "id": "cairo-airport",
+    "file": "project-cairo-airport.html",
+    "homeTitleKey": "proj_ux2_title",
+    "caseTitleKey": "cs_cairo_title",
+    "title": {
+      "en": "Cairo International Airport - Command Hub",
+      "ar": "مطار القاهرة الدولي - مركز التحكم والعمليات"
+    },
+    "platform": {
+      "en": "Tableau Desktop & Cloud",
+      "ar": "Tableau Desktop و Cloud"
+    },
+    "caseStudyUrl": "project-cairo-airport.html",
+    "liveUrl": "https://amahdy59.github.io/Cairo-International-Airpot-CIA-Dashboard/"
+  },
+  {
+    "id": "hr-tool",
+    "file": "project-hr-tool.html",
+    "homeTitleKey": "proj_ux1_title",
+    "caseTitleKey": "cs_hr_title",
+    "title": {
+      "en": "HR Management Tool",
+      "ar": "منظومة إدارة الموارد البشرية"
+    },
+    "platform": {
+      "en": "Web Application (SaaS)",
+      "ar": "تطبيق ويب سحابي (SaaS)"
+    },
+    "caseStudyUrl": "project-hr-tool.html",
+    "liveUrl": "https://amahdy59.github.io/hr-tool-v2/"
+  },
+  {
+    "id": "azkar-app",
+    "file": "project-azkar-app.html",
+    "homeTitleKey": "proj_ux4_title",
+    "caseTitleKey": "cs_azkar_title",
+    "title": {
+      "en": "Azkar App – Daily Fortress",
+      "ar": "تطبيق الأذكار - الحصن اليومي"
+    },
+    "platform": {
+      "en": "Progressive Web App (PWA)",
+      "ar": "تطبيق ويب تقدمي (PWA)"
+    },
+    "caseStudyUrl": "project-azkar-app.html",
+    "liveUrl": "https://amahdy59.github.io/Azkarapp/#/home"
+  },
+  {
+    "id": "lego-explorer",
+    "file": "project-lego-explorer.html",
+    "homeTitleKey": "proj_data1_title",
+    "caseTitleKey": "cs_lego_title",
+    "title": {
+      "en": "A Data-Driven LEGO Explorer",
+      "ar": "مستكشف مجموعات LEGO بالبيانات"
+    },
+    "platform": {
+      "en": "Power BI & Python Analytics",
+      "ar": "Power BI وتحليلات Python"
+    },
+    "caseStudyUrl": "project-lego-explorer.html",
+    "liveUrl": "https://mavenshowcase.com/project/24967",
+    "forbiddenTerms": ["Tableau"]
+  }
+]

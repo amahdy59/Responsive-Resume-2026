@@ -82,6 +82,15 @@
   box-shadow: none;
 }
 
+[data-contrast="high"] .global-audio-player,
+[data-contrast="high"] .audio-player-controls button,
+[data-contrast="high"] .audio-player-speed select {
+  border: 2px solid #fff;
+  background: #000;
+  color: #fff;
+  box-shadow: none;
+}
+
 [data-contrast="high"] .compact-list li,
 [data-contrast="high"] .featured article {
   border: 2px solid #fff;
@@ -214,7 +223,10 @@
 
   .panel,
   .compact-list li,
-  .featured article {
+  .featured article,
+  .global-audio-player,
+  .audio-player-controls button,
+  .audio-player-speed select {
     border: 1.5px solid ButtonBorder !important;
   }
 

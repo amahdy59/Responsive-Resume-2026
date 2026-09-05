@@ -70,7 +70,7 @@ const siteMeta = {
 const translations = {
   ar: {
     about_text:
-      "أصمم تجارب رقمية سهلة الوصول، من فهم الاحتياجات وتصميم التفاعل إلى التنفيذ والتحقق من الجودة. تشكّل خبرتي في التعلم الإلكتروني طريقتي في تنظيم المعلومات وتبسيط الأفكار المعقدة ومساعدة الناس على التعلم بثقة. أستخدم الذكاء الاصطناعي لاستكشاف الحلول وتنفيذها مع احتفاظي بمسؤولية القرارات التصميمية ومراجعة الجودة.",
+      "أصمم تجارب رقمية سهلة الوصول، من فهم الاحتياجات وتصميم التفاعل إلى التنفيذ والتحقق من الجودة. تشكّل خبرتي في التعلم الإلكتروني طريقتي في تنظيم المعلومات وتبسيط الأفكار المعقدة. أستخدم أدوات الذكاء الاصطناعي لتسريع الاستكشاف والتنفيذ، مع احتفاظي بمسؤولية قرارات التصميم وسهولة الوصول والمراجعة والجودة النهائية.",
     aria_dark_mode: "الوضع الداكن",
     aria_high_contrast_mode: "وضع التباين العالي",
     aria_switch_to_arabic: "التبديل إلى العربية",
@@ -191,8 +191,8 @@ const translations = {
     opens_new_tab: " يفتح في تبويب جديد",
     profile_details_label: "تفاصيل الملف الشخصي",
     proj_data1_desc:
-      "تجربة تفاعلية لتصور البيانات باستخدام Tableau تساعد المستخدمين على استكشاف مجموعات LEGO حسب الموضوع، والعمر، والسعر، وعدد القطع.",
-    proj_data1_title: "مستكشف ليجو المعتمد على البيانات",
+      "لوحة Power BI تفاعلية مدعومة بتحليل Python تساعد المستخدمين على استكشاف مجموعات LEGO حسب الموضوع والعمر والسعر وعدد القطع.",
+    proj_data1_title: "مستكشف مجموعات LEGO بالبيانات",
     proj_data2_desc:
       "لوحة معلومات لمبيعات علاقات العملاء (CRM) تم بناؤها في Google Sheets لتتبع أداء الفريق الربع سنوي عبر التصور المعتمد على الرسوم البيانية.",
     proj_data2_title: "لوحة معلومات أداء المبيعات",
@@ -202,10 +202,10 @@ const translations = {
     filter_data: "تصوير البيانات",
     proj_ux1_desc:
       "تصور متجاوب يركز على الخصوصية لأداة موارد بشرية (SaaS) تدعم طلبات الإجازات والموافقات حسب الدور ووضوح حالة الطلب.",
-    proj_ux1_title: "أداة الموارد البشرية",
+    proj_ux1_title: "منظومة إدارة الموارد البشرية",
     proj_ux2_desc:
       "تصور تفاعلي للوحة تحكم تشغيلية يركز على وضوح تصوير البيانات وتسلسل المعلومات والسلوك المتجاوب.",
-    proj_ux2_title: "مركز التحكم بمطار القاهرة الدولي",
+    proj_ux2_title: "مطار القاهرة الدولي - مركز التحكم والعمليات",
     proj_ux3_desc:
       "تصور لتجارة إلكترونية عبر الجوال يسهل الوصول إليه، مع تنقل يبدأ بالبحث وتجربة دفع موحدة للزوار.",
     proj_ux3_title: "تطبيق حاج عرفة",
@@ -217,7 +217,7 @@ const translations = {
     read_case_study: "قراءة دراسة الحالة",
     resume_card_label: "نظرة عامة على السيرة الذاتية",
     resume_label: "موقع السيرة الذاتية لأحمد مهدي",
-    section_nav_label: "أقسام السيرة الذاتية",
+    section_nav_label: "أقسام ملف الأعمال",
     sect_about: "نبذة عني",
     sect_certs: "الشهادات المهنية",
     sect_edu: "التعليم",
@@ -274,7 +274,7 @@ const translations = {
       "جميع مشاريع تجربة المستخدم من تصميم أحمد مهدي في Figma. استُخدمت أدوات Antigravity وCodex وClaude للمساعدة في تحويل التصاميم إلى تطبيقات حية تحت مراجعته وتوجيهه.",
     toast_copied: "تم النسخ",
     hero_bio:
-      "أساعد الشركات في تحويل البيانات المعقدة إلى رؤى واضحة وتجارب رقمية متميزة يحب الناس استخدامها.",
+      "أصمم منتجات رقمية سهلة الوصول وأحوّل البيانات المعقدة إلى تجارب واضحة تدعم اتخاذ القرار.",
     hero_cta_resume: "طباعة / حفظ السيرة الذاتية",
     hero_availability: "متاح لمشاريع جديدة",
     contact_email_sub: "راسلني",
@@ -300,7 +300,7 @@ const translations = {
     cs_back_to_projects: "العودة إلى المشاريع",
     cs_home: "الرئيسية",
     cs_projects: "المشاريع",
-    cs_listen: "قراءة صوتية",
+    cs_listen: "استمع",
     cs_pause: "إيقاف مؤقت",
     cs_hide_preview: "إخفاء المعاينة التفاعلية",
     cs_image_preview: "معاينة الصورة",
@@ -313,13 +313,15 @@ const translations = {
     cs_platform: "المنصة",
     cs_status: "الحالة",
     cs_interactive_preview: "معاينة تفاعلية",
-    cs_visit_live: "زيارة المشروع الحي",
+    cs_visit_live: "عرض المشروع الحي",
     cs_visit_dashboard: "فتح لوحة البيانات",
     cs_desktop: "سطح المكتب",
     cs_mobile: "الجوال (390px)",
     cs_open_tab: "فتح في نافذة جديدة",
     cs_key_decision: "قرار التصميم الرئيسي",
-    cs_listen_full: "قراءة دراسة الحالة بصوت مسموع",
+    cs_listen_full: "استمع إلى دراسة الحالة",
+    cs_tradeoff: "المقايضة:",
+    cs_special_learning: "ما تعلمته",
     cs_open_live: "فتح الموقع الحي",
     cs_view_prototype: "معاينة الموقع الحي",
     cs_hover_expand: "فتح معاينة الصورة",
@@ -366,14 +368,34 @@ const translations = {
       "المتاح هو التصميم والتنفيذ الحي وقرارات دراسة الحالة. لا تُنسب نتائج أعمال كمية ما لم يوجد مصدر وقياس موثق.",
     cs_haj_learning:
       "التعلم الخاص: تصميم مسار تجارة إلكترونية قصير ومتجاوب، وتوجيه وكلاء الذكاء الاصطناعي لتنفيذ حالات التنقل والدفع بدقة.",
+    cs_haj_tradeoff:
+      "تقلل واجهة الأكورديون طول صفحة الدفع، لكنها تخفي الخطوات اللاحقة؛ لذلك يجب أن تبقى حالة التقدم واضحة وأن يُتحقق منها باختبار قابلية الاستخدام.",
+    cs_haj_image_caption:
+      "لاحظ أولوية البحث والفئات ومسار الدفع المختصر الملائم للجوال.",
     cs_cairo_learning:
       "التعلم الخاص: الحفاظ على هرمية المعلومات والوضوح البصري عند تحويل لوحة تشغيل كثيفة البيانات من Figma إلى تجربة حية.",
+    cs_cairo_tradeoff:
+      "يسهّل تجميع مؤشرات التشغيل المسح السريع، لكنه يزيد كثافة المعلومات؛ لذلك يعتمد التصميم على هرمية قوية ويحتاج إلى تحقق مع مستخدمي العمليات.",
+    cs_cairo_image_caption:
+      "لاحظ هرمية مؤشرات التشغيل وحالات التنبيه داخل لوحة معلومات كثيفة.",
     cs_hr_learning:
       "التعلم الخاص: نمذجة مسارات العمل القائمة على الأدوار وحالات الموافقة، ومراجعة المخرجات المولدة بالذكاء الاصطناعي من منظور سهولة الوصول.",
+    cs_hr_tradeoff:
+      "تسرّع الموافقات المجمعة المهام المتكررة، لكنها ترفع تكلفة الخطأ؛ لذلك تحتاج إلى ملخص واضح وتأكيد وسجل تدقيق.",
+    cs_hr_image_caption:
+      "لاحظ وضوح حالة الطلب وتنظيم إجراءات الموافقة القائمة على الدور.",
     cs_azkar_learning:
       "التعلم الخاص: حماية أولوية العربية واتجاه RTL وجودة القراءة أثناء استخدام الوكلاء لتنفيذ تجربة حساسة للمحتوى.",
+    cs_azkar_tradeoff:
+      "يعزز نهج العمل دون اتصال الاعتمادية والخصوصية، لكنه يحد من المزامنة بين الأجهزة ما لم يضف المستخدم خدمة سحابية اختيارية.",
+    cs_azkar_image_caption:
+      "لاحظ أولوية العربية ومساحة القراءة الهادئة ووضوح التقدم اليومي.",
     cs_lego_learning:
       "التعلم الخاص: تحويل استكشاف البيانات إلى قصة بصرية تفاعلية، واختيار الأداة أو الوكيل الأنسب لكل مهمة بدلاً من الاعتماد على أداة واحدة.",
+    cs_lego_tradeoff:
+      "تسهّل مصفوفة السعر لكل قطعة المقارنة، لكنها لا تمثل وحدها الندرة أو الحالة أو قيمة إعادة البيع؛ لذلك تُعرض كمؤشر استكشافي لا كتوصية شراء.",
+    cs_lego_image_caption:
+      "لاحظ كيف تدعم المرشحات ومؤشرات القيمة مقارنة المجموعات دون إخفاء البيانات الأساسية.",
 
     // Case Study 1: Haj Arafa App
     cs_haj_title: "تطبيق حاج عرفة",
@@ -440,7 +462,7 @@ const translations = {
       "يوضح التنفيذ الحي مسار العمل. يتطلب إثبات التبني في الإنتاج أو الوقت الموفر بيانات مؤسسية موثقة.",
 
     // Case Study 4: Azkar Application
-    cs_azkar_title: "تطبيق الأذكار اليومية",
+    cs_azkar_title: "تطبيق الأذكار - الحصن اليومي",
     cs_azkar_badge: "تجربة مستخدم الجوال • تطبيقات الإنتاجية الإسلامية",
     cs_azkar_badge1: "تجربة مستخدم الجوال",
     cs_azkar_badge2: "تطبيقات الإنتاجية الإسلامية",
@@ -485,7 +507,7 @@ const translations = {
   },
   en: {
     about_text:
-      "I design accessible digital experiences from discovery and interaction design through implementation and validation. My background in eLearning shapes how I organize information, explain complex ideas, and help people build confidence. I use AI to explore and deliver solutions while keeping design judgment and quality review in my hands.",
+      "I design accessible digital experiences from discovery and interaction design through implementation and validation. My eLearning background shapes how I organize information and explain complex ideas. I use AI tools to accelerate exploration and implementation while retaining responsibility for design decisions, accessibility, review, and final quality.",
     aria_dark_mode: "Dark mode",
     aria_high_contrast_mode: "High contrast mode",
     aria_switch_to_arabic: "Switch to Arabic",
@@ -606,7 +628,7 @@ const translations = {
     opens_new_tab: " opens in a new tab",
     profile_details_label: "Profile details",
     proj_data1_desc:
-      "Interactive Tableau data visualization helping users explore LEGO sets across themes, age ranges, prices, and piece counts.",
+      "Interactive Power BI dashboard, supported by Python analysis, for exploring LEGO sets across themes, age ranges, prices, and piece counts.",
     proj_data1_title: "A Data-Driven LEGO Explorer",
     proj_data2_desc:
       "CRM sales dashboard built in Google Sheets to track quarterly team performance via chart-driven visualization.",
@@ -632,7 +654,7 @@ const translations = {
     read_case_study: "Read Case Study",
     resume_card_label: "Resume overview",
     resume_label: "Ahmed Mahdy resume portfolio",
-    section_nav_label: "Resume sections",
+    section_nav_label: "Portfolio sections",
     sect_about: "About Me",
     sect_certs: "Certifications",
     sect_edu: "Education",
@@ -694,7 +716,7 @@ const translations = {
     toast_copy_linkedin: "LinkedIn link copied to clipboard",
     toast_copy_project: "Project link copied to clipboard",
     hero_bio:
-      "I help businesses turn complex data into clear insights and beautiful experiences that people love to use.",
+      "I design accessible digital products and turn complex data into clear, decision-ready experiences.",
     hero_cta_resume: "Print / Save Résumé",
     hero_availability: "Available for new projects",
     contact_email_sub: "Email me",
@@ -720,7 +742,7 @@ const translations = {
     cs_back_to_projects: "Back to Projects",
     cs_home: "Home",
     cs_projects: "Projects",
-    cs_listen: "Read aloud",
+    cs_listen: "Listen",
     cs_pause: "Pause",
     cs_hide_preview: "Hide Interactive Preview",
     cs_image_preview: "Image preview",
@@ -733,13 +755,15 @@ const translations = {
     cs_platform: "Platform",
     cs_status: "Status",
     cs_interactive_preview: "Interactive Preview",
-    cs_visit_live: "Visit Live Project",
+    cs_visit_live: "View Live Project",
     cs_visit_dashboard: "Open Dashboard",
     cs_desktop: "Desktop",
     cs_mobile: "Mobile (390px)",
     cs_open_tab: "Open in New Tab",
     cs_key_decision: "Key Design Decision",
-    cs_listen_full: "Read case study aloud",
+    cs_listen_full: "Listen to case study",
+    cs_tradeoff: "Trade-off:",
+    cs_special_learning: "What I learned",
     cs_open_live: "Open Live Website",
     cs_view_prototype: "Preview live site",
     cs_hover_expand: "Open image preview",
@@ -786,14 +810,34 @@ const translations = {
       "Evidence shown is the design, live implementation, and documented case-study decisions. No quantitative business outcome is attributed without a documented source and measurement.",
     cs_haj_learning:
       "Special learning: shaping a concise responsive commerce journey and directing AI agents to implement navigation and checkout states faithfully.",
+    cs_haj_tradeoff:
+      "The accordion reduces checkout-page length but hides later steps, so progress must remain clear and the pattern still needs usability validation.",
+    cs_haj_image_caption:
+      "Notice the search-first hierarchy, curated categories, and shortened mobile checkout path.",
     cs_cairo_learning:
       "Special learning: preserving information hierarchy and visual clarity while translating a dense operational dashboard from Figma into a live experience.",
+    cs_cairo_tradeoff:
+      "Consolidating operational signals supports fast scanning but increases information density, so the hierarchy needs validation with operational users.",
+    cs_cairo_image_caption:
+      "Notice the hierarchy of operational signals and warning states within a dense dashboard.",
     cs_hr_learning:
       "Special learning: modeling role-based workflows and approval states while reviewing AI-generated implementation for accessibility and clarity.",
+    cs_hr_tradeoff:
+      "Batch approvals accelerate repetitive work but raise the cost of mistakes, so they require a clear summary, confirmation, and audit history.",
+    cs_hr_image_caption:
+      "Notice the visible request status and organization of role-based approval actions.",
     cs_azkar_learning:
       "Special learning: protecting Arabic-first, RTL, and reading-quality requirements while using agents on a content-sensitive experience.",
+    cs_azkar_tradeoff:
+      "Offline-first behavior improves reliability and privacy but limits cross-device continuity unless users opt into a future synchronization service.",
+    cs_azkar_image_caption:
+      "Notice the Arabic-first hierarchy, calm reading space, and clear daily progress.",
     cs_lego_learning:
       "Special learning: turning data exploration into interactive visual storytelling and choosing the best agent or tool for each task instead of relying on one tool.",
+    cs_lego_tradeoff:
+      "Price per piece makes comparison approachable but cannot represent rarity, condition, or resale value alone, so it is presented as an exploration aid rather than buying advice.",
+    cs_lego_image_caption:
+      "Notice how filters and value indicators support comparison without hiding the underlying set data.",
 
     // Case Study 1: Haj Arafa App
     cs_haj_title: "Haj Arafa App",
@@ -860,7 +904,7 @@ const translations = {
       "The live implementation demonstrates the workflow. Production adoption and time-saved outcomes require documented organizational data.",
 
     // Case Study 4: Azkar Application
-    cs_azkar_title: "Azkar Application",
+    cs_azkar_title: "Azkar App – Daily Fortress",
     cs_azkar_badge: "Mobile UX • Islamic Productivity",
     cs_azkar_badge1: "Mobile UX",
     cs_azkar_badge2: "Islamic Productivity",
@@ -1304,6 +1348,8 @@ function refreshUi(lang) {
     const heading = list.closest(".skill-group")?.querySelector("h3")?.textContent;
     if (heading) list.setAttribute("aria-label", heading);
   });
+  refreshCaseSectionJump(lang);
+  window.AntigravityAudio?.refreshLabels?.();
 }
 
 /**
@@ -1637,6 +1683,7 @@ function initReadingProgressBar() {
 function initialize() {
   initResponsiveContentOrder();
   initSectionNavigation();
+  initCaseSectionNavigation();
   enhanceLinkedCards();
   bindCopyButtons();
   initReadingProgressBar();
@@ -1644,6 +1691,76 @@ function initialize() {
   setTheme(savedTheme || (prefersDark ? "dark" : "light"));
   setContrast(savedContrast);
   setLanguage(savedLang, true);
+}
+
+function refreshCaseSectionJump(lang) {
+  const select = document.querySelector(".case-section-jump select");
+  if (!select) return;
+  const links = [...document.querySelectorAll(".case-section-link")];
+  select.previousElementSibling.textContent =
+    lang === "ar" ? "انتقل إلى قسم في دراسة الحالة" : "Jump to case study section";
+  [...select.options].forEach((option, index) => {
+    option.textContent = links[index]?.textContent.trim() || option.textContent;
+  });
+}
+
+function initCaseSectionNavigation() {
+  const nav = document.querySelector(".case-section-nav");
+  const links = [...(nav?.querySelectorAll('.case-section-link[href^="#"]') || [])];
+  if (!nav || !links.length) return;
+
+  const jump = document.createElement("label");
+  jump.className = "case-section-jump";
+  jump.innerHTML = `<span></span><select>${links
+    .map((link) => `<option value="${link.hash}">${link.textContent.trim()}</option>`)
+    .join("")}</select>`;
+  nav.before(jump);
+  const select = jump.querySelector("select");
+  const setCurrent = (hash) => {
+    links.forEach((link) => {
+      link.classList.toggle("is-active", link.hash === hash);
+      if (link.hash === hash) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+    });
+    select.value = hash;
+  };
+  const openTarget = (hash) => {
+    const target = document.querySelector(hash);
+    if (!target) return;
+    if (target instanceof HTMLDetailsElement) target.open = true;
+    target.scrollIntoView({
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+        ? "auto"
+        : "smooth",
+      block: "start",
+    });
+    setCurrent(hash);
+  };
+
+  select.addEventListener("change", () => openTarget(select.value));
+  links.forEach((link) =>
+    link.addEventListener("click", () => {
+      const target = document.querySelector(link.hash);
+      if (target instanceof HTMLDetailsElement) target.open = true;
+      setCurrent(link.hash);
+    }),
+  );
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (visible) setCurrent(`#${visible.target.id}`);
+      },
+      { rootMargin: "-20% 0px -65%", threshold: [0, 0.1, 0.5] },
+    );
+    links.forEach((link) => {
+      const target = document.querySelector(link.hash);
+      if (target) observer.observe(target);
+    });
+  }
+  setCurrent(links[0].hash);
 }
 
 function initSectionNavigation() {
@@ -1736,6 +1853,7 @@ document.querySelectorAll(".contrast-toggle").forEach((button) => {
 
 document.querySelectorAll(".lang-toggle").forEach((button) => {
   button.addEventListener("click", () => {
+    window.AntigravityAudio?.stop();
     setLanguage(getCurrentLanguage() === "ar" ? "en" : "ar");
   });
 });

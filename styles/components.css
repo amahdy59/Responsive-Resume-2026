@@ -420,7 +420,6 @@ html[lang="ar"] .credential-meta {
   background: #10b981;
   color: #fff;
   border-color: #10b981;
-  animation: pulse-audio 2s infinite;
 }
 
 .audio-icon {
@@ -429,6 +428,107 @@ html[lang="ar"] .credential-meta {
   stroke: currentcolor;
   stroke-width: 2;
   fill: none;
+}
+
+.global-audio-player {
+  position: fixed;
+  z-index: var(--z-popover);
+  inset: auto auto 16px 50%;
+  display: grid;
+  width: min(760px, calc(100% - 32px));
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--panel);
+  color: var(--text);
+  box-shadow: var(--shadow-2);
+  transform: translateX(-50%);
+}
+
+.global-audio-player[hidden] {
+  display: none;
+}
+
+.audio-live-status {
+  inset: 0 auto auto 0;
+  margin: 0;
+}
+
+.audio-player-summary,
+.audio-player-controls,
+.audio-player-speed {
+  display: flex;
+  align-items: center;
+}
+
+.audio-player-summary {
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.audio-player-summary strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.audio-player-summary span {
+  flex: 0 0 auto;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.audio-player-progress {
+  width: 100%;
+  min-height: 24px;
+  margin: 4px 0;
+  accent-color: var(--blue);
+}
+
+.audio-player-controls {
+  gap: 8px;
+}
+
+.audio-player-controls button,
+.audio-player-speed select {
+  min-height: 44px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+}
+
+.audio-player-controls button {
+  min-width: 44px;
+  padding: 0 12px;
+  cursor: pointer;
+}
+
+.audio-player-controls button:hover,
+.audio-player-speed select:hover {
+  border-color: var(--blue);
+  color: var(--link-aaa);
+}
+
+.audio-player-controls button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.audio-player-speed {
+  gap: 6px;
+  margin-inline-start: auto;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.audio-player-speed select {
+  padding-inline: 8px;
+}
+
+.has-audio-player {
+  padding-bottom: 150px;
 }
 
 /* Spacing gives section headings hierarchy without enclosing the content. */

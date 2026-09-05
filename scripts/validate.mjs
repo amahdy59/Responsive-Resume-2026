@@ -1,5 +1,6 @@
 import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
+import { parseHTML } from "linkedom";
 
 const root = process.cwd();
 const html = readFileSync(resolve(root, "index.html"), "utf8");
@@ -19,6 +20,9 @@ const htmlDocuments = [
 ];
 const script = readFileSync(resolve(root, "script.js"), "utf8");
 const readme = readFileSync(resolve(root, "README.md"), "utf8");
+const projects = JSON.parse(
+  readFileSync(resolve(root, "data", "projects.json"), "utf8"),
+);
 
 const translationKeyPattern = /\b(ar|en):\s*\{([\s\S]*?)\n\s*\}/g;
 const dictionaryKeyPattern = /\b([a-zA-Z0-9_]+)\s*:/g;
@@ -48,6 +52,15 @@ function getDictionaryKeys(language) {
   ].sort();
 }
 
+function readTranslations() {
+  const start = script.indexOf("const translations = ");
+  const end = script.indexOf("\n};\n\n/**", start);
+  if (start < 0 || end < 0) throw new Error("Unable to read translations.");
+  return Function(
+    `"use strict"; return (${script.slice(start + "const translations = ".length, end + 2)});`,
+  )();
+}
+
 const allHtmlSource = htmlDocuments.map(({ source }) => source).join("\n");
 const htmlKeys = [
   ...uniqueMatches(allHtmlSource, htmlTextKeyPattern),
@@ -56,6 +69,137 @@ const htmlKeys = [
 
 const errors = [];
 const warnings = [];
+const translations = readTranslations();
+
+for (const project of projects) {
+  const caseSource = htmlDocuments.find(
+    ({ file }) => file === project.file,
+  )?.source;
+  if (!caseSource) {
+    errors.push(`Canonical project ${project.id} references a missing page.`);
+    continue;
+  }
+
+  const homeDocument = parseHTML(html).document;
+  const caseDocument = parseHTML(caseSource).document;
+  const homeTitle = homeDocument.querySelector(
+    `[data-translate="${project.homeTitleKey}"]`,
+  );
+  const caseTitles = [
+    ...caseDocument.querySelectorAll(
+      `[data-translate="${project.caseTitleKey}"]`,
+    ),
+  ];
+  const homeCard = homeTitle?.closest("article");
+
+  for (const language of ["en", "ar"]) {
+    for (const key of [project.homeTitleKey, project.caseTitleKey]) {
+      if (translations[language][key] !== project.title[language]) {
+        errors.push(
+          `${language} translation ${key} must match canonical title "${project.title[language]}".`,
+        );
+      }
+    }
+    const platformKey = `${project.caseTitleKey.replace(/_title$/, "")}_platform`;
+    if (translations[language][platformKey] !== project.platform[language]) {
+      errors.push(
+        `${language} translation ${platformKey} must match canonical platform "${project.platform[language]}".`,
+      );
+    }
+  }
+
+  if (homeTitle?.textContent.trim() !== project.title.en) {
+    errors.push(`${project.id} homepage fallback title is not canonical.`);
+  }
+  if (
+    caseTitles.length === 0 ||
+    caseTitles.some((node) => node.textContent.trim() !== project.title.en)
+  ) {
+    errors.push(`${project.id} case-study fallback titles are not canonical.`);
+  }
+  for (const { file, source } of htmlDocuments) {
+    const references = parseHTML(source).document.querySelectorAll(
+      `[data-translate="${project.caseTitleKey}"]`,
+    );
+    if (
+      [...references].some(
+        (node) => node.textContent.trim() !== project.title.en,
+      )
+    ) {
+      errors.push(`${file} contains a stale ${project.id} title reference.`);
+    }
+  }
+  if (caseDocument.title !== `${project.title.en} | Ahmed Mahdy Portfolio`) {
+    errors.push(`${project.id} document title is not canonical.`);
+  }
+  for (const selector of [
+    'meta[property="og:title"]',
+    'meta[property="twitter:title"]',
+  ]) {
+    if (
+      !caseDocument
+        .querySelector(selector)
+        ?.content.startsWith(project.title.en)
+    ) {
+      errors.push(`${project.id} ${selector} is not canonical.`);
+    }
+  }
+  if (homeTitle?.closest("a")?.getAttribute("href") !== project.caseStudyUrl) {
+    errors.push(`${project.id} homepage case-study URL has drifted.`);
+  }
+  if (homeCard?.querySelector(".project-live-link")?.href !== project.liveUrl) {
+    errors.push(`${project.id} homepage live URL has drifted.`);
+  }
+  if (caseDocument.querySelector(".case-live-cta")?.href !== project.liveUrl) {
+    errors.push(`${project.id} case-study live URL has drifted.`);
+  }
+  for (const node of caseDocument.querySelectorAll(
+    '.device-btn[target="_blank"], .live-embed-iframe',
+  )) {
+    const liveUrl = node.getAttribute("href") || node.getAttribute("data-src");
+    if (liveUrl !== project.liveUrl) {
+      errors.push(`${project.id} preview URL has drifted.`);
+    }
+  }
+
+  try {
+    const schemas = JSON.parse(
+      caseDocument.querySelector("#person-schema")?.textContent || "[]",
+    );
+    const entries = Array.isArray(schemas) ? schemas : [schemas];
+    const creativeWork = entries.find(
+      (entry) => entry["@type"] === "CreativeWork",
+    );
+    const breadcrumb = entries.find(
+      (entry) => entry["@type"] === "BreadcrumbList",
+    );
+    const breadcrumbTitle = breadcrumb?.itemListElement?.at(-1)?.name;
+    if (
+      creativeWork?.name !== project.title.en ||
+      creativeWork?.headline !== project.title.en ||
+      breadcrumbTitle !== project.title.en
+    ) {
+      errors.push(`${project.id} structured data is not canonical.`);
+    }
+  } catch {
+    errors.push(`${project.id} structured data is invalid JSON.`);
+  }
+
+  for (const term of project.forbiddenTerms || []) {
+    const homeSummary = homeCard?.querySelector("p")?.textContent || "";
+    const localizedSummary =
+      translations.en[project.homeTitleKey.replace(/_title$/, "_desc")];
+    if (
+      homeSummary.includes(term) ||
+      localizedSummary?.includes(term) ||
+      caseSource.includes(term)
+    ) {
+      errors.push(
+        `${project.id} still contains the conflicting term "${term}".`,
+      );
+    }
+  }
+}
 
 for (const language of ["ar", "en"]) {
   const dictionaryKeys = getDictionaryKeys(language);
