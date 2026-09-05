@@ -539,20 +539,37 @@ html[lang="ar"] .external-arrow-icon {
 /* ── Section Navigation ── */
 .section-nav {
   position: sticky;
-  top: 0;
-  z-index: 30;
+  top: 12px;
+  z-index: 50;
   display: flex;
-  width: 100%;
+  width: fit-content;
   max-width: 100%;
-  justify-content: flex-start;
+  margin: 0 auto 20px;
+  justify-content: center;
+  align-items: center;
   gap: 4px;
-  padding: 0 clamp(16px, 3vw, 28px);
+  padding: 5px 8px;
   overflow: auto hidden;
-  background: color-mix(in srgb, var(--surface) 96%, transparent);
-  border-bottom: 1px solid var(--line);
-  backdrop-filter: blur(12px);
-  contain: inline-size paint;
+  background: color-mix(in srgb, var(--surface) 84%, transparent);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  backdrop-filter: blur(16px) saturate(180%);
+  box-shadow: 0 4px 16px rgb(0 0 0 / 6%);
   scrollbar-width: none;
+  transition:
+    box-shadow 240ms ease,
+    background-color 240ms ease,
+    border-color 240ms ease,
+    transform 200ms ease;
+  transform: translateZ(0);
+}
+
+.section-nav.is-stuck {
+  box-shadow:
+    0 10px 30px rgb(0 0 0 / 14%),
+    0 1px 3px rgb(0 0 0 / 8%);
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
+  border-color: color-mix(in srgb, var(--line) 70%, var(--blue) 30%);
 }
 
 .section-nav::-webkit-scrollbar {
@@ -565,17 +582,18 @@ html[lang="ar"] .external-arrow-icon {
   flex: 0 0 auto;
   align-items: center;
   gap: 8px;
-  min-height: 48px;
-  padding: 12px 14px;
+  min-height: 40px;
+  padding: 8px 16px;
   color: var(--muted);
-  border-bottom: 2.5px solid transparent;
+  border-radius: 999px;
+  border-bottom: none;
   font-size: 0.88rem;
   font-weight: 700;
   text-decoration: none;
   transition:
     background-color 150ms ease,
     color 150ms ease,
-    border-color 150ms ease,
+    box-shadow 150ms ease,
     transform 150ms ease;
 }
 
@@ -592,7 +610,7 @@ html[lang="ar"] .external-arrow-icon {
 .section-nav a:focus-visible,
 .section-nav-link:hover,
 .section-nav-link:focus-visible {
-  color: var(--blue);
+  color: var(--text);
   background: var(--pill-bg);
   transform: none;
 }
@@ -602,7 +620,8 @@ html[lang="ar"] .external-arrow-icon {
 .section-nav-link.active,
 .section-nav-link[aria-current] {
   color: var(--blue);
-  border-bottom-color: var(--blue);
+  background: var(--pill-bg);
+  box-shadow: 0 1px 3px rgb(0 0 0 / 6%);
 }
 
 /* Inset rings stay visible inside the horizontally scrolling navigation. */
@@ -613,7 +632,7 @@ html[lang="ar"] .external-arrow-icon {
 
 .section-nav a:active,
 .section-nav-link:active {
-  transform: none;
+  transform: scale(0.97);
 }
 
 /* ── Main Content Layout ── */

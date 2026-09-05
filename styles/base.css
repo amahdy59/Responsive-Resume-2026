@@ -36,7 +36,7 @@ body {
 body {
   position: relative;
   margin: 0;
-  overflow-x: hidden;
+  overflow-x: clip;
   background: var(--page-background);
   color: var(--text);
   font-family: var(--font-ui);

@@ -1848,6 +1848,18 @@ function initCaseSectionNavigation() {
 }
 
 function initSectionNavigation() {
+  const nav = document.querySelector(".section-nav");
+  const sentinel = document.getElementById("nav-sentinel");
+  if (nav && sentinel && "IntersectionObserver" in window) {
+    const stickyObserver = new IntersectionObserver(
+      ([entry]) => {
+        nav.classList.toggle("is-stuck", !entry.isIntersecting);
+      },
+      { threshold: [0], rootMargin: "-12px 0px 0px 0px" },
+    );
+    stickyObserver.observe(sentinel);
+  }
+
   const links = [...document.querySelectorAll('.section-nav a[href^="#"]')];
   const targets = links
     .map((link) => document.querySelector(link.getAttribute("href")))
@@ -1856,9 +1868,14 @@ function initSectionNavigation() {
     return;
   const setCurrent = (id) =>
     links.forEach((link) => {
-      if (link.getAttribute("href") === `#${id}`)
+      const match = link.getAttribute("href") === `#${id}`;
+      if (match) {
         link.setAttribute("aria-current", "location");
-      else link.removeAttribute("aria-current");
+        link.classList.add("active");
+      } else {
+        link.removeAttribute("aria-current");
+        link.classList.remove("active");
+      }
     });
   const observer = new IntersectionObserver(
     (entries) => {

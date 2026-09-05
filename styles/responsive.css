@@ -218,9 +218,14 @@
     display: flex;
     overflow-x: auto;
     gap: 4px;
-    padding: 4px 8px;
+    padding: 4px 6px;
     width: 100%;
+    max-width: 100%;
+    margin: 0 auto 16px;
+    top: max(8px, env(safe-area-inset-top));
+    border-radius: 999px;
     scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
   }
 
   .section-nav::-webkit-scrollbar {
@@ -229,7 +234,7 @@
 
   .section-nav a,
   .section-nav-link {
-    padding: 8px 10px;
+    padding: 8px 12px;
     font-size: 0.8rem;
     min-height: 44px;
   }
