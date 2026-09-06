@@ -1275,6 +1275,10 @@ function updateLanguageButton(lang) {
     const label = button.querySelector(".control-state");
     if (label) label.setAttribute("lang", lang === "ar" ? "en" : "ar");
   });
+
+  document.querySelectorAll(".language-option-input").forEach((input) => {
+    input.checked = input.value === lang;
+  });
 }
 
 /**
@@ -1967,6 +1971,14 @@ document.querySelectorAll(".lang-toggle").forEach((button) => {
   button.addEventListener("click", () => {
     window.AntigravityAudio?.stop();
     setLanguage(getCurrentLanguage() === "ar" ? "en" : "ar");
+  });
+});
+
+document.querySelectorAll(".language-option-input").forEach((input) => {
+  input.addEventListener("change", () => {
+    if (!input.checked || !["en", "ar"].includes(input.value)) return;
+    window.AntigravityAudio?.stop();
+    setLanguage(input.value);
   });
 });
 

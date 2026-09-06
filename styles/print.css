@@ -29,7 +29,7 @@
   @page resume-ar {
     @bottom-center {
       content: "صفحة " counter(page) " من " counter(pages);
-      font-family: "Cairo Variable", Arial, sans-serif;
+      font-family: "Noto Sans Arabic Variable", Arial, sans-serif;
     }
   }
 
@@ -52,7 +52,7 @@
     line-height: 1.42 !important;
   }
 
-  html[lang="ar"] body { font-family: "Cairo Variable", Arial, sans-serif !important; }
+  html[lang="ar"] body { font-family: "Noto Sans Arabic Variable", Arial, sans-serif !important; }
 
   a {
     color: #173f68 !important;

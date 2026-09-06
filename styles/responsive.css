@@ -69,7 +69,7 @@
   .hero {
     grid-template-columns: 1fr;
     gap: 20px;
-    padding: 28px 0 12px;
+    padding: 22px 0 10px;
   }
 
   .hero-identity {
@@ -112,7 +112,7 @@
 
   .portfolio-header {
     margin: 0;
-    padding: 10px 16px 34px;
+    padding: 10px 16px 30px;
     border-inline: 0;
     border-radius: 0 0 24px 24px;
   }
@@ -120,22 +120,22 @@
   .hero {
     display: flex;
     min-height: auto;
-    padding: 22px 0 4px;
+    padding: 18px 0 4px;
     flex-direction: column;
     align-items: stretch;
-    gap: 16px;
+    gap: 14px;
   }
 
   .hero-identity {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: 14px;
+    gap: 12px;
   }
 
   .avatar-wrap {
-    width: 112px;
-    height: 112px;
+    width: 96px;
+    height: 96px;
   }
 
   .identity-copy {
@@ -203,7 +203,7 @@
     flex-direction: column;
     justify-content: center;
     gap: 7px;
-    min-height: 68px;
+    min-height: 60px;
     padding: 6px 4px;
     text-align: center;
   }
@@ -247,6 +247,17 @@
   .controls-group button > span:first-child {
     width: 24px;
     height: 24px;
+  }
+
+  .language-selector {
+    grid-column: 1 / -1;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .language-option {
+    flex: 1 1 0;
+    max-width: 132px;
   }
 
   .control-switch {

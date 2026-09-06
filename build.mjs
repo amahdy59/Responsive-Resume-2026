@@ -159,6 +159,9 @@ function localizeDocument(document, language, translations, page) {
   document.body.dataset.staticLocale = language;
   document.body.dataset.staticPath = page.localizedPath;
   applyTranslations(document, dictionary);
+  document.querySelectorAll(".language-option-input").forEach((input) => {
+    input.toggleAttribute("checked", input.value === language);
+  });
 
   const projectTitle = page.key ? dictionary[`${page.key}_title`] : "";
   const description = page.key
@@ -221,7 +224,7 @@ function rewriteAssetReferences(document, mapping, bundleNames) {
   // Discover the active font early to reduce layout movement during font swap.
   const fonts =
     document.documentElement.lang === "ar"
-      ? ["cairo-arabic", "cairo-latin"]
+      ? ["noto-sans-arabic-arabic", "noto-sans-arabic-latin"]
       : ["inter-latin"];
   for (const font of fonts) {
     const preload = document.createElement("link");
@@ -268,8 +271,14 @@ await copyDirectory(join(root, "assets"), join(dist, "assets"));
 const fontSources = [
   ["@fontsource-variable/inter", "inter-latin-wght-normal.woff2"],
   ["@fontsource-variable/inter", "inter-latin-ext-wght-normal.woff2"],
-  ["@fontsource-variable/cairo", "cairo-arabic-wght-normal.woff2"],
-  ["@fontsource-variable/cairo", "cairo-latin-wght-normal.woff2"],
+  [
+    "@fontsource-variable/noto-sans-arabic",
+    "noto-sans-arabic-arabic-wght-normal.woff2",
+  ],
+  [
+    "@fontsource-variable/noto-sans-arabic",
+    "noto-sans-arabic-latin-wght-normal.woff2",
+  ],
 ];
 await mkdir(join(dist, "assets", "fonts"), { recursive: true });
 for (const [packageName, file] of fontSources) {

@@ -166,6 +166,7 @@
 
 /* Enhanced tactile button borders and visibility in High Contrast Mode */
 [data-contrast="high"] .lang-toggle,
+[data-contrast="high"] .language-selector,
 [data-contrast="high"] .contrast-toggle,
 [data-contrast="high"] .print-button {
   border: 2px solid #fff !important;
@@ -209,6 +210,16 @@
 [data-contrast="high"] .print-button:focus-visible {
   border-color: #0ff !important;
   color: #0ff !important;
+}
+
+[data-contrast="high"] .language-option {
+  color: #fff !important;
+}
+
+[data-contrast="high"] .language-option:has(input:checked) {
+  background: #0ff !important;
+  color: #000 !important;
+  box-shadow: none !important;
 }
 
 [data-contrast="high"] .copy-button:hover span,

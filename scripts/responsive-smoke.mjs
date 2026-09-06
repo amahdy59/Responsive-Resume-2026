@@ -129,7 +129,7 @@ try {
       assert.equal(response?.status(), 200);
 
       if (scenario.language === "ar") {
-        await page.getByLabel("Switch to Arabic", { exact: true }).click();
+        await page.locator('.language-option[lang="ar"]').click();
       }
 
       await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
@@ -167,12 +167,26 @@ try {
           direction: document.documentElement.dir,
           domSectionOrder: panels.map(panelName),
           heading: document.querySelector("h1")?.textContent?.trim(),
+          heroTypeScale: {
+            bio: Number.parseFloat(
+              getComputedStyle(document.querySelector(".hero-bio")).fontSize,
+            ),
+            name: Number.parseFloat(
+              getComputedStyle(document.querySelector(".identity-copy h1"))
+                .fontSize,
+            ),
+            role: Number.parseFloat(
+              getComputedStyle(document.querySelector(".hero-role")).fontSize,
+            ),
+          },
           headerLayout: (() => {
             const header = document.querySelector(".portfolio-header");
             const identity = document.querySelector(".hero-identity");
             const contact = document.querySelector(".hero-contact-card");
             const controls = [
-              ...document.querySelectorAll(".controls-group > button"),
+              ...document.querySelectorAll(
+                ".controls-group > button, .controls-group .language-option",
+              ),
             ];
             if (!header || !identity || !contact) return null;
             const headerRect = header.getBoundingClientRect();
@@ -207,6 +221,9 @@ try {
                 .map((element) => getComputedStyle(element).fontFamily),
             ),
           ],
+          languageSelection: [
+            ...document.querySelectorAll(".language-option-input"),
+          ].map((input) => ({ checked: input.checked, value: input.value })),
           contactDescriptions:
             document.querySelectorAll(".contact-desc").length,
           contactIcons: document.querySelectorAll(".contact-list .contact-icon")
@@ -313,9 +330,12 @@ try {
       assert.ok(state.heading, "The resume heading should be visible");
       assert.equal(state.headerLayout?.headerContained, true);
       assert.equal(state.headerLayout?.targetsMeetSize, true);
+      assert.ok(state.heroTypeScale.name <= 40);
+      assert.ok(state.heroTypeScale.role <= 19);
+      assert.ok(state.heroTypeScale.bio <= 16);
       if (scenario.width <= 560) {
         assert.ok(
-          state.headerLayout.headerHeight <= 920,
+          state.headerLayout.headerHeight <= 880,
           `Mobile header should remain compact: ${JSON.stringify(state.headerLayout)}`,
         );
         assert.ok(
@@ -324,13 +344,13 @@ try {
         );
       } else if (scenario.width <= 1080) {
         assert.ok(
-          state.headerLayout.headerHeight <= 620,
+          state.headerLayout.headerHeight <= 560,
           `Tablet header should remain compact: ${JSON.stringify(state.headerLayout)}`,
         );
         assert.equal(state.headerLayout.contactAfterIdentity, true);
       } else {
         assert.ok(
-          state.headerLayout.headerHeight <= 520,
+          state.headerLayout.headerHeight <= 470,
           `Desktop header should remain compact: ${JSON.stringify(state.headerLayout)}`,
         );
         assert.ok(
@@ -356,6 +376,10 @@ try {
       );
       assert.equal(state.sectionNavPosition, "sticky");
       assert.equal(state.toolbarRole, "group");
+      assert.deepEqual(state.languageSelection, [
+        { checked: scenario.language === "en", value: "en" },
+        { checked: scenario.language === "ar", value: "ar" },
+      ]);
       assert.equal(state.footerExists, false);
       assert.equal(state.projectThumbnailCount, 5);
       assert.equal(state.audioControllerReady, true);
@@ -364,7 +388,9 @@ try {
       assert.equal(state.contactIcons, 3);
       assert.equal(state.exposedEmail, undefined);
       if (scenario.language === "ar") {
-        assert.deepEqual(state.fontFamilies, ['"Cairo Variable", sans-serif']);
+        assert.deepEqual(state.fontFamilies, [
+          '"Noto Sans Arabic Variable", system-ui, sans-serif',
+        ]);
       }
       assert.equal(state.resumeActionCount, 0);
       assert.ok(
@@ -704,9 +730,9 @@ try {
       }
 
       if (scenario.width === 768) {
-        await page.locator(".lang-toggle").focus();
+        await page.locator(".theme-toggle").focus();
         const tooltip = await page
-          .locator(".lang-toggle")
+          .locator(".theme-toggle")
           .evaluate((button) => {
             const style = getComputedStyle(button, "::before");
             return { left: style.left, right: style.right };
@@ -751,6 +777,12 @@ try {
     assert.equal(
       await page.locator("html").getAttribute("dir"),
       language === "ar" ? "rtl" : "ltr",
+    );
+    assert.equal(
+      await page
+        .locator(`.language-option-input[value="${language}"]`)
+        .isChecked(),
+      true,
     );
     assert.ok(await page.locator("h1").textContent());
     assert.equal(
@@ -839,7 +871,7 @@ try {
     });
     const page = await context.newPage();
     await page.goto(`${baseUrl}/${language}/`, { waitUntil: "load" });
-    const toggle = page.locator(".lang-toggle");
+    const toggle = page.locator(".theme-toggle");
     await toggle.focus();
     await page.keyboard.press("Escape");
     assert.equal(
@@ -849,14 +881,14 @@ try {
     );
     await page.waitForFunction(
       () =>
-        getComputedStyle(document.querySelector(".lang-toggle"), "::before")
+        getComputedStyle(document.querySelector(".theme-toggle"), "::before")
           .opacity === "0",
     );
     await page.keyboard.press("Tab");
     await page.keyboard.press("Shift+Tab");
     await page.waitForFunction(
       () =>
-        getComputedStyle(document.querySelector(".lang-toggle"), "::before")
+        getComputedStyle(document.querySelector(".theme-toggle"), "::before")
           .opacity === "1",
     );
 

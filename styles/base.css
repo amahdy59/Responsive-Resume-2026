@@ -155,7 +155,7 @@ a:hover {
 }
 
 html[lang="ar"] {
-  --font-ui: "Cairo Variable", sans-serif;
+  --font-ui: "Noto Sans Arabic Variable", system-ui, sans-serif;
 }
 
 button,

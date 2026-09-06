@@ -203,11 +203,18 @@
               data-translate-attr="aria-label"
               data-translate-attr-key="display_settings_label"
             >
-              <button class="lang-toggle" type="button" data-tooltip="Switch Language" aria-label="Switch to Arabic">
-                <span aria-hidden="true"><svg><use href="#icon-language"></use></svg></span>
-                <span class="control-label" data-translate="control_language">Language</span>
-                <span class="control-state" data-translate="control_language_state">English</span>
-              </button>
+              <fieldset class="language-selector">
+                <legend class="sr-only" data-translate="control_language">Language</legend>
+                <span class="language-selector-icon" aria-hidden="true"><svg><use href="#icon-language"></use></svg></span>
+                <label class="language-option" lang="en">
+                  <input class="sr-only language-option-input" type="radio" name="portfolio-language" value="en" checked />
+                  <span>English</span>
+                </label>
+                <label class="language-option" lang="ar" dir="rtl">
+                  <input class="sr-only language-option-input" type="radio" name="portfolio-language" value="ar" />
+                  <span>العربية</span>
+                </label>
+              </fieldset>
               <button class="theme-toggle" type="button" role="switch" aria-checked="false" data-tooltip="Switch Theme" aria-label="Dark mode">
                 <span aria-hidden="true"><svg><use href="#icon-moon"></use></svg></span>
                 <span class="control-label" data-translate="control_theme">Dark Mode</span>
@@ -219,11 +226,6 @@
                 <span class="control-label" data-translate="control_contrast">High Contrast</span>
                 <span class="control-state" data-translate="control_contrast_state">Off</span>
                 <span class="control-switch" aria-hidden="true"><span></span></span>
-              </button>
-              <button class="print-button" type="button" data-print-resume data-tooltip="Print / Save PDF" aria-label="Print or save as PDF" data-tooltip-key="print_resume_action">
-                <span aria-hidden="true"><svg><use href="#icon-print"></use></svg></span>
-                <span class="control-label" data-translate="control_print_label">Print / Save</span>
-                <span class="control-state" data-translate="control_print_state">PDF</span>
               </button>
             </div>
           </aside>

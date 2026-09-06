@@ -5,7 +5,7 @@
 .portfolio-header {
   position: relative;
   margin-top: 8px;
-  padding: clamp(12px, 1.5vw, 20px) clamp(20px, 4vw, 48px) clamp(28px, 3vw, 36px);
+  padding: clamp(12px, 1.5vw, 18px) clamp(20px, 4vw, 46px) clamp(24px, 2.5vw, 32px);
   color: #f0f6fc;
   background:
     radial-gradient(circle at 78% 22%, rgb(59 130 246 / 18%), transparent 28rem),
@@ -18,10 +18,10 @@
 .hero {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(220px, 240px);
+  grid-template-columns: minmax(0, 1fr) minmax(210px, 224px);
   align-items: center;
-  gap: clamp(28px, 4vw, 48px);
-  padding: clamp(28px, 4vw, 44px) 0 clamp(12px, 2vw, 20px);
+  gap: clamp(24px, 3vw, 40px);
+  padding: clamp(22px, 3vw, 34px) 0 clamp(10px, 1.5vw, 16px);
   background: transparent;
 }
 
@@ -29,7 +29,7 @@
   position: relative;
   display: flex;
   align-items: center;
-  gap: clamp(20px, 2.5vw, 32px);
+  gap: clamp(18px, 2vw, 26px);
   flex: 1 1 auto;
   min-width: 0;
 }
@@ -37,8 +37,8 @@
 .avatar-wrap {
   position: relative;
   flex: 0 0 auto;
-  width: clamp(112px, 12vw, 148px);
-  height: clamp(112px, 12vw, 148px);
+  width: clamp(104px, 10vw, 132px);
+  height: clamp(104px, 10vw, 132px);
 }
 
 .avatar {
@@ -61,24 +61,24 @@
 
 .identity-copy h1 {
   margin: 0;
-  font-size: clamp(2.15rem, 3.8vw, 3.35rem);
+  font-size: clamp(1.8rem, 2.8vw, 2.45rem);
   font-weight: 800;
-  line-height: 1.08;
+  line-height: 1.15;
   letter-spacing: -0.02em;
   color: #f8fbff;
 }
 
 .hero-role {
-  margin: 8px 0 0;
+  margin: 6px 0 0;
   color: #60a5fa;
-  font-size: clamp(1.08rem, 1.7vw, 1.45rem);
+  font-size: clamp(1rem, 1.3vw, 1.18rem);
   font-weight: 700;
-  line-height: 1.3;
+  line-height: 1.4;
 }
 
 .hero-bio {
-  margin: 12px 0 0;
-  font-size: clamp(0.95rem, 1.25vw, 1.08rem);
+  margin: 10px 0 0;
+  font-size: clamp(0.9rem, 1vw, 0.98rem);
   line-height: 1.6;
   color: #d5deeb;
   max-width: 62ch;
@@ -87,8 +87,8 @@
 .tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 16px;
+  gap: 7px;
+  margin-top: 14px;
 }
 
 .tag-pill {
@@ -100,7 +100,7 @@
   border: 1px solid rgb(203 213 225 / 24%);
   border-radius: 999px;
   color: #dbe7f5;
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   font-weight: 600;
   line-height: 1.3;
   white-space: nowrap;
@@ -124,7 +124,7 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 12px;
-  margin-top: 20px;
+  margin-top: 16px;
 }
 
 .hero-btn-work {
@@ -269,9 +269,9 @@
 
 /* ── Contact Card ── */
 .hero-contact-card {
-  flex: 0 0 240px;
+  flex: 0 0 224px;
   width: 100%;
-  max-width: 240px;
+  max-width: 224px;
   min-width: 0;
   box-sizing: border-box;
   background: rgb(255 255 255 / 4%);
@@ -289,7 +289,7 @@
 .contact-card-title {
   margin: 0 10px 6px;
   color: #f8fbff;
-  font-size: 0.95rem;
+  font-size: 0.88rem;
   font-weight: 800;
 }
 
@@ -311,7 +311,7 @@
   align-items: center;
   gap: 12px;
   padding: 0;
-  min-height: 52px;
+  min-height: 48px;
   border-radius: 10px;
   background: transparent;
   transition: background-color 150ms ease;
@@ -326,8 +326,8 @@
   display: inline-grid;
   place-items: center;
   flex: 0 0 auto;
-  width: 38px;
-  height: 38px;
+  width: 36px;
+  height: 36px;
   border-radius: 10px;
   color: #fff;
   font-size: 0.75rem;
@@ -363,7 +363,7 @@
 }
 
 .contact-label {
-  font-size: 0.88rem;
+  font-size: 0.82rem;
   font-weight: 700;
   color: #f0f6fc;
   line-height: 1.25;
@@ -534,6 +534,67 @@ html[lang="ar"] .external-arrow-icon {
   font-size: 0.75rem;
   color: #8fcaff;
   white-space: nowrap;
+}
+
+.language-selector {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  min-width: 0;
+  margin: 0;
+  padding: 3px;
+  border: 1px solid rgb(203 213 225 / 18%);
+  border-radius: 11px;
+  background: rgb(7 16 29 / 24%);
+  color: #dbe7f5;
+}
+
+.language-selector-icon {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  flex: 0 0 auto;
+  color: #8fcaff;
+}
+
+.language-selector-icon svg {
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: currentcolor;
+  stroke-width: 2;
+}
+
+.language-option {
+  display: grid;
+  place-items: center;
+  min-width: 68px;
+  min-height: 44px;
+  padding: 0 10px;
+  border-radius: 8px;
+  color: #aebdd0;
+  font-size: 0.75rem;
+  font-weight: 650;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color 160ms ease, color 160ms ease;
+}
+
+.language-option:has(input:checked) {
+  background: #1d4f91;
+  color: #fff;
+  box-shadow: inset 0 0 0 1px rgb(121 192 255 / 34%);
+}
+
+.language-option:hover {
+  color: #fff;
+  background: rgb(121 192 255 / 12%);
+}
+
+.language-option:has(input:focus-visible) {
+  outline: 3px solid #93c5fd;
+  outline-offset: 2px;
 }
 
 .control-switch {
