@@ -13,6 +13,12 @@ assets/screenshots/
 artifacts/
 assets/audio/*.mp3
 
+# Local tooling, generated documents, and temporary QA evidence
+/.claude/
+/output/
+/test-results/
+/tmp/
+
 # OS/editor noise
 .DS_Store
 Thumbs.db
