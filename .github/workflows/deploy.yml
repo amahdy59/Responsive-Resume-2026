@@ -25,7 +25,7 @@ jobs:
           node-version: "24"
           cache: npm
       - run: npm ci
-      - run: npx playwright install --with-deps chromium
+      - run: npx playwright install --with-deps chromium firefox webkit
       - name: Lint, content, responsive UX, accessibility, visual regression, and performance
         run: npm test
       - name: Audit production dependencies

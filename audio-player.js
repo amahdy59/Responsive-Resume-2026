@@ -41,7 +41,7 @@
     },
   };
   const allowedRates = [0.75, 1, 1.25, 1.5, 2];
-  const savedRate = Number(localStorage.getItem("resume-audio-rate"));
+  const savedRate = Number(window.resumePreferences.get("resume-audio-rate"));
   let playbackRate = allowedRates.includes(savedRate) ? savedRate : 1;
   let currentBtn = null;
   let currentContainer = null;
@@ -265,7 +265,7 @@
       .querySelector("[data-audio-speed]")
       .addEventListener("change", (event) => {
         playbackRate = Number(event.target.value);
-        localStorage.setItem("resume-audio-rate", String(playbackRate));
+        window.resumePreferences.set("resume-audio-rate", String(playbackRate));
         if (currentMedia) currentMedia.playbackRate = playbackRate;
       });
     player

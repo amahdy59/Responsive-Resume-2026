@@ -6,17 +6,18 @@ const storageKeys = {
 };
 
 const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-const savedTheme = localStorage.getItem(storageKeys.theme);
+const savedTheme = window.resumePreferences.get(storageKeys.theme);
 const routeLanguage = location.pathname.match(/^\/(en|ar)(?:\/|$)/)?.[1];
 const savedLang =
   routeLanguage ||
-  localStorage.getItem(storageKeys.lang) ||
+  window.resumePreferences.get(storageKeys.lang) ||
   (navigator.languages?.some((language) =>
     language.toLowerCase().startsWith("ar"),
   )
     ? "ar"
     : "en");
-const savedContrast = localStorage.getItem(storageKeys.contrast) || "normal";
+const savedContrast =
+  window.resumePreferences.get(storageKeys.contrast) || "normal";
 
 const controls = {
   themeToggle: document.querySelector(".theme-toggle"),
@@ -82,11 +83,16 @@ const translations = {
     cert3_meta: "جامعة ماكواري · 2024",
     cert4_meta: "جامعة ماكواري · 2024",
     cert5_meta: "جوجل · 2023",
-    cert1_desc: "بناء مهارات جاهزة لسوق العمل في تنظيف البيانات والتحليل والتصوير المرئي واتخاذ القرارات المستندة إلى البيانات.",
-    cert2_desc: "إثبات الكفاءة في Tableau للاتصال والتحليل والتصوير المرئي ومشاركة البيانات لدعم رؤى الأعمال.",
-    cert3_desc: "مهارات Excel المتقدمة لتحليل البيانات والنمذجة والتصوير المرئي والأتمتة باستخدام الصيغ والجداول المحورية.",
-    cert4_desc: "إتقان Excel الموجه للأعمال يشمل إدارة البيانات والصيغ المتقدمة وإعداد التقارير الاحترافية.",
-    cert5_desc: "أساسيات تصميم تجربة المستخدم تشمل أبحاث المستخدم والتخطيط الهيكلي والنماذج الأولية واختبار قابلية الاستخدام.",
+    cert1_desc:
+      "بناء مهارات جاهزة لسوق العمل في تنظيف البيانات والتحليل والتصوير المرئي واتخاذ القرارات المستندة إلى البيانات.",
+    cert2_desc:
+      "إثبات الكفاءة في Tableau للاتصال والتحليل والتصوير المرئي ومشاركة البيانات لدعم رؤى الأعمال.",
+    cert3_desc:
+      "مهارات Excel المتقدمة لتحليل البيانات والنمذجة والتصوير المرئي والأتمتة باستخدام الصيغ والجداول المحورية.",
+    cert4_desc:
+      "إتقان Excel الموجه للأعمال يشمل إدارة البيانات والصيغ المتقدمة وإعداد التقارير الاحترافية.",
+    cert5_desc:
+      "أساسيات تصميم تجربة المستخدم تشمل أبحاث المستخدم والتخطيط الهيكلي والنماذج الأولية واختبار قابلية الاستخدام.",
     certs_subtitle: "شهادات مهنية تُثبت خبرتي والتزامي بالتعلم المستمر.",
     certs_count_label: "شهادات",
     cert2: "تحليل ذكاء الأعمال Tableau (Tableau Business Intelligence Analyst)",
@@ -94,7 +100,8 @@ const translations = {
     cert4: "مهارات Excel للأعمال",
     cert5: "تصميم تجربة المستخدم من جوجل (Google UX Design)",
     back_to_top: "العودة إلى الأعلى",
-    footer_tagline: "أصمم تجارب بديهية وأحول البيانات إلى مرئيات واضحة ومؤثرة تساعد الناس على اتخاذ قرارات أفضل.",
+    footer_tagline:
+      "أصمم تجارب بديهية وأحول البيانات إلى مرئيات واضحة ومؤثرة تساعد الناس على اتخاذ قرارات أفضل.",
     footer_quick_links: "روابط سريعة",
     footer_resources: "الموارد",
     footer_connect: "تواصل معي",
@@ -121,7 +128,8 @@ const translations = {
     display_modes_label: "أوضاع العرض",
     edu1_badge: "دبلوم",
     edu1_date: "سبتمبر 2016 - يونيو 2017",
-    edu1_desc: "تخصص في التصميم التعليمي ومنهجيات التعلم الإلكتروني وحلول تكنولوجيا التعليم.",
+    edu1_desc:
+      "تخصص في التصميم التعليمي ومنهجيات التعلم الإلكتروني وحلول تكنولوجيا التعليم.",
     edu1_school: "معهد تكنولوجيا المعلومات (ITI)",
     edu1_title: "دبلوم في تقنيات التعليم وتكنولوجيا المعلومات",
     edu2_badge: "بكالوريوس",
@@ -146,7 +154,8 @@ const translations = {
     job1_b3:
       "الاستفادة من أدوات التصميم المدعومة بالذكاء الاصطناعي لتسريع النماذج الأولية وتلخيص أبحاث تجربة المستخدم.",
     job1_company: "أدفانسيز للحلول البرمجية",
-    job1_company_desc: "شركة رائدة في حلول تكنولوجيا المعلومات متخصصة في البرمجيات المؤسسية والتحول الرقمي وتكامل الأنظمة في منطقة الشرق الأوسط وشمال أفريقيا.",
+    job1_company_desc:
+      "شركة رائدة في حلول تكنولوجيا المعلومات متخصصة في البرمجيات المؤسسية والتحول الرقمي وتكامل الأنظمة في منطقة الشرق الأوسط وشمال أفريقيا.",
     job1_date: "يناير 2023 - الحالي",
     job1_date_range: "يناير 2023 – الحالي",
     job1_duration: "3 سنوات و6 أشهر",
@@ -155,13 +164,16 @@ const translations = {
     job1_title: "مصمم تجربة المستخدم",
     job1_impact1_metric: "أنظمة التصميم",
     job1_impact1_label: "مكونات قابلة للتوسع",
-    job1_impact1_desc: "تأسيس أنظمة تصميم قابلة للتوسع باستخدام Figma والمنهجيات الحديثة لمنصات B2B.",
+    job1_impact1_desc:
+      "تأسيس أنظمة تصميم قابلة للتوسع باستخدام Figma والمنهجيات الحديثة لمنصات B2B.",
     job1_impact2_metric: "تجربة مؤسسية",
     job1_impact2_label: "منصات SaaS معقدة",
-    job1_impact2_desc: "قيادة تصميم UX/UI لمنصات SaaS المؤسسية وB2B المعقدة مع حلول متمحورة حول المستخدم.",
+    job1_impact2_desc:
+      "قيادة تصميم UX/UI لمنصات SaaS المؤسسية وB2B المعقدة مع حلول متمحورة حول المستخدم.",
     job1_impact3_metric: "ذكاء اصطناعي",
     job1_impact3_label: "نماذج أولية سريعة",
-    job1_impact3_desc: "الاستفادة من أدوات التصميم بالذكاء الاصطناعي لتسريع سير عمل النماذج الأولية وتلخيص أبحاث UX.",
+    job1_impact3_desc:
+      "الاستفادة من أدوات التصميم بالذكاء الاصطناعي لتسريع سير عمل النماذج الأولية وتلخيص أبحاث UX.",
     key_impact: "الأثر الرئيسي",
     jobs_subtitle: "أماكن عملي والأثر الذي قدمته",
     job2_b1:
@@ -169,7 +181,8 @@ const translations = {
     job2_b2:
       "تحويل المتطلبات التقنية المعقدة إلى تجارب تعلم إلكترونية B2B سهلة الوصول وبديهية.",
     job2_company: "شنايدر إلكتريك",
-    job2_company_desc: "شركة عالمية رائدة في إدارة الطاقة والأتمتة، تقود التحول الرقمي عبر الحلول المؤسسية والصناعية.",
+    job2_company_desc:
+      "شركة عالمية رائدة في إدارة الطاقة والأتمتة، تقود التحول الرقمي عبر الحلول المؤسسية والصناعية.",
     job2_date: "يوليو 2018 - يناير 2023",
     job2_date_range: "يوليو 2018 – يناير 2023",
     job2_duration: "4 سنوات و7 أشهر",
@@ -178,13 +191,16 @@ const translations = {
     job2_title: "مصمم تعليمي",
     job2_impact1_metric: "تصميم التعلم",
     job2_impact1_label: "تجارب تعليمية",
-    job2_impact1_desc: "إعادة تصميم منصات التعلم المؤسسية وواجهاتها، مما زاد من التفاعل ومعدلات الإكمال.",
+    job2_impact1_desc:
+      "إعادة تصميم منصات التعلم المؤسسية وواجهاتها، مما زاد من التفاعل ومعدلات الإكمال.",
     job2_impact2_metric: "حلول قابلة للتوسع",
     job2_impact2_label: "منصات تعلم عالمية",
-    job2_impact2_desc: "بناء أصول وقوالب تعلم قابلة لإعادة الاستخدام والتوسع لتبسيط تقديم المحتوى.",
+    job2_impact2_desc:
+      "بناء أصول وقوالب تعلم قابلة لإعادة الاستخدام والتوسع لتبسيط تقديم المحتوى.",
     job2_impact3_metric: "تركيز على المتعلم",
     job2_impact3_label: "تصميم قائم على النتائج",
-    job2_impact3_desc: "تطبيق علوم التعلم ومبادئ UX لإنشاء تجارب مؤثرة تتمحور حول المتعلم.",
+    job2_impact3_desc:
+      "تطبيق علوم التعلم ومبادئ UX لإنشاء تجارب مؤثرة تتمحور حول المتعلم.",
     main_resume_label: "محتوى السيرة الذاتية الرئيسي",
     meta_description:
       "السيرة الذاتية لأحمد مهدي، مصمم تجربة مستخدم ومصور بيانات، مع خبرة في التصميم، ولوحات المعلومات، وتجارب المنتجات الرقمية.",
@@ -249,10 +265,13 @@ const translations = {
     skills_data_header: "تحليل وتصوير البيانات",
     skills_data_desc: "تحويل البيانات إلى رؤى ذات معنى وقصص بصرية مؤثرة.",
     skills_ux_header: "تصميم تجربة المستخدم",
-    skills_ux_desc: "تصميم واجهات بديهية وتجارب سلسة تحل مشاكل المستخدمين والأعمال.",
+    skills_ux_desc:
+      "تصميم واجهات بديهية وتجارب سلسة تحل مشاكل المستخدمين والأعمال.",
     skills_tools_header: "الأدوات والتقنيات",
-    skills_tools_desc: "التقنيات التي أستخدمها للتصميم والتحليل وبناء النماذج وتقديم حلول قائمة على البيانات.",
-    skills_subtitle: "مزيج من التفكير التصميمي وخبرة البيانات والأدوات الحديثة لبناء تجارب رقمية واضحة.",
+    skills_tools_desc:
+      "التقنيات التي أستخدمها للتصميم والتحليل وبناء النماذج وتقديم حلول قائمة على البيانات.",
+    skills_subtitle:
+      "مزيج من التفكير التصميمي وخبرة البيانات والأدوات الحديثة لبناء تجارب رقمية واضحة.",
     skills_tagline: "أتعلم باستمرار وأستكشف أدوات جديدة",
     skill_level_proficient: "إتقان",
     skill_level_advanced: "متقدم",
@@ -341,17 +360,23 @@ const translations = {
     cs_haj_badge1: "التجارة عبر الجوال",
     cs_haj_badge2: "تجربة المستخدم للتجارة الإلكترونية",
     cs_haj_sec1_card1_title: "مشكلة المستخدم",
-    cs_haj_sec1_card1_desc: "ركز موجز المشروع على تسهيل اكتشاف المنتجات واختصار رحلة الدفع. وجّهت هذه الاحتياجات التصور، ولا تمثل نتائج دراسة مستخدمين موثقة.",
+    cs_haj_sec1_card1_desc:
+      "ركز موجز المشروع على تسهيل اكتشاف المنتجات واختصار رحلة الدفع. وجّهت هذه الاحتياجات التصور، ولا تمثل نتائج دراسة مستخدمين موثقة.",
     cs_haj_sec1_card2_title: "مشكلة الأعمال",
-    cs_haj_sec1_card2_desc: "حدد موجز المشروع تعقيد الدفع بوصفه مخاطرة تجارية. لم تتوفر بيانات فعلية عن ترك السلة أو تكرار الشراء لهذا التصور.",
+    cs_haj_sec1_card2_desc:
+      "حدد موجز المشروع تعقيد الدفع بوصفه مخاطرة تجارية. لم تتوفر بيانات فعلية عن ترك السلة أو تكرار الشراء لهذا التصور.",
     cs_haj_sec1_card3_title: "هدف التصميم",
-    cs_haj_sec1_card3_desc: "تصميم رحلة تسوق تبدأ بالجوال، مع تنقل يركز على البحث ودفع أقصر للزوار.",
+    cs_haj_sec1_card3_desc:
+      "تصميم رحلة تسوق تبدأ بالجوال، مع تنقل يركز على البحث ودفع أقصر للزوار.",
     cs_haj_sec4_card1_title: "تنقل بحثي أولاً",
-    cs_haj_sec4_card1_desc: "يبرز التنفيذ البحث والفئات المختارة. وتبقى سهولة العثور على المنتجات موضوعاً لاختبار قابلية الاستخدام.",
+    cs_haj_sec4_card1_desc:
+      "يبرز التنفيذ البحث والفئات المختارة. وتبقى سهولة العثور على المنتجات موضوعاً لاختبار قابلية الاستخدام.",
     cs_haj_sec4_card2_title: "دفع مبسط",
-    cs_haj_sec4_card2_desc: "يختصر تصور الدفع مسار الشراء. ولم يُقَس أثره على معدل التحويل بعد.",
+    cs_haj_sec4_card2_desc:
+      "يختصر تصور الدفع مسار الشراء. ولم يُقَس أثره على معدل التحويل بعد.",
     cs_haj_sec4_card3_title: "تنفيذ متجاوب",
-    cs_haj_sec4_card3_desc: "تنفيذ يبدأ بالجوال، مع تفاعل بلوحة المفاتيح ومؤشرات تركيز واضحة وتخطيطات متجاوبة تسترشد بمعايير WCAG 2.2.",
+    cs_haj_sec4_card3_desc:
+      "تنفيذ يبدأ بالجوال، مع تفاعل بلوحة المفاتيح ومؤشرات تركيز واضحة وتخطيطات متجاوبة تسترشد بمعايير WCAG 2.2.",
     cs_prev_project: "المشروع السابق",
     cs_next_project: "المشروع التالي",
     cs_sec1_title: "السياق والتحدي",
@@ -524,12 +549,18 @@ const translations = {
     cert3_meta: "Macquarie University · 2024",
     cert4_meta: "Macquarie University · 2024",
     cert5_meta: "Google · 2023",
-    cert1_desc: "Build job-ready skills in data cleaning, analysis, visualization, and data-driven decision making using real-world datasets.",
-    cert2_desc: "Demonstrates proficiency in Tableau to connect, analyze, visualize, and share data to drive business insights.",
-    cert3_desc: "Advanced Excel skills for data analysis, modeling, visualization, and automation using formulas and pivot tables.",
-    cert4_desc: "Business-focused Excel proficiency covering data management, advanced formulas, and professional reporting.",
-    cert5_desc: "Foundational UX design principles including user research, wireframing, prototyping, and usability testing.",
-    certs_subtitle: "Professional certifications that validate my expertise and commitment to continuous learning.",
+    cert1_desc:
+      "Build job-ready skills in data cleaning, analysis, visualization, and data-driven decision making using real-world datasets.",
+    cert2_desc:
+      "Demonstrates proficiency in Tableau to connect, analyze, visualize, and share data to drive business insights.",
+    cert3_desc:
+      "Advanced Excel skills for data analysis, modeling, visualization, and automation using formulas and pivot tables.",
+    cert4_desc:
+      "Business-focused Excel proficiency covering data management, advanced formulas, and professional reporting.",
+    cert5_desc:
+      "Foundational UX design principles including user research, wireframing, prototyping, and usability testing.",
+    certs_subtitle:
+      "Professional certifications that validate my expertise and commitment to continuous learning.",
     certs_count_label: "Certifications",
     cert2: "Tableau Business Intelligence Analyst",
     cert3: "Excel Skills for Data Analytics and Visualization",
@@ -544,12 +575,14 @@ const translations = {
     control_print_state: "PDF",
     control_theme: "Dark Mode",
     control_theme_state: "On",
-    footer_tagline: "I design intuitive experiences and turn data into clear, impactful visuals that help people make better decisions.",
+    footer_tagline:
+      "I design intuitive experiences and turn data into clear, impactful visuals that help people make better decisions.",
     footer_quick_links: "Quick Links",
     footer_resources: "Resources",
     footer_connect: "Let's Connect",
     footer_cta_title: "Let's work together",
-    footer_cta_desc: "I'm always open to discussing new projects and opportunities.",
+    footer_cta_desc:
+      "I'm always open to discussing new projects and opportunities.",
     footer_send_email: "Send me an email",
     footer_copyright: "© 2026 Ahmed Mahdy. All rights reserved.",
     footer_built_with: "Built with passion and precision",
@@ -563,12 +596,14 @@ const translations = {
     display_modes_label: "Display modes",
     edu1_badge: "Diploma",
     edu1_date: "Sep 2016 - Jun 2017",
-    edu1_desc: "Focused on instructional design, e-learning methodologies, and educational technology solutions.",
+    edu1_desc:
+      "Focused on instructional design, e-learning methodologies, and educational technology solutions.",
     edu1_school: "Information Technology Institute (ITI)",
     edu1_title: "Diploma of Education/Instructional Technology",
     edu2_badge: "Bachelor's",
     edu2_date: "Sep 2009 - Jun 2013",
-    edu2_desc: "Studied broadcast communication, media production, and visual storytelling.",
+    edu2_desc:
+      "Studied broadcast communication, media production, and visual storytelling.",
     edu2_school: "Minufiya University",
     edu2_title: "Bachelor's degree, Radio and Television",
     exp_tag: "8+ years experience",
@@ -588,7 +623,8 @@ const translations = {
     job1_b3:
       "Leveraging AI design tools to accelerate prototyping workflows and synthesize UX research.",
     job1_company: "Advansys IS",
-    job1_company_desc: "Leading IT solutions provider specializing in enterprise software, digital transformation, and system integration across the MENA region.",
+    job1_company_desc:
+      "Leading IT solutions provider specializing in enterprise software, digital transformation, and system integration across the MENA region.",
     job1_date: "Jan 2023 - Present",
     job1_date_range: "Jan 2023 – Present",
     job1_duration: "3 yrs 6 mos",
@@ -597,13 +633,16 @@ const translations = {
     job1_title: "UX Designer",
     job1_impact1_metric: "Design Systems",
     job1_impact1_label: "Scalable Components",
-    job1_impact1_desc: "Established scalable design systems using Figma and modern methodologies for B2B platforms.",
+    job1_impact1_desc:
+      "Established scalable design systems using Figma and modern methodologies for B2B platforms.",
     job1_impact2_metric: "Enterprise UX",
     job1_impact2_label: "Complex SaaS Platforms",
-    job1_impact2_desc: "Led UX/UI design for complex B2B and enterprise SaaS platforms, driving user-centric solutions.",
+    job1_impact2_desc:
+      "Led UX/UI design for complex B2B and enterprise SaaS platforms, driving user-centric solutions.",
     job1_impact3_metric: "AI-Powered",
     job1_impact3_label: "Rapid Prototyping",
-    job1_impact3_desc: "Leveraged AI design tools to accelerate prototyping workflows and synthesize UX research.",
+    job1_impact3_desc:
+      "Leveraged AI design tools to accelerate prototyping workflows and synthesize UX research.",
     key_impact: "Key Impact",
     jobs_subtitle: "Where I've worked and the impact I delivered",
     job2_b1:
@@ -611,7 +650,8 @@ const translations = {
     job2_b2:
       "Translated complex technical requirements into accessible, intuitive B2B e-learning experiences.",
     job2_company: "Schneider Electric",
-    job2_company_desc: "Global leader in energy management and automation, driving digital transformation across enterprise and industrial solutions.",
+    job2_company_desc:
+      "Global leader in energy management and automation, driving digital transformation across enterprise and industrial solutions.",
     job2_date: "Jul 2018 - Jan 2023",
     job2_date_range: "Jul 2018 – Jan 2023",
     job2_duration: "4 yrs 7 mos",
@@ -620,13 +660,16 @@ const translations = {
     job2_title: "Instructional Designer",
     job2_impact1_metric: "Learning Design",
     job2_impact1_label: "Course experiences",
-    job2_impact1_desc: "Redesigned corporate learning platforms and interfaces, increasing engagement and completion rates.",
+    job2_impact1_desc:
+      "Redesigned corporate learning platforms and interfaces, increasing engagement and completion rates.",
     job2_impact2_metric: "Scalable Solutions",
     job2_impact2_label: "Global Learning Platforms",
-    job2_impact2_desc: "Built scalable, reusable learning assets and templates that streamlined content delivery.",
+    job2_impact2_desc:
+      "Built scalable, reusable learning assets and templates that streamlined content delivery.",
     job2_impact3_metric: "Learner-Centered",
     job2_impact3_label: "Results-Driven Design",
-    job2_impact3_desc: "Applied learning science and UX principles to create impactful, learner-centered experiences.",
+    job2_impact3_desc:
+      "Applied learning science and UX principles to create impactful, learner-centered experiences.",
     main_resume_label: "Main resume content",
     meta_description:
       "Online resume for Ahmed Mahdy, a UX Designer & Data Visualizer with expertise in UX design, dashboards, and digital product experiences.",
@@ -693,12 +736,16 @@ const translations = {
     skill_tool3: "Looker Studio",
     skill_tool4: "Git & GitHub",
     skills_data_header: "Data Analysis & Visualization",
-    skills_data_desc: "Turning data into meaningful insights and impactful visual stories.",
+    skills_data_desc:
+      "Turning data into meaningful insights and impactful visual stories.",
     skills_ux_header: "Core UX & Design",
-    skills_ux_desc: "Crafting intuitive interfaces and seamless experiences that solve real user and business problems.",
+    skills_ux_desc:
+      "Crafting intuitive interfaces and seamless experiences that solve real user and business problems.",
     skills_tools_header: "Tools & Technologies",
-    skills_tools_desc: "Technologies I use to design, analyze, prototype, and deliver data-informed solutions.",
-    skills_subtitle: "A blend of design thinking, data expertise, and modern tools to build clarity-driven, user-centered digital experiences.",
+    skills_tools_desc:
+      "Technologies I use to design, analyze, prototype, and deliver data-informed solutions.",
+    skills_subtitle:
+      "A blend of design thinking, data expertise, and modern tools to build clarity-driven, user-centered digital experiences.",
     skills_tagline: "Continuously learning & exploring new tools",
     skill_level_proficient: "Proficient",
     skill_level_advanced: "Advanced",
@@ -778,7 +825,8 @@ const translations = {
     cs_open_live: "Open Live Website",
     cs_view_prototype: "Preview live site",
     cs_hover_expand: "Open image preview",
-    cs_a11y_note: "Designed with accessibility, WCAG 2.2, and performance in mind.",
+    cs_a11y_note:
+      "Designed with accessibility, WCAG 2.2, and performance in mind.",
     cs_sec1_short: "Context & Challenge",
     cs_sec2_short: "Approach & Decisions",
     cs_sec3_short: "Tools & Tech",
@@ -788,17 +836,23 @@ const translations = {
     cs_haj_badge1: "Mobile Commerce",
     cs_haj_badge2: "E-Commerce UX",
     cs_haj_sec1_card1_title: "User problem",
-    cs_haj_sec1_card1_desc: "The brief called for easier product discovery and a shorter checkout journey. These needs informed the concept; they are not findings from a reported user study.",
+    cs_haj_sec1_card1_desc:
+      "The brief called for easier product discovery and a shorter checkout journey. These needs informed the concept; they are not findings from a reported user study.",
     cs_haj_sec1_card2_title: "Business problem",
-    cs_haj_sec1_card2_desc: "The brief identified checkout friction as a business risk. Production abandonment and repeat-purchase data were not available for this concept.",
+    cs_haj_sec1_card2_desc:
+      "The brief identified checkout friction as a business risk. Production abandonment and repeat-purchase data were not available for this concept.",
     cs_haj_sec1_card3_title: "Design goal",
-    cs_haj_sec1_card3_desc: "Design a mobile-first shopping journey with search-first navigation and a shorter guest checkout.",
+    cs_haj_sec1_card3_desc:
+      "Design a mobile-first shopping journey with search-first navigation and a shorter guest checkout.",
     cs_haj_sec4_card1_title: "Search-first navigation",
-    cs_haj_sec4_card1_desc: "The implementation gives search and curated categories prominent positions. Findability remains a question for usability testing.",
+    cs_haj_sec4_card1_desc:
+      "The implementation gives search and curated categories prominent positions. Findability remains a question for usability testing.",
     cs_haj_sec4_card2_title: "Streamlined checkout",
-    cs_haj_sec4_card2_desc: "The proposed checkout shortens the purchase path. Its effect on conversion has not yet been measured.",
+    cs_haj_sec4_card2_desc:
+      "The proposed checkout shortens the purchase path. Its effect on conversion has not yet been measured.",
     cs_haj_sec4_card3_title: "Responsive implementation",
-    cs_haj_sec4_card3_desc: "Built mobile-first with keyboard interaction, visible focus states, and responsive layouts informed by WCAG 2.2.",
+    cs_haj_sec4_card3_desc:
+      "Built mobile-first with keyboard interaction, visible focus states, and responsive layouts informed by WCAG 2.2.",
     cs_prev_project: "Previous Project",
     cs_next_project: "Next Project",
     cs_sec1_title: "Context & Challenge",
@@ -1161,7 +1215,12 @@ function ensureExternalLinkNotes(lang) {
       link.appendChild(note);
     }
 
-    if (!link.closest(".footer-social-icons, .contact-list") && !link.querySelector('use[href="#icon-external"], use[href="#icon-arrow-up-right"]')) {
+    if (
+      !link.closest(".footer-social-icons, .contact-list") &&
+      !link.querySelector(
+        'use[href="#icon-external"], use[href="#icon-arrow-up-right"]',
+      )
+    ) {
       const icon = document.createElementNS(
         "http://www.w3.org/2000/svg",
         "svg",
@@ -1200,8 +1259,11 @@ function updateExternalLinks(lang) {
   document.querySelectorAll('a[target="_blank"]').forEach((link) => {
     let label = getLinkText(link);
     if (!label) {
-      const equivalent = [...document.querySelectorAll('a[href]')].find(
-        (candidate) => candidate !== link && candidate.href === link.href && getLinkText(candidate),
+      const equivalent = [...document.querySelectorAll("a[href]")].find(
+        (candidate) =>
+          candidate !== link &&
+          candidate.href === link.href &&
+          getLinkText(candidate),
       );
       if (equivalent) label = getLinkText(equivalent);
     }
@@ -1307,7 +1369,9 @@ function updateThemeButton(lang) {
   }
   controls.themeToggle?.setAttribute("data-tooltip", tooltip);
   const state = controls.themeToggle?.querySelector(".control-state");
-  if (state) state.textContent = lang === "ar" ? (isDark ? "تشغيل" : "إيقاف") : (isDark ? "On" : "Off");
+  if (state)
+    state.textContent =
+      lang === "ar" ? (isDark ? "تشغيل" : "إيقاف") : isDark ? "On" : "Off";
   setUseIcon(controls.themeToggle, isDark ? "#icon-sun" : "#icon-moon");
 }
 
@@ -1336,7 +1400,9 @@ function updateContrastButton(lang) {
   );
   controls.contrastToggle?.classList.toggle("active", isHigh);
   const state = controls.contrastToggle?.querySelector(".control-state");
-  if (state) state.textContent = lang === "ar" ? (isHigh ? "تشغيل" : "إيقاف") : (isHigh ? "On" : "Off");
+  if (state)
+    state.textContent =
+      lang === "ar" ? (isHigh ? "تشغيل" : "إيقاف") : isHigh ? "On" : "Off";
 }
 
 /**
@@ -1361,18 +1427,34 @@ function refreshUi(lang) {
   updateThemeButton(lang);
   updateContrastButton(lang);
   document.querySelectorAll("[data-print-resume]").forEach((button) => {
-    const label = lang === "ar" ? "طباعة أو حفظ السيرة الذاتية" : "Print or save résumé";
+    const label =
+      lang === "ar" ? "طباعة أو حفظ السيرة الذاتية" : "Print or save résumé";
     button.setAttribute("aria-label", label);
     button.setAttribute("data-tooltip", label);
   });
-  document.querySelectorAll(".audio-play-btn:not(.is-playing)").forEach((button) => {
-    const section = button.closest(".panel")?.querySelector("h2")?.textContent.trim();
-    const label = translations[lang][button.classList.contains("case-listen-btn") ? "cs_listen_full" : "cs_listen"];
-    button.setAttribute("aria-label", section ? `${label}: ${section}` : label);
-    button.setAttribute("title", label);
-  });
+  document
+    .querySelectorAll(".audio-play-btn:not(.is-playing)")
+    .forEach((button) => {
+      const section = button
+        .closest(".panel")
+        ?.querySelector("h2")
+        ?.textContent.trim();
+      const label =
+        translations[lang][
+          button.classList.contains("case-listen-btn")
+            ? "cs_listen_full"
+            : "cs_listen"
+        ];
+      button.setAttribute(
+        "aria-label",
+        section ? `${label}: ${section}` : label,
+      );
+      button.setAttribute("title", label);
+    });
   document.querySelectorAll('.skills-panel [role="list"]').forEach((list) => {
-    const heading = list.closest(".skill-group")?.querySelector("h3")?.textContent;
+    const heading = list
+      .closest(".skill-group")
+      ?.querySelector("h3")?.textContent;
     if (heading) list.setAttribute("aria-label", heading);
   });
   const backToTop = document.querySelector(".back-to-top-fab");
@@ -1391,7 +1473,7 @@ function refreshUi(lang) {
  */
 function setTheme(theme) {
   root.dataset.theme = theme;
-  localStorage.setItem(storageKeys.theme, theme);
+  window.resumePreferences.set(storageKeys.theme, theme);
   updateThemeColor();
   updateThemeButton(getCurrentLanguage());
 }
@@ -1402,7 +1484,7 @@ function setTheme(theme) {
  */
 function setContrast(contrast) {
   root.dataset.contrast = contrast;
-  localStorage.setItem(storageKeys.contrast, contrast);
+  window.resumePreferences.set(storageKeys.contrast, contrast);
   updateThemeColor();
   updateContrastButton(getCurrentLanguage());
 }
@@ -1415,13 +1497,13 @@ function setContrast(contrast) {
 function setLanguage(lang, persist = true) {
   const staticLocale = document.body.dataset.staticLocale;
   if (persist && staticLocale && lang !== staticLocale) {
-    localStorage.setItem(storageKeys.lang, lang);
+    window.resumePreferences.set(storageKeys.lang, lang);
     location.assign(`/${lang}${document.body.dataset.staticPath || "/"}`);
     return;
   }
   root.setAttribute("lang", lang);
   root.setAttribute("dir", lang === "ar" ? "rtl" : "ltr");
-  if (persist) localStorage.setItem(storageKeys.lang, lang);
+  if (persist) window.resumePreferences.set(storageKeys.lang, lang);
   refreshUi(lang);
 }
 
@@ -1625,7 +1707,10 @@ function bindCopyButtons() {
 function updatePrintStyles() {
   const printDocument = document.querySelector(".print-resume-document");
   if (printDocument) {
-    const walker = document.createTreeWalker(printDocument, NodeFilter.SHOW_TEXT);
+    const walker = document.createTreeWalker(
+      printDocument,
+      NodeFilter.SHOW_TEXT,
+    );
     let node = walker.nextNode();
     while (node) {
       node.nodeValue = node.nodeValue.replace(/\s*[–—·]\s*/g, " - ");
@@ -1732,7 +1817,8 @@ function initBackToTop() {
   button.type = "button";
   button.className = "back-to-top-fab";
   button.hidden = true;
-  button.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>';
+  button.innerHTML =
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>';
   document.body.append(button);
 
   let ticking = false;
@@ -1741,20 +1827,31 @@ function initBackToTop() {
     ticking = false;
   };
 
-  window.addEventListener("scroll", () => {
-    if (ticking) return;
-    requestAnimationFrame(update);
-    ticking = true;
-  }, { passive: true });
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (ticking) return;
+      requestAnimationFrame(update);
+      ticking = true;
+    },
+    { passive: true },
+  );
 
   button.addEventListener("click", () => {
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
     window.scrollTo({ top: 0, behavior: reducedMotion ? "auto" : "smooth" });
-    window.setTimeout(() => {
-      main.setAttribute("tabindex", "-1");
-      main.focus({ preventScroll: true });
-      main.addEventListener("blur", () => main.removeAttribute("tabindex"), { once: true });
-    }, reducedMotion ? 0 : 350);
+    window.setTimeout(
+      () => {
+        main.setAttribute("tabindex", "-1");
+        main.focus({ preventScroll: true });
+        main.addEventListener("blur", () => main.removeAttribute("tabindex"), {
+          once: true,
+        });
+      },
+      reducedMotion ? 0 : 350,
+    );
   });
 
   update();
@@ -1799,7 +1896,9 @@ function refreshCaseSectionJump(lang) {
   if (!select) return;
   const links = [...document.querySelectorAll(".case-section-link")];
   select.previousElementSibling.textContent =
-    lang === "ar" ? "انتقل إلى قسم في دراسة الحالة" : "Jump to case study section";
+    lang === "ar"
+      ? "انتقل إلى قسم في دراسة الحالة"
+      : "Jump to case study section";
   [...select.options].forEach((option, index) => {
     option.textContent = links[index]?.textContent.trim() || option.textContent;
   });
@@ -1807,13 +1906,18 @@ function refreshCaseSectionJump(lang) {
 
 function initCaseSectionNavigation() {
   const nav = document.querySelector(".case-section-nav");
-  const links = [...(nav?.querySelectorAll('.case-section-link[href^="#"]') || [])];
+  const links = [
+    ...(nav?.querySelectorAll('.case-section-link[href^="#"]') || []),
+  ];
   if (!nav || !links.length) return;
 
   const jump = document.createElement("label");
   jump.className = "case-section-jump";
   jump.innerHTML = `<span></span><select>${links
-    .map((link) => `<option value="${link.hash}">${link.textContent.trim()}</option>`)
+    .map(
+      (link) =>
+        `<option value="${link.hash}">${link.textContent.trim()}</option>`,
+    )
     .join("")}</select>`;
   nav.before(jump);
   const select = jump.querySelector("select");
@@ -2155,7 +2259,10 @@ function initLiveEmbedViewer() {
           iframe.src = iframe.dataset.src;
         }
         container.scrollIntoView({
-          behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+          behavior: window.matchMedia("(prefers-reduced-motion: reduce)")
+            .matches
+            ? "auto"
+            : "smooth",
           block: "nearest",
         });
       }

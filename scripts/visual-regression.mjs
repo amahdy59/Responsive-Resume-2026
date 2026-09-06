@@ -203,11 +203,29 @@ try {
         { threshold: 0.3 },
       );
       const ratio = different / (compareWidth * compareHeight);
-      const maxAllowedRatio = isCI ? 0.2 : 0.05;
+      const maxAllowedRatio = 0.05;
       assert.ok(
         ratio <= maxAllowedRatio,
         `${scenario.name} visual difference ${(ratio * 100).toFixed(2)}% exceeds ${(maxAllowedRatio * 100).toFixed(0)}%`,
       );
+      // A long page must not dilute a broken header or card into a tiny ratio.
+      for (let y = 0; y < compareHeight; y += scenario.height) {
+        const bottom = Math.min(y + scenario.height, compareHeight);
+        const start = y * compareWidth * 4;
+        const end = bottom * compareWidth * 4;
+        const changed = pixelmatch(
+          actualCropped.data.subarray(start, end),
+          baselineCropped.data.subarray(start, end),
+          null,
+          compareWidth,
+          bottom - y,
+          { threshold: 0.3 },
+        );
+        assert.ok(
+          changed / (compareWidth * (bottom - y)) <= 0.08,
+          `${scenario.name}: visual regression in viewport slice at y=${y}`,
+        );
+      }
       console.log(`Passed ${scenario.name}`);
     }
     await context.close();
