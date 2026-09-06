@@ -73,7 +73,7 @@
   border: 0;
   border-radius: 7px;
   cursor: pointer;
-  opacity: 0.45;
+  opacity: 1;
   transition:
     opacity 150ms ease,
     transform 150ms ease,

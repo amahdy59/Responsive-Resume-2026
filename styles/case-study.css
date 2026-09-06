@@ -14,12 +14,12 @@
 }
 
 .case-study-nav {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: 10px 16px;
+  padding: 8px 0;
   background: transparent;
   border: 0;
   border-radius: 14px;
@@ -33,8 +33,8 @@
   gap: 8px;
   height: 44px;
   padding: 0 16px;
-  background: color-mix(in srgb, var(--blue) 8%, transparent);
-  border: 1px solid color-mix(in srgb, var(--blue) 25%, transparent);
+  background: transparent;
+  border: 1px solid transparent;
   border-radius: 999px;
   color: var(--blue);
   font-family: inherit;
@@ -82,6 +82,8 @@
 
 /* Breadcrumbs inline in header */
 .case-study-breadcrumbs {
+  grid-column: 1 / -1;
+  grid-row: 2;
   flex: 1;
   min-width: 0;
   margin: 0;
@@ -117,6 +119,7 @@
 }
 
 .breadcrumbs a {
+  min-width: 44px;
   color: var(--link-aaa);
   transition: color 160ms ease;
   min-height: 44px;
@@ -140,8 +143,75 @@
   display: flex;
   margin-inline-start: auto;
   align-items: center;
-  gap: 6px;
+  gap: 24px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.case-reading-action {
+  margin: 0 0 16px;
+}
+
+.case-reading-action .case-listen-btn {
+  min-height: 44px;
+  height: auto;
+  white-space: normal;
+}
+
+.case-study-controls .language-selector {
+  background: var(--surface);
+  border-color: var(--line);
+}
+
+.case-study-controls .language-option {
+  color: var(--text);
+}
+
+.case-study-controls .language-selector-icon {
+  color: var(--link-aaa);
+}
+
+.case-study-controls .language-option:has(input:checked) {
+  background: var(--button-bg);
+  color: var(--button-text);
+}
+
+.case-display-modes {
+  background: var(--surface);
+  border-color: var(--line);
+}
+
+.case-display-modes :is(.theme-toggle, .contrast-toggle) {
+  display: flex;
+  width: auto;
+  gap: 8px;
+  padding: 6px 10px;
+}
+
+.case-display-modes :is(.control-label, .control-state) {
+  color: var(--text);
+}
+
+.case-display-modes .control-state {
+  display: none;
+}
+
+.case-display-modes .control-switch {
   flex-shrink: 0;
+  background: #526174;
+  border-color: #526174;
+}
+
+.case-display-modes [aria-checked="true"] .control-switch {
+  background: #2563eb;
+}
+
+.case-display-modes [aria-checked="true"] .control-switch > span {
+  translate: 18px 0;
+}
+
+[dir="rtl"] .case-display-modes [aria-checked="true"] .control-switch > span {
+  translate: -18px 0;
 }
 
 .case-listen-btn {
@@ -192,7 +262,7 @@
 .case-study-card {
   max-width: 960px;
   margin: 12px auto 48px;
-  padding: clamp(20px, 4vw, 40px);
+  padding: clamp(16px, 2.5vw, 28px);
   border: 0;
   border-radius: 18px;
   background: transparent;
@@ -202,7 +272,7 @@
 /* ── Two-Column Hero ── */
 .case-study-hero {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
   gap: 32px;
   align-items: start;
   margin-bottom: 28px;
@@ -230,15 +300,15 @@
   text-transform: uppercase;
   letter-spacing: 0.06em;
   color: var(--link-aaa);
-  background: var(--pill-bg);
-  border: 1px solid color-mix(in srgb, var(--blue) 25%, transparent);
+  background: transparent;
+  border: 1px solid var(--soft-line);
   border-radius: 999px;
 }
 
 .case-study-hero h1 {
   margin: 0 0 12px;
   color: var(--text);
-  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-size: clamp(1.75rem, 3vw, 2.75rem);
   font-weight: 800;
   line-height: 1.15;
   letter-spacing: -0.02em;
@@ -404,6 +474,7 @@
 }
 
 .case-meta-icon {
+  display: none;
   width: 18px;
   height: 18px;
   color: var(--blue);
@@ -434,11 +505,12 @@
 /* ── Section Nav (Horizontal Tabs) ── */
 .case-section-nav {
   display: flex;
+  flex-wrap: wrap;
   gap: 0;
   margin-bottom: 24px;
   padding-bottom: 1px;
   border-bottom: 1px solid var(--line);
-  overflow-x: auto;
+  overflow: visible;
   scrollbar-width: none;
 }
 
@@ -459,7 +531,8 @@
   font-weight: 600;
   color: var(--muted);
   text-decoration: none !important;
-  white-space: nowrap;
+  white-space: normal;
+  min-height: 44px;
   border-bottom: 2px solid transparent;
   margin-bottom: -1px;
   transition:

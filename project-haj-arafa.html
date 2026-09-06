@@ -112,15 +112,31 @@
               <li aria-current="page" data-translate="cs_haj_title">Haj Arafa App</li>
             </ol>
           </nav>
-          <div class="case-study-controls">
-            <button class="audio-play-btn case-listen-btn" type="button" data-audio-id="haj-arafa-intro" aria-label="Listen to case study" title="Listen to narration">
-              <svg class="audio-icon" aria-hidden="true"><use href="#icon-volume"></use></svg>
-              <span class="audio-btn-text" data-translate="cs_listen_full">Listen to case study</span>
-            </button>
-            <button class="lang-toggle" type="button" data-tooltip="Switch Language" aria-label="Switch to Arabic"><span aria-hidden="true"><svg><use href="#icon-language"></use></svg></span></button>
-            <button class="theme-toggle" type="button" data-tooltip="Switch Theme" aria-label="Dark mode"><span aria-hidden="true"><svg><use href="#icon-moon"></use></svg></span></button>
-            <button class="contrast-toggle" type="button" data-tooltip="Toggle Contrast" aria-label="High contrast mode"><span aria-hidden="true"><svg><use href="#icon-contrast"></use></svg></span></button>
-          </div>
+          <div class="case-study-controls"><fieldset class="language-selector">
+                <legend class="sr-only" data-translate="control_language">Language</legend>
+                <span class="language-selector-icon" aria-hidden="true"><svg><use href="#icon-language"></use></svg></span>
+                <label class="language-option" lang="en">
+                  <input class="sr-only language-option-input" type="radio" name="portfolio-language" value="en" checked />
+                  <span>English</span>
+                </label>
+                <label class="language-option" lang="ar" dir="rtl">
+                  <input class="sr-only language-option-input" type="radio" name="portfolio-language" value="ar" />
+                  <span>العربية</span>
+                </label>
+              </fieldset><div class="display-mode-group case-display-modes" role="group" aria-label="Display modes" data-translate-attr="aria-label" data-translate-attr-key="display_modes_label">
+                <button class="theme-toggle" type="button" role="switch" aria-checked="false" data-tooltip="Switch Theme" aria-label="Dark mode">
+                  <span aria-hidden="true"><svg><use href="#icon-moon"></use></svg></span>
+                  <span class="control-label" data-translate="control_theme">Dark Mode</span>
+                  <span class="control-state" data-translate="control_theme_state">On</span>
+                  <span class="control-switch" aria-hidden="true"><span></span></span>
+                </button>
+                <button class="contrast-toggle" type="button" role="switch" aria-checked="false" data-tooltip="Toggle Contrast" aria-label="High contrast mode">
+                  <span aria-hidden="true"><svg><use href="#icon-contrast"></use></svg></span>
+                  <span class="control-label" data-translate="control_contrast">High Contrast</span>
+                  <span class="control-state" data-translate="control_contrast_state">Off</span>
+                  <span class="control-switch" aria-hidden="true"><span></span></span>
+                </button>
+              </div></div>
         </nav>
       </header>
 
@@ -133,6 +149,10 @@
             </div>
             <h1 data-translate="cs_haj_title">Haj Arafa App</h1>
             <p class="case-study-subtitle" data-translate="cs_haj_sub">Mobile-first e-commerce interface showcasing search-first navigation and express 2-step checkout.</p>
+            <div class="case-reading-action"><button class="audio-play-btn case-listen-btn" type="button" data-audio-id="haj-arafa-intro" aria-label="Listen to case study" title="Listen to narration">
+              <svg class="audio-icon" aria-hidden="true"><use href="#icon-volume"></use></svg>
+              <span class="audio-btn-text" data-translate="cs_listen_full">Listen to case study</span>
+            </button></div>
             <div class="case-cta-wrapper">
               <a href="https://amahdy59.github.io/Hajarafaapp/" class="btn btn-primary case-live-cta" target="_blank" rel="noopener noreferrer">
                 <span data-translate="cs_open_live">Open Live Website</span>

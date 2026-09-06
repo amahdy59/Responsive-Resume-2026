@@ -301,6 +301,11 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .case-hero-image:hover .case-study-image,
+  .project-thumbnail-link:hover .project-thumbnail {
+    transform: none;
+  }
+
   *,
   *::before,
   *::after {
@@ -341,10 +346,64 @@ html[lang] .controls-group [data-tooltip][data-tooltip-dismissed]::after {
   }
 }
 
-/* Feedback belongs on the control being pressed, with no layout movement. */
+/* The hero stays dark even in the light page theme. */
+.portfolio-header .display-mode-group button:is(:hover, :focus-visible) {
+  background: #203e60;
+  border-color: #93c5fd;
+  color: #fff;
+}
+
+.portfolio-header .display-mode-group button:is(:hover, :focus-visible) .control-label {
+  color: #fff;
+}
+
+.portfolio-header .display-mode-group button:is(:hover, :focus-visible) .control-state {
+  color: #c5e3ff;
+}
+
+.portfolio-header .control-switch {
+  border-color: #b6c9df;
+}
+
+.case-display-modes button:is(:hover, :focus-visible) :is(.control-label, .control-state) {
+  color: var(--text);
+}
+
 @media (prefers-reduced-motion: no-preference) {
   :where(.btn, .hero-cta, .audio-player-controls button):active {
     transform: scale(0.98);
     transition-duration: var(--motion-fast);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) and (hover: hover) {
+  .project-card {
+    transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+  }
+
+  .project-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgb(0 0 0 / 12%);
+  }
+
+  .project-card:focus-within {
+    transform: none;
+    transition: none;
+  }
+
+  .project-thumbnail {
+    transition: transform 280ms ease;
+  }
+
+  .project-thumbnail-link:hover .project-thumbnail {
+    transform: scale(1.025);
+  }
+
+  .contact-link-main .contact-icon {
+    transition: transform 180ms ease;
+  }
+
+  .contact-link-main:hover .contact-icon {
+    transform: translateY(-2px);
   }
 }

@@ -1009,6 +1009,15 @@ html[lang="ar"] .skill-group h3 {
   margin-top: 14px;
 }
 
+.project-actions > .btn {
+  flex: 1 1 180px;
+  justify-content: center;
+  min-height: 44px;
+  height: auto;
+  white-space: normal;
+  text-align: center;
+}
+
 .timeline-card h3 {
   color: var(--text);
   font-size: 1.12rem;
@@ -1205,12 +1214,23 @@ html[lang="ar"] .skill-group h3 {
 /* ── Employment Redesign ── */
 .employment-panel .li-experience-group {
   display: grid;
-  grid-template-columns: 160px minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr);
   background: var(--surface);
   padding: 24px;
   border: 1px solid var(--line);
   border-radius: 16px;
-  gap: 0 20px;
+  gap: 12px;
+}
+
+.employment-panel .li-date-aside {
+  flex-flow: row wrap;
+  align-items: baseline;
+  gap: 4px 16px;
+  padding: 0;
+}
+
+.employment-panel .li-roles-list {
+  margin-inline-start: 0;
 }
 
 .li-date-aside {

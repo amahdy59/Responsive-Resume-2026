@@ -1048,6 +1048,21 @@ try {
         })),
         [],
       );
+      if (theme === "light" && contrast === "normal") {
+        for (const selector of [".theme-toggle", ".contrast-toggle"]) {
+          await page.locator(selector).hover();
+          await page.waitForTimeout(450);
+          const hovered = await new AxeBuilder({ page }).analyze();
+          assert.deepEqual(
+            hovered.violations.map(({ id, nodes }) => ({
+              id,
+              targets: nodes.map(({ target }) => target),
+            })),
+            [],
+            `${selector} must remain accessible on hover in light mode`,
+          );
+        }
+      }
       await context.close();
       console.log(`Passed ${theme}/${contrast} contrast and accessibility`);
     }
@@ -1237,7 +1252,7 @@ try {
       );
 
       for (const selector of [
-        ".lang-toggle",
+        '.language-option[lang="en"]',
         ".theme-toggle",
         ".contrast-toggle",
       ]) {
