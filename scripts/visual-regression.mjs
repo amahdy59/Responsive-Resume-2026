@@ -150,10 +150,10 @@ try {
     } else {
       const actual = PNG.sync.read(await readFile(actualPath));
       const baseline = PNG.sync.read(await readFile(baselinePath));
-      assert.equal(
-        actual.width,
-        baseline.width,
-        `${scenario.name} width changed`,
+      // Linux and Windows can round fractional layout edges one pixel apart.
+      assert.ok(
+        Math.abs(actual.width - baseline.width) <= (isCI ? 1 : 0),
+        `${scenario.name} width changed: ${actual.width} vs ${baseline.width}`,
       );
       const heightDiff = Math.abs(actual.height - baseline.height);
       const maxAllowedHeightDiff =
@@ -164,7 +164,7 @@ try {
       );
 
       const compareHeight = Math.min(actual.height, baseline.height);
-      const compareWidth = actual.width;
+      const compareWidth = Math.min(actual.width, baseline.width);
       const actualCropped = new PNG({
         width: compareWidth,
         height: compareHeight,
