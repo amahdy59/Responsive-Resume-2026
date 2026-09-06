@@ -114,7 +114,7 @@ try {
           route.fulfill({ body: "", contentType: "text/css", status: 200 }),
       );
       const page = await context.newPage();
-      page.setDefaultNavigationTimeout(30000);
+      page.setDefaultNavigationTimeout(60000);
       page.setDefaultTimeout(30000);
       const runtimeErrors = [];
 
@@ -167,6 +167,38 @@ try {
           direction: document.documentElement.dir,
           domSectionOrder: panels.map(panelName),
           heading: document.querySelector("h1")?.textContent?.trim(),
+          headerLayout: (() => {
+            const header = document.querySelector(".portfolio-header");
+            const identity = document.querySelector(".hero-identity");
+            const contact = document.querySelector(".hero-contact-card");
+            const controls = [
+              ...document.querySelectorAll(".controls-group > button"),
+            ];
+            if (!header || !identity || !contact) return null;
+            const headerRect = header.getBoundingClientRect();
+            const identityRect = identity.getBoundingClientRect();
+            const contactRect = contact.getBoundingClientRect();
+            return {
+              contactAfterIdentity: contactRect.top >= identityRect.bottom - 1,
+              headerContained:
+                headerRect.left >= -1 &&
+                headerRect.right <= window.innerWidth + 1,
+              identityCenterDelta: Math.abs(
+                identityRect.left +
+                  identityRect.width / 2 -
+                  window.innerWidth / 2,
+              ),
+              rowCenterDelta: Math.abs(
+                identityRect.top +
+                  identityRect.height / 2 -
+                  (contactRect.top + contactRect.height / 2),
+              ),
+              targetsMeetSize: controls.every((button) => {
+                const rect = button.getBoundingClientRect();
+                return rect.width >= 44 && rect.height >= 44;
+              }),
+            };
+          })(),
           fontFamilies: [
             ...new Set(
               [...document.querySelectorAll("body, body *")]
@@ -278,6 +310,21 @@ try {
       assert.equal(state.language, scenario.language);
       assert.equal(state.direction, scenario.language === "ar" ? "rtl" : "ltr");
       assert.ok(state.heading, "The resume heading should be visible");
+      assert.equal(state.headerLayout?.headerContained, true);
+      assert.equal(state.headerLayout?.targetsMeetSize, true);
+      if (scenario.width <= 560) {
+        assert.ok(
+          state.headerLayout.identityCenterDelta <= 2,
+          `Mobile hero identity should be centered: ${JSON.stringify(state.headerLayout)}`,
+        );
+      } else if (scenario.width <= 1080) {
+        assert.equal(state.headerLayout.contactAfterIdentity, true);
+      } else {
+        assert.ok(
+          state.headerLayout.rowCenterDelta <= 48,
+          `Desktop hero columns should align vertically: ${JSON.stringify(state.headerLayout)}`,
+        );
+      }
       assert.equal(state.brokenImages, 0);
       assert.ok(
         state.scrollWidth <= state.clientWidth,
@@ -625,18 +672,19 @@ try {
           const toggle = page.locator(selector);
           const before = {
             label: await toggle.getAttribute("aria-label"),
-            pressed: await toggle.getAttribute("aria-pressed"),
+            checked: await toggle.getAttribute("aria-checked"),
           };
           await toggle.click();
           const after = {
             label: await toggle.getAttribute("aria-label"),
-            pressed: await toggle.getAttribute("aria-pressed"),
+            checked: await toggle.getAttribute("aria-checked"),
           };
           assert.equal(after.label, before.label);
-          assert.notEqual(after.pressed, before.pressed);
+          assert.equal(await toggle.getAttribute("role"), "switch");
+          assert.notEqual(after.checked, before.checked);
           assert.equal(
             await toggle.locator(".control-state").textContent(),
-            after.pressed === "true" ? "On" : "Off",
+            after.checked === "true" ? "On" : "Off",
           );
           await toggle.click();
         }

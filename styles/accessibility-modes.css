@@ -73,6 +73,26 @@
   color: #000 !important;
 }
 
+[data-contrast="high"] .portfolio-header {
+  background: #000 !important;
+  border: 2px solid #fff !important;
+  box-shadow: none !important;
+}
+
+[data-contrast="high"] .control-switch {
+  border: 2px solid #fff;
+  background: #000;
+}
+
+[data-contrast="high"] [role="switch"][aria-checked="true"] .control-switch {
+  border-color: #0ff;
+  background: #0ff;
+}
+
+[data-contrast="high"] [role="switch"][aria-checked="true"] .control-switch > span {
+  background: #000;
+}
+
 [data-contrast="high"] .theme-toggle {
   display: none !important;
 }
@@ -228,6 +248,22 @@
 
   .theme-toggle {
     display: none !important;
+  }
+
+  .portfolio-header {
+    background: Canvas;
+    border: 1.5px solid ButtonBorder;
+    box-shadow: none;
+    forced-color-adjust: auto;
+  }
+
+  .portfolio-header :is(h1, .hero-role, .hero-bio, .tag-pill, .contact-card-title, .contact-label, .control-label, .control-state) {
+    color: CanvasText;
+  }
+
+  .control-switch {
+    border-color: ButtonBorder;
+    background: ButtonFace;
   }
 
   .panel,

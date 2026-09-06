@@ -1278,7 +1278,7 @@ function updateLanguageButton(lang) {
 }
 
 /**
- * Updates the theme toggle button icon, aria-label, aria-pressed, and tooltip
+ * Updates the theme switch icon, label, checked state, and tooltip
  * to reflect the current theme state.
  * @param {'en'|'ar'} lang - Language code for translated labels.
  */
@@ -1292,7 +1292,13 @@ function updateThemeButton(lang) {
     "aria-label",
     getTranslation(lang, "aria_dark_mode"),
   );
-  controls.themeToggle?.setAttribute("aria-pressed", String(isDark));
+  if (controls.themeToggle?.querySelector(".control-switch")) {
+    controls.themeToggle.setAttribute("role", "switch");
+    controls.themeToggle.setAttribute("aria-checked", String(isDark));
+    controls.themeToggle.removeAttribute("aria-pressed");
+  } else {
+    controls.themeToggle?.setAttribute("aria-pressed", String(isDark));
+  }
   controls.themeToggle?.setAttribute("data-tooltip", tooltip);
   const state = controls.themeToggle?.querySelector(".control-state");
   if (state) state.textContent = lang === "ar" ? (isDark ? "تشغيل" : "إيقاف") : (isDark ? "On" : "Off");
@@ -1300,7 +1306,7 @@ function updateThemeButton(lang) {
 }
 
 /**
- * Updates the contrast toggle button aria-label, aria-pressed, tooltip,
+ * Updates the contrast switch label, checked state, tooltip,
  * and active class to reflect the current contrast state.
  * @param {'en'|'ar'} lang - Language code for translated labels.
  */
@@ -1311,7 +1317,13 @@ function updateContrastButton(lang) {
     "aria-label",
     getTranslation(lang, "aria_high_contrast_mode"),
   );
-  controls.contrastToggle?.setAttribute("aria-pressed", String(isHigh));
+  if (controls.contrastToggle?.querySelector(".control-switch")) {
+    controls.contrastToggle.setAttribute("role", "switch");
+    controls.contrastToggle.setAttribute("aria-checked", String(isHigh));
+    controls.contrastToggle.removeAttribute("aria-pressed");
+  } else {
+    controls.contrastToggle?.setAttribute("aria-pressed", String(isHigh));
+  }
   controls.contrastToggle?.setAttribute(
     "data-tooltip",
     getTranslation(lang, "tooltip_contrast"),

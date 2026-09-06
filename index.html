@@ -194,6 +194,7 @@
         data-translate-attr="aria-label"
         data-translate-attr-key="resume_card_label"
       >
+        <div class="portfolio-header">
           <aside class="hero-controls-rail" aria-label="Display settings">
             <div
               class="controls-group"
@@ -207,15 +208,17 @@
                 <span class="control-label" data-translate="control_language">Language</span>
                 <span class="control-state" data-translate="control_language_state">English</span>
               </button>
-              <button class="theme-toggle" type="button" data-tooltip="Switch Theme" aria-label="Dark mode">
+              <button class="theme-toggle" type="button" role="switch" aria-checked="false" data-tooltip="Switch Theme" aria-label="Dark mode">
                 <span aria-hidden="true"><svg><use href="#icon-moon"></use></svg></span>
                 <span class="control-label" data-translate="control_theme">Dark Mode</span>
                 <span class="control-state" data-translate="control_theme_state">On</span>
+                <span class="control-switch" aria-hidden="true"><span></span></span>
               </button>
-              <button class="contrast-toggle" type="button" data-tooltip="Toggle Contrast" aria-label="High contrast mode">
+              <button class="contrast-toggle" type="button" role="switch" aria-checked="false" data-tooltip="Toggle Contrast" aria-label="High contrast mode">
                 <span aria-hidden="true"><svg><use href="#icon-contrast"></use></svg></span>
                 <span class="control-label" data-translate="control_contrast">High Contrast</span>
                 <span class="control-state" data-translate="control_contrast_state">Off</span>
+                <span class="control-switch" aria-hidden="true"><span></span></span>
               </button>
               <button class="print-button" type="button" data-print-resume data-tooltip="Print / Save PDF" aria-label="Print or save as PDF" data-tooltip-key="print_resume_action">
                 <span aria-hidden="true"><svg><use href="#icon-print"></use></svg></span>
@@ -299,6 +302,7 @@
           </div>
 
           <div class="hero-contact-card" aria-label="Contact and profiles">
+            <p class="contact-card-title" data-translate="footer_connect">Let's Connect</p>
             <ul
               class="contact-list"
               aria-label="Contact links"
@@ -331,6 +335,7 @@
 
 
         </header>
+        </div>
 
         <address class="print-contact">
           <span>Cairo, Egypt</span>

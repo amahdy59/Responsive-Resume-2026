@@ -97,7 +97,8 @@
   .skip-link { display: none !important; }
 
   .resume-shell,
-  .resume-card {
+  .resume-card,
+  .portfolio-header {
     width: 100% !important;
     max-width: none !important;
     margin: 0 !important;
@@ -105,6 +106,7 @@
     border: 0 !important;
     border-radius: 0 !important;
     background: #fff !important;
+    box-shadow: none !important;
   }
 
   .hero {
