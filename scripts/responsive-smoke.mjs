@@ -217,6 +217,25 @@ try {
               visible: box.width > 0 && box.height >= 40,
             };
           })(),
+          aiTag: document
+            .querySelector('[data-translate="ai_tag"]')
+            ?.textContent?.trim(),
+          availabilityLabels: document.querySelectorAll(
+            ".avatar-badge, .hero-availability, [data-translate='hero_availability'], [data-translate='footer_available']",
+          ).length,
+          featuredProject: (() => {
+            const card = document.querySelector(
+              "#projects .project-card-featured",
+            );
+            return card
+              ? {
+                  caseStudyPath: new URL(card.querySelector("h3 a").href)
+                    .pathname,
+                  liveUrl: card.querySelector(".project-live-link").href,
+                  title: card.querySelector("h3").textContent.trim(),
+                }
+              : null;
+          })(),
           projectFilterCount: document.querySelectorAll(".project-filter-pill")
             .length,
           projectThumbnailCount:
@@ -299,6 +318,21 @@ try {
         { hash: "#projects", visible: true },
         "Hero must expose a visible primary CTA pointing at #projects",
       );
+      assert.equal(state.availabilityLabels, 0);
+      assert.equal(
+        state.aiTag,
+        scenario.language === "ar"
+          ? "تنفيذ معزّز بالذكاء الاصطناعي"
+          : "AI-assisted delivery",
+      );
+      assert.deepEqual(state.featuredProject, {
+        caseStudyPath: "/project-azkar-app.html",
+        liveUrl: "https://wa-zaker.com/",
+        title:
+          scenario.language === "ar"
+            ? "وَذَكِّر — الحصن اليومي"
+            : "Wa-Zaker — Daily Fortress",
+      });
       assert.equal(
         state.projectTitleLinks.length,
         5,
@@ -356,15 +390,26 @@ try {
             constructor(src) {
               window.__narrationSource = src;
               this.paused = true;
+              this.duration = 120;
+              this._currentTime = 0;
             }
             pause() {
               this.paused = true;
             }
             play() {
               this.paused = false;
+              queueMicrotask(() => {
+                this.onloadedmetadata?.();
+                this.onplaying?.();
+              });
               return Promise.resolve();
             }
-            set currentTime(_value) {}
+            get currentTime() {
+              return this._currentTime;
+            }
+            set currentTime(value) {
+              this._currentTime = value;
+            }
           };
         });
         const audioButton = page.locator(".audio-play-btn").first();
@@ -385,7 +430,35 @@ try {
           1,
         );
         assert.ok(
-          (await page.locator(".audio-player-controls svg").count()) >= 6,
+          (await page.locator(".global-audio-player svg").count()) >= 6,
+        );
+        assert.equal(
+          await page.locator(".global-audio-player").getAttribute("data-state"),
+          "playing",
+        );
+        assert.match(
+          await page.locator("[data-audio-position]").textContent(),
+          /^Section 1 of \d+$/,
+        );
+        assert.equal(
+          await page.locator("[data-audio-elapsed]").textContent(),
+          "0:00",
+        );
+        assert.equal(
+          await page.locator("[data-audio-duration]").textContent(),
+          "2:00",
+        );
+        assert.equal(
+          await page
+            .locator("[data-audio-progress]")
+            .getAttribute("aria-valuetext"),
+          "0:00 of 2:00",
+        );
+        assert.equal(
+          await page
+            .locator(".global-audio-player")
+            .evaluate((player) => player.scrollWidth <= player.clientWidth),
+          true,
         );
         await page.waitForFunction(() => Boolean(window.__narrationSource));
         assert.match(
@@ -405,8 +478,49 @@ try {
           window.print = () => {
             window.__printCalled = true;
           };
-          document.querySelector("[data-print-resume]").click();
         });
+        await page.locator(".resume-download-menu > summary").click();
+        assert.equal(
+          await page.locator(".resume-download-menu").getAttribute("open"),
+          "",
+        );
+        assert.equal(
+          await page.evaluate(() => {
+            const options = document.querySelector(".resume-download-options");
+            const nav = document.querySelector(".section-nav");
+            const optionsRect = options.getBoundingClientRect();
+            const originalStyle = nav.getAttribute("style");
+            nav.style.position = "fixed";
+            nav.style.inset = "auto";
+            nav.style.left = `${optionsRect.left}px`;
+            nav.style.top = `${optionsRect.top}px`;
+            nav.style.width = `${optionsRect.width}px`;
+            const topElement = document
+              .elementFromPoint(
+                optionsRect.left + optionsRect.width / 2,
+                optionsRect.top + 22,
+              )
+              ?.closest(".resume-download-options, .section-nav");
+            if (originalStyle === null) nav.removeAttribute("style");
+            else nav.setAttribute("style", originalStyle);
+            return topElement === options;
+          }),
+          true,
+          "The résumé menu must paint above the sticky section navigation",
+        );
+        assert.equal(
+          await page.evaluate(() => {
+            const rect = document
+              .querySelector(".resume-download-options")
+              .getBoundingClientRect();
+            return rect.left >= 0 && rect.right <= window.innerWidth;
+          }),
+          true,
+          "The résumé menu must remain inside the mobile viewport",
+        );
+        await page
+          .locator(".resume-download-options [data-print-resume]")
+          .click();
         assert.equal(await page.evaluate(() => window.__printCalled), true);
 
         await page.emulateMedia({ media: "print" });

@@ -124,7 +124,7 @@ function addSecurityMetadata(document) {
     const csp = document.createElement("meta");
     csp.setAttribute("http-equiv", "Content-Security-Policy");
     csp.content =
-      "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self'; font-src 'self'; img-src 'self' data: https:; media-src 'self' https://pub-0e85a9758556488098db7ca057ac5d1e.r2.dev; frame-src https://amahdy59.github.io https://mavenshowcase.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self' mailto:; upgrade-insecure-requests";
+      "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self'; font-src 'self'; img-src 'self' data: https:; media-src 'self' https://pub-0e85a9758556488098db7ca057ac5d1e.r2.dev; frame-src https://wa-zaker.com https://amahdy59.github.io https://mavenshowcase.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self' mailto:; upgrade-insecure-requests";
     document.head.prepend(csp);
   }
   if (!document.querySelector('meta[name="referrer"]')) {
@@ -378,11 +378,11 @@ if (existsSync(join(root, "CNAME")))
   await copyFile(join(root, "CNAME"), join(dist, "CNAME"));
 await writeFile(
   join(dist, "release.json"),
-  JSON.stringify({
+  `${JSON.stringify({
     commit:
       process.env.GITHUB_SHA ||
       execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim(),
-  }) + "\n",
+  })}\n`,
 );
 console.log(
   `Static portfolio built with ${bundleNames.size} fingerprinted bundles, ${assetMapping.size} fingerprinted assets, and ${urls.length} indexed URLs.`,

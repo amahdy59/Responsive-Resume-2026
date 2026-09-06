@@ -14,7 +14,6 @@
 
 .hero-identity {
   position: relative;
-  z-index: 3;
   display: flex;
   align-items: center;
   gap: clamp(16px, 2.5vw, 24px);
@@ -37,19 +36,6 @@
   display: block;
   box-shadow: var(--hero-avatar-glow);
   transition: box-shadow 320ms ease;
-}
-
-.avatar-badge {
-  position: absolute;
-  inset-inline-end: 6px;
-  bottom: 6px;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: #22c55e;
-  border: 3px solid var(--hero-surface);
-  box-shadow: 0 0 10px rgb(34 197 94 / 60%);
-  transition: border-color 420ms ease;
 }
 
 .identity-copy {
@@ -207,12 +193,13 @@
 
 .resume-download-options {
   position: absolute;
-  z-index: 20;
+  z-index: var(--z-popover);
   inset-block-start: calc(100% + 8px);
   inset-inline-end: 0;
   display: grid;
   width: max-content;
   min-width: 220px;
+  max-width: calc(100vw - 32px);
   padding: 6px;
   border: 1px solid var(--line);
   border-radius: 12px;
@@ -223,7 +210,7 @@
 .resume-download-options > a,
 .resume-download-options > button {
   display: grid;
-  grid-template-columns: 42px 1fr;
+  grid-template-columns: max-content minmax(0, 1fr);
   align-items: center;
   gap: 10px;
   min-height: 44px;
@@ -237,6 +224,7 @@
   font-weight: 650;
   text-align: start;
   text-decoration: none;
+  overflow-wrap: anywhere;
   cursor: pointer;
 }
 
@@ -265,24 +253,6 @@
   stroke-width: 2;
 }
 
-.hero-availability {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 8px;
-  font-size: 0.82rem;
-  font-weight: 500;
-  color: var(--hero-bio-color);
-}
-
-.status-pulse {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #22c55e;
-  box-shadow: 0 0 8px rgb(34 197 94 / 70%);
-}
-
 /* ── Contact Card ── */
 .hero-contact-card {
   flex: 0 0 280px;
@@ -296,7 +266,6 @@
   box-shadow: none;
   padding: 10px;
   position: relative;
-  z-index: 2;
   transition:
     background-color 420ms ease,
     border-color 420ms ease,
@@ -489,7 +458,7 @@ html[lang="ar"] .external-arrow-icon {
   justify-content: flex-end;
   padding-block: 8px;
   position: relative;
-  z-index: 40;
+  z-index: var(--z-navigation);
 }
 
 .controls-group {
@@ -540,7 +509,7 @@ html[lang="ar"] .external-arrow-icon {
 .section-nav {
   position: sticky;
   top: 12px;
-  z-index: 50;
+  z-index: var(--z-navigation);
   display: flex;
   width: fit-content;
   max-width: 100%;
@@ -1588,22 +1557,6 @@ html[lang="ar"] .skill-group h3 {
   stroke-linejoin: round;
 }
 
-.footer-availability {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.75rem;
-  color: var(--muted);
-}
-
-.availability-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #22c55e;
-  flex-shrink: 0;
-}
-
 .footer-cta-col {
   display: flex;
   flex-direction: column;
@@ -1767,8 +1720,7 @@ html[lang="ar"] .skill-group h3 {
   font-size: 0.95rem;
 }
 
-.footer-tagline-col p,
-.footer-availability {
+.footer-tagline-col p {
   margin: 0;
   font-size: 0.95rem;
 }

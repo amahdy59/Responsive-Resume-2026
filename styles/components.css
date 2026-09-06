@@ -454,8 +454,9 @@ html[lang="ar"] .credential-meta {
   z-index: var(--z-popover);
   inset: auto auto max(16px, env(safe-area-inset-bottom)) 50%;
   display: grid;
-  width: min(720px, calc(100% - 32px));
-  padding: 18px;
+  width: min(680px, calc(100% - 32px));
+  padding: 16px;
+  gap: 10px;
   overflow: hidden;
   border: 1px solid color-mix(in srgb, var(--blue) 24%, var(--line));
   border-radius: 20px;
@@ -491,20 +492,29 @@ html[lang="ar"] .credential-meta {
 }
 
 .audio-player-summary {
-  display: grid;
-  grid-template-columns: 44px minmax(0, 1fr) auto;
+  grid-template-columns: 48px minmax(0, 1fr) 44px;
   gap: 12px;
 }
 
 .audio-player-artwork {
   display: grid;
   place-items: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 13px;
+  width: 48px;
+  height: 48px;
+  border-radius: 15px;
   color: #fff;
   background: linear-gradient(145deg, color-mix(in srgb, var(--blue) 76%, #6ca9ff), var(--blue));
   box-shadow: 0 8px 20px color-mix(in srgb, var(--blue) 28%, transparent);
+}
+
+.global-audio-player[data-state="loading"] .audio-player-artwork {
+  opacity: 0.72;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .global-audio-player[data-state="playing"] .audio-player-artwork {
+    animation: audioArtworkPulse 1.8s ease-in-out infinite;
+  }
 }
 
 .audio-player-artwork svg,
@@ -536,6 +546,9 @@ html[lang="ar"] .credential-meta {
 }
 
 .audio-player-eyebrow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35em;
   color: var(--link-aaa);
   font-size: 0.68rem;
   font-weight: 750;
@@ -556,8 +569,10 @@ html[lang="ar"] .credential-meta {
 }
 
 .audio-player-track {
-  display: flex;
+  display: grid;
+  grid-template-columns: 3.2em minmax(0, 1fr) 3.2em;
   align-items: center;
+  gap: 10px;
   min-height: 36px;
 }
 
@@ -566,7 +581,7 @@ html[lang="ar"] .credential-meta {
 
   appearance: none;
   width: 100%;
-  height: 4px;
+  height: 6px;
   margin: 0;
   border-radius: 999px;
   background: linear-gradient(to right, var(--blue) var(--audio-progress), var(--line) var(--audio-progress));
@@ -579,8 +594,8 @@ html[lang="ar"] .credential-meta {
 
 .audio-player-progress::-webkit-slider-thumb {
   appearance: none;
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   border: 3px solid var(--panel);
   border-radius: 50%;
   background: var(--blue);
@@ -588,8 +603,8 @@ html[lang="ar"] .credential-meta {
 }
 
 .audio-player-progress::-moz-range-thumb {
-  width: 11px;
-  height: 11px;
+  width: 13px;
+  height: 13px;
   border: 3px solid var(--panel);
   border-radius: 50%;
   background: var(--blue);
@@ -601,6 +616,7 @@ html[lang="ar"] .credential-meta {
 }
 
 .audio-player-controls {
+  justify-content: space-between;
   gap: 8px;
 }
 
@@ -717,11 +733,13 @@ html[lang="ar"] .credential-meta {
 }
 
 .audio-control-close {
-  margin-inline-start: 2px;
+  align-self: start;
+  border-color: transparent;
+  background: transparent;
 }
 
 .has-audio-player {
-  padding-bottom: 170px;
+  padding-bottom: 180px;
 }
 
 .back-to-top-fab {

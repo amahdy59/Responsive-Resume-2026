@@ -133,12 +133,26 @@
   }
 
   .hero-ctas {
+    position: relative;
     justify-content: center;
     width: 100%;
   }
 
-  .hero-availability {
-    justify-content: center;
+  .resume-download-menu {
+    position: static;
+    max-width: 100%;
+  }
+
+  .hero-btn-resume {
+    max-width: 100%;
+    text-align: center;
+    white-space: normal;
+  }
+
+  .resume-download-options {
+    inset-inline: 0;
+    width: auto;
+    max-width: none;
   }
 
   .hero-contact-card {
@@ -242,17 +256,35 @@
   .global-audio-player {
     inset-block-end: max(8px, env(safe-area-inset-bottom));
     width: calc(100% - 16px);
-    padding: 14px;
+    padding: 12px;
+    gap: 8px;
     border-radius: 17px;
+  }
+
+  .audio-player-summary {
+    grid-template-columns: 44px minmax(0, 1fr) 44px;
+    gap: 10px;
+  }
+
+  .audio-player-artwork {
+    width: 44px;
+    height: 44px;
+    border-radius: 13px;
+  }
+
+  .audio-player-track {
+    grid-template-columns: 3em minmax(0, 1fr) 3em;
+    gap: 7px;
   }
 
   .audio-player-controls {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-columns: 1fr;
     gap: 8px;
   }
 
   .audio-player-transport {
+    justify-content: center;
     min-width: 0;
   }
 
@@ -262,15 +294,8 @@
   }
 
   .audio-player-speed {
-    grid-column: 1 / -1;
-    grid-row: 2;
-    justify-content: space-between;
+    justify-content: center;
     margin-inline-start: 0;
-  }
-
-  .audio-control-close {
-    grid-column: 2;
-    grid-row: 1;
   }
 
   .has-audio-player {
@@ -283,7 +308,7 @@
   }
 
   .has-audio-player .back-to-top-fab {
-    inset-block-end: max(244px, calc(env(safe-area-inset-bottom) + 232px));
+    inset-block-end: max(238px, calc(env(safe-area-inset-bottom) + 226px));
   }
 
   html {

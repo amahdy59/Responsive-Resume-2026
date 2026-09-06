@@ -64,6 +64,7 @@ const siteMeta = {
     "Microsoft Excel",
     "SQL",
     "Python",
+    "AI-assisted product design",
   ],
 };
 
@@ -97,7 +98,6 @@ const translations = {
     footer_quick_links: "روابط سريعة",
     footer_resources: "الموارد",
     footer_connect: "تواصل معي",
-    footer_available: "متاح لفرص جديدة",
     footer_cta_title: "لنعمل معًا",
     footer_cta_desc: "أنا دائمًا منفتح لمناقشة المشاريع والفرص الجديدة.",
     footer_send_email: "أرسل لي بريدًا إلكترونيًا",
@@ -116,6 +116,7 @@ const translations = {
     contact_linkedin: "لينكد إن",
     contact_links_label: "روابط التواصل",
     data_tag: "تصوير البيانات",
+    ai_tag: "تنفيذ معزّز بالذكاء الاصطناعي",
     display_settings_label: "إعدادات العرض",
     edu1_badge: "دبلوم",
     edu1_date: "سبتمبر 2016 - يونيو 2017",
@@ -211,7 +212,7 @@ const translations = {
     proj_ux3_title: "تطبيق حاج عرفة",
     proj_ux4_desc:
       "تطبيق عربي أولاً وسهل الوصول للأذكار ومواقيت الصلاة، مع دعم العمل دون اتصال وقراءة هادئة وتقدم واضح.",
-    proj_ux4_title: "تطبيق الأذكار - الحصن اليومي",
+    proj_ux4_title: "وَذَكِّر — الحصن اليومي",
     proj_ux_header: "مشاريع تجربة المستخدم",
     print_resume_action: "طباعة / حفظ PDF",
     read_case_study: "قراءة دراسة الحالة",
@@ -274,14 +275,13 @@ const translations = {
       "جميع مشاريع تجربة المستخدم من تصميم أحمد مهدي في Figma. استُخدمت أدوات Antigravity وCodex وClaude للمساعدة في تحويل التصاميم إلى تطبيقات حية تحت مراجعته وتوجيهه.",
     toast_copied: "تم النسخ",
     hero_bio:
-      "أصمم منتجات رقمية سهلة الوصول وأحوّل البيانات المعقدة إلى تجارب واضحة تدعم اتخاذ القرار.",
+      "أصمم منتجات رقمية سهلة الوصول، وأحوّل البيانات المعقدة إلى قرارات واضحة، وأوظّف الذكاء الاصطناعي لتسريع البحث والنمذجة والتنفيذ مع الحفاظ على جودة المخرجات.",
     hero_cta_resume: "تنزيل السيرة الذاتية",
     resume_menu_label: "خيارات تنزيل السيرة الذاتية",
     resume_formats_label: "صيغ السيرة الذاتية",
     resume_pdf: "تنزيل PDF بالإنجليزية",
     resume_docx: "تنزيل Word بالإنجليزية",
     resume_print: "طباعة هذه الصفحة",
-    hero_availability: "متاح لمشاريع جديدة",
     contact_email_sub: "راسلني",
     contact_li_sub: "الملف المهني",
     contact_dr_sub: "معرض الأعمال",
@@ -466,8 +466,8 @@ const translations = {
     cs_hr_sec5_desc:
       "يوضح التنفيذ الحي مسار العمل. يتطلب إثبات التبني في الإنتاج أو الوقت الموفر بيانات مؤسسية موثقة.",
 
-    // Case Study 4: Azkar Application
-    cs_azkar_title: "تطبيق الأذكار - الحصن اليومي",
+    // Case Study 4: Wa-Zaker — Daily Fortress
+    cs_azkar_title: "وَذَكِّر — الحصن اليومي",
     cs_azkar_badge: "تجربة مستخدم الجوال • تطبيقات الإنتاجية الإسلامية",
     cs_azkar_badge1: "تجربة مستخدم الجوال",
     cs_azkar_badge2: "تطبيقات الإنتاجية الإسلامية",
@@ -547,7 +547,6 @@ const translations = {
     footer_quick_links: "Quick Links",
     footer_resources: "Resources",
     footer_connect: "Let's Connect",
-    footer_available: "Available for new opportunities",
     footer_cta_title: "Let's work together",
     footer_cta_desc: "I'm always open to discussing new projects and opportunities.",
     footer_send_email: "Send me an email",
@@ -558,6 +557,7 @@ const translations = {
     contact_linkedin: "LinkedIn",
     contact_links_label: "Contact links",
     data_tag: "Data Visualization",
+    ai_tag: "AI-assisted delivery",
     display_settings_label: "Display settings",
     edu1_badge: "Diploma",
     edu1_date: "Sep 2016 - Jun 2017",
@@ -653,7 +653,7 @@ const translations = {
     proj_ux3_title: "Haj Arafa App",
     proj_ux4_desc:
       "Accessible Arabic-first remembrance and prayer-time application with offline support, calm reading, and clear progress.",
-    proj_ux4_title: "Azkar App – Daily Fortress",
+    proj_ux4_title: "Wa-Zaker — Daily Fortress",
     proj_ux_header: "UX Projects",
     print_resume_action: "Print / Save PDF",
     read_case_study: "Read Case Study",
@@ -721,14 +721,13 @@ const translations = {
     toast_copy_linkedin: "LinkedIn link copied to clipboard",
     toast_copy_project: "Project link copied to clipboard",
     hero_bio:
-      "I design accessible digital products and turn complex data into clear, decision-ready experiences.",
+      "I design accessible digital products, turn complex data into clear decisions, and use AI to research, prototype, and deliver high-quality outcomes faster.",
     hero_cta_resume: "Download Résumé",
     resume_menu_label: "Résumé download options",
     resume_formats_label: "Résumé formats",
     resume_pdf: "Download PDF",
     resume_docx: "Download Word",
     resume_print: "Print this page",
-    hero_availability: "Available for new projects",
     contact_email_sub: "Email me",
     contact_li_sub: "Professional profile",
     contact_dr_sub: "Selected design work",
@@ -913,8 +912,8 @@ const translations = {
     cs_hr_sec5_desc:
       "The live implementation demonstrates the workflow. Production adoption and time-saved outcomes require documented organizational data.",
 
-    // Case Study 4: Azkar Application
-    cs_azkar_title: "Azkar App – Daily Fortress",
+    // Case Study 4: Wa-Zaker — Daily Fortress
+    cs_azkar_title: "Wa-Zaker — Daily Fortress",
     cs_azkar_badge: "Mobile UX • Islamic Productivity",
     cs_azkar_badge1: "Mobile UX",
     cs_azkar_badge2: "Islamic Productivity",

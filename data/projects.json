@@ -53,15 +53,15 @@
     "homeTitleKey": "proj_ux4_title",
     "caseTitleKey": "cs_azkar_title",
     "title": {
-      "en": "Azkar App – Daily Fortress",
-      "ar": "تطبيق الأذكار - الحصن اليومي"
+      "en": "Wa-Zaker — Daily Fortress",
+      "ar": "وَذَكِّر — الحصن اليومي"
     },
     "platform": {
       "en": "Progressive Web App (PWA)",
       "ar": "تطبيق ويب تقدمي (PWA)"
     },
     "caseStudyUrl": "project-azkar-app.html",
-    "liveUrl": "https://amahdy59.github.io/Azkarapp/#/home"
+    "liveUrl": "https://wa-zaker.com/"
   },
   {
     "id": "lego-explorer",

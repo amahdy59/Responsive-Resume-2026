@@ -392,11 +392,11 @@ def build_resume():
     )
     add_project(
         doc,
-        "Azkar App Daily Fortress",
+        "Wa-Zaker — Daily Fortress",
         "https://creativemahdy.space/en/case-studies/azkar-app/",
         "Arabic-first remembrance and prayer-time application with accessible reading controls, offline support, calm content presentation, and clear progress.",
         "Live project",
-        "https://amahdy59.github.io/Azkarapp/#/home",
+        "https://wa-zaker.com/",
     )
     add_project(
         doc,

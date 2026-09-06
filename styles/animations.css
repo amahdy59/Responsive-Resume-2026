@@ -19,3 +19,10 @@
     box-shadow: 0 0 0 4px color-mix(in srgb, var(--blue) 35%, transparent);
   }
 }
+
+@keyframes audioArtworkPulse {
+  50% {
+    box-shadow: 0 8px 24px color-mix(in srgb, var(--blue) 48%, transparent);
+    transform: scale(1.025);
+  }
+}
