@@ -1265,6 +1265,22 @@ try {
         );
       }
 
+      for (const width of [320, 768, 1280]) {
+        await page.setViewportSize({ width, height: 1024 });
+        const paginationFits = await page
+          .locator(".pagination-card")
+          .evaluateAll((cards) =>
+            cards.every((card) => {
+              const bounds = card.getBoundingClientRect();
+              return bounds.left >= 0 && bounds.right <= innerWidth + 1;
+            }),
+          );
+        assert.ok(
+          paginationFits,
+          `${file}: pagination overflows at ${width}px`,
+        );
+      }
+
       await page.emulateMedia({ media: "print" });
       assert.equal(
         await page
