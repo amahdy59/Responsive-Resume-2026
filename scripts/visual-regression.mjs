@@ -140,7 +140,11 @@ try {
       fullPage: true,
       animations: "disabled",
     });
-    if (update || !existsSync(baselinePath)) {
+    assert.ok(
+      update || existsSync(baselinePath),
+      `Missing reviewed baseline: ${baselinePath}. Use --update explicitly.`,
+    );
+    if (update) {
       await writeFile(baselinePath, await readFile(actualPath));
       console.log(`Updated ${scenario.name}`);
     } else {

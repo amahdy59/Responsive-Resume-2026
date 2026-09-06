@@ -1,292 +1,178 @@
-import { execSync } from "node:child_process";
-import https from "node:https";
+import assert from "node:assert/strict";
+import { execFileSync } from "node:child_process";
+import { chromium } from "playwright";
 
-const REPO_OWNER = "amahdy59";
-const REPO_NAME = "Responsive-Resume-2026";
-const PRODUCTION_DOMAIN = "https://creativemahdy.space";
-const CASE_STUDY_PATHS = [
-  "/",
-  "/en/",
-  "/ar/",
-  "/sitemap.xml",
-  "/robots.txt",
-  "/project-haj-arafa.html",
-  "/project-cairo-airport.html",
-  "/project-hr-tool.html",
-  "/project-azkar-app.html",
-  "/project-lego-explorer.html",
-  "/en/case-studies/haj-arafa/",
-  "/ar/case-studies/haj-arafa/",
-];
+const origin = "https://creativemahdy.space";
+const repository = "amahdy59/Responsive-Resume-2026";
+const argument = process.argv.slice(2).find((value) => !value.startsWith("--"));
+const commit =
+  argument ||
+  process.env.GITHUB_SHA ||
+  execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim();
+assert.match(commit, /^[a-f0-9]{7,40}$/i);
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+const matches = (sha) => typeof sha === "string" && sha.startsWith(commit);
 
-function fetchJson(url) {
-  return new Promise((resolve, reject) => {
-    const headers = {
-      "User-Agent": "Portfolio-Deployment-Checker/1.0",
-      Accept: "application/vnd.github.v3+json",
-    };
-    const token = process.env.GITHUB_TOKEN || process.env.GH_TOKEN;
-    if (token) {
-      headers.Authorization = `Bearer ${token}`;
-    }
-
-    const options = { headers };
-
-    https
-      .get(url, options, (res) => {
-        let data = "";
-        res.on("data", (chunk) => (data += chunk));
-        res.on("end", () => {
-          try {
-            if (res.statusCode >= 400) {
-              reject(new Error(`HTTP ${res.statusCode}: ${data}`));
-            } else {
-              resolve(JSON.parse(data));
-            }
-          } catch (err) {
-            reject(err);
-          }
-        });
-      })
-      .on("error", reject);
+async function get(url, options = {}) {
+  const response = await fetch(url, {
+    ...options,
+    signal: AbortSignal.timeout(20000),
   });
+  assert.ok(response.ok, `${url}: HTTP ${response.status}`);
+  return response;
 }
 
-function checkLiveUrl(url) {
-  return new Promise((resolve) => {
-    const start = Date.now();
-    const minimumBytes = url.endsWith("/robots.txt") ? 20 : 500;
-    https
-      .get(url, (res) => {
-        let bodyLength = 0;
-        res.on("data", (chunk) => (bodyLength += chunk.length));
-        res.on("end", () => {
-          resolve({
-            url,
-            status: res.statusCode,
-            durationMs: Date.now() - start,
-            sizeBytes: bodyLength,
-            ok: res.statusCode === 200 && bodyLength > minimumBytes,
-          });
-        });
+// A healthy old site is not proof that this release deployed successfully.
+if (!process.argv.includes("--live-only")) {
+  const headers = { Accept: "application/vnd.github+json" };
+  const token = process.env.GITHUB_TOKEN || process.env.GH_TOKEN;
+  if (token) headers.Authorization = `Bearer ${token}`;
+  let completed = false;
+  for (let attempt = 0; attempt < 60; attempt++) {
+    const data = await (
+      await get(
+        `https://api.github.com/repos/${repository}/actions/workflows/deploy.yml/runs?head_sha=${commit}&per_page=10`,
+        { headers },
+      )
+    ).json();
+    const run = data.workflow_runs.find(
+      (item) => matches(item.head_sha) && item.event !== "pull_request",
+    );
+    if (run?.status === "completed") {
+      assert.equal(
+        run.conclusion,
+        "success",
+        `Deployment failed: ${run.html_url}`,
+      );
+      console.log(`Workflow passed: ${run.html_url}`);
+      completed = true;
+      break;
+    }
+    if (attempt % 3 === 0)
+      console.log(`Waiting for deployment of ${commit.slice(0, 7)}...`);
+    await sleep(20000);
+  }
+  assert.ok(
+    completed,
+    "Timed out waiting for the exact deployment workflow; release remains unverified.",
+  );
+}
+
+let released = false;
+for (let attempt = 0; attempt < 30; attempt++) {
+  try {
+    const release = await (
+      await get(`${origin}/release.json?verify=${Date.now()}`, {
+        cache: "no-store",
       })
-      .on("error", (err) => {
-        resolve({
-          url,
-          status: 0,
-          error: err.message,
-          durationMs: Date.now() - start,
-          ok: false,
-        });
-      });
-  });
-}
-
-async function checkNarrationAudio() {
-  const manifestResponse = await fetch(
-    `${PRODUCTION_DOMAIN}/assets/audio/narration.json`,
-  );
-  if (!manifestResponse.ok)
-    throw new Error("Narration manifest is unavailable");
-
-  const manifest = await manifestResponse.json();
-  const keys = ["en/resume-employment", "ar/resume-employment"];
-  return Promise.all(
-    keys.map(async (key) => {
-      const response = await fetch(manifest[key]?.url, {
-        headers: { Origin: PRODUCTION_DOMAIN, Range: "bytes=0-1023" },
-      });
-      const allowedOrigin = response.headers.get("access-control-allow-origin");
-      return {
-        key,
-        status: response.status,
-        type: response.headers.get("content-type") || "",
-        ok:
-          [200, 206].includes(response.status) &&
-          response.headers.get("content-type")?.startsWith("audio/") &&
-          [PRODUCTION_DOMAIN, "*"].includes(allowedOrigin),
-      };
-    }),
-  );
-}
-
-function sleep(ms) {
-  return new Promise((r) => setTimeout(r, ms));
-}
-
-async function getCommitSha() {
-  const customSha = process.argv[2];
-  if (customSha && /^[0-9a-f]{7,40}$/i.test(customSha)) {
-    return customSha;
-  }
-  try {
-    return execSync("git rev-parse HEAD", { encoding: "utf8" }).trim();
-  } catch {
-    throw new Error("Unable to determine current Git commit SHA.");
-  }
-}
-
-async function verifyDeployment() {
-  const targetSha = await getCommitSha();
-  const shortSha = targetSha.substring(0, 7);
-
-  console.log("\n========================================================");
-  console.log(`🚀 Automated Deployment Checker for [${shortSha}]`);
-  console.log(`📡 Repository: ${REPO_OWNER}/${REPO_NAME}`);
-  console.log("========================================================\n");
-
-  console.log(
-    `⏳ Monitoring GitHub Actions workflow for commit ${shortSha}...`,
-  );
-
-  let run = null;
-  const maxAttempts = 45; // ~3.5 minutes max
-
-  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
-    try {
-      const data = await fetchJson(
-        `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/actions/runs?per_page=10`,
-      );
-
-      const matchingRun = data.workflow_runs?.find(
-        (r) =>
-          r.head_sha.startsWith(targetSha) || targetSha.startsWith(r.head_sha),
-      );
-
-      if (matchingRun) {
-        run = matchingRun;
-        const status = run.status.toUpperCase();
-        const conclusion = run.conclusion
-          ? run.conclusion.toUpperCase()
-          : "PENDING";
-
-        process.stdout.write(
-          `\r[Attempt ${attempt}/${maxAttempts}] Workflow: ${run.name} | Status: ${status} | Conclusion: ${conclusion}   `,
-        );
-
-        if (run.status === "completed") {
-          console.log("\n");
-          break;
-        }
-      } else {
-        process.stdout.write(
-          `\r[Attempt ${attempt}/${maxAttempts}] Waiting for GitHub Actions to register commit ${shortSha}...   `,
-        );
-      }
-    } catch (err) {
-      if (err.message.includes("403") || err.message.includes("rate limit")) {
-        console.log(
-          "\nℹ️ GitHub API rate limit reached for unauthenticated requests. Skipping to live health checks...",
-        );
-        break;
-      }
-      process.stdout.write(`\r[Warning] API fetch notice: ${err.message}   `);
-    }
-
-    await sleep(5000);
-  }
-
-  if (!run || run.status !== "completed") {
-    console.log(
-      "\n\n⚠️ Could not poll GitHub Actions status (rate limit or timeout). Proceeding to live checks.",
-    );
-  } else {
-    // Fetch job details
-    try {
-      const jobsData = await fetchJson(
-        `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/actions/runs/${run.id}/jobs`,
-      );
-
-      console.log("📋 Workflow Step Breakdown:");
-      if (jobsData.jobs?.length) {
-        for (const job of jobsData.jobs) {
-          console.log(`\n  Job: ${job.name} (${job.conclusion})`);
-          for (const step of job.steps) {
-            const icon =
-              step.conclusion === "success"
-                ? "✅"
-                : step.conclusion === "failure"
-                  ? "❌"
-                  : step.conclusion === "skipped"
-                    ? "⏭️"
-                    : "⏳";
-            console.log(
-              `    ${icon} ${step.name} [${step.conclusion || step.status}]`,
-            );
-          }
-        }
-      }
-    } catch (err) {
-      console.log(`Could not fetch job step details: ${err.message}`);
-    }
-
-    if (run.conclusion !== "success") {
-      console.error(`\n❌ Deployment FAILED for commit ${shortSha}!`);
-      console.error(`🔗 Workflow logs: ${run.html_url}`);
-      process.exit(1);
-    }
-
-    console.log(
-      `\n✅ GitHub Actions deployment SUCCEEDED for commit ${shortSha}!`,
-    );
-  }
-
-  // Run live production endpoint health check
-  console.log("\n🌐 Running Live Production Health Checks...");
-  console.log(`🔗 Target: ${PRODUCTION_DOMAIN}\n`);
-
-  let allLiveOk = true;
-  for (const path of CASE_STUDY_PATHS) {
-    const fullUrl = `${PRODUCTION_DOMAIN}${path}`;
-    const result = await checkLiveUrl(fullUrl);
-
-    if (result.ok) {
-      console.log(
-        `  ✅ [HTTP ${result.status}] ${path.padEnd(30)} (${result.durationMs}ms, ${(
-          result.sizeBytes / 1024
-        ).toFixed(1)} KB)`,
-      );
-    } else {
-      allLiveOk = false;
-      console.error(
-        `  ❌ [HTTP ${result.status || "ERR"}] ${path.padEnd(30)} Error: ${
-          result.error || "Invalid response"
-        }`,
-      );
-    }
-  }
-
-  try {
-    for (const result of await checkNarrationAudio()) {
-      if (result.ok) {
-        console.log(
-          `  ✅ [HTTP ${result.status}] narration ${result.key} (${result.type})`,
-        );
-      } else {
-        allLiveOk = false;
-        console.error(
-          `  ❌ [HTTP ${result.status}] narration ${result.key} failed CORS or media validation`,
-        );
-      }
+    ).json();
+    if (matches(release.commit)) {
+      released = true;
+      break;
     }
   } catch (error) {
-    allLiveOk = false;
-    console.error(`  ❌ Narration verification failed: ${error.message}`);
+    if (attempt === 29) throw error;
   }
+  if (attempt % 3 === 0)
+    console.log("Waiting for the expected release to reach production...");
+  await sleep(10000);
+}
+assert.ok(released, `Production is not serving commit ${commit}`);
 
-  console.log("\n========================================================");
-  if (allLiveOk) {
-    console.log(
-      "🎉 ALL SYSTEMS OPERATIONAL: Deployment is 100% live & verified!",
-    );
-  } else {
-    console.warn("⚠️ One or more production health checks failed.");
-    process.exitCode = 1;
-  }
-  console.log("========================================================\n");
+const slugs = [
+  "haj-arafa",
+  "cairo-airport",
+  "hr-tool",
+  "azkar-app",
+  "lego-explorer",
+];
+for (const path of [
+  "/",
+  "/sitemap.xml",
+  "/robots.txt",
+  ...slugs.map((slug) => `/project-${slug}.html`),
+  ...["en", "ar"].flatMap((lang) => [
+    `/${lang}/`,
+    ...slugs.map((slug) => `/${lang}/case-studies/${slug}/`),
+  ]),
+]) {
+  const response = await get(`${origin}${path}`);
+  assert.ok((await response.text()).length > 20, `Empty route: ${path}`);
+  console.log(`Live route passed: ${path}`);
 }
 
-verifyDeployment().catch((err) => {
-  console.error("Verification checker error:", err);
-  process.exit(1);
-});
+const browser = await chromium.launch({ headless: true });
+try {
+  for (const language of ["en", "ar"]) {
+    const page = await browser.newPage({
+      viewport: { width: 375, height: 812 },
+      reducedMotion: "reduce",
+    });
+    const errors = [];
+    page.on("pageerror", (error) => errors.push(error.message));
+    await page.goto(`${origin}/${language}/`, { waitUntil: "load" });
+    await page.evaluate(() => document.fonts.ready);
+    assert.equal(await page.locator("html").getAttribute("lang"), language);
+    assert.equal(
+      await page.locator("html").getAttribute("dir"),
+      language === "ar" ? "rtl" : "ltr",
+    );
+    assert.equal(
+      await page.evaluate(
+        () => document.documentElement.scrollWidth <= innerWidth,
+      ),
+      true,
+      "Mobile overflow",
+    );
+    await page.locator(".theme-toggle").click();
+    assert.equal(await page.locator("html").getAttribute("data-theme"), "dark");
+    await page.locator(".resume-download-menu > summary").click();
+    for (const extension of ["pdf", "docx"]) {
+      const link = page.locator(
+        `.resume-download-options a[href$=".${extension}"]`,
+      );
+      const url = await link.evaluate((element) => element.href);
+      const response = await get(url);
+      const bytes = new Uint8Array(await response.arrayBuffer());
+      assert.ok(bytes.length > 1000, `Empty ${extension} download`);
+      assert.equal(
+        String.fromCharCode(...bytes.slice(0, extension === "pdf" ? 4 : 2)),
+        extension === "pdf" ? "%PDF" : "PK",
+      );
+    }
+    await page.keyboard.press("Escape");
+    assert.equal(
+      await page
+        .locator(".resume-download-menu")
+        .evaluate((element) => element.open),
+      false,
+    );
+    const audio = await page.evaluate(async (lang) => {
+      const manifest = await (
+        await fetch("/assets/audio/narration.json")
+      ).json();
+      const response = await fetch(manifest[`${lang}/resume-employment`].url, {
+        headers: { Range: "bytes=0-1023" },
+        signal: AbortSignal.timeout(20000),
+      });
+      const result = {
+        ok: response.ok,
+        type: response.headers.get("content-type"),
+        size: (await response.arrayBuffer()).byteLength,
+      };
+      return result;
+    }, language);
+    assert.ok(
+      audio.ok && audio.type?.startsWith("audio/") && audio.size > 0,
+      "Narration failed real-origin CORS/media check",
+    );
+    assert.deepEqual(errors, [], "Production JavaScript errors");
+    await page.close();
+    console.log(
+      `Live ${language}: mobile layout, theme, downloads, keyboard menu, and narration passed`,
+    );
+  }
+} finally {
+  await browser.close();
+}
+console.log(`Production verified at commit ${commit}.`);

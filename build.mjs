@@ -1,3 +1,4 @@
+import { execFileSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import { existsSync } from "node:fs";
 import {
@@ -375,6 +376,14 @@ await writeFile(
 );
 if (existsSync(join(root, "CNAME")))
   await copyFile(join(root, "CNAME"), join(dist, "CNAME"));
+await writeFile(
+  join(dist, "release.json"),
+  JSON.stringify({
+    commit:
+      process.env.GITHUB_SHA ||
+      execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim(),
+  }) + "\n",
+);
 console.log(
   `Static portfolio built with ${bundleNames.size} fingerprinted bundles, ${assetMapping.size} fingerprinted assets, and ${urls.length} indexed URLs.`,
 );

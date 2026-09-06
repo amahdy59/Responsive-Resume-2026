@@ -2,82 +2,71 @@ name: Deploy static content to Pages
 
 on:
   push:
-    branches: ["main"]
-
-  # Allows you to run this workflow manually from the Actions tab
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
 concurrency:
-  group: "pages"
+  group: pages-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
-  # Single deploy job
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  quality:
+    name: Quality gate
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
-      - name: Checkout
-        uses: actions/checkout@v7
-
-      - name: Setup Node
-        uses: actions/setup-node@v7
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
         with:
           node-version: "24"
-          cache: "npm"
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Install Chromium
-        run: npx playwright install --with-deps chromium
-
-      - name: Validate assets and dictionaries
-        run: npm run lint && npm run check
-
-      - name: Build static distribution
-        run: npm run build
-
-      - name: Run browser smoke & accessibility tests
-        run: npm run test:browser
-
-      - name: Run performance budgets
-        run: npm run test:performance
-
-      - name: Generate visual evidence
-        run: npm run test:visual
-        env:
-          UPDATE_VISUALS: "1"
-
-      - name: Upload visual evidence
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: Lint, content, responsive UX, accessibility, visual regression, and performance
+        run: npm test
+      - name: Audit production dependencies
+        run: npm audit --omit=dev --audit-level=high
+      - name: Preserve visual evidence even on failure
         if: always()
         uses: actions/upload-artifact@v7
         with:
           name: visual-evidence
           path: artifacts/visual/
-
-      - name: Audit production dependencies
-        run: npm audit --omit=dev --audit-level=high
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v6
-
-      - name: Upload artifact
+          retention-days: 14
+      - name: Upload tested site
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@v5
         with:
-          # Upload entire dist directory
-          path: './dist'
+          path: dist
 
-      - name: Deploy to GitHub Pages
+  deploy:
+    name: Deploy and verify production
+    needs: quality
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "24"
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - uses: actions/configure-pages@v6
+      - name: Deploy tested artifact
         id: deployment
         uses: actions/deploy-pages@v5
+      - name: Verify exact release and live functionality
+        run: npm run verify:deploy -- --live-only
