@@ -97,6 +97,12 @@
   display: none !important;
 }
 
+@media screen and (max-width: 700px) {
+  [data-contrast="high"] .display-mode-group {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
 [data-contrast="high"] .panel {
   border: 2px solid #fff;
   box-shadow: none;

@@ -78,21 +78,42 @@
   }
 
   .hero-contact-card {
-    flex: 1 1 auto;
     width: 100%;
-    max-width: none;
-  }
-
-  .hero-contact-card .contact-list {
-    flex-flow: row wrap;
-  }
-
-  .hero-contact-card .contact-item {
-    flex: 1 1 180px;
+    max-width: 820px;
   }
 
   .hero-controls-rail {
     flex: 0 0 auto;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .controls-group {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .language-selector,
+  .display-mode-group {
+    width: 100%;
+  }
+
+  .language-selector {
+    justify-content: center;
+  }
+
+  .language-option {
+    flex: 1 1 0;
+  }
+
+  .display-mode-group {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .display-mode-group > button {
+    width: 100%;
   }
 }
 
@@ -175,8 +196,8 @@
   }
 
   .hero-contact-card {
+    display: block;
     width: 100%;
-    flex: 1 1 100%;
     max-width: none;
     padding: 12px 8px 8px;
     border: 1px solid rgb(203 213 225 / 24%);
@@ -223,19 +244,15 @@
 
   .hero-controls-rail {
     width: 100%;
-    padding: 6px;
+    padding: 0;
   }
 
   .controls-group {
-    flex-direction: row;
-    justify-content: center;
     width: 100%;
     gap: 8px;
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .controls-group > button {
+  .display-mode-group > button {
     display: grid;
     grid-template-columns: 24px minmax(0, 1fr) auto;
     width: 100%;
@@ -250,7 +267,6 @@
   }
 
   .language-selector {
-    grid-column: 1 / -1;
     justify-content: center;
     width: 100%;
   }

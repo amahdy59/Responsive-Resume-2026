@@ -179,13 +179,42 @@ try {
               getComputedStyle(document.querySelector(".hero-role")).fontSize,
             ),
           },
+          heroRows: (() => {
+            const language = document.querySelector(".language-selector");
+            const modes = document.querySelector(".display-mode-group");
+            const contactItems = [
+              ...document.querySelectorAll(".hero-contact-card .contact-item"),
+            ];
+            if (!language || !modes || contactItems.length === 0) return null;
+            const languageRect = language.getBoundingClientRect();
+            const modesRect = modes.getBoundingClientRect();
+            const contactTops = contactItems.map(
+              (item) => item.getBoundingClientRect().top,
+            );
+            return {
+              contactSingleRow:
+                Math.max(...contactTops) - Math.min(...contactTops) <= 1,
+              controlsSingleRow:
+                Math.abs(
+                  languageRect.top +
+                    languageRect.height / 2 -
+                    (modesRect.top + modesRect.height / 2),
+                ) <= 2,
+              logicalOrder:
+                document.documentElement.dir === "rtl"
+                  ? languageRect.left > modesRect.left
+                  : languageRect.left < modesRect.left,
+              modeCount: modes.querySelectorAll('[role="switch"]').length,
+              stackedOrder: languageRect.top < modesRect.top,
+            };
+          })(),
           headerLayout: (() => {
             const header = document.querySelector(".portfolio-header");
             const identity = document.querySelector(".hero-identity");
             const contact = document.querySelector(".hero-contact-card");
             const controls = [
               ...document.querySelectorAll(
-                ".controls-group > button, .controls-group .language-option",
+                ".display-mode-group > button, .controls-group .language-option",
               ),
             ];
             if (!header || !identity || !contact) return null;
@@ -330,9 +359,19 @@ try {
       assert.ok(state.heading, "The resume heading should be visible");
       assert.equal(state.headerLayout?.headerContained, true);
       assert.equal(state.headerLayout?.targetsMeetSize, true);
-      assert.ok(state.heroTypeScale.name <= 40);
-      assert.ok(state.heroTypeScale.role <= 19);
-      assert.ok(state.heroTypeScale.bio <= 16);
+      assert.ok(state.heroTypeScale.name <= 48);
+      assert.ok(state.heroTypeScale.role <= 22);
+      assert.ok(state.heroTypeScale.bio <= 17);
+      assert.equal(state.heroRows.modeCount, 2);
+      assert.equal(state.heroRows.contactSingleRow, true);
+      assert.equal(state.heroRows.controlsSingleRow, scenario.width > 700);
+      assert.equal(
+        scenario.width > 700
+          ? state.heroRows.logicalOrder
+          : state.heroRows.stackedOrder,
+        true,
+      );
+      if (scenario.width >= 1920) assert.ok(state.heroTypeScale.name >= 47);
       if (scenario.width <= 560) {
         assert.ok(
           state.headerLayout.headerHeight <= 880,
@@ -350,13 +389,10 @@ try {
         assert.equal(state.headerLayout.contactAfterIdentity, true);
       } else {
         assert.ok(
-          state.headerLayout.headerHeight <= 470,
+          state.headerLayout.headerHeight <= 520,
           `Desktop header should remain compact: ${JSON.stringify(state.headerLayout)}`,
         );
-        assert.ok(
-          state.headerLayout.rowCenterDelta <= 48,
-          `Desktop hero columns should align vertically: ${JSON.stringify(state.headerLayout)}`,
-        );
+        assert.equal(state.headerLayout.contactAfterIdentity, true);
       }
       assert.equal(state.brokenImages, 0);
       assert.ok(
