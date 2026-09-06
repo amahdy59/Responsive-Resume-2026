@@ -5,7 +5,7 @@
 .portfolio-header {
   position: relative;
   margin-top: 8px;
-  padding: clamp(14px, 2vw, 24px) clamp(20px, 4vw, 48px) clamp(36px, 4vw, 48px);
+  padding: clamp(12px, 1.5vw, 20px) clamp(20px, 4vw, 48px) clamp(28px, 3vw, 36px);
   color: #f0f6fc;
   background:
     radial-gradient(circle at 78% 22%, rgb(59 130 246 / 18%), transparent 28rem),
@@ -18,10 +18,10 @@
 .hero {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(230px, 260px);
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 240px);
   align-items: center;
-  gap: clamp(32px, 5vw, 64px);
-  padding: clamp(42px, 6vw, 72px) 0 clamp(18px, 3vw, 32px);
+  gap: clamp(28px, 4vw, 48px);
+  padding: clamp(28px, 4vw, 44px) 0 clamp(12px, 2vw, 20px);
   background: transparent;
 }
 
@@ -29,7 +29,7 @@
   position: relative;
   display: flex;
   align-items: center;
-  gap: clamp(24px, 3vw, 38px);
+  gap: clamp(20px, 2.5vw, 32px);
   flex: 1 1 auto;
   min-width: 0;
 }
@@ -37,8 +37,8 @@
 .avatar-wrap {
   position: relative;
   flex: 0 0 auto;
-  width: clamp(132px, 15vw, 172px);
-  height: clamp(132px, 15vw, 172px);
+  width: clamp(112px, 12vw, 148px);
+  height: clamp(112px, 12vw, 148px);
 }
 
 .avatar {
@@ -61,25 +61,25 @@
 
 .identity-copy h1 {
   margin: 0;
-  font-size: clamp(2.35rem, 5vw, 4.4rem);
+  font-size: clamp(2.15rem, 3.8vw, 3.35rem);
   font-weight: 800;
-  line-height: 1.15;
+  line-height: 1.08;
   letter-spacing: -0.02em;
   color: #f8fbff;
 }
 
 .hero-role {
-  margin: 4px 0 0;
+  margin: 8px 0 0;
   color: #60a5fa;
-  font-size: clamp(1.15rem, 2.2vw, 1.75rem);
+  font-size: clamp(1.08rem, 1.7vw, 1.45rem);
   font-weight: 700;
   line-height: 1.3;
 }
 
 .hero-bio {
-  margin: 8px 0 0;
+  margin: 12px 0 0;
   font-size: clamp(0.95rem, 1.25vw, 1.08rem);
-  line-height: 1.7;
+  line-height: 1.6;
   color: #d5deeb;
   max-width: 62ch;
 }
@@ -88,7 +88,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-top: 20px;
+  margin-top: 16px;
 }
 
 .tag-pill {
@@ -124,7 +124,7 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 12px;
-  margin-top: 26px;
+  margin-top: 20px;
 }
 
 .hero-btn-work {
@@ -269,16 +269,16 @@
 
 /* ── Contact Card ── */
 .hero-contact-card {
-  flex: 0 0 280px;
+  flex: 0 0 240px;
   width: 100%;
-  max-width: 260px;
+  max-width: 240px;
   min-width: 0;
   box-sizing: border-box;
   background: rgb(255 255 255 / 4%);
   border: 1px solid rgb(203 213 225 / 24%);
   border-radius: 20px;
   box-shadow: none;
-  padding: 16px 12px 12px;
+  padding: 12px 10px 10px;
   position: relative;
   transition:
     background-color 420ms ease,
@@ -287,7 +287,7 @@
 }
 
 .contact-card-title {
-  margin: 0 10px 10px;
+  margin: 0 10px 6px;
   color: #f8fbff;
   font-size: 0.95rem;
   font-weight: 800;
@@ -477,7 +477,7 @@ html[lang="ar"] .external-arrow-icon {
 .hero-controls-rail {
   display: flex;
   justify-content: flex-end;
-  padding: 7px;
+  padding: 6px;
   position: relative;
   z-index: var(--z-navigation);
   width: fit-content;
@@ -502,7 +502,7 @@ html[lang="ar"] .external-arrow-icon {
   width: auto;
   height: auto;
   min-height: 44px;
-  padding: 6px 10px;
+  padding: 6px 8px;
   border-color: transparent;
   border-radius: 10px;
   background: transparent;

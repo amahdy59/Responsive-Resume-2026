@@ -180,6 +180,7 @@ try {
             const contactRect = contact.getBoundingClientRect();
             return {
               contactAfterIdentity: contactRect.top >= identityRect.bottom - 1,
+              headerHeight: Math.round(headerRect.height),
               headerContained:
                 headerRect.left >= -1 &&
                 headerRect.right <= window.innerWidth + 1,
@@ -314,12 +315,24 @@ try {
       assert.equal(state.headerLayout?.targetsMeetSize, true);
       if (scenario.width <= 560) {
         assert.ok(
+          state.headerLayout.headerHeight <= 920,
+          `Mobile header should remain compact: ${JSON.stringify(state.headerLayout)}`,
+        );
+        assert.ok(
           state.headerLayout.identityCenterDelta <= 2,
           `Mobile hero identity should be centered: ${JSON.stringify(state.headerLayout)}`,
         );
       } else if (scenario.width <= 1080) {
+        assert.ok(
+          state.headerLayout.headerHeight <= 620,
+          `Tablet header should remain compact: ${JSON.stringify(state.headerLayout)}`,
+        );
         assert.equal(state.headerLayout.contactAfterIdentity, true);
       } else {
+        assert.ok(
+          state.headerLayout.headerHeight <= 520,
+          `Desktop header should remain compact: ${JSON.stringify(state.headerLayout)}`,
+        );
         assert.ok(
           state.headerLayout.rowCenterDelta <= 48,
           `Desktop hero columns should align vertically: ${JSON.stringify(state.headerLayout)}`,
