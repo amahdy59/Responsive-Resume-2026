@@ -127,12 +127,13 @@ await mkdir(cache, { recursive: true });
 await mkdir(resolve(root, "assets/audio"), { recursive: true });
 for (const task of tasks) {
   const entryKey = `${task.lang}/${task.id}`;
+  const current = manifest[entryKey];
   const expectedUrl = local
     ? `/assets/audio/${task.lang}-${task.id}-${task.hash}.mp3`
     : `${publicBase.href.replace(/\/$/, "")}/${task.key}`;
   if (
-    manifest[entryKey]?.hash === task.hash &&
-    manifest[entryKey]?.url === expectedUrl
+    (current?.hash === task.hash && current?.url === expectedUrl) ||
+    (!local && current?.sourceHash === task.hash && current?.url)
   ) {
     console.log(`Unchanged ${entryKey}`);
     continue;

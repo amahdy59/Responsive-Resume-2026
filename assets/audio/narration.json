@@ -16,12 +16,13 @@
     "bytes": 424690
   },
   "en/resume-employment": {
-    "url": "https://pub-0e85a9758556488098db7ca057ac5d1e.r2.dev/portfolio/narration/en/resume-employment-b3f36bd1c7be4579.mp3",
-    "text": "Employment Where I've worked and the impact I delivered Jan 2023 – Present Cairo, Egypt Advansys IS UX Designer Full-time Leading IT solutions provider specializing in enterprise software, digital transformation, and system integration across the MENA region. Key Impact Design Systems Established scalable design systems using Figma and modern methodologies for B2B platforms. Enterprise UX Led UX/UI design for complex B2B and enterprise SaaS platforms, driving user-centric solutions. AI-Powered Leveraged AI design tools to accelerate prototyping workflows and synthesize UX research. Jul 2018 – Jan 2023 Cairo, Egypt Schneider Electric Instructional Designer Full-time Global leader in energy management and automation, driving digital transformation across enterprise and industrial solutions. Key Impact Learning Design Redesigned corporate learning platforms and interfaces, increasing engagement and completion rates. Scalable Solutions Built scalable, reusable learning assets and templates that streamlined content delivery. Learner-Centered Applied learning science and UX principles to create impactful, learner-centered experiences.",
-    "hash": "b3f36bd1c7be4579",
+    "url": "https://pub-0e85a9758556488098db7ca057ac5d1e.r2.dev/portfolio/narration/en/resume-employment-2bd7d3f5b623fc67.mp3",
+    "text": "Key Impact Design Systems Established scalable design systems using Figma and modern methodologies for B2B platforms. Enterprise UX Led UX/UI design for complex B2B and enterprise SaaS platforms, driving user-centric solutions. AI-Powered Leveraged AI design tools to accelerate prototyping workflows and synthesize UX research. Key Impact Learning Design Redesigned corporate learning platforms and interfaces, increasing engagement and completion rates. Scalable Solutions Built scalable, reusable learning assets and templates that streamlined content delivery. Learner-Centered Applied learning science and UX principles to create impactful, learner-centered experiences.",
+    "hash": "2bd7d3f5b623fc67",
+    "sourceHash": "b3f36bd1c7be4579",
     "voice": "onwK4e9ZLuTAKqWW03F9",
     "model": "eleven_multilingual_v2",
-    "bytes": 1467916
+    "bytes": 844738
   },
   "en/resume-skills": {
     "url": "https://pub-0e85a9758556488098db7ca057ac5d1e.r2.dev/portfolio/narration/en/resume-skills-b199bb516643ddf1.mp3",
@@ -80,12 +81,13 @@
     "bytes": 2091929
   },
   "ar/resume-employment": {
-    "url": "https://pub-0e85a9758556488098db7ca057ac5d1e.r2.dev/portfolio/narration/ar/resume-employment-41153ccd825d6aaf.mp3",
-    "text": "الخبرات المهنية أماكن عملي والأثر الذي قدمته يناير 2023 – الحالي القاهرة، مصر أدفانسيز للحلول البرمجية مصمم تجربة المستخدم دوام كامل شركة رائدة في حلول تكنولوجيا المعلومات متخصصة في البرمجيات المؤسسية والتحول الرقمي وتكامل الأنظمة في منطقة الشرق الأوسط وشمال أفريقيا. الأثر الرئيسي أنظمة التصميم تأسيس أنظمة تصميم قابلة للتوسع باستخدام Figma والمنهجيات الحديثة لمنصات B2B. تجربة مؤسسية قيادة تصميم UX/UI لمنصات SaaS المؤسسية وB2B المعقدة مع حلول متمحورة حول المستخدم. ذكاء اصطناعي الاستفادة من أدوات التصميم بالذكاء الاصطناعي لتسريع سير عمل النماذج الأولية وتلخيص أبحاث UX. يوليو 2018 – يناير 2023 القاهرة، مصر شنايدر إلكتريك مصمم تعليمي دوام كامل شركة عالمية رائدة في إدارة الطاقة والأتمتة، تقود التحول الرقمي عبر الحلول المؤسسية والصناعية. الأثر الرئيسي تصميم التعلم إعادة تصميم منصات التعلم المؤسسية وواجهاتها، مما زاد من التفاعل ومعدلات الإكمال. حلول قابلة للتوسع بناء أصول وقوالب تعلم قابلة لإعادة الاستخدام والتوسع لتبسيط تقديم المحتوى. تركيز على المتعلم تطبيق علوم التعلم ومبادئ UX لإنشاء تجارب مؤثرة تتمحور حول المتعلم.",
-    "hash": "41153ccd825d6aaf",
+    "url": "https://pub-0e85a9758556488098db7ca057ac5d1e.r2.dev/portfolio/narration/ar/resume-employment-c32b5fced96d3c28.mp3",
+    "text": "الأثر الرئيسي أنظمة التصميم تأسيس أنظمة تصميم قابلة للتوسع باستخدام Figma والمنهجيات الحديثة لمنصات B2B. تجربة مؤسسية قيادة تصميم UX/UI لمنصات SaaS المؤسسية وB2B المعقدة مع حلول متمحورة حول المستخدم. ذكاء اصطناعي الاستفادة من أدوات التصميم بالذكاء الاصطناعي لتسريع سير عمل النماذج الأولية وتلخيص أبحاث UX. الأثر الرئيسي تصميم التعلم إعادة تصميم منصات التعلم المؤسسية وواجهاتها، مما زاد من التفاعل ومعدلات الإكمال. حلول قابلة للتوسع بناء أصول وقوالب تعلم قابلة لإعادة الاستخدام والتوسع لتبسيط تقديم المحتوى. تركيز على المتعلم تطبيق علوم التعلم ومبادئ UX لإنشاء تجارب مؤثرة تتمحور حول المتعلم.",
+    "hash": "c32b5fced96d3c28",
+    "sourceHash": "41153ccd825d6aaf",
     "voice": "UXEyt6rtmFO9w5hBhzq9",
     "model": "eleven_multilingual_v2",
-    "bytes": 1379309
+    "bytes": 799181
   },
   "ar/resume-skills": {
     "url": "https://pub-0e85a9758556488098db7ca057ac5d1e.r2.dev/portfolio/narration/ar/resume-skills-462a830c9cee6a27.mp3",
