@@ -151,20 +151,46 @@ try {
       const manifest = await (
         await fetch("/assets/audio/narration.json")
       ).json();
-      const response = await fetch(manifest[`${lang}/resume-employment`].url, {
-        headers: { Range: "bytes=0-1023" },
-        signal: AbortSignal.timeout(20000),
+      // Match the application's media path; connect-src deliberately blocks
+      // fetching R2 audio as arbitrary data. Anonymous mode also checks CORS.
+      const media = new Audio();
+      media.crossOrigin = "anonymous";
+      media.muted = true;
+      const loaded = new Promise((resolve, reject) => {
+        const timeout = setTimeout(
+          () => reject(new Error("Narration load timed out")),
+          20000,
+        );
+        media.addEventListener(
+          "loadeddata",
+          () => {
+            clearTimeout(timeout);
+            resolve();
+          },
+          { once: true },
+        );
+        media.addEventListener(
+          "error",
+          () => {
+            clearTimeout(timeout);
+            reject(new Error(`Narration media error ${media.error?.code}`));
+          },
+          { once: true },
+        );
       });
-      const result = {
-        ok: response.ok,
-        type: response.headers.get("content-type"),
-        size: (await response.arrayBuffer()).byteLength,
-      };
+      media.src = manifest[`${lang}/resume-employment`].url;
+      await loaded;
+      await media.play();
+      await new Promise((resolve) => setTimeout(resolve, 200));
+      const result = { duration: media.duration, time: media.currentTime };
+      media.pause();
+      media.removeAttribute("src");
+      media.load();
       return result;
     }, language);
     assert.ok(
-      audio.ok && audio.type?.startsWith("audio/") && audio.size > 0,
-      "Narration failed real-origin CORS/media check",
+      audio.duration > 0 && audio.time > 0,
+      "Narration failed real-origin CORS/playback check",
     );
     assert.deepEqual(errors, [], "Production JavaScript errors");
     await page.close();
