@@ -218,6 +218,20 @@ function updateLocalizedLinks(document, language, pageByFile) {
 }
 
 function rewriteAssetReferences(document, mapping, bundleNames) {
+  // Discover the active font early to reduce layout movement during font swap.
+  const fonts =
+    document.documentElement.lang === "ar"
+      ? ["cairo-arabic", "cairo-latin"]
+      : ["inter-latin"];
+  for (const font of fonts) {
+    const preload = document.createElement("link");
+    preload.rel = "preload";
+    preload.setAttribute("as", "font");
+    preload.type = "font/woff2";
+    preload.setAttribute("crossorigin", "anonymous");
+    preload.href = `assets/fonts/${font}-wght-normal.woff2`;
+    document.head.append(preload);
+  }
   document.querySelectorAll("[src], [href]").forEach((node) => {
     for (const attribute of ["src", "href"]) {
       const value = node.getAttribute(attribute);

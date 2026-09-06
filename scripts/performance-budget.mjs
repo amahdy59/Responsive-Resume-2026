@@ -89,6 +89,13 @@ try {
     }).observe({ type: "layout-shift", buffered: true });
   });
   await page.goto(`${baseUrl}/en/`, { waitUntil: "load" });
+  const fontPreload = page.locator('link[rel="preload"][as="font"]');
+  assert.equal(await fontPreload.count(), 1);
+  assert.equal(await fontPreload.getAttribute("crossorigin"), "anonymous");
+  assert.match(
+    await fontPreload.getAttribute("href"),
+    /inter-latin-wght-normal\.[a-f0-9]+\.woff2$/,
+  );
   await page.waitForTimeout(1000);
   const metrics = await page.evaluate(() => ({ ...window.__quality }));
   console.log(
