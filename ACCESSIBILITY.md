@@ -21,3 +21,7 @@ Record each result with OS, browser and screen-reader version, date and route.
 | Physical iPhone/Android: read case study and download résumé | No horizontal page pan; controls usable by touch; download opens correctly | Pending |
 
 Do not mark pending rows passed based only on automated assertions.
+
+`npm run test:cross-browser` covers Chromium, Firefox and WebKit controls/layouts with blocked and invalid preferences, plus bilingual clipboard/image/embed/audio failure paths. Windows WebKit validates the PDF response because this harness does not emit a native download event; it is not evidence of physical Safari download behavior. Tests remove only the HTTPS-upgrade directive from loopback HTML for WebKit, leaving production CSP unchanged.
+
+`npm run check:links` is an opt-in network check. HTTP 404/410 fails it; authentication/bot blocks and network failures are reported as inconclusive for manual review. A successful HTTP response does not establish that an external destination's content is correct.

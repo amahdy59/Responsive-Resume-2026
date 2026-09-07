@@ -2,6 +2,21 @@
    buttons, the copy-button/tooltip system, toggles, the audio narration
    button, and the shared .panel card shell. */
 
+.embed-help,
+.image-fallback {
+  display: block;
+  margin: 0;
+  padding: 12px 16px;
+  color: var(--text);
+  background: var(--surface);
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.image-unavailable {
+  display: none;
+}
+
 .theme-toggle,
 .lang-toggle,
 .print-button,
@@ -258,6 +273,8 @@ html[lang="ar"] .credential-meta {
 }
 
 .copy-toast {
+  max-width: calc(100vw - 40px);
+  overflow-wrap: anywhere;
   position: fixed;
   inset-inline-end: 20px;
   inset-block-end: 20px;

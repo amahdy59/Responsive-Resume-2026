@@ -71,6 +71,11 @@ const siteMeta = {
 
 const translations = {
   ar: {
+    toast_failed: "تعذّر النسخ. يمكنك نسخ النص يدويًا:",
+    image_unavailable:
+      "الصورة غير متاحة حاليًا. يمكنك متابعة قراءة وصف المشروع.",
+    cs_preview_help:
+      "إذا لم تظهر المعاينة، استخدم رابط فتح في نافذة جديدة أعلاه.",
     about_text:
       "أصمم تجارب رقمية سهلة الوصول، من فهم الاحتياجات وتصميم التفاعل إلى التنفيذ والتحقق من الجودة. تشكّل خبرتي في التعلم الإلكتروني طريقتي في تنظيم المعلومات وتبسيط الأفكار المعقدة. أستخدم أدوات الذكاء الاصطناعي لتسريع الاستكشاف والتنفيذ، مع احتفاظي بمسؤولية قرارات التصميم وسهولة الوصول والمراجعة والجودة النهائية.",
     aria_dark_mode: "الوضع الداكن",
@@ -537,6 +542,11 @@ const translations = {
       "تم استعراض التقرير التفاعلي في مجتمعات تصميم البيانات. وستتضمن التحديثات المستقبلية تتبع أسعار سوق إعادة البيع الحي.",
   },
   en: {
+    toast_failed: "Could not copy. You can copy this text manually:",
+    image_unavailable:
+      "Image unavailable. You can still read the project description.",
+    cs_preview_help:
+      "If the preview does not appear, use Open in New Tab above.",
     about_text:
       "I design accessible digital experiences from discovery and interaction design through implementation and validation. My eLearning background shapes how I organize information and explain complex ideas. I use AI tools to accelerate exploration and implementation while retaining responsibility for design decisions, accessibility, review, and final quality.",
     aria_dark_mode: "Dark mode",
@@ -1693,7 +1703,9 @@ function bindCopyButtons() {
           button.classList.remove("copied");
         }, 1500);
       } catch {
-        showToast(getTranslation(lang, "toast_failed"));
+        showToast(
+          `${getTranslation(lang, "toast_failed")} ${button.dataset.copy}`,
+        );
       }
     });
   });
@@ -2217,6 +2229,7 @@ function initImageLightbox() {
     );
 
     const handleOpen = () => {
+      if (!img.naturalWidth) return;
       const caption =
         img.closest("figure")?.querySelector("figcaption")?.textContent ||
         img.alt;
@@ -2235,6 +2248,14 @@ function initImageLightbox() {
 
 /* ── Interactive In-Page Live Embed Viewer ── */
 function initLiveEmbedViewer() {
+  const viewer = document.getElementById("live-embed-viewer");
+  if (viewer) {
+    const help = document.createElement("p");
+    help.className = "embed-help";
+    help.dataset.translate = "cs_preview_help";
+    help.textContent = getTranslation(getCurrentLanguage(), "cs_preview_help");
+    viewer.querySelector(".live-embed-bar")?.after(help);
+  }
   const toggleButtons = document.querySelectorAll("[data-toggle-embed]");
   toggleButtons.forEach((btn) => {
     btn.addEventListener("click", () => {
@@ -2292,3 +2313,26 @@ function initLiveEmbedViewer() {
 
 initImageLightbox();
 initLiveEmbedViewer();
+
+// Failed artwork must not become an empty zoom control or hide project context.
+document
+  .querySelectorAll(".case-study-image, .project-thumbnail")
+  .forEach((img) => {
+    const unavailable = () => {
+      if (img.classList.contains("image-unavailable")) return;
+      img.classList.add("image-unavailable");
+      img.removeAttribute("tabindex");
+      img.removeAttribute("role");
+      img.removeAttribute("aria-label");
+      const note = document.createElement("span");
+      note.className = "image-fallback";
+      note.dataset.translate = "image_unavailable";
+      note.textContent = getTranslation(
+        getCurrentLanguage(),
+        "image_unavailable",
+      );
+      img.after(note);
+    };
+    img.addEventListener("error", unavailable, { once: true });
+    if (img.complete && !img.naturalWidth) unavailable();
+  });

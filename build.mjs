@@ -12,6 +12,7 @@ import {
 import { dirname, join, parse } from "node:path";
 import { fileURLToPath } from "node:url";
 import { parseHTML } from "linkedom";
+import { expandCaseHeader } from "./scripts/case-template.mjs";
 
 const root = dirname(fileURLToPath(import.meta.url));
 const dist = join(root, "dist");
@@ -345,7 +346,9 @@ const pages = [
   })),
 ];
 for (const page of pages) {
-  const source = await readFile(join(root, page.file), "utf8");
+  const source = expandCaseHeader(
+    await readFile(join(root, page.file), "utf8"),
+  );
   const { document: legacyDocument } = parseHTML(source);
   if (page.key) applyTranslations(legacyDocument, translations.en);
   const legacyPath = page.file === "index.html" ? "/" : `/${page.file}`;

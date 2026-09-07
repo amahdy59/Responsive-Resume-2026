@@ -1,6 +1,7 @@
 import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { parseHTML } from "linkedom";
+import { expandCaseHeader } from "./case-template.mjs";
 
 const root = process.cwd();
 const html = readFileSync(resolve(root, "index.html"), "utf8");
@@ -15,7 +16,7 @@ const htmlDocuments = [
   { file: "index.html", source: html },
   ...caseStudyFiles.map((file) => ({
     file,
-    source: readFileSync(resolve(root, file), "utf8"),
+    source: expandCaseHeader(readFileSync(resolve(root, file), "utf8")),
   })),
 ];
 const script = readFileSync(resolve(root, "script.js"), "utf8").replace(

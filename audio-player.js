@@ -16,6 +16,7 @@
       listen: "Listen",
       listenCase: "Listen to case study",
       playing: "Playing",
+      loading: "Loading narration…",
       paused: "Narration paused",
       stopped: "Narration stopped",
       unavailable: "Narration is unavailable",
@@ -35,6 +36,7 @@
       listen: "استمع",
       listenCase: "استمع إلى دراسة الحالة",
       playing: "قيد التشغيل",
+      loading: "جارٍ تحميل السرد…",
       paused: "تم إيقاف السرد مؤقتًا",
       stopped: "تم إيقاف السرد",
       unavailable: "السرد الصوتي غير متاح",
@@ -47,6 +49,7 @@
   let currentContainer = null;
   let currentUtterance = null;
   let currentMedia = null;
+  let playbackRequest = 0;
   let isPaused = false;
   let cachedVoices = [];
   let player;
@@ -56,6 +59,7 @@
   const loadManifest = () =>
     (manifest ??= fetch(
       new URL("/assets/audio/narration.json", location.origin),
+      { signal: AbortSignal.timeout(8000) },
     )
       .then((response) => (response.ok ? response.json() : {}))
       .catch(() => ({})));
@@ -165,7 +169,12 @@
   }
 
   function setPlayerState(state) {
-    if (player) player.dataset.state = state;
+    if (!player) return;
+    player.dataset.state = state;
+    player.setAttribute("aria-busy", String(state === "loading"));
+    player.querySelector("[data-audio-toggle]").disabled = state === "loading";
+    player.querySelector("[data-audio-eyebrow]").textContent =
+      state === "loading" ? copy().loading : copy().nowPlaying;
   }
 
   function setButtonState(button, state) {
@@ -294,6 +303,7 @@
   }
 
   function clearSources() {
+    playbackRequest++;
     if (currentMedia) {
       currentMedia.pause();
       currentMedia.currentTime = 0;
@@ -305,6 +315,9 @@
   }
 
   function stopAllAudio(shouldAnnounce = false) {
+    const restoreFocus = player?.contains(document.activeElement)
+      ? currentBtn
+      : null;
     clearSources();
     setButtonState(currentBtn, "idle");
     currentBtn = null;
@@ -314,6 +327,7 @@
     setPlayerState("idle");
     document.body.classList.remove("has-audio-player");
     if (shouldAnnounce) announce(copy().stopped);
+    restoreFocus?.focus({ preventScroll: true });
   }
 
   function pauseAudio() {
@@ -372,7 +386,11 @@
     utterance.rate = playbackRate * (lang === "ar" ? 0.92 : 1);
     utterance.voice = getBestVoice(lang);
     utterance.onend = () => currentUtterance === utterance && stopAllAudio();
-    utterance.onerror = () => currentUtterance === utterance && stopAllAudio();
+    utterance.onerror = () => {
+      if (currentUtterance !== utterance) return;
+      stopAllAudio();
+      announce(copy().unavailable);
+    };
     currentUtterance = utterance;
     setPlayerState("playing");
     speechSynthesis.speak(utterance);
@@ -385,6 +403,7 @@
       return;
     }
     clearSources();
+    const request = playbackRequest;
     setButtonState(currentBtn, "idle");
     currentContainer?.classList.remove("audio-reading-active");
     const container = getContainer(button);
@@ -395,12 +414,13 @@
     container?.classList.add("audio-reading-active");
     setButtonState(button, "playing");
     showPlayer();
-    announce(`${copy().playing}: ${getTitle(button)}`);
+    announce(`${copy().loading}: ${getTitle(button)}`);
 
     const lang = language();
     const recording = (await loadManifest())[
       `${lang}/${button.dataset.audioId}`
     ];
+    if (request !== playbackRequest || currentBtn !== button) return;
     if (recording?.url) {
       const media = new Audio(recording.url);
       currentMedia = media;
@@ -418,6 +438,7 @@
         await media.play();
         return;
       } catch {
+        if (request !== playbackRequest || currentBtn !== button) return;
         if (currentMedia === media) currentMedia = null;
       }
     }

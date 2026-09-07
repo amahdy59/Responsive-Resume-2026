@@ -1,5 +1,7 @@
 # Design system
 
+Case-study navigation and display/language controls live in `templates/case-header.html`. Each source case page includes a `case-header` marker; `scripts/case-template.mjs` expands it before validation and static localization. Titles come from `data/projects.json`. Edit the shared template once; use `npm run dev`/the built site for preview, not raw source HTML. Existing narrative text remains in each case page.
+
 `styles/tokens.css` defines the public token contract: semantic colors, spacing, type sizes, radii, shadows, motion durations/easing, and z-index layers. Components consume semantic tokens so theme and high-contrast modes remain coherent.
 
 The rest of `styles/*.css` is split by concern and built into a single fingerprinted `styles.css` bundle in this order (see `styleBundleOrder` in `build.mjs`): `base.css` (reset and shared elements) → `animations.css` (`@keyframes`) → `components.css` (buttons, copy-button, tooltips, toggles, the shared `.panel` shell — used on every page) → `home.css` (hero, projects, skills, certifications, timeline — homepage only) → `case-study.css` (case-study nav, mockup, narrative sections, lightbox — case-study pages only) → `responsive.css` (viewport breakpoints, both page types) → `accessibility-modes.css` (forced-colors, reduced-motion, high-contrast) → `print.css`. Load order matters: `components.css` must precede `home.css`/`case-study.css` so page-specific rules can override shared ones at equal specificity.
