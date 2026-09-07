@@ -17,6 +17,156 @@
   display: none;
 }
 
+/* Shared progressive enhancement for native selects. */
+.enhanced-select-native {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  clip: rect(0 0 0 0) !important;
+  clip-path: inset(50%) !important;
+  border: 0 !important;
+  white-space: nowrap !important;
+}
+
+.select-menu {
+  position: relative;
+  display: inline-block;
+  min-width: 0;
+  color: var(--text);
+}
+
+.select-menu-trigger {
+  display: flex;
+  width: 100%;
+  min-height: 48px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 8px 16px;
+  border: 1px solid color-mix(in srgb, var(--line) 78%, var(--blue));
+  border-radius: 12px;
+  background: linear-gradient(145deg, color-mix(in srgb, var(--surface) 94%, var(--blue)), var(--surface));
+  box-shadow: 0 4px 14px rgb(0 0 0 / 8%);
+  color: var(--text);
+  font: inherit;
+  font-weight: 700;
+  line-height: 1.35;
+  text-align: start;
+  cursor: pointer;
+  transition: border-color var(--motion-normal) var(--ease-standard), box-shadow var(--motion-normal) var(--ease-standard);
+}
+
+.select-menu-trigger:hover,
+.select-menu-trigger:focus-visible,
+.select-menu.is-open .select-menu-trigger {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--focus) 24%, transparent), 0 8px 22px rgb(0 0 0 / 12%);
+}
+
+.select-menu-chevron {
+  flex: 0 0 9px;
+  width: 9px;
+  height: 9px;
+  margin-inline-end: 2px;
+  border-inline-end: 2px solid currentcolor;
+  border-bottom: 2px solid currentcolor;
+  transform: translateY(-2px) rotate(45deg);
+  transition: transform var(--motion-normal) var(--ease-standard);
+}
+
+.select-menu.is-open .select-menu-chevron {
+  transform: translateY(2px) rotate(225deg);
+}
+
+.select-menu-list {
+  position: absolute;
+  z-index: var(--z-popover);
+  inset-block-start: calc(100% + 8px);
+  inset-inline: 0;
+  display: grid;
+  gap: 4px;
+  min-width: max(100%, 15rem);
+  max-width: min(28rem, calc(100vw - 32px));
+  max-height: min(22rem, 55vh);
+  padding: 6px;
+  overflow: auto;
+  overscroll-behavior: contain;
+  border: 1px solid color-mix(in srgb, var(--line) 75%, var(--blue));
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--surface) 96%, var(--page));
+  box-shadow: var(--shadow-2);
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent;
+  transform-origin: top center;
+  animation: dropdown-reveal var(--motion-normal) var(--ease-emphasized);
+}
+
+.select-menu-list[hidden] { display: none; }
+
+.select-menu-option {
+  position: relative;
+  display: flex;
+  width: 100%;
+  min-height: 44px;
+  align-items: center;
+  padding: 9px 40px 9px 12px;
+  border: 1px solid transparent;
+  border-radius: 9px;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.4;
+  text-align: start;
+  cursor: pointer;
+}
+
+[dir="rtl"] .select-menu-option { padding: 9px 12px 9px 40px; }
+
+.select-menu-option:hover,
+.select-menu-option:focus-visible {
+  border-color: color-mix(in srgb, var(--blue) 42%, transparent);
+  background: var(--pill-bg);
+  color: var(--link-aaa);
+  outline: none;
+}
+
+.select-menu-option[aria-selected="true"] {
+  background: color-mix(in srgb, var(--blue) 15%, var(--surface));
+  color: var(--link-aaa);
+  font-weight: 750;
+}
+
+.select-menu-option[aria-selected="true"]::after {
+  position: absolute;
+  inset-inline-end: 14px;
+  content: "✓";
+  color: var(--blue);
+  font-weight: 800;
+}
+
+.audio-select-shell .select-menu { min-width: 76px; }
+
+.case-section-jump .select-menu { width: 100%; }
+
+.audio-select-shell .select-menu-trigger {
+  min-height: 44px;
+  padding: 6px 10px;
+  border-radius: 10px;
+  font-size: 0.82rem;
+}
+
+.audio-select-shell .select-menu-list {
+  inset-block: auto calc(100% + 8px);
+  inset-inline: auto 0;
+  min-width: 8rem;
+  transform-origin: bottom center;
+}
+
 .theme-toggle,
 .lang-toggle,
 .print-button,
@@ -451,9 +601,9 @@ html[lang="ar"] .credential-meta {
 }
 
 .audio-play-btn.is-playing {
-  background: #10b981;
+  background: #047857;
   color: #fff;
-  border-color: #10b981;
+  border-color: #047857;
 }
 
 .audio-icon {
@@ -474,7 +624,7 @@ html[lang="ar"] .credential-meta {
   width: min(680px, calc(100% - 32px));
   padding: 16px;
   gap: 10px;
-  overflow: hidden;
+  overflow: visible;
   border: 1px solid color-mix(in srgb, var(--blue) 24%, var(--line));
   border-radius: 20px;
   background:

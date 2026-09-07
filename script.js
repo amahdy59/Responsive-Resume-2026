@@ -1882,16 +1882,221 @@ function initResumeDownloadMenu() {
   });
 
   menu.addEventListener("keydown", (event) => {
-    if (event.key !== "Escape") return;
-    menu.open = false;
-    menu.querySelector("summary")?.focus();
+    const items = [
+      ...menu.querySelectorAll(
+        ".resume-download-options > a, .resume-download-options > button",
+      ),
+    ];
+    const index = items.indexOf(document.activeElement);
+    if (event.key === "Escape") {
+      menu.open = false;
+      menu.querySelector("summary")?.focus();
+      return;
+    }
+    if (
+      event.target === menu.querySelector("summary") &&
+      ["ArrowDown", "ArrowUp"].includes(event.key)
+    ) {
+      event.preventDefault();
+      menu.open = true;
+      items[event.key === "ArrowDown" ? 0 : items.length - 1]?.focus();
+      return;
+    }
+    const next =
+      event.key === "Home"
+        ? 0
+        : event.key === "End"
+          ? items.length - 1
+          : event.key === "ArrowDown"
+            ? Math.min(items.length - 1, index + 1)
+            : event.key === "ArrowUp"
+              ? Math.max(0, index - 1)
+              : -1;
+    if (next >= 0) {
+      event.preventDefault();
+      items[next]?.focus();
+    }
   });
+}
+
+let selectMenuId = 0;
+
+/**
+ * Adds a consistently styled listbox while retaining the native select as the
+ * no-JavaScript fallback and source of truth.
+ */
+function enhanceSelect(select) {
+  if (!(select instanceof HTMLSelectElement) || select.dataset.enhanced) return;
+  select.dataset.enhanced = "true";
+  select.classList.add("enhanced-select-native");
+  select.tabIndex = -1;
+  select.setAttribute("aria-hidden", "true");
+
+  const shell = document.createElement("span");
+  shell.className = "select-menu";
+  const trigger = document.createElement("button");
+  trigger.type = "button";
+  trigger.className = "select-menu-trigger";
+  trigger.id = `select-menu-trigger-${++selectMenuId}`;
+  trigger.setAttribute("aria-haspopup", "listbox");
+  trigger.setAttribute("aria-expanded", "false");
+  const value = document.createElement("span");
+  value.className = "select-menu-value";
+  const chevron = document.createElement("span");
+  chevron.className = "select-menu-chevron";
+  chevron.setAttribute("aria-hidden", "true");
+  trigger.append(value, chevron);
+
+  const list = document.createElement("span");
+  list.className = "select-menu-list";
+  list.id = `select-menu-options-${selectMenuId}`;
+  list.setAttribute("role", "listbox");
+  list.hidden = true;
+  trigger.setAttribute("aria-controls", list.id);
+  shell.append(trigger, list);
+  select.after(shell);
+  const owningLabel = select.closest("label");
+  if (owningLabel) owningLabel.htmlFor = trigger.id;
+  shell.parentElement?.querySelector(":scope > svg")?.remove();
+  const labelNode = owningLabel?.querySelector(":scope > span");
+
+  const labelText = () =>
+    labelNode?.textContent?.trim() ||
+    select.getAttribute("aria-label") ||
+    "Select";
+  const options = () => [...list.querySelectorAll('[role="option"]')];
+  const close = ({ restoreFocus = false } = {}) => {
+    list.hidden = true;
+    trigger.setAttribute("aria-expanded", "false");
+    shell.classList.remove("is-open");
+    if (restoreFocus) trigger.focus();
+  };
+  const open = () => {
+    list.hidden = false;
+    trigger.setAttribute("aria-expanded", "true");
+    shell.classList.add("is-open");
+    (
+      options().find(
+        (option) => option.getAttribute("aria-selected") === "true",
+      ) || options()[0]
+    )?.focus();
+  };
+  const choose = (option) => {
+    select.value = option.dataset.value;
+    select.dispatchEvent(new Event("change", { bubbles: true }));
+    sync();
+    close({ restoreFocus: true });
+  };
+  const sync = () => {
+    list.replaceChildren();
+    list.setAttribute("aria-label", labelText());
+    for (const nativeOption of select.options) {
+      const option = document.createElement("button");
+      option.type = "button";
+      option.className = "select-menu-option";
+      option.dataset.value = nativeOption.value;
+      option.setAttribute("role", "option");
+      option.setAttribute(
+        "aria-selected",
+        String(nativeOption.value === select.value),
+      );
+      option.textContent = nativeOption.textContent;
+      option.addEventListener("click", () => choose(option));
+      list.append(option);
+    }
+    const selected = select.selectedOptions[0];
+    value.textContent = selected?.textContent || "";
+    trigger.setAttribute("aria-label", `${labelText()}: ${value.textContent}`);
+  };
+
+  trigger.addEventListener("click", () =>
+    trigger.getAttribute("aria-expanded") === "true" ? close() : open(),
+  );
+  shell.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      event.preventDefault();
+      close({ restoreFocus: true });
+      return;
+    }
+    if (
+      event.target === trigger &&
+      ["ArrowDown", "ArrowUp"].includes(event.key)
+    ) {
+      event.preventDefault();
+      open();
+      return;
+    }
+    const items = options();
+    const index = items.indexOf(document.activeElement);
+    const next =
+      event.key === "Home"
+        ? 0
+        : event.key === "End"
+          ? items.length - 1
+          : event.key === "ArrowDown"
+            ? Math.min(items.length - 1, index + 1)
+            : event.key === "ArrowUp"
+              ? Math.max(0, index - 1)
+              : -1;
+    if (next >= 0) {
+      event.preventDefault();
+      items[next]?.focus();
+      return;
+    }
+    if (
+      event.key.length === 1 &&
+      !event.ctrlKey &&
+      !event.metaKey &&
+      !event.altKey
+    ) {
+      const match = items.find((item) =>
+        item.textContent
+          .trim()
+          .toLocaleLowerCase()
+          .startsWith(event.key.toLocaleLowerCase()),
+      );
+      match?.focus();
+    }
+  });
+  document.addEventListener("pointerdown", (event) => {
+    if (!shell.contains(event.target)) close();
+  });
+  shell.addEventListener("focusout", () => {
+    requestAnimationFrame(() => {
+      if (!shell.contains(document.activeElement)) close();
+    });
+  });
+  select.addEventListener("change", sync);
+  select.addEventListener("selectoptionschange", sync);
+  if (labelNode)
+    new MutationObserver(sync).observe(labelNode, {
+      childList: true,
+      characterData: true,
+      subtree: true,
+    });
+  sync();
+}
+
+window.enhanceSelect = enhanceSelect;
+
+function initSelectEnhancements() {
+  document.querySelectorAll("select").forEach(enhanceSelect);
+  new MutationObserver((records) => {
+    for (const record of records) {
+      for (const node of record.addedNodes) {
+        if (!(node instanceof Element)) continue;
+        if (node.matches("select")) enhanceSelect(node);
+        node.querySelectorAll("select").forEach(enhanceSelect);
+      }
+    }
+  }).observe(document.body, { childList: true, subtree: true });
 }
 
 function initialize() {
   initResponsiveContentOrder();
   initSectionNavigation();
   initCaseSectionNavigation();
+  initSelectEnhancements();
   enhanceLinkedCards();
   bindCopyButtons();
   initReadingProgressBar();
@@ -1914,6 +2119,7 @@ function refreshCaseSectionJump(lang) {
   [...select.options].forEach((option, index) => {
     option.textContent = links[index]?.textContent.trim() || option.textContent;
   });
+  select.dispatchEvent(new Event("selectoptionschange"));
 }
 
 function initCaseSectionNavigation() {
@@ -1933,6 +2139,7 @@ function initCaseSectionNavigation() {
     .join("")}</select>`;
   nav.before(jump);
   const select = jump.querySelector("select");
+  enhanceSelect(select);
   const setCurrent = (hash) => {
     links.forEach((link) => {
       link.classList.toggle("is-active", link.hash === hash);
@@ -1940,6 +2147,7 @@ function initCaseSectionNavigation() {
       else link.removeAttribute("aria-current");
     });
     select.value = hash;
+    select.dispatchEvent(new Event("selectoptionschange"));
   };
   const openTarget = (hash) => {
     const target = document.querySelector(hash);

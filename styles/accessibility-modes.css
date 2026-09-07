@@ -110,7 +110,9 @@
 
 [data-contrast="high"] .global-audio-player,
 [data-contrast="high"] .audio-player-controls button,
-[data-contrast="high"] .audio-player-speed select {
+[data-contrast="high"] .audio-player-speed select:not(.enhanced-select-native),
+[data-contrast="high"] .select-menu-trigger,
+[data-contrast="high"] .select-menu-list {
   border: 2px solid #fff;
   background: #000;
   color: #fff;
@@ -288,7 +290,10 @@
   .featured article,
   .global-audio-player,
   .audio-player-controls button,
-  .audio-player-speed select {
+  .audio-player-speed select:not(.enhanced-select-native),
+  .select-menu-trigger,
+  .select-menu-list,
+  .select-menu-option {
     border: 1.5px solid ButtonBorder !important;
   }
 

@@ -215,11 +215,14 @@
   width: max-content;
   min-width: 220px;
   max-width: calc(100vw - 32px);
+  gap: 4px;
   padding: 6px;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  background: var(--surface);
+  border: 1px solid color-mix(in srgb, var(--line) 75%, var(--blue));
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--surface) 96%, var(--page));
   box-shadow: var(--shadow-2);
+  transform-origin: top center;
+  animation: dropdown-reveal var(--motion-normal) var(--ease-emphasized);
 }
 
 .resume-download-options > a,
@@ -247,13 +250,21 @@
 .resume-download-options > a:focus-visible,
 .resume-download-options > button:hover,
 .resume-download-options > button:focus-visible {
-  background: var(--hero-contact-item-hover);
-  color: var(--blue);
+  background: var(--pill-bg);
+  color: var(--link-aaa);
   text-decoration: none;
 }
 
 .resume-format-mark {
-  color: var(--muted);
+  display: inline-grid;
+  min-width: 38px;
+  min-height: 26px;
+  place-items: center;
+  padding-inline: 7px;
+  border: 1px solid color-mix(in srgb, var(--line) 80%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--blue) 9%, var(--surface));
+  color: var(--link-aaa);
   font-size: 0.66rem;
   font-weight: 800;
   letter-spacing: 0.035em;
