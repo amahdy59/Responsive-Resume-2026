@@ -31,9 +31,11 @@ try {
       });
       delete window.speechSynthesis;
     });
-    await page.route("**/assets/audio/narration.json", (route) =>
-      route.fulfill({ status: 503, body: "Unavailable" }),
-    );
+    let narrationRequests = 0;
+    await page.route("**/assets/audio/narration.json", (route) => {
+      narrationRequests++;
+      return route.fulfill({ status: 503, body: "Unavailable" });
+    });
     await page.goto(`${origin}/${lang}/`);
     await page.locator("[data-copy]").first().click();
     await page.waitForFunction(() =>
@@ -43,15 +45,22 @@ try {
     assert.match(toast, lang === "en" ? /copy/i : /النسخ/);
     await page.locator(".audio-play-btn").first().click();
     await page.waitForFunction(() =>
-      /unavailable|غير متاح/.test(
+      /could not be played|تعذر تشغيل/.test(
         document.querySelector(".audio-live-status")?.textContent,
       ),
     );
-    assert.ok(
-      await page
-        .locator(".global-audio-player")
-        .evaluate((player) => player.hidden),
+    assert.equal(
+      await page.locator(".global-audio-player").getAttribute("data-state"),
+      "error",
     );
+    assert.ok(await page.locator("[data-audio-retry]").isVisible());
+    await page.locator("[data-audio-retry]").press("Enter");
+    await page.waitForFunction(
+      () =>
+        document.querySelector(".global-audio-player")?.dataset.state ===
+        "error",
+    );
+    assert.equal(narrationRequests, 2);
 
     await page.route("**/assets/case-haj-arafa-*.webp", (route) =>
       route.abort(),

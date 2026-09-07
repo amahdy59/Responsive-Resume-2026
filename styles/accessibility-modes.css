@@ -109,6 +109,7 @@
 }
 
 [data-contrast="high"] .global-audio-player,
+[data-contrast="high"] .audio-player-transcript,
 [data-contrast="high"] .audio-player-controls button,
 [data-contrast="high"] .audio-player-speed select:not(.enhanced-select-native),
 [data-contrast="high"] .select-menu-trigger,
@@ -289,6 +290,7 @@
   .compact-list li,
   .featured article,
   .global-audio-player,
+  .audio-player-transcript,
   .audio-player-controls button,
   .audio-player-speed select:not(.enhanced-select-native),
   .select-menu-trigger,

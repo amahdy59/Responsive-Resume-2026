@@ -508,9 +508,29 @@ try {
 
       if (scenario.language === "en" && scenario.width === 320) {
         await page.evaluate(() => {
+          window.__mediaActions = {};
+          Object.defineProperty(navigator, "mediaSession", {
+            configurable: true,
+            value: {
+              metadata: null,
+              playbackState: "none",
+              setActionHandler(action, handler) {
+                window.__mediaActions[action] = handler;
+              },
+              setPositionState(state) {
+                window.__mediaPosition = state;
+              },
+            },
+          });
+          window.MediaMetadata = class {
+            constructor(metadata) {
+              Object.assign(this, metadata);
+            }
+          };
           window.Audio = class {
             constructor(src) {
               window.__narrationSource = src;
+              window.__audioInstance = this;
               this.paused = true;
               this.duration = 120;
               this._currentTime = 0;
@@ -544,8 +564,126 @@ try {
           false,
         );
         assert.equal(
+          await page
+            .locator("[data-audio-expand]")
+            .getAttribute("aria-expanded"),
+          "false",
+        );
+        assert.equal(
+          await page.locator("[data-audio-progress]").isVisible(),
+          false,
+        );
+        assert.equal(
+          await page
+            .locator("[data-audio-previous]")
+            .getAttribute("data-tooltip"),
+          "Previous section",
+        );
+        assert.equal(
+          await page.locator("[data-audio-next]").getAttribute("data-tooltip"),
+          "Next section",
+        );
+        await page.locator("[data-audio-expand]").click();
+        assert.equal(
+          await page
+            .locator("[data-audio-expand]")
+            .getAttribute("aria-expanded"),
+          "true",
+        );
+        assert.equal(
+          await page.locator("[data-audio-progress]").isVisible(),
+          true,
+        );
+        await page.locator("[data-audio-transcript-toggle]").click();
+        assert.equal(
+          await page
+            .locator("[data-audio-transcript-toggle]")
+            .getAttribute("aria-expanded"),
+          "true",
+        );
+        assert.match(
+          await page.locator("[data-audio-transcript-copy]").textContent(),
+          /Employment|UX Designer/,
+        );
+        assert.deepEqual(
+          await page.evaluate(() => Object.keys(window.__mediaActions).sort()),
+          ["nexttrack", "pause", "play", "previoustrack", "seekto", "stop"],
+        );
+        assert.equal(
+          await page.evaluate(() => navigator.mediaSession.metadata.title),
+          "Employment",
+        );
+        await page.locator("[data-audio-next]").click();
+        await page.waitForFunction(
+          () =>
+            document.querySelector("[data-audio-position]")?.textContent ===
+            "Section 2 of 4",
+        );
+        assert.equal(
+          await page.locator("[data-audio-title]").textContent(),
+          "About Me",
+        );
+        await page.locator("[data-audio-previous]").click();
+        await page.waitForFunction(
+          () =>
+            document.querySelector("[data-audio-position]")?.textContent ===
+            "Section 1 of 4",
+        );
+        assert.equal(
           await page.locator("[data-audio-speed] option").count(),
           5,
+        );
+        assert.equal(
+          await page.locator("[data-audio-mute]").getAttribute("aria-pressed"),
+          "false",
+        );
+        assert.equal(
+          await page
+            .locator("[data-audio-volume]")
+            .getAttribute("aria-valuetext"),
+          "100%",
+        );
+        await page.locator("[data-audio-mute]").click();
+        assert.equal(
+          await page.locator("[data-audio-mute]").getAttribute("aria-pressed"),
+          "true",
+        );
+        assert.equal(
+          await page.evaluate(() => window.__audioInstance.muted),
+          true,
+        );
+        await page.locator("[data-audio-volume]").fill("0.4");
+        assert.equal(
+          await page
+            .locator("[data-audio-volume]")
+            .getAttribute("aria-valuetext"),
+          "40%",
+        );
+        assert.equal(
+          await page.evaluate(() => window.__audioInstance.volume),
+          0.4,
+        );
+        assert.equal(
+          await page.evaluate(() => window.__audioInstance.muted),
+          false,
+        );
+        await page.locator("[data-audio-volume]").fill("0");
+        await page.locator("[data-audio-mute]").click();
+        assert.equal(
+          await page
+            .locator("[data-audio-volume]")
+            .getAttribute("aria-valuetext"),
+          "100%",
+        );
+        assert.equal(
+          await page.evaluate(() => window.__audioInstance.volume),
+          1,
+        );
+        assert.equal(
+          await page
+            .locator(".audio-player-transport")
+            .evaluate((element) => getComputedStyle(element).direction),
+          "ltr",
         );
         assert.equal(
           await page.locator(".audio-player-artwork svg").count(),
@@ -581,6 +719,28 @@ try {
             .locator(".global-audio-player")
             .evaluate((player) => player.scrollWidth <= player.clientWidth),
           true,
+        );
+        await page.locator("[data-audio-expand]").click();
+        assert.equal(
+          await page
+            .locator("[data-audio-expand]")
+            .getAttribute("aria-expanded"),
+          "false",
+        );
+        assert.equal(
+          await page.locator("[data-audio-transcript]").isVisible(),
+          false,
+        );
+        assert.equal(
+          await page
+            .locator("[data-audio-advanced]")
+            .evaluateAll((elements) =>
+              elements.every(
+                (element) => element.getClientRects().length === 0,
+              ),
+            ),
+          true,
+          "Collapsed audio controls must leave the visual and keyboard flow",
         );
         await page.waitForFunction(() => Boolean(window.__narrationSource));
         assert.match(
@@ -858,6 +1018,8 @@ try {
       localStorage.setItem("resume-lang", "ar");
       localStorage.setItem("resume-theme", "dark");
       localStorage.setItem("resume-contrast", "high");
+      localStorage.setItem("resume-audio-muted", "true");
+      localStorage.setItem("resume-audio-volume", "0.4");
     });
     const page = await context.newPage();
     await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
@@ -875,6 +1037,13 @@ try {
       reducedMotion: true,
       theme: "dark",
     });
+    assert.deepEqual(
+      await page.evaluate(() => ({
+        muted: window.resumePreferences.get("resume-audio-muted"),
+        volume: window.resumePreferences.get("resume-audio-volume"),
+      })),
+      { muted: "true", volume: "0.4" },
+    );
     const accessibility = await new AxeBuilder({ page }).analyze();
     assert.deepEqual(accessibility.violations, []);
     await context.close();
