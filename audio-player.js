@@ -52,11 +52,13 @@
   let player;
   let liveStatus;
   let playlist = [];
-  const manifest = fetch(
-    new URL("/assets/audio/narration.json", location.origin),
-  )
-    .then((response) => (response.ok ? response.json() : {}))
-    .catch(() => ({}));
+  let manifest;
+  const loadManifest = () =>
+    (manifest ??= fetch(
+      new URL("/assets/audio/narration.json", location.origin),
+    )
+      .then((response) => (response.ok ? response.json() : {}))
+      .catch(() => ({})));
 
   const language = () => (document.documentElement.lang === "ar" ? "ar" : "en");
   const copy = () => labels[language()];
@@ -396,7 +398,9 @@
     announce(`${copy().playing}: ${getTitle(button)}`);
 
     const lang = language();
-    const recording = (await manifest)[`${lang}/${button.dataset.audioId}`];
+    const recording = (await loadManifest())[
+      `${lang}/${button.dataset.audioId}`
+    ];
     if (recording?.url) {
       const media = new Audio(recording.url);
       currentMedia = media;

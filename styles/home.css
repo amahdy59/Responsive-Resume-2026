@@ -932,6 +932,7 @@ html[lang="ar"] .skill-group h3 {
 
 .project-card-tag {
   display: inline-block;
+  align-self: flex-start;
   padding: 3px 10px;
   border-radius: var(--radius-pill, 999px);
   background: color-mix(in srgb, var(--blue) 12%, transparent);
@@ -995,10 +996,6 @@ html[lang="ar"] .skill-group h3 {
 
 .project-card-compact p {
   font-size: 0.82rem;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
 }
 
 .project-actions {
@@ -1010,7 +1007,8 @@ html[lang="ar"] .skill-group h3 {
 }
 
 .project-actions > .btn {
-  flex: 1 1 180px;
+  flex: 1 1 12rem;
+  min-width: 0;
   justify-content: center;
   min-height: 44px;
   height: auto;
@@ -1315,15 +1313,14 @@ html[lang="ar"] .skill-group h3 {
 
 .impact-cards {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
   gap: 12px;
 }
 
 .impact-card {
   padding: 14px;
-  background: color-mix(in srgb, var(--panel) 72%, var(--page));
-  border: 1px solid var(--soft-line);
-  border-radius: 10px;
+  background: transparent;
+  border-inline-start: 2px solid var(--soft-line);
 }
 
 .impact-card:hover {

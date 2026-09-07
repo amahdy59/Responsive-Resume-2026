@@ -6,6 +6,10 @@ The rest of `styles/*.css` is split by concern and built into a single fingerpri
 
 Core components are the resume shell, hero, toolbar controls, sticky section navigation, panels, timelines, project cards, case-study sections, mobile jump menu, preview controls, dialog/lightbox, global narration player, toast, and print layout. Every interactive component must define default, hover, focus-visible, active/pressed, disabled where applicable, dark-theme, high-contrast, RTL, reduced-motion, and print behavior.
 
+Supporting impact/provenance content uses quiet inline separators rather than nested interactive-looking boxes. Project descriptions remain fully readable; action groups use wrapping flex items with a `12rem` basis and equal growth. Impact grids use available container width with a `14rem` preferred minimum, capped at 100% to preserve narrow-screen reflow. Keep primary actions before secondary actions in DOM order and avoid fixed text heights.
+
+Performance tests use three cold runs per scenario and report median metrics. Mobile scenarios cover both locales and a case study at 4x CPU throttling, 1.6 Mbps and 150 ms latency; text compression models production GitHub Pages responses. Measured control interactions are lab samples, not field INP. Real-user Core Web Vitals and assistive-technology acceptance remain separate evidence.
+
 Narration uses one controller and one player per page. Section triggers start the session; the global player owns pause/resume, stop, progress, seeking, playback speed, and previous/next navigation. Audio never autoplays and prerecorded R2 narration falls back to language-matched browser speech only after a user action.
 
 Avoid `transition: all`, physical left/right positioning when a logical property works, and arbitrary new z-index or spacing values. Add a token when a repeated design decision is genuinely new.

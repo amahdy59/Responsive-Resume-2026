@@ -681,25 +681,15 @@
 /* ── Provenance Cards ── */
 .provenance-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
   gap: 12px;
   margin-top: 14px;
 }
 
 .provenance-card {
   padding: 18px 20px;
-  background: color-mix(in srgb, var(--panel) 70%, transparent);
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgb(0 0 0 / 4%);
-  transition:
-    border-color var(--motion-normal) var(--ease-standard),
-    transform var(--motion-normal) var(--ease-standard);
-}
-
-.provenance-card:hover {
-  border-color: var(--blue);
-  transform: translateY(-2px);
+  background: transparent;
+  border-inline-start: 2px solid var(--soft-line);
 }
 
 .provenance-icon {

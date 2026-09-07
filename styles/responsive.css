@@ -419,9 +419,6 @@
     margin-bottom: 8px;
   }
 
-  .impact-cards {
-    grid-template-columns: 1fr;
-  }
 
   .compact-list li {
     align-items: flex-start;

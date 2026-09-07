@@ -151,7 +151,8 @@ try {
             }
           }
           const other = language === "en" ? "ar" : "en";
-          await page.locator(`.language-option[lang="${other}"]`).click();
+          await page.locator(`.language-option[lang="${other}"] input`).focus();
+          await page.keyboard.press("Space");
           await page.waitForURL((url) =>
             url.pathname.startsWith(`/${other}/case-studies/haj-arafa/`),
           );
