@@ -1,64 +1,6 @@
 /* Viewport breakpoints for both the homepage and case-study pages. Grouped
    here so a layout bug at a given width has one place to check. */
 
-@media screen and (min-width: 561px) {
-  /* Keep tooltips beside the vertical controls column on tablet and desktop. */
-  html[lang="en"] .controls-group [data-tooltip]::before {
-    bottom: 50% !important;
-    left: auto !important;
-    right: 100% !important;
-    transform: translateY(50%) scale(0.9) !important;
-  }
-
-  html[lang="en"] .controls-group [data-tooltip]::after {
-    bottom: 50% !important;
-    left: auto !important;
-    right: calc(100% + 2px) !important;
-    transform: translateY(50%) scale(0.9) !important;
-    border-color: transparent transparent transparent var(--text) !important;
-    border-width: 5px 0 5px 5px !important;
-  }
-
-  html[lang="en"] .controls-group [data-tooltip]:hover::before,
-  html[lang="en"] .controls-group [data-tooltip]:focus-visible::before {
-    transform: translateY(50%) scale(1) !important;
-    opacity: 1 !important;
-  }
-
-  html[lang="en"] .controls-group [data-tooltip]:hover::after,
-  html[lang="en"] .controls-group [data-tooltip]:focus-visible::after {
-    transform: translateY(50%) scale(1) !important;
-    opacity: 1 !important;
-  }
-
-  html[lang="ar"] .controls-group [data-tooltip]::before {
-    bottom: 50% !important;
-    right: auto !important;
-    left: 100% !important;
-    transform: translateY(50%) scale(0.9) !important;
-  }
-
-  html[lang="ar"] .controls-group [data-tooltip]::after {
-    bottom: 50% !important;
-    right: auto !important;
-    left: calc(100% + 2px) !important;
-    transform: translateY(50%) scale(0.9) !important;
-    border-color: transparent var(--text) transparent transparent !important;
-    border-width: 5px 5px 5px 0 !important;
-  }
-
-  html[lang="ar"] .controls-group [data-tooltip]:hover::before,
-  html[lang="ar"] .controls-group [data-tooltip]:focus-visible::before {
-    transform: translateY(50%) scale(1) !important;
-    opacity: 1 !important;
-  }
-
-  html[lang="ar"] .controls-group [data-tooltip]:hover::after,
-  html[lang="ar"] .controls-group [data-tooltip]:focus-visible::after {
-    transform: translateY(50%) scale(1) !important;
-    opacity: 1 !important;
-  }
-}
 
 @media screen and (min-width: 561px) and (max-width: 1080px) {
   /* ── Tablet Hero ── */

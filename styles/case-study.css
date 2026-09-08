@@ -176,41 +176,58 @@
 }
 
 .case-display-modes {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px;
   background: var(--surface);
-  border-color: var(--line);
+  border: 1px solid var(--soft-line);
+  border-radius: 12px;
 }
 
 .case-display-modes :is(.theme-toggle, .contrast-toggle) {
-  display: flex;
-  width: auto;
-  gap: 8px;
-  padding: 6px 10px;
-}
-
-.case-display-modes :is(.control-label, .control-state) {
+  display: inline-grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 9px;
+  background: transparent;
   color: var(--text);
+  box-shadow: none;
+  cursor: pointer;
+  transition:
+    background-color var(--motion-normal) var(--ease-standard),
+    border-color var(--motion-normal) var(--ease-standard),
+    color var(--motion-normal) var(--ease-standard),
+    transform var(--motion-fast) var(--ease-standard),
+    box-shadow var(--motion-normal) var(--ease-standard);
 }
 
-.case-display-modes .control-state {
-  display: none;
+.case-display-modes :is(.theme-toggle, .contrast-toggle):hover {
+  background: var(--pill-bg);
+  color: var(--blue);
+  border-color: var(--blue);
+  transform: translateY(-1px);
 }
 
-.case-display-modes .control-switch {
-  flex-shrink: 0;
-  background: #526174;
-  border-color: #526174;
+.case-display-modes :is(.theme-toggle, .contrast-toggle):focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
 }
 
-.case-display-modes [aria-checked="true"] .control-switch {
-  background: #2563eb;
+.case-display-modes :is(.theme-toggle, .contrast-toggle):active {
+  transform: scale(0.94);
 }
 
-.case-display-modes [aria-checked="true"] .control-switch > span {
-  translate: 18px 0;
-}
-
-[dir="rtl"] .case-display-modes [aria-checked="true"] .control-switch > span {
-  translate: -18px 0;
+.case-display-modes [aria-checked="true"] {
+  background: var(--pill-bg);
+  color: var(--blue);
+  border-color: var(--blue);
 }
 
 .case-listen-btn {

@@ -79,6 +79,19 @@
   box-shadow: none !important;
 }
 
+[data-contrast="high"] .portfolio-header :is(h1, .hero-bio, .tag-pill, .contact-card-title, .contact-label, .contact-desc, .control-label, .control-state) {
+  color: #fff !important;
+}
+
+[data-contrast="high"] .portfolio-header .hero-role {
+  color: #0ff !important;
+}
+
+[data-contrast="high"] .hero-contact-card {
+  background: #000 !important;
+  border: 2px solid #fff !important;
+}
+
 [data-contrast="high"] .control-switch {
   border: 2px solid #fff;
   background: #000;
@@ -353,44 +366,182 @@ html[lang] .controls-group [data-tooltip][data-tooltip-dismissed]::after {
   }
 }
 
-/* The hero stays dark even in the light page theme. */
-.portfolio-header .display-mode-group button:is(:hover, :focus-visible) {
-  background: #203e60;
-  border-color: #93c5fd;
+/* ── Dark Mode Hero Overrides ── */
+[data-theme="dark"] .portfolio-header {
+  color: #f0f6fc;
+  background:
+    radial-gradient(circle at 78% 22%, rgb(59 130 246 / 18%), transparent 28rem),
+    linear-gradient(145deg, #10223b 0%, #091422 48%, #07101d 100%);
+  border: 1px solid rgb(121 192 255 / 22%);
+  box-shadow: 0 24px 60px rgb(7 16 29 / 20%);
+}
+
+[data-theme="dark"] .portfolio-header .identity-copy h1 {
+  color: #f8fbff;
+}
+
+[data-theme="dark"] .portfolio-header .hero-role {
+  color: #60a5fa;
+}
+
+[data-theme="dark"] .portfolio-header .hero-bio {
+  color: #d5deeb;
+}
+
+[data-theme="dark"] .portfolio-header .avatar {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 7px rgb(59 130 246 / 10%), 0 20px 44px rgb(0 0 0 / 32%);
+}
+
+[data-theme="dark"] .portfolio-header .tag-pill {
+  background: rgb(255 255 255 / 4%);
+  border: 1px solid rgb(203 213 225 / 24%);
+  color: #dbe7f5;
+  box-shadow: none;
+}
+
+[data-theme="dark"] .portfolio-header .tag-pill:hover {
+  background: rgb(255 255 255 / 8%);
+  border-color: #79c0ff;
+  color: #79c0ff;
+}
+
+[data-theme="dark"] .portfolio-header .hero-contact-card {
+  background: rgb(255 255 255 / 4%);
+  border: 1px solid rgb(203 213 225 / 24%);
+  box-shadow: none;
+}
+
+[data-theme="dark"] .portfolio-header .contact-card-title {
+  color: #f8fbff;
+}
+
+[data-theme="dark"] .portfolio-header .contact-label {
+  color: #f0f6fc;
+}
+
+[data-theme="dark"] .portfolio-header .contact-desc {
+  color: #cbd5e1;
+}
+
+[data-theme="dark"] .portfolio-header .contact-item:hover,
+[data-theme="dark"] .portfolio-header .contact-item:focus-within {
+  background: rgb(255 255 255 / 7%);
+}
+
+[data-theme="dark"] .portfolio-header .contact-link-main:hover .contact-label,
+[data-theme="dark"] .portfolio-header .contact-link-main:focus-visible .contact-label {
+  color: #79c0ff;
+}
+
+[data-theme="dark"] .portfolio-header .language-selector {
+  background: rgb(7 16 29 / 24%);
+  border-color: rgb(203 213 225 / 18%);
+  color: #dbe7f5;
+}
+
+[data-theme="dark"] .portfolio-header .language-selector-icon {
+  color: #8fcaff;
+}
+
+[data-theme="dark"] .portfolio-header .language-option {
+  color: #aebdd0;
+}
+
+[data-theme="dark"] .portfolio-header .language-option:has(input:checked) {
+  background: #1d4f91;
   color: #fff;
+  box-shadow: inset 0 0 0 1px rgb(121 192 255 / 34%);
 }
 
-.portfolio-header .display-mode-group button:is(:hover, :focus-visible) .control-label {
+[data-theme="dark"] .portfolio-header .language-option:hover {
   color: #fff;
+  background: rgb(121 192 255 / 12%);
 }
 
-.portfolio-header .display-mode-group button:is(:hover, :focus-visible) .control-state {
-  color: #c5e3ff;
+[data-theme="dark"] .display-mode-group {
+  background: rgb(7 16 29 / 35%);
+  border-color: rgb(203 213 225 / 16%);
 }
 
-.portfolio-header .control-switch {
-  border-color: #b6c9df;
+[data-theme="dark"] .display-mode-group button {
+  color: #cbd5e1;
 }
 
-.case-display-modes button:is(:hover, :focus-visible) :is(.control-label, .control-state) {
-  color: var(--text);
+[data-theme="dark"] .display-mode-group button:hover {
+  background: rgb(255 255 255 / 8%);
+  color: #fff;
+  border-color: rgb(255 255 255 / 15%);
+  box-shadow: 0 2px 8px rgb(0 0 0 / 25%);
+}
+
+[data-theme="dark"] .display-mode-group button:focus-visible {
+  outline: 3px solid #60a5fa;
+  outline-offset: 2px;
+}
+
+[data-theme="dark"] .display-mode-group button[aria-checked="true"] {
+  background: rgb(37 99 235 / 24%);
+  color: #93c5fd;
+  border-color: #3b82f6;
+  box-shadow: 0 0 12px rgb(59 130 246 / 25%);
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  :where(.btn, .hero-cta, .audio-player-controls button):active {
-    transform: scale(0.98);
+  html,
+  body,
+  .resume-shell,
+  .portfolio-header,
+  .panel,
+  .case-study-card {
+    transition:
+      background-color 220ms ease,
+      color 220ms ease,
+      border-color 220ms ease,
+      box-shadow 220ms ease;
+  }
+
+  :where(
+    .btn,
+    .hero-cta,
+    .audio-player-controls button,
+    .device-btn,
+    .skill-btn,
+    .display-mode-group button,
+    .copy-button,
+    .pagination-card,
+    .case-nav-back-pill,
+    .language-option
+  ):active {
+    transform: scale(0.96);
     transition-duration: var(--motion-fast);
   }
 }
 
 @media (prefers-reduced-motion: no-preference) and (hover: hover) {
-  .project-card {
-    transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+  .project-card,
+  .panel,
+  .provenance-card,
+  .featured article {
+    transition:
+      transform 200ms ease,
+      box-shadow 200ms ease,
+      border-color 200ms ease;
   }
 
   .project-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 24px rgb(0 0 0 / 12%);
+    transform: translateY(-4px);
+    box-shadow: 0 14px 28px rgb(0 0 0 / 12%);
+  }
+
+  .panel:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgb(0 0 0 / 7%);
+  }
+
+  .provenance-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--blue);
   }
 
   .project-card:focus-within {
@@ -412,5 +563,16 @@ html[lang] .controls-group [data-tooltip][data-tooltip-dismissed]::after {
 
   .contact-link-main:hover .contact-icon {
     transform: translateY(-2px);
+  }
+
+  .skill-btn {
+    transition:
+      transform 160ms ease,
+      background-color 160ms ease,
+      border-color 160ms ease;
+  }
+
+  .skill-btn:hover {
+    transform: translateY(-1px);
   }
 }

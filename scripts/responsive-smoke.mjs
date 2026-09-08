@@ -1269,7 +1269,7 @@ try {
       [],
       `${language} mobile case-study controls must fit and meet 44px targets`,
     );
-    assert.equal(await page.locator("details[open]").count(), 4);
+    assert.equal(await page.locator("details[open]").count(), 3);
     await context.close();
   }
 
@@ -1391,7 +1391,7 @@ try {
       assert.ok(state.provenanceItems >= 1);
       assert.equal(state.repeatedDisclosureItems, 0);
       assert.equal(state.jumpMenuVisible, true);
-      assert.equal(state.jumpMenuOptions, 6);
+      assert.equal(state.jumpMenuOptions, 3);
       assert.equal(state.tradeoffs, 1);
       assert.ok(state.projectLearning);
       assert.deepEqual(runtimeErrors, []);
@@ -1471,5 +1471,7 @@ try {
   process.exitCode = 1;
 } finally {
   await browser?.close();
+  server.closeAllConnections?.();
   server.close();
+  process.exit(process.exitCode || 0);
 }

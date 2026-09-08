@@ -232,5 +232,7 @@ try {
   }
 } finally {
   await browser.close();
+  server.closeAllConnections?.();
   server.close();
+  process.exit(process.exitCode || 0);
 }

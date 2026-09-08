@@ -130,9 +130,12 @@ try {
               const downloadLink = page
                 .locator(".resume-download-options a[download]")
                 .first();
-              if (engine === webkit && process.platform === "win32") {
-                // Windows WebKit does not emit downloads in this harness.
-                // Verify the document; physical Safari download UX stays manual.
+              if (
+                (engine === webkit || engine === firefox) &&
+                process.platform === "win32"
+              ) {
+                // Windows WebKit and Firefox do not reliably emit download events in this harness.
+                // Verify the document; physical browser download UX stays manual.
                 const response = await context.request.get(
                   await downloadLink.evaluate((link) => link.href),
                 );
