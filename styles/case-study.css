@@ -14,10 +14,9 @@
 }
 
 .case-study-nav {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  align-items: center;
-  justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   gap: 12px;
   padding: 8px 0;
   background: transparent;
@@ -28,6 +27,7 @@
 }
 
 .case-nav-back-pill {
+  order: 2;
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -82,8 +82,7 @@
 
 /* Breadcrumbs inline in header */
 .case-study-breadcrumbs {
-  grid-column: 1 / -1;
-  grid-row: 2;
+  order: 3;
   flex: 1;
   min-width: 0;
   margin: 0;
@@ -138,12 +137,12 @@
   font-weight: 700;
 }
 
-/* Controls area with listen button */
 .case-study-controls {
+  order: 1;
   display: flex;
-  margin-inline-start: auto;
+  width: 100%;
   align-items: center;
-  gap: 24px;
+  gap: 12px;
   flex-wrap: wrap;
   justify-content: flex-end;
 }

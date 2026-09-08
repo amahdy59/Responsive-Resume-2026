@@ -364,13 +364,8 @@ try {
       assert.ok(state.heroTypeScale.bio <= 17);
       assert.equal(state.heroRows.modeCount, 2);
       assert.equal(state.heroRows.contactSingleRow, true);
-      assert.equal(state.heroRows.controlsSingleRow, scenario.width > 700);
-      assert.equal(
-        scenario.width > 700
-          ? state.heroRows.logicalOrder
-          : state.heroRows.stackedOrder,
-        true,
-      );
+      assert.equal(state.heroRows.controlsSingleRow, true);
+      assert.equal(state.heroRows.logicalOrder, true);
       if (scenario.width >= 1920) assert.ok(state.heroTypeScale.name >= 47);
       if (scenario.width <= 560) {
         assert.ok(
