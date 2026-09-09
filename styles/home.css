@@ -284,7 +284,7 @@
   border-radius: 999px;
   background: color-mix(in srgb, var(--blue) 9%, var(--surface));
   color: var(--link-aaa);
-  font-size: 0.66rem;
+  font-size: 0.8125rem;
   font-weight: 800;
   letter-spacing: 0.035em;
 }
@@ -363,7 +363,7 @@
   height: 36px;
   border-radius: 10px;
   color: #fff;
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
 }
 
 .contact-icon svg {
@@ -404,7 +404,7 @@
 }
 
 .contact-desc {
-  font-size: 0.76rem;
+  font-size: 0.8125rem;
   color: #475569;
   line-height: 1.2;
   margin-top: 2px;
@@ -612,7 +612,7 @@ html[lang="ar"] .external-arrow-icon {
 
 .control-label {
   display: block;
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   font-weight: 600;
   white-space: nowrap;
   color: #0f172a;
@@ -620,7 +620,7 @@ html[lang="ar"] .external-arrow-icon {
 
 .control-state {
   display: block;
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   color: var(--blue);
   white-space: nowrap;
 }
@@ -666,7 +666,7 @@ html[lang="ar"] .external-arrow-icon {
   padding: 0 10px;
   border-radius: 9px;
   color: #475569;
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   font-weight: 650;
   line-height: 1;
   cursor: pointer;
@@ -934,7 +934,7 @@ html[lang="ar"] .external-arrow-icon {
   margin: 0;
   padding: 0 0 6px;
   color: var(--muted);
-  font-size: 0.76rem;
+  font-size: 0.8125rem;
   font-weight: 500;
   line-height: 1.35;
   letter-spacing: 0.01em;
@@ -1264,7 +1264,7 @@ html[lang="ar"] .skill-group h3 {
   background: var(--date-bg);
   border: 1px solid var(--line);
   border-radius: 999px;
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
 }
 
 .li-location {
@@ -1358,7 +1358,7 @@ html[lang="ar"] .skill-group h3 {
 
 .li-duration {
   color: var(--blue);
-  font-size: 0.78rem;
+  font-size: 0.8125rem;
   font-weight: 500;
 }
 
@@ -1368,7 +1368,7 @@ html[lang="ar"] .skill-group h3 {
   gap: 4px;
   margin-top: 2px;
   color: var(--muted);
-  font-size: 0.78rem;
+  font-size: 0.8125rem;
 }
 
 .li-experience-content {
@@ -1385,7 +1385,7 @@ html[lang="ar"] .skill-group h3 {
 .employment-type-badge {
   display: inline-block;
   padding: 2px 10px;
-  font-size: 0.72rem;
+  font-size: 0.8125rem;
   font-weight: 600;
   color: var(--muted);
   background: var(--date-bg);
@@ -1412,7 +1412,7 @@ html[lang="ar"] .skill-group h3 {
   gap: 6px;
   margin: 0 0 10px;
   color: var(--blue);
-  font-size: 0.78rem;
+  font-size: 0.8125rem;
   font-weight: 700;
   letter-spacing: 0.02em;
 }
@@ -1455,7 +1455,7 @@ html[lang="ar"] .skill-group h3 {
 }
 
 .impact-label {
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   font-weight: 500;
   color: var(--muted);
   margin-top: 1px;
@@ -1463,7 +1463,7 @@ html[lang="ar"] .skill-group h3 {
 
 .impact-desc {
   margin: 8px 0 0;
-  font-size: 0.8rem;
+  font-size: 0.8125rem;
   color: var(--muted);
   line-height: 1.45;
 }
@@ -1479,7 +1479,7 @@ html[lang="ar"] .skill-group h3 {
   align-items: center;
   gap: 4px;
   padding: 4px 12px;
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   font-weight: 600;
   color: var(--blue);
   background: var(--pill-bg);
@@ -1502,7 +1502,7 @@ html[lang="ar"] .skill-group h3 {
   align-items: center;
   gap: 4px;
   padding: 4px 12px;
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   font-weight: 600;
   color: var(--blue);
   background: var(--pill-bg);
@@ -1667,7 +1667,7 @@ html[lang="ar"] .skill-group h3 {
 }
 
 .footer-title {
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   color: var(--muted);
 }
 
@@ -1683,7 +1683,7 @@ html[lang="ar"] .skill-group h3 {
   gap: 5px;
   padding: 6px 10px;
   border-radius: var(--radius-sm, 8px);
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   font-weight: 500;
   color: var(--muted);
   text-decoration: none;
@@ -1713,7 +1713,7 @@ html[lang="ar"] .skill-group h3 {
   padding: 8px 14px;
   border: 0;
   border-radius: var(--radius-sm, 8px);
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   font-weight: 600;
   color: var(--text);
   text-decoration: none;
@@ -1859,7 +1859,7 @@ html[lang="ar"] .skill-group h3 {
 }
 
 .footer-cta-card p {
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   color: var(--muted);
   line-height: 1.4;
 }
@@ -1868,7 +1868,7 @@ html[lang="ar"] .skill-group h3 {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-size: 0.8rem;
+  font-size: 0.8125rem;
   padding: 10px 18px;
   border-radius: var(--radius-sm, 8px);
   white-space: nowrap;

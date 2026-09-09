@@ -1655,7 +1655,10 @@ function setLanguage(lang, persist = true) {
   const staticLocale = document.body.dataset.staticLocale;
   if (persist && staticLocale && lang !== staticLocale) {
     window.resumePreferences.set(storageKeys.lang, lang);
-    location.assign(`/${lang}${document.body.dataset.staticPath || "/"}`);
+    const hash = location.hash || "";
+    location.assign(
+      `/${lang}${document.body.dataset.staticPath || "/"}${hash}`,
+    );
     return;
   }
   root.setAttribute("lang", lang);
@@ -2834,8 +2837,8 @@ function initCardSpotlight() {
         cancelAnimationFrame(frame);
         frame = requestAnimationFrame(() => {
           const rect = card.getBoundingClientRect();
-          const x = e.clientX - rect.left;
-          const y = e.clientY - rect.top;
+          const x = Math.max(0, Math.min(e.clientX - rect.left, rect.width));
+          const y = Math.max(0, Math.min(e.clientY - rect.top, rect.height));
           card.style.setProperty("--mouse-x", `${x}px`);
           card.style.setProperty("--mouse-y", `${y}px`);
         });
@@ -2857,7 +2860,6 @@ function initCardSpotlight() {
 
 initImageLightbox();
 initLiveEmbedViewer();
-initReadingProgressBar();
 initMetricCounters();
 initCardSpotlight();
 

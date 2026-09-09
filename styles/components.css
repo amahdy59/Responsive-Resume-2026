@@ -513,20 +513,20 @@ html[lang="ar"] .credential-meta {
 /* Skip link for keyboard accessibility */
 .skip-link {
   position: absolute;
-  top: -999px;
+  top: 0;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -100%);
   background: var(--blue);
   color: var(--page);
   padding: 10px 20px;
   border-radius: 0 0 8px 8px;
   z-index: 9999;
   font-weight: 600;
-  transition: top 200ms ease;
+  transition: transform 200ms ease;
 }
 
 .skip-link:focus-visible {
-  top: 0;
+  transform: translate(-50%, 0);
   outline: none;
   box-shadow: 0 4px 12px rgb(0 0 0 / 25%);
 }

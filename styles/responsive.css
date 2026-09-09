@@ -85,30 +85,11 @@
   }
 
   .display-mode-group > button {
-    width: 70px;
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
     min-height: 44px;
-    grid-template-columns: 24px 38px;
-    gap: 4px;
-    padding: 2px;
-  }
-
-  .display-mode-group > button .control-label,
-  .display-mode-group > button .control-state {
-    display: none;
-  }
-
-  .display-mode-group > button .control-switch {
-    grid-column: 2;
-    grid-row: 1;
-    width: 38px;
-  }
-
-  .controls-group [role="switch"][aria-checked="true"] .control-switch > span {
-    translate: 14px 0;
-  }
-
-  [dir="rtl"] .controls-group [role="switch"][aria-checked="true"] .control-switch > span {
-    translate: -14px 0;
+    padding: 0;
   }
 }
 
@@ -269,6 +250,7 @@
     border-right: none;
     scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
+    mask-image: linear-gradient(to right, transparent 0, #000 16px, #000 calc(100% - 16px), transparent 100%);
   }
 
   .section-nav::-webkit-scrollbar {
@@ -278,7 +260,7 @@
   .section-nav a,
   .section-nav-link {
     padding: 8px 12px;
-    font-size: 0.8rem;
+    font-size: 0.8125rem;
     min-height: 44px;
   }
 

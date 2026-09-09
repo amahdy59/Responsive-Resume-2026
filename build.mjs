@@ -236,7 +236,7 @@ function rewriteAssetReferences(document, mapping, bundleNames) {
   // Discover the active font early to reduce layout movement during font swap.
   const fonts =
     document.documentElement.lang === "ar"
-      ? ["noto-sans-arabic-arabic", "noto-sans-arabic-latin"]
+      ? ["noto-sans-arabic-arabic"]
       : ["inter-latin"];
   for (const font of fonts) {
     const preload = document.createElement("link");
