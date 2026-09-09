@@ -2346,15 +2346,9 @@ function initCaseSectionNavigation() {
 function initSectionNavigation() {
   const nav = document.querySelector(".section-nav");
   const sentinel = document.getElementById("nav-sentinel");
-  let cachedNavRect = null;
-  const invalidateNavRect = () => {
-    cachedNavRect = null;
-  };
-
   if (nav && sentinel && "IntersectionObserver" in window) {
     const stickyObserver = new IntersectionObserver(
       ([entry]) => {
-        invalidateNavRect();
         nav.classList.toggle("is-stuck", !entry.isIntersecting);
       },
       { threshold: [0], rootMargin: "-12px 0px 0px 0px" },
@@ -2380,18 +2374,18 @@ function initSectionNavigation() {
   const prefersReducedMotion = () =>
     window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  let isUserClick = false;
+  let clickTimeout = 0;
   let moveFrame = 0;
+
   function moveIndicatorTo(targetLink, immediate = false) {
     if (!targetLink || !indicator) return;
     cancelAnimationFrame(moveFrame);
     moveFrame = requestAnimationFrame(() => {
-      if (!cachedNavRect) {
-        cachedNavRect = nav.getBoundingClientRect();
-      }
-      const navRect = cachedNavRect;
-      const linkRect = targetLink.getBoundingClientRect();
-      const x = linkRect.left - navRect.left - nav.clientLeft + nav.scrollLeft;
-      const y = linkRect.top - navRect.top - nav.clientTop;
+      const x = targetLink.offsetLeft;
+      const y = targetLink.offsetTop;
+      const w = targetLink.offsetWidth;
+      const h = targetLink.offsetHeight;
 
       if (immediate || prefersReducedMotion()) {
         indicator.style.transition = "none";
@@ -2399,9 +2393,9 @@ function initSectionNavigation() {
         indicator.style.transition = "";
       }
 
-      indicator.style.transform = `translate3d(${Math.round(x)}px, ${Math.round(y)}px, 0)`;
-      indicator.style.width = `${Math.round(linkRect.width)}px`;
-      indicator.style.height = `${Math.round(linkRect.height)}px`;
+      indicator.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+      indicator.style.width = `${w}px`;
+      indicator.style.height = `${h}px`;
       indicator.style.opacity = "1";
 
       if (immediate) {
@@ -2436,6 +2430,7 @@ function initSectionNavigation() {
   if (targets.length && "IntersectionObserver" in window) {
     const observer = new IntersectionObserver(
       (entries) => {
+        if (isUserClick) return;
         const visible = entries
           .filter((entry) => entry.isIntersecting)
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
@@ -2450,6 +2445,11 @@ function initSectionNavigation() {
 
   for (const link of links) {
     link.addEventListener("click", () => {
+      isUserClick = true;
+      clearTimeout(clickTimeout);
+      clickTimeout = setTimeout(() => {
+        isUserClick = false;
+      }, 900);
       setCurrent(link.hash.slice(1));
       moveIndicatorTo(link);
     });
@@ -2467,7 +2467,6 @@ function initSectionNavigation() {
   nav.addEventListener(
     "scroll",
     () => {
-      invalidateNavRect();
       moveIndicatorTo(getActiveLink(), true);
     },
     { passive: true },
@@ -2476,7 +2475,6 @@ function initSectionNavigation() {
   window.addEventListener(
     "resize",
     () => {
-      invalidateNavRect();
       moveIndicatorTo(getActiveLink(), true);
     },
     { passive: true },
@@ -2484,7 +2482,6 @@ function initSectionNavigation() {
 
   if ("ResizeObserver" in window) {
     const ro = new ResizeObserver(() => {
-      invalidateNavRect();
       moveIndicatorTo(getActiveLink(), true);
     });
     ro.observe(nav);
