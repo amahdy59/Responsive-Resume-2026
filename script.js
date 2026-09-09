@@ -83,11 +83,11 @@ const translations = {
     aria_switch_to_arabic: "التبديل إلى العربية",
     aria_switch_to_english: "التبديل إلى الإنجليزية",
     cert1: "تحليل البيانات من جوجل (Google Data Analytics)",
-    cert1_meta: "جوجل · 2024",
-    cert2_meta: "شريك التعلّم Tableau · 2024",
-    cert3_meta: "جامعة ماكواري · 2024",
-    cert4_meta: "جامعة ماكواري · 2024",
-    cert5_meta: "جوجل · 2023",
+    cert1_meta: "جوجل · ٢٠٢٤",
+    cert2_meta: "شريك التعلّم Tableau · ٢٠٢٤",
+    cert3_meta: "جامعة ماكواري · ٢٠٢٤",
+    cert4_meta: "جامعة ماكواري · ٢٠٢٤",
+    cert5_meta: "جوجل · ٢٠٢٣",
     cert1_desc:
       "بناء مهارات جاهزة لسوق العمل في تنظيف البيانات والتحليل والتصوير المرئي واتخاذ القرارات المستندة إلى البيانات.",
     cert2_desc:
@@ -132,17 +132,17 @@ const translations = {
     display_settings_label: "إعدادات العرض",
     display_modes_label: "أوضاع العرض",
     edu1_badge: "دبلوم",
-    edu1_date: "سبتمبر 2016 - يونيو 2017",
+    edu1_date: "سبتمبر ٢٠١٦ - يونيو ٢٠١٧",
     edu1_desc:
       "تخصص في التصميم التعليمي ومنهجيات التعلم الإلكتروني وحلول تكنولوجيا التعليم.",
     edu1_school: "معهد تكنولوجيا المعلومات (ITI)",
     edu1_title: "دبلوم في تقنيات التعليم وتكنولوجيا المعلومات",
     edu2_badge: "بكالوريوس",
-    edu2_date: "سبتمبر 2009 - يونيو 2013",
+    edu2_date: "سبتمبر ٢٠٠٩ - يونيو ٢٠١٣",
     edu2_desc: "دراسة الاتصال الإذاعي والإنتاج الإعلامي والسرد البصري.",
     edu2_school: "جامعة المنوفية",
     edu2_title: "بكالوريوس في الإذاعة والتلفزيون",
-    exp_tag: "خبرة +8 سنوات",
+    exp_tag: "خبرة ٨+ سنوات",
     footer_cta: "لنعمل معاً",
     footer_email: "راسل أحمد",
     footer_text:
@@ -161,9 +161,9 @@ const translations = {
     job1_company: "أدفانسيز للحلول البرمجية",
     job1_company_desc:
       "شركة رائدة في حلول تكنولوجيا المعلومات متخصصة في البرمجيات المؤسسية والتحول الرقمي وتكامل الأنظمة في منطقة الشرق الأوسط وشمال أفريقيا.",
-    job1_date: "يناير 2023 - الحالي",
-    job1_date_range: "يناير 2023 – الحالي",
-    job1_duration: "3 سنوات و6 أشهر",
+    job1_date: "يناير ٢٠٢٣ - الحالي",
+    job1_date_range: "يناير ٢٠٢٣ – الحالي",
+    job1_duration: "٣ سنوات و٦ أشهر",
     job1_location: "القاهرة، مصر",
     job1_type: "دوام كامل",
     job1_title: "مصمم تجربة المستخدم",
@@ -182,15 +182,15 @@ const translations = {
     key_impact: "الأثر الرئيسي",
     jobs_subtitle: "أماكن عملي والأثر الذي قدمته",
     job2_b1:
-      "إعادة تصميم منصات وواجهات التعلم المؤسسية، مما زاد من تفاعل المستخدمين ومعدلات إكمال التدريب بنسبة 30%.",
+      "إعادة تصميم منصات وواجهات التعلم المؤسسية، مما زاد من تفاعل المستخدمين ومعدلات إكمال التدريب بنسبة ٣٠٪.",
     job2_b2:
       "تحويل المتطلبات التقنية المعقدة إلى تجارب تعلم إلكترونية B2B سهلة الوصول وبديهية.",
     job2_company: "شنايدر إلكتريك",
     job2_company_desc:
       "شركة عالمية رائدة في إدارة الطاقة والأتمتة، تقود التحول الرقمي عبر الحلول المؤسسية والصناعية.",
-    job2_date: "يوليو 2018 - يناير 2023",
-    job2_date_range: "يوليو 2018 – يناير 2023",
-    job2_duration: "4 سنوات و7 أشهر",
+    job2_date: "يوليو ٢٠١٨ - يناير ٢٠٢٣",
+    job2_date_range: "يوليو ٢٠١٨ – يناير ٢٠٢٣",
+    job2_duration: "٤ سنوات و٧ أشهر",
     job2_location: "القاهرة، مصر",
     job2_type: "دوام كامل",
     job2_title: "مصمم تعليمي",
@@ -281,7 +281,7 @@ const translations = {
     skill_level_proficient: "إتقان",
     skill_level_advanced: "متقدم",
     skill_level_expert: "خبير",
-    skill_tool1: "مايكروسوفت 365",
+    skill_tool1: "مايكروسوفت ٣٦٥",
     skill_tool2: "جوجل Workspace",
     skill_tool3: "Looker Studio",
     skill_tool4: "Git و GitHub",
@@ -346,7 +346,7 @@ const translations = {
     cs_visit_live: "عرض المشروع الحي",
     cs_visit_dashboard: "فتح لوحة البيانات",
     cs_desktop: "سطح المكتب",
-    cs_mobile: "الجوال (390px)",
+    cs_mobile: "الجوال (٣٩٠ بكسل)",
     cs_open_tab: "فتح في نافذة جديدة",
     cs_key_decision: "قرار التصميم الرئيسي",
     cs_listen_full: "استمع إلى دراسة الحالة",
@@ -355,7 +355,7 @@ const translations = {
     cs_open_live: "فتح الموقع الحي",
     cs_view_prototype: "معاينة الموقع الحي",
     cs_hover_expand: "فتح معاينة الصورة",
-    cs_a11y_note: "مصمم مع مراعاة إمكانية الوصول، WCAG 2.2، والأداء.",
+    cs_a11y_note: "مصمم مع مراعاة إمكانية الوصول، WCAG ٢.٢، والأداء.",
     cs_sec1_short: "التحدي والسياق",
     cs_sec2_short: "الحل والتنفيذ",
     cs_sec3_short: "الأثر والدروس المستفادة",
@@ -381,7 +381,7 @@ const translations = {
       "يختصر تصور الدفع مسار الشراء. ولم يُقَس أثره على معدل التحويل بعد.",
     cs_haj_sec4_card3_title: "تنفيذ متجاوب",
     cs_haj_sec4_card3_desc:
-      "تنفيذ يبدأ بالجوال، مع تفاعل بلوحة المفاتيح ومؤشرات تركيز واضحة وتخطيطات متجاوبة تسترشد بمعايير WCAG 2.2.",
+      "تنفيذ يبدأ بالجوال، مع تفاعل بلوحة المفاتيح ومؤشرات تركيز واضحة وتخطيطات متجاوبة تسترشد بمعايير WCAG ٢.٢.",
     cs_prev_project: "المشروع السابق",
     cs_next_project: "المشروع التالي",
     cs_sec1_title: "التحدي والسياق",
@@ -439,13 +439,13 @@ const translations = {
     cs_haj_sub:
       "واجهة متجر إلكتروني مصممة للجوال أولاً تتميز بتنقل قائم على البحث وتجربة دفع سريعة من خطوتين.",
     cs_haj_role: "مصمم تجربة المستخدم",
-    cs_haj_timeline: "3 أشهر",
+    cs_haj_timeline: "٣ أشهر",
     cs_haj_platform: "تطبيق ويب للجوال",
     cs_haj_status: "تنفيذ تفاعلي مباشر",
     cs_haj_sec1_desc:
       "ركز موجز التصميم على تبسيط تصنيفات الجوال المتشعبة ومسار دفع طويل كان يتطلب إنشاء حساب.",
     cs_haj_sec2_desc:
-      "تم تخطيط رحلة التسوق المقصودة وتصميم تنقل يركز على البحث، ودفع للزائر، وأهداف لمس بارزة بقياس 44 بكسل مسترشدة بمعايير WCAG 2.2 ذات الصلة.",
+      "تم تخطيط رحلة التسوق المقصودة وتصميم تنقل يركز على البحث، ودفع للزائر، وأهداف لمس بارزة بقياس ٤٤ بكسل مسترشدة بمعايير WCAG ٢.٢ ذات الصلة.",
     cs_haj_sec2_callout:
       "جُمعت خمس مراحل للواجهة في مفهوم دفع واحد قائم على الأكورديون مع إكمال العنوان وتفصيل واضح للتكلفة.",
     cs_haj_sec4_desc:
@@ -461,7 +461,7 @@ const translations = {
     cs_cairo_sub:
       "تصور للوحة قيادة وتحكم تشغيلية ينظم مؤشرات المدارج ودقة المواعيد والخدمات الأرضية في عرض متجاوب واحد.",
     cs_cairo_role: "مصمم تجربة المستخدم ومصور البيانات",
-    cs_cairo_timeline: "4 أشهر",
+    cs_cairo_timeline: "٤ أشهر",
     cs_cairo_platform: "Tableau Desktop و Cloud",
     cs_cairo_status: "تنفيذ تفاعلي مباشر",
     cs_cairo_sec1_desc:
@@ -483,7 +483,7 @@ const translations = {
     cs_hr_sub:
       "منصة شاملة لإدارة القوى العاملة تعمل على تبسيط طلبات الإجازات ومراجعات الأداء وجداول نوبات الأقسام.",
     cs_hr_role: "مصمم تجربة المستخدم",
-    cs_hr_timeline: "4 أشهر",
+    cs_hr_timeline: "٤ أشهر",
     cs_hr_platform: "تطبيق ويب سحابي (SaaS)",
     cs_hr_status: "تنفيذ تفاعلي مباشر",
     cs_hr_sec1_desc:
@@ -544,7 +544,7 @@ const translations = {
     cs_metric_cairo_2: "نطاقات القياس عن بُعد للعمليات",
     cs_metric_cairo_3: "تغطية كاملة لجميع الشاشات",
     cs_metric_haj_1: "دمج مراحل إتمام الطلب إلى مرحلة واحدة",
-    cs_metric_haj_2: "الحد الأدنى لمساحة اللمس (44 بكسل)",
+    cs_metric_haj_2: "الحد الأدنى لمساحة اللمس (٤٤ بكسل)",
     cs_metric_haj_3: "مسار الوصول للمنتج وإضافته للسلة",
     cs_metric_hr_1: "تسريع تدفق اعتماد الإجازات",
     cs_metric_hr_2: "امتثال الخصوصية المعتمد على الأدوار",
@@ -555,6 +555,35 @@ const translations = {
     cs_metric_lego_1: "سنوات من بيانات الكتالوج التي تم تحليلها",
     cs_metric_lego_2: "مجموعات ليغو مصنفة ومحللة بدقة",
     cs_metric_lego_3: "تصفية تفاعلية متقاطعة للبيانات",
+    cs_sec_num_1: "٠١",
+    cs_sec_num_2: "٠٢",
+    cs_sec_num_3: "٠٣",
+    certs_count: "٥",
+    cs_unit_percent: "٪",
+    cs_unit_ads: "إعلانات",
+    cs_unit_modes: "أنماط",
+    cs_unit_min: "دقيقة",
+    cs_unit_zones: "مناطق",
+    cs_unit_to_1: "إلى ١",
+    cs_unit_px: "بكسل",
+    cs_unit_clicks: "نقرات",
+    cs_unit_training: "تدريب",
+    cs_unit_plus: "+",
+    cs_metric_azkar_1_val: "١٠٠٪",
+    cs_metric_azkar_2_val: "٠ إعلانات",
+    cs_metric_azkar_3_val: "٣ أنماط",
+    cs_metric_cairo_1_val: "٤٥ دقيقة",
+    cs_metric_cairo_2_val: "٤ مناطق",
+    cs_metric_cairo_3_val: "١٠٠٪",
+    cs_metric_haj_1_val: "٥ إلى ١",
+    cs_metric_haj_2_val: "٤٤ بكسل",
+    cs_metric_haj_3_val: "٣ نقرات",
+    cs_metric_hr_1_val: "٦٠٪",
+    cs_metric_hr_2_val: "١٠٠٪",
+    cs_metric_hr_3_val: "٠ تدريب",
+    cs_metric_lego_1_val: "٧٠+",
+    cs_metric_lego_2_val: "١٠٬٠٠٠+",
+    cs_metric_lego_3_val: "١٠٠٪",
   },
   en: {
     toast_failed: "Could not copy. You can copy this text manually:",
@@ -1051,6 +1080,35 @@ const translations = {
     cs_metric_lego_1: "Years of catalog data analyzed",
     cs_metric_lego_2: "LEGO sets cataloged & parsed",
     cs_metric_lego_3: "Interactive cross-filtering",
+    cs_sec_num_1: "01",
+    cs_sec_num_2: "02",
+    cs_sec_num_3: "03",
+    certs_count: "5",
+    cs_unit_percent: "%",
+    cs_unit_ads: "ads",
+    cs_unit_modes: "modes",
+    cs_unit_min: "min",
+    cs_unit_zones: "zones",
+    cs_unit_to_1: "to 1",
+    cs_unit_px: "px",
+    cs_unit_clicks: "clicks",
+    cs_unit_training: "training",
+    cs_unit_plus: "+",
+    cs_metric_azkar_1_val: "100%",
+    cs_metric_azkar_2_val: "0 ads",
+    cs_metric_azkar_3_val: "3 modes",
+    cs_metric_cairo_1_val: "45 min",
+    cs_metric_cairo_2_val: "4 zones",
+    cs_metric_cairo_3_val: "100%",
+    cs_metric_haj_1_val: "5 to 1",
+    cs_metric_haj_2_val: "44px",
+    cs_metric_haj_3_val: "3 clicks",
+    cs_metric_hr_1_val: "60%",
+    cs_metric_hr_2_val: "100%",
+    cs_metric_hr_3_val: "0 training",
+    cs_metric_lego_1_val: "70+",
+    cs_metric_lego_2_val: "10,000+",
+    cs_metric_lego_3_val: "100%",
   },
 };
 
@@ -1071,6 +1129,53 @@ function getCurrentLanguage() {
  */
 function getTranslation(lang, key, fallback = "") {
   return translations[lang]?.[key] ?? fallback;
+}
+
+const EASTERN_ARABIC_DIGITS = [
+  "٠",
+  "١",
+  "٢",
+  "٣",
+  "٤",
+  "٥",
+  "٦",
+  "٧",
+  "٨",
+  "٩",
+];
+
+/**
+ * Converts Western digits to Eastern Arabic numerals while preserving email addresses.
+ * @param {string|number} str
+ * @returns {string}
+ */
+function toArabicNumerals(str) {
+  if (str === null || str === undefined) return "";
+  const text = String(str);
+  return text.replace(
+    /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}|(\d)/g,
+    (match, digit) => {
+      if (digit !== undefined) return EASTERN_ARABIC_DIGITS[Number(digit)];
+      return match;
+    },
+  );
+}
+
+/**
+ * Formats a number according to language, using Eastern Arabic numerals for 'ar'.
+ * @param {number} val
+ * @param {'en'|'ar'} lang
+ * @returns {string}
+ */
+function formatCounterNumber(val, lang) {
+  if (lang === "ar") {
+    try {
+      return val.toLocaleString("ar-EG");
+    } catch {
+      return toArabicNumerals(val.toLocaleString("en-US"));
+    }
+  }
+  return val.toLocaleString("en-US");
 }
 
 /**
@@ -1503,6 +1608,18 @@ function refreshUi(lang) {
     backToTop.setAttribute("aria-label", label);
     backToTop.setAttribute("title", label);
   }
+  document.querySelectorAll("[data-counter-target]").forEach((el) => {
+    const target = Number.parseInt(
+      el.getAttribute("data-counter-target") || "0",
+      10,
+    );
+    if (Number.isNaN(target)) return;
+    if (el.dataset.animated === "true") {
+      el.textContent = formatCounterNumber(target, lang);
+    } else {
+      el.textContent = lang === "ar" ? "٠" : "0";
+    }
+  });
   refreshCaseSectionJump(lang);
   window.AntigravityAudio?.refreshLabels?.();
 }
@@ -2662,7 +2779,8 @@ function initMetricCounters() {
           if (Number.isNaN(target)) continue;
 
           if (prefersReducedMotion) {
-            el.textContent = target.toLocaleString();
+            el.textContent = formatCounterNumber(target, getCurrentLanguage());
+            el.dataset.animated = "true";
             continue;
           }
 
@@ -2674,12 +2792,19 @@ function initMetricCounters() {
             const progress = Math.min(elapsed / duration, 1);
             const ease = progress === 1 ? 1 : 1 - 2 ** (-10 * progress);
             const currentVal = Math.round(target * ease);
-            el.textContent = currentVal.toLocaleString();
+            el.textContent = formatCounterNumber(
+              currentVal,
+              getCurrentLanguage(),
+            );
 
             if (progress < 1) {
               requestAnimationFrame(animate);
             } else {
-              el.textContent = target.toLocaleString();
+              el.textContent = formatCounterNumber(
+                target,
+                getCurrentLanguage(),
+              );
+              el.dataset.animated = "true";
             }
           };
 

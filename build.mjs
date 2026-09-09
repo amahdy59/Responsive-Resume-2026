@@ -188,6 +188,17 @@ function localizeDocument(document, language, translations, page) {
     .querySelector('meta[property="twitter:description"]')
     ?.setAttribute("content", description);
 
+  if (language === "ar") {
+    document.querySelectorAll("[data-counter-target]").forEach((el) => {
+      const target = Number.parseInt(
+        el.getAttribute("data-counter-target") || "0",
+        10,
+      );
+      if (!Number.isNaN(target)) {
+        el.textContent = "٠";
+      }
+    });
+  }
   if (language === "ar" && page.key) {
     document.querySelectorAll(".audio-play-btn").forEach((button) => {
       const heading =

@@ -253,9 +253,14 @@
   function updatePosition() {
     if (!player) return;
     const index = playlist.indexOf(currentBtn);
+    const isAr = document.documentElement.lang === "ar";
+    const toArDigits = (num) =>
+      String(num).replace(/\d/g, (d) => "٠١٢٣٤٥٦٧٨٩"[d]);
+    const currentNum = isAr ? toArDigits(index + 1) : index + 1;
+    const totalNum = isAr ? toArDigits(playlist.length) : playlist.length;
     player.querySelector("[data-audio-position]").textContent =
       index >= 0
-        ? `${copy().section} ${index + 1} ${copy().of} ${playlist.length}`
+        ? `${copy().section} ${currentNum} ${copy().of} ${totalNum}`
         : "";
   }
 
