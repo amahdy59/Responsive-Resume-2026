@@ -540,6 +540,21 @@ const translations = {
       "تقديم بيئة استكشافية ممتعة تجمع بين الفضول التفاعلي ورواية القصص عبر علم البيانات.",
     cs_lego_sec5_desc:
       "تم استعراض التقرير التفاعلي في مجتمعات تصميم البيانات. وستتضمن التحديثات المستقبلية تتبع أسعار سوق إعادة البيع الحي.",
+    cs_metric_cairo_1: "مهلة التحذير المبكر لرحلات الطيران",
+    cs_metric_cairo_2: "نطاقات القياس عن بُعد للعمليات",
+    cs_metric_cairo_3: "تغطية كاملة لجميع الشاشات",
+    cs_metric_haj_1: "دمج مراحل إتمام الطلب إلى مرحلة واحدة",
+    cs_metric_haj_2: "الحد الأدنى لمساحة اللمس (44 بكسل)",
+    cs_metric_haj_3: "مسار الوصول للمنتج وإضافته للسلة",
+    cs_metric_hr_1: "تسريع تدفق اعتماد الإجازات",
+    cs_metric_hr_2: "امتثال الخصوصية المعتمد على الأدوار",
+    cs_metric_hr_3: "واجهة واضحة بدون الحاجة لتدريب",
+    cs_metric_azkar_1: "عمل كامل بدون إنترنت مع خصوصية تامة",
+    cs_metric_azkar_2: "قراءة هادئة خالية من الإعلانات",
+    cs_metric_azkar_3: "أنماط النهار، منتصف الليل والتباين العالي",
+    cs_metric_lego_1: "سنوات من بيانات الكتالوج التي تم تحليلها",
+    cs_metric_lego_2: "مجموعات ليغو مصنفة ومحللة بدقة",
+    cs_metric_lego_3: "تصفية تفاعلية متقاطعة للبيانات",
   },
   en: {
     toast_failed: "Could not copy. You can copy this text manually:",
@@ -1021,6 +1036,21 @@ const translations = {
       "Created an engaging, analytical playground that bridges playful curiosity with data science storytelling.",
     cs_lego_sec5_desc:
       "Interactive report showcased to data design communities. Future updates will incorporate real-time secondary market resale feeds.",
+    cs_metric_cairo_1: "Early warning lead time",
+    cs_metric_cairo_2: "Operational telemetry zones",
+    cs_metric_cairo_3: "Responsive viewport coverage",
+    cs_metric_haj_1: "Checkout stages consolidated",
+    cs_metric_haj_2: "Minimum touch target standard",
+    cs_metric_haj_3: "Product-to-cart journey",
+    cs_metric_hr_1: "Faster leave approval flow",
+    cs_metric_hr_2: "Role-based privacy compliance",
+    cs_metric_hr_3: "Self-explanatory onboarding",
+    cs_metric_azkar_1: "Offline capability & privacy",
+    cs_metric_azkar_2: "Calm, distraction-free reading",
+    cs_metric_azkar_3: "Light, Midnight & High Contrast",
+    cs_metric_lego_1: "Years of catalog data analyzed",
+    cs_metric_lego_2: "LEGO sets cataloged & parsed",
+    cs_metric_lego_3: "Interactive cross-filtering",
   },
 };
 
@@ -2519,8 +2549,101 @@ function initLiveEmbedViewer() {
   });
 }
 
+/* ── Interactive Metric Counters ── */
+function initMetricCounters() {
+  const counterElements = document.querySelectorAll("[data-counter-target]");
+  if (!counterElements.length) return;
+
+  const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
+
+  const observer = new IntersectionObserver(
+    (entries, obs) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          obs.unobserve(el);
+          const target = Number.parseInt(
+            el.getAttribute("data-counter-target") || "0",
+            10,
+          );
+          if (Number.isNaN(target)) continue;
+
+          if (prefersReducedMotion) {
+            el.textContent = target.toLocaleString();
+            continue;
+          }
+
+          const duration = 1200;
+          const startTime = performance.now();
+
+          const animate = (currentTime) => {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            const ease = progress === 1 ? 1 : 1 - 2 ** (-10 * progress);
+            const currentVal = Math.round(target * ease);
+            el.textContent = currentVal.toLocaleString();
+
+            if (progress < 1) {
+              requestAnimationFrame(animate);
+            } else {
+              el.textContent = target.toLocaleString();
+            }
+          };
+
+          requestAnimationFrame(animate);
+        }
+      }
+    },
+    { threshold: 0.2 },
+  );
+
+  for (const el of counterElements) {
+    observer.observe(el);
+  }
+}
+
+/* ── Card Spotlight & Subtle Tilt Effect ── */
+function initCardSpotlight() {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+
+  const cards = document.querySelectorAll(".project-card");
+  for (const card of cards) {
+    let frame = 0;
+    card.addEventListener(
+      "pointermove",
+      (e) => {
+        cancelAnimationFrame(frame);
+        frame = requestAnimationFrame(() => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          card.style.setProperty("--mouse-x", `${x}px`);
+          card.style.setProperty("--mouse-y", `${y}px`);
+        });
+      },
+      { passive: true },
+    );
+
+    card.addEventListener(
+      "pointerleave",
+      () => {
+        cancelAnimationFrame(frame);
+        card.style.setProperty("--mouse-x", "-500px");
+        card.style.setProperty("--mouse-y", "-500px");
+      },
+      { passive: true },
+    );
+  }
+}
+
 initImageLightbox();
 initLiveEmbedViewer();
+initReadingProgressBar();
+initMetricCounters();
+initCardSpotlight();
 
 // Failed artwork must not become an empty zoom control or hide project context.
 document

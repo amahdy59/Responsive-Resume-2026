@@ -730,6 +730,83 @@
   margin: 0;
 }
 
+/* ── Case Metrics Grid ── */
+.case-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
+  gap: 14px;
+  margin: 20px 0;
+}
+
+.case-metric-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 16px 18px;
+  background: var(--surface-soft, rgb(0 0 0 / 2%));
+  border: 1px solid var(--soft-line, rgb(0 0 0 / 8%));
+  border-radius: 12px;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease;
+}
+
+.case-metric-card:hover {
+  border-color: color-mix(in srgb, var(--blue) 40%, var(--soft-line));
+  transform: translateY(-2px);
+}
+
+.case-metric-val-row {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  line-height: 1;
+}
+
+.case-metric-value {
+  font-size: clamp(1.75rem, 3.5vw, 2.25rem);
+  font-weight: 800;
+  color: var(--blue);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+.case-metric-unit {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.case-metric-label {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+[data-theme="dark"] .case-metric-card {
+  background: rgb(255 255 255 / 3%);
+  border-color: rgb(255 255 255 / 8%);
+}
+
+[data-theme="dark"] .case-metric-value {
+  color: var(--accent, #60a5fa);
+}
+
+[data-contrast="high"] .case-metric-card {
+  border: 2px solid #fff;
+  background: #000;
+}
+
+[data-contrast="high"] .case-metric-value {
+  color: #0ff !important;
+}
+
+[data-contrast="high"] .case-metric-unit,
+[data-contrast="high"] .case-metric-label {
+  color: #fff !important;
+}
+
 /* ── Accessibility Note ── */
 .case-a11y-note {
   display: flex;

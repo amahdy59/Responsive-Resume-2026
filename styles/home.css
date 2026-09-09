@@ -916,6 +916,7 @@ html[lang="ar"] .skill-group h3 {
   text-transform: none;
 }
 
+
 /* ── Project Cards ── */
 .project-card {
   position: relative;
@@ -925,9 +926,43 @@ html[lang="ar"] .skill-group h3 {
   overflow: hidden;
   box-shadow: 0 4px 16px rgb(0 0 0 / 6%);
   transition:
-    transform 220ms ease,
+    opacity 240ms ease,
+    transform 240ms ease,
     box-shadow 220ms ease,
     border-color 220ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .project-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(
+      450px circle at var(--mouse-x, -500px) var(--mouse-y, -500px),
+      rgb(22 94 240 / 8%),
+      transparent 70%
+    );
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    z-index: 1;
+  }
+
+  [data-theme="dark"] .project-card::before {
+    background: radial-gradient(
+      450px circle at var(--mouse-x, -500px) var(--mouse-y, -500px),
+      rgb(59 130 246 / 15%),
+      transparent 70%
+    );
+  }
+
+  [data-contrast="high"] .project-card::before {
+    display: none;
+  }
+
+  .project-card:hover::before {
+    opacity: 1;
+  }
 }
 
 .project-card:hover,
