@@ -144,11 +144,23 @@
 
 .hero-btn-work {
   white-space: normal;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease;
 }
 
 .hero-btn-work:hover,
 .hero-btn-work:focus-visible {
   text-decoration: none;
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .hero-btn-work:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgb(0 94 135 / 24%);
+  }
 }
 
 .hero-btn-work .btn-icon {
@@ -183,7 +195,12 @@
 .hero-btn-resume:focus-visible {
   color: var(--blue);
   text-decoration: underline;
-  transform: none;
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .hero-btn-resume:hover {
+    transform: translateY(-1px);
+  }
 }
 
 [data-theme="dark"] .hero-btn-resume:hover,
@@ -742,12 +759,11 @@ html[lang="ar"] .external-arrow-icon {
   box-shadow: 0 1px 3px rgb(0 0 0 / 6%);
   pointer-events: none;
   opacity: 0;
-  will-change: transform, width, height;
+  will-change: transform, width;
   transition:
-    transform 280ms cubic-bezier(0.2, 0, 0, 1),
-    width 280ms cubic-bezier(0.2, 0, 0, 1),
-    height 280ms cubic-bezier(0.2, 0, 0, 1),
-    opacity 150ms ease;
+    transform var(--motion-slow, 260ms) var(--ease-standard, cubic-bezier(0.2, 0, 0, 1)),
+    width var(--motion-slow, 260ms) var(--ease-standard, cubic-bezier(0.2, 0, 0, 1)),
+    opacity var(--motion-fast, 120ms) ease;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -773,10 +789,10 @@ html[lang="ar"] .external-arrow-icon {
   font-weight: 700;
   text-decoration: none;
   transition:
-    background-color 150ms ease,
-    color 150ms ease,
-    box-shadow 150ms ease,
-    transform 150ms ease;
+    color var(--motion-fast, 120ms) ease,
+    background-color var(--motion-fast, 120ms) ease,
+    box-shadow var(--motion-fast, 120ms) ease,
+    transform var(--motion-fast, 120ms) ease;
 }
 
 .section-nav.has-indicator a,
@@ -801,6 +817,19 @@ html[lang="ar"] .external-arrow-icon {
   color: var(--text);
   background: var(--pill-bg);
   transform: none;
+}
+
+.section-nav.has-indicator a:hover,
+.section-nav.has-indicator a:focus-visible,
+.section-nav.has-indicator .section-nav-link:hover,
+.section-nav.has-indicator .section-nav-link:focus-visible,
+.section-nav.has-indicator a.active,
+.section-nav.has-indicator a[aria-current],
+.section-nav.has-indicator .section-nav-link.active,
+.section-nav.has-indicator .section-nav-link[aria-current] {
+  background: transparent;
+  box-shadow: none;
+  color: var(--blue);
 }
 
 .section-nav a.active,
@@ -1005,8 +1034,13 @@ html[lang="ar"] .skill-group h3 {
 .project-card:hover,
 .project-card:focus-within {
   border-color: color-mix(in srgb, var(--project-accent) 45%, var(--line));
-  transform: none;
-  box-shadow: 0 6px 16px rgb(0 0 0 / 6%);
+  box-shadow: 0 10px 24px rgb(0 0 0 / 9%);
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .project-card:hover {
+    transform: translateY(-3px);
+  }
 }
 
 .project-card[hidden] {

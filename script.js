@@ -246,6 +246,7 @@ const translations = {
     sect_certs: "الشهادات المهنية",
     sect_edu: "التعليم",
     sect_jobs: "الخبرات المهنية",
+    sect_jobs_nav: "الخبرات",
     sect_projects: "المشاريع",
     sect_skills: "المهارات",
     skill_data1: "إكسل (متقدم)",
@@ -765,6 +766,7 @@ const translations = {
     sect_certs: "Certifications",
     sect_edu: "Education",
     sect_jobs: "Employment",
+    sect_jobs_nav: "Employment",
     sect_projects: "Projects",
     sect_skills: "Skills",
     skill_data1: "Excel (Advanced)",
@@ -2344,9 +2346,15 @@ function initCaseSectionNavigation() {
 function initSectionNavigation() {
   const nav = document.querySelector(".section-nav");
   const sentinel = document.getElementById("nav-sentinel");
+  let cachedNavRect = null;
+  const invalidateNavRect = () => {
+    cachedNavRect = null;
+  };
+
   if (nav && sentinel && "IntersectionObserver" in window) {
     const stickyObserver = new IntersectionObserver(
       ([entry]) => {
+        invalidateNavRect();
         nav.classList.toggle("is-stuck", !entry.isIntersecting);
       },
       { threshold: [0], rootMargin: "-12px 0px 0px 0px" },
@@ -2377,7 +2385,10 @@ function initSectionNavigation() {
     if (!targetLink || !indicator) return;
     cancelAnimationFrame(moveFrame);
     moveFrame = requestAnimationFrame(() => {
-      const navRect = nav.getBoundingClientRect();
+      if (!cachedNavRect) {
+        cachedNavRect = nav.getBoundingClientRect();
+      }
+      const navRect = cachedNavRect;
       const linkRect = targetLink.getBoundingClientRect();
       const x = linkRect.left - navRect.left - nav.clientLeft + nav.scrollLeft;
       const y = linkRect.top - navRect.top - nav.clientTop;
@@ -2442,18 +2453,21 @@ function initSectionNavigation() {
       setCurrent(link.hash.slice(1));
       moveIndicatorTo(link);
     });
-    link.addEventListener("pointerenter", () => {
+    link.addEventListener("pointerenter", (e) => {
+      if (e.pointerType === "touch") return;
       moveIndicatorTo(link);
     });
   }
 
-  nav.addEventListener("pointerleave", () => {
+  nav.addEventListener("pointerleave", (e) => {
+    if (e.pointerType === "touch") return;
     moveIndicatorTo(getActiveLink());
   });
 
   nav.addEventListener(
     "scroll",
     () => {
+      invalidateNavRect();
       moveIndicatorTo(getActiveLink(), true);
     },
     { passive: true },
@@ -2462,6 +2476,7 @@ function initSectionNavigation() {
   window.addEventListener(
     "resize",
     () => {
+      invalidateNavRect();
       moveIndicatorTo(getActiveLink(), true);
     },
     { passive: true },
@@ -2469,6 +2484,7 @@ function initSectionNavigation() {
 
   if ("ResizeObserver" in window) {
     const ro = new ResizeObserver(() => {
+      invalidateNavRect();
       moveIndicatorTo(getActiveLink(), true);
     });
     ro.observe(nav);
@@ -2834,16 +2850,39 @@ function initCardSpotlight() {
   const cards = document.querySelectorAll(".project-card");
   for (const card of cards) {
     let frame = 0;
+    let cardRect = null;
+
+    const resetRect = () => {
+      cardRect = null;
+    };
+
+    card.addEventListener(
+      "pointerenter",
+      () => {
+        cardRect = card.getBoundingClientRect();
+      },
+      { passive: true },
+    );
+
+    window.addEventListener("scroll", resetRect, { passive: true });
+    window.addEventListener("resize", resetRect, { passive: true });
+
     card.addEventListener(
       "pointermove",
       (e) => {
         cancelAnimationFrame(frame);
         frame = requestAnimationFrame(() => {
-          const rect = card.getBoundingClientRect();
-          const x = Math.max(0, Math.min(e.clientX - rect.left, rect.width));
-          const y = Math.max(0, Math.min(e.clientY - rect.top, rect.height));
-          card.style.setProperty("--mouse-x", `${x}px`);
-          card.style.setProperty("--mouse-y", `${y}px`);
+          if (!cardRect) cardRect = card.getBoundingClientRect();
+          const x = Math.max(
+            0,
+            Math.min(e.clientX - cardRect.left, cardRect.width),
+          );
+          const y = Math.max(
+            0,
+            Math.min(e.clientY - cardRect.top, cardRect.height),
+          );
+          card.style.setProperty("--mouse-x", `${Math.round(x)}px`);
+          card.style.setProperty("--mouse-y", `${Math.round(y)}px`);
         });
       },
       { passive: true },
@@ -2853,6 +2892,7 @@ function initCardSpotlight() {
       "pointerleave",
       () => {
         cancelAnimationFrame(frame);
+        cardRect = null;
         card.style.setProperty("--mouse-x", "-500px");
         card.style.setProperty("--mouse-y", "-500px");
       },

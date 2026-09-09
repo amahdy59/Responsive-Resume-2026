@@ -1149,7 +1149,7 @@
   background: #0a1420;
   padding: 16px;
   min-height: 600px;
-  transition: background-color var(--motion-slow) var(--ease-standard), padding var(--motion-slow) var(--ease-standard);
+  transition: background-color var(--motion-slow) var(--ease-standard);
 }
 
 .live-embed-iframe {

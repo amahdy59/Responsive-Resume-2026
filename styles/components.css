@@ -1228,8 +1228,15 @@ html[lang="ar"] .credential-meta {
   background: color-mix(in srgb, var(--button-bg) 85%, #000);
   border-color: var(--button-bg);
   color: var(--button-text);
-  transform: none;
   box-shadow: 0 4px 12px rgb(0 0 0 / 18%);
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .btn-primary:hover,
+  .btn-secondary:hover,
+  .back-link:hover {
+    transform: translateY(-1px);
+  }
 }
 
 .back-link {
@@ -1245,7 +1252,6 @@ html[lang="ar"] .credential-meta {
   background: color-mix(in srgb, var(--blue) 12%, transparent);
   border-color: var(--blue);
   color: var(--blue);
-  transform: none;
   box-shadow: 0 4px 10px rgb(0 0 0 / 8%);
 }
 
