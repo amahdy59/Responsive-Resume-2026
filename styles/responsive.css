@@ -322,11 +322,12 @@
   .audio-player-transport {
     justify-content: center;
     min-width: 0;
+    gap: 4px;
   }
 
   .audio-control-primary {
     flex: 1 1 auto;
-    min-width: 88px;
+    min-width: 72px;
   }
 
   .audio-player-speed {

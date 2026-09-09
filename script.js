@@ -2275,6 +2275,18 @@ function refreshCaseSectionJump(lang) {
     option.textContent = links[index]?.textContent.trim() || option.textContent;
   });
   select.dispatchEvent(new Event("selectoptionschange"));
+  const nav = document.querySelector(".case-section-nav");
+  const activeLink = nav?.querySelector(".case-section-link.is-active");
+  const indicator = nav?.querySelector(".case-section-indicator");
+  if (activeLink && indicator) {
+    requestAnimationFrame(() => {
+      const x = activeLink.offsetLeft;
+      const y = activeLink.offsetTop + activeLink.offsetHeight - 2;
+      const w = activeLink.offsetWidth;
+      indicator.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+      indicator.style.width = `${w}px`;
+    });
+  }
 }
 
 function initCaseSectionNavigation() {
@@ -2283,6 +2295,51 @@ function initCaseSectionNavigation() {
     ...(nav?.querySelectorAll('.case-section-link[href^="#"]') || []),
   ];
   if (!nav || !links.length) return;
+
+  let indicator = nav.querySelector(".case-section-indicator");
+  if (!indicator) {
+    indicator = document.createElement("span");
+    indicator.className = "case-section-indicator";
+    indicator.setAttribute("aria-hidden", "true");
+    nav.appendChild(indicator);
+  }
+  nav.classList.add("has-indicator");
+
+  const prefersReducedMotion = () =>
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  let isUserClick = false;
+  let clickTimeout = 0;
+  let moveFrame = 0;
+
+  function moveIndicatorTo(targetLink, immediate = false) {
+    if (!targetLink || !indicator) return;
+    cancelAnimationFrame(moveFrame);
+    moveFrame = requestAnimationFrame(() => {
+      const x = targetLink.offsetLeft;
+      const y = targetLink.offsetTop + targetLink.offsetHeight - 2;
+      const w = targetLink.offsetWidth;
+
+      if (immediate || prefersReducedMotion()) {
+        indicator.style.transition = "none";
+      } else {
+        indicator.style.transition = "";
+      }
+
+      indicator.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+      indicator.style.width = `${w}px`;
+      indicator.style.opacity = "1";
+
+      if (immediate) {
+        requestAnimationFrame(() => {
+          indicator.style.transition = "";
+        });
+      }
+    });
+  }
+
+  const getActiveLink = () =>
+    nav.querySelector('.case-section-link.is-active[href^="#"]') || links[0];
 
   const jump = document.createElement("label");
   jump.className = "case-section-jump";
@@ -2295,39 +2352,74 @@ function initCaseSectionNavigation() {
   nav.before(jump);
   const select = jump.querySelector("select");
   enhanceSelect(select);
+
   const setCurrent = (hash) => {
+    let matchedLink = null;
     links.forEach((link) => {
-      link.classList.toggle("is-active", link.hash === hash);
-      if (link.hash === hash) link.setAttribute("aria-current", "location");
-      else link.removeAttribute("aria-current");
+      const match = link.hash === hash;
+      link.classList.toggle("is-active", match);
+      if (match) {
+        link.setAttribute("aria-current", "location");
+        matchedLink = link;
+      } else {
+        link.removeAttribute("aria-current");
+      }
     });
-    select.value = hash;
-    select.dispatchEvent(new Event("selectoptionschange"));
+    if (matchedLink) {
+      moveIndicatorTo(matchedLink);
+    }
+    if (select.value !== hash) {
+      select.value = hash;
+      select.dispatchEvent(new Event("selectoptionschange"));
+    }
   };
+
   const openTarget = (hash) => {
     const target = document.querySelector(hash);
     if (!target) return;
     if (target instanceof HTMLDetailsElement) target.open = true;
     target.scrollIntoView({
-      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
-        ? "auto"
-        : "smooth",
+      behavior: prefersReducedMotion() ? "auto" : "smooth",
       block: "start",
     });
     setCurrent(hash);
   };
 
   select.addEventListener("change", () => openTarget(select.value));
-  links.forEach((link) =>
+  links.forEach((link) => {
     link.addEventListener("click", () => {
+      isUserClick = true;
+      clearTimeout(clickTimeout);
+      clickTimeout = setTimeout(() => {
+        isUserClick = false;
+      }, 900);
       const target = document.querySelector(link.hash);
       if (target instanceof HTMLDetailsElement) target.open = true;
       setCurrent(link.hash);
-    }),
+      moveIndicatorTo(link);
+    });
+    link.addEventListener("pointerenter", (e) => {
+      if (e.pointerType === "touch") return;
+      moveIndicatorTo(link);
+    });
+  });
+
+  nav.addEventListener("pointerleave", () => {
+    moveIndicatorTo(getActiveLink());
+  });
+
+  window.addEventListener(
+    "resize",
+    () => {
+      moveIndicatorTo(getActiveLink(), true);
+    },
+    { passive: true },
   );
+
   if ("IntersectionObserver" in window) {
     const observer = new IntersectionObserver(
       (entries) => {
+        if (isUserClick) return;
         const visible = entries
           .filter((entry) => entry.isIntersecting)
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
@@ -2341,6 +2433,9 @@ function initCaseSectionNavigation() {
     });
   }
   setCurrent(links[0].hash);
+  requestAnimationFrame(() => {
+    moveIndicatorTo(getActiveLink(), true);
+  });
 }
 
 function initSectionNavigation() {

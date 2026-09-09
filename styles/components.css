@@ -949,6 +949,14 @@ html[lang="ar"] .credential-meta {
   padding: 0;
 }
 
+.audio-speed-badge-btn {
+  font-size: 0.8125rem;
+  font-weight: 750;
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+  padding: 0 4px;
+}
+
 .audio-control-primary {
   min-width: 100px;
   border-color: var(--blue);

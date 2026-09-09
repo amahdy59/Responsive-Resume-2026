@@ -602,11 +602,25 @@ try {
         );
         assert.deepEqual(
           await page.evaluate(() => Object.keys(window.__mediaActions).sort()),
-          ["nexttrack", "pause", "play", "previoustrack", "seekto", "stop"],
+          [
+            "nexttrack",
+            "pause",
+            "play",
+            "previoustrack",
+            "seekbackward",
+            "seekforward",
+            "seekto",
+            "stop",
+          ],
         );
         assert.equal(
           await page.evaluate(() => navigator.mediaSession.metadata.title),
           "Employment",
+        );
+        assert.ok(
+          await page.evaluate(
+            () => (navigator.mediaSession.metadata.artwork?.length || 0) > 0,
+          ),
         );
         await page.locator("[data-audio-next]").click();
         await page.waitForFunction(

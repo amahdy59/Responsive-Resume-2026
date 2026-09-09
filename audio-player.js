@@ -316,6 +316,18 @@
           title: getTitle(currentBtn),
           artist: "Ahmed Mahdy",
           album: copy().player,
+          artwork: [
+            {
+              src: new URL("/assets/ahmed-mahdy.webp", location.origin).href,
+              sizes: "128x128",
+              type: "image/webp",
+            },
+            {
+              src: new URL("/assets/ahmed-mahdy.png", location.origin).href,
+              sizes: "512x512",
+              type: "image/png",
+            },
+          ],
         });
     } catch {
       // Media Session is optional and may be only partially implemented.
@@ -339,11 +351,36 @@
           playNarration(playlist[index + 1]);
       },
       seekto: ({ seekTime }) => {
-        if (currentMedia && Number.isFinite(seekTime))
+        if (currentMedia && Number.isFinite(seekTime)) {
           currentMedia.currentTime = Math.min(
             Math.max(seekTime, 0),
             currentMedia.duration || seekTime,
           );
+          updateProgress();
+        }
+      },
+      seekbackward: (details) => {
+        const offset = details?.seekOffset || 10;
+        if (currentMedia && Number.isFinite(currentMedia.currentTime)) {
+          currentMedia.currentTime = Math.max(
+            0,
+            currentMedia.currentTime - offset,
+          );
+          updateProgress();
+        }
+      },
+      seekforward: (details) => {
+        const offset = details?.seekOffset || 10;
+        if (currentMedia && Number.isFinite(currentMedia.currentTime)) {
+          const maxTime = Number.isFinite(currentMedia.duration)
+            ? currentMedia.duration
+            : currentMedia.currentTime + offset;
+          currentMedia.currentTime = Math.min(
+            maxTime,
+            currentMedia.currentTime + offset,
+          );
+          updateProgress();
+        }
       },
     };
     for (const [action, handler] of Object.entries(actions)) {
@@ -422,6 +459,15 @@
       control.title = label;
     }
     player.querySelector("[data-audio-speed-label]").textContent = copy().speed;
+    const speedBtn = player.querySelector("[data-audio-speed-btn]");
+    if (speedBtn) {
+      const tooltip = `${copy().speed}: ${playbackRate}×`;
+      speedBtn.setAttribute("aria-label", tooltip);
+      speedBtn.setAttribute("data-tooltip", tooltip);
+      speedBtn.title = tooltip;
+      const badgeLabel = speedBtn.querySelector("[data-audio-speed-btn-label]");
+      if (badgeLabel) badgeLabel.textContent = `${playbackRate}×`;
+    }
     player
       .querySelector("[data-audio-speed]")
       ?.dispatchEvent(new Event("selectoptionschange"));
@@ -447,12 +493,33 @@
         getTitle(currentBtn);
   }
 
+  function setPlaybackRate(newRate, syncSelect = true) {
+    if (!allowedRates.includes(newRate)) return;
+    playbackRate = newRate;
+    window.resumePreferences.set("resume-audio-rate", String(playbackRate));
+    if (currentMedia) currentMedia.playbackRate = playbackRate;
+    const speedBtn = player?.querySelector("[data-audio-speed-btn]");
+    if (speedBtn) {
+      const badgeLabel = speedBtn.querySelector("[data-audio-speed-btn-label]");
+      if (badgeLabel) badgeLabel.textContent = `${playbackRate}×`;
+      const tooltip = `${copy().speed}: ${playbackRate}×`;
+      speedBtn.setAttribute("aria-label", tooltip);
+      speedBtn.setAttribute("data-tooltip", tooltip);
+      speedBtn.title = tooltip;
+    }
+    const select = player?.querySelector("[data-audio-speed]");
+    if (syncSelect && select && select.value !== String(playbackRate)) {
+      select.value = String(playbackRate);
+      select.dispatchEvent(new Event("selectoptionschange"));
+    }
+  }
+
   function createPlayer() {
     player = document.createElement("aside");
     player.className = "global-audio-player";
     player.hidden = true;
     player.setAttribute("role", "region");
-    player.innerHTML = `<div class="audio-player-summary"><span class="audio-player-artwork" aria-hidden="true">${icons.volume}${icons.waveform}</span><span class="audio-player-copy"><span class="audio-player-eyebrow"><span data-audio-eyebrow></span><span aria-hidden="true"> · </span><span data-audio-position></span></span><strong data-audio-title></strong></span><button class="audio-control audio-control-icon audio-expand-toggle" type="button" data-audio-expand aria-controls="audio-player-track audio-player-settings audio-player-transcript">${icons.chevron}</button><button class="audio-control audio-control-icon audio-control-close" type="button" data-audio-stop>${icons.close}</button></div><div class="audio-player-track" id="audio-player-track" data-audio-advanced><span class="audio-player-time" data-audio-elapsed>0:00</span><input class="audio-player-progress" data-audio-progress type="range" min="0" max="1" value="0" step="0.1" disabled><span class="audio-player-time" data-audio-duration>--:--</span></div><div class="audio-player-controls"><div class="audio-player-transport"><button class="audio-control audio-control-icon" type="button" data-audio-previous>${icons.previous}</button><button class="audio-control audio-control-primary" type="button" data-audio-toggle><span data-audio-toggle-icon>${icons.pause}</span><span data-audio-toggle-label></span></button><button class="audio-control audio-control-icon audio-retry" type="button" data-audio-retry hidden>${icons.retry}</button><button class="audio-control audio-control-icon" type="button" data-audio-next>${icons.next}</button><button class="audio-control audio-control-icon" type="button" data-audio-mute></button></div><div class="audio-player-settings" id="audio-player-settings" data-audio-advanced><input class="audio-volume-range" data-audio-volume type="range" min="0" max="1" value="${playbackVolume}" step="0.05"><label class="audio-player-speed"><span class="audio-speed-label">${icons.speed}<span data-audio-speed-label></span></span><span class="audio-select-shell"><select data-audio-speed>${allowedRates.map((rate) => `<option value="${rate}">${rate}×</option>`).join("")}</select></span></label><button class="audio-control audio-transcript-toggle" type="button" data-audio-transcript-toggle aria-controls="audio-player-transcript">${icons.transcript}<span data-audio-transcript-label></span></button></div></div><section class="audio-player-transcript" id="audio-player-transcript" data-audio-transcript data-audio-advanced hidden><strong data-audio-transcript-heading></strong><p data-audio-transcript-copy></p></section>`;
+    player.innerHTML = `<div class="audio-player-summary"><span class="audio-player-artwork" aria-hidden="true">${icons.volume}${icons.waveform}</span><span class="audio-player-copy"><span class="audio-player-eyebrow"><span data-audio-eyebrow></span><span aria-hidden="true"> · </span><span data-audio-position></span></span><strong data-audio-title></strong></span><button class="audio-control audio-control-icon audio-expand-toggle" type="button" data-audio-expand aria-controls="audio-player-track audio-player-settings audio-player-transcript">${icons.chevron}</button><button class="audio-control audio-control-icon audio-control-close" type="button" data-audio-stop>${icons.close}</button></div><div class="audio-player-track" id="audio-player-track" data-audio-advanced><span class="audio-player-time" data-audio-elapsed>0:00</span><input class="audio-player-progress" data-audio-progress type="range" min="0" max="1" value="0" step="0.1" disabled><span class="audio-player-time" data-audio-duration>--:--</span></div><div class="audio-player-controls"><div class="audio-player-transport"><button class="audio-control audio-control-icon" type="button" data-audio-previous>${icons.previous}</button><button class="audio-control audio-control-primary" type="button" data-audio-toggle><span data-audio-toggle-icon>${icons.pause}</span><span data-audio-toggle-label></span></button><button class="audio-control audio-control-icon audio-retry" type="button" data-audio-retry hidden>${icons.retry}</button><button class="audio-control audio-control-icon" type="button" data-audio-next>${icons.next}</button><button class="audio-control audio-control-icon audio-speed-badge-btn" type="button" data-audio-speed-btn><span data-audio-speed-btn-label>${playbackRate}×</span></button><button class="audio-control audio-control-icon" type="button" data-audio-mute></button></div><div class="audio-player-settings" id="audio-player-settings" data-audio-advanced><input class="audio-volume-range" data-audio-volume type="range" min="0" max="1" value="${playbackVolume}" step="0.05"><label class="audio-player-speed"><span class="audio-speed-label">${icons.speed}<span data-audio-speed-label></span></span><span class="audio-select-shell"><select data-audio-speed>${allowedRates.map((rate) => `<option value="${rate}">${rate}×</option>`).join("")}</select></span></label><button class="audio-control audio-transcript-toggle" type="button" data-audio-transcript-toggle aria-controls="audio-player-transcript">${icons.transcript}<span data-audio-transcript-label></span></button></div></div><section class="audio-player-transcript" id="audio-player-transcript" data-audio-transcript data-audio-advanced hidden><strong data-audio-transcript-heading></strong><p data-audio-transcript-copy></p></section>`;
     document.body.append(player);
     liveStatus = document.createElement("p");
     liveStatus.className = "sr-only audio-live-status";
@@ -516,17 +583,35 @@
         playNarration(playlist[index + 1]);
     });
     player
+      .querySelector("[data-audio-speed-btn]")
+      .addEventListener("click", () => {
+        const currentIndex = allowedRates.indexOf(playbackRate);
+        const nextIndex = (currentIndex + 1) % allowedRates.length;
+        setPlaybackRate(allowedRates[nextIndex]);
+      });
+    player
       .querySelector("[data-audio-speed]")
       .addEventListener("change", (event) => {
-        playbackRate = Number(event.target.value);
-        window.resumePreferences.set("resume-audio-rate", String(playbackRate));
-        if (currentMedia) currentMedia.playbackRate = playbackRate;
+        setPlaybackRate(Number(event.target.value), false);
       });
     player
       .querySelector("[data-audio-progress]")
       .addEventListener("input", (event) => {
-        if (currentMedia && Number.isFinite(currentMedia.duration))
-          currentMedia.currentTime = Number(event.target.value);
+        const val = Number(event.target.value);
+        if (currentMedia && Number.isFinite(currentMedia.duration)) {
+          currentMedia.currentTime = val;
+          const duration = currentMedia.duration;
+          event.target.style.setProperty(
+            "--audio-progress",
+            `${duration > 0 ? (val / duration) * 100 : 0}%`,
+          );
+          player.querySelector("[data-audio-elapsed]").textContent =
+            formatTime(val);
+          event.target.setAttribute(
+            "aria-valuetext",
+            `${formatTime(val)} ${copy().of} ${formatTime(duration)}`,
+          );
+        }
       });
     refreshLabels();
   }

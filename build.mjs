@@ -188,6 +188,94 @@ function localizeDocument(document, language, translations, page) {
     .querySelector('meta[property="twitter:description"]')
     ?.setAttribute("content", description);
 
+  let ogLocale = document.querySelector('meta[property="og:locale"]');
+  if (!ogLocale) {
+    ogLocale = document.createElement("meta");
+    ogLocale.setAttribute("property", "og:locale");
+    document.head.append(ogLocale);
+  }
+  ogLocale.setAttribute("content", language === "ar" ? "ar_EG" : "en_US");
+
+  let ogAltLocale = document.querySelector(
+    'meta[property="og:locale:alternate"]',
+  );
+  if (!ogAltLocale) {
+    ogAltLocale = document.createElement("meta");
+    ogAltLocale.setAttribute("property", "og:locale:alternate");
+    document.head.append(ogAltLocale);
+  }
+  ogAltLocale.setAttribute("content", language === "ar" ? "en_US" : "ar_EG");
+
+  const canonicalUrl = `${productionUrl}/${language}${page.localizedPath}`;
+  const jsonLdScript = document.querySelector(
+    'script[type="application/ld+json"]',
+  );
+  if (jsonLdScript) {
+    try {
+      const data = JSON.parse(jsonLdScript.textContent);
+      const updateEntity = (item) => {
+        if (!item || typeof item !== "object") return;
+        if (item["@type"] === "Person") {
+          item.url = `${productionUrl}/${language}/`;
+          if (language === "ar") {
+            item.name = "أحمد مهدي";
+            item.jobTitle = "مصمم تجربة مستخدم ومحلل بصري للبيانات";
+            if (Array.isArray(item.knowsAbout)) {
+              item.knowsAbout = [
+                "تصميم تجربة المستخدم (UX Design)",
+                "تمثيل البيانات بصرياً (Data Visualization)",
+                "تحليل البيانات (Data Analytics)",
+                "باور بي آي (Power BI)",
+                "تابلو (Tableau)",
+                "مايكروسوفت إكسل (Microsoft Excel)",
+                "إس كيو إل (SQL)",
+                "بايثون (Python)",
+              ];
+            }
+          }
+        } else if (item["@type"] === "CreativeWork") {
+          item.url = canonicalUrl;
+          if (language === "ar") {
+            item.name = projectTitle || item.name;
+            item.headline = projectTitle || item.headline;
+            item.description = description || item.description;
+            if (item.author) {
+              item.author.name = "أحمد مهدي";
+              item.author.url = `${productionUrl}/ar/`;
+            }
+          }
+        } else if (
+          item["@type"] === "BreadcrumbList" &&
+          Array.isArray(item.itemListElement)
+        ) {
+          for (const crumb of item.itemListElement) {
+            if (crumb.position === 1) {
+              crumb.item = `${productionUrl}/${language}/`;
+              if (language === "ar") crumb.name = "الرئيسية";
+            } else if (crumb.position === 2) {
+              crumb.item = `${productionUrl}/${language}/#projects`;
+              if (language === "ar") crumb.name = "المشاريع";
+            } else if (crumb.position === 3) {
+              crumb.item = canonicalUrl;
+              if (language === "ar" && projectTitle) {
+                crumb.name = projectTitle;
+              }
+            }
+          }
+        }
+      };
+
+      if (Array.isArray(data)) {
+        data.forEach(updateEntity);
+      } else {
+        updateEntity(data);
+      }
+      jsonLdScript.textContent = JSON.stringify(data, null, 2);
+    } catch {
+      // Ignore JSON parse errors
+    }
+  }
+
   if (language === "ar") {
     document.querySelectorAll("[data-counter-target]").forEach((el) => {
       const target = Number.parseInt(
@@ -369,6 +457,24 @@ for (const page of pages) {
   const legacyPath = page.file === "index.html" ? "/" : `/${page.file}`;
   ensureAlternateLinks(legacyDocument, page.localizedPath, legacyPath);
   addSecurityMetadata(legacyDocument);
+  let legacyOgLocale = legacyDocument.querySelector(
+    'meta[property="og:locale"]',
+  );
+  if (!legacyOgLocale) {
+    legacyOgLocale = legacyDocument.createElement("meta");
+    legacyOgLocale.setAttribute("property", "og:locale");
+    legacyDocument.head.append(legacyOgLocale);
+  }
+  legacyOgLocale.setAttribute("content", "en_US");
+  let legacyOgAltLocale = legacyDocument.querySelector(
+    'meta[property="og:locale:alternate"]',
+  );
+  if (!legacyOgAltLocale) {
+    legacyOgAltLocale = legacyDocument.createElement("meta");
+    legacyOgAltLocale.setAttribute("property", "og:locale:alternate");
+    legacyDocument.head.append(legacyOgAltLocale);
+  }
+  legacyOgAltLocale.setAttribute("content", "ar_EG");
   rewriteAssetReferences(legacyDocument, assetMapping, bundleNames);
   await writeFile(join(dist, page.file), serialize(legacyDocument));
 

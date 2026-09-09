@@ -130,7 +130,8 @@
   outline: 2px solid #0ff !important;
 }
 
-[data-contrast="high"] .section-nav-indicator {
+[data-contrast="high"] .section-nav-indicator,
+[data-contrast="high"] .case-section-indicator {
   background: #000 !important;
   border: 2px solid #0ff !important;
   box-shadow: none !important;
