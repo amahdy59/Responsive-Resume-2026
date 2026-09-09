@@ -2894,7 +2894,7 @@ function initCertLightbox() {
   const dialog = document.getElementById("cert-lightbox");
   if (!dialog) return;
 
-  const lightboxImg = dialog.querySelector(".cert-lightbox-img");
+  const wrap = dialog.querySelector(".cert-lightbox-img-wrap");
   const titleEl = dialog.querySelector(".cert-lightbox-title");
   const verifyLink = dialog.querySelector(".cert-lightbox-verify");
   const closeBtn = dialog.querySelector(".cert-lightbox-close");
@@ -2903,8 +2903,15 @@ function initCertLightbox() {
     const src = btn.dataset.certSrc;
     const title = btn.dataset.certTitle || "";
     const href = btn.dataset.certHref || "#";
-    lightboxImg.src = src;
-    lightboxImg.alt = `${title} certificate — Ahmed Saad Mahdy Sayed`;
+
+    wrap.innerHTML = "";
+    const img = document.createElement("img");
+    img.className = "cert-lightbox-img";
+    img.src = src;
+    img.alt = `${title} certificate — Ahmed Saad Mahdy Sayed`;
+    img.decoding = "async";
+    wrap.appendChild(img);
+
     titleEl.textContent = title;
     verifyLink.href = href;
     dialog.showModal();
@@ -2926,8 +2933,6 @@ function initCertLightbox() {
   });
 
   dialog.addEventListener("close", () => {
-    lightboxImg.src =
-      "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";
-    lightboxImg.alt = "";
+    wrap.replaceChildren();
   });
 }

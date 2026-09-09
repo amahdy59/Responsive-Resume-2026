@@ -26,15 +26,8 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npx playwright install --with-deps chromium firefox webkit
-      - name: Lint, content, responsive UX, accessibility, and performance
-        run: npm run lint && npm run check && npm run build && npm run test:browser && npm run test:cross-browser && npm run test:performance
-      - name: Visual regression (compare vs baseline on PRs, update on main)
-        run: |
-          if [ "${{ github.event_name }}" = "pull_request" ]; then
-            npm run test:visual
-          else
-            UPDATE_VISUALS=1 node scripts/visual-regression.mjs
-          fi
+      - name: Lint, content, responsive UX, accessibility, visual regression, and performance
+        run: npm test
       - name: Audit production dependencies
         run: npm audit --omit=dev --audit-level=high
       - name: Preserve visual evidence even on failure
@@ -49,38 +42,6 @@ jobs:
         uses: actions/upload-pages-artifact@v5
         with:
           path: dist
-
-  update-baselines:
-    name: Refresh visual baselines (Linux)
-    needs: quality
-    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    permissions:
-      contents: write
-    steps:
-      - uses: actions/checkout@v7
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-      - uses: actions/setup-node@v7
-        with:
-          node-version: "24"
-          cache: npm
-      - run: npm ci
-      - run: npx playwright install --with-deps chromium
-      - name: Regenerate baselines on Linux
-        run: npm run build && UPDATE_VISUALS=1 node scripts/visual-regression.mjs
-      - name: Commit updated baselines if changed
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add tests/visual-baselines/
-          if git diff --cached --quiet; then
-            echo "No baseline changes."
-          else
-            git commit -m "chore: update visual baselines [skip ci]"
-            git push
-          fi
 
   deploy:
     name: Deploy and verify production
@@ -109,4 +70,3 @@ jobs:
         uses: actions/deploy-pages@v5
       - name: Verify exact release and live functionality
         run: npm run verify:deploy -- --live-only
-

@@ -133,10 +133,7 @@ try {
       });
       await page.goto(`${baseUrl}${scenario.path}`, { waitUntil: "load" });
       const fontPreload = page.locator('link[rel="preload"][as="font"]');
-      assert.equal(
-        await fontPreload.count(),
-        scenario.path.startsWith("/ar/") ? 2 : 1,
-      );
+      assert.equal(await fontPreload.count(), 1);
       assert.ok(
         await fontPreload.evaluateAll((links) =>
           links.every(

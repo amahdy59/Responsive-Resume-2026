@@ -2008,7 +2008,8 @@ html[lang="ar"] .skill-group h3 {
 }
 
 /* ── Certificate Thumbnail Button ── */
-.cert-thumb-btn {
+.cert-thumb-btn,
+.cert-item-icon.cert-thumb-btn {
   position: relative;
   flex: 0 0 auto;
   display: flex;
@@ -2026,13 +2027,16 @@ html[lang="ar"] .skill-group h3 {
 }
 
 .cert-thumb-btn:hover,
-.cert-thumb-btn:focus-visible {
+.cert-thumb-btn:focus-visible,
+.cert-item-icon.cert-thumb-btn:hover,
+.cert-item-icon.cert-thumb-btn:focus-visible {
   border-color: var(--blue);
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--blue) 25%, transparent);
   transform: scale(1.05);
 }
 
-.cert-thumb-btn:focus-visible {
+.cert-thumb-btn:focus-visible,
+.cert-item-icon.cert-thumb-btn:focus-visible {
   outline: 2px solid var(--blue);
   outline-offset: 2px;
 }
