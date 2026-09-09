@@ -100,6 +100,7 @@ const translations = {
       "أساسيات تصميم تجربة المستخدم تشمل أبحاث المستخدم والتخطيط الهيكلي والنماذج الأولية واختبار قابلية الاستخدام.",
     certs_subtitle: "شهادات مهنية تُثبت خبرتي والتزامي بالتعلم المستمر.",
     certs_count_label: "شهادات",
+    cert_verify: "التحقق على Coursera",
     cert2: "تحليل ذكاء الأعمال Tableau (Tableau Business Intelligence Analyst)",
     cert3: "مهارات Excel لتحليل البيانات والتصوير المرئي",
     cert4: "مهارات Excel للأعمال",
@@ -616,6 +617,7 @@ const translations = {
     certs_subtitle:
       "Professional certifications that validate my expertise and commitment to continuous learning.",
     certs_count_label: "Certifications",
+    cert_verify: "Verify on Coursera",
     cert2: "Tableau Business Intelligence Analyst",
     cert3: "Excel Skills for Data Analytics and Visualization",
     cert4: "Excel Skills for Business",
@@ -2252,6 +2254,7 @@ function initialize() {
   initReadingProgressBar();
   initBackToTop();
   initResumeDownloadMenu();
+  initCertLightbox();
 
   setTheme(savedTheme || (prefersDark ? "dark" : "light"));
   setContrast(savedContrast);
@@ -2885,3 +2888,46 @@ document
     img.addEventListener("error", unavailable, { once: true });
     if (img.complete && !img.naturalWidth) unavailable();
   });
+
+// ── Certificate Lightbox ──────────────────────────────────────────────────
+function initCertLightbox() {
+  const dialog = document.getElementById("cert-lightbox");
+  if (!dialog) return;
+
+  const lightboxImg = dialog.querySelector(".cert-lightbox-img");
+  const titleEl = dialog.querySelector(".cert-lightbox-title");
+  const verifyLink = dialog.querySelector(".cert-lightbox-verify");
+  const closeBtn = dialog.querySelector(".cert-lightbox-close");
+
+  function openLightbox(btn) {
+    const src = btn.dataset.certSrc;
+    const title = btn.dataset.certTitle || "";
+    const href = btn.dataset.certHref || "#";
+    lightboxImg.src = src;
+    lightboxImg.alt = `${title} certificate — Ahmed Saad Mahdy Sayed`;
+    titleEl.textContent = title;
+    verifyLink.href = href;
+    dialog.showModal();
+    closeBtn.focus();
+  }
+
+  function closeLightbox() {
+    dialog.close();
+  }
+
+  document.querySelectorAll(".cert-thumb-btn").forEach((btn) => {
+    btn.addEventListener("click", () => openLightbox(btn));
+  });
+
+  closeBtn.addEventListener("click", closeLightbox);
+
+  dialog.addEventListener("click", (e) => {
+    if (e.target === dialog) closeLightbox();
+  });
+
+  dialog.addEventListener("close", () => {
+    lightboxImg.src =
+      "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";
+    lightboxImg.alt = "";
+  });
+}
