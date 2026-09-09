@@ -1,17 +1,12 @@
 <header class="case-study-header-bar reveal active">
         <nav class="case-study-nav" aria-label="Case study header navigation">
-          <a href="index.html#projects" class="case-nav-back-pill">
-            <svg aria-hidden="true"><use href="#icon-arrow-left"></use></svg>
-            <span data-translate="cs_back_to_projects">Back to Projects</span>
-          </a>
-          <nav class="case-study-breadcrumbs" aria-label="Breadcrumb trail">
-            <ol class="breadcrumbs">
-              <li><a href="index.html" data-translate="cs_home">Home</a></li>
-              <li><a href="index.html#projects" data-translate="cs_projects">Projects</a></li>
-              <li aria-current="page" data-translate="{{titleKey}}">{{title}}</li>
-            </ol>
-          </nav>
-          <div class="case-study-controls"><fieldset class="language-selector">
+          <div class="case-nav-top-row">
+            <a href="index.html#projects" class="case-nav-back-pill">
+              <svg aria-hidden="true"><use href="#icon-arrow-left"></use></svg>
+              <span data-translate="cs_back_to_projects">Back to Projects</span>
+            </a>
+            <div class="case-study-controls">
+              <fieldset class="language-selector">
                 <legend class="sr-only" data-translate="control_language">Language</legend>
                 <span class="language-selector-icon" aria-hidden="true"><svg><use href="#icon-language"></use></svg></span>
                 <label class="language-option" lang="en">
@@ -22,7 +17,8 @@
                   <input class="sr-only language-option-input" type="radio" name="portfolio-language" value="ar" />
                   <span>العربية</span>
                 </label>
-              </fieldset><div class="display-mode-group case-display-modes" role="group" aria-label="Display modes" data-translate-attr="aria-label" data-translate-attr-key="display_modes_label">
+              </fieldset>
+              <div class="display-mode-group case-display-modes" role="group" aria-label="Display modes" data-translate-attr="aria-label" data-translate-attr-key="display_modes_label">
                 <button class="theme-toggle" type="button" role="switch" aria-checked="false" data-tooltip="Switch Theme" aria-label="Dark mode">
                   <span class="control-icon" aria-hidden="true"><svg><use href="#icon-moon"></use></svg></span>
                   <span class="control-label sr-only" data-translate="control_theme">Dark Mode</span>
@@ -35,6 +31,15 @@
                   <span class="control-state sr-only" data-translate="control_contrast_state">Off</span>
                   <span class="control-switch sr-only" aria-hidden="true"><span></span></span>
                 </button>
-              </div></div>
+              </div>
+            </div>
+          </div>
+          <div class="case-study-breadcrumbs" aria-label="Breadcrumb trail">
+            <ol class="breadcrumbs">
+              <li><a href="index.html" data-translate="cs_home">Home</a></li>
+              <li><a href="index.html#projects" data-translate="cs_projects">Projects</a></li>
+              <li aria-current="page" data-translate="{{titleKey}}">{{title}}</li>
+            </ol>
+          </div>
         </nav>
       </header>

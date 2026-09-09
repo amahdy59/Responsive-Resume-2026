@@ -1653,9 +1653,9 @@ function setContrast(contrast) {
  * persists the choice to localStorage, and runs a full UI refresh.
  * @param {'en'|'ar'} lang - Language code to activate.
  */
-function setLanguage(lang, persist = true) {
+function setLanguage(lang, persist = true, isUserAction = false) {
   const staticLocale = document.body.dataset.staticLocale;
-  if (persist && staticLocale && lang !== staticLocale) {
+  if (isUserAction && persist && staticLocale && lang !== staticLocale) {
     window.resumePreferences.set(storageKeys.lang, lang);
     const hash = location.hash || "";
     location.assign(
@@ -2540,7 +2540,7 @@ document.querySelectorAll(".contrast-toggle").forEach((button) => {
 document.querySelectorAll(".lang-toggle").forEach((button) => {
   button.addEventListener("click", () => {
     window.AntigravityAudio?.stop();
-    setLanguage(getCurrentLanguage() === "ar" ? "en" : "ar");
+    setLanguage(getCurrentLanguage() === "ar" ? "en" : "ar", true, true);
   });
 });
 
@@ -2548,7 +2548,7 @@ document.querySelectorAll(".language-option-input").forEach((input) => {
   input.addEventListener("change", () => {
     if (!input.checked || !["en", "ar"].includes(input.value)) return;
     window.AntigravityAudio?.stop();
-    setLanguage(input.value);
+    setLanguage(input.value, true, true);
   });
 });
 

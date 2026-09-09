@@ -361,7 +361,11 @@ for (const page of pages) {
     await readFile(join(root, page.file), "utf8"),
   );
   const { document: legacyDocument } = parseHTML(source);
-  if (page.key) applyTranslations(legacyDocument, translations.en);
+  legacyDocument.body.dataset.staticPath = page.localizedPath;
+  if (page.key) {
+    legacyDocument.body.dataset.staticLocale = "en";
+    applyTranslations(legacyDocument, translations.en);
+  }
   const legacyPath = page.file === "index.html" ? "/" : `/${page.file}`;
   ensureAlternateLinks(legacyDocument, page.localizedPath, legacyPath);
   addSecurityMetadata(legacyDocument);
