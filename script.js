@@ -2235,32 +2235,123 @@ function initSectionNavigation() {
   const targets = links
     .map((link) => document.querySelector(link.getAttribute("href")))
     .filter(Boolean);
-  if (!links.length || !targets.length || !("IntersectionObserver" in window))
-    return;
-  const setCurrent = (id) =>
-    links.forEach((link) => {
+  if (!links.length || !nav) return;
+
+  let indicator = nav.querySelector(".section-nav-indicator");
+  if (!indicator) {
+    indicator = document.createElement("span");
+    indicator.className = "section-nav-indicator";
+    indicator.setAttribute("aria-hidden", "true");
+    nav.appendChild(indicator);
+  }
+  nav.classList.add("has-indicator");
+
+  const prefersReducedMotion = () =>
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  let moveFrame = 0;
+  function moveIndicatorTo(targetLink, immediate = false) {
+    if (!targetLink || !indicator) return;
+    cancelAnimationFrame(moveFrame);
+    moveFrame = requestAnimationFrame(() => {
+      const navRect = nav.getBoundingClientRect();
+      const linkRect = targetLink.getBoundingClientRect();
+      const x = linkRect.left - navRect.left - nav.clientLeft + nav.scrollLeft;
+      const y = linkRect.top - navRect.top - nav.clientTop;
+
+      if (immediate || prefersReducedMotion()) {
+        indicator.style.transition = "none";
+      } else {
+        indicator.style.transition = "";
+      }
+
+      indicator.style.transform = `translate3d(${Math.round(x)}px, ${Math.round(y)}px, 0)`;
+      indicator.style.width = `${Math.round(linkRect.width)}px`;
+      indicator.style.height = `${Math.round(linkRect.height)}px`;
+      indicator.style.opacity = "1";
+
+      if (immediate) {
+        requestAnimationFrame(() => {
+          indicator.style.transition = "";
+        });
+      }
+    });
+  }
+
+  const getActiveLink = () =>
+    nav.querySelector('.section-nav a.active[href^="#"]') || links[0];
+
+  const setCurrent = (id) => {
+    let matchedLink = null;
+    for (const link of links) {
       const match = link.getAttribute("href") === `#${id}`;
       if (match) {
         link.setAttribute("aria-current", "location");
         link.classList.add("active");
+        matchedLink = link;
       } else {
         link.removeAttribute("aria-current");
         link.classList.remove("active");
       }
+    }
+    if (matchedLink) {
+      moveIndicatorTo(matchedLink);
+    }
+  };
+
+  if (targets.length && "IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (visible) setCurrent(visible.target.id);
+      },
+      { rootMargin: "-20% 0px -65%", threshold: [0, 0.1, 0.5] },
+    );
+    for (const target of targets) {
+      observer.observe(target);
+    }
+  }
+
+  for (const link of links) {
+    link.addEventListener("click", () => {
+      setCurrent(link.hash.slice(1));
+      moveIndicatorTo(link);
     });
-  const observer = new IntersectionObserver(
-    (entries) => {
-      const visible = entries
-        .filter((entry) => entry.isIntersecting)
-        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-      if (visible) setCurrent(visible.target.id);
+    link.addEventListener("pointerenter", () => {
+      moveIndicatorTo(link);
+    });
+  }
+
+  nav.addEventListener("pointerleave", () => {
+    moveIndicatorTo(getActiveLink());
+  });
+
+  nav.addEventListener(
+    "scroll",
+    () => {
+      moveIndicatorTo(getActiveLink(), true);
     },
-    { rootMargin: "-20% 0px -65%", threshold: [0, 0.1, 0.5] },
+    { passive: true },
   );
-  targets.forEach((target) => observer.observe(target));
-  links.forEach((link) =>
-    link.addEventListener("click", () => setCurrent(link.hash.slice(1))),
+
+  window.addEventListener(
+    "resize",
+    () => {
+      moveIndicatorTo(getActiveLink(), true);
+    },
+    { passive: true },
   );
+
+  if ("ResizeObserver" in window) {
+    const ro = new ResizeObserver(() => {
+      moveIndicatorTo(getActiveLink(), true);
+    });
+    ro.observe(nav);
+  }
+
+  moveIndicatorTo(getActiveLink(), true);
 }
 
 function initResponsiveContentOrder() {

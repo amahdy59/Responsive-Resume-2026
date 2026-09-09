@@ -466,10 +466,14 @@ html[lang="ar"] .credential-meta {
   border-radius: 6px;
   white-space: nowrap;
   opacity: 0;
+  visibility: hidden;
   pointer-events: none;
   z-index: 9999;
   box-shadow: 0 4px 12px rgb(0 0 0 / 18%);
-  transition: opacity 150ms ease, transform 150ms ease;
+  transition:
+    opacity 150ms ease,
+    transform 150ms ease,
+    visibility 150ms ease;
 }
 
 [data-tooltip]::after {
@@ -482,9 +486,13 @@ html[lang="ar"] .credential-meta {
   border-style: solid;
   border-color: transparent transparent var(--text) transparent;
   opacity: 0;
+  visibility: hidden;
   pointer-events: none;
   z-index: 9999;
-  transition: opacity 150ms ease, transform 150ms ease;
+  transition:
+    opacity 150ms ease,
+    transform 150ms ease,
+    visibility 150ms ease;
 }
 
 [data-tooltip]:hover::before,
@@ -492,6 +500,7 @@ html[lang="ar"] .credential-meta {
 [data-tooltip]:hover::after,
 [data-tooltip]:focus-visible::after {
   opacity: 1;
+  visibility: visible;
   transform: translateX(-50%) translateY(0);
 }
 

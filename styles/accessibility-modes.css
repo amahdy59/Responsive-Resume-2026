@@ -87,6 +87,80 @@
   color: #0ff !important;
 }
 
+[data-contrast="high"] .tag-pill {
+  background: #000 !important;
+  border: 2px solid #fff !important;
+  color: #fff !important;
+  box-shadow: none !important;
+}
+
+[data-contrast="high"] .tag-pill:hover,
+[data-contrast="high"] .tag-pill:focus-visible {
+  border-color: #0ff !important;
+  color: #0ff !important;
+}
+
+[data-contrast="high"] .hero-btn-resume {
+  color: #0ff !important;
+}
+
+[data-contrast="high"] .hero-btn-resume:hover,
+[data-contrast="high"] .hero-btn-resume:focus-visible {
+  color: #86efac !important;
+  text-decoration: underline !important;
+}
+
+[data-contrast="high"] .resume-download-options {
+  background: #000 !important;
+  border: 2px solid #fff !important;
+  box-shadow: none !important;
+}
+
+[data-contrast="high"] .resume-download-options > a,
+[data-contrast="high"] .resume-download-options > button {
+  color: #fff !important;
+}
+
+[data-contrast="high"] .resume-download-options > a:hover,
+[data-contrast="high"] .resume-download-options > button:hover,
+[data-contrast="high"] .resume-download-options > a:focus-visible,
+[data-contrast="high"] .resume-download-options > button:focus-visible {
+  background: #000 !important;
+  color: #0ff !important;
+  outline: 2px solid #0ff !important;
+}
+
+[data-contrast="high"] .section-nav-indicator {
+  background: #000 !important;
+  border: 2px solid #0ff !important;
+  box-shadow: none !important;
+}
+
+[data-contrast="high"] .section-nav a {
+  color: #fff !important;
+}
+
+[data-contrast="high"] .section-nav a.active,
+[data-contrast="high"] .section-nav a[aria-current] {
+  color: #0ff !important;
+}
+
+[data-contrast="high"] .section-nav a:hover,
+[data-contrast="high"] .section-nav a:focus-visible {
+  color: #86efac !important;
+}
+
+[data-contrast="high"] [data-tooltip]::before {
+  background: #000 !important;
+  color: #fff !important;
+  border: 1.5px solid #fff !important;
+  box-shadow: none !important;
+}
+
+[data-contrast="high"] [data-tooltip]::after {
+  border-color: transparent transparent #fff !important;
+}
+
 [data-contrast="high"] .hero-contact-card {
   background: #000 !important;
   border: 2px solid #fff !important;
