@@ -2281,16 +2281,29 @@ function refreshCaseSectionJump(lang) {
   if (activeLink && indicator) {
     requestAnimationFrame(() => {
       const x = activeLink.offsetLeft;
-      const y = activeLink.offsetTop + activeLink.offsetHeight - 2;
+      const y = activeLink.offsetTop;
       const w = activeLink.offsetWidth;
+      const h = activeLink.offsetHeight;
       indicator.style.transform = `translate3d(${x}px, ${y}px, 0)`;
       indicator.style.width = `${w}px`;
+      indicator.style.height = `${h}px`;
     });
   }
 }
 
 function initCaseSectionNavigation() {
   const nav = document.querySelector(".case-section-nav");
+  const sentinel = document.getElementById("case-nav-sentinel");
+  if (nav && sentinel && "IntersectionObserver" in window) {
+    const stickyObserver = new IntersectionObserver(
+      ([entry]) => {
+        nav.classList.toggle("is-stuck", !entry.isIntersecting);
+      },
+      { threshold: [0], rootMargin: "-12px 0px 0px 0px" },
+    );
+    stickyObserver.observe(sentinel);
+  }
+
   const links = [
     ...(nav?.querySelectorAll('.case-section-link[href^="#"]') || []),
   ];
@@ -2317,8 +2330,9 @@ function initCaseSectionNavigation() {
     cancelAnimationFrame(moveFrame);
     moveFrame = requestAnimationFrame(() => {
       const x = targetLink.offsetLeft;
-      const y = targetLink.offsetTop + targetLink.offsetHeight - 2;
+      const y = targetLink.offsetTop;
       const w = targetLink.offsetWidth;
+      const h = targetLink.offsetHeight;
 
       if (immediate || prefersReducedMotion()) {
         indicator.style.transition = "none";
@@ -2328,6 +2342,7 @@ function initCaseSectionNavigation() {
 
       indicator.style.transform = `translate3d(${x}px, ${y}px, 0)`;
       indicator.style.width = `${w}px`;
+      indicator.style.height = `${h}px`;
       indicator.style.opacity = "1";
 
       if (immediate) {
