@@ -557,20 +557,26 @@ html[lang="ar"] .external-arrow-icon {
 }
 
 .display-mode-group button {
-  display: inline-grid;
-  place-items: center;
-  width: 44px;
-  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: auto;
   min-width: 44px;
   min-height: 44px;
   margin: 0;
-  padding: 0;
+  padding: 0 10px;
   border: 1px solid transparent;
   border-radius: 9px;
   background: transparent;
   color: #334155;
   box-shadow: none;
   cursor: pointer;
+  font-family: inherit;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  white-space: nowrap;
+  box-sizing: border-box;
   transition:
     background-color var(--motion-normal) var(--ease-standard),
     border-color var(--motion-normal) var(--ease-standard),
@@ -580,10 +586,12 @@ html[lang="ar"] .external-arrow-icon {
 }
 
 .display-mode-group button .control-icon {
-  display: grid;
-  place-items: center;
-  width: 32px;
-  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
   border-radius: 8px;
   transition: transform var(--motion-fast) var(--ease-standard);
 }
@@ -629,11 +637,12 @@ html[lang="ar"] .external-arrow-icon {
 }
 
 .control-label {
-  display: block;
+  display: inline-block;
   font-size: 0.8125rem;
   font-weight: 600;
   white-space: nowrap;
-  color: #0f172a;
+  color: inherit;
+  line-height: 1;
 }
 
 .control-state {

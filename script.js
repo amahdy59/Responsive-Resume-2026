@@ -19,12 +19,6 @@ const savedLang =
 const savedContrast =
   window.resumePreferences.get(storageKeys.contrast) || "normal";
 
-const controls = {
-  themeToggle: document.querySelector(".theme-toggle"),
-  langToggle: document.querySelector(".lang-toggle"),
-  contrastToggle: document.querySelector(".contrast-toggle"),
-};
-
 const metaNodes = {
   description: document.getElementById("meta-description"),
   themeColor: document.querySelector('meta[name="theme-color"]'),
@@ -1523,23 +1517,22 @@ function updateThemeButton(lang) {
     ? getTranslation(lang, "tooltip_theme_light")
     : getTranslation(lang, "tooltip_theme_dark");
 
-  controls.themeToggle?.setAttribute(
-    "aria-label",
-    getTranslation(lang, "aria_dark_mode"),
-  );
-  if (controls.themeToggle?.querySelector(".control-switch")) {
-    controls.themeToggle.setAttribute("role", "switch");
-    controls.themeToggle.setAttribute("aria-checked", String(isDark));
-    controls.themeToggle.removeAttribute("aria-pressed");
-  } else {
-    controls.themeToggle?.setAttribute("aria-pressed", String(isDark));
-  }
-  controls.themeToggle?.setAttribute("data-tooltip", tooltip);
-  const state = controls.themeToggle?.querySelector(".control-state");
-  if (state)
-    state.textContent =
-      lang === "ar" ? (isDark ? "تشغيل" : "إيقاف") : isDark ? "On" : "Off";
-  setUseIcon(controls.themeToggle, isDark ? "#icon-sun" : "#icon-moon");
+  document.querySelectorAll(".theme-toggle").forEach((toggle) => {
+    toggle.setAttribute("aria-label", getTranslation(lang, "aria_dark_mode"));
+    if (toggle.querySelector(".control-switch")) {
+      toggle.setAttribute("role", "switch");
+      toggle.setAttribute("aria-checked", String(isDark));
+      toggle.removeAttribute("aria-pressed");
+    } else {
+      toggle.setAttribute("aria-pressed", String(isDark));
+    }
+    toggle.setAttribute("data-tooltip", tooltip);
+    const state = toggle.querySelector(".control-state");
+    if (state)
+      state.textContent =
+        lang === "ar" ? (isDark ? "تشغيل" : "إيقاف") : isDark ? "On" : "Off";
+    setUseIcon(toggle, isDark ? "#icon-sun" : "#icon-moon");
+  });
 }
 
 /**
@@ -1550,26 +1543,28 @@ function updateThemeButton(lang) {
 function updateContrastButton(lang) {
   const isHigh = root.dataset.contrast === "high";
 
-  controls.contrastToggle?.setAttribute(
-    "aria-label",
-    getTranslation(lang, "aria_high_contrast_mode"),
-  );
-  if (controls.contrastToggle?.querySelector(".control-switch")) {
-    controls.contrastToggle.setAttribute("role", "switch");
-    controls.contrastToggle.setAttribute("aria-checked", String(isHigh));
-    controls.contrastToggle.removeAttribute("aria-pressed");
-  } else {
-    controls.contrastToggle?.setAttribute("aria-pressed", String(isHigh));
-  }
-  controls.contrastToggle?.setAttribute(
-    "data-tooltip",
-    getTranslation(lang, "tooltip_contrast"),
-  );
-  controls.contrastToggle?.classList.toggle("active", isHigh);
-  const state = controls.contrastToggle?.querySelector(".control-state");
-  if (state)
-    state.textContent =
-      lang === "ar" ? (isHigh ? "تشغيل" : "إيقاف") : isHigh ? "On" : "Off";
+  document.querySelectorAll(".contrast-toggle").forEach((toggle) => {
+    toggle.setAttribute(
+      "aria-label",
+      getTranslation(lang, "aria_high_contrast_mode"),
+    );
+    if (toggle.querySelector(".control-switch")) {
+      toggle.setAttribute("role", "switch");
+      toggle.setAttribute("aria-checked", String(isHigh));
+      toggle.removeAttribute("aria-pressed");
+    } else {
+      toggle.setAttribute("aria-pressed", String(isHigh));
+    }
+    toggle.setAttribute(
+      "data-tooltip",
+      getTranslation(lang, "tooltip_contrast"),
+    );
+    toggle.classList.toggle("active", isHigh);
+    const state = toggle.querySelector(".control-state");
+    if (state)
+      state.textContent =
+        lang === "ar" ? (isHigh ? "تشغيل" : "إيقاف") : isHigh ? "On" : "Off";
+  });
 }
 
 /**

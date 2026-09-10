@@ -98,13 +98,11 @@
   }
 
   .language-selector {
-    flex: 1 1 0;
-    width: 0;
-    min-width: 0;
+    flex: 0 0 auto;
+    width: auto;
     max-width: 100%;
-    overflow: hidden;
     justify-content: center;
-    padding-inline: 3px;
+    padding: 3px;
   }
 
   .language-selector-icon {
@@ -112,11 +110,10 @@
   }
 
   .language-option {
-    flex: 1 1 0;
-    min-width: 0;
+    min-width: 44px;
     min-height: 44px;
     font-size: 0.75rem;
-    padding: 0 4px;
+    padding: 0 8px;
   }
 
   .language-option[lang="en"] span {
@@ -138,17 +135,54 @@
   }
 
   .display-mode-group {
-    display: flex;
+    display: inline-flex;
     flex: 0 0 auto;
-    gap: 4px;
+    gap: 2px;
   }
 
   .display-mode-group > button {
-    width: 44px;
-    height: 44px;
+    width: auto;
     min-width: 44px;
     min-height: 44px;
-    padding: 0;
+    padding: 0 8px;
+    gap: 4px;
+    font-size: 0.75rem;
+  }
+
+  html[lang="en"] .theme-toggle .control-label {
+    font-size: 0;
+  }
+
+  html[lang="en"] .theme-toggle .control-label::after {
+    content: "Dark";
+    font-size: 0.75rem;
+  }
+
+  html[lang="en"] .contrast-toggle .control-label {
+    font-size: 0;
+  }
+
+  html[lang="en"] .contrast-toggle .control-label::after {
+    content: "Contrast";
+    font-size: 0.75rem;
+  }
+
+  html[lang="ar"] .theme-toggle .control-label {
+    font-size: 0;
+  }
+
+  html[lang="ar"] .theme-toggle .control-label::after {
+    content: "داكن";
+    font-size: 0.80rem;
+  }
+
+  html[lang="ar"] .contrast-toggle .control-label {
+    font-size: 0;
+  }
+
+  html[lang="ar"] .contrast-toggle .control-label::after {
+    content: "تباين";
+    font-size: 0.80rem;
   }
 }
 
@@ -735,17 +769,18 @@
   }
 
   .case-display-modes {
-    display: flex;
-    gap: 4px;
+    display: inline-flex;
+    gap: 2px;
     flex-shrink: 0;
   }
 
   .case-display-modes > button {
-    width: 44px;
-    height: 44px;
+    width: auto;
     min-width: 44px;
     min-height: 44px;
-    padding: 0;
+    padding: 0 8px;
+    gap: 4px;
+    font-size: 0.75rem;
   }
 
   .breadcrumbs [aria-current="page"] {

@@ -209,20 +209,26 @@
 }
 
 .case-display-modes :is(.theme-toggle, .contrast-toggle) {
-  display: inline-grid;
-  place-items: center;
-  width: 44px;
-  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: auto;
   min-width: 44px;
   min-height: 44px;
   margin: 0;
-  padding: 0;
+  padding: 0 10px;
   border: 1px solid transparent;
   border-radius: 9px;
   background: transparent;
   color: var(--text);
   box-shadow: none;
   cursor: pointer;
+  font-family: inherit;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  white-space: nowrap;
+  box-sizing: border-box;
   transition:
     background-color var(--motion-normal) var(--ease-standard),
     border-color var(--motion-normal) var(--ease-standard),

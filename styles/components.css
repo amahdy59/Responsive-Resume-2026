@@ -542,17 +542,25 @@ html[lang="ar"] .credential-meta {
 .case-study-controls .theme-toggle,
 .case-study-controls .contrast-toggle,
 .case-study-controls .lang-toggle {
-  width: 44px;
+  width: auto;
   height: 44px;
   min-width: 44px;
   min-height: 44px;
+  padding: 0 10px;
+  gap: 6px;
   background: color-mix(in srgb, var(--panel) 80%, transparent);
   border: 1px solid var(--line);
   border-radius: 10px;
   color: var(--text);
-  display: inline-grid;
-  place-items: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
+  box-sizing: border-box;
+  font-family: inherit;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  white-space: nowrap;
   transition:
     background-color 180ms ease,
     border-color 180ms ease,

@@ -554,30 +554,30 @@ html[lang] .controls-group [data-tooltip][data-tooltip-dismissed]::after {
   background: rgb(121 192 255 / 12%);
 }
 
-[data-theme="dark"] .display-mode-group {
+[data-theme="dark"] :is(.display-mode-group, .case-display-modes) {
   background: rgb(7 16 29 / 35%);
   border-color: rgb(203 213 225 / 16%);
 }
 
-[data-theme="dark"] .display-mode-group button {
+[data-theme="dark"] :is(.display-mode-group, .case-display-modes) button {
   color: #cbd5e1;
 }
 
-[data-theme="dark"] .display-mode-group button:hover {
+[data-theme="dark"] :is(.display-mode-group, .case-display-modes) button:hover {
   background: rgb(255 255 255 / 8%);
   color: #fff;
   border-color: rgb(255 255 255 / 15%);
   box-shadow: 0 2px 8px rgb(0 0 0 / 25%);
 }
 
-[data-theme="dark"] .display-mode-group button:focus-visible {
+[data-theme="dark"] :is(.display-mode-group, .case-display-modes) button:focus-visible {
   outline: 3px solid #60a5fa;
   outline-offset: 2px;
 }
 
-[data-theme="dark"] .display-mode-group button[aria-checked="true"] {
-  background: rgb(37 99 235 / 24%);
-  color: #93c5fd;
+[data-theme="dark"] :is(.display-mode-group, .case-display-modes) button[aria-checked="true"] {
+  background: #1d4f91;
+  color: #fff;
   border-color: #3b82f6;
   box-shadow: 0 0 12px rgb(59 130 246 / 25%);
 }
