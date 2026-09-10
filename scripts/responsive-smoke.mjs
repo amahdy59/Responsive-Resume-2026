@@ -1362,11 +1362,14 @@ try {
         repeatedDisclosureItems: document.querySelectorAll(
           '[data-translate^="cs_provenance_ownership"], [data-translate^="cs_provenance_background"], [data-translate^="cs_provenance_ai"]',
         ).length,
-        jumpMenuVisible:
-          getComputedStyle(document.querySelector(".case-section-jump"))
+        caseNavVisible:
+          Boolean(document.querySelector(".case-section-nav")) &&
+          getComputedStyle(document.querySelector(".case-section-nav"))
             .display !== "none",
-        jumpMenuOptions: document.querySelectorAll(".case-section-jump option")
-          .length,
+        caseNavFits:
+          document.querySelector(".case-section-nav").scrollWidth <=
+          document.querySelector(".case-section-nav").clientWidth + 1,
+        caseNavLinks: document.querySelectorAll(".case-section-nav a").length,
         tradeoffs: document.querySelectorAll(".case-tradeoff").length,
         projectLearning: document
           .querySelector(
@@ -1404,8 +1407,9 @@ try {
       assert.ok(state.sandbox?.includes("allow-scripts"));
       assert.ok(state.provenanceItems >= 1);
       assert.equal(state.repeatedDisclosureItems, 0);
-      assert.equal(state.jumpMenuVisible, true);
-      assert.equal(state.jumpMenuOptions, 3);
+      assert.equal(state.caseNavVisible, true);
+      assert.equal(state.caseNavFits, true);
+      assert.equal(state.caseNavLinks, 4);
       assert.equal(state.tradeoffs, 1);
       assert.ok(state.projectLearning);
       assert.deepEqual(runtimeErrors, []);

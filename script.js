@@ -330,6 +330,10 @@ const translations = {
 
     // Case Study Shared UI
     cs_back_to_projects: "العودة إلى المشاريع",
+    cs_nav_label: "أقسام دراسة الحالة",
+    cs_nav_challenge: "التحدي",
+    cs_nav_solution: "الحل",
+    cs_nav_impact: "الأثر",
     cs_home: "الرئيسية",
     cs_projects: "المشاريع",
     cs_listen: "استمع",
@@ -856,6 +860,10 @@ const translations = {
 
     // Case Study Shared UI
     cs_back_to_projects: "Back to Projects",
+    cs_nav_label: "Case study sections",
+    cs_nav_challenge: "Challenge",
+    cs_nav_solution: "Solution",
+    cs_nav_impact: "Impact",
     cs_home: "Home",
     cs_projects: "Projects",
     cs_listen: "Listen",
@@ -2263,18 +2271,7 @@ function initialize() {
   setLanguage(savedLang, true);
 }
 
-function refreshCaseSectionJump(lang) {
-  const select = document.querySelector(".case-section-jump select");
-  if (!select) return;
-  const links = [...document.querySelectorAll(".case-section-link")];
-  select.previousElementSibling.textContent =
-    lang === "ar"
-      ? "انتقل إلى قسم في دراسة الحالة"
-      : "Jump to case study section";
-  [...select.options].forEach((option, index) => {
-    option.textContent = links[index]?.textContent.trim() || option.textContent;
-  });
-  select.dispatchEvent(new Event("selectoptionschange"));
+function refreshCaseSectionJump(_lang) {
   const nav = document.querySelector(".case-section-nav");
   const activeLink = nav?.querySelector(".case-section-link.is-active");
   const indicator = nav?.querySelector(".case-section-indicator");
@@ -2356,18 +2353,6 @@ function initCaseSectionNavigation() {
   const getActiveLink = () =>
     nav.querySelector('.case-section-link.is-active[href^="#"]') || links[0];
 
-  const jump = document.createElement("label");
-  jump.className = "case-section-jump";
-  jump.innerHTML = `<span></span><select>${links
-    .map(
-      (link) =>
-        `<option value="${link.hash}">${link.textContent.trim()}</option>`,
-    )
-    .join("")}</select>`;
-  nav.before(jump);
-  const select = jump.querySelector("select");
-  enhanceSelect(select);
-
   const setCurrent = (hash) => {
     let matchedLink = null;
     links.forEach((link) => {
@@ -2383,24 +2368,8 @@ function initCaseSectionNavigation() {
     if (matchedLink) {
       moveIndicatorTo(matchedLink);
     }
-    if (select.value !== hash) {
-      select.value = hash;
-      select.dispatchEvent(new Event("selectoptionschange"));
-    }
   };
 
-  const openTarget = (hash) => {
-    const target = document.querySelector(hash);
-    if (!target) return;
-    if (target instanceof HTMLDetailsElement) target.open = true;
-    target.scrollIntoView({
-      behavior: prefersReducedMotion() ? "auto" : "smooth",
-      block: "start",
-    });
-    setCurrent(hash);
-  };
-
-  select.addEventListener("change", () => openTarget(select.value));
   links.forEach((link) => {
     link.addEventListener("click", () => {
       isUserClick = true;
@@ -2430,6 +2399,13 @@ function initCaseSectionNavigation() {
     },
     { passive: true },
   );
+
+  if ("ResizeObserver" in window) {
+    const ro = new ResizeObserver(() => {
+      moveIndicatorTo(getActiveLink(), true);
+    });
+    ro.observe(nav);
+  }
 
   if ("IntersectionObserver" in window) {
     const observer = new IntersectionObserver(

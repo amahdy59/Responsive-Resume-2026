@@ -99,6 +99,9 @@
       <symbol id="icon-calendar" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 2v4M8 2v4M3 10h18" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
       <symbol id="icon-monitor" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 21h8M12 17v4" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
       <symbol id="icon-signal" viewBox="0 0 24 24"><path d="M2 20h.01M7 20v-4M12 20v-8M17 20V8M22 20V4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+      <symbol id="icon-target" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol>
+      <symbol id="icon-layers" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></symbol>
+      <symbol id="icon-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></symbol>
     </svg>
     <div class="ambient-particles" aria-hidden="true"></div>
     <main class="resume-shell case-study-shell" id="case-study-content">
@@ -174,15 +177,33 @@
         </div>
 
         <div id="case-nav-sentinel" aria-hidden="true"></div>
-        <nav class="case-section-nav" aria-label="Case study sections">
+        <nav
+          class="case-section-nav"
+          aria-label="Case study sections"
+          data-translate-attr="aria-label"
+          data-translate-attr-key="cs_nav_label"
+        >
           <a href="index.html#projects" class="case-section-back">
-            <svg class="case-section-back-icon" aria-hidden="true"><use href="#icon-arrow-left"></use></svg>
-            <span class="case-section-back-label" data-translate="cs_back_to_projects">Back to Projects</span>
+            <svg class="case-section-icon case-section-back-icon" aria-hidden="true"><use href="#icon-arrow-left"></use></svg>
+            <span class="case-nav-text-full" data-translate="cs_back_to_projects">Back to Projects</span>
+            <span class="case-nav-text-short" data-translate="cs_projects">Projects</span>
           </a>
           <span class="case-section-nav-divider" aria-hidden="true"></span>
-          <a href="#section-01" class="case-section-link is-active"><span class="case-section-link-num" data-translate="cs_sec_num_1">01</span> <span data-translate="cs_sec1_short">Challenge & Context</span></a>
-          <a href="#section-02" class="case-section-link"><span class="case-section-link-num" data-translate="cs_sec_num_2">02</span> <span data-translate="cs_sec2_short">Solution & Execution</span></a>
-          <a href="#section-03" class="case-section-link"><span class="case-section-link-num" data-translate="cs_sec_num_3">03</span> <span data-translate="cs_sec3_short">Impact & Learnings</span></a>
+          <a href="#section-01" class="case-section-link is-active">
+            <svg class="case-section-icon" aria-hidden="true"><use href="#icon-target"></use></svg>
+            <span class="case-nav-text-full" data-translate="cs_sec1_short">Challenge &amp; Context</span>
+            <span class="case-nav-text-short" data-translate="cs_nav_challenge">Challenge</span>
+          </a>
+          <a href="#section-02" class="case-section-link">
+            <svg class="case-section-icon" aria-hidden="true"><use href="#icon-layers"></use></svg>
+            <span class="case-nav-text-full" data-translate="cs_sec2_short">Solution &amp; Execution</span>
+            <span class="case-nav-text-short" data-translate="cs_nav_solution">Solution</span>
+          </a>
+          <a href="#section-03" class="case-section-link">
+            <svg class="case-section-icon" aria-hidden="true"><use href="#icon-chart"></use></svg>
+            <span class="case-nav-text-full" data-translate="cs_sec3_short">Impact &amp; Learnings</span>
+            <span class="case-nav-text-short" data-translate="cs_nav_impact">Impact</span>
+          </a>
         </nav>
 
         <div class="case-study-content">
