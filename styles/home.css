@@ -267,8 +267,8 @@
   grid-template-columns: max-content minmax(0, 1fr);
   align-items: center;
   gap: 10px;
-  min-height: 44px;
-  padding: 8px 10px;
+  min-height: 48px;
+  padding: 10px 14px;
   border: 0;
   border-radius: 8px;
   background: transparent;
@@ -280,6 +280,7 @@
   text-decoration: none;
   overflow-wrap: anywhere;
   cursor: pointer;
+  box-sizing: border-box;
 }
 
 .resume-download-options > a:hover,
@@ -780,7 +781,7 @@ html[lang="ar"] .external-arrow-icon {
   flex: 0 0 auto;
   align-items: center;
   gap: 8px;
-  min-height: 40px;
+  min-height: 44px;
   padding: 8px 16px;
   color: var(--muted);
   border-radius: 999px;
@@ -1745,10 +1746,12 @@ html[lang="ar"] .skill-group h3 {
 }
 
 .footer-back-to-top {
-  display: flex;
+  display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 6px;
-  padding: 8px 14px;
+  min-height: 44px;
+  padding: 10px 18px;
   border: 0;
   border-radius: var(--radius-sm, 8px);
   font-size: 0.8125rem;
@@ -1756,6 +1759,7 @@ html[lang="ar"] .skill-group h3 {
   color: var(--text);
   text-decoration: none;
   white-space: nowrap;
+  box-sizing: border-box;
   transition: border-color 200ms ease, color 200ms ease;
 }
 

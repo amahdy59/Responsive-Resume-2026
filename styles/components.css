@@ -452,6 +452,11 @@ html[lang="ar"] .credential-meta {
   position: relative;
 }
 
+[data-tooltip]::before,
+[data-tooltip]::after {
+  display: none;
+}
+
 [data-tooltip]::before {
   content: attr(data-tooltip);
   position: absolute;
@@ -495,10 +500,9 @@ html[lang="ar"] .credential-meta {
     visibility 150ms ease;
 }
 
-[data-tooltip]:hover::before,
-[data-tooltip]:focus-visible::before,
-[data-tooltip]:hover::after,
-[data-tooltip]:focus-visible::after {
+[data-tooltip]:is(:hover, :focus-visible):not([data-tooltip-dismissed])::before,
+[data-tooltip]:is(:hover, :focus-visible):not([data-tooltip-dismissed])::after {
+  display: block;
   opacity: 1;
   visibility: visible;
   transform: translateX(-50%) translateY(0);
