@@ -102,6 +102,10 @@
       <symbol id="icon-target" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol>
       <symbol id="icon-layers" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></symbol>
       <symbol id="icon-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></symbol>
+      <symbol id="icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
+      <symbol id="icon-zoom-in" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></symbol>
+      <symbol id="icon-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V4H4v12h4"/></symbol>
+      <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4L19 6"/></symbol>
     </svg>
     <div class="ambient-particles" aria-hidden="true"></div>
     <main class="resume-shell case-study-shell" id="case-study-content">
@@ -132,7 +136,13 @@
             </div>
           </div>
           <figure class="case-hero-image">
-            <img src="assets/case-cairo-airport-800.webp" srcset="assets/case-cairo-airport-480.webp 480w, assets/case-cairo-airport-800.webp 800w, assets/case-cairo-airport-1200.webp 1200w" sizes="(max-width: 560px) calc(100vw - 52px), (max-width: 960px) calc(100vw - 80px), 400px" width="1440" height="1586" alt="Cairo International Airport - Command Hub interface preview" class="case-study-image" decoding="async" fetchpriority="high" />
+            <div class="case-image-zoom-trigger">
+              <img src="assets/case-cairo-airport-800.webp" srcset="assets/case-cairo-airport-480.webp 480w, assets/case-cairo-airport-800.webp 800w, assets/case-cairo-airport-1200.webp 1200w" sizes="(max-width: 560px) calc(100vw - 52px), (max-width: 960px) calc(100vw - 80px), 400px" width="1440" height="1586" alt="Cairo International Airport - Command Hub interface preview" class="case-study-image" decoding="async" fetchpriority="high" />
+              <span class="case-image-zoom-badge" aria-hidden="true">
+                <svg><use href="#icon-zoom-in"></use></svg>
+                <span data-translate="cs_zoom_image">Zoom image</span>
+              </span>
+            </div>
             <figcaption class="case-image-hint" data-translate="cs_cairo_image_caption">Notice the hierarchy of operational signals and warning states within a dense dashboard.</figcaption>
           </figure>
         </header>
@@ -157,6 +167,11 @@
             <svg class="case-meta-icon" aria-hidden="true"><use href="#icon-signal"></use></svg>
             <span class="case-meta-label" data-translate="cs_status">Status</span>
             <strong class="case-meta-val status-live" data-translate="cs_cairo_status">Deployed Dashboard</strong>
+          </div>
+          <div class="case-meta-item">
+            <svg class="case-meta-icon" aria-hidden="true"><use href="#icon-clock"></use></svg>
+            <span class="case-meta-label" data-translate="cs_read_time">Read Time</span>
+            <strong class="case-meta-val" data-translate="cs_read_time_val">3 min read</strong>
           </div>
         </div>
 
@@ -204,6 +219,9 @@
             <span class="case-nav-text-full" data-translate="cs_sec3_short">Impact &amp; Learnings</span>
             <span class="case-nav-text-short" data-translate="cs_nav_impact">Impact</span>
           </a>
+          <div class="case-reading-progress" aria-hidden="true">
+            <div class="case-reading-progress-fill" id="case-reading-progress"></div>
+          </div>
         </nav>
 
         <div class="case-study-content">
@@ -214,6 +232,12 @@
               <svg class="accordion-chevron" aria-hidden="true"><use href="#icon-chevron-down"></use></svg>
             </summary>
             <div class="accordion-body">
+              <div class="section-action-bar">
+                <button class="section-copy-btn" type="button" data-copy-section="section-01" aria-label="Copy link to this section" data-translate-attr="aria-label" data-translate-attr-key="cs_copy_section">
+                  <svg class="section-copy-icon" aria-hidden="true"><use href="#icon-copy"></use></svg>
+                  <span class="section-copy-text" data-translate="cs_copy_section">Copy link to this section</span>
+                </button>
+              </div>
               <p data-translate="cs_cairo_sec1_desc">Airport station managers were overwhelmed by disparate data feeds across baggage handling, flight turnaround times, and gate congestion, causing delayed response times.</p>
             </div>
           </details>
@@ -225,6 +249,12 @@
               <svg class="accordion-chevron" aria-hidden="true"><use href="#icon-chevron-down"></use></svg>
             </summary>
             <div class="accordion-body">
+              <div class="section-action-bar">
+                <button class="section-copy-btn" type="button" data-copy-section="section-02" aria-label="Copy link to this section" data-translate-attr="aria-label" data-translate-attr-key="cs_copy_section">
+                  <svg class="section-copy-icon" aria-hidden="true"><use href="#icon-copy"></use></svg>
+                  <span class="section-copy-text" data-translate="cs_copy_section">Copy link to this section</span>
+                </button>
+              </div>
               <p data-translate="cs_cairo_sec2_desc">Structured an end-to-end data pipeline using SQL and Tableau to aggregate telemetry into clear visual quadrants with interactive threshold filtering.</p>
               <div class="case-callout">
                 <strong data-translate="cs_key_decision">Key Design Decision</strong>
@@ -249,6 +279,12 @@
               <svg class="accordion-chevron" aria-hidden="true"><use href="#icon-chevron-down"></use></svg>
             </summary>
             <div class="accordion-body">
+              <div class="section-action-bar">
+                <button class="section-copy-btn" type="button" data-copy-section="section-03" aria-label="Copy link to this section" data-translate-attr="aria-label" data-translate-attr-key="cs_copy_section">
+                  <svg class="section-copy-icon" aria-hidden="true"><use href="#icon-copy"></use></svg>
+                  <span class="section-copy-text" data-translate="cs_copy_section">Copy link to this section</span>
+                </button>
+              </div>
               <p data-translate="cs_cairo_sec4_desc">Transformed complex telemetry into immediate situational awareness, empowering shift managers to proactively allocate ground support equipment.</p>
               <div class="case-metrics-grid">
                 <div class="case-metric-card">
@@ -314,6 +350,19 @@
         </footer>
       </article>
     </main>
+
+    <div class="copy-toast" role="status" aria-live="polite" aria-atomic="true"></div>
+
+    <dialog class="image-lightbox" id="image-lightbox" aria-modal="true" aria-labelledby="image-lightbox-title">
+      <div class="lightbox-content">
+        <h2 class="sr-only" id="image-lightbox-title" data-translate="cs_image_preview">Image preview</h2>
+        <button class="lightbox-close-btn" type="button" aria-label="Close image preview" data-translate-attr="aria-label" data-translate-attr-key="cs_close_image_preview">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="lightbox-img-wrapper"></div>
+        <p class="lightbox-caption"></p>
+      </div>
+    </dialog>
 
     <script src="script.js" defer></script>
     <script src="audio-player.js" defer></script>

@@ -447,6 +447,17 @@
   background: color-mix(in srgb, var(--page) 60%, var(--surface));
 }
 
+.case-image-zoom-trigger {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  position: relative;
+  text-align: start;
+}
+
 .case-study-image {
   display: block;
   width: 100%;
@@ -457,8 +468,53 @@
   transition: opacity 180ms ease, transform 300ms ease;
 }
 
-.case-hero-image:hover .case-study-image {
+.case-study-image:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: -3px;
+}
+
+.case-hero-image:hover .case-study-image,
+.case-study-image:focus-visible {
   transform: scale(1.02);
+}
+
+.case-image-zoom-badge {
+  position: absolute;
+  bottom: 12px;
+  inset-inline-end: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgb(4 12 24 / 75%);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgb(255 255 255 / 25%);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  opacity: 0.85;
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease,
+    background-color 180ms ease;
+  pointer-events: none;
+}
+
+.case-image-zoom-badge svg {
+  width: 14px;
+  height: 14px;
+  stroke: currentcolor;
+  fill: none;
+  stroke-width: 2;
+}
+
+.case-hero-image:hover .case-image-zoom-badge,
+.case-study-image:focus-visible ~ .case-image-zoom-badge {
+  opacity: 1;
+  transform: scale(1.05);
+  background: var(--blue);
+  border-color: var(--blue);
 }
 
 .case-image-hint {
@@ -478,7 +534,7 @@
 /* ── Meta Grid ── */
 .case-meta-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 1px;
   margin-bottom: 28px;
   background: var(--line);
@@ -698,6 +754,37 @@
   }
 }
 
+.case-reading-progress {
+  position: absolute;
+  bottom: 0;
+  inset-inline: 16px;
+  height: 2px;
+  background: color-mix(in srgb, var(--line) 40%, transparent);
+  border-radius: 999px;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.case-reading-progress-fill {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--blue), var(--teal));
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+  transition: transform 60ms linear;
+}
+
+[dir="rtl"] .case-reading-progress-fill {
+  transform-origin: 100% 50%;
+  background: linear-gradient(270deg, var(--blue), var(--teal));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .case-reading-progress-fill {
+    transition: none !important;
+  }
+}
+
 .case-section-jump {
   display: none;
 }
@@ -772,6 +859,60 @@
 
 .case-accordion[open] .accordion-chevron {
   transform: rotate(180deg);
+}
+
+.section-action-bar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 14px;
+}
+
+.section-copy-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 6px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--pill-bg);
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color 150ms ease,
+    color 150ms ease,
+    border-color 150ms ease,
+    transform 150ms ease;
+}
+
+.section-copy-btn:hover {
+  background: color-mix(in srgb, var(--blue) 10%, var(--surface));
+  color: var(--blue);
+  border-color: color-mix(in srgb, var(--blue) 30%, var(--line));
+}
+
+.section-copy-btn:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+  color: var(--text);
+  border-color: var(--focus);
+}
+
+.section-copy-btn.copied {
+  background: color-mix(in srgb, var(--teal) 15%, var(--surface));
+  color: var(--teal);
+  border-color: color-mix(in srgb, var(--teal) 40%, var(--line));
+}
+
+.section-copy-icon {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentcolor;
+  stroke-width: 2;
+  flex-shrink: 0;
 }
 
 .accordion-body {

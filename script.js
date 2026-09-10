@@ -342,6 +342,11 @@ const translations = {
     cs_image_preview: "معاينة الصورة",
     cs_close_image_preview: "إغلاق معاينة الصورة",
     cs_zoom_image: "تكبير الصورة",
+    cs_zoom_hint: "انقر للتكبير",
+    cs_read_time: "وقت القراءة",
+    cs_read_time_val: "٣ دقائق قراءة",
+    cs_copy_section: "نسخ رابط هذا القسم",
+    cs_section_copied: "تم نسخ رابط القسم إلى الحافظة!",
     print_portfolio_title: "أحمد مهدي — ملف الأعمال التفاعلي ودراسات الحالة",
     print_scan_online: "امسح للعرض عبر الإنترنت",
     cs_role: "الدور",
@@ -872,6 +877,11 @@ const translations = {
     cs_image_preview: "Image preview",
     cs_close_image_preview: "Close image preview",
     cs_zoom_image: "Zoom image",
+    cs_zoom_hint: "Click to enlarge",
+    cs_read_time: "Read Time",
+    cs_read_time_val: "3 min read",
+    cs_copy_section: "Copy link to this section",
+    cs_section_copied: "Section link copied to clipboard!",
     print_portfolio_title: "Ahmed Mahdy — Interactive Portfolio & Case Studies",
     print_scan_online: "Scan to View Online",
     cs_role: "Role",
@@ -1964,6 +1974,10 @@ function initReadingProgressBar() {
     if (totalHeight > 0) {
       const progress = Math.min(Math.max(window.scrollY / totalHeight, 0), 1);
       bar.style.transform = `scaleX(${progress})`;
+      const navFill = document.getElementById("case-reading-progress");
+      if (navFill) {
+        navFill.style.transform = `scaleX(${progress})`;
+      }
     }
     ticking = false;
   };
@@ -2261,6 +2275,7 @@ function initialize() {
   initSelectEnhancements();
   enhanceLinkedCards();
   bindCopyButtons();
+  bindSectionCopyButtons();
   initReadingProgressBar();
   initBackToTop();
   initResumeDownloadMenu();
@@ -2685,34 +2700,49 @@ function initImageLightbox() {
 
   function ensureLightbox() {
     if (lightbox) return;
-    lightbox = document.createElement("dialog");
-    lightbox.id = "image-lightbox";
-    lightbox.className = "image-lightbox";
-    lightbox.setAttribute(
-      "aria-label",
-      getTranslation(getCurrentLanguage(), "cs_image_preview"),
-    );
-    lightbox.innerHTML = `
-      <div class="lightbox-content">
-        <button class="lightbox-close-btn" type="button">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 6L6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-        <div class="lightbox-img-wrapper">
-          <img class="lightbox-img" alt="" />
+    lightbox = document.getElementById("image-lightbox");
+    if (!lightbox) {
+      lightbox = document.createElement("dialog");
+      lightbox.id = "image-lightbox";
+      lightbox.className = "image-lightbox";
+      lightbox.setAttribute(
+        "aria-label",
+        getTranslation(getCurrentLanguage(), "cs_image_preview"),
+      );
+      lightbox.innerHTML = `
+        <div class="lightbox-content">
+          <button class="lightbox-close-btn" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 6L6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="lightbox-img-wrapper">
+            <img class="lightbox-img" alt="" />
+          </div>
+          <p class="lightbox-caption"></p>
         </div>
-        <p class="lightbox-caption"></p>
-      </div>
-    `;
-    document.body.appendChild(lightbox);
+      `;
+      document.body.appendChild(lightbox);
+    }
+    let wrapper = lightbox.querySelector(".lightbox-img-wrapper");
+    if (!wrapper) {
+      wrapper = document.createElement("div");
+      wrapper.className = "lightbox-img-wrapper";
+      lightbox.querySelector(".lightbox-content")?.appendChild(wrapper);
+    }
     lightboxImg = lightbox.querySelector(".lightbox-img");
+    if (!lightboxImg) {
+      lightboxImg = document.createElement("img");
+      lightboxImg.className = "lightbox-img";
+      lightboxImg.alt = "";
+      wrapper.appendChild(lightboxImg);
+    }
     lightboxCaption = lightbox.querySelector(".lightbox-caption");
     closeBtn = lightbox.querySelector(".lightbox-close-btn");
-    closeBtn.setAttribute(
+    closeBtn?.setAttribute(
       "aria-label",
       getTranslation(getCurrentLanguage(), "cs_close_image_preview"),
     );
 
-    closeBtn.addEventListener("click", closeLightbox);
+    closeBtn?.addEventListener("click", closeLightbox);
     lightbox.addEventListener("click", (e) => {
       if (
         e.target === lightbox ||
@@ -2729,7 +2759,7 @@ function initImageLightbox() {
     lightbox.addEventListener("keydown", (event) => {
       if (event.key === "Tab") {
         event.preventDefault();
-        closeBtn.focus({ preventScroll: true });
+        closeBtn?.focus({ preventScroll: true });
       }
     });
     lightbox.addEventListener("close", restoreLightboxState);
@@ -2740,17 +2770,20 @@ function initImageLightbox() {
     lastActiveElement = document.activeElement;
     lightboxImg.src = imgSrc;
     lightboxImg.alt = altText || "";
-    lightboxCaption.textContent = captionText || altText || "";
+    if (lightboxCaption) {
+      lightboxCaption.textContent = captionText || altText || "";
+    }
     lightbox.setAttribute(
       "aria-label",
       getTranslation(getCurrentLanguage(), "cs_image_preview"),
     );
-    closeBtn.setAttribute(
+    closeBtn?.setAttribute(
       "aria-label",
       getTranslation(getCurrentLanguage(), "cs_close_image_preview"),
     );
     lightbox.showModal();
-    closeBtn.focus({ preventScroll: true });
+    closeBtn?.focus({ preventScroll: true });
+    document.body.style.overflow = "hidden";
   }
 
   function closeLightbox() {
@@ -2759,9 +2792,11 @@ function initImageLightbox() {
   }
 
   function restoreLightboxState() {
-    if (lightboxImg)
+    document.body.style.overflow = "";
+    if (lightboxImg) {
       lightboxImg.src =
         "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E";
+    }
     if (lastActiveElement && typeof lastActiveElement.focus === "function") {
       lastActiveElement.focus();
     }
@@ -2780,11 +2815,12 @@ function initImageLightbox() {
     );
 
     const handleOpen = () => {
-      if (!img.naturalWidth) return;
+      if (!img.naturalWidth && !img.currentSrc && !img.src) return;
+      const bestSrc = img.currentSrc || img.src;
       const caption =
         img.closest("figure")?.querySelector("figcaption")?.textContent ||
         img.alt;
-      openLightbox(img.src, img.alt, caption);
+      openLightbox(bestSrc, img.alt, caption);
     };
 
     img.addEventListener("click", handleOpen);
@@ -2793,6 +2829,20 @@ function initImageLightbox() {
         e.preventDefault();
         handleOpen();
       }
+    });
+  });
+
+  const zoomTriggers = document.querySelectorAll(".case-image-zoom-trigger");
+  zoomTriggers.forEach((trigger) => {
+    const img = trigger.querySelector("img");
+    if (!img) return;
+    trigger.addEventListener("click", (e) => {
+      if (e.target === img) return;
+      const bestSrc = img.currentSrc || img.src;
+      const caption =
+        trigger.closest("figure")?.querySelector("figcaption")?.textContent ||
+        img.alt;
+      openLightbox(bestSrc, img.alt, caption);
     });
   });
 }
@@ -3057,5 +3107,43 @@ function initCertLightbox() {
 
   dialog.addEventListener("close", () => {
     wrap.replaceChildren();
+  });
+}
+
+// ── Case Study Section Deep Link Copy ─────────────────────────────────────
+function bindSectionCopyButtons() {
+  document.querySelectorAll("[data-copy-section]").forEach((button) => {
+    if (button.dataset.sectionCopyBound === "true") return;
+    button.dataset.sectionCopyBound = "true";
+
+    button.addEventListener("click", async (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+
+      const sectionId = button.dataset.copySection;
+      const url = new URL(window.location.href);
+      url.hash = sectionId;
+      const lang = getCurrentLanguage();
+
+      try {
+        await copyText(url.toString());
+        showToast(
+          getTranslation(
+            lang,
+            "cs_section_copied",
+            "Section link copied to clipboard!",
+          ),
+        );
+        setUseIcon(button, "#icon-check");
+        button.classList.add("copied");
+
+        window.setTimeout(() => {
+          setUseIcon(button, "#icon-copy");
+          button.classList.remove("copied");
+        }, 1500);
+      } catch {
+        showToast(`${getTranslation(lang, "toast_failed")} ${url.toString()}`);
+      }
+    });
   });
 }
