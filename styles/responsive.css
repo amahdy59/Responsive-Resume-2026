@@ -477,6 +477,20 @@
   .case-meta-grid {
     grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   }
+
+  .case-section-nav {
+    max-width: min(calc(100% - 24px), 480px);
+    padding: 4px 6px;
+    gap: 3px;
+  }
+
+  .case-section-back,
+  .case-section-link {
+    padding: 8px 12px;
+    font-size: 0.82rem;
+    gap: 6px;
+    min-height: 44px;
+  }
 }
 
 @media screen and (max-width: 640px) {
@@ -555,11 +569,11 @@
   .case-section-nav {
     display: flex;
     box-sizing: border-box;
-    width: calc(100% - 20px);
+    width: 100%;
     max-width: 440px;
     margin: 0 auto 16px;
     top: 8px;
-    padding: 4px;
+    padding: 3px;
     gap: 2px;
     border-radius: 999px;
     border: 1px solid color-mix(in srgb, var(--line) 70%, var(--blue) 30%);
@@ -584,9 +598,9 @@
     flex: 1 1 0;
     min-width: 0;
     min-height: 44px;
-    padding: 6px;
-    font-size: 0.78rem;
-    gap: 5px;
+    padding: 6px 3px;
+    font-size: 0.74rem;
+    gap: 4px;
     justify-content: center;
     text-align: center;
     white-space: nowrap;
@@ -594,17 +608,9 @@
   }
 
   .case-section-icon {
-    width: 15px;
-    height: 15px;
+    width: 14px;
+    height: 14px;
     flex-shrink: 0;
-  }
-
-  .case-nav-text-full {
-    display: none;
-  }
-
-  .case-nav-text-short {
-    display: inline;
   }
 
   .case-section-jump {
@@ -730,26 +736,40 @@
 }
 
 @media screen and (max-width: 360px) {
-  .section-nav,
-  .case-section-nav {
+  .section-nav {
     width: calc(100% - 10px);
     padding: 3px;
     gap: 1px;
   }
 
+  .case-section-nav {
+    width: 100%;
+    padding: 2px;
+    gap: 1px;
+  }
+
   .section-nav a,
-  .section-nav-link,
-  .case-section-back,
-  .case-section-link {
+  .section-nav-link {
     padding: 6px 2px;
     font-size: 0.72rem;
     gap: 3px;
   }
 
-  .section-nav-icon,
-  .case-section-icon {
+  .case-section-back,
+  .case-section-link {
+    padding: 6px 2px;
+    font-size: 0.70rem;
+    gap: 2px;
+  }
+
+  .section-nav-icon {
     width: 13px;
     height: 13px;
+  }
+
+  .case-section-icon {
+    width: 12px;
+    height: 12px;
   }
 
   .breadcrumbs [aria-current="page"] {

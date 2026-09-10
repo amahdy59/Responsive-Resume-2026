@@ -1461,6 +1461,20 @@ try {
           paginationFits,
           `${file}: pagination overflows at ${width}px`,
         );
+        const navFits = await page
+          .locator(".case-section-nav")
+          .evaluate((nav) => {
+            const navRect = nav.getBoundingClientRect();
+            const items = [
+              ...nav.querySelectorAll(".case-section-back, .case-section-link"),
+            ];
+            const itemsContained = items.every((el) => {
+              const r = el.getBoundingClientRect();
+              return r.left >= navRect.left - 1 && r.right <= navRect.right + 1;
+            });
+            return nav.scrollWidth <= nav.clientWidth + 1 && itemsContained;
+          });
+        assert.ok(navFits, `${file}: case-section-nav overflows at ${width}px`);
       }
 
       await page.emulateMedia({ media: "print" });
