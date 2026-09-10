@@ -6,6 +6,7 @@
     margin: 15mm 14mm 14mm;
 
     @top-left {
+      content: "";
       font: 500 8pt Aptos, Arial, sans-serif;
       color: #526172;
       vertical-align: top;
@@ -13,6 +14,7 @@
     }
 
     @top-right {
+      content: "Ahmed Mahdy | UX Designer & Data Visualizer";
       font: 650 8pt Aptos, Arial, sans-serif;
       color: #25364a;
       vertical-align: top;
@@ -27,6 +29,12 @@
   }
 
   @page resume-ar {
+    @top-right {
+      content: "أحمد مهدي | مصمم تجربة المستخدم ومصور البيانات";
+      font-family: "Noto Sans Arabic Variable", Arial, sans-serif;
+      direction: rtl;
+    }
+
     @bottom-center {
       content: "صفحة " counter(page) " من " counter(pages);
       font-family: "Noto Sans Arabic Variable", Arial, sans-serif;

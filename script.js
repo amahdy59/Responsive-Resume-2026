@@ -113,6 +113,8 @@ const translations = {
     hero_title: "مصمم تجربة المستخدم ومُصوِّر البيانات",
     control_contrast: "التباين العالي",
     control_contrast_state: "إيقاف",
+    control_on: "تشغيل",
+    control_off: "إيقاف",
     control_language: "اللغة",
     control_language_state: "English",
     control_print_label: "طباعة / حفظ",
@@ -629,6 +631,8 @@ const translations = {
     back_to_top: "Back to top",
     control_contrast: "High Contrast",
     control_contrast_state: "Off",
+    control_on: "On",
+    control_off: "Off",
     control_language: "Language",
     control_language_state: "العربية",
     control_print_label: "Print / Save",
@@ -1529,8 +1533,10 @@ function updateThemeButton(lang) {
     toggle.setAttribute("data-tooltip", tooltip);
     const state = toggle.querySelector(".control-state");
     if (state)
-      state.textContent =
-        lang === "ar" ? (isDark ? "تشغيل" : "إيقاف") : isDark ? "On" : "Off";
+      state.textContent = getTranslation(
+        lang,
+        isDark ? "control_on" : "control_off",
+      );
     setUseIcon(toggle, isDark ? "#icon-sun" : "#icon-moon");
   });
 }
@@ -1562,8 +1568,10 @@ function updateContrastButton(lang) {
     toggle.classList.toggle("active", isHigh);
     const state = toggle.querySelector(".control-state");
     if (state)
-      state.textContent =
-        lang === "ar" ? (isHigh ? "تشغيل" : "إيقاف") : isHigh ? "On" : "Off";
+      state.textContent = getTranslation(
+        lang,
+        isHigh ? "control_on" : "control_off",
+      );
   });
 }
 
@@ -1879,9 +1887,9 @@ function bindCopyButtons() {
 }
 
 /**
- * Dynamically generates and injects a <style> block that populates @page
- * running headers and footers with the current name, title, date, and
- * page counter — localised for the active language and text direction.
+ * Normalises text in the printable résumé document and updates aria-labels
+ * on the print button. The @page header/footer content is declared statically
+ * in print.css to avoid CSP violations on the production site.
  */
 function updatePrintStyles() {
   const printDocument = document.querySelector(".print-resume-document");
@@ -1896,51 +1904,6 @@ function updatePrintStyles() {
       node = walker.nextNode();
     }
   }
-
-  const lang = getCurrentLanguage();
-  const isRtl = root.getAttribute("dir") === "rtl";
-  const nameText =
-    document.querySelector('h1[data-translate="name"]')?.textContent?.trim() ||
-    "Ahmed Mahdy";
-  const titleText =
-    document.querySelector('p[data-translate="title"]')?.textContent?.trim() ||
-    "UX Designer & Data Visualizer";
-  const dateText = new Date().toLocaleDateString(
-    lang === "ar" ? "ar-EG" : "en-US",
-    {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-    },
-  );
-  const pageText = lang === "ar" ? "صفحة" : "Page";
-  const ofText = lang === "ar" ? "من" : "of";
-  const leftContent = isRtl ? `"${nameText} | ${titleText}"` : `"${dateText}"`;
-  const rightContent = isRtl ? `"${dateText}"` : `"${nameText} | ${titleText}"`;
-
-  let dynamicStyle = document.getElementById("print-dynamic-style");
-
-  if (!dynamicStyle) {
-    dynamicStyle = document.createElement("style");
-    dynamicStyle.id = "print-dynamic-style";
-    document.head.appendChild(dynamicStyle);
-  }
-
-  dynamicStyle.textContent = `
-    @media print {
-      @page {
-        @top-left {
-          content: ${leftContent} !important;
-        }
-        @top-right {
-          content: ${rightContent} !important;
-        }
-        @bottom-center {
-          content: "${pageText} " counter(page) " ${ofText} " counter(pages) !important;
-        }
-      }
-    }
-  `;
 }
 
 /**

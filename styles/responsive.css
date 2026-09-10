@@ -88,7 +88,7 @@
   }
 }
 
-@media screen and (max-width: 700px) {
+@media (max-width: 700px) {
   .controls-group {
     flex-direction: row;
     align-items: stretch;
@@ -186,16 +186,13 @@
   }
 }
 
-@media screen and (max-width: 560px) {
+@media (max-width: 560px) {
   .resume-shell {
     padding: 0;
   }
 
   .resume-card {
     border-radius: 0;
-  }
-
-  .resume-card {
     min-height: 100vh;
     border-width: 0;
   }
@@ -535,7 +532,6 @@
     overflow-x: auto;
     flex-wrap: nowrap;
     scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
     max-width: 100%;
   }
 
@@ -586,7 +582,7 @@
   }
 }
 
-@media screen and (max-width: 640px) {
+@media (max-width: 640px) {
   .case-study-pagination {
     grid-template-columns: 1fr;
   }
@@ -729,7 +725,7 @@
   }
 }
 
-@media screen and (max-width: 960px) {
+@media (max-width: 960px) {
   .case-study-nav {
     padding-inline: 0;
   }
@@ -753,7 +749,7 @@
 
 }
 
-@media screen and (max-width: 600px) {
+@media (max-width: 600px) {
   .case-nav-top-row {
     flex-direction: row;
     justify-content: space-between;
@@ -788,7 +784,7 @@
   }
 }
 
-@media screen and (max-width: 800px) {
+@media (max-width: 800px) {
   .skill-group {
     grid-template-columns: 1fr;
     gap: 16px;
@@ -807,7 +803,7 @@
   }
 }
 
-@media screen and (max-width: 560px) {
+@media (max-width: 560px) {
   .employment-panel .li-experience-group {
     padding: 20px 16px;
   }
@@ -829,7 +825,7 @@
   }
 }
 
-@media screen and (max-width: 360px) {
+@media (max-width: 360px) {
   .section-nav {
     width: calc(100% - 10px);
     padding: 3px;
@@ -845,14 +841,14 @@
   .section-nav a,
   .section-nav-link {
     padding: 6px 2px;
-    font-size: 0.72rem;
+    font-size: 0.75rem;
     gap: 3px;
   }
 
   .case-section-back,
   .case-section-link {
     padding: 6px 2px;
-    font-size: 0.70rem;
+    font-size: 0.75rem;
     gap: 2px;
   }
 

@@ -6,7 +6,7 @@
   position: relative;
   margin-top: 8px;
   padding: clamp(12px, 1.5vw, 18px) clamp(20px, 4vw, 46px) clamp(24px, 2.5vw, 32px);
-  color: #0f172a;
+  color: var(--text);
   background:
     radial-gradient(circle at 82% 18%, rgb(0 94 135 / 7%), transparent 28rem),
     linear-gradient(155deg, #fff 0%, #f8fafc 55%, #eef4f9 100%);
@@ -70,7 +70,7 @@
   font-weight: 800;
   line-height: 1.15;
   letter-spacing: -0.02em;
-  color: #0f172a;
+  color: var(--hero-title);
 }
 
 .hero-role {
@@ -85,7 +85,7 @@
   margin: 10px 0 0;
   font-size: clamp(0.9rem, 1.05vw, 1.05rem);
   line-height: 1.6;
-  color: #334155;
+  color: var(--hero-bio-color);
   max-width: 62ch;
 }
 

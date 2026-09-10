@@ -19,11 +19,16 @@ dd {
 }
 
 html {
-  scroll-behavior: smooth;
   overflow-x: clip;
 
   /* WCAG 2.4.11: prevent focus from being hidden under any fixed/sticky elements */
   scroll-padding-top: 96px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 html,
