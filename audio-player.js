@@ -200,7 +200,6 @@
     mute.setAttribute("aria-label", label);
     mute.setAttribute("aria-pressed", String(isMuted));
     mute.setAttribute("data-tooltip", label);
-    mute.title = label;
     mute.innerHTML = isMuted ? icons.volumeMuted : icons.volume;
     const volume = player.querySelector("[data-audio-volume]");
     volume.value = String(playbackVolume);
@@ -273,7 +272,6 @@
     const label = isExpanded ? copy().collapse : copy().expand;
     toggle.setAttribute("aria-label", label);
     toggle.setAttribute("data-tooltip", label);
-    toggle.title = label;
     player.dataset.expanded = String(isExpanded);
     document.body.classList.toggle(
       "audio-player-compact",
@@ -292,7 +290,6 @@
     toggle.setAttribute("aria-expanded", String(open));
     toggle.setAttribute("aria-label", label);
     toggle.setAttribute("data-tooltip", label);
-    toggle.title = label;
     toggle.querySelector("[data-audio-transcript-label]").textContent = label;
     player.querySelector("[data-audio-transcript-heading]").textContent =
       copy().transcriptHeading;
@@ -456,7 +453,6 @@
       const control = player.querySelector(selector);
       control.setAttribute("aria-label", label);
       control.setAttribute("data-tooltip", label);
-      control.title = label;
     }
     player.querySelector("[data-audio-speed-label]").textContent = copy().speed;
     const speedBtn = player.querySelector("[data-audio-speed-btn]");
@@ -464,7 +460,6 @@
       const tooltip = `${copy().speed}: ${playbackRate}×`;
       speedBtn.setAttribute("aria-label", tooltip);
       speedBtn.setAttribute("data-tooltip", tooltip);
-      speedBtn.title = tooltip;
       const badgeLabel = speedBtn.querySelector("[data-audio-speed-btn-label]");
       if (badgeLabel) badgeLabel.textContent = `${playbackRate}×`;
     }
@@ -479,7 +474,6 @@
     const toggleLabel = isPaused ? copy().resume : copy().pause;
     toggle.setAttribute("aria-label", toggleLabel);
     toggle.setAttribute("data-tooltip", toggleLabel);
-    toggle.title = toggleLabel;
     toggle.querySelector("[data-audio-toggle-icon]").innerHTML = isPaused
       ? icons.play
       : icons.pause;
@@ -505,7 +499,6 @@
       const tooltip = `${copy().speed}: ${playbackRate}×`;
       speedBtn.setAttribute("aria-label", tooltip);
       speedBtn.setAttribute("data-tooltip", tooltip);
-      speedBtn.title = tooltip;
     }
     const select = player?.querySelector("[data-audio-speed]");
     if (syncSelect && select && select.value !== String(playbackRate)) {

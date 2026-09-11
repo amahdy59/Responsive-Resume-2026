@@ -459,44 +459,45 @@ html[lang="ar"] .credential-meta {
 [data-tooltip]::before {
   content: attr(data-tooltip);
   position: absolute;
-  top: calc(100% + 8px);
-  left: 50%;
+  inset: calc(100% + 8px) auto auto 50%;
   transform: translateX(-50%) translateY(-4px);
   padding: 6px 10px;
-  background: var(--text);
-  color: var(--surface);
-  font-size: 0.72rem;
+  background: var(--tooltip-bg, #0f172a);
+  color: var(--tooltip-text, #f8fafc);
+  border: var(--tooltip-border, 1px solid rgb(15 23 42 / 10%));
+  box-shadow: var(--tooltip-shadow, 0 4px 14px rgb(15 23 42 / 24%), 0 1px 3px rgb(15 23 42 / 12%));
+  font-size: 0.75rem;
   font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: 0.01em;
   border-radius: 6px;
   white-space: nowrap;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
   z-index: 9999;
-  box-shadow: 0 4px 12px rgb(0 0 0 / 18%);
   transition:
-    opacity 150ms ease,
-    transform 150ms ease,
-    visibility 150ms ease;
+    opacity 150ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 150ms cubic-bezier(0.16, 1, 0.3, 1),
+    visibility 150ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 [data-tooltip]::after {
   content: "";
   position: absolute;
-  top: calc(100% + 2px);
-  left: 50%;
+  inset: calc(100% + 2px) auto auto 50%;
   transform: translateX(-50%) translateY(-4px);
   border-width: 0 5px 6px;
   border-style: solid;
-  border-color: transparent transparent var(--text) transparent;
+  border-color: transparent transparent var(--tooltip-bg, #0f172a) transparent;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
   z-index: 9999;
   transition:
-    opacity 150ms ease,
-    transform 150ms ease,
-    visibility 150ms ease;
+    opacity 150ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 150ms cubic-bezier(0.16, 1, 0.3, 1),
+    visibility 150ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 [data-tooltip]:is(:hover, :focus-visible):not([data-tooltip-dismissed])::before,
@@ -1091,30 +1092,25 @@ html[lang="ar"] .credential-meta {
   display: none;
 }
 
-.global-audio-player [data-tooltip]:is(:hover, :focus-visible)::before,
-.global-audio-player [data-tooltip]:is(:hover, :focus-visible)::after {
+.global-audio-player [data-tooltip]::before {
+  inset: auto auto calc(100% + 8px) 50%;
+  transform: translateX(-50%) translateY(4px);
+}
+
+.global-audio-player [data-tooltip]::after {
+  inset: auto auto calc(100% + 2px) 50%;
+  transform: translateX(-50%) translateY(4px);
+  border-width: 6px 5px 0;
+  border-style: solid;
+  border-color: var(--tooltip-bg, #0f172a) transparent transparent transparent;
+}
+
+.global-audio-player [data-tooltip]:is(:hover, :focus-visible):not([data-tooltip-dismissed])::before,
+.global-audio-player [data-tooltip]:is(:hover, :focus-visible):not([data-tooltip-dismissed])::after {
   display: block;
-}
-
-.global-audio-player [data-audio-previous]::before {
-  left: 0;
-  transform: scale(0.9);
-  transform-origin: bottom left;
-}
-
-.global-audio-player [data-audio-previous]:is(:hover, :focus-visible)::before {
-  transform: scale(1);
-}
-
-.global-audio-player :is([data-audio-mute], [data-audio-stop], [data-audio-expand])::before {
-  right: 0;
-  left: auto;
-  transform: scale(0.9);
-  transform-origin: bottom right;
-}
-
-.global-audio-player :is([data-audio-mute], [data-audio-stop], [data-audio-expand]):is(:hover, :focus-visible)::before {
-  transform: scale(1);
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
 }
 
 .has-audio-player {

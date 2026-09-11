@@ -940,14 +940,27 @@ try {
           .locator(".theme-toggle")
           .evaluate((button) => {
             const style = getComputedStyle(button, "::before");
-            return { left: style.left, right: style.right };
+            return {
+              opacity: style.opacity,
+              visibility: style.visibility,
+              height: parseFloat(style.height) || 0,
+              top: style.top,
+              bottom: style.bottom,
+            };
           });
-        const outsideEdge =
-          scenario.language === "ar" ? tooltip.left : tooltip.right;
-        assert.notEqual(
-          outsideEdge,
-          "auto",
-          "Tablet tooltip should open away from the portrait",
+        assert.equal(
+          tooltip.opacity,
+          "1",
+          "Tablet tooltip should be visible on focus",
+        );
+        assert.equal(
+          tooltip.visibility,
+          "visible",
+          "Tablet tooltip should have visible visibility",
+        );
+        assert.ok(
+          tooltip.height > 10,
+          "Tablet tooltip should have positive rendered height",
         );
       }
 

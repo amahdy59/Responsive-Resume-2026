@@ -2,64 +2,6 @@
    here so a layout bug at a given width has one place to check. */
 
 
-@media screen and (min-width: 561px) {
-  /* Keep tooltips beside the vertical controls column on tablet and desktop. */
-  html[lang="en"] .controls-group [data-tooltip]::before {
-    bottom: 50%;
-    left: auto;
-    right: 100%;
-    transform: translateY(50%) scale(0.9);
-  }
-
-  html[lang="en"] .controls-group [data-tooltip]::after {
-    bottom: 50%;
-    left: auto;
-    right: calc(100% + 2px);
-    transform: translateY(50%) scale(0.9);
-    border-color: transparent transparent transparent var(--text);
-    border-width: 5px 0 5px 5px;
-  }
-
-  html[lang="en"] .controls-group [data-tooltip]:hover::before,
-  html[lang="en"] .controls-group [data-tooltip]:focus-visible::before {
-    transform: translateY(50%) scale(1);
-    opacity: 1;
-  }
-
-  html[lang="en"] .controls-group [data-tooltip]:hover::after,
-  html[lang="en"] .controls-group [data-tooltip]:focus-visible::after {
-    transform: translateY(50%) scale(1);
-    opacity: 1;
-  }
-
-  html[lang="ar"] .controls-group [data-tooltip]::before {
-    bottom: 50%;
-    right: auto;
-    left: 100%;
-    transform: translateY(50%) scale(0.9);
-  }
-
-  html[lang="ar"] .controls-group [data-tooltip]::after {
-    bottom: 50%;
-    right: auto;
-    left: calc(100% + 2px);
-    transform: translateY(50%) scale(0.9);
-    border-color: transparent var(--text) transparent transparent;
-    border-width: 5px 5px 5px 0;
-  }
-
-  html[lang="ar"] .controls-group [data-tooltip]:hover::before,
-  html[lang="ar"] .controls-group [data-tooltip]:focus-visible::before {
-    transform: translateY(50%) scale(1);
-    opacity: 1;
-  }
-
-  html[lang="ar"] .controls-group [data-tooltip]:hover::after,
-  html[lang="ar"] .controls-group [data-tooltip]:focus-visible::after {
-    transform: translateY(50%) scale(1);
-    opacity: 1;
-  }
-}
 
 @media screen and (min-width: 561px) and (max-width: 1080px) {
   /* ── Tablet Hero ── */

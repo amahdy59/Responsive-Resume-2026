@@ -259,49 +259,7 @@
   border-color: var(--blue);
 }
 
-.case-study-controls [data-tooltip]::before {
-  left: auto;
-  right: 0;
-  transform: translateY(-4px);
-}
 
-.case-study-controls [data-tooltip]:is(:hover, :focus-visible):not([data-tooltip-dismissed])::before {
-  transform: translateY(0);
-}
-
-.case-study-controls [data-tooltip]::after {
-  left: auto;
-  right: 14px;
-  transform: translateY(-4px);
-}
-
-.case-study-controls [data-tooltip]:is(:hover, :focus-visible):not([data-tooltip-dismissed])::after {
-  transform: translateY(0);
-}
-
-[dir="rtl"] .case-study-controls [data-tooltip]::before,
-html[lang="ar"] .case-study-controls [data-tooltip]::before {
-  right: auto;
-  left: 0;
-  transform: translateY(-4px);
-}
-
-[dir="rtl"] .case-study-controls [data-tooltip]:is(:hover, :focus-visible):not([data-tooltip-dismissed])::before,
-html[lang="ar"] .case-study-controls [data-tooltip]:is(:hover, :focus-visible):not([data-tooltip-dismissed])::before {
-  transform: translateY(0);
-}
-
-[dir="rtl"] .case-study-controls [data-tooltip]::after,
-html[lang="ar"] .case-study-controls [data-tooltip]::after {
-  right: auto;
-  left: 14px;
-  transform: translateY(-4px);
-}
-
-[dir="rtl"] .case-study-controls [data-tooltip]:is(:hover, :focus-visible):not([data-tooltip-dismissed])::after,
-html[lang="ar"] .case-study-controls [data-tooltip]:is(:hover, :focus-visible):not([data-tooltip-dismissed])::after {
-  transform: translateY(0);
-}
 
 .case-listen-btn {
   display: inline-flex;

@@ -63,6 +63,10 @@
   --pill-bg: #000;
   --date-bg: #000;
   --date-text: #86efac;
+  --tooltip-bg: #000;
+  --tooltip-text: #fff;
+  --tooltip-border: 1.5px solid #fff;
+  --tooltip-shadow: none;
 }
 
 [data-contrast="high"] .hero-cta {
@@ -184,6 +188,10 @@
 
 [data-contrast="high"] [data-tooltip]::after {
   border-color: transparent transparent #fff !important;
+}
+
+[data-contrast="high"] .global-audio-player [data-tooltip]::after {
+  border-color: #fff transparent transparent !important;
 }
 
 [data-contrast="high"] .hero-contact-card {
