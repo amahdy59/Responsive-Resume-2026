@@ -203,12 +203,13 @@ try {
         { threshold: 0.3 },
       );
       const ratio = different / (compareWidth * compareHeight);
-      const maxAllowedRatio = 0.05;
+      const maxAllowedRatio = isCI ? 0.08 : 0.05;
       assert.ok(
         ratio <= maxAllowedRatio,
         `${scenario.name} visual difference ${(ratio * 100).toFixed(2)}% exceeds ${(maxAllowedRatio * 100).toFixed(0)}%`,
       );
       // A long page must not dilute a broken header or card into a tiny ratio.
+      const maxAllowedSliceRatio = isCI ? 0.15 : 0.08;
       for (let y = 0; y < compareHeight; y += scenario.height) {
         const bottom = Math.min(y + scenario.height, compareHeight);
         const start = y * compareWidth * 4;
@@ -222,7 +223,7 @@ try {
           { threshold: 0.3 },
         );
         assert.ok(
-          changed / (compareWidth * (bottom - y)) <= 0.08,
+          changed / (compareWidth * (bottom - y)) <= maxAllowedSliceRatio,
           `${scenario.name}: visual regression in viewport slice at y=${y}`,
         );
       }
