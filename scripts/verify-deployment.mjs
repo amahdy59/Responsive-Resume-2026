@@ -125,6 +125,9 @@ try {
       "Mobile overflow",
     );
     await page.locator(".theme-toggle").click();
+    await page.waitForFunction(
+      () => document.documentElement.getAttribute("data-theme") === "dark",
+    );
     assert.equal(await page.locator("html").getAttribute("data-theme"), "dark");
     await page.locator(".resume-download-menu > summary").click();
     for (const extension of ["pdf", "docx"]) {
