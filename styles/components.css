@@ -500,8 +500,8 @@ html[lang="ar"] .credential-meta {
     visibility 150ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-[data-tooltip]:is(:hover, :focus-visible):not([data-tooltip-dismissed])::before,
-[data-tooltip]:is(:hover, :focus-visible):not([data-tooltip-dismissed])::after {
+[data-tooltip]:is(:hover, :focus, :focus-visible):not([data-tooltip-dismissed])::before,
+[data-tooltip]:is(:hover, :focus, :focus-visible):not([data-tooltip-dismissed])::after {
   display: block;
   opacity: 1;
   visibility: visible;
@@ -510,7 +510,7 @@ html[lang="ar"] .credential-meta {
 
 /* AAA 1.4.13: tooltip content must be hoverable by pointer */
 [data-tooltip]:hover::before,
-[data-tooltip]:focus-visible::before {
+[data-tooltip]:is(:focus, :focus-visible)::before {
   pointer-events: auto;
 }
 
@@ -1105,8 +1105,8 @@ html[lang="ar"] .credential-meta {
   border-color: var(--tooltip-bg, #0f172a) transparent transparent transparent;
 }
 
-.global-audio-player [data-tooltip]:is(:hover, :focus-visible):not([data-tooltip-dismissed])::before,
-.global-audio-player [data-tooltip]:is(:hover, :focus-visible):not([data-tooltip-dismissed])::after {
+.global-audio-player [data-tooltip]:is(:hover, :focus, :focus-visible):not([data-tooltip-dismissed])::before,
+.global-audio-player [data-tooltip]:is(:hover, :focus, :focus-visible):not([data-tooltip-dismissed])::after {
   display: block;
   opacity: 1;
   visibility: visible;

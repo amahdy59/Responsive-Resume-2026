@@ -936,6 +936,13 @@ try {
 
       if (scenario.width === 768) {
         await page.locator(".theme-toggle").focus();
+        await page.waitForFunction(
+          () =>
+            getComputedStyle(
+              document.querySelector(".theme-toggle"),
+              "::before",
+            ).opacity === "1",
+        );
         const tooltip = await page
           .locator(".theme-toggle")
           .evaluate((button) => {
