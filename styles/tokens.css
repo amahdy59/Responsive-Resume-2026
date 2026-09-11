@@ -82,7 +82,7 @@
   --radius-pill: 999px;
   --shadow-1: 0 4px 8px rgb(0 0 0 / 13%);
   --shadow-2: 0 16px 40px rgb(0 0 0 / 25%);
-  --motion-fast: 120ms;
+  --motion-fast: 90ms;
   --motion-normal: 180ms;
   --motion-slow: 260ms;
   --ease-standard: cubic-bezier(0.2, 0, 0, 1);

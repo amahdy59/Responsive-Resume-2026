@@ -14,6 +14,11 @@
 }
 
 /* High Contrast Mode overrides */
+[data-contrast="high"],
+[data-contrast="high"] * {
+  transition: none !important;
+}
+
 [data-contrast="high"] {
   --page: #000;
   --surface: #000;
@@ -583,17 +588,10 @@ html[lang] .controls-group [data-tooltip][data-tooltip-dismissed]::after {
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  html,
-  body,
-  .resume-shell,
-  .portfolio-header,
-  .panel,
-  .case-study-card {
+  body {
     transition:
-      background-color 220ms ease,
-      color 220ms ease,
-      border-color 220ms ease,
-      box-shadow 220ms ease;
+      background-color var(--motion-fast) var(--ease-standard),
+      color var(--motion-fast) var(--ease-standard);
   }
 
   :where(
@@ -609,7 +607,7 @@ html[lang] .controls-group [data-tooltip][data-tooltip-dismissed]::after {
     .language-option
   ):active {
     transform: scale(0.96);
-    transition-duration: var(--motion-fast);
+    transition: none;
   }
 }
 

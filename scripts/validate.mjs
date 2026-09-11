@@ -28,8 +28,14 @@ const projects = JSON.parse(
   readFileSync(resolve(root, "data", "projects.json"), "utf8"),
 );
 
-const translationKeyPattern = /\b(ar|en):\s*\{([\s\S]*?)\n\s*\}/g;
-const dictionaryKeyPattern = /\b([a-zA-Z0-9_]+)\s*:/g;
+const locales = {
+  ar: JSON.parse(
+    readFileSync(resolve(root, "data", "locales", "ar.json"), "utf8"),
+  ),
+  en: JSON.parse(
+    readFileSync(resolve(root, "data", "locales", "en.json"), "utf8"),
+  ),
+};
 const htmlTextKeyPattern = /data-translate="([^"]+)"/g;
 const htmlAttrKeyPattern = /data-translate-attr-key="([^"]+)"/g;
 const blankLinkPattern = /<a\b[^>]*target="_blank"[^>]*rel="([^"]*)"[^>]*>/g;
@@ -41,28 +47,15 @@ function uniqueMatches(source, pattern) {
 }
 
 function getDictionaryKeys(language) {
-  const match = [...script.matchAll(translationKeyPattern)].find(
-    (item) => item[1] === language,
-  );
-
-  if (!match) {
+  const dict = locales[language];
+  if (!dict) {
     throw new Error(`Missing translation dictionary for "${language}"`);
   }
-
-  return [
-    ...new Set(
-      [...match[2].matchAll(dictionaryKeyPattern)].map((item) => item[1]),
-    ),
-  ].sort();
+  return Object.keys(dict).sort();
 }
 
 function readTranslations() {
-  const start = script.indexOf("const translations = ");
-  const end = script.indexOf("\n};\n\n/**", start);
-  if (start < 0 || end < 0) throw new Error("Unable to read translations.");
-  return Function(
-    `"use strict"; return (${script.slice(start + "const translations = ".length, end + 2)});`,
-  )();
+  return locales;
 }
 
 const allHtmlSource = htmlDocuments.map(({ source }) => source).join("\n");

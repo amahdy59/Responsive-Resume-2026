@@ -89,11 +89,12 @@ try {
   for (const scenario of scenarios) {
     const samples = [];
     for (let run = 0; run < 3; run++) {
-      const page = await browser.newPage({
+      const context = await browser.newContext({
         viewport: scenario.mobile
           ? { width: 375, height: 812 }
           : { width: 1280, height: 800 },
       });
+      const page = await context.newPage();
       page.setDefaultNavigationTimeout(30000);
       page.setDefaultTimeout(30000);
       const devtools = await page.context().newCDPSession(page);
@@ -154,6 +155,7 @@ try {
       const metrics = await page.evaluate(() => ({ ...window.__quality }));
       samples.push({ ...metrics, transferredBytes });
       await page.close();
+      await context.close();
     }
     const median = (key) =>
       samples.map((sample) => sample[key]).sort((a, b) => a - b)[1];
@@ -183,6 +185,9 @@ try {
   console.log(
     "Performance budgets passed. Field Core Web Vitals require real-user data.",
   );
+} catch (error) {
+  console.error(error);
+  process.exitCode = 1;
 } finally {
   await browser.close();
   server.closeAllConnections?.();

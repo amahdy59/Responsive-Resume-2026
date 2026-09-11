@@ -31,11 +31,10 @@ html {
   }
 }
 
-html,
 body {
   transition:
-    background-color 420ms ease,
-    color 420ms ease;
+    background-color var(--motion-fast) var(--ease-standard),
+    color var(--motion-fast) var(--ease-standard);
 }
 
 body {
@@ -55,18 +54,12 @@ body {
 }
 
 :where(
-  .resume-card,
-  .panel,
   .hero-cta,
-  .compact-list li,
-  .featured article,
-  .tags span,
-  .pills > span,
   .copy-button
 ) {
-  transition-property: background-color, background, border-color, box-shadow, color, opacity, transform;
-  transition-duration: 260ms;
-  transition-timing-function: ease;
+  transition-property: background-color, border-color, color, opacity;
+  transition-duration: var(--motion-fast);
+  transition-timing-function: var(--ease-standard);
 }
 
 body::selection {

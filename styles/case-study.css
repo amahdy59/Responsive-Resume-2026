@@ -1174,8 +1174,11 @@ html[lang="ar"] .case-study-controls [data-tooltip]:is(:hover, :focus-visible):n
   border-radius: 12px;
   background: var(--panel);
   color: var(--text);
-  text-decoration: none !important;
-  transition: background-color var(--motion-normal) var(--ease-standard), border-color var(--motion-normal) var(--ease-standard), box-shadow var(--motion-normal) var(--ease-standard), color var(--motion-normal) var(--ease-standard), transform var(--motion-normal) var(--ease-standard);
+  transition:
+    background-color var(--motion-fast) var(--ease-standard),
+    border-color var(--motion-fast) var(--ease-standard),
+    color var(--motion-fast) var(--ease-standard),
+    transform var(--motion-fast) var(--ease-standard);
 }
 
 .pagination-card:hover,

@@ -43,16 +43,32 @@ const requiredPaths = [
 // accessibility modes, print) last. Concatenated 1:1 into the single
 // fingerprinted styles.css bundle below — this list is the only place that
 // order is decided.
-const styleBundleOrder = [
+const commonPrefixStyles = [
   "tokens.css",
   "base.css",
   "animations.css",
   "components.css",
-  "home.css",
-  "case-study.css",
+];
+const commonSuffixStyles = [
   "responsive.css",
   "accessibility-modes.css",
   "print.css",
+];
+const homeStyleOrder = [
+  ...commonPrefixStyles,
+  "home.css",
+  ...commonSuffixStyles,
+];
+const caseStyleOrder = [
+  ...commonPrefixStyles,
+  "case-study.css",
+  ...commonSuffixStyles,
+];
+const styleBundleOrder = [
+  ...commonPrefixStyles,
+  "home.css",
+  "case-study.css",
+  ...commonSuffixStyles,
 ];
 const hash = (value) =>
   createHash("sha256").update(value).digest("hex").slice(0, 10);
@@ -90,16 +106,15 @@ async function fingerprintDirectory(source, destination, webPrefix, mapping) {
   }
 }
 
-function readTranslations(scriptSource) {
-  const start = scriptSource.indexOf("const translations = ");
-  const end = scriptSource.indexOf("\n};\n\n/**", start);
-  if (start < 0 || end < 0)
-    throw new Error("Unable to locate translation dictionaries.");
-  const objectLiteral = scriptSource.slice(
-    start + "const translations = ".length,
-    end + 2,
-  );
-  return Function(`"use strict"; return (${objectLiteral});`)();
+async function readTranslations() {
+  return {
+    ar: JSON.parse(
+      await readFile(join(root, "data", "locales", "ar.json"), "utf8"),
+    ),
+    en: JSON.parse(
+      await readFile(join(root, "data", "locales", "en.json"), "utf8"),
+    ),
+  };
 }
 
 function ensureAlternateLinks(document, localizedPath, legacyPath) {
@@ -320,12 +335,41 @@ function updateLocalizedLinks(document, language, pageByFile) {
   });
 }
 
-function rewriteAssetReferences(document, mapping, bundleNames) {
+function minifyCss(source) {
+  return source
+    .replace(/\/\*[\s\S]*?\*\//g, "")
+    .replace(/\r\n/g, "\n")
+    .split("\n")
+    .map((line) => line.trim())
+    .filter(Boolean)
+    .join("\n");
+}
+
+function minifyJs(source) {
+  return source
+    .replace(/^\s*\/\/.*$/gm, "")
+    .replace(/\/\*[\s\S]*?\*\//g, "")
+    .replace(/\r\n/g, "\n")
+    .split("\n")
+    .map((line) => line.trimEnd())
+    .filter(Boolean)
+    .join("\n");
+}
+
+function rewriteAssetReferences(
+  document,
+  mapping,
+  bundleNames,
+  targetStyleBundle = "styles.css",
+) {
   // Discover the active font early to reduce layout movement during font swap.
   const fonts =
     document.documentElement.lang === "ar"
       ? ["noto-sans-arabic-arabic"]
       : ["inter-latin"];
+  const anchor = document.head.querySelector(
+    'link[rel="preload"], link[rel="stylesheet"], script',
+  );
   for (const font of fonts) {
     const preload = document.createElement("link");
     preload.rel = "preload";
@@ -333,15 +377,23 @@ function rewriteAssetReferences(document, mapping, bundleNames) {
     preload.type = "font/woff2";
     preload.setAttribute("crossorigin", "anonymous");
     preload.href = `assets/fonts/${font}-wght-normal.woff2`;
-    document.head.append(preload);
+    if (anchor) {
+      anchor.before(preload);
+    } else {
+      document.head.append(preload);
+    }
   }
   document.querySelectorAll("[src], [href]").forEach((node) => {
     for (const attribute of ["src", "href"]) {
       const value = node.getAttribute(attribute);
       if (!value) continue;
-      if (mapping.has(value)) node.setAttribute(attribute, mapping.get(value));
-      else if (bundleNames.has(value))
+      if (value === "styles.css" && bundleNames.has(targetStyleBundle)) {
+        node.setAttribute(attribute, bundleNames.get(targetStyleBundle));
+      } else if (mapping.has(value)) {
+        node.setAttribute(attribute, mapping.get(value));
+      } else if (bundleNames.has(value)) {
         node.setAttribute(attribute, bundleNames.get(value));
+      }
     }
   });
   document.querySelectorAll("[srcset]").forEach((node) => {
@@ -395,10 +447,28 @@ await fingerprintDirectory(
   "assets",
   assetMapping,
 );
-const scriptSource = (
-  await readFile(join(root, "script.js"), "utf8")
-).replaceAll("\r\n", "\n");
-const translations = readTranslations(scriptSource);
+let scriptSource = (await readFile(join(root, "script.js"), "utf8")).replaceAll(
+  "\r\n",
+  "\n",
+);
+const translations = await readTranslations();
+scriptSource = scriptSource.replace(
+  'import { translations } from "./data/translations.js";',
+  `const translations = ${JSON.stringify(translations)};`,
+);
+
+const stylesHomeBundle = (
+  await Promise.all(
+    homeStyleOrder.map((file) => readFile(join(root, "styles", file), "utf8")),
+  )
+).join("\n");
+
+const stylesCaseBundle = (
+  await Promise.all(
+    caseStyleOrder.map((file) => readFile(join(root, "styles", file), "utf8")),
+  )
+).join("\n");
+
 const stylesBundle = (
   await Promise.all(
     styleBundleOrder.map((file) =>
@@ -406,14 +476,20 @@ const stylesBundle = (
     ),
   )
 ).join("\n");
+
 const bundleSources = new Map([
-  ["styles.css", stylesBundle],
-  ["fonts.css", await readFile(join(root, "fonts.css"), "utf8")],
-  ["script.js", scriptSource],
-  ["audio-player.js", await readFile(join(root, "audio-player.js"), "utf8")],
+  ["styles.css", minifyCss(stylesBundle)],
+  ["styles-home.css", minifyCss(stylesHomeBundle)],
+  ["styles-case.css", minifyCss(stylesCaseBundle)],
+  ["fonts.css", minifyCss(await readFile(join(root, "fonts.css"), "utf8"))],
+  ["script.js", minifyJs(scriptSource)],
+  [
+    "audio-player.js",
+    minifyJs(await readFile(join(root, "audio-player.js"), "utf8")),
+  ],
   [
     "preference-bootstrap.js",
-    await readFile(join(root, "preference-bootstrap.js"), "utf8"),
+    minifyJs(await readFile(join(root, "preference-bootstrap.js"), "utf8")),
   ],
 ]);
 for (const [stablePath, hashedPath] of assetMapping) {
@@ -474,8 +550,14 @@ for (const page of pages) {
     legacyOgAltLocale.setAttribute("property", "og:locale:alternate");
     legacyDocument.head.append(legacyOgAltLocale);
   }
-  legacyOgAltLocale.setAttribute("content", "ar_EG");
-  rewriteAssetReferences(legacyDocument, assetMapping, bundleNames);
+  const targetStyleBundle =
+    page.file === "index.html" ? "styles-home.css" : "styles-case.css";
+  rewriteAssetReferences(
+    legacyDocument,
+    assetMapping,
+    bundleNames,
+    targetStyleBundle,
+  );
   await writeFile(join(dist, page.file), serialize(legacyDocument));
 
   for (const language of ["en", "ar"]) {
@@ -494,7 +576,12 @@ for (const page of pages) {
     document
       .querySelector('meta[property="og:url"]')
       ?.setAttribute("content", canonicalUrl);
-    rewriteAssetReferences(document, assetMapping, bundleNames);
+    rewriteAssetReferences(
+      document,
+      assetMapping,
+      bundleNames,
+      targetStyleBundle,
+    );
     const outputDirectory =
       page.localizedPath === "/"
         ? join(dist, language)
