@@ -230,6 +230,9 @@ try {
     }
     await context.close();
   }
+} catch (error) {
+  console.error("Visual regression error:", error);
+  process.exitCode = 1;
 } finally {
   await browser.close();
   server.closeAllConnections?.();
