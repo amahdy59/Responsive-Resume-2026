@@ -1526,12 +1526,14 @@ function initSectionNavigation() {
 
 document.querySelectorAll(".theme-toggle").forEach((button) => {
   button.addEventListener("click", () => {
+    button.dataset.tooltipDismissed = "true";
     setTheme(root.dataset.theme === "dark" ? "light" : "dark");
   });
 });
 
 document.querySelectorAll(".contrast-toggle").forEach((button) => {
   button.addEventListener("click", () => {
+    button.dataset.tooltipDismissed = "true";
     setContrast(root.dataset.contrast === "high" ? "normal" : "high");
   });
 });

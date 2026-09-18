@@ -26,17 +26,17 @@
   --line: #fff;
   --soft-line: #fff;
   --text: #fff;
-  --muted: #86efac; /* Softer mint green instead of harsh yellow */
-  --blue: #0ff;
-  --accent: #0ff;
-  --project-accent: #0ff;
+  --muted: #86efac; /* Softer mint green for secondary info */
+  --blue: #ffd700; /* Gold: ~17:1 on #000, works across all CVD types */
+  --accent: #ffd700;
+  --project-accent: #ffd700;
   --focus: #86efac; /* Softer focus ring green */
   --page-background: #000;
   --hero-gradient: #000;
   --hero-title: #fff;
   --hero-subtitle: #86efac;
   --hero-surface: #000;
-  --hero-role-color: #0ff;
+  --hero-role-color: #ffd700;
   --hero-bio-color: #fff;
   --hero-border: #fff;
   --hero-contact-card-bg: #000;
@@ -49,11 +49,11 @@
   --hero-rail-bg: #000;
   --hero-rail-border: #fff;
   --hero-rail-color: #fff;
-  --hero-btn-ghost-text: #0ff;
-  --hero-btn-primary-bg: #0ff;
+  --hero-btn-ghost-text: #ffd700;
+  --hero-btn-primary-bg: #ffd700;
   --hero-btn-primary-text: #000;
   --text-secondary: #fff;
-  --link-aaa: #0ff;
+  --link-aaa: #ffd700;
   --inner-card: #000;
   --project-bg: #000;
   --cert-card: #000;
@@ -71,14 +71,14 @@
 
 [data-contrast="high"] .hero-cta {
   background: #000 !important;
-  border: 1px solid #0ff !important;
-  box-shadow: inset 0 0 0 1px #0ff !important;
-  color: #0ff !important;
+  border: 1px solid #ffd700 !important;
+  box-shadow: inset 0 0 0 1px #ffd700 !important;
+  color: #ffd700 !important;
 }
 
 [data-contrast="high"] .hero-cta:hover,
 [data-contrast="high"] .hero-cta:focus-visible {
-  background: #0ff !important;
+  background: #ffd700 !important;
   color: #000 !important;
 }
 
@@ -93,7 +93,7 @@
 }
 
 [data-contrast="high"] .portfolio-header .hero-role {
-  color: #0ff !important;
+  color: #ffd700 !important;
 }
 
 [data-contrast="high"] .tag-pill {
@@ -105,13 +105,13 @@
 
 [data-contrast="high"] .tag-pill:hover,
 [data-contrast="high"] .tag-pill:focus-visible {
-  border-color: #0ff !important;
-  box-shadow: inset 0 0 0 1px #0ff !important;
-  color: #0ff !important;
+  border-color: #ffd700 !important;
+  box-shadow: inset 0 0 0 1px #ffd700 !important;
+  color: #ffd700 !important;
 }
 
 [data-contrast="high"] .hero-btn-resume {
-  color: #0ff !important;
+  color: #ffd700 !important;
 }
 
 [data-contrast="high"] .hero-btn-resume:hover,
@@ -136,15 +136,15 @@
 [data-contrast="high"] .resume-download-options > a:focus-visible,
 [data-contrast="high"] .resume-download-options > button:focus-visible {
   background: #000 !important;
-  color: #0ff !important;
-  outline: 2px solid #0ff !important;
+  color: #ffd700 !important;
+  outline: 2px solid #ffd700 !important;
 }
 
 [data-contrast="high"] .section-nav-indicator,
 [data-contrast="high"] .case-section-indicator {
   background: #000 !important;
-  border: 1px solid #0ff !important;
-  box-shadow: inset 0 0 0 1px #0ff !important;
+  border: 1px solid #ffd700 !important;
+  box-shadow: inset 0 0 0 1px #ffd700 !important;
 }
 
 [data-contrast="high"] .section-nav,
@@ -155,7 +155,7 @@
 }
 
 [data-contrast="high"] .case-section-nav.is-stuck {
-  border-color: #0ff !important;
+  border-color: #ffd700 !important;
 }
 
 [data-contrast="high"] .section-nav a,
@@ -168,7 +168,7 @@
 [data-contrast="high"] .section-nav a[aria-current],
 [data-contrast="high"] .case-section-link.is-active,
 [data-contrast="high"] .case-section-link[aria-current] {
-  color: #0ff !important;
+  color: #ffd700 !important;
 }
 
 [data-contrast="high"] .section-nav a:hover,
@@ -208,9 +208,9 @@
 }
 
 [data-contrast="high"] [role="switch"][aria-checked="true"] .control-switch {
-  border-color: #0ff;
-  box-shadow: inset 0 0 0 1px #0ff;
-  background: #0ff;
+  border-color: #ffd700;
+  box-shadow: inset 0 0 0 1px #ffd700;
+  background: #ffd700;
 }
 
 [data-contrast="high"] [role="switch"][aria-checked="true"] .control-switch > span {
@@ -237,10 +237,10 @@
 [data-contrast="high"] .audio-player-artwork,
 [data-contrast="high"] .back-to-top-fab,
 [data-contrast="high"] .cert-item-icon {
-  border: 1px solid #0ff !important;
-  box-shadow: inset 0 0 0 1px #0ff !important;
+  border: 1px solid #ffd700 !important;
+  box-shadow: inset 0 0 0 1px #ffd700 !important;
   background: #000;
-  color: #0ff;
+  color: #ffd700;
 }
 
 [data-contrast="high"] .compact-list li,
@@ -251,8 +251,8 @@
 }
 
 [data-contrast="high"] .pills > span {
-  border: 1px solid #0ff;
-  color: #0ff;
+  border: 1px solid #ffd700;
+  color: #ffd700;
 }
 
 [data-contrast="high"] .impact-card {
@@ -262,12 +262,12 @@
 }
 
 [data-contrast="high"] .impact-metric {
-  color: #0ff !important;
+  color: #ffd700 !important;
 }
 
 [data-contrast="high"] .compact-list a,
 [data-contrast="high"] .featured h4 a {
-  color: #0ff !important;
+  color: #ffd700 !important;
 }
 
 [data-contrast="high"] .external-icon {
@@ -275,7 +275,7 @@
 }
 
 [data-contrast="high"] .li-company-name {
-  color: #0ff;
+  color: #ffd700;
 }
 
 [data-contrast="high"] .li-entity-link:hover .li-company-name,
@@ -318,9 +318,9 @@
 
 [data-contrast="high"] .language-option:has(input:checked),
 [data-contrast="high"] .display-mode-group button[aria-checked="true"] {
-  border: 1px solid #0ff !important;
-  box-shadow: inset 0 0 0 1px #0ff !important;
-  background: #0ff !important;
+  border: 1px solid #ffd700 !important;
+  box-shadow: inset 0 0 0 1px #ffd700 !important;
+  background: #ffd700 !important;
   color: #000 !important;
 }
 
@@ -328,16 +328,16 @@
 [data-contrast="high"] .display-mode-group button:focus-visible,
 [data-contrast="high"] .language-option:hover,
 [data-contrast="high"] .language-option:has(input:focus-visible) {
-  border-color: #0ff !important;
-  box-shadow: inset 0 0 0 1px #0ff !important;
-  color: #0ff !important;
+  border-color: #ffd700 !important;
+  box-shadow: inset 0 0 0 1px #ffd700 !important;
+  color: #ffd700 !important;
 }
 
 [data-contrast="high"] .display-mode-group button[aria-checked="true"]:hover,
 [data-contrast="high"] .display-mode-group button[aria-checked="true"]:focus-visible,
 [data-contrast="high"] .language-option:has(input:checked):hover,
 [data-contrast="high"] .language-option:has(input:checked:focus-visible) {
-  background: #0ff !important;
+  background: #ffd700 !important;
   color: #000 !important;
 }
 
@@ -381,14 +381,14 @@
 [data-contrast="high"] .lang-toggle:focus-visible,
 [data-contrast="high"] .print-button:hover,
 [data-contrast="high"] .print-button:focus-visible {
-  border-color: #0ff !important;
-  box-shadow: inset 0 0 0 1px #0ff !important;
-  color: #0ff !important;
+  border-color: #ffd700 !important;
+  box-shadow: inset 0 0 0 1px #ffd700 !important;
+  color: #ffd700 !important;
 }
 
 [data-contrast="high"] .copy-button:hover span,
 [data-contrast="high"] .copy-button:focus-visible span {
-  border-color: #0ff !important;
+  border-color: #ffd700 !important;
 }
 
 /* Explicit high-visibility keyboard focus rings */
@@ -479,7 +479,7 @@
 }
 
 [data-contrast="high"] {
-  --button-bg: #0ff;
+  --button-bg: #ffd700;
   --button-text: #000;
 }
 
