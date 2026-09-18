@@ -208,8 +208,8 @@
   }
 }
 
-[data-theme="dark"] .hero-btn-resume:hover,
-[data-theme="dark"] .hero-btn-resume:focus-visible {
+[data-theme="dark"]:not([data-contrast="high"]) .hero-btn-resume:hover,
+[data-theme="dark"]:not([data-contrast="high"]) .hero-btn-resume:focus-visible {
   color: #fff;
 }
 
@@ -843,7 +843,7 @@ html[lang="ar"] .skill-group h3 {
     z-index: 1;
   }
 
-  [data-theme="dark"] .project-card::before {
+  [data-theme="dark"]:not([data-contrast="high"]) .project-card::before {
     background: radial-gradient(
       450px circle at var(--mouse-x, -500px) var(--mouse-y, -500px),
       rgb(59 130 246 / 15%),

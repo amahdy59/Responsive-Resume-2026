@@ -1025,7 +1025,7 @@ html[lang="ar"] .credential-meta {
   cursor: pointer;
 }
 
-[data-theme="dark"] .audio-player-speed select:not(.enhanced-select-native) {
+[data-theme="dark"]:not([data-contrast="high"]) .audio-player-speed select:not(.enhanced-select-native) {
   color-scheme: dark;
 }
 
@@ -1289,16 +1289,16 @@ html[lang="ar"] .credential-meta {
   transform: scaleX(-1);
 }
 
-[data-theme="dark"] .btn-secondary,
-[data-theme="dark"] .back-link {
+[data-theme="dark"]:not([data-contrast="high"]) .btn-secondary,
+[data-theme="dark"]:not([data-contrast="high"]) .back-link {
   border-color: var(--blue);
   color: var(--blue);
 }
 
-[data-theme="dark"] .btn-secondary:hover,
-[data-theme="dark"] .btn-secondary:focus-visible,
-[data-theme="dark"] .back-link:hover,
-[data-theme="dark"] .back-link:focus-visible {
+[data-theme="dark"]:not([data-contrast="high"]) .btn-secondary:hover,
+[data-theme="dark"]:not([data-contrast="high"]) .btn-secondary:focus-visible,
+[data-theme="dark"]:not([data-contrast="high"]) .back-link:hover,
+[data-theme="dark"]:not([data-contrast="high"]) .back-link:focus-visible {
   background: color-mix(in srgb, var(--blue) 20%, transparent);
 }
 

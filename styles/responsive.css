@@ -100,7 +100,7 @@
     font-size: 0.75rem;
   }
 
-  html[data-theme="dark"][lang="en"] .theme-toggle .control-label::after {
+  html[data-theme="dark"]:not([data-contrast="high"])[lang="en"] .theme-toggle .control-label::after {
     content: "Dark";
   }
 
@@ -122,7 +122,7 @@
     font-size: 0.80rem;
   }
 
-  html[data-theme="dark"][lang="ar"] .theme-toggle .control-label::after {
+  html[data-theme="dark"]:not([data-contrast="high"])[lang="ar"] .theme-toggle .control-label::after {
     content: "داكن";
   }
 
