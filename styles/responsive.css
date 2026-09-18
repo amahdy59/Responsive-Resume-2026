@@ -378,10 +378,6 @@
     width: clamp(72px, 24vw, 96px);
   }
 
-  .audio-player-transcript {
-    max-height: min(160px, 22vh);
-  }
-
   .has-audio-player {
     padding-bottom: 310px;
   }

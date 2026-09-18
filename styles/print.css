@@ -60,7 +60,11 @@
     line-height: 1.42 !important;
   }
 
-  html[lang="ar"] body { font-family: "Noto Sans Arabic Variable", Arial, sans-serif !important; }
+  html[lang="ar"] body,
+  html[lang="ar"] body * {
+    font-family: "Noto Sans Arabic Variable", Arial, sans-serif !important;
+    letter-spacing: normal !important;
+  }
 
   a {
     color: #173f68 !important;

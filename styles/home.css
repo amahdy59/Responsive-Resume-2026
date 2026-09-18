@@ -8,8 +8,8 @@
   padding: clamp(12px, 1.5vw, 18px) clamp(20px, 4vw, 46px) clamp(24px, 2.5vw, 32px);
   color: var(--text);
   background:
-    radial-gradient(circle at 82% 18%, rgb(0 94 135 / 7%), transparent 28rem),
-    linear-gradient(155deg, #fff 0%, #f8fafc 55%, #eef4f9 100%);
+    radial-gradient(circle at 82% 18%, rgb(0 94 135 / 6%), transparent 28rem),
+    linear-gradient(155deg, #f8fafc 0%, #f1f5f9 55%, #e9eff5 100%);
   border: 1px solid rgb(203 213 225 / 75%);
   border-radius: clamp(20px, 3vw, 30px);
   box-shadow: 0 20px 48px -12px rgb(15 23 42 / 7%), 0 1px 3px rgb(15 23 42 / 4%);
@@ -72,6 +72,13 @@
   color: var(--hero-title);
 }
 
+html[lang="ar"] .identity-copy h1 {
+  font-family: var(--font-ui);
+  font-weight: 800;
+  line-height: 1.28;
+  letter-spacing: normal;
+}
+
 .hero-role {
   margin: 6px 0 0;
   color: var(--blue);
@@ -80,12 +87,25 @@
   line-height: 1.4;
 }
 
+html[lang="ar"] .hero-role {
+  font-family: var(--font-ui);
+  font-weight: 700;
+  line-height: 1.45;
+  letter-spacing: normal;
+}
+
 .hero-bio {
   margin: 10px 0 0;
   font-size: clamp(0.9rem, 1.05vw, 1.05rem);
   line-height: 1.6;
   color: var(--hero-bio-color);
   max-width: 62ch;
+}
+
+html[lang="ar"] .hero-bio {
+  font-family: var(--font-ui);
+  line-height: 1.7;
+  letter-spacing: normal;
 }
 
 .tags {

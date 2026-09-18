@@ -361,6 +361,16 @@
   letter-spacing: -0.02em;
 }
 
+html[lang="ar"] .case-study-hero h1 {
+  font-family: var(--font-ui);
+  line-height: 1.28;
+  letter-spacing: normal;
+}
+
+html[lang="ar"] .case-category-badge {
+  letter-spacing: normal;
+}
+
 .case-study-subtitle {
   color: var(--text-secondary);
   font-size: 1rem;

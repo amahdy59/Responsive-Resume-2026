@@ -18,9 +18,6 @@
       unmuted: "Audio unmuted",
       expand: "Show more audio controls",
       collapse: "Show fewer audio controls",
-      transcript: "Transcript",
-      hideTranscript: "Hide transcript",
-      transcriptHeading: "Narration transcript",
       retry: "Retry narration",
       buffering: "Buffering narration…",
       error: "Narration could not be played",
@@ -51,9 +48,6 @@
       unmuted: "تم إلغاء كتم الصوت",
       expand: "إظهار المزيد من عناصر التحكم الصوتي",
       collapse: "إظهار عناصر تحكم صوتي أقل",
-      transcript: "النص المقروء",
-      hideTranscript: "إخفاء النص المقروء",
-      transcriptHeading: "نص السرد الصوتي",
       retry: "إعادة محاولة تشغيل السرد",
       buffering: "جارٍ تخزين السرد مؤقتًا…",
       error: "تعذر تشغيل السرد الصوتي",
@@ -92,8 +86,6 @@
   let liveStatus;
   let playlist = [];
   let manifest;
-  let transcriptOpen = false;
-  let currentTranscript = "";
   let isExpanded = true;
   let mediaSessionReady = false;
   const mobilePlayer = window.matchMedia("(max-width: 560px)");
@@ -127,8 +119,6 @@
       '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 14a8 8 0 1 1 16 0M12 14l4-4"/><path d="M7 18h10"/></svg>',
     chevron:
       '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 10 4 4 4-4"/></svg>',
-    transcript:
-      '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h14v16H5zM8 8h8M8 12h8M8 16h5"/></svg>',
     retry:
       '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 5v6h-6"/></svg>',
     waveform:
@@ -279,24 +269,6 @@
     );
     for (const control of player.querySelectorAll("[data-audio-advanced]"))
       control.hidden = !isExpanded;
-    player.querySelector("[data-audio-transcript]").hidden =
-      !isExpanded || !transcriptOpen;
-  }
-
-  function setTranscript(open) {
-    transcriptOpen = open;
-    const toggle = player.querySelector("[data-audio-transcript-toggle]");
-    const label = open ? copy().hideTranscript : copy().transcript;
-    toggle.setAttribute("aria-expanded", String(open));
-    toggle.setAttribute("aria-label", label);
-    toggle.setAttribute("data-tooltip", label);
-    toggle.querySelector("[data-audio-transcript-label]").textContent = label;
-    player.querySelector("[data-audio-transcript-heading]").textContent =
-      copy().transcriptHeading;
-    player.querySelector("[data-audio-transcript-copy]").textContent =
-      currentTranscript;
-    player.querySelector("[data-audio-transcript]").hidden =
-      !isExpanded || !open;
   }
 
   function updateMediaSession(state) {
@@ -479,8 +451,6 @@
       : icons.pause;
     toggle.querySelector("[data-audio-toggle-label]").textContent = toggleLabel;
     setExpanded(isExpanded);
-    if (currentContainer) currentTranscript = narrationText(currentContainer);
-    setTranscript(transcriptOpen);
     setPlayerState(player.dataset.state || "idle");
     if (currentBtn)
       player.querySelector("[data-audio-title]").textContent =
@@ -512,7 +482,7 @@
     player.className = "global-audio-player";
     player.hidden = true;
     player.setAttribute("role", "region");
-    player.innerHTML = `<div class="audio-player-summary"><span class="audio-player-artwork" aria-hidden="true">${icons.volume}${icons.waveform}</span><span class="audio-player-copy"><span class="audio-player-eyebrow"><span data-audio-eyebrow></span><span aria-hidden="true"> · </span><span data-audio-position></span></span><strong data-audio-title></strong></span><button class="audio-control audio-control-icon audio-expand-toggle" type="button" data-audio-expand aria-controls="audio-player-track audio-player-settings audio-player-transcript">${icons.chevron}</button><button class="audio-control audio-control-icon audio-control-close" type="button" data-audio-stop>${icons.close}</button></div><div class="audio-player-track" id="audio-player-track" data-audio-advanced><span class="audio-player-time" data-audio-elapsed>0:00</span><input class="audio-player-progress" data-audio-progress type="range" min="0" max="1" value="0" step="0.1" disabled><span class="audio-player-time" data-audio-duration>--:--</span></div><div class="audio-player-controls"><div class="audio-player-transport"><button class="audio-control audio-control-icon" type="button" data-audio-previous>${icons.previous}</button><button class="audio-control audio-control-primary" type="button" data-audio-toggle><span data-audio-toggle-icon>${icons.pause}</span><span data-audio-toggle-label></span></button><button class="audio-control audio-control-icon audio-retry" type="button" data-audio-retry hidden>${icons.retry}</button><button class="audio-control audio-control-icon" type="button" data-audio-next>${icons.next}</button><button class="audio-control audio-control-icon audio-speed-badge-btn" type="button" data-audio-speed-btn><span data-audio-speed-btn-label>${playbackRate}×</span></button><button class="audio-control audio-control-icon" type="button" data-audio-mute></button></div><div class="audio-player-settings" id="audio-player-settings" data-audio-advanced><input class="audio-volume-range" data-audio-volume type="range" min="0" max="1" value="${playbackVolume}" step="0.05"><label class="audio-player-speed"><span class="audio-speed-label">${icons.speed}<span data-audio-speed-label></span></span><span class="audio-select-shell"><select data-audio-speed>${allowedRates.map((rate) => `<option value="${rate}">${rate}×</option>`).join("")}</select></span></label><button class="audio-control audio-transcript-toggle" type="button" data-audio-transcript-toggle aria-controls="audio-player-transcript">${icons.transcript}<span data-audio-transcript-label></span></button></div></div><section class="audio-player-transcript" id="audio-player-transcript" data-audio-transcript data-audio-advanced hidden><strong data-audio-transcript-heading></strong><p data-audio-transcript-copy></p></section>`;
+    player.innerHTML = `<div class="audio-player-summary"><span class="audio-player-artwork" aria-hidden="true">${icons.volume}${icons.waveform}</span><span class="audio-player-copy"><span class="audio-player-eyebrow"><span data-audio-eyebrow></span><span aria-hidden="true"> · </span><span data-audio-position></span></span><strong data-audio-title></strong></span><button class="audio-control audio-control-icon audio-expand-toggle" type="button" data-audio-expand aria-controls="audio-player-track audio-player-settings">${icons.chevron}</button><button class="audio-control audio-control-icon audio-control-close" type="button" data-audio-stop>${icons.close}</button></div><div class="audio-player-track" id="audio-player-track" data-audio-advanced><span class="audio-player-time" data-audio-elapsed>0:00</span><input class="audio-player-progress" data-audio-progress type="range" min="0" max="1" value="0" step="0.1" disabled><span class="audio-player-time" data-audio-duration>--:--</span></div><div class="audio-player-controls"><div class="audio-player-transport"><button class="audio-control audio-control-icon" type="button" data-audio-previous>${icons.previous}</button><button class="audio-control audio-control-primary" type="button" data-audio-toggle><span data-audio-toggle-icon>${icons.pause}</span><span data-audio-toggle-label></span></button><button class="audio-control audio-control-icon audio-retry" type="button" data-audio-retry hidden>${icons.retry}</button><button class="audio-control audio-control-icon" type="button" data-audio-next>${icons.next}</button><button class="audio-control audio-control-icon audio-speed-badge-btn" type="button" data-audio-speed-btn><span data-audio-speed-btn-label>${playbackRate}×</span></button><button class="audio-control audio-control-icon" type="button" data-audio-mute></button></div><div class="audio-player-settings" id="audio-player-settings" data-audio-advanced><input class="audio-volume-range" data-audio-volume type="range" min="0" max="1" value="${playbackVolume}" step="0.05"><label class="audio-player-speed"><span class="audio-speed-label">${icons.speed}<span data-audio-speed-label></span></span><span class="audio-select-shell"><select data-audio-speed>${allowedRates.map((rate) => `<option value="${rate}">${rate}×</option>`).join("")}</select></span></label></div></div>`;
     document.body.append(player);
     liveStatus = document.createElement("p");
     liveStatus.className = "sr-only audio-live-status";
@@ -524,9 +494,6 @@
     player
       .querySelector("[data-audio-expand]")
       .addEventListener("click", () => setExpanded(!isExpanded));
-    player
-      .querySelector("[data-audio-transcript-toggle]")
-      .addEventListener("click", () => setTranscript(!transcriptOpen));
     player
       .querySelector("[data-audio-retry]")
       .addEventListener(
@@ -742,7 +709,6 @@
     if (!text) return;
     currentBtn = button;
     currentContainer = container;
-    currentTranscript = text;
     container?.classList.add("audio-reading-active");
     setButtonState(button, "playing");
     showPlayer();

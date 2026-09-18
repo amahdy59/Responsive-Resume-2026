@@ -687,7 +687,6 @@ html[lang="ar"] .credential-meta {
 
 .audio-player-track[hidden],
 .audio-player-settings[hidden],
-.audio-player-transcript[hidden],
 .audio-expand-toggle[hidden],
 .audio-retry[hidden] {
   display: none;
@@ -1050,35 +1049,6 @@ html[lang="ar"] .credential-meta {
 
 .audio-expand-toggle[aria-expanded="true"] svg {
   transform: rotate(180deg);
-}
-
-.audio-transcript-toggle {
-  font-size: 0.78rem;
-  font-weight: 700;
-}
-
-.audio-player-transcript {
-  max-height: min(180px, 24vh);
-  padding: 12px;
-  overflow: auto;
-  overscroll-behavior: contain;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  background: color-mix(in srgb, var(--surface) 92%, transparent);
-}
-
-.audio-player-transcript strong {
-  display: block;
-  margin-bottom: 6px;
-  color: var(--text);
-  font-size: 0.82rem;
-}
-
-.audio-player-transcript p {
-  margin: 0;
-  color: var(--muted);
-  font-size: 0.82rem;
-  line-height: 1.65;
 }
 
 .global-audio-player[data-state="error"] .audio-player-artwork {

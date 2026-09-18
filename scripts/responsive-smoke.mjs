@@ -589,17 +589,6 @@ try {
           await page.locator("[data-audio-progress]").isVisible(),
           true,
         );
-        await page.locator("[data-audio-transcript-toggle]").click();
-        assert.equal(
-          await page
-            .locator("[data-audio-transcript-toggle]")
-            .getAttribute("aria-expanded"),
-          "true",
-        );
-        assert.match(
-          await page.locator("[data-audio-transcript-copy]").textContent(),
-          /Employment|UX Designer/,
-        );
         assert.deepEqual(
           await page.evaluate(() => Object.keys(window.__mediaActions).sort()),
           [
@@ -735,10 +724,6 @@ try {
             .locator("[data-audio-expand]")
             .getAttribute("aria-expanded"),
           "false",
-        );
-        assert.equal(
-          await page.locator("[data-audio-transcript]").isVisible(),
-          false,
         );
         assert.equal(
           await page
