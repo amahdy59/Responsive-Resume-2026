@@ -574,11 +574,7 @@ function refreshUi(lang) {
       10,
     );
     if (Number.isNaN(target)) return;
-    if (el.dataset.animated === "true") {
-      el.textContent = formatCounterNumber(target, lang);
-    } else {
-      el.textContent = lang === "ar" ? "٠" : "0";
-    }
+    el.textContent = formatCounterNumber(target, lang);
   });
   refreshCaseSectionJump(lang);
   window.AntigravityAudio?.refreshLabels?.();
@@ -1195,7 +1191,6 @@ function initSelectEnhancements() {
 }
 
 function initialize() {
-  initResponsiveContentOrder();
   initSectionNavigation();
   initCaseSectionNavigation();
   initSelectEnhancements();
@@ -1515,54 +1510,6 @@ function initSectionNavigation() {
   }
 
   moveIndicatorTo(getActiveLink(), true);
-}
-
-function initResponsiveContentOrder() {
-  const content = document.querySelector(".content-grid");
-  const sidebar = content?.querySelector(".sidebar");
-  const mainColumn = content?.querySelector(".main-column");
-  const sections = Object.fromEntries(
-    [
-      "projects",
-      "employment",
-      "about",
-      "skills",
-      "education",
-      "certifications",
-    ].map((id) => [id, document.getElementById(id)]),
-  );
-  if (
-    !content ||
-    !sidebar ||
-    !mainColumn ||
-    Object.values(sections).some((section) => !section)
-  )
-    return;
-
-  const narrow = window.matchMedia("(max-width: 880px)");
-  const applyOrder = () => {
-    if (narrow.matches) {
-      content.append(mainColumn, sidebar);
-      mainColumn.append(sections.projects, sections.employment);
-      sidebar.append(
-        sections.about,
-        sections.skills,
-        sections.education,
-        sections.certifications,
-      );
-    } else {
-      content.append(sidebar, mainColumn);
-      sidebar.append(sections.about, sections.certifications, sections.skills);
-      mainColumn.append(
-        sections.projects,
-        sections.employment,
-        sections.education,
-      );
-    }
-  };
-
-  applyOrder();
-  narrow.addEventListener("change", applyOrder);
 }
 
 document.querySelectorAll(".theme-toggle").forEach((button) => {
@@ -1907,38 +1854,40 @@ function initCardSpotlight() {
   if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
 
   const cards = document.querySelectorAll(".project-card");
+  if (!cards.length) return;
+
+  let activeCardRect = null;
+  const resetRect = () => {
+    activeCardRect = null;
+  };
+
+  window.addEventListener("scroll", resetRect, { passive: true });
+  window.addEventListener("resize", resetRect, { passive: true });
+
   for (const card of cards) {
     let frame = 0;
-    let cardRect = null;
-
-    const resetRect = () => {
-      cardRect = null;
-    };
 
     card.addEventListener(
       "pointerenter",
       () => {
-        cardRect = card.getBoundingClientRect();
+        activeCardRect = card.getBoundingClientRect();
       },
       { passive: true },
     );
-
-    window.addEventListener("scroll", resetRect, { passive: true });
-    window.addEventListener("resize", resetRect, { passive: true });
 
     card.addEventListener(
       "pointermove",
       (e) => {
         cancelAnimationFrame(frame);
         frame = requestAnimationFrame(() => {
-          if (!cardRect) cardRect = card.getBoundingClientRect();
+          if (!activeCardRect) activeCardRect = card.getBoundingClientRect();
           const x = Math.max(
             0,
-            Math.min(e.clientX - cardRect.left, cardRect.width),
+            Math.min(e.clientX - activeCardRect.left, activeCardRect.width),
           );
           const y = Math.max(
             0,
-            Math.min(e.clientY - cardRect.top, cardRect.height),
+            Math.min(e.clientY - activeCardRect.top, activeCardRect.height),
           );
           card.style.setProperty("--mouse-x", `${Math.round(x)}px`);
           card.style.setProperty("--mouse-y", `${Math.round(y)}px`);
@@ -1951,7 +1900,7 @@ function initCardSpotlight() {
       "pointerleave",
       () => {
         cancelAnimationFrame(frame);
-        cardRect = null;
+        activeCardRect = null;
         card.style.setProperty("--mouse-x", "-500px");
         card.style.setProperty("--mouse-y", "-500px");
       },
@@ -1997,8 +1946,10 @@ function initCertLightbox() {
   const titleEl = dialog.querySelector(".cert-lightbox-title");
   const verifyLink = dialog.querySelector(".cert-lightbox-verify");
   const closeBtn = dialog.querySelector(".cert-lightbox-close");
+  let lastActiveThumb = null;
 
   function openLightbox(btn) {
+    lastActiveThumb = btn;
     const src = btn.dataset.certSrc;
     const title = btn.dataset.certTitle || "";
     const href = btn.dataset.certHref || "#";
@@ -2033,6 +1984,7 @@ function initCertLightbox() {
 
   dialog.addEventListener("close", () => {
     wrap.replaceChildren();
+    lastActiveThumb?.focus();
   });
 }
 

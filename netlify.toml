@@ -5,7 +5,7 @@ publish = "dist"
 [[headers]]
   for = "/*"
   [headers.values]
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self'; img-src 'self' data: https:; media-src 'self'; font-src 'self'; frame-src https://amahdy59.github.io https://mavenshowcase.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self' mailto:; frame-ancestors 'none'; upgrade-insecure-requests"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self'; img-src 'self' data: https:; media-src 'self' https://pub-0e85a9758556488098db7ca057ac5d1e.r2.dev https://*.r2.dev; font-src 'self'; frame-src https://amahdy59.github.io https://mavenshowcase.com; connect-src 'self' https://pub-0e85a9758556488098db7ca057ac5d1e.r2.dev; object-src 'none'; base-uri 'self'; form-action 'self' mailto:; frame-ancestors 'none'; upgrade-insecure-requests"
     Referrer-Policy = "strict-origin-when-cross-origin"
     X-Content-Type-Options = "nosniff"
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"

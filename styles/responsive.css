@@ -100,6 +100,10 @@
     font-size: 0.75rem;
   }
 
+  html[data-theme="dark"][lang="en"] .theme-toggle .control-label::after {
+    content: "Light";
+  }
+
   html[lang="en"] .contrast-toggle .control-label {
     font-size: 0;
   }
@@ -116,6 +120,10 @@
   html[lang="ar"] .theme-toggle .control-label::after {
     content: "داكن";
     font-size: 0.80rem;
+  }
+
+  html[data-theme="dark"][lang="ar"] .theme-toggle .control-label::after {
+    content: "فاتح";
   }
 
   html[lang="ar"] .contrast-toggle .control-label {
