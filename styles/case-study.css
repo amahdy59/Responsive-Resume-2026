@@ -201,7 +201,7 @@
 .case-display-modes {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: 3px;
   padding: 3px;
   background: var(--surface);
   border: 1px solid var(--soft-line);
@@ -245,12 +245,12 @@
 }
 
 .case-display-modes :is(.theme-toggle, .contrast-toggle):focus-visible {
-  outline: 3px solid var(--focus);
+  outline: 2px solid var(--focus);
   outline-offset: 2px;
 }
 
 .case-display-modes :is(.theme-toggle, .contrast-toggle):active {
-  transform: scale(0.94);
+  transform: scale(0.97);
 }
 
 .case-display-modes [aria-checked="true"] {

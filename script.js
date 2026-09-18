@@ -470,7 +470,17 @@ function updateThemeButton(lang, targetTheme) {
         lang,
         isDark ? "control_on" : "control_off",
       );
-    setUseIcon(toggle, isDark ? "#icon-sun" : "#icon-moon");
+    const label = toggle.querySelector(".control-label");
+    if (label) {
+      label.textContent = isDark
+        ? lang === "ar"
+          ? "الوضع الداكن"
+          : "Dark Mode"
+        : lang === "ar"
+          ? "الوضع الفاتح"
+          : "Light Mode";
+    }
+    setUseIcon(toggle, isDark ? "#icon-moon" : "#icon-sun");
   });
 }
 
@@ -622,6 +632,8 @@ function setContrast(contrast, immediate = false) {
       root.dataset.contrast = contrast;
     }
     updateThemeColor();
+    refreshCaseSectionJump(getCurrentLanguage());
+    window.dispatchEvent(new Event("resize"));
   };
 
   if (

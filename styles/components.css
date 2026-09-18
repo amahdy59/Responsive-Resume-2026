@@ -1343,7 +1343,7 @@ html[lang="ar"] .credential-meta {
 .display-mode-group {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: 3px;
   padding: 3px;
   border: 1px solid rgb(203 213 225 / 60%);
   border-radius: 12px;
@@ -1377,7 +1377,8 @@ html[lang="ar"] .credential-meta {
   transition:
     background-color var(--motion-fast) var(--ease-standard),
     border-color var(--motion-fast) var(--ease-standard),
-    color var(--motion-fast) var(--ease-standard);
+    color var(--motion-fast) var(--ease-standard),
+    transform var(--motion-fast) var(--ease-standard);
 }
 
 .display-mode-group button .control-icon {
@@ -1398,7 +1399,7 @@ html[lang="ar"] .credential-meta {
 }
 
 .display-mode-group button:focus-visible {
-  outline: 3px solid var(--focus);
+  outline: 2px solid var(--focus);
   outline-offset: 2px;
   background: #fff;
   color: var(--blue);
@@ -1406,6 +1407,7 @@ html[lang="ar"] .credential-meta {
 
 .display-mode-group button:active {
   background: #fff;
+  transform: scale(0.97);
 }
 
 .display-mode-group button[aria-checked="true"] {
@@ -1480,20 +1482,24 @@ html[lang="ar"] .credential-meta {
   min-width: 64px;
   min-height: 44px;
   padding: 0 10px;
+  border: 1px solid transparent;
   border-radius: 9px;
   color: #475569;
   font-size: 0.8125rem;
-  font-weight: 650;
+  font-weight: 600;
   line-height: 1;
   cursor: pointer;
+  box-sizing: border-box;
   transition:
-    background-color 160ms ease,
-    color 160ms ease,
-    transform 120ms ease;
+    background-color var(--motion-fast) var(--ease-standard),
+    border-color var(--motion-fast) var(--ease-standard),
+    color var(--motion-fast) var(--ease-standard),
+    transform var(--motion-fast) var(--ease-standard);
 }
 
 .language-option:has(input:checked) {
   background: var(--blue);
+  border-color: var(--blue);
   color: #fff;
   box-shadow: 0 1px 4px rgb(0 94 135 / 30%);
 }
@@ -1503,7 +1509,11 @@ html[lang="ar"] .credential-meta {
   background: rgb(0 94 135 / 8%);
 }
 
+.language-option:active {
+  transform: scale(0.97);
+}
+
 .language-option:has(input:focus-visible) {
-  outline: 3px solid var(--focus);
+  outline: 2px solid var(--focus);
   outline-offset: 2px;
 }

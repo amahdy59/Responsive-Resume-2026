@@ -96,12 +96,12 @@
   }
 
   html[lang="en"] .theme-toggle .control-label::after {
-    content: "Dark";
+    content: "Light";
     font-size: 0.75rem;
   }
 
   html[data-theme="dark"][lang="en"] .theme-toggle .control-label::after {
-    content: "Light";
+    content: "Dark";
   }
 
   html[lang="en"] .contrast-toggle .control-label {
@@ -118,12 +118,12 @@
   }
 
   html[lang="ar"] .theme-toggle .control-label::after {
-    content: "داكن";
+    content: "فاتح";
     font-size: 0.80rem;
   }
 
   html[data-theme="dark"][lang="ar"] .theme-toggle .control-label::after {
-    content: "فاتح";
+    content: "داكن";
   }
 
   html[lang="ar"] .contrast-toggle .control-label {
