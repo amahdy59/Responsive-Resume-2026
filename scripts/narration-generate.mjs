@@ -50,11 +50,11 @@ const settings = {
     speed: 0.98,
   },
   ar: {
-    stability: 0.68,
-    similarity_boost: 0.78,
-    style: 0.08,
+    stability: 0.58,
+    similarity_boost: 0.8,
+    style: 0.12,
     use_speaker_boost: true,
-    speed: 0.95,
+    speed: 0.96,
   },
 };
 
