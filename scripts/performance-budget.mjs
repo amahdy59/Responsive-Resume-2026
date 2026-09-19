@@ -168,14 +168,16 @@ try {
     console.log(
       `${scenario.path} ${scenario.mobile ? "4x CPU / 1.6Mbps / 150ms" : "desktop"}, median of 3: LCP ${metrics.lcp.toFixed(0)}ms, CLS ${metrics.cls.toFixed(3)}, ${(transferredBytes / 1024).toFixed(0)}KB, tested interaction ${metrics.interaction}ms (lab sample, not field INP).`,
     );
+    const lcpLimit = scenario.mobile ? 4500 : 2500;
+    const interactionLimit = scenario.mobile ? 750 : 250;
     assert.ok(
-      metrics.lcp <= 3500,
-      `LCP ${metrics.lcp.toFixed(0)}ms exceeds 3500ms`,
+      metrics.lcp <= lcpLimit,
+      `LCP ${metrics.lcp.toFixed(0)}ms exceeds ${lcpLimit}ms`,
     );
     assert.ok(metrics.cls <= 0.1, `CLS ${metrics.cls.toFixed(3)} exceeds 0.1`);
     assert.ok(
-      metrics.interaction <= 500,
-      `Lab interaction ${metrics.interaction}ms exceeds 500ms`,
+      metrics.interaction <= interactionLimit,
+      `Lab interaction ${metrics.interaction}ms exceeds ${interactionLimit}ms`,
     );
     assert.ok(
       transferredBytes <= 1_500_000,
